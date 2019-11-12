@@ -32,11 +32,6 @@ public abstract class BaseAlipayClient implements AlipayClient{
     public BaseAlipayClient(){
     }
 
-    public BaseAlipayClient(String merchantPrivateKey, String alipayPublicKey ){
-        this.merchantPrivateKey = merchantPrivateKey;
-        this.alipayPublicKey = alipayPublicKey;
-    }
-
     public BaseAlipayClient(String gatewayUrl, String merchantPrivateKey, String alipayPublicKey ){
         this.gatewayUrl = gatewayUrl;
         this.merchantPrivateKey = merchantPrivateKey;

@@ -26,7 +26,7 @@ public static boolean verify(String rspContent, String signature, String alipayP
 #### 2、The sample for pay  
   
 ```
-AlipayClient defaultAlipayClient = new DefaultAlipayClient("merchantPrivateKey", "alipayPublicKey");  
+AlipayClient defaultAlipayClient = new DefaultAlipayClient("https://open-na.alipay.com","merchantPrivateKey", "alipayPublicKey");  
   
 AlipayPayRequest payRequest = new AlipayPayRequest();  
 payRequest.setClientId("T_111222333"); 
