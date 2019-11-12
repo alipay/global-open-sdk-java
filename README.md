@@ -9,7 +9,7 @@ Copyright：Ant financial services group
 ```
 DefaultAlipayClient.java  
 
-public DefaultAlipayClient(String merchantPrivateKey, String alipayPublicKey);  
+public DefaultAlipayClient(String gatewayUrl, String merchantPrivateKey, String alipayPublicKey);  
 public <T extends AlipayResponse> T execute(AlipayRequest<T> alipayRequest);  
   
 ```
