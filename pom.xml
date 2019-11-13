@@ -43,13 +43,13 @@
     <scm>
         <connection>scm:git:git@github.com:alipay/global-open-sdk-java.git</connection>
         <developerConnection>scm:git:ssh://github.com:alipay/global-open-sdk-java.git</developerConnection>
-        <url>http://github.com/alipay/global-open-sdk-java/tree/master</url>
+        <url>https://github.com/alipay/global-open-sdk-java</url>
     </scm>
 
     <developers>
         <developer>
-            <id>songlin</id>
-            <name>songlin</name>
+            <id>ant-songlin</id>
+            <name>XIE SONGLIN</name>
             <email>songlin.xiesl@alibaba-inc.com</email>
         </developer>
     </developers>
