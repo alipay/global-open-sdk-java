@@ -14,6 +14,7 @@ public class AlipayPayResponse extends AlipayResponse {
     private String              paymentCreateTime;
     private String              authExpiryTime;
     private Amount              nonGuaranteeCouponValue;
+    private String              paymentActionForm;
     private PspCustomerInfo     pspCustomerInfo;
     private ChallengeActionForm challengeActionForm;
     private RedirectActionForm  redirectActionForm;
@@ -90,6 +91,14 @@ public class AlipayPayResponse extends AlipayResponse {
 
     public void setNonGuaranteeCouponValue(Amount nonGuaranteeCouponValue) {
         this.nonGuaranteeCouponValue = nonGuaranteeCouponValue;
+    }
+
+    public String getPaymentActionForm() {
+        return paymentActionForm;
+    }
+
+    public void setPaymentActionForm(String paymentActionForm) {
+        this.paymentActionForm = paymentActionForm;
     }
 
     public PspCustomerInfo getPspCustomerInfo() {
