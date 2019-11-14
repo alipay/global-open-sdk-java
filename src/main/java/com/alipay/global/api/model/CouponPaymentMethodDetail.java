@@ -1,14 +1,12 @@
 package com.alipay.global.api.model;
 
-import java.util.Date;
-
 public class CouponPaymentMethodDetail {
 
     private String  couponId;
     private Amount  availableAmount;
     private String  couponName;
     private String  couponDescription;
-    private Date    couponExpireTime;
+    private String  couponExpireTime;
     private String  paymentMethodDetailMetadatal;
 
     public String getCouponId() {
@@ -43,11 +41,11 @@ public class CouponPaymentMethodDetail {
         this.couponDescription = couponDescription;
     }
 
-    public Date getCouponExpireTime() {
+    public String getCouponExpireTime() {
         return couponExpireTime;
     }
 
-    public void setCouponExpireTime(Date couponExpireTime) {
+    public void setCouponExpireTime(String couponExpireTime) {
         this.couponExpireTime = couponExpireTime;
     }
 

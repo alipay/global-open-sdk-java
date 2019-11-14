@@ -1,15 +1,14 @@
 package com.alipay.global.api.model;
 
 import java.math.BigDecimal;
-import java.util.Date;
 
 public class Quote {
 
     private String     quoteId;
     private String     quoteCurrencyPair;
     private BigDecimal quotePrice;
-    private Date       quoteStartTime	;
-    private Date       quoteExpiryTime;
+    private String     quoteStartTime	;
+    private String     quoteExpiryTime;
     private Boolean    guaranteed;
 
     public String getQuoteId() {
@@ -36,19 +35,19 @@ public class Quote {
         this.quotePrice = quotePrice;
     }
 
-    public Date getQuoteStartTime() {
+    public String getQuoteStartTime() {
         return quoteStartTime;
     }
 
-    public void setQuoteStartTime(Date quoteStartTime) {
+    public void setQuoteStartTime(String quoteStartTime) {
         this.quoteStartTime = quoteStartTime;
     }
 
-    public Date getQuoteExpiryTime() {
+    public String getQuoteExpiryTime() {
         return quoteExpiryTime;
     }
 
-    public void setQuoteExpiryTime(Date quoteExpiryTime) {
+    public void setQuoteExpiryTime(String quoteExpiryTime) {
         this.quoteExpiryTime = quoteExpiryTime;
     }
 

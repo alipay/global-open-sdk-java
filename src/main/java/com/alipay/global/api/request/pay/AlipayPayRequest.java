@@ -6,8 +6,6 @@ import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.pay.AlipayPayResponse;
 import com.alipay.global.api.model.*;
 
-import java.util.Date;
-
 public class AlipayPayRequest extends AlipayRequest<AlipayPayResponse> {
 
     @JSONField(serialize = false)
@@ -19,7 +17,7 @@ public class AlipayPayRequest extends AlipayRequest<AlipayPayResponse> {
     private Amount                  paymentAmount;
     private PaymentMethod           payToMethod;
     private PaymentMethod           paymentMethod;
-    private Date                    paymentExpiryTime;
+    private String                  paymentExpiryTime;
     private String                  paymentRedirectUrl;
     private String                  paymentNotifyUrl;
     private Boolean                 isAuthorization;
@@ -75,11 +73,11 @@ public class AlipayPayRequest extends AlipayRequest<AlipayPayResponse> {
         this.paymentMethod = paymentMethod;
     }
 
-    public Date getPaymentExpiryTime() {
+    public String getPaymentExpiryTime() {
         return paymentExpiryTime;
     }
 
-    public void setPaymentExpiryTime(Date paymentExpiryTime) {
+    public void setPaymentExpiryTime(String paymentExpiryTime) {
         this.paymentExpiryTime = paymentExpiryTime;
     }
 

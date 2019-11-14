@@ -2,13 +2,11 @@ package com.alipay.global.api.response.pay;
 
 import com.alipay.global.api.response.AlipayResponse;
 
-import java.util.Date;
-
 public class AlipayPayCancelResponse extends AlipayResponse {
 
     private String paymentId;
     private String paymentRequestId;
-    private Date   cancelTime;
+    private String cancelTime;
 
     public String getPaymentId() {
         return paymentId;
@@ -26,11 +24,11 @@ public class AlipayPayCancelResponse extends AlipayResponse {
         this.paymentRequestId = paymentRequestId;
     }
 
-    public Date getCancelTime() {
+    public String getCancelTime() {
         return cancelTime;
     }
 
-    public void setCancelTime(Date cancelTime) {
+    public void setCancelTime(String cancelTime) {
         this.cancelTime = cancelTime;
     }
 

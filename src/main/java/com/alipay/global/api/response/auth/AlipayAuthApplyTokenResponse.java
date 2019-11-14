@@ -2,14 +2,12 @@ package com.alipay.global.api.response.auth;
 
 import com.alipay.global.api.response.AlipayResponse;
 
-import java.util.Date;
-
 public class AlipayAuthApplyTokenResponse extends AlipayResponse {
 
     private String   accessToken;
-    private Date     accessTokenExpiryTime;
+    private String   accessTokenExpiryTime;
     private String   refreshToken;
-    private Date     refreshTokenExpiryTime;
+    private String   refreshTokenExpiryTime;
     private String   extendInfo;
 
 
@@ -21,11 +19,11 @@ public class AlipayAuthApplyTokenResponse extends AlipayResponse {
         this.accessToken = accessToken;
     }
 
-    public Date getAccessTokenExpiryTime() {
+    public String getAccessTokenExpiryTime() {
         return accessTokenExpiryTime;
     }
 
-    public void setAccessTokenExpiryTime(Date accessTokenExpiryTime) {
+    public void setAccessTokenExpiryTime(String accessTokenExpiryTime) {
         this.accessTokenExpiryTime = accessTokenExpiryTime;
     }
 
@@ -37,11 +35,11 @@ public class AlipayAuthApplyTokenResponse extends AlipayResponse {
         this.refreshToken = refreshToken;
     }
 
-    public Date getRefreshTokenExpiryTime() {
+    public String getRefreshTokenExpiryTime() {
         return refreshTokenExpiryTime;
     }
 
-    public void setRefreshTokenExpiryTime(Date refreshTokenExpiryTime) {
+    public void setRefreshTokenExpiryTime(String refreshTokenExpiryTime) {
         this.refreshTokenExpiryTime = refreshTokenExpiryTime;
     }
 
