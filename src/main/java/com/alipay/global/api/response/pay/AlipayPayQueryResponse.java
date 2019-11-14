@@ -1,15 +1,11 @@
 package com.alipay.global.api.response.pay;
 
-import com.alipay.global.api.model.Amount;
-import com.alipay.global.api.model.PspCustomerInfo;
-import com.alipay.global.api.model.Quote;
-import com.alipay.global.api.model.TransactionStatusType;
+import com.alipay.global.api.model.*;
 import com.alipay.global.api.response.AlipayResponse;
 
 public class AlipayPayQueryResponse extends AlipayResponse {
 
     private TransactionStatusType paymentStatus;
-    private String                paymentActionForm;
     private String                paymentRequestId;
     private String                paymentId;
     private Amount                paymentAmount;
@@ -18,8 +14,9 @@ public class AlipayPayQueryResponse extends AlipayResponse {
     private String                authExpiryTime;
     private String                paymentCreateTime;
     private String                paymentTime;
-    private Amount                nonGuaranteeCouponValue;
+    private Amount                nonGuaranteeCouponAmount;
     private PspCustomerInfo       pspCustomerInfo;
+    private RedirectActionForm    redirectActionForm;
     private String                extendInfo;
 
     public TransactionStatusType getPaymentStatus() {
@@ -28,14 +25,6 @@ public class AlipayPayQueryResponse extends AlipayResponse {
 
     public void setPaymentStatus(TransactionStatusType paymentStatus) {
         this.paymentStatus = paymentStatus;
-    }
-
-    public String getPaymentActionForm() {
-        return paymentActionForm;
-    }
-
-    public void setPaymentActionForm(String paymentActionForm) {
-        this.paymentActionForm = paymentActionForm;
     }
 
     public String getPaymentRequestId() {
@@ -102,12 +91,12 @@ public class AlipayPayQueryResponse extends AlipayResponse {
         this.paymentTime = paymentTime;
     }
 
-    public Amount getNonGuaranteeCouponValue() {
-        return nonGuaranteeCouponValue;
+    public Amount getNonGuaranteeCouponAmount() {
+        return nonGuaranteeCouponAmount;
     }
 
-    public void setNonGuaranteeCouponValue(Amount nonGuaranteeCouponValue) {
-        this.nonGuaranteeCouponValue = nonGuaranteeCouponValue;
+    public void setNonGuaranteeCouponAmount(Amount nonGuaranteeCouponAmount) {
+        this.nonGuaranteeCouponAmount = nonGuaranteeCouponAmount;
     }
 
     public PspCustomerInfo getPspCustomerInfo() {
@@ -118,6 +107,14 @@ public class AlipayPayQueryResponse extends AlipayResponse {
         this.pspCustomerInfo = pspCustomerInfo;
     }
 
+    public RedirectActionForm getRedirectActionForm() {
+        return redirectActionForm;
+    }
+
+    public void setRedirectActionForm(RedirectActionForm redirectActionForm) {
+        this.redirectActionForm = redirectActionForm;
+    }
+
     public String getExtendInfo() {
         return extendInfo;
     }
@@ -125,4 +122,5 @@ public class AlipayPayQueryResponse extends AlipayResponse {
     public void setExtendInfo(String extendInfo) {
         this.extendInfo = extendInfo;
     }
+
 }
