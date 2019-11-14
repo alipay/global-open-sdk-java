@@ -1,14 +1,12 @@
 package com.alipay.global.api.model;
 
-import java.util.Date;
-
 public class Merchant {
     private String  referenceMerchantId;
     private String  merchantMCC;
     private String  merchantName;
     private String  merchantDisplayName;
     private Address	merchantAddress;
-    private Date    merchantRegisterDate;
+    private String  merchantRegisterDate;
     private Store   store;
 
     public String getReferenceMerchantId() {
@@ -51,11 +49,11 @@ public class Merchant {
         this.merchantAddress = merchantAddress;
     }
 
-    public Date getMerchantRegisterDate() {
+    public String getMerchantRegisterDate() {
         return merchantRegisterDate;
     }
 
-    public void setMerchantRegisterDate(Date merchantRegisterDate) {
+    public void setMerchantRegisterDate(String merchantRegisterDate) {
         this.merchantRegisterDate = merchantRegisterDate;
     }
 
