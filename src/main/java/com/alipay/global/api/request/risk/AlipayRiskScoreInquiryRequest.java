@@ -15,8 +15,8 @@ public class AlipayRiskScoreInquiryRequest extends AlipayRequest<AlipayRiskScore
     @JSONField(serialize = false)
     private final static String httpMethod = HttpMethod.POST.name();
 
-    private CustomerBelongsTo customerBelongsTo;
-    private CustomerIdType customerIdType;
+    private CustomerBelongsTo   customerBelongsTo;
+    private CustomerIdType      customerIdType;
     private String              customerId;
     private List<RiskScoreType> riskScoreTypes;
 

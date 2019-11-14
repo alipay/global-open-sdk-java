@@ -7,16 +7,16 @@ import com.alipay.global.api.response.AlipayResponse;
 
 public class AlipayPayResponse extends AlipayResponse {
 
-    private String paymentRequestId;
-    private String paymentId;
-    private Amount paymentAmount;
-    private Amount actualPaymentAmount;
-    private Quote paymentQuote;
-    private String paymentTime;
-    private String paymentCreateTime;
-    private String authExpiryTime;
-    private Amount nonGuaranteeCouponValue;
-    private String paymentActionForm;
+    private String          paymentRequestId;
+    private String          paymentId;
+    private Amount          paymentAmount;
+    private Amount          actualPaymentAmount;
+    private Quote           paymentQuote;
+    private String          paymentTime;
+    private String          paymentCreateTime;
+    private String          authExpiryTime;
+    private Amount          nonGuaranteeCouponValue;
+    private String          paymentActionForm;
     private PspCustomerInfo pspCustomerInfo;
     private String          extendInfo;
 

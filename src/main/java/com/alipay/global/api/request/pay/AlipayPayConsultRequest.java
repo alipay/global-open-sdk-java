@@ -16,13 +16,13 @@ public class AlipayPayConsultRequest extends AlipayRequest<AlipayPayConsultRespo
     private final static String httpMethod = HttpMethod.POST.name();
 
     private ProductCodeType productCode;
-    private Amount paymentAmount;
+    private Amount          paymentAmount;
     private List<String>    allowedPaymentMethods;
     private List<String>    blockedPaymentMethods;
     private String          region;
     private String          customerId;
     private String          referenceUserId;
-    private Env env;
+    private Env             env;
     private String          extendInfo;
 
     public ProductCodeType getProductCode() {

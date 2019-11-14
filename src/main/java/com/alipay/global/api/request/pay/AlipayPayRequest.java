@@ -13,19 +13,19 @@ public class AlipayPayRequest extends AlipayRequest<AlipayPayResponse> {
     @JSONField(serialize = false)
     private final static String httpMethod = HttpMethod.POST.name();
 
-    private ProductCodeType productCode;
-    private String          paymentRequestId;
-    private Order order;
-    private Amount paymentAmount;
-    private PaymentMethod payToMethod;
-    private PaymentMethod   paymentMethod;
-    private Date            paymentExpiryTime;
-    private String          paymentRedirectUrl;
-    private String          paymentNotifyUrl;
-    private Boolean         isAuthorization;
+    private ProductCodeType         productCode;
+    private String                  paymentRequestId;
+    private Order                   order;
+    private Amount                  paymentAmount;
+    private PaymentMethod           payToMethod;
+    private PaymentMethod           paymentMethod;
+    private Date                    paymentExpiryTime;
+    private String                  paymentRedirectUrl;
+    private String                  paymentNotifyUrl;
+    private Boolean                 isAuthorization;
     private PaymentVerificationData paymentVerificationData;
-    private PaymentFactor paymentFactor;
-    private String          extendInfo;
+    private PaymentFactor           paymentFactor;
+    private String                  extendInfo;
 
     public ProductCodeType getProductCode() {
         return productCode;

@@ -12,7 +12,7 @@ public class AlipayAuthApplyTokenRequest extends AlipayRequest<AlipayAuthApplyTo
     @JSONField(serialize = false)
     private final static String httpMethod =  HttpMethod.POST.name();
 
-    private GrantType grantType;
+    private GrantType         grantType;
     private CustomerBelongsTo customerBelongsTo;
     private String            authCode;
     private String            refreshToken;

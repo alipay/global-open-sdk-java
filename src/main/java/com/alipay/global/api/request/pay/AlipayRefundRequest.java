@@ -14,7 +14,7 @@ public class AlipayRefundRequest extends AlipayRequest<AlipayRefundResponse> {
     private String  refundRequestId;
     private String  paymentId;
     private String  referenceRefundId;
-    private Amount refundAmount;
+    private Amount  refundAmount;
     private String  refundReason;
     private Boolean isAsyncRefund;
     private String  extendInfo;
