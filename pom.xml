@@ -8,7 +8,7 @@
     <name>global-open-sdk-java</name>
     <url>https://github.com/alipay/global-open-sdk-java</url>
     <description>
-        Alipay global openapi SDK for Java
+        Alipay global open gateway SDK for Java
     </description>
 
     <properties>
@@ -64,7 +64,6 @@
             <version>1.2.60</version>
         </dependency>
     </dependencies>
-
 
     <build>
         <plugins>
@@ -130,7 +129,6 @@
             </plugin>
         </plugins>
     </build>
-
-
+    
 </project>
 
