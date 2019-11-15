@@ -163,7 +163,7 @@ SignatureTool.setBase64Encryptor(yourBase64Encryptor);
 ```
 
 
-#### 5、Interface overview  
+#### 5、Overview of supported interfaces  
 * Authorization Consult  
 * Authorization Apply Token  
 * Authorization Revoke  
