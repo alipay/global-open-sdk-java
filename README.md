@@ -118,7 +118,9 @@ boolean isPass    = SignatureTool.verify(rspContent, signRsp, alipayPublicKey);
   
 ```
   
-#### 4、For compatibility with lower version of Java JDK, signatureTool provided a base64 encryptor DefaultBase64Encryptor by default. 
+#### 4、For base64  
+
+For compatibility with lower version of Java JDK, signatureTool provided a base64 encryptor DefaultBase64Encryptor by default. 
 
 ```
 public class DefaultBase64Encryptor implements Base64Encryptor{
