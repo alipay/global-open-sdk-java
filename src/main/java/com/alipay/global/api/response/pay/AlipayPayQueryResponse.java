@@ -8,6 +8,7 @@ public class AlipayPayQueryResponse extends AlipayResponse {
     private TransactionStatusType paymentStatus;
     private String                paymentRequestId;
     private String                paymentId;
+    private String                authPaymentId;
     private Amount                paymentAmount;
     private Amount                actualPaymentAmount;
     private Quote                 paymentQuote;
@@ -41,6 +42,14 @@ public class AlipayPayQueryResponse extends AlipayResponse {
 
     public void setPaymentId(String paymentId) {
         this.paymentId = paymentId;
+    }
+
+    public String getAuthPaymentId() {
+        return authPaymentId;
+    }
+
+    public void setAuthPaymentId(String authPaymentId) {
+        this.authPaymentId = authPaymentId;
     }
 
     public Amount getPaymentAmount() {
@@ -122,5 +131,4 @@ public class AlipayPayQueryResponse extends AlipayResponse {
     public void setExtendInfo(String extendInfo) {
         this.extendInfo = extendInfo;
     }
-
 }
