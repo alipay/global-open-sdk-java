@@ -79,15 +79,16 @@ public class YourAlipayClient extends BaseAlipayClient{
     public HttpRpcResult sendRequest(String requestUrl, String httpMethod, Map<String, String> header, String reqBody)throws AlipayApiException {  
         // HTTP Call
         // ...
+        
         HttpRpcResult rsp = new HttpRpcResult();
-        // String rspSignValue = Get from response header;
-        // rsp.setRspSign(rspSignValue);
+        String rspSignValue = "Get from response header";
+        rsp.setRspSign(rspSignValue);
         
-        // String responseTime = Get from response header;
-        // rsp.setResponseTime(responseTime);
+        String responseTime = "Get from response header";
+        rsp.setResponseTime(responseTime);
         
-        // String rspBody = Get from response body;
-        // rsp.setRspBody(rspBody);
+        String rspBody = "Get from response body";
+        rsp.setRspBody(rspBody);
         
         return rsp;
     }
