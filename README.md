@@ -76,8 +76,7 @@ public class YourAlipayClient extends BaseAlipayClient{
     }
 
     @Override
-    public HttpRpcResult sendRequest(String requestUrl, String httpMethod, Map<String, String> header, String reqBody)throws AlipayApiException {
-        // TODO 
+    public HttpRpcResult sendRequest(String requestUrl, String httpMethod, Map<String, String> header, String reqBody)throws AlipayApiException {  
         // HTTP Call
         // ...
         HttpRpcResult rsp = new HttpRpcResult();
