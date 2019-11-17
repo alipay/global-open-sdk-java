@@ -95,7 +95,7 @@ public class YourAlipayClient extends BaseAlipayClient{
     
 }
 
-AlipayClient       yourAlipayClient  = new YourAlipayClient("merchantPrivateKey", "alipayPublicKey");  
+AlipayClient       yourAlipayClient  = new YourAlipayClient("https://open-na.alipay.com", "merchantPrivateKey", "alipayPublicKey");  
 AlipayPayResponse  alipayPayResponse = yourAlipayClient.execute(aliPayRequest);  
 
 ```
