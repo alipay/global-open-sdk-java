@@ -11,43 +11,33 @@ public class AlipayCaptureRequest extends AlipayRequest<AlipayCaptureResponse> {
     @JSONField(serialize = false)
     private final static String httpMethod = HttpMethod.POST.name();
 
-    private String  paymentRequestId;
-    private String  authPaymentId;
-    private String  referenceCaptureId;
-    private Amount  paymentAmount;
+    private String  captureRequestId;
+    private String  paymentId;
+    private Amount  captureAmount;
     private Boolean isLastCapture;
-    private String  extendInfo;
 
-    public String getPaymentRequestId() {
-        return paymentRequestId;
+    public String getCaptureRequestId() {
+        return captureRequestId;
     }
 
-    public void setPaymentRequestId(String paymentRequestId) {
-        this.paymentRequestId = paymentRequestId;
+    public void setCaptureRequestId(String captureRequestId) {
+        this.captureRequestId = captureRequestId;
     }
 
-    public String getAuthPaymentId() {
-        return authPaymentId;
+    public String getPaymentId() {
+        return paymentId;
     }
 
-    public void setAuthPaymentId(String authPaymentId) {
-        this.authPaymentId = authPaymentId;
+    public void setPaymentId(String paymentId) {
+        this.paymentId = paymentId;
     }
 
-    public String getReferenceCaptureId() {
-        return referenceCaptureId;
+    public Amount getCaptureAmount() {
+        return captureAmount;
     }
 
-    public void setReferenceCaptureId(String referenceCaptureId) {
-        this.referenceCaptureId = referenceCaptureId;
-    }
-
-    public Amount getPaymentAmount() {
-        return paymentAmount;
-    }
-
-    public void setPaymentAmount(Amount paymentAmount) {
-        this.paymentAmount = paymentAmount;
+    public void setCaptureAmount(Amount captureAmount) {
+        this.captureAmount = captureAmount;
     }
 
     public Boolean getLastCapture() {
@@ -56,14 +46,6 @@ public class AlipayCaptureRequest extends AlipayRequest<AlipayCaptureResponse> {
 
     public void setLastCapture(Boolean lastCapture) {
         isLastCapture = lastCapture;
-    }
-
-    public String getExtendInfo() {
-        return extendInfo;
-    }
-
-    public void setExtendInfo(String extendInfo) {
-        this.extendInfo = extendInfo;
     }
 
     @Override

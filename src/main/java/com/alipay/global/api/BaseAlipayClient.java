@@ -120,6 +120,10 @@ public abstract class BaseAlipayClient implements AlipayClient{
     }
 
     private void checkRequestParam(AlipayRequest alipayRequest) throws AlipayApiException{
+        if(alipayRequest == null){
+            throw new AlipayApiException("alipayRequest can't null");
+        }
+
         String clientId = alipayRequest.getClientId();
         String httpMehod = alipayRequest.getHttpMethod();
         String path = alipayRequest.getPath();

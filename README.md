@@ -3,7 +3,20 @@ Language：JAVA
 JDK version：1.6+  
 Copyright：Ant financial services group  
 ```
-  
+
+#### 0、Please use the latest version
+
+https://mvnrepository.com/artifact/com.alipay.global.sdk/global-open-sdk-java
+
+```  
+
+<dependency>
+    <groupId>com.alipay.global.sdk</groupId>
+    <artifactId>global-open-sdk-java</artifactId>
+    <version>1.0.1</version>
+</dependency>
+
+```
    
 #### 1、Main class file  
 ```
@@ -161,20 +174,6 @@ Base64Encryptor yourBase64Encryptor = new YourBase64Encryptor();
 SignatureTool.setBase64Encryptor(yourBase64Encryptor);
 
 ```
-
-
-#### 5、Overview of supported interfaces  
-* Authorization Consult  
-* Authorization Apply Token  
-* Authorization Revoke  
-* Authorization Query  
-* Consult Payment  
-* Payment  
-* Inquiry Payment
-* Cancel Payment
-* Refund
-* Inquiry Refund  
-
 
 
 

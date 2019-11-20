@@ -11,7 +11,7 @@ public class AlipayRefundQueryResponse extends AlipayResponse {
     private String                paymentId;
     private String                referenceRefundId;
     private Amount                refundAmount;
-    private String                refundReason	;
+    private String                refundReason;
     private TransactionStatusType refundStatus;
     private Amount                refundNonGuaranteeCouponAmount;
     private String                refundTime;

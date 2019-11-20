@@ -5,19 +5,26 @@ import com.alipay.global.api.response.AlipayResponse;
 
 public class AlipayCaptureResponse  extends AlipayResponse {
 
-    private String  paymentRequestId;
+    private String  captureRequestId;
+    private String  captureId;
     private String  paymentId;
-    private String  authPaymentId;
-    private Amount  paymentAmount;
-    private String  paymentTime;
-    private String  extendInfo;
+    private Amount  captureAmount;
+    private String  captureTime;
 
-    public String getPaymentRequestId() {
-        return paymentRequestId;
+    public String getCaptureRequestId() {
+        return captureRequestId;
     }
 
-    public void setPaymentRequestId(String paymentRequestId) {
-        this.paymentRequestId = paymentRequestId;
+    public void setCaptureRequestId(String captureRequestId) {
+        this.captureRequestId = captureRequestId;
+    }
+
+    public String getCaptureId() {
+        return captureId;
+    }
+
+    public void setCaptureId(String captureId) {
+        this.captureId = captureId;
     }
 
     public String getPaymentId() {
@@ -28,35 +35,19 @@ public class AlipayCaptureResponse  extends AlipayResponse {
         this.paymentId = paymentId;
     }
 
-    public String getAuthPaymentId() {
-        return authPaymentId;
+    public Amount getCaptureAmount() {
+        return captureAmount;
     }
 
-    public void setAuthPaymentId(String authPaymentId) {
-        this.authPaymentId = authPaymentId;
+    public void setCaptureAmount(Amount captureAmount) {
+        this.captureAmount = captureAmount;
     }
 
-    public Amount getPaymentAmount() {
-        return paymentAmount;
+    public String getCaptureTime() {
+        return captureTime;
     }
 
-    public void setPaymentAmount(Amount paymentAmount) {
-        this.paymentAmount = paymentAmount;
-    }
-
-    public String getPaymentTime() {
-        return paymentTime;
-    }
-
-    public void setPaymentTime(String paymentTime) {
-        this.paymentTime = paymentTime;
-    }
-
-    public String getExtendInfo() {
-        return extendInfo;
-    }
-
-    public void setExtendInfo(String extendInfo) {
-        this.extendInfo = extendInfo;
+    public void setCaptureTime(String captureTime) {
+        this.captureTime = captureTime;
     }
 }
