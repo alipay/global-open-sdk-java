@@ -9,13 +9,11 @@ Copyright：Ant financial services group
 https://mvnrepository.com/artifact/com.alipay.global.sdk/global-open-sdk-java
 
 ```  
-
 <dependency>
     <groupId>com.alipay.global.sdk</groupId>
     <artifactId>global-open-sdk-java</artifactId>
     <version>1.0.1</version>
 </dependency>
-
 ```
    
 #### 1、Main class file  
