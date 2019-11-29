@@ -3,6 +3,8 @@ package com.alipay.global.api.response.pay;
 import com.alipay.global.api.model.*;
 import com.alipay.global.api.response.AlipayResponse;
 
+import java.util.List;
+
 public class AlipayPayQueryResponse extends AlipayResponse {
 
     private TransactionStatusType paymentStatus;
@@ -19,6 +21,7 @@ public class AlipayPayQueryResponse extends AlipayResponse {
     private PspCustomerInfo       pspCustomerInfo;
     private RedirectActionForm    redirectActionForm;
     private String                extendInfo;
+    private List<Transaction>     transactions;
 
     public TransactionStatusType getPaymentStatus() {
         return paymentStatus;
@@ -131,4 +134,13 @@ public class AlipayPayQueryResponse extends AlipayResponse {
     public void setExtendInfo(String extendInfo) {
         this.extendInfo = extendInfo;
     }
+
+    public List<Transaction> getTransactions() {
+        return transactions;
+    }
+
+    public void setTransactions(List<Transaction> transactions) {
+        this.transactions = transactions;
+    }
+
 }

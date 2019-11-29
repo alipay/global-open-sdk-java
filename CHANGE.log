@@ -2,3 +2,5 @@
 Modify AlipayCaptureRequest.java
 Modify AlipayCaptureResponse.java
 
+2、Version:1.0.2
+Modify AlipayPayQueryResponse.java

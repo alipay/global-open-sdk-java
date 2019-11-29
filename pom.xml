@@ -4,7 +4,7 @@
     <groupId>com.alipay.global.sdk</groupId>
     <artifactId>global-open-sdk-java</artifactId>
     <packaging>jar</packaging>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <name>global-open-sdk-java</name>
     <url>https://github.com/alipay/global-open-sdk-java</url>
     <description>
@@ -38,6 +38,12 @@
             <id>XIE SONGLIN</id>
             <name>XIE SONGLIN</name>
             <email>songlin.xiesl@alibaba-inc.com</email>
+            <organization>Ant financial services group</organization>
+            <organizationUrl>https://global.alipay.com</organizationUrl>
+            <roles>
+                <role>Software engineer</role>
+            </roles>
+            <timezone>UTC+08:00</timezone>
         </developer>
     </developers>
 
