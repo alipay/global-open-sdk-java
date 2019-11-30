@@ -1,4 +1,4 @@
-package com.alipay.global.api.net;
+package com.alipay.global.api.result;
 
 public class HttpRpcResult {
 

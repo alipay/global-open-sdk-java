@@ -1,6 +1,7 @@
 package com.alipay.global.api.net;
 
 import com.alipay.global.api.exception.AlipayApiException;
+import com.alipay.global.api.result.HttpRpcResult;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -11,10 +12,10 @@ import java.util.Set;
 
 public class DefaultHttpRPC {
 
-    private static int readTimeout    = 15000;
+    private static int readTimeout = 15000;
     private static int connectTimeout = 3000;
 
-    public static final String DEFAULT_CHARSET  = "UTF-8";
+    public static final String DEFAULT_CHARSET = "UTF-8";
 
     public static HttpRpcResult doPost(String url, Map<String, String> header, String reqBody) throws IOException, AlipayApiException {
         String ctype = "application/x-www-form-urlencoded;charset=" + DEFAULT_CHARSET;
@@ -34,9 +35,9 @@ public class DefaultHttpRPC {
                 conns.setReadTimeout(readTimeout);
 
                 Set<Map.Entry<String, String>> headerEntry = reqHeader.entrySet();
-                for(Map.Entry<String, String> entry: headerEntry){
-                   String headerName = entry.getKey();
-                   String headerValue = entry.getValue();
+                for (Map.Entry<String, String> entry : headerEntry) {
+                    String headerName = entry.getKey();
+                    String headerValue = entry.getValue();
                     conns.setRequestProperty(headerName, headerValue);
                 }
             } catch (IOException e) {
@@ -92,18 +93,18 @@ public class DefaultHttpRPC {
     public static String getResponseSignature(HttpsURLConnection conn) {
 
         String signatureValue = conn.getHeaderField("signature");
-        if(StringUtils.isBlank(signatureValue)){
+        if (StringUtils.isBlank(signatureValue)) {
             return null;
         }
 
         String[] valueItem = signatureValue.split(",");
-        if(valueItem.length < 3){
+        if (valueItem.length < 3) {
             return null;
         }
 
         String signatureItem = valueItem[2];
-        String[]  itemArr = signatureItem.split("=");
-        if(itemArr.length != 2){
+        String[] itemArr = signatureItem.split("=");
+        if (itemArr.length != 2) {
             return null;
         }
 

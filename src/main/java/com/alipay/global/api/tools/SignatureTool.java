@@ -4,8 +4,8 @@ package com.alipay.global.api.tools;
 /**
  * Alipay.com Inc. Copyright (c) 2004-2019 All Rights Reserved.
  */
-import com.alipay.global.api.base64.Base64Encryptor;
-import com.alipay.global.api.base64.DefaultBase64Encryptor;
+import com.alipay.global.api.tools.base64.Base64Encryptor;
+import com.alipay.global.api.tools.base64.DefaultBase64Encryptor;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;

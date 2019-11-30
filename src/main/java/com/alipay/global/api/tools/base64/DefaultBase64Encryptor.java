@@ -1,4 +1,4 @@
-package com.alipay.global.api.base64;
+package com.alipay.global.api.tools.base64;
 
 import javax.xml.bind.DatatypeConverter;
 

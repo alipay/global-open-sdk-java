@@ -3,8 +3,7 @@ package com.alipay.global.api;
 import com.alibaba.fastjson.JSON;
 import com.alipay.global.api.exception.AlipayApiException;
 import com.alipay.global.api.model.Result;
-import com.alipay.global.api.model.ResultStatusType;
-import com.alipay.global.api.net.HttpRpcResult;
+import com.alipay.global.api.result.HttpRpcResult;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.AlipayResponse;
 import com.alipay.global.api.tools.SignatureTool;
@@ -14,7 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class BaseAlipayClient implements AlipayClient{
+public abstract class BaseAlipayClient implements AlipayClient {
 
     /**
      * eg:https://open-na.alipay.com
@@ -29,98 +28,123 @@ public abstract class BaseAlipayClient implements AlipayClient{
      */
     private String alipayPublicKey;
 
-    public BaseAlipayClient(){
+    public BaseAlipayClient() {
     }
 
-    public BaseAlipayClient(String gatewayUrl, String merchantPrivateKey, String alipayPublicKey ){
+    public BaseAlipayClient(String gatewayUrl, String merchantPrivateKey, String alipayPublicKey) {
         this.gatewayUrl = gatewayUrl;
         this.merchantPrivateKey = merchantPrivateKey;
         this.alipayPublicKey = alipayPublicKey;
     }
 
+    @Override
     public <T extends AlipayResponse> T execute(AlipayRequest<T> alipayRequest) throws AlipayApiException {
 
+        // 1. 请求参数校验(Check request parameters)
         checkRequestParam(alipayRequest);
 
-        String clientId    = alipayRequest.getClientId();
-        String httpMethod  = alipayRequest.getHttpMethod();
-        String path        = alipayRequest.getPath();
-        String reqTime     = DateTool.getCurISO8601Time();
-        String reqBody     = JSON.toJSONString(alipayRequest);
+        String clientId = alipayRequest.getClientId();
+        String httpMethod = alipayRequest.getHttpMethod();
+        String path = alipayRequest.getPath();
+        String reqTime = DateTool.getCurISO8601Time();
+        String reqBody = JSON.toJSONString(alipayRequest);
 
-        /**
-         * 对内容加签(Sign the content)
-         */
+        // 2. 对内容加签(Sign the content)
         String signValue = genSignValue(httpMethod, path, clientId, reqTime, reqBody);
-        /**
-         *  生成必要header(Generate required headers)
-         */
-        Map<String, String> header       = buildBaseHeader(reqTime, clientId, signValue);
+
+        // 3. 生成必要header(Generate required headers)
+        Map<String, String> header = buildBaseHeader(reqTime, clientId, signValue);
         Map<String, String> customHeader = buildCustomHeader();
-        if(customHeader != null && customHeader.size() > 0){
+        if (customHeader != null && customHeader.size() > 0) {
             header.putAll(customHeader);
         }
 
+        // 4. 生成请求url(Generate required url)
         String requestUrl = genRequestUrl(path);
-        /**
-         * 向网关发起http请求(Make an HTTP request to the gateway)
-         */
+
+        // 向网关发起http请求(Make an HTTP request to the gateway)
         HttpRpcResult rsp = sendRequest(requestUrl, httpMethod, header, reqBody);
 
-        if(rsp == null){
+        if (rsp == null) {
             throw new AlipayApiException("HttpRpcResult is null.");
         }
 
-        String   rspBody         = rsp.getRspBody();
-        Class<T> responseClass   = alipayRequest.getResponseClass();
-        T        alipayResponse  = JSON.parseObject(rspBody, responseClass);
-        Result   result          = alipayResponse.getResult();
-        if(result == null){
-            throw new AlipayApiException("Response data error,result field is null");
-        }
-
-        ResultStatusType rStatus = result.getResultStatus();
-        if(ResultStatusType.F.equals(rStatus) || ResultStatusType.U.equals(rStatus)){
-            return alipayResponse;
-        }
+        // 6. 获取返回结果(Get http response)
+        String rspBody = rsp.getRspBody();
+        Class<T> responseClass = alipayRequest.getResponseClass();
+        T alipayResponse = JSON.parseObject(rspBody, responseClass);
+        Result result = alipayResponse.getResult();
 
         String rspSignValue = rsp.getRspSign();
-        String rspTime      = rsp.getResponseTime();
-        /**
-         * 对返回结果验签(Verify the result signature)
-         */
+        String rspTime = rsp.getResponseTime();
+
+        // 7. 对返回结果验签(Verify the result signature)
         boolean isVerifySuccess = checkRspSign(httpMethod, path, clientId, rspTime, rspBody, rspSignValue);
-        if(!isVerifySuccess){
+        if (!isVerifySuccess) {
             throw new AlipayApiException("Response sign verify fail.");
         }
 
+        if (result == null) {
+            throw new AlipayApiException("Response data error,result field is null");
+        }
+
+        // 8. 返回结果(Return the response)
         return alipayResponse;
     }
 
-    private String genSignValue(String httpMethod, String path, String clientId, String requestTime, String reqBody)throws AlipayApiException{
+    /**
+     * generate the sign value
+     *
+     * @param httpMethod
+     * @param path
+     * @param clientId
+     * @param requestTime
+     * @param reqBody
+     * @return
+     * @throws AlipayApiException
+     */
+    private String genSignValue(String httpMethod, String path, String clientId, String requestTime, String reqBody) throws AlipayApiException {
         String signContent = SignatureTool.genSignConent(httpMethod, path, clientId, requestTime, reqBody);
         String signatureValue;
-        try{
+        try {
             signatureValue = SignatureTool.sign(signContent, merchantPrivateKey);
-        } catch(Exception e){
+        } catch (Exception e) {
             throw new AlipayApiException(e);
         }
         return signatureValue;
     }
 
-    private boolean checkRspSign(String httpMethod, String path, String clientId, String responseTime, String rspBody, String rspSignValue) throws AlipayApiException{
+    /**
+     * check the signature of the response
+     *
+     * @param httpMethod
+     * @param path
+     * @param clientId
+     * @param responseTime
+     * @param rspBody
+     * @param rspSignValue
+     * @return
+     * @throws AlipayApiException
+     */
+    private boolean checkRspSign(String httpMethod, String path, String clientId, String responseTime, String rspBody, String rspSignValue) throws AlipayApiException {
         String rspCheckSignValue = SignatureTool.genSignConent(httpMethod, path, clientId, responseTime, rspBody);
-        try{
+        try {
             boolean isVerify = SignatureTool.verify(rspCheckSignValue, rspSignValue, alipayPublicKey);
             return isVerify;
-        } catch(Exception e){
+        } catch (Exception e) {
             throw new AlipayApiException(e);
         }
 
     }
 
-    private void checkRequestParam(AlipayRequest alipayRequest) throws AlipayApiException{
-        if(alipayRequest == null){
+    /**
+     * check the parameters of the request
+     *
+     * @param alipayRequest
+     * @throws AlipayApiException
+     */
+    private void checkRequestParam(AlipayRequest alipayRequest) throws AlipayApiException {
+        if (alipayRequest == null) {
             throw new AlipayApiException("alipayRequest can't null");
         }
 
@@ -128,33 +152,39 @@ public abstract class BaseAlipayClient implements AlipayClient{
         String httpMehod = alipayRequest.getHttpMethod();
         String path = alipayRequest.getPath();
 
-        if(StringUtils.isBlank(gatewayUrl)){
+        if (StringUtils.isBlank(gatewayUrl)) {
             throw new AlipayApiException("gatewayUrl can't null");
         }
 
-        if(StringUtils.isBlank(clientId)){
+        if (StringUtils.isBlank(clientId)) {
             throw new AlipayApiException("clientId can't null");
         }
 
-        if(StringUtils.isBlank(httpMehod)){
+        if (StringUtils.isBlank(httpMehod)) {
             throw new AlipayApiException("httpMehod can't null");
         }
 
-        if(StringUtils.isBlank(path)){
+        if (StringUtils.isBlank(path)) {
             throw new AlipayApiException("path can't null");
         }
 
-        if(!path.startsWith("/")){
+        if (!path.startsWith("/")) {
             throw new AlipayApiException("path must start with /");
         }
 
     }
 
-    private String genRequestUrl(String path){
-        if(!gatewayUrl.startsWith("http://") && !gatewayUrl.startsWith("https://")){
+    /**
+     * generate the request url
+     *
+     * @param path
+     * @return
+     */
+    private String genRequestUrl(String path) {
+        if (!gatewayUrl.startsWith("http://") && !gatewayUrl.startsWith("https://")) {
             gatewayUrl = "https://" + gatewayUrl;
         }
-        if(gatewayUrl.endsWith("/")){
+        if (gatewayUrl.endsWith("/")) {
             int len = gatewayUrl.length();
             gatewayUrl = gatewayUrl.substring(0, len - 1);
         }
@@ -163,7 +193,15 @@ public abstract class BaseAlipayClient implements AlipayClient{
 
     }
 
-    private Map<String,String> buildBaseHeader(String requestTime, String clientId, String signatureValue){
+    /**
+     * build headers
+     *
+     * @param requestTime
+     * @param clientId
+     * @param signatureValue
+     * @return
+     */
+    private Map<String, String> buildBaseHeader(String requestTime, String clientId, String signatureValue) {
         Map<String, String> header = new HashMap<String, String>();
         header.put("Content-Type", "application/json; charset=UTF-8");
         header.put("Request-Time", requestTime);
@@ -173,9 +211,22 @@ public abstract class BaseAlipayClient implements AlipayClient{
         return header;
     }
 
-    public abstract Map<String,String> buildCustomHeader();
+    /**
+     * build self-defined parameters
+     *
+     * @return
+     */
+    public abstract Map<String, String> buildCustomHeader();
 
-    public abstract HttpRpcResult sendRequest(String requestUrl, String httpMethod, Map<String, String> header, String reqBody)throws AlipayApiException;
-
-
+    /**
+     * send request
+     *
+     * @param requestUrl
+     * @param httpMethod
+     * @param header
+     * @param reqBody
+     * @return
+     * @throws AlipayApiException
+     */
+    public abstract HttpRpcResult sendRequest(String requestUrl, String httpMethod, Map<String, String> header, String reqBody) throws AlipayApiException;
 }
