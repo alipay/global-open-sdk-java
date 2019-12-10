@@ -23,6 +23,8 @@ public class AlipayPayRequest extends AlipayRequest<AlipayPayResponse> {
     private Boolean                 isAuthorization;
     private PaymentVerificationData paymentVerificationData;
     private PaymentFactor           paymentFactor;
+    private Merchant                merchant;
+    private Env                     env;
     private String                  extendInfo;
 
     public ProductCodeType getProductCode() {
@@ -119,6 +121,22 @@ public class AlipayPayRequest extends AlipayRequest<AlipayPayResponse> {
 
     public void setPaymentFactor(PaymentFactor paymentFactor) {
         this.paymentFactor = paymentFactor;
+    }
+
+    public Merchant getMerchant() {
+        return merchant;
+    }
+
+    public void setMerchant(Merchant merchant) {
+        this.merchant = merchant;
+    }
+
+    public Env getEnv() {
+        return env;
+    }
+
+    public void setEnv(Env env) {
+        this.env = env;
     }
 
     public String getExtendInfo() {

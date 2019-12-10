@@ -22,7 +22,7 @@ public class SignatureTool {
 
     private static Base64Encryptor base64Encryptor = new DefaultBase64Encryptor();
 
-    public static String genSignConent(String httpMethod, String path, String clientId, String timeString, String content){
+    public static String genSignContent(String httpMethod, String path, String clientId, String timeString, String content){
         String payload = httpMethod + " " + path + "\n" + clientId + "." + timeString
                 + "." + content;
 

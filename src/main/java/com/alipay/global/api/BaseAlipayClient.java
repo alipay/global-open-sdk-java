@@ -98,7 +98,7 @@ public abstract class BaseAlipayClient implements AlipayClient{
     }
 
     private String genSignValue(String httpMethod, String path, String clientId, String requestTime, String reqBody)throws AlipayApiException{
-        String signContent = SignatureTool.genSignConent(httpMethod, path, clientId, requestTime, reqBody);
+        String signContent = SignatureTool.genSignContent(httpMethod, path, clientId, requestTime, reqBody);
         String signatureValue;
         try{
             signatureValue = SignatureTool.sign(signContent, merchantPrivateKey);
@@ -109,7 +109,7 @@ public abstract class BaseAlipayClient implements AlipayClient{
     }
 
     private boolean checkRspSign(String httpMethod, String path, String clientId, String responseTime, String rspBody, String rspSignValue) throws AlipayApiException{
-        String rspCheckSignValue = SignatureTool.genSignConent(httpMethod, path, clientId, responseTime, rspBody);
+        String rspCheckSignValue = SignatureTool.genSignContent(httpMethod, path, clientId, responseTime, rspBody);
         try{
             boolean isVerify = SignatureTool.verify(rspCheckSignValue, rspSignValue, alipayPublicKey);
             return isVerify;

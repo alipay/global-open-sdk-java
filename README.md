@@ -119,12 +119,12 @@ String clientId   = "T_client";
 String reqTimeStr = "2019-11-01T10:00:00+08:30";
 
 String reqBody    = "{\"key1\":\"value1\"}";
-String reqContent = SignatureTool.genSignConent(httpMethod, path, clientId, reqTimeStr, reqBody);
+String reqContent = SignatureTool.genSignContent(httpMethod, path, clientId, reqTimeStr, reqBody);
 String signReq    = SignatureTool.sign(reqContent, merchantPrivateKey);  
   
 String rspBody    = "{\"key2\":\"value2\"}";
 String rspTimeStr = "2019-11-01T10:00:01+08:30";
-String rspContent = SignatureTool.genSignConent(httpMethod, path, clientId, rspTimeStr, rspBody);
+String rspContent = SignatureTool.genSignContent(httpMethod, path, clientId, rspTimeStr, rspBody);
 boolean isPass    = SignatureTool.verify(rspContent, signRsp, alipayPublicKey);
   
 ```
