@@ -4,7 +4,7 @@ JDK version：1.6+
 Copyright：Ant financial services group  
 ```
 
-#### 0、Please use the latest version
+#### 1 Please use the latest version
 
 https://mvnrepository.com/artifact/com.alipay.global.sdk/global-open-sdk-java
 
@@ -16,7 +16,7 @@ https://mvnrepository.com/artifact/com.alipay.global.sdk/global-open-sdk-java
 </dependency>
 ```
    
-#### 1、Main class file  
+#### 2 Main class file  
 ```
 DefaultAlipayClient.java  
 
@@ -34,7 +34,7 @@ public static boolean verify(String rspContent, String signature, String alipayP
  
 ```
   
-#### 2、The sample for pay  
+#### 3 The sample for pay  
   
 ```
 AlipayClient defaultAlipayClient = new DefaultAlipayClient("https://open-na.alipay.com","merchantPrivateKey", "alipayPublicKey");  
@@ -111,7 +111,7 @@ AlipayPayResponse  alipayPayResponse = yourAlipayClient.execute(aliPayRequest);
 
 ```
   
-#### 3、If you don't care about HTTP calls,the sample for sign and verify  
+#### 4 If you don't care about HTTP calls,the sample for sign and verify  
 ```  
 String httpMethod = "POST";
 String path       = "/ams/sandbox/api/v1/payments/pay";
@@ -129,7 +129,7 @@ boolean isPass    = SignatureTool.verify(rspContent, signRsp, alipayPublicKey);
   
 ```
   
-#### 4、For base64  
+#### 5 For base64  
 
 For compatibility with lower version of Java JDK, signatureTool provided a base64 encryptor DefaultBase64Encryptor by default. 
 
