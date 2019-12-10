@@ -1,15 +1,16 @@
 package com.alipay.global.api.response.order;
 
 import com.alipay.global.api.model.Amount;
+import com.alipay.global.api.model.RedirectActionForm;
 import com.alipay.global.api.response.AlipayResponse;
 
 public class AlipayCreateOrderResponse extends AlipayResponse {
 
-    private String  paymentId;
-    private String  paymentRequestId;
-    private String  paymentToken;
-    private Amount  paymentAmount;
-    private String  extendInfo;
+    private String             paymentId;
+    private String             paymentRequestId;
+    private String             clientPaymentToken;
+    private Amount             paymentAmount;
+    private RedirectActionForm redirectActionForm;
 
     public String getPaymentId() {
         return paymentId;
@@ -27,12 +28,12 @@ public class AlipayCreateOrderResponse extends AlipayResponse {
         this.paymentRequestId = paymentRequestId;
     }
 
-    public String getPaymentToken() {
-        return paymentToken;
+    public String getClientPaymentToken() {
+        return clientPaymentToken;
     }
 
-    public void setPaymentToken(String paymentToken) {
-        this.paymentToken = paymentToken;
+    public void setClientPaymentToken(String clientPaymentToken) {
+        this.clientPaymentToken = clientPaymentToken;
     }
 
     public Amount getPaymentAmount() {
@@ -43,11 +44,12 @@ public class AlipayCreateOrderResponse extends AlipayResponse {
         this.paymentAmount = paymentAmount;
     }
 
-    public String getExtendInfo() {
-        return extendInfo;
+    public RedirectActionForm getRedirectActionForm() {
+        return redirectActionForm;
     }
 
-    public void setExtendInfo(String extendInfo) {
-        this.extendInfo = extendInfo;
+    public void setRedirectActionForm(RedirectActionForm redirectActionForm) {
+        this.redirectActionForm = redirectActionForm;
     }
+
 }

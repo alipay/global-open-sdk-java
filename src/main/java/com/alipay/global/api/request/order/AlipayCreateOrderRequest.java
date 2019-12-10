@@ -19,7 +19,6 @@ public class AlipayCreateOrderRequest extends AlipayRequest<AlipayCreateOrderRes
     private Amount          paymentAmount;
     private String          paymentRedirectUrl;
     private String          paymentNotifyUrl;
-    private String          extendInfo;
 
     public ProductCodeType getProductCode() {
         return productCode;
@@ -67,14 +66,6 @@ public class AlipayCreateOrderRequest extends AlipayRequest<AlipayCreateOrderRes
 
     public void setPaymentNotifyUrl(String paymentNotifyUrl) {
         this.paymentNotifyUrl = paymentNotifyUrl;
-    }
-
-    public String getExtendInfo() {
-        return extendInfo;
-    }
-
-    public void setExtendInfo(String extendInfo) {
-        this.extendInfo = extendInfo;
     }
 
     @Override
