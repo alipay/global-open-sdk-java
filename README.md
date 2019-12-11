@@ -28,7 +28,7 @@ public <T extends AlipayResponse> T execute(AlipayRequest<T> alipayRequest);
 ``` 
 SignatureTool.java 
 
-public static String  genSignConent(String httpMethod, String uriWithQueryString, String clientId, String timeString, String content);
+public static String  genSignContent(String httpMethod, String uriWithQueryString, String clientId, String timeString, String content);
 public static String  sign(String reqContent, String merchantPrivateKey);  
 public static boolean verify(String rspContent, String signature, String alipayPublicKey); 
  
