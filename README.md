@@ -65,7 +65,7 @@ paymentMethod.setPaymentMethodType("GCASH");
 paymentMethod.setPaymentMethodId("20191029042129157232288970435238628515579670ClupeQXzXu");  
 payRequest.setPaymentMethod(paymentMethod);  
   
-AlipayPayResponse  alipayPayResponse = defaultAlipayClient.execute(alipayPayRequest);  
+AlipayPayResponse  alipayPayResponse = defaultAlipayClient.execute(payRequest);  
   
 ```  
   
