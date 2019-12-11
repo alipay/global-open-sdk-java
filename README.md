@@ -39,16 +39,16 @@ public static boolean verify(String rspContent, String signature, String alipayP
 ```
 AlipayClient defaultAlipayClient = new DefaultAlipayClient("https://open-na.alipay.com","merchantPrivateKey", "alipayPublicKey");  
   
-AlipayPayRequest payRequest = new AlipayPayRequest();  
-payRequest.setClientId("T_111222333"); 
-payRequest.setPath("/ams/sandbox/api/v1/payments/pay"); 
-payRequest.setProductCode(ProductCodeType.AGREEMENT_PAYMENT);  
-payRequest.setPaymentRequestId("pay_1029760066776669_102775765796667639");  
+AlipayPayRequest alipayPayRequest = new AlipayPayRequest();  
+alipayPayRequest.setClientId("T_111222333"); 
+alipayPayRequest.setPath("/ams/sandbox/api/v1/payments/pay"); 
+alipayPayRequest.setProductCode(ProductCodeType.AGREEMENT_PAYMENT);  
+alipayPayRequest.setPaymentRequestId("pay_1029760066776669_102775765796667639");  
   
 Amount paymentAmount = new Amount();  
 paymentAmount.setCurrency("PHP");  
 paymentAmount.setValue("10000");  
-payRequest.setPaymentAmount(paymentAmount);  
+alipayPayRequest.setPaymentAmount(paymentAmount);  
   
 Order order = new Order();  
 order.setReferenceOrderId("102775765075669");  
@@ -58,14 +58,14 @@ Amount orderAmount = new Amount();
 orderAmount.setCurrency("PHP");
 orderAmount.setValue("10000");       
 order.setOrderAmount(orderAmount);  
-payRequest.setOrder(order);  
+alipayPayRequest.setOrder(order);  
   
 PaymentMethod paymentMethod = new PaymentMethod();  
 paymentMethod.setPaymentMethodType("GCASH");  
 paymentMethod.setPaymentMethodId("20191029042129157232288970435238628515579670ClupeQXzXu");  
-payRequest.setPaymentMethod(paymentMethod);  
+alipayPayRequest.setPaymentMethod(paymentMethod);  
   
-AlipayPayResponse  alipayPayResponse = defaultAlipayClient.execute(payRequest);  
+AlipayPayResponse  alipayPayResponse = defaultAlipayClient.execute(alipayPayRequest);  
   
 ```  
   
