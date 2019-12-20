@@ -9,3 +9,8 @@ Modify AlipayPayQueryResponse.java
 Remove AlipayRefundQueryRequest.java
 Remove AlipayRefundQueryResponse.java
 Modify SignatureTool.genSignConent to SignatureTool.genSignContent
+
+4、Version:1.0.4
+Add AlipayUserQueryInfoRequest.java
+Add AlipayUserQueryInfoResponse.java
+
