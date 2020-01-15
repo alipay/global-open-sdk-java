@@ -52,6 +52,7 @@ public abstract class BaseAlipayClient implements AlipayClient{
          * 对内容加签(Sign the content)
          */
         String signValue = genSignValue(httpMethod, path, clientId, reqTime, reqBody);
+
         /**
          *  生成必要header(Generate required headers)
          */
@@ -76,7 +77,7 @@ public abstract class BaseAlipayClient implements AlipayClient{
         T        alipayResponse  = JSON.parseObject(rspBody, responseClass);
         Result   result          = alipayResponse.getResult();
         if(result == null){
-            throw new AlipayApiException("Response data error,result field is null");
+            throw new AlipayApiException("Response data error, result field is null");
         }
 
         ResultStatusType rStatus = result.getResultStatus();
@@ -91,17 +92,16 @@ public abstract class BaseAlipayClient implements AlipayClient{
          */
         boolean isVerifySuccess = checkRspSign(httpMethod, path, clientId, rspTime, rspBody, rspSignValue);
         if(!isVerifySuccess){
-            throw new AlipayApiException("Response sign verify fail.");
+            throw new AlipayApiException("Response signature verify fail.");
         }
 
         return alipayResponse;
     }
 
     private String genSignValue(String httpMethod, String path, String clientId, String requestTime, String reqBody)throws AlipayApiException{
-        String signContent = SignatureTool.genSignContent(httpMethod, path, clientId, requestTime, reqBody);
         String signatureValue;
         try{
-            signatureValue = SignatureTool.sign(signContent, merchantPrivateKey);
+            signatureValue = SignatureTool.sign(httpMethod, path, clientId, requestTime, reqBody, merchantPrivateKey);
         } catch(Exception e){
             throw new AlipayApiException(e);
         }
@@ -109,9 +109,8 @@ public abstract class BaseAlipayClient implements AlipayClient{
     }
 
     private boolean checkRspSign(String httpMethod, String path, String clientId, String responseTime, String rspBody, String rspSignValue) throws AlipayApiException{
-        String rspCheckSignValue = SignatureTool.genSignContent(httpMethod, path, clientId, responseTime, rspBody);
         try{
-            boolean isVerify = SignatureTool.verify(rspCheckSignValue, rspSignValue, alipayPublicKey);
+            boolean isVerify = SignatureTool.verify(httpMethod, path, clientId, responseTime, rspBody, rspSignValue, alipayPublicKey);
             return isVerify;
         } catch(Exception e){
             throw new AlipayApiException(e);

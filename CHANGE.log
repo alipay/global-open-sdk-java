@@ -1,16 +1,22 @@
 1、Version:1.0.1
-Modify AlipayCaptureRequest.java
-Modify AlipayCaptureResponse.java
+Modify AlipayCaptureRequest.java;
+Modify AlipayCaptureResponse.java;
 
 2、Version:1.0.2
-Modify AlipayPayQueryResponse.java
+Modify AlipayPayQueryResponse.java;
 
 3、Version:1.0.3
-Remove AlipayRefundQueryRequest.java
-Remove AlipayRefundQueryResponse.java
-Modify SignatureTool.genSignConent to SignatureTool.genSignContent
+Remove AlipayRefundQueryRequest.java;
+Remove AlipayRefundQueryResponse.java;
+Modify SignatureTool.genSignConent to SignatureTool.genSignContent;
 
 4、Version:1.0.4
-Add AlipayUserQueryInfoRequest.java
-Add AlipayUserQueryInfoResponse.java
+Add AlipayUserQueryInfoRequest.java;
+Add AlipayUserQueryInfoResponse.java;
+
+5、Version:1.0.5
+Add SignatureTool.sign(String httpMethod, String path, String clientId, String reqTimeStr, String reqBody, String merchantPrivateKey);
+Add SignatureTool.verify(String httpMethod, String path, String clientId, String rspTimeStr, String rspBody, String signature, String alipayPublicKey);
+Modify AlipayPayQueryResponse.java;
+Optimize TCP connection reuse;
 

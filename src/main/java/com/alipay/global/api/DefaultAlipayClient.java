@@ -28,5 +28,4 @@ public class DefaultAlipayClient extends BaseAlipayClient{
         return httpRpcResult;
     }
 
-
 }

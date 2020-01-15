@@ -118,14 +118,12 @@ String path       = "/ams/sandbox/api/v1/payments/pay";
 String clientId   = "T_client";
 String reqTimeStr = "2019-11-01T10:00:00+08:30";
 
-String reqBody    = "{\"key1\":\"value1\"}";
-String reqContent = SignatureTool.genSignContent(httpMethod, path, clientId, reqTimeStr, reqBody);
-String signReq    = SignatureTool.sign(reqContent, merchantPrivateKey);  
+String reqBody       = "{\"key1\":\"value1\"}";
+String signReqValue  = SignatureTool.sign(httpMethod, path, clientId, reqTimeStr, reqBody, merchantPrivateKey);  
   
 String rspBody    = "{\"key2\":\"value2\"}";
 String rspTimeStr = "2019-11-01T10:00:01+08:30";
-String rspContent = SignatureTool.genSignContent(httpMethod, path, clientId, rspTimeStr, rspBody);
-boolean isPass    = SignatureTool.verify(rspContent, signRsp, alipayPublicKey);
+boolean isPass    = SignatureTool.verify(httpMethod, path, clientId, rspTimeStr, rspBody, signRsp, alipayPublicKey);
   
 ```
   

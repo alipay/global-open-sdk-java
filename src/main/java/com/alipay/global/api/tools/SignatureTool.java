@@ -22,6 +22,16 @@ public class SignatureTool {
 
     private static Base64Encryptor base64Encryptor = new DefaultBase64Encryptor();
 
+    public static String sign(String httpMethod, String path, String clientId, String reqTimeStr, String reqBody, String merchantPrivateKey) throws Exception{
+        String reqContent = genSignContent(httpMethod, path, clientId, reqTimeStr, reqBody);
+        return encode(signWithSHA256RSA(reqContent, merchantPrivateKey), DEFAULT_CHARSET);
+    }
+
+    public static boolean verify(String httpMethod, String path, String clientId, String rspTimeStr, String rspBody, String signature, String alipayPublicKey) throws Exception {
+        String rspContent = genSignContent(httpMethod, path, clientId, rspTimeStr, rspBody);
+        return verifySignatureWithSHA256RSA(rspContent, decode(signature, DEFAULT_CHARSET), alipayPublicKey);
+    }
+
     public static String genSignContent(String httpMethod, String path, String clientId, String timeString, String content){
         String payload = httpMethod + " " + path + "\n" + clientId + "." + timeString
                 + "." + content;

@@ -5,14 +5,17 @@ import org.apache.commons.lang3.StringUtils;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.*;
+import java.lang.reflect.Field;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Map;
 import java.util.Set;
 
 public class DefaultHttpRPC {
 
-    private static int readTimeout    = 15000;
-    private static int connectTimeout = 3000;
+    private static int readTimeout      = 15000;
+    private static int connectTimeout   = 3000;
+    private static int keepAliveTimeout = 30;
 
     public static final String DEFAULT_CHARSET  = "UTF-8";
 
@@ -27,6 +30,7 @@ public class DefaultHttpRPC {
         HttpsURLConnection conns = null;
         OutputStream out = null;
         HttpRpcResult rsp = new HttpRpcResult();
+
         try {
             try {
                 conns = getConnection(new URL(url), HttpMethod.POST.name(), ctype);
@@ -46,6 +50,8 @@ public class DefaultHttpRPC {
             try {
                 out = conns.getOutputStream();
                 out.write(content);
+
+                setConnKeepAliveTimeout(conns);
 
                 String rspSignValue = getResponseSignature(conns);
                 rsp.setRspSign(rspSignValue);
@@ -70,7 +76,6 @@ public class DefaultHttpRPC {
 
         return rsp;
     }
-
 
     private static HttpsURLConnection getConnection(URL url, String method, String ctype) throws IOException, AlipayApiException {
         HttpsURLConnection connHttps = null;
@@ -172,6 +177,29 @@ public class DefaultHttpRPC {
             if (stream != null) {
                 stream.close();
             }
+        }
+    }
+
+    private static void setConnKeepAliveTimeout(HttpURLConnection connection) {
+        if (keepAliveTimeout == 0) {
+            return;
+        }
+        try {
+
+            Field delegateHttpsUrlConnectionField = Class.forName("sun.net.www.protocol.https.HttpsURLConnectionImpl").getDeclaredField(
+                    "delegate");
+            delegateHttpsUrlConnectionField.setAccessible(true);
+            Object delegateHttpsUrlConnection = delegateHttpsUrlConnectionField.get(connection);
+
+            Field httpClientField = Class.forName("sun.net.www.protocol.http.HttpURLConnection").getDeclaredField("http");
+            httpClientField.setAccessible(true);
+            Object httpClient = httpClientField.get(delegateHttpsUrlConnection);
+
+            Field keepAliveTimeoutField = Class.forName("sun.net.www.http.HttpClient").getDeclaredField("keepAliveTimeout");
+            keepAliveTimeoutField.setAccessible(true);
+            keepAliveTimeoutField.setInt(httpClient, keepAliveTimeout);
+        } catch (Throwable ignored) {
+
         }
     }
 

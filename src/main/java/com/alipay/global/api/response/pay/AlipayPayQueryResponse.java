@@ -8,6 +8,8 @@ import java.util.List;
 public class AlipayPayQueryResponse extends AlipayResponse {
 
     private TransactionStatusType paymentStatus;
+    private String                paymentResultCode;
+    private String                paymentResultMessage;
     private String                paymentRequestId;
     private String                paymentId;
     private String                authPaymentId;
@@ -29,6 +31,22 @@ public class AlipayPayQueryResponse extends AlipayResponse {
 
     public void setPaymentStatus(TransactionStatusType paymentStatus) {
         this.paymentStatus = paymentStatus;
+    }
+
+    public String getPaymentResultCode() {
+        return paymentResultCode;
+    }
+
+    public void setPaymentResultCode(String paymentResultCode) {
+        this.paymentResultCode = paymentResultCode;
+    }
+
+    public String getPaymentResultMessage() {
+        return paymentResultMessage;
+    }
+
+    public void setPaymentResultMessage(String paymentResultMessage) {
+        this.paymentResultMessage = paymentResultMessage;
     }
 
     public String getPaymentRequestId() {
