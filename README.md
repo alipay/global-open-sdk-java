@@ -166,8 +166,7 @@ public class YourBase64Encryptor implements Base64Encryptor{
     
 }
 
-Base64Encryptor yourBase64Encryptor = new YourBase64Encryptor();
-SignatureTool.setBase64Encryptor(yourBase64Encryptor);
+SignatureTool.setBase64Encryptor(new YourBase64Encryptor());
 
 ```
 
