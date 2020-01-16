@@ -28,9 +28,8 @@ public <T extends AlipayResponse> T execute(AlipayRequest<T> alipayRequest);
 ``` 
 SignatureTool.java 
 
-public static String  genSignContent(String httpMethod, String uriWithQueryString, String clientId, String timeString, String content);
-public static String  sign(String reqContent, String merchantPrivateKey);  
-public static boolean verify(String rspContent, String signature, String alipayPublicKey); 
+public static String  sign(String httpMethod, String path, String clientId, String reqTimeStr, String reqBody, String merchantPrivateKey);  
+public static boolean (String httpMethod, String path, String clientId, String rspTimeStr, String rspBody, String signature, String alipayPublicKey);  
  
 ```
   
@@ -123,7 +122,8 @@ String signReqValue  = SignatureTool.sign(httpMethod, path, clientId, reqTimeStr
   
 String rspBody    = "{\"key2\":\"value2\"}";
 String rspTimeStr = "2019-11-01T10:00:01+08:30";
-boolean isPass    = SignatureTool.verify(httpMethod, path, clientId, rspTimeStr, rspBody, signRsp, alipayPublicKey);
+String signRspValue = "get from response header";
+boolean isPass    = SignatureTool.verify(httpMethod, path, clientId, rspTimeStr, rspBody, signRspValue, alipayPublicKey);
   
 ```
   
