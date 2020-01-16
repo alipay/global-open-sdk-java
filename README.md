@@ -122,8 +122,8 @@ String signReqValue  = SignatureTool.sign(httpMethod, path, clientId, reqTimeStr
   
 String rspBody    = "{\"key2\":\"value2\"}";
 String rspTimeStr = "2019-11-01T10:00:01+08:30";
-String signRspValue = "get from response header";
-boolean isPass    = SignatureTool.verify(httpMethod, path, clientId, rspTimeStr, rspBody, signRspValue, alipayPublicKey);
+String signature  = "get from response header";
+boolean isPass    = SignatureTool.verify(httpMethod, path, clientId, rspTimeStr, rspBody, signature, alipayPublicKey);
   
 ```
   
