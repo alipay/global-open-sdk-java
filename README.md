@@ -29,7 +29,7 @@ public <T extends AlipayResponse> T execute(AlipayRequest<T> alipayRequest);
 SignatureTool.java 
 
 public static String  sign(String httpMethod, String path, String clientId, String reqTimeStr, String reqBody, String merchantPrivateKey);  
-public static boolean (String httpMethod, String path, String clientId, String rspTimeStr, String rspBody, String signature, String alipayPublicKey);  
+public static boolean verify(String httpMethod, String path, String clientId, String rspTimeStr, String rspBody, String signature, String alipayPublicKey);  
  
 ```
   
