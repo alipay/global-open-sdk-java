@@ -16,6 +16,7 @@ import java.util.Map;
 
 public abstract class BaseAlipayClient implements AlipayClient{
 
+    private static final Integer DEFULT_KEY_VERSION = 1;
     /**
      * eg:https://open-na.alipay.com
      */
@@ -42,11 +43,12 @@ public abstract class BaseAlipayClient implements AlipayClient{
 
         checkRequestParam(alipayRequest);
 
-        String clientId    = alipayRequest.getClientId();
-        String httpMethod  = alipayRequest.getHttpMethod();
-        String path        = alipayRequest.getPath();
-        String reqTime     = DateTool.getCurISO8601Time();
-        String reqBody     = JSON.toJSONString(alipayRequest);
+        String  clientId    = alipayRequest.getClientId();
+        String  httpMethod  = alipayRequest.getHttpMethod();
+        String  path        = alipayRequest.getPath();
+        Integer keyVersion  = alipayRequest.getKeyVersion();
+        String  reqTime     = DateTool.getCurISO8601Time();
+        String  reqBody     = JSON.toJSONString(alipayRequest);
 
         /**
          * 对内容加签(Sign the content)
@@ -56,7 +58,7 @@ public abstract class BaseAlipayClient implements AlipayClient{
         /**
          *  生成必要header(Generate required headers)
          */
-        Map<String, String> header       = buildBaseHeader(reqTime, clientId, signValue);
+        Map<String, String> header       = buildBaseHeader(reqTime, clientId, keyVersion, signValue);
         Map<String, String> customHeader = buildCustomHeader();
         if(customHeader != null && customHeader.size() > 0){
             header.putAll(customHeader);
@@ -162,12 +164,15 @@ public abstract class BaseAlipayClient implements AlipayClient{
 
     }
 
-    private Map<String,String> buildBaseHeader(String requestTime, String clientId, String signatureValue){
+    private Map<String,String> buildBaseHeader(String requestTime, String clientId, Integer keyVersion, String signatureValue){
         Map<String, String> header = new HashMap<String, String>();
         header.put("Content-Type", "application/json; charset=UTF-8");
         header.put("Request-Time", requestTime);
         header.put("client-id", clientId);
-        String signatureHeader = "algorithm=RSA256,keyVersion=2,signature=" + signatureValue;
+        if(keyVersion == null){
+            keyVersion = DEFULT_KEY_VERSION;
+        }
+        String signatureHeader = "algorithm=RSA256,keyVersion=" + keyVersion + ",signature=" + signatureValue;
         header.put("Signature", signatureHeader);
         return header;
     }

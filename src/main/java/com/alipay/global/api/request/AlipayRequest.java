@@ -12,6 +12,8 @@ public abstract class AlipayRequest <T extends AlipayResponse>{
     @JSONField(serialize = false)
     private String path;
     @JSONField(serialize = false)
+    private Integer keyVersion;
+    @JSONField(serialize = false)
     private  Class<T> responseClass;
 
     public String getClientId() {
@@ -28,6 +30,14 @@ public abstract class AlipayRequest <T extends AlipayResponse>{
 
     public void setPath(String path) {
         this.path = path;
+    }
+
+    public Integer getKeyVersion() {
+        return keyVersion;
+    }
+
+    public void setKeyVersion(Integer keyVersion) {
+        this.keyVersion = keyVersion;
     }
 
     public abstract String getHttpMethod();
