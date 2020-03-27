@@ -20,3 +20,5 @@ Add SignatureTool.verify(String httpMethod, String path, String clientId, String
 Modify AlipayPayQueryResponse.java;
 Optimize TCP connection reuse;
 
+6、Version:1.0.7
+ADD BKASH to CustomerBelongsTo;
