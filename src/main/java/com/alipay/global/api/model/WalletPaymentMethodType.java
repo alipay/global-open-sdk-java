@@ -1,6 +1,7 @@
 package com.alipay.global.api.model;
 
-public enum CustomerBelongsTo {
+public enum WalletPaymentMethodType {
+
     TRUEMONEY,
 
     ALIPAY_HK,
@@ -17,6 +18,8 @@ public enum CustomerBelongsTo {
 
     BKASH,
 
-    EASYPASIA;
+    EASYPASIA,
+
+    CONNECT_WALLET;
 
 }
