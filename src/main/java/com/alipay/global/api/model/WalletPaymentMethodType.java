@@ -18,7 +18,7 @@ public enum WalletPaymentMethodType {
 
     BKASH,
 
-    EASYPASIA,
+    EASYPAISA,
 
     CONNECT_WALLET;
 
