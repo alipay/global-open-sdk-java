@@ -22,3 +22,6 @@ Optimize TCP connection reuse;
 
 6、Version:1.0.7
 ADD BKASH to CustomerBelongsTo;
+
+7、Version:1.0.8
+Modify EASYPASIA to EASYPAISA;

@@ -17,6 +17,6 @@ public enum CustomerBelongsTo {
 
     BKASH,
 
-    EASYPASIA;
+    EASYPAISA;
 
 }
