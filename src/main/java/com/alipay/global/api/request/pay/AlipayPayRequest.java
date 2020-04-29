@@ -25,6 +25,7 @@ public class AlipayPayRequest extends AlipayRequest<AlipayPayResponse> {
     private PaymentFactor           paymentFactor;
     private Merchant                merchant;
     private Env                     env;
+    private SettlementStrategy      settlementStrategy;
     private String                  extendInfo;
 
     public ProductCodeType getProductCode() {
@@ -137,6 +138,14 @@ public class AlipayPayRequest extends AlipayRequest<AlipayPayResponse> {
 
     public void setEnv(Env env) {
         this.env = env;
+    }
+
+    public SettlementStrategy getSettlementStrategy() {
+        return settlementStrategy;
+    }
+
+    public void setSettlementStrategy(SettlementStrategy settlementStrategy) {
+        this.settlementStrategy = settlementStrategy;
     }
 
     public String getExtendInfo() {
