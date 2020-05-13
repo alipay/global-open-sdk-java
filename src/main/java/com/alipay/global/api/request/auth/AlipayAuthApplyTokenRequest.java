@@ -1,9 +1,7 @@
 package com.alipay.global.api.request.auth;
 
-import com.alibaba.fastjson.annotation.JSONField;
 import com.alipay.global.api.model.CustomerBelongsTo;
 import com.alipay.global.api.model.GrantType;
-import com.alipay.global.api.net.HttpMethod;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.auth.AlipayAuthApplyTokenResponse;
 
