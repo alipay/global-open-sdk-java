@@ -36,35 +36,60 @@ public static boolean verify(String httpMethod, String path, String clientId, St
 #### 3 The sample for pay  
   
 ```
-AlipayClient defaultAlipayClient = new DefaultAlipayClient("https://open-na.alipay.com","merchantPrivateKey", "alipayPublicKey");  
-  
-AlipayPayRequest alipayPayRequest = new AlipayPayRequest();  
-alipayPayRequest.setClientId("T_111222333"); 
-alipayPayRequest.setPath("/ams/sandbox/api/v1/payments/pay"); 
-alipayPayRequest.setProductCode(ProductCodeType.AGREEMENT_PAYMENT);  
-alipayPayRequest.setPaymentRequestId("pay_1029760066776669_102775765796667639");  
-  
-Amount paymentAmount = new Amount();  
-paymentAmount.setCurrency("PHP");  
-paymentAmount.setValue("10000");  
-alipayPayRequest.setPaymentAmount(paymentAmount);  
-  
-Order order = new Order();  
-order.setReferenceOrderId("102775765075669");  
+AlipayClient defaultAlipayClient = new DefaultAlipayClient("https://open-na.alipay.com", merchantPrivateKey, alipayPublicKey);
+
+AlipayPayRequest alipayPayRequest = new AlipayPayRequest();
+alipayPayRequest.setClientId("T_111222333");
+alipayPayRequest.setPath("/ams/sandbox/api/v1/payments/pay");
+alipayPayRequest.setProductCode(ProductCodeType.CASHIER_PAYMENT);
+alipayPayRequest.setPaymentRequestId("pay_test_99");
+
+Amount paymentAmount = new Amount();
+paymentAmount.setCurrency("USD");
+paymentAmount.setValue("30000");
+alipayPayRequest.setPaymentAmount(paymentAmount);
+
+Order order = new Order();
+order.setReferenceOrderId("102775765075669");
 order.setOrderDescription("Mi Band 3 Wrist Strap Metal Screwless Stainless Steel For Xiaomi Mi Band 3");
 
+ChinaExtraTransInfo chinaExtraTransInfo = new ChinaExtraTransInfo();
+chinaExtraTransInfo.setBusinessType(BusinessType.HOTEL);
+chinaExtraTransInfo.setHotelName("hotelName");
+chinaExtraTransInfo.setCheckinTime("2020-06-26T10:00:00+08:00");
+chinaExtraTransInfo.setCheckoutTime("2020-06-26T10:00:00+08:00");
+JSONObject extendInfo = new JSONObject();
+extendInfo.put("chinaExtraTransInfo",chinaExtraTransInfo);
+order.setExtendInfo(extendInfo.toJSONString());
+
+Merchant merchant = new Merchant();
+merchant.setMerchantMCC("testMcc");
+merchant.setReferenceMerchantId("referenceMerchantId");
+order.setMerchant(merchant);
+
 Amount orderAmount = new Amount();
-orderAmount.setCurrency("PHP");
-orderAmount.setValue("10000");       
-order.setOrderAmount(orderAmount);  
-alipayPayRequest.setOrder(order);  
-  
-PaymentMethod paymentMethod = new PaymentMethod();  
-paymentMethod.setPaymentMethodType("GCASH");  
-paymentMethod.setPaymentMethodId("20191029042129157232288970435238628515579670ClupeQXzXu");  
-alipayPayRequest.setPaymentMethod(paymentMethod);  
-  
-AlipayPayResponse  alipayPayResponse = defaultAlipayClient.execute(alipayPayRequest);  
+orderAmount.setCurrency("USD");
+orderAmount.setValue("30000");
+order.setOrderAmount(orderAmount);
+alipayPayRequest.setOrder(order);
+
+PaymentMethod paymentMethod = new PaymentMethod();
+paymentMethod.setPaymentMethodType(WalletPaymentMethodType.ALIPAY_CN.name());
+alipayPayRequest.setPaymentMethod(paymentMethod);
+
+Env env = new Env();
+env.setTerminalType(TerminalType.WEB);
+env.setOsType(OsType.IOS);
+alipayPayRequest.setEnv(env);
+
+alipayPayRequest.setPaymentNotifyUrl("https://global.alipay.com/notify");
+alipayPayRequest.setPaymentRedirectUrl("https://global.alipay.com?param1=v1");
+
+SettlementStrategy settlementStrategy  = new SettlementStrategy();
+settlementStrategy.setSettlementCurrency("USD");
+alipayPayRequest.setSettlementStrategy(settlementStrategy);
+
+AlipayPayResponse alipayPayResponse = defaultAlipayClient.execute(alipayPayRequest);
   
 ```  
   
@@ -170,5 +195,47 @@ SignatureTool.setBase64Encryptor(new YourBase64Encryptor());
 
 ```
 
+#### 6 The sample for handling the notification
+```
 
+HttpRequest request         = new YourHttpRequest();
 
+String      clientId        = request.getHeader("Client-Id");
+String      httpMethod      = request.getMethod();
+String      path            = request.getRequestURL()
+String      requestTime     = request.getHeader("Request-Time");
+String      reqBody         = IOUtils.read(request.getInputStream());
+
+String      signatureHeader = request.getHeader("Signature");
+String[]    valueItem       = signatureHeader.split(",");
+String      signatureItem   = valueItem[2];
+String[]    itemArr         = signatureItem.split("=");
+String      reqSignValue    = itemArr[1];
+
+boolean     isVerify        = SignatureTool.verify(httpMethod, path, clientId, requestTime, reqBody, reqSignValue, "alipayPublicKey");
+
+String      rspBody         = "{\"result\":{\"resultCode\":\"SUCCESS\",\"resultStatus\":\"S\",\"resultMessage\":\"success\"}}";
+if(!isVerify){
+    rspBody = "{\"result\":{\"resultCode\":\"FAIL\",\"resultStatus\":\"F\",\"resultMessage\":\"fail\"}}";
+} else {
+    // To do your business for reqBody
+    boolean isDoFail = true;
+    if(isDoFail){
+       rspBody = "{\"result\":{\"resultCode\":\"FAIL\",\"resultStatus\":\"F\",\"resultMessage\":\"fail\"}}";
+    }
+}
+
+HttpResponse response         = new YourHttpResponse();
+
+String       responseTime     = "2020-06-26T10:00:00+08:00";
+String       signatureValue   = SignatureTool.sign(httpMethod, path, clientId, responseTime, rspBody, "merchantPrivateKey");
+String       signatureHeader  = "algorithm=RSA256,keyVersion=1" + ",signature=" + signatureValue;
+response.setHeader("signature", signatureHeader);
+   
+response.setHeader("Content-Type", "application/json; charset=UTF-8");
+response.setHeader("Response-time", responseTime);
+response.setHeader("Client-id", clientId);
+
+response.getWriter().write(rspBody);
+
+```
