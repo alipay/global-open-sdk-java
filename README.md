@@ -197,7 +197,6 @@ SignatureTool.setBase64Encryptor(new YourBase64Encryptor());
 
 #### 6 The sample for handling the notification
 ```
-
 HttpRequest request         = new YourHttpRequest();
 
 String      clientId        = request.getHeader("Client-Id");
@@ -230,8 +229,8 @@ HttpResponse response         = new YourHttpResponse();
 String       responseTime     = "2020-06-26T10:00:00+08:00";
 String       signatureValue   = SignatureTool.sign(httpMethod, path, clientId, responseTime, rspBody, "merchantPrivateKey");
 String       signatureHeader  = "algorithm=RSA256,keyVersion=1" + ",signature=" + signatureValue;
+
 response.setHeader("signature", signatureHeader);
-   
 response.setHeader("Content-Type", "application/json; charset=UTF-8");
 response.setHeader("Response-time", responseTime);
 response.setHeader("Client-id", clientId);
