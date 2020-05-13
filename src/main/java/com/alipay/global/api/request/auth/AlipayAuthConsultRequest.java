@@ -1,18 +1,13 @@
 package com.alipay.global.api.request.auth;
 
-import com.alibaba.fastjson.annotation.JSONField;
 import com.alipay.global.api.model.CustomerBelongsTo;
 import com.alipay.global.api.model.OsType;
 import com.alipay.global.api.model.ScopeType;
 import com.alipay.global.api.model.TerminalType;
-import com.alipay.global.api.net.HttpMethod;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.auth.AlipayAuthConsultResponse;
 
 public class AlipayAuthConsultRequest extends AlipayRequest<AlipayAuthConsultResponse> {
-
-    @JSONField(serialize = false)
-    private final static String httpMethod =  HttpMethod.POST.name();
 
     private CustomerBelongsTo customerBelongsTo;
     private String            authClientId;
@@ -94,11 +89,6 @@ public class AlipayAuthConsultRequest extends AlipayRequest<AlipayAuthConsultRes
 
     public void setExtendInfo(String extendInfo) {
         this.extendInfo = extendInfo;
-    }
-
-    @Override
-    public String getHttpMethod() {
-        return httpMethod;
     }
 
     @Override

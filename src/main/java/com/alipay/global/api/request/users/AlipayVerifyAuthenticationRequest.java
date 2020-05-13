@@ -1,15 +1,10 @@
 package com.alipay.global.api.request.users;
 
-import com.alibaba.fastjson.annotation.JSONField;
 import com.alipay.global.api.model.AuthenticationType;
-import com.alipay.global.api.net.HttpMethod;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.users.AlipayVerifyAuthenticationResponse;
 
 public class AlipayVerifyAuthenticationRequest extends AlipayRequest<AlipayVerifyAuthenticationResponse> {
-
-    @JSONField(serialize = false)
-    private final static String httpMethod = HttpMethod.POST.name();
 
     private AuthenticationType authenticationType;
     private String             authenticationRequestId;
@@ -37,11 +32,6 @@ public class AlipayVerifyAuthenticationRequest extends AlipayRequest<AlipayVerif
 
     public void setAuthenticationValue(String authenticationValue) {
         this.authenticationValue = authenticationValue;
-    }
-
-    @Override
-    public String getHttpMethod() {
-        return httpMethod;
     }
 
     @Override

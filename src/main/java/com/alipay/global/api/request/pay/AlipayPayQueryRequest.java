@@ -1,14 +1,9 @@
 package com.alipay.global.api.request.pay;
 
-import com.alibaba.fastjson.annotation.JSONField;
-import com.alipay.global.api.net.HttpMethod;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.pay.AlipayPayQueryResponse;
 
 public class AlipayPayQueryRequest extends AlipayRequest<AlipayPayQueryResponse> {
-
-    @JSONField(serialize = false)
-    private final static String httpMethod = HttpMethod.POST.name();
 
     private String paymentRequestId;
     private String paymentId;
@@ -27,11 +22,6 @@ public class AlipayPayQueryRequest extends AlipayRequest<AlipayPayQueryResponse>
 
     public void setPaymentId(String paymentId) {
         this.paymentId = paymentId;
-    }
-
-    @Override
-    public String getHttpMethod() {
-        return httpMethod;
     }
 
     @Override

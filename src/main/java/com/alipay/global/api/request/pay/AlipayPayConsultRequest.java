@@ -1,19 +1,14 @@
 package com.alipay.global.api.request.pay;
 
-import com.alibaba.fastjson.annotation.JSONField;
 import com.alipay.global.api.model.Amount;
 import com.alipay.global.api.model.Env;
 import com.alipay.global.api.model.ProductCodeType;
-import com.alipay.global.api.net.HttpMethod;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.pay.AlipayPayConsultResponse;
 
 import java.util.List;
 
 public class AlipayPayConsultRequest extends AlipayRequest<AlipayPayConsultResponse> {
-
-    @JSONField(serialize = false)
-    private final static String httpMethod = HttpMethod.POST.name();
 
     private ProductCodeType productCode;
     private Amount          paymentAmount;
@@ -95,11 +90,6 @@ public class AlipayPayConsultRequest extends AlipayRequest<AlipayPayConsultRespo
 
     public void setExtendInfo(String extendInfo) {
         this.extendInfo = extendInfo;
-    }
-
-    @Override
-    public String getHttpMethod() {
-        return httpMethod;
     }
 
     @Override

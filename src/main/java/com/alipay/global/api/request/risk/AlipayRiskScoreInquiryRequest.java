@@ -1,19 +1,14 @@
 package com.alipay.global.api.request.risk;
 
-import com.alibaba.fastjson.annotation.JSONField;
 import com.alipay.global.api.model.CustomerBelongsTo;
 import com.alipay.global.api.model.CustomerIdType;
 import com.alipay.global.api.model.RiskScoreType;
-import com.alipay.global.api.net.HttpMethod;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.risk.AlipayRiskScoreInquiryResponse;
 
 import java.util.List;
 
 public class AlipayRiskScoreInquiryRequest extends AlipayRequest<AlipayRiskScoreInquiryResponse> {
-
-    @JSONField(serialize = false)
-    private final static String httpMethod = HttpMethod.POST.name();
 
     private CustomerBelongsTo   customerBelongsTo;
     private CustomerIdType      customerIdType;
@@ -50,11 +45,6 @@ public class AlipayRiskScoreInquiryRequest extends AlipayRequest<AlipayRiskScore
 
     public void setRiskScoreTypes(List<RiskScoreType> riskScoreTypes) {
         this.riskScoreTypes = riskScoreTypes;
-    }
-
-    @Override
-    public String getHttpMethod() {
-        return httpMethod;
     }
 
     @Override

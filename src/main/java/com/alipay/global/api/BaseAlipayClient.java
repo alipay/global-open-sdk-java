@@ -79,7 +79,7 @@ public abstract class BaseAlipayClient implements AlipayClient{
         T        alipayResponse  = JSON.parseObject(rspBody, responseClass);
         Result   result          = alipayResponse.getResult();
         if(result == null){
-            throw new AlipayApiException("Response data error, result field is null");
+            throw new AlipayApiException("Response data error, result field is null, rspBody:" + rspBody);
         }
 
         ResultStatusType rStatus = result.getResultStatus();

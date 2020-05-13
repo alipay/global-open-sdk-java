@@ -1,6 +1,7 @@
 package com.alipay.global.api.request;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import com.alipay.global.api.net.HttpMethod;
 import com.alipay.global.api.response.AlipayResponse;
 
 public abstract class AlipayRequest <T extends AlipayResponse>{
@@ -15,6 +16,8 @@ public abstract class AlipayRequest <T extends AlipayResponse>{
     private Integer keyVersion;
     @JSONField(serialize = false)
     private  Class<T> responseClass;
+    @JSONField(serialize = false)
+    private static String httpMethod = HttpMethod.POST.name();
 
     public String getClientId() {
         return clientId;
@@ -40,7 +43,9 @@ public abstract class AlipayRequest <T extends AlipayResponse>{
         this.keyVersion = keyVersion;
     }
 
-    public abstract String getHttpMethod();
+    public String getHttpMethod() {
+        return httpMethod;
+    }
 
     /**
      * 得到当前API的响应结果类型

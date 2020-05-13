@@ -10,7 +10,6 @@ public class AlipayAuthApplyTokenResponse extends AlipayResponse {
     private String   refreshTokenExpiryTime;
     private String   extendInfo;
 
-
     public String getAccessToken() {
         return accessToken;
     }

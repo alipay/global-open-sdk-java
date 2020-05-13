@@ -8,9 +8,6 @@ import com.alipay.global.api.response.pay.AlipayCaptureResponse;
 
 public class AlipayCaptureRequest extends AlipayRequest<AlipayCaptureResponse> {
 
-    @JSONField(serialize = false)
-    private final static String httpMethod = HttpMethod.POST.name();
-
     private String  captureRequestId;
     private String  paymentId;
     private Amount  captureAmount;
@@ -46,11 +43,6 @@ public class AlipayCaptureRequest extends AlipayRequest<AlipayCaptureResponse> {
 
     public void setLastCapture(Boolean lastCapture) {
         isLastCapture = lastCapture;
-    }
-
-    @Override
-    public String getHttpMethod() {
-        return httpMethod;
     }
 
     @Override

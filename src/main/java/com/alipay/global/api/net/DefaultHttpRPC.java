@@ -20,7 +20,7 @@ public class DefaultHttpRPC {
     public static final String DEFAULT_CHARSET  = "UTF-8";
 
     public static HttpRpcResult doPost(String url, Map<String, String> header, String reqBody) throws IOException, AlipayApiException {
-        String ctype = "application/x-www-form-urlencoded;charset=" + DEFAULT_CHARSET;
+        String ctype = "application/json;charset=" + DEFAULT_CHARSET;
         byte[] content = reqBody.getBytes(DEFAULT_CHARSET);
 
         return doPost(url, ctype, header, content);
@@ -89,7 +89,7 @@ public class DefaultHttpRPC {
         connHttps.setDoInput(true);
         connHttps.setDoOutput(true);
         connHttps.setRequestProperty("Accept", "text/plain,text/xml,text/javascript,text/html");
-        connHttps.setRequestProperty("User-Agent", "sandbox-sdk-java");
+        connHttps.setRequestProperty("User-Agent", "global-sdk-java");
         connHttps.setRequestProperty("Content-Type", ctype);
         return connHttps;
     }

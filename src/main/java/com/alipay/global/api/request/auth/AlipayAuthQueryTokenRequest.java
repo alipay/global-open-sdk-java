@@ -1,14 +1,9 @@
 package com.alipay.global.api.request.auth;
 
-import com.alibaba.fastjson.annotation.JSONField;
-import com.alipay.global.api.net.HttpMethod;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.auth.AlipayAuthQueryTokenResponse;
 
 public class AlipayAuthQueryTokenRequest extends AlipayRequest<AlipayAuthQueryTokenResponse> {
-
-    @JSONField(serialize = false)
-    private final static String httpMethod =  HttpMethod.POST.name();
 
     private String accessToken;
 
@@ -18,11 +13,6 @@ public class AlipayAuthQueryTokenRequest extends AlipayRequest<AlipayAuthQueryTo
 
     public void setAccessToken(String accessToken) {
         this.accessToken = accessToken;
-    }
-
-    @Override
-    public String getHttpMethod() {
-        return httpMethod;
     }
 
     @Override

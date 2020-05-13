@@ -9,9 +9,6 @@ import com.alipay.global.api.response.auth.AlipayAuthApplyTokenResponse;
 
 public class AlipayAuthApplyTokenRequest extends AlipayRequest<AlipayAuthApplyTokenResponse> {
 
-    @JSONField(serialize = false)
-    private final static String httpMethod =  HttpMethod.POST.name();
-
     private GrantType         grantType;
     private CustomerBelongsTo customerBelongsTo;
     private String            authCode;
@@ -56,10 +53,6 @@ public class AlipayAuthApplyTokenRequest extends AlipayRequest<AlipayAuthApplyTo
 
     public void setExtendInfo(String extendInfo) {
         this.extendInfo = extendInfo;
-    }
-
-    public String getHttpMethod(){
-        return httpMethod;
     }
 
     @Override

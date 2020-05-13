@@ -1,14 +1,9 @@
 package com.alipay.global.api.request.auth;
 
-import com.alibaba.fastjson.annotation.JSONField;
-import com.alipay.global.api.net.HttpMethod;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.auth.AlipayAuthRevokeTokenResponse;
 
 public class AlipayAuthRevokeTokenRequest extends AlipayRequest<AlipayAuthRevokeTokenResponse> {
-
-    @JSONField(serialize = false)
-    private final static String httpMethod = HttpMethod.POST.name();
 
     private String accessToken;
     private String extendInfo;
@@ -27,11 +22,6 @@ public class AlipayAuthRevokeTokenRequest extends AlipayRequest<AlipayAuthRevoke
 
     public void setExtendInfo(String extendInfo) {
         this.extendInfo = extendInfo;
-    }
-
-    @Override
-    public String getHttpMethod() {
-        return httpMethod;
     }
 
     @Override
