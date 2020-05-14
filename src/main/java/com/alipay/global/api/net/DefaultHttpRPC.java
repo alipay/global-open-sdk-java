@@ -1,36 +1,42 @@
 package com.alipay.global.api.net;
 
 import com.alipay.global.api.exception.AlipayApiException;
+import com.alipay.global.api.ssl.TrueHostnameVerifier;
+import com.alipay.global.api.ssl.X509TrustManagerImp;
 import org.apache.commons.lang3.StringUtils;
 
-import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.*;
 import java.io.*;
 import java.lang.reflect.Field;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Map;
 import java.util.Set;
 
 public class DefaultHttpRPC {
 
     private static int readTimeout      = 15000;
-    private static int connectTimeout   = 3000;
+    private static int connectTimeout   = 15000;
     private static int keepAliveTimeout = 30;
 
     public static final String DEFAULT_CHARSET  = "UTF-8";
 
-    public static HttpRpcResult doPost(String url, Map<String, String> header, String reqBody) throws IOException, AlipayApiException {
+    public static HttpRpcResult doPost(String url, Map<String, String> header, String reqBody) throws NoSuchAlgorithmException, KeyManagementException, IOException, AlipayApiException {
         String ctype = "application/json;charset=" + DEFAULT_CHARSET;
         byte[] content = reqBody.getBytes(DEFAULT_CHARSET);
 
         return doPost(url, ctype, header, content);
     }
 
-    private static HttpRpcResult doPost(String url, String ctype, Map<String, String> reqHeader, byte[] content) throws IOException, AlipayApiException {
+    private static HttpRpcResult doPost(String url, String ctype, Map<String, String> reqHeader, byte[] content) throws NoSuchAlgorithmException, KeyManagementException, IOException, AlipayApiException {
         HttpsURLConnection conns = null;
         OutputStream out = null;
-        HttpRpcResult rsp = new HttpRpcResult();
+        HttpRpcResult httpRpcResult = new HttpRpcResult();
 
+        System.setProperty("sun.net.http.allowRestrictedHeaders", "true");
+        System.setProperty("sun.net.http.retryPost", "false");
         try {
             try {
                 conns = getConnection(new URL(url), HttpMethod.POST.name(), ctype);
@@ -51,14 +57,14 @@ public class DefaultHttpRPC {
                 out = conns.getOutputStream();
                 out.write(content);
 
-                setConnKeepAliveTimeout(conns);
+                // setConnKeepAliveTimeout(conns);
 
                 String rspSignValue = getResponseSignature(conns);
-                rsp.setRspSign(rspSignValue);
+                httpRpcResult.setRspSign(rspSignValue);
                 String responseTime = getResponseTime(conns);
-                rsp.setResponseTime(responseTime);
+                httpRpcResult.setResponseTime(responseTime);
                 String rspBody = getResponseAsString(conns);
-                rsp.setRspBody(rspBody);
+                httpRpcResult.setRspBody(rspBody);
 
             } catch (IOException e) {
                 throw e;
@@ -70,17 +76,19 @@ public class DefaultHttpRPC {
             }
             if (conns != null) {
                 conns.disconnect();
-
             }
         }
 
-        return rsp;
+        return httpRpcResult;
     }
 
-    private static HttpsURLConnection getConnection(URL url, String method, String ctype) throws IOException, AlipayApiException {
-        HttpsURLConnection connHttps = null;
-        if ("https".equals(url.getProtocol())) {
+    private static HttpsURLConnection getConnection(URL url, String method, String ctype) throws NoSuchAlgorithmException, KeyManagementException, IOException, AlipayApiException {
+        HttpsURLConnection connHttps;
+        if ("https".equalsIgnoreCase(url.getProtocol())) {
+            SSLSocketFactory sslSocketFactory = createSSLSocketFactory();
             connHttps = (HttpsURLConnection) url.openConnection();
+            connHttps.setSSLSocketFactory(sslSocketFactory);
+            connHttps.setHostnameVerifier(new TrueHostnameVerifier());
         } else {
             throw new AlipayApiException("Only supports HTTPS.");
         }
@@ -92,6 +100,13 @@ public class DefaultHttpRPC {
         connHttps.setRequestProperty("User-Agent", "global-sdk-java");
         connHttps.setRequestProperty("Content-Type", ctype);
         return connHttps;
+    }
+
+    private static SSLSocketFactory createSSLSocketFactory() throws NoSuchAlgorithmException, KeyManagementException {
+        X509TrustManager compositeX509TrustManager = new X509TrustManagerImp();
+        SSLContext sslContext = SSLContext.getInstance("TLS");
+        sslContext.init(null, new TrustManager[]{compositeX509TrustManager}, new java.security.SecureRandom());
+        return sslContext.getSocketFactory();
     }
 
     public static String getResponseSignature(HttpsURLConnection conn) {

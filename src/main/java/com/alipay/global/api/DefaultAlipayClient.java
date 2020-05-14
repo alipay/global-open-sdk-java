@@ -22,7 +22,7 @@ public class DefaultAlipayClient extends BaseAlipayClient{
         HttpRpcResult httpRpcResult;
         try {
             httpRpcResult = DefaultHttpRPC.doPost(requestUrl, header, reqBody);
-        } catch (IOException e){
+        } catch (Exception e){
             throw new AlipayApiException(e);
         }
         return httpRpcResult;
