@@ -25,3 +25,6 @@ ADD BKASH to CustomerBelongsTo;
 
 7、Version:1.0.8
 Modify EASYPASIA to EASYPAISA;
+
+8、Version:1.0.10
+Disable partial JDK HttpURLConnection automatic retry
