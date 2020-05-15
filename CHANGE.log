@@ -28,3 +28,6 @@ Modify EASYPASIA to EASYPAISA;
 
 8、Version:1.0.10
 Disable partial JDK HttpURLConnection automatic retry
+
+9、Version:1.0.10
+Optimize HTTP links for long connection times
