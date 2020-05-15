@@ -10,8 +10,6 @@ import java.io.*;
 import java.lang.reflect.Field;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.security.KeyManagementException;
-import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Map;
 import java.util.Set;
@@ -47,14 +45,14 @@ public class DefaultHttpRPC {
 
     }
 
-    public static HttpRpcResult doPost(String url, Map<String, String> header, String reqBody) throws NoSuchAlgorithmException, KeyManagementException, IOException, AlipayApiException {
+    public static HttpRpcResult doPost(String url, Map<String, String> header, String reqBody) throws IOException, AlipayApiException {
         String ctype = "application/json;charset=" + DEFAULT_CHARSET;
         byte[] content = reqBody.getBytes(DEFAULT_CHARSET);
 
         return doPost(url, ctype, header, content);
     }
 
-    private static HttpRpcResult doPost(String url, String ctype, Map<String, String> reqHeader, byte[] content) throws NoSuchAlgorithmException, KeyManagementException, IOException, AlipayApiException {
+    private static HttpRpcResult doPost(String url, String ctype, Map<String, String> reqHeader, byte[] content) throws IOException, AlipayApiException {
         HttpsURLConnection conns = null;
         OutputStream out = null;
         HttpRpcResult httpRpcResult = new HttpRpcResult();
@@ -110,7 +108,7 @@ public class DefaultHttpRPC {
         return httpRpcResult;
     }
 
-    private static HttpsURLConnection getConnection(URL url, String method, String ctype) throws NoSuchAlgorithmException, KeyManagementException, IOException, AlipayApiException {
+    private static HttpsURLConnection getConnection(URL url, String method, String ctype) throws IOException, AlipayApiException {
         HttpsURLConnection connHttps;
         if ("https".equalsIgnoreCase(url.getProtocol())) {
             connHttps = (HttpsURLConnection) url.openConnection();

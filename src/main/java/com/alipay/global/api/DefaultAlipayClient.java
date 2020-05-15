@@ -4,7 +4,6 @@ import com.alipay.global.api.exception.AlipayApiException;
 import com.alipay.global.api.net.DefaultHttpRPC;
 import com.alipay.global.api.net.HttpRpcResult;
 
-import java.io.IOException;
 import java.util.Map;
 
 public class DefaultAlipayClient extends BaseAlipayClient{
