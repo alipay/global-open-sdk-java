@@ -18,7 +18,7 @@ public class DefaultHttpRPC {
 
     private static int readTimeout      = 15000;
     private static int connectTimeout   = 15000;
-    private static int keepAliveTimeout = 60;
+    private static int keepAliveTimeout = 30;
 
     private static SSLContext       ctx           = null;
     private static HostnameVerifier verifier      = null;
