@@ -7,6 +7,7 @@ import com.alipay.global.api.model.ResultStatusType;
 import com.alipay.global.api.net.HttpRpcResult;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.AlipayResponse;
+import com.alipay.global.api.tools.Constants;
 import com.alipay.global.api.tools.SignatureTool;
 import com.alipay.global.api.tools.DateTool;
 import org.apache.commons.lang3.StringUtils;
@@ -82,13 +83,12 @@ public abstract class BaseAlipayClient implements AlipayClient{
             throw new AlipayApiException("Response data error, result field is null, rspBody:" + rspBody);
         }
 
-        ResultStatusType rStatus = result.getResultStatus();
-        if(ResultStatusType.F.equals(rStatus) || ResultStatusType.U.equals(rStatus)){
+        String rspSignValue = rsp.getRspSign();
+        String rspTime      = rsp.getResponseTime();
+        if(null == rspSignValue || rspSignValue.isEmpty() || null == rspTime || rspTime.isEmpty()){
             return alipayResponse;
         }
 
-        String rspSignValue = rsp.getRspSign();
-        String rspTime      = rsp.getResponseTime();
         /**
          * 对返回结果验签(Verify the result signature)
          */
@@ -166,14 +166,14 @@ public abstract class BaseAlipayClient implements AlipayClient{
 
     private Map<String,String> buildBaseHeader(String requestTime, String clientId, Integer keyVersion, String signatureValue){
         Map<String, String> header = new HashMap<String, String>();
-        header.put("Content-Type", "application/json; charset=UTF-8");
-        header.put("Request-Time", requestTime);
-        header.put("client-id", clientId);
+        header.put(Constants.CONTENT_TYPE_HEADER, "application/json; charset=UTF-8");
+        header.put(Constants.REQ_TIME_HEADER, requestTime);
+        header.put(Constants.CLIENT_ID_HEADER, clientId);
         if(keyVersion == null){
             keyVersion = DEFULT_KEY_VERSION;
         }
         String signatureHeader = "algorithm=RSA256,keyVersion=" + keyVersion + ",signature=" + signatureValue;
-        header.put("Signature", signatureHeader);
+        header.put(Constants.REQ_SIGN_HEADER, signatureHeader);
         return header;
     }
 

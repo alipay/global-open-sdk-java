@@ -7,7 +7,7 @@ public class CouponPaymentMethodDetail {
     private String  couponName;
     private String  couponDescription;
     private String  couponExpireTime;
-    private String  paymentMethodDetailMetadatal;
+    private String  paymentMethodDetailMetadata;
 
     public String getCouponId() {
         return couponId;
@@ -49,12 +49,12 @@ public class CouponPaymentMethodDetail {
         this.couponExpireTime = couponExpireTime;
     }
 
-    public String getPaymentMethodDetailMetadatal() {
-        return paymentMethodDetailMetadatal;
+    public String getPaymentMethodDetailMetadata() {
+        return paymentMethodDetailMetadata;
     }
 
-    public void setPaymentMethodDetailMetadatal(String paymentMethodDetailMetadatal) {
-        this.paymentMethodDetailMetadatal = paymentMethodDetailMetadatal;
+    public void setPaymentMethodDetailMetadata(String paymentMethodDetailMetadata) {
+        this.paymentMethodDetailMetadata = paymentMethodDetailMetadata;
     }
 
 }

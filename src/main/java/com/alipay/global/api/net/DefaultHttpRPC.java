@@ -3,6 +3,7 @@ package com.alipay.global.api.net;
 import com.alipay.global.api.exception.AlipayApiException;
 import com.alipay.global.api.ssl.TrueHostnameVerifier;
 import com.alipay.global.api.ssl.X509TrustManagerImp;
+import com.alipay.global.api.tools.Constants;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.net.ssl.*;
@@ -24,8 +25,6 @@ public class DefaultHttpRPC {
     private static HostnameVerifier verifier      = null;
     private static SSLSocketFactory sslSocketFactory = null;
 
-    public static final String DEFAULT_CHARSET  = "UTF-8";
-
     static {
 
         try {
@@ -46,8 +45,8 @@ public class DefaultHttpRPC {
     }
 
     public static HttpRpcResult doPost(String url, Map<String, String> header, String reqBody) throws IOException, AlipayApiException {
-        String ctype = "application/json;charset=" + DEFAULT_CHARSET;
-        byte[] content = reqBody.getBytes(DEFAULT_CHARSET);
+        String ctype = "application/json;charset=" + Constants.DEFAULT_CHARSET;
+        byte[] content = reqBody.getBytes(Constants.DEFAULT_CHARSET);
 
         return doPost(url, ctype, header, content);
     }
@@ -111,7 +110,7 @@ public class DefaultHttpRPC {
 
     private static HttpsURLConnection getConnection(URL url, String method, String ctype) throws IOException, AlipayApiException {
         HttpsURLConnection connHttps;
-        if ("https".equalsIgnoreCase(url.getProtocol())) {
+        if (Constants.SCHEME.equalsIgnoreCase(url.getProtocol())) {
             connHttps = (HttpsURLConnection) url.openConnection();
             connHttps.setSSLSocketFactory(sslSocketFactory);
             connHttps.setHostnameVerifier(verifier);
@@ -122,15 +121,15 @@ public class DefaultHttpRPC {
         connHttps.setRequestMethod(method);
         connHttps.setDoInput(true);
         connHttps.setDoOutput(true);
-        connHttps.setRequestProperty("Accept", "text/plain,text/xml,text/javascript,text/html");
-        connHttps.setRequestProperty("User-Agent", "global-sdk-java");
-        connHttps.setRequestProperty("Content-Type", ctype);
-        connHttps.setRequestProperty("Connection", "keep-alive");
+        connHttps.setRequestProperty(Constants.ACCEPT_HEADER, "text/plain,text/xml,text/javascript,text/html");
+        connHttps.setRequestProperty(Constants.USER_AGENT_HEADER, "global-sdk-java");
+        connHttps.setRequestProperty(Constants.CONTENT_TYPE_HEADER, ctype);
+        connHttps.setRequestProperty(Constants.CONNECTION_HEADER, "keep-alive");
         return connHttps;
     }
 
     public static String getResponseSignature(HttpsURLConnection conn) {
-        String signatureValue = conn.getHeaderField("signature");
+        String signatureValue = conn.getHeaderField(Constants.RSP_SIGN_HEADER);
         if(StringUtils.isBlank(signatureValue)){
             return null;
         }
@@ -151,7 +150,7 @@ public class DefaultHttpRPC {
 
     public static String getResponseTime(HttpsURLConnection conn) {
 
-        String responseTime = conn.getHeaderField("response-time");
+        String responseTime = conn.getHeaderField(Constants.RSP_TIME_HEADER);
 
         return responseTime;
     }
@@ -174,7 +173,7 @@ public class DefaultHttpRPC {
     }
 
     private static String getResponseCharset(String ctype) {
-        String charset = DEFAULT_CHARSET;
+        String charset = Constants.DEFAULT_CHARSET;
 
         if (!StringUtils.isEmpty(ctype)) {
             String[] params = ctype.split(";");
