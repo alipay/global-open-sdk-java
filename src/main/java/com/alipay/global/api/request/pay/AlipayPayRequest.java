@@ -22,6 +22,7 @@ public class AlipayPayRequest extends AlipayRequest<AlipayPayResponse> {
     private Env                     env;
     private SettlementStrategy      settlementStrategy;
     private String                  extendInfo;
+    private CreditPayPlan           creditPayPlan;
 
     public ProductCodeType getProductCode() {
         return productCode;
@@ -149,6 +150,14 @@ public class AlipayPayRequest extends AlipayRequest<AlipayPayResponse> {
 
     public void setExtendInfo(String extendInfo) {
         this.extendInfo = extendInfo;
+    }
+
+    public CreditPayPlan getCreditPayPlan() {
+        return creditPayPlan;
+    }
+
+    public void setCreditPayPlan(CreditPayPlan creditPayPlan) {
+        this.creditPayPlan = creditPayPlan;
     }
 
     @Override

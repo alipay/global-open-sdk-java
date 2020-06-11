@@ -9,6 +9,8 @@ public class Env {
     private String       clientIp;
     private String       cookieId;
     private String       extendInfo;
+    private String       storeTerminalId;
+    private String       storeTerminalRequestTime;
 
     public TerminalType getTerminalType() {
         return terminalType;
@@ -66,4 +68,19 @@ public class Env {
         this.extendInfo = extendInfo;
     }
 
+    public String getStoreTerminalId() {
+        return storeTerminalId;
+    }
+
+    public void setStoreTerminalId(String storeTerminalId) {
+        this.storeTerminalId = storeTerminalId;
+    }
+
+    public String getStoreTerminalRequestTime() {
+        return storeTerminalRequestTime;
+    }
+
+    public void setStoreTerminalRequestTime(String storeTerminalRequestTime) {
+        this.storeTerminalRequestTime = storeTerminalRequestTime;
+    }
 }
