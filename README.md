@@ -78,7 +78,7 @@ paymentMethod.setPaymentMethodType(WalletPaymentMethodType.ALIPAY_CN.name());
 alipayPayRequest.setPaymentMethod(paymentMethod);
 
 Env env = new Env();
-env.setTerminalType(TerminalType.WEB);
+env.setTerminalType(TerminalType.APP);
 env.setOsType(OsType.IOS);
 alipayPayRequest.setEnv(env);
 
