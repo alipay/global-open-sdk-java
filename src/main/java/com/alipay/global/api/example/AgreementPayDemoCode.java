@@ -2,6 +2,9 @@ package com.alipay.global.api.example;
 
 import com.alipay.global.api.AlipayClient;
 import com.alipay.global.api.DefaultAlipayClient;
+import com.alipay.global.api.example.model.Callback;
+import com.alipay.global.api.example.model.ResultCode;
+import com.alipay.global.api.example.model.RetryResult;
 import com.alipay.global.api.exception.AlipayApiException;
 import com.alipay.global.api.model.*;
 import com.alipay.global.api.request.auth.AlipayAuthApplyTokenRequest;
@@ -74,7 +77,7 @@ public class AgreementPayDemoCode {
                                 return RetryResult.ofResult(false);
                             }
                             if(ResultStatusType.F.equals(cancelResult.getResultStatus())){
-                                // TODO Cancel fail,Contact tech support
+                                // TODO Cancel fail,contact tech support
                                 return RetryResult.ofResult(false);
                             }
                             return RetryResult.ofResult(false);
@@ -167,7 +170,7 @@ public class AgreementPayDemoCode {
                                     return RetryResult.ofResult(false);
                                 }
                                 if(ResultStatusType.F.equals(cancelResult.getResultStatus())){
-                                    // TODO Cancel fail,Contact tech support
+                                    // TODO Cancel fail,contact tech support
                                     return RetryResult.ofResult(false);
                                 }
                                 return RetryResult.ofResult(false);

@@ -1,5 +1,7 @@
 package com.alipay.global.api.example;
 
+import com.alipay.global.api.example.model.Callback;
+
 public class RetryExecutor {
 
     public static Object execute(int retryCount, Callback callback){

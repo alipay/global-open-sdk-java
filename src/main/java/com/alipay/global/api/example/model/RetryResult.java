@@ -1,4 +1,4 @@
-package com.alipay.global.api.example;
+package com.alipay.global.api.example.model;
 
 public class RetryResult {
 

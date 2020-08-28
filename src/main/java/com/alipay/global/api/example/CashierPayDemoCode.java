@@ -2,6 +2,9 @@ package com.alipay.global.api.example;
 
 import com.alipay.global.api.AlipayClient;
 import com.alipay.global.api.DefaultAlipayClient;
+import com.alipay.global.api.example.model.Callback;
+import com.alipay.global.api.example.model.ResultCode;
+import com.alipay.global.api.example.model.RetryResult;
 import com.alipay.global.api.exception.AlipayApiException;
 import com.alipay.global.api.model.*;
 import com.alipay.global.api.request.pay.AlipayPayCancelRequest;
@@ -82,7 +85,7 @@ public class CashierPayDemoCode {
                     String method = redirectActionForm.getMethod();
                     String parameters = redirectActionForm.getParameters();
                     // TODO 1、Jump to the checkout page
-                    // TODO 2、Wait notify
+                    // TODO 2、Wait notify，eg: PayNotifyListener
                     // TODO 3、Start the asynchronous task to query the payment results
                     asyncQueryTask(paymentRequestId);
                 }
@@ -167,7 +170,7 @@ public class CashierPayDemoCode {
                         return RetryResult.ofResult(false);
                     }
                     if(ResultStatusType.F.equals(cancelResult.getResultStatus())){
-                        // TODO Cancel fail,Contact tech support
+                        // TODO Cancel fail,contact tech support
                         return RetryResult.ofResult(false);
                     }
                     return RetryResult.ofResult(false);
