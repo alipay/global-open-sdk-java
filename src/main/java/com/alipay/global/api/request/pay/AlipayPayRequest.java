@@ -19,7 +19,6 @@ public class AlipayPayRequest extends AlipayRequest<AlipayPayResponse> {
     private PaymentVerificationData paymentVerificationData;
     private PaymentFactor           paymentFactor;
     private Merchant                merchant;
-    private Env                     env;
     private SettlementStrategy      settlementStrategy;
     private String                  extendInfo;
     private CreditPayPlan           creditPayPlan;
@@ -126,14 +125,6 @@ public class AlipayPayRequest extends AlipayRequest<AlipayPayResponse> {
 
     public void setMerchant(Merchant merchant) {
         this.merchant = merchant;
-    }
-
-    public Env getEnv() {
-        return env;
-    }
-
-    public void setEnv(Env env) {
-        this.env = env;
     }
 
     public SettlementStrategy getSettlementStrategy() {

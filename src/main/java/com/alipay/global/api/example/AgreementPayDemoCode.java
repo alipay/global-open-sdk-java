@@ -245,7 +245,7 @@ public class AgreementPayDemoCode {
         env.setTerminalType(TerminalType.APP);
         env.setOsType(OsType.IOS);
 
-        alipayPayRequest.setEnv(env);
+        order.setEnv(env);
 
         alipayPayRequest.setPaymentNotifyUrl("https://www.gcash.com/notify");
         alipayPayRequest.setPaymentRedirectUrl("https://www.gcash.com?param1=sl");
