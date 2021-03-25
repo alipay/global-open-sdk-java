@@ -3,7 +3,6 @@ package com.alipay.global.api;
 import com.alibaba.fastjson.JSON;
 import com.alipay.global.api.exception.AlipayApiException;
 import com.alipay.global.api.model.Result;
-import com.alipay.global.api.model.ResultStatusType;
 import com.alipay.global.api.net.HttpRpcResult;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.AlipayResponse;
