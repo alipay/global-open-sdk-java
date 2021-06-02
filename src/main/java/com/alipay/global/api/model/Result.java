@@ -6,6 +6,12 @@ public class Result {
     private ResultStatusType resultStatus;
     private String           resultMessage;
 
+    public Result(String resultCode, String resultMessage,ResultStatusType resultStatus){
+        this.resultCode = resultCode;
+        this.resultMessage = resultMessage;
+        this.resultStatus = resultStatus;
+    }
+
     public String getResultCode() {
         return resultCode;
     }

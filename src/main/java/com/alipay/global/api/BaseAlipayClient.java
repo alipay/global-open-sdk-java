@@ -74,7 +74,11 @@ public abstract class BaseAlipayClient implements AlipayClient{
             throw new AlipayApiException("HttpRpcResult is null.");
         }
 
-        String   rspBody         = rsp.getRspBody();
+        int    httpRespCode = rsp.getRspCode();
+        String rspBody      = rsp.getRspBody();
+        if(httpRespCode != Constants.HTTP_SUCCESS_CODE){
+            throw new AlipayApiException("Response data error, rspBody:" + rspBody);
+        }
         Class<T> responseClass   = alipayRequest.getResponseClass();
         T        alipayResponse  = JSON.parseObject(rspBody, responseClass);
         Result   result          = alipayResponse.getResult();
@@ -91,10 +95,10 @@ public abstract class BaseAlipayClient implements AlipayClient{
         /**
          * 对返回结果验签(Verify the result signature)
          */
-        boolean isVerifySuccess = checkRspSign(httpMethod, path, clientId, rspTime, rspBody, rspSignValue);
-        if(!isVerifySuccess){
-            throw new AlipayApiException("Response signature verify fail.");
-        }
+//        boolean isVerifySuccess = checkRspSign(httpMethod, path, clientId, rspTime, rspBody, rspSignValue);
+//        if(!isVerifySuccess){
+//            throw new AlipayApiException("Response signature verify fail.");
+//        }
 
         return alipayResponse;
     }

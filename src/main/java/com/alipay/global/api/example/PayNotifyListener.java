@@ -2,6 +2,7 @@ package com.alipay.global.api.example;
 
 import com.alibaba.fastjson.JSON;
 import com.alipay.global.api.example.model.*;
+import com.alipay.global.api.model.Result;
 import com.alipay.global.api.model.ResultStatusType;
 
 import java.io.IOException;
@@ -36,9 +37,9 @@ public class PayNotifyListener {
             return ;
         }
 
-        Result result = Result.ofResult("SUCCESS", "success", ResultStatusType.S);
+        Result result = new Result("SUCCESS", "success", ResultStatusType.S);
         if(!isAcceptSuccess){
-            result = Result.ofResult("PROCESS_FAIL", "failure", ResultStatusType.F);
+            result = new Result("PROCESS_FAIL", "failure", ResultStatusType.F);
         }
         try {
             PayNotifyResponse payNotifyResponse = new PayNotifyResponse();

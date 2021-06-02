@@ -24,4 +24,6 @@ public interface Constants {
 
     String RSP_TIME_HEADER = "response-time";
 
+    int HTTP_SUCCESS_CODE = 200;
+
 }

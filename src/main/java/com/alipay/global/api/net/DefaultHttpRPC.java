@@ -89,6 +89,8 @@ public class DefaultHttpRPC {
                 // 设置keepAliveTimeout（一般服务端通过Keep-Alive头设置），这里一定要在解析header之后，否则会被覆盖为默认的5s或者服务端带回的Keep-Alive头的timeout值
                 setConnKeepAliveTimeout(conns);
 
+                int httpRespCode = conns.getResponseCode();
+                httpRpcResult.setRspCode(httpRespCode);
                 String rspBody = getResponseAsString(conns);
                 httpRpcResult.setRspBody(rspBody);
 
@@ -158,6 +160,7 @@ public class DefaultHttpRPC {
 
     public static String getResponseAsString(HttpsURLConnection conn) throws IOException {
         String charset = getResponseCharset(conn.getContentType());
+
 
         InputStream es = conn.getErrorStream();
         if (es == null) {

@@ -1,5 +1,7 @@
 package com.alipay.global.api.example.model;
 
+import com.alipay.global.api.model.Result;
+
 public class PayNotifyResponse {
 
     private Result result;
