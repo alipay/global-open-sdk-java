@@ -39,4 +39,7 @@ Fix core logic
 Support spend bai
 
 11、Version:1.0.16
-AlipayPayRequest remote env
+AlipayPayRequest class remove env field
+
+12、Version:2.0.0
+add aps interface and adjust the package for the AMS interface(request/response)
