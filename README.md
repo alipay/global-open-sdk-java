@@ -33,7 +33,7 @@ public static boolean verify(String httpMethod, String path, String clientId, St
  
 ```
   
-#### 3 The sample for pay  
+#### 3 The sample for ams pay  
   
 ```
 AlipayClient defaultAlipayClient = new DefaultAlipayClient("https://open-na.alipay.com", merchantPrivateKey, alipayPublicKey);
