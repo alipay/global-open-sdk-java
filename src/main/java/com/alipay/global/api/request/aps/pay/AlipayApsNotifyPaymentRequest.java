@@ -2,6 +2,7 @@ package com.alipay.global.api.request.aps.pay;
 
 import com.alipay.global.api.model.Result;
 import com.alipay.global.api.model.aps.Amount;
+import com.alipay.global.api.model.aps.Quote;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.aps.pay.AlipayApsNotifyPaymentResponse;
 
@@ -16,6 +17,8 @@ public class AlipayApsNotifyPaymentRequest extends AlipayRequest<AlipayApsNotify
     private String paymentTime;
     private String customerId;
     private String walletBrandName;
+    private Amount settlementAmount;
+    private Quote  settlementQuote;
 
     public String getAcquirerId() {
         return acquirerId;
@@ -87,6 +90,22 @@ public class AlipayApsNotifyPaymentRequest extends AlipayRequest<AlipayApsNotify
 
     public void setWalletBrandName(String walletBrandName) {
         this.walletBrandName = walletBrandName;
+    }
+
+    public Amount getSettlementAmount() {
+        return settlementAmount;
+    }
+
+    public void setSettlementAmount(Amount settlementAmount) {
+        this.settlementAmount = settlementAmount;
+    }
+
+    public Quote getSettlementQuote() {
+        return settlementQuote;
+    }
+
+    public void setSettlementQuote(Quote settlementQuote) {
+        this.settlementQuote = settlementQuote;
     }
 
     @Override

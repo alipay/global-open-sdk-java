@@ -1,6 +1,7 @@
 package com.alipay.global.api.response.aps.pay;
 
 import com.alipay.global.api.model.aps.Amount;
+import com.alipay.global.api.model.aps.OrderCodeForm;
 import com.alipay.global.api.response.AlipayResponse;
 
 public class AlipayApsPayResponse extends AlipayResponse {
@@ -8,12 +9,12 @@ public class AlipayApsPayResponse extends AlipayResponse {
     private String        acquirerId;
     private String        paymentId;
     private String        paymentTime;
+    private String        paymentUrl;
     private Amount        paymentAmount;
+    private OrderCodeForm orderCodeForm;
     private String        customerId;
     private String        pspId;
     private String        walletBrandName;
-
-    private String        paymentUrl;
 
     public String getAcquirerId() {
         return acquirerId;
@@ -47,6 +48,22 @@ public class AlipayApsPayResponse extends AlipayResponse {
         this.paymentAmount = paymentAmount;
     }
 
+    public String getPaymentUrl() {
+        return paymentUrl;
+    }
+
+    public void setPaymentUrl(String paymentUrl) {
+        this.paymentUrl = paymentUrl;
+    }
+
+    public OrderCodeForm getOrderCodeForm() {
+        return orderCodeForm;
+    }
+
+    public void setOrderCodeForm(OrderCodeForm orderCodeForm) {
+        this.orderCodeForm = orderCodeForm;
+    }
+
     public String getCustomerId() {
         return customerId;
     }
@@ -69,13 +86,5 @@ public class AlipayApsPayResponse extends AlipayResponse {
 
     public void setWalletBrandName(String walletBrandName) {
         this.walletBrandName = walletBrandName;
-    }
-
-    public String getPaymentUrl() {
-        return paymentUrl;
-    }
-
-    public void setPaymentUrl(String paymentUrl) {
-        this.paymentUrl = paymentUrl;
     }
 }

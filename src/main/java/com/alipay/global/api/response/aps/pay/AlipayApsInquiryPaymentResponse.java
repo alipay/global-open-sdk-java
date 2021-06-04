@@ -2,6 +2,7 @@ package com.alipay.global.api.response.aps.pay;
 
 import com.alipay.global.api.model.Result;
 import com.alipay.global.api.model.aps.Amount;
+import com.alipay.global.api.model.aps.Quote;
 import com.alipay.global.api.model.aps.Transaction;
 import com.alipay.global.api.response.AlipayResponse;
 
@@ -19,6 +20,8 @@ public class AlipayApsInquiryPaymentResponse extends AlipayResponse {
     private String customerId;
     private String walletBrandName;
     private List<Transaction> transactions;
+    private Amount settlementAmount;
+    private Quote  settlementQuote;
 
     public Result getPaymentResult() {
         return paymentResult;
@@ -100,4 +103,19 @@ public class AlipayApsInquiryPaymentResponse extends AlipayResponse {
         this.transactions = transactions;
     }
 
+    public Amount getSettlementAmount() {
+        return settlementAmount;
+    }
+
+    public void setSettlementAmount(Amount settlementAmount) {
+        this.settlementAmount = settlementAmount;
+    }
+
+    public Quote getSettlementQuote() {
+        return settlementQuote;
+    }
+
+    public void setSettlementQuote(Quote settlementQuote) {
+        this.settlementQuote = settlementQuote;
+    }
 }
