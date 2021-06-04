@@ -71,16 +71,17 @@ Amount orderAmount = new Amount();
 orderAmount.setCurrency("USD");
 orderAmount.setValue("30000");
 order.setOrderAmount(orderAmount);
+
+Env env = new Env();
+env.setTerminalType(TerminalType.APP);
+env.setOsType(OsType.IOS);
+order.setEnv(env);
+
 alipayPayRequest.setOrder(order);
 
 PaymentMethod paymentMethod = new PaymentMethod();
 paymentMethod.setPaymentMethodType(WalletPaymentMethodType.ALIPAY_CN.name());
 alipayPayRequest.setPaymentMethod(paymentMethod);
-
-Env env = new Env();
-env.setTerminalType(TerminalType.APP);
-env.setOsType(OsType.IOS);
-alipayPayRequest.setEnv(env);
 
 alipayPayRequest.setPaymentNotifyUrl("https://global.alipay.com/notify");
 alipayPayRequest.setPaymentRedirectUrl("https://global.alipay.com?param1=v1");
