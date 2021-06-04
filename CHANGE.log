@@ -47,6 +47,6 @@ TerminalType add MINI_APP
 13、Version:1.0.18
 Upgrade the fastjson version to 1.2.76
 
-14、Version:2.0.0
+14、Version:2.0.1
 add aps interface and adjust the package for the AMS interface(request/response)
 

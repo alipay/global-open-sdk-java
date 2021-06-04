@@ -95,10 +95,10 @@ public abstract class BaseAlipayClient implements AlipayClient{
         /**
          * 对返回结果验签(Verify the result signature)
          */
-//        boolean isVerifySuccess = checkRspSign(httpMethod, path, clientId, rspTime, rspBody, rspSignValue);
-//        if(!isVerifySuccess){
-//            throw new AlipayApiException("Response signature verify fail.");
-//        }
+        boolean isVerifySuccess = checkRspSign(httpMethod, path, clientId, rspTime, rspBody, rspSignValue);
+        if(!isVerifySuccess){
+            throw new AlipayApiException("Response signature verify fail.");
+        }
 
         return alipayResponse;
     }
