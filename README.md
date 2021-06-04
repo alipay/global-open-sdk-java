@@ -33,7 +33,9 @@ public static boolean verify(String httpMethod, String path, String clientId, St
  
 ```
   
-#### 3 The sample for ams pay  
+#### 3 The sample for pay  
+
+AMS:
   
 ```
 AlipayClient defaultAlipayClient = new DefaultAlipayClient("https://open-na.alipay.com", merchantPrivateKey, alipayPublicKey);
@@ -93,7 +95,22 @@ alipayPayRequest.setSettlementStrategy(settlementStrategy);
 AlipayPayResponse alipayPayResponse = defaultAlipayClient.execute(alipayPayRequest);
   
 ```  
-  
+
+APS:
+
+```  
+AlipayClient defaultAlipayClient = new DefaultAlipayClient("https://open-na.alipay.com", merchantPrivateKey, alipayPublicKey);
+ 
+AlipayApsInquiryPaymentRequest inquiryPaymentRequest = new AlipayApsInquiryPaymentRequest();
+ 
+inquiryPaymentRequest.setPath("/aps/api/v1/payments/inquiryPayment");
+inquiryPaymentRequest.setClientId(sgClientId);
+inquiryPaymentRequest.setPaymentId("20210518190796060008A0001628707");
+inquiryPaymentRequest.setPaymentRequestId("rtanhU9au6F3VEbvbVWRz");
+ 
+AlipayApsInquiryPaymentResponse alipayResponse = defaultAlipayClient.execute(inquiryPaymentRequest);
+
+```  
   
 The execute method contains the HTTP request to the gateway. 
 
@@ -116,17 +133,21 @@ public class YourAlipayClient extends BaseAlipayClient{
         // HTTP Call
         // ...
         
-        HttpRpcResult rsp = new HttpRpcResult();
+        HttpRpcResult resp = new HttpRpcResult();
+        
+        int respCode = "Get from response header";
+        httpRpcResult.setRspCode(respCode);
+        
         String rspSignValue = "Get from response header";
-        rsp.setRspSign(rspSignValue);
+        resp.setRspSign(rspSignValue);
         
         String responseTime = "Get from response header";
-        rsp.setResponseTime(responseTime);
+        resp.setResponseTime(responseTime);
         
         String rspBody = "Get from response body";
-        rsp.setRspBody(rspBody);
+        resp.setRspBody(rspBody);
         
-        return rsp;
+        return resp;
     }
     
 }
