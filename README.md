@@ -104,7 +104,7 @@ AlipayClient defaultAlipayClient = new DefaultAlipayClient("https://open-na.alip
 AlipayApsInquiryPaymentRequest inquiryPaymentRequest = new AlipayApsInquiryPaymentRequest();
  
 inquiryPaymentRequest.setPath("/aps/api/v1/payments/inquiryPayment");
-inquiryPaymentRequest.setClientId(clientId);
+inquiryPaymentRequest.setClientId("clientId");
 inquiryPaymentRequest.setPaymentId("20210518190796060008A0001628707");
 inquiryPaymentRequest.setPaymentRequestId("rtanhU9au6F3VEbvbVWRz");
  
