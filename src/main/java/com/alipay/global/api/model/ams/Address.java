@@ -8,6 +8,15 @@ public class Address {
     private String address1;
     private String address2;
     private String zipCode;
+    private String label;
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
 
     public String getRegion() {
         return region;

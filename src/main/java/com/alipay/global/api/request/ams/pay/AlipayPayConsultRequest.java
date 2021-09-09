@@ -1,8 +1,6 @@
 package com.alipay.global.api.request.ams.pay;
 
-import com.alipay.global.api.model.ams.Amount;
-import com.alipay.global.api.model.ams.Env;
-import com.alipay.global.api.model.ams.ProductCodeType;
+import com.alipay.global.api.model.ams.*;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.pay.AlipayPayConsultResponse;
 
@@ -19,6 +17,12 @@ public class AlipayPayConsultRequest extends AlipayRequest<AlipayPayConsultRespo
     private String          referenceUserId;
     private Env             env;
     private String          extendInfo;
+    private String          userRegion;
+    private PaymentFactor   paymentFactor;
+    private SettlementStrategy settlementStrategy;
+    private Merchant        merchant;
+    private List<String>    allowedPspRegions;
+
 
     public ProductCodeType getProductCode() {
         return productCode;
@@ -90,6 +94,46 @@ public class AlipayPayConsultRequest extends AlipayRequest<AlipayPayConsultRespo
 
     public void setExtendInfo(String extendInfo) {
         this.extendInfo = extendInfo;
+    }
+
+    public String getUserRegion() {
+        return userRegion;
+    }
+
+    public void setUserRegion(String userRegion) {
+        this.userRegion = userRegion;
+    }
+
+    public PaymentFactor getPaymentFactor() {
+        return paymentFactor;
+    }
+
+    public void setPaymentFactor(PaymentFactor paymentFactor) {
+        this.paymentFactor = paymentFactor;
+    }
+
+    public SettlementStrategy getSettlementStrategy() {
+        return settlementStrategy;
+    }
+
+    public void setSettlementStrategy(SettlementStrategy settlementStrategy) {
+        this.settlementStrategy = settlementStrategy;
+    }
+
+    public Merchant getMerchant() {
+        return merchant;
+    }
+
+    public void setMerchant(Merchant merchant) {
+        this.merchant = merchant;
+    }
+
+    public List<String> getAllowedPspRegions() {
+        return allowedPspRegions;
+    }
+
+    public void setAllowedPspRegions(List<String> allowedPspRegions) {
+        this.allowedPspRegions = allowedPspRegions;
     }
 
     @Override
