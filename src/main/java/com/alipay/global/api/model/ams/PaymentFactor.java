@@ -4,6 +4,7 @@ public class PaymentFactor {
 
     private Boolean                isPaymentEvaluation;
     private InStorePaymentScenario inStorePaymentScenario;
+    private PresentmentMode        presentmentMode;
 
     public Boolean getIsPaymentEvaluation() {
         return isPaymentEvaluation;
@@ -21,4 +22,11 @@ public class PaymentFactor {
         this.inStorePaymentScenario = inStorePaymentScenario;
     }
 
+    public PresentmentMode getPresentmentMode() {
+        return presentmentMode;
+    }
+
+    public void setPresentmentMode(PresentmentMode presentmentMode) {
+        this.presentmentMode = presentmentMode;
+    }
 }
