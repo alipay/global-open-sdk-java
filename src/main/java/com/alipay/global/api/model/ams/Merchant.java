@@ -8,6 +8,7 @@ public class Merchant {
     private Address merchantAddress;
     private String  merchantRegisterDate;
     private Store   store;
+    private MerchantType  merchantType;
 
     public String getReferenceMerchantId() {
         return referenceMerchantId;
@@ -63,5 +64,13 @@ public class Merchant {
 
     public void setStore(Store store) {
         this.store = store;
+    }
+
+    public MerchantType getMerchantType() {
+        return merchantType;
+    }
+
+    public void setMerchantType(MerchantType merchantType) {
+        this.merchantType = merchantType;
     }
 }
