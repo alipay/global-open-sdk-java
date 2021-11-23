@@ -9,6 +9,7 @@ public class AlipayAuthApplyTokenResponse extends AlipayResponse {
     private String   refreshToken;
     private String   refreshTokenExpiryTime;
     private String   extendInfo;
+    private String   userLoginId;
 
     public String getAccessToken() {
         return accessToken;
@@ -50,4 +51,11 @@ public class AlipayAuthApplyTokenResponse extends AlipayResponse {
         this.extendInfo = extendInfo;
     }
 
+    public String getUserLoginId() {
+        return userLoginId;
+    }
+
+    public void setUserLoginId(String userLoginId) {
+        this.userLoginId = userLoginId;
+    }
 }
