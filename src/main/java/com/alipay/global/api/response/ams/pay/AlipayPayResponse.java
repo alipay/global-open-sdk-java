@@ -20,6 +20,10 @@ public class AlipayPayResponse extends AlipayResponse {
     private RedirectActionForm  redirectActionForm;
     private OrderCodeForm orderCodeForm;
     private String              extendInfo;
+    private String              normalUrl;
+    private String              schemeUrl;
+    private String              applinkUrl;
+    private String              appIdentifier;
 
     public String getPaymentRequestId() {
         return paymentRequestId;
@@ -139,5 +143,37 @@ public class AlipayPayResponse extends AlipayResponse {
 
     public void setExtendInfo(String extendInfo) {
         this.extendInfo = extendInfo;
+    }
+
+    public String getNormalUrl() {
+        return normalUrl;
+    }
+
+    public void setNormalUrl(String normalUrl) {
+        this.normalUrl = normalUrl;
+    }
+
+    public String getSchemeUrl() {
+        return schemeUrl;
+    }
+
+    public void setSchemeUrl(String schemeUrl) {
+        this.schemeUrl = schemeUrl;
+    }
+
+    public String getApplinkUrl() {
+        return applinkUrl;
+    }
+
+    public void setApplinkUrl(String applinkUrl) {
+        this.applinkUrl = applinkUrl;
+    }
+
+    public String getAppIdentifier() {
+        return appIdentifier;
+    }
+
+    public void setAppIdentifier(String appIdentifier) {
+        this.appIdentifier = appIdentifier;
     }
 }

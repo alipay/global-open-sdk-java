@@ -1,5 +1,7 @@
 package com.alipay.global.api.model.ams;
 
+import com.alipay.global.api.model.aps.Logo;
+
 import java.util.List;
 import java.util.Map;
 
@@ -14,7 +16,7 @@ public class PaymentOption {
     private List<String>                 supportedCurrencies;
     private String                       paymentOptionDetail;
     private String                       extendInfo;
-
+    private Logo                         logo;
     public String getPaymentMethodType() {
         return paymentMethodType;
     }
@@ -87,4 +89,11 @@ public class PaymentOption {
         this.extendInfo = extendInfo;
     }
 
+    public Logo getLogo() {
+        return logo;
+    }
+
+    public void setLogo(Logo logo) {
+        this.logo = logo;
+    }
 }
