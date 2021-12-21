@@ -12,6 +12,9 @@ public class Result {
         this.resultStatus = resultStatus;
     }
 
+    public Result() {
+    }
+
     public String getResultCode() {
         return resultCode;
     }
