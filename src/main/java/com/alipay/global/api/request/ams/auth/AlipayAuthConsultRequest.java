@@ -18,6 +18,15 @@ public class AlipayAuthConsultRequest extends AlipayRequest<AlipayAuthConsultRes
     private OsType            osType;
     private String            osVersion;
     private String            extendInfo;
+    private String            merchantRegion;
+
+    public String getMerchantRegion() {
+        return merchantRegion;
+    }
+
+    public void setMerchantRegion(String merchantRegion) {
+        this.merchantRegion = merchantRegion;
+    }
 
     public CustomerBelongsTo getCustomerBelongsTo() {
         return customerBelongsTo;
