@@ -12,6 +12,15 @@ public class AlipayAuthApplyTokenRequest extends AlipayRequest<AlipayAuthApplyTo
     private String            authCode;
     private String            refreshToken;
     private String            extendInfo;
+    private String            merchantRegion;
+
+    public String getMerchantRegion() {
+        return merchantRegion;
+    }
+
+    public void setMerchantRegion(String merchantRegion) {
+        this.merchantRegion = merchantRegion;
+    }
 
     public GrantType getGrantType() {
         return grantType;

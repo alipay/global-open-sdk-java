@@ -22,6 +22,24 @@ public class AlipayPayRequest extends AlipayRequest<AlipayPayResponse> {
     private SettlementStrategy      settlementStrategy;
     private String                  extendInfo;
     private CreditPayPlan creditPayPlan;
+    private String                  appId;
+    private String                  merchantRegion;
+
+    public String getAppId() {
+        return appId;
+    }
+
+    public void setAppId(String appId) {
+        this.appId = appId;
+    }
+
+    public String getMerchantRegion() {
+        return merchantRegion;
+    }
+
+    public void setMerchantRegion(String merchantRegion) {
+        this.merchantRegion = merchantRegion;
+    }
 
     public ProductCodeType getProductCode() {
         return productCode;
