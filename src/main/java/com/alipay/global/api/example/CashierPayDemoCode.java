@@ -30,6 +30,8 @@ public class CashierPayDemoCode {
     private static final String  GATE_WAY_URL = "";
     private static final String  merchantPrivateKey = "";
     private static final String  alipayPublicKey    = "";
+    private static final String  CLIENT_ID = "";
+    private static final String  PAYMENT_REQUEST_ID = "";
     private static final AlipayClient defaultAlipayClient = new DefaultAlipayClient(GATE_WAY_URL, merchantPrivateKey, alipayPublicKey);
 
     public static void main(String[] args) {
@@ -38,7 +40,7 @@ public class CashierPayDemoCode {
 
             @Override
             public RetryResult doProcess() {
-                final String paymentRequestId = "paymentRequestId";
+                final String paymentRequestId = PAYMENT_REQUEST_ID;
                 AlipayPayResponse alipayPayResponse = pay(paymentRequestId);
                 if(alipayPayResponse == null){
 
@@ -207,7 +209,7 @@ public class CashierPayDemoCode {
     public static AlipayPayResponse pay(String paymentRequestId){
 
         final AlipayPayRequest alipayPayRequest = new AlipayPayRequest();
-        alipayPayRequest.setClientId("client_id");
+        alipayPayRequest.setClientId(CLIENT_ID);
         alipayPayRequest.setPath("/ams/sandbox/api/v1/payments/pay");
         alipayPayRequest.setProductCode(ProductCodeType.CASHIER_PAYMENT);
         alipayPayRequest.setPaymentRequestId(paymentRequestId);
@@ -249,6 +251,9 @@ public class CashierPayDemoCode {
         settlementStrategy.setSettlementCurrency("USD");
         alipayPayRequest.setSettlementStrategy(settlementStrategy);
 
+        alipayPayRequest.setMerchantRegion("US");
+        alipayPayRequest.setAppId("312a74651aa74586be847a0c672243a9");
+
         Object obj = RetryExecutor.execute(TIMEOUT_RETRY_COUNT, new Callback() {
             @Override
             public RetryResult doProcess() {
@@ -274,7 +279,7 @@ public class CashierPayDemoCode {
 
     public static AlipayPayQueryResponse inquiryPayment(String paymentRequestId) {
         final AlipayPayQueryRequest alipayPayQueryRequest = new AlipayPayQueryRequest();
-        alipayPayQueryRequest.setClientId("client_id");
+        alipayPayQueryRequest.setClientId(CLIENT_ID);
         alipayPayQueryRequest.setPath("/ams/sandbox/api/v1/payments/inquiryPayment");
         alipayPayQueryRequest.setPaymentRequestId("paymentRequestId");
 
@@ -303,7 +308,7 @@ public class CashierPayDemoCode {
 
     public static AlipayPayCancelResponse cancel(String paymentRequestId) {
         final AlipayPayCancelRequest alipayPayCancelRequest = new AlipayPayCancelRequest();
-        alipayPayCancelRequest.setClientId("client_id");
+        alipayPayCancelRequest.setClientId(CLIENT_ID);
         alipayPayCancelRequest.setPath("/ams/sandbox/api/v1/payments/cancel");
         alipayPayCancelRequest.setPaymentRequestId(paymentRequestId);
 

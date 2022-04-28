@@ -34,6 +34,8 @@ public class AgreementPayDemoCode {
     private static final String  GATE_WAY_URL = "";
     private static final String  merchantPrivateKey = "";
     private static final String  alipayPublicKey    = "";
+    private static final String  CLIENT_ID = "";
+    private static final String  PAYMENT_REQUEST_ID = "";
     private static final AlipayClient defaultAlipayClient = new DefaultAlipayClient(GATE_WAY_URL, merchantPrivateKey, alipayPublicKey);
 
     public static void main(String[] args) {
@@ -57,7 +59,7 @@ public class AgreementPayDemoCode {
         RetryExecutor.execute(PAY_RETRY_COUNT, new Callback() {
             @Override
             public RetryResult doProcess() {
-                final String paymentRequestId = "paymentRequestId";
+                final String paymentRequestId = PAYMENT_REQUEST_ID;
                 AlipayPayResponse alipayPayResponse = pay(accessToken, paymentRequestId);
                 if(alipayPayResponse == null){
                     RetryExecutor.execute(CANCEL_RETRY_COUNT, new Callback() {
@@ -213,7 +215,7 @@ public class AgreementPayDemoCode {
     public static AlipayPayResponse pay(String accessToken, String paymentRequestId) {
 
         final AlipayPayRequest alipayPayRequest = new AlipayPayRequest();
-        alipayPayRequest.setClientId("client_id");
+        alipayPayRequest.setClientId(CLIENT_ID);
         alipayPayRequest.setPath("/ams/sandbox/api/v1/payments/pay");
         alipayPayRequest.setProductCode(ProductCodeType.AGREEMENT_PAYMENT);
         alipayPayRequest.setPaymentRequestId(paymentRequestId);
@@ -281,9 +283,9 @@ public class AgreementPayDemoCode {
 
     public static AlipayPayQueryResponse inquiryPayment(String paymentRequestId) {
         final AlipayPayQueryRequest alipayPayQueryRequest = new AlipayPayQueryRequest();
-        alipayPayQueryRequest.setClientId("client_id");
+        alipayPayQueryRequest.setClientId(CLIENT_ID);
         alipayPayQueryRequest.setPath("/ams/sandbox/api/v1/payments/inquiryPayment");
-        alipayPayQueryRequest.setPaymentRequestId("paymentRequestId");
+        alipayPayQueryRequest.setPaymentRequestId(paymentRequestId);
 
         Object obj = RetryExecutor.execute(TIMEOUT_RETRY_COUNT, new Callback() {
             @Override
@@ -310,7 +312,7 @@ public class AgreementPayDemoCode {
 
     public static AlipayPayCancelResponse cancel(String paymentRequestId){
         final AlipayPayCancelRequest alipayPayCancelRequest = new AlipayPayCancelRequest();
-        alipayPayCancelRequest.setClientId("client_id");
+        alipayPayCancelRequest.setClientId(CLIENT_ID);
         alipayPayCancelRequest.setPath("/ams/sandbox/api/v1/payments/cancel");
         alipayPayCancelRequest.setPaymentRequestId(paymentRequestId);
 
@@ -341,11 +343,12 @@ public class AgreementPayDemoCode {
     public static String applyToken(String authCode){
 
         final AlipayAuthApplyTokenRequest applyTokenRequest = new AlipayAuthApplyTokenRequest();
-        applyTokenRequest.setClientId("client_id");
+        applyTokenRequest.setClientId(CLIENT_ID);
         applyTokenRequest.setPath("/ams/sandbox/api/v1/authorizations/applyToken");
         applyTokenRequest.setGrantType(GrantType.AUTHORIZATION_CODE);
         applyTokenRequest.setCustomerBelongsTo(CustomerBelongsTo.BKASH);
         applyTokenRequest.setAuthCode(authCode);
+        applyTokenRequest.setMerchantRegion("US");
 
         Object obj = RetryExecutor.execute(TIMEOUT_RETRY_COUNT, new Callback() {
             @Override
@@ -373,7 +376,7 @@ public class AgreementPayDemoCode {
 
     public static String authConsult(){
         final AlipayAuthConsultRequest authConsultRequest = new AlipayAuthConsultRequest();
-        authConsultRequest.setClientId("client_id");
+        authConsultRequest.setClientId(CLIENT_ID);
         authConsultRequest.setPath("/ams/sandbox/api/v1/authorizations/consult");
         authConsultRequest.setAuthRedirectUrl("https://www.taobao.com/?param1=567&param2=123");
         authConsultRequest.setAuthState("663A8FA9D83656EE8AA1dd6F6F682ff989DC7");
@@ -383,6 +386,7 @@ public class AgreementPayDemoCode {
         ScopeType[] scopes =  {ScopeType.USER_LOGIN_ID};
         authConsultRequest.setScopes(scopes);
         authConsultRequest.setTerminalType(TerminalType.APP);
+        authConsultRequest.setMerchantRegion("US");
 
         Object obj = RetryExecutor.execute(TIMEOUT_RETRY_COUNT, new Callback() {
             @Override
