@@ -19,11 +19,29 @@ public class AlipayPayResponse extends AlipayResponse {
     private ChallengeActionForm challengeActionForm;
     private RedirectActionForm  redirectActionForm;
     private OrderCodeForm orderCodeForm;
+    private Amount              grossSettlementAmount;
+    private Quote               settlementQuote;
     private String              extendInfo;
     private String              normalUrl;
     private String              schemeUrl;
     private String              applinkUrl;
     private String              appIdentifier;
+
+    public Amount getGrossSettlementAmount() {
+        return grossSettlementAmount;
+    }
+
+    public void setGrossSettlementAmount(Amount grossSettlementAmount) {
+        this.grossSettlementAmount = grossSettlementAmount;
+    }
+
+    public Quote getSettlementQuote() {
+        return settlementQuote;
+    }
+
+    public void setSettlementQuote(Quote settlementQuote) {
+        this.settlementQuote = settlementQuote;
+    }
 
     public String getPaymentRequestId() {
         return paymentRequestId;

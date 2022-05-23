@@ -16,8 +16,8 @@ import com.alipay.global.api.response.ams.pay.AlipayPayCancelResponse;
 import com.alipay.global.api.response.ams.pay.AlipayPayQueryResponse;
 import com.alipay.global.api.response.ams.pay.AlipayPayResponse;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * The demo code mainly shows how to use the API correctly and the specific implementation needs to be performed by merchants.
@@ -102,7 +102,7 @@ public class CashierPayDemoCode {
     public static void asyncQueryTask(final String paymentRequestId){
         // 1、TODO Wait 3 minutes for execution
 
-        String orderStatus = "";
+        String orderStatus = TransactionStatusType.PROCESSING.name();
         // 2、TODO Get order status from merchant's DB
 
         /**
@@ -114,7 +114,7 @@ public class CashierPayDemoCode {
         /**
          * Pause interval when the state is PROCESSING
          */
-        ArrayList<Integer> pauseInterval = (ArrayList<Integer>) Arrays.asList(2, 4, 8, 16, 32, 64, 128, 256, 512);
+        List<Integer> pauseInterval = Arrays.asList(2, 4, 8, 16, 32, 64, 128, 256, 512);
         boolean isContinue = true;
         Integer QUERY_RETRY_COUNT = 10;
         TransactionStatusType paymentStatus = null;
@@ -281,7 +281,7 @@ public class CashierPayDemoCode {
         final AlipayPayQueryRequest alipayPayQueryRequest = new AlipayPayQueryRequest();
         alipayPayQueryRequest.setClientId(CLIENT_ID);
         alipayPayQueryRequest.setPath("/ams/sandbox/api/v1/payments/inquiryPayment");
-        alipayPayQueryRequest.setPaymentRequestId("paymentRequestId");
+        alipayPayQueryRequest.setPaymentRequestId(paymentRequestId);
 
         Object obj = RetryExecutor.execute(TIMEOUT_RETRY_COUNT, new Callback() {
             @Override
