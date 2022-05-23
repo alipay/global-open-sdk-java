@@ -2,6 +2,7 @@ package com.alipay.global.api.response.ams.pay;
 
 
 import com.alipay.global.api.model.ams.Amount;
+import com.alipay.global.api.model.ams.Quote;
 import com.alipay.global.api.model.ams.TransactionStatusType;
 import com.alipay.global.api.response.AlipayResponse;
 
@@ -17,6 +18,24 @@ public class AlipayInquiryRefundResponse extends AlipayResponse {
      */
     private TransactionStatusType refundStatus;
     private String                refundTime;
+    private Amount                grossSettlementAmount;
+    private Quote                 settlementQuote;
+
+    public Amount getGrossSettlementAmount() {
+        return grossSettlementAmount;
+    }
+
+    public void setGrossSettlementAmount(Amount grossSettlementAmount) {
+        this.grossSettlementAmount = grossSettlementAmount;
+    }
+
+    public Quote getSettlementQuote() {
+        return settlementQuote;
+    }
+
+    public void setSettlementQuote(Quote settlementQuote) {
+        this.settlementQuote = settlementQuote;
+    }
 
     public String getRefundId() {
         return refundId;

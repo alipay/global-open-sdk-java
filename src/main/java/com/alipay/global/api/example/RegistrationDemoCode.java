@@ -29,6 +29,8 @@ public class RegistrationDemoCode {
     private static final String  GATE_WAY_URL = "";
     private static final String  merchantPrivateKey = "";
     private static final String  alipayPublicKey    = "";
+    private static final String  CLIENT_ID = "";
+    private static final String  PAYMENT_REQUEST_ID = "";
     private static final AlipayClient defaultAlipayClient = new DefaultAlipayClient(GATE_WAY_URL, merchantPrivateKey, alipayPublicKey);
     private static final String registrationRequestId = "";
     private static final String referenceMerchantId = "";
@@ -73,7 +75,7 @@ public class RegistrationDemoCode {
         final AlipayMerchantRegistrationRequest request = new AlipayMerchantRegistrationRequest();
 
         request.setPath("/ams/sandbox/api/v1/merchants/registration");
-        request.setClientId("client_id");
+        request.setClientId(CLIENT_ID);
 
         //TODO build your merchant info request
         request.setRegistrationRequestId(registrationRequestId);
@@ -146,7 +148,7 @@ public class RegistrationDemoCode {
     public static AlipayMerchantRegistrationInfoQueryRequest buildAlipayMerchantRegistrationInfoQueryRequest() {
         final AlipayMerchantRegistrationInfoQueryRequest request = new AlipayMerchantRegistrationInfoQueryRequest();
         request.setPath("/ams/sandbox/api/v1/merchants/inquiryRegistrationInfo");
-        request.setClientId("client_id");
+        request.setClientId(CLIENT_ID);
 
 
         request.setReferenceMerchantId(referenceMerchantId);
@@ -180,7 +182,7 @@ public class RegistrationDemoCode {
     public static AlipayMerchantRegistrationStatusQueryRequest buildAlipayMerchantRegistrationStatusQueryRequest() {
         final AlipayMerchantRegistrationStatusQueryRequest request = new AlipayMerchantRegistrationStatusQueryRequest();
         request.setPath("/ams/sandbox/api/v1/merchants/inquiryRegistrationStatus");
-        request.setClientId("client_id");
+        request.setClientId(CLIENT_ID);
 
         request.setReferenceMerchantId(referenceMerchantId);
         //request.setRegistrationRequestId(registrationRequestId);

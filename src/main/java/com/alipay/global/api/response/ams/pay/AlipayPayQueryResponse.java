@@ -24,6 +24,33 @@ public class AlipayPayQueryResponse extends AlipayResponse {
     private RedirectActionForm redirectActionForm;
     private String                extendInfo;
     private List<Transaction>     transactions;
+    private Amount                customsDeclarationAmount;
+    private Amount                grossSettlementAmount;
+    private Quote                 settlementQuote;
+
+    public Amount getCustomsDeclarationAmount() {
+        return customsDeclarationAmount;
+    }
+
+    public void setCustomsDeclarationAmount(Amount customsDeclarationAmount) {
+        this.customsDeclarationAmount = customsDeclarationAmount;
+    }
+
+    public Amount getGrossSettlementAmount() {
+        return grossSettlementAmount;
+    }
+
+    public void setGrossSettlementAmount(Amount grossSettlementAmount) {
+        this.grossSettlementAmount = grossSettlementAmount;
+    }
+
+    public Quote getSettlementQuote() {
+        return settlementQuote;
+    }
+
+    public void setSettlementQuote(Quote settlementQuote) {
+        this.settlementQuote = settlementQuote;
+    }
 
     public TransactionStatusType getPaymentStatus() {
         return paymentStatus;
