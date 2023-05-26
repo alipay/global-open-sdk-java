@@ -12,4 +12,8 @@ public class DateTool {
         return DateFormatUtils.format(new Date().getTime(), ISO8601);
     }
 
+    public static String getCurrentTimeMillis() {
+        return String.valueOf(System.currentTimeMillis());
+    }
+
 }
