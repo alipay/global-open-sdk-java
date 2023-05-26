@@ -47,7 +47,7 @@ public abstract class BaseAlipayClient implements AlipayClient{
         String  httpMethod  = alipayRequest.getHttpMethod();
         String  path        = alipayRequest.getPath();
         Integer keyVersion  = alipayRequest.getKeyVersion();
-        String  reqTime     = DateTool.getCurISO8601Time();
+        String  reqTime     = DateTool.getCurrentTimeMillis();
         String  reqBody     = JSON.toJSONString(alipayRequest);
 
         /**
