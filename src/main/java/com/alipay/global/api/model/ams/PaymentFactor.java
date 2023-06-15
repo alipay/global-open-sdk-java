@@ -6,6 +6,8 @@ public class PaymentFactor {
     private InStorePaymentScenario inStorePaymentScenario;
     private PresentmentMode        presentmentMode;
 
+    private Boolean                isAuthorization;
+
     public Boolean getIsPaymentEvaluation() {
         return isPaymentEvaluation;
     }
@@ -28,5 +30,21 @@ public class PaymentFactor {
 
     public void setPresentmentMode(PresentmentMode presentmentMode) {
         this.presentmentMode = presentmentMode;
+    }
+
+    public Boolean getPaymentEvaluation() {
+        return isPaymentEvaluation;
+    }
+
+    public void setPaymentEvaluation(Boolean paymentEvaluation) {
+        isPaymentEvaluation = paymentEvaluation;
+    }
+
+    public Boolean getAuthorization() {
+        return isAuthorization;
+    }
+
+    public void setAuthorization(Boolean authorization) {
+        isAuthorization = authorization;
     }
 }
