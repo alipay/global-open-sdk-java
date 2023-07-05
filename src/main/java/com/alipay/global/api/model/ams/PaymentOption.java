@@ -9,9 +9,7 @@ public class PaymentOption {
 
     private String                       paymentMethodType;
     private PaymentMethodCategoryType    paymentMethodCategory;
-
     private List<String>                 paymentMethodRegion;
-
     private boolean                      enabled;
     private boolean                      preferred;
     private String                       disableReason;
@@ -20,7 +18,6 @@ public class PaymentOption {
     private String                       paymentOptionDetail;
     private String                       extendInfo;
     private Logo                         logo;
-
     private List<String>                 promoNames;
 
     public String getPaymentMethodType() {
