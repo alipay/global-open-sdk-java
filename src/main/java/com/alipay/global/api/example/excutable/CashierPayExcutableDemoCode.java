@@ -40,7 +40,7 @@ public class CashierPayExcutableDemoCode {
     public static void main(String[] args) {
 
         //executePayWithCard();
-        executePayWithBlik();
+        //executePayWithBlik();
         //executeInquiry();
 
     }

@@ -27,6 +27,7 @@ public class AlipayPayResponse extends AlipayResponse {
     private String              schemeUrl;
     private String              applinkUrl;
     private String              appIdentifier;
+    private PaymentResultInfo   paymentResultInfo;
 
     public Amount getGrossSettlementAmount() {
         return grossSettlementAmount;
@@ -202,5 +203,13 @@ public class AlipayPayResponse extends AlipayResponse {
 
     public void setPaymentData(String paymentData) {
         this.paymentData = paymentData;
+    }
+
+    public PaymentResultInfo getPaymentResultInfo() {
+        return paymentResultInfo;
+    }
+
+    public void setPaymentResultInfo(PaymentResultInfo paymentResultInfo) {
+        this.paymentResultInfo = paymentResultInfo;
     }
 }

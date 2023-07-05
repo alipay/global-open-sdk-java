@@ -11,6 +11,16 @@ public class Env {
     private String       extendInfo;
     private String       storeTerminalId;
     private String       storeTerminalRequestTime;
+    private BrowserInfo  browserInfo;
+    private String       colorDepth;
+    private String       screenHeight;
+    private String       screenWidth;
+    private Integer      timeZoneOffset;
+    private String       deviceBrand;
+    private String       deviceModel;
+    private String       deviceLanguage;
+    private String       deviceId;
+
 
     public TerminalType getTerminalType() {
         return terminalType;
@@ -82,5 +92,77 @@ public class Env {
 
     public void setStoreTerminalRequestTime(String storeTerminalRequestTime) {
         this.storeTerminalRequestTime = storeTerminalRequestTime;
+    }
+
+    public BrowserInfo getBrowserInfo() {
+        return browserInfo;
+    }
+
+    public void setBrowserInfo(BrowserInfo browserInfo) {
+        this.browserInfo = browserInfo;
+    }
+
+    public String getColorDepth() {
+        return colorDepth;
+    }
+
+    public void setColorDepth(String colorDepth) {
+        this.colorDepth = colorDepth;
+    }
+
+    public String getScreenHeight() {
+        return screenHeight;
+    }
+
+    public void setScreenHeight(String screenHeight) {
+        this.screenHeight = screenHeight;
+    }
+
+    public String getScreenWidth() {
+        return screenWidth;
+    }
+
+    public void setScreenWidth(String screenWidth) {
+        this.screenWidth = screenWidth;
+    }
+
+    public Integer getTimeZoneOffset() {
+        return timeZoneOffset;
+    }
+
+    public void setTimeZoneOffset(Integer timeZoneOffset) {
+        this.timeZoneOffset = timeZoneOffset;
+    }
+
+    public String getDeviceBrand() {
+        return deviceBrand;
+    }
+
+    public void setDeviceBrand(String deviceBrand) {
+        this.deviceBrand = deviceBrand;
+    }
+
+    public String getDeviceModel() {
+        return deviceModel;
+    }
+
+    public void setDeviceModel(String deviceModel) {
+        this.deviceModel = deviceModel;
+    }
+
+    public String getDeviceLanguage() {
+        return deviceLanguage;
+    }
+
+    public void setDeviceLanguage(String deviceLanguage) {
+        this.deviceLanguage = deviceLanguage;
+    }
+
+    public String getDeviceId() {
+        return deviceId;
+    }
+
+    public void setDeviceId(String deviceId) {
+        this.deviceId = deviceId;
     }
 }

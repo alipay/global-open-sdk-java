@@ -71,6 +71,16 @@ public class AlipayPayRequest extends AlipayRequest<AlipayPayResponse> {
      */
     private String                  merchantRegion;
 
+    /**
+     * A 2-letter country or region code based on the standard of ISO 3166 Country Codes. This parameter is used to sort Alipay+ payment methods according to the user's region
+     */
+    private String                  userRegion;
+
+    /**
+     * Information about the environment where the order is placed, such as the device information
+     */
+    private Env                     env;
+
     private PaymentMethod           payToMethod;
 
     private Boolean                 isAuthorization;
@@ -223,6 +233,22 @@ public class AlipayPayRequest extends AlipayRequest<AlipayPayResponse> {
 
     public void setCreditPayPlan(CreditPayPlan creditPayPlan) {
         this.creditPayPlan = creditPayPlan;
+    }
+
+    public String getUserRegion() {
+        return userRegion;
+    }
+
+    public void setUserRegion(String userRegion) {
+        this.userRegion = userRegion;
+    }
+
+    public Env getEnv() {
+        return env;
+    }
+
+    public void setEnv(Env env) {
+        this.env = env;
     }
 
     @Override
