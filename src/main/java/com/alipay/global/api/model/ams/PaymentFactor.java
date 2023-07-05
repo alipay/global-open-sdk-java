@@ -5,7 +5,6 @@ public class PaymentFactor {
     private Boolean                isPaymentEvaluation;
     private InStorePaymentScenario inStorePaymentScenario;
     private PresentmentMode        presentmentMode;
-
     private Boolean                isAuthorization;
 
     public Boolean getIsPaymentEvaluation() {

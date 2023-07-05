@@ -7,18 +7,19 @@ public class AlipayPayResponse extends AlipayResponse {
 
     private String              paymentRequestId;
     private String              paymentId;
-    private Amount paymentAmount;
+    private Amount              paymentAmount;
+    private String              paymentData;
     private Amount              actualPaymentAmount;
-    private Quote paymentQuote;
+    private Quote               paymentQuote;
     private String              paymentTime;
     private String              paymentCreateTime;
     private String              authExpiryTime;
     private Amount              nonGuaranteeCouponValue;
     private String              paymentActionForm;
-    private PspCustomerInfo pspCustomerInfo;
+    private PspCustomerInfo     pspCustomerInfo;
     private ChallengeActionForm challengeActionForm;
     private RedirectActionForm  redirectActionForm;
-    private OrderCodeForm orderCodeForm;
+    private OrderCodeForm       orderCodeForm;
     private Amount              grossSettlementAmount;
     private Quote               settlementQuote;
     private String              extendInfo;
@@ -193,5 +194,13 @@ public class AlipayPayResponse extends AlipayResponse {
 
     public void setAppIdentifier(String appIdentifier) {
         this.appIdentifier = appIdentifier;
+    }
+
+    public String getPaymentData() {
+        return paymentData;
+    }
+
+    public void setPaymentData(String paymentData) {
+        this.paymentData = paymentData;
     }
 }

@@ -6,24 +6,80 @@ import com.alipay.global.api.response.ams.pay.AlipayPayResponse;
 
 public class AlipayPayRequest extends AlipayRequest<AlipayPayResponse> {
 
+    /**
+     * Represents the payment product that is being used.
+     */
     private ProductCodeType         productCode;
+
+    /**
+     * The unique ID assigned by a merchant to identify a payment request
+     */
     private String                  paymentRequestId;
-    private Order order;
-    private Amount paymentAmount;
-    private PaymentMethod           payToMethod;
+
+    /**
+     * The order information
+     */
+    private Order                   order;
+
+    /**
+     * The payment amount that the merchant requests to receive in the order currency
+     */
+    private Amount                  paymentAmount;
+
+    /**
+     * The payment method that is used to collect the payment by the merchant or acquirer
+     */
     private PaymentMethod           paymentMethod;
+
+    /**
+     * The specific time after which the payment will expire
+     */
     private String                  paymentExpiryTime;
+
+    /**
+     * The merchant page URL that the user is redirected to after the payment is completed
+     */
     private String                  paymentRedirectUrl;
+
+    /**
+     * The URL that is used to receive the payment result notification
+     */
     private String                  paymentNotifyUrl;
-    private Boolean                 isAuthorization;
-    private PaymentVerificationData paymentVerificationData;
-    private PaymentFactor paymentFactor;
-    private Merchant merchant;
+
+    /**
+     * Factors that impact the payment. This field is used to indicate the payment scenario
+     */
+    private PaymentFactor           paymentFactor;
+
+    /**
+     * The settlement strategy for the payment request.
+     */
     private SettlementStrategy      settlementStrategy;
-    private String                  extendInfo;
-    private CreditPayPlan creditPayPlan;
+
+    /**
+     * The credit payment plan information for this payment
+     */
+    private CreditPayPlan           creditPayPlan;
+
+    /**
+     * The unique ID that is assigned by Alipay to identify the mini program
+     */
     private String                  appId;
+
+    /**
+     * The country or region where the merchant operates the business
+     */
     private String                  merchantRegion;
+
+    private PaymentMethod           payToMethod;
+
+    private Boolean                 isAuthorization;
+
+    private Merchant                merchant;
+
+    private PaymentVerificationData paymentVerificationData;
+
+    private String                  extendInfo;
 
     public String getAppId() {
         return appId;

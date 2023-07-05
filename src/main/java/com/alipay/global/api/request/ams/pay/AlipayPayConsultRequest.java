@@ -8,8 +8,26 @@ import java.util.List;
 
 public class AlipayPayConsultRequest extends AlipayRequest<AlipayPayConsultResponse> {
 
+    /**
+     * Represents the payment product that is being used
+     */
     private ProductCodeType productCode;
+
+    /**
+     * The payment amount that the merchant requests to receive in the order currency
+     */
     private Amount          paymentAmount;
+
+    /**
+     * The country or region where the merchant operates the business. The parameter is a 2-letter country or region code that follows ISO 3166 Country Codes standard.
+     */
+    private String          merchantRegion;
+
+    /**
+     * A list of region codes that represent the countries or regions of payment methods. The value of this parameter is a 2-letter ISO country code or GLOBAL.
+     */
+    private List<String>    allowedPaymentMethodRegions;
+
     private List<String>    allowedPaymentMethods;
     private List<String>    blockedPaymentMethods;
     private String          region;
@@ -19,6 +37,10 @@ public class AlipayPayConsultRequest extends AlipayRequest<AlipayPayConsultRespo
     private String          extendInfo;
     private String          userRegion;
     private PaymentFactor   paymentFactor;
+
+    /**
+     * The settlement strategy
+     */
     private SettlementStrategy settlementStrategy;
     private Merchant        merchant;
     private List<String>    allowedPspRegions;
@@ -134,6 +156,22 @@ public class AlipayPayConsultRequest extends AlipayRequest<AlipayPayConsultRespo
 
     public void setAllowedPspRegions(List<String> allowedPspRegions) {
         this.allowedPspRegions = allowedPspRegions;
+    }
+
+    public String getMerchantRegion() {
+        return merchantRegion;
+    }
+
+    public void setMerchantRegion(String merchantRegion) {
+        this.merchantRegion = merchantRegion;
+    }
+
+    public List<String> getAllowedPaymentMethodRegions() {
+        return allowedPaymentMethodRegions;
+    }
+
+    public void setAllowedPaymentMethodRegions(List<String> allowedPaymentMethodRegions) {
+        this.allowedPaymentMethodRegions = allowedPaymentMethodRegions;
     }
 
     @Override

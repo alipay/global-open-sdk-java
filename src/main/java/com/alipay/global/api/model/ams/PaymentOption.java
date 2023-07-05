@@ -9,6 +9,9 @@ public class PaymentOption {
 
     private String                       paymentMethodType;
     private PaymentMethodCategoryType    paymentMethodCategory;
+
+    private List<String>                 paymentMethodRegion;
+
     private boolean                      enabled;
     private boolean                      preferred;
     private String                       disableReason;
@@ -17,6 +20,9 @@ public class PaymentOption {
     private String                       paymentOptionDetail;
     private String                       extendInfo;
     private Logo                         logo;
+
+    private List<String>                 promoNames;
+
     public String getPaymentMethodType() {
         return paymentMethodType;
     }
@@ -95,5 +101,21 @@ public class PaymentOption {
 
     public void setLogo(Logo logo) {
         this.logo = logo;
+    }
+
+    public List<String> getPaymentMethodRegion() {
+        return paymentMethodRegion;
+    }
+
+    public void setPaymentMethodRegion(List<String> paymentMethodRegion) {
+        this.paymentMethodRegion = paymentMethodRegion;
+    }
+
+    public List<String> getPromoNames() {
+        return promoNames;
+    }
+
+    public void setPromoNames(List<String> promoNames) {
+        this.promoNames = promoNames;
     }
 }

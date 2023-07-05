@@ -1,41 +1,61 @@
 package com.alipay.global.api.request.ams.notify;
 
-import com.alipay.global.api.model.Result;
 import com.alipay.global.api.model.ams.Amount;
 import com.alipay.global.api.model.ams.PspCustomerInfo;
 import com.alipay.global.api.model.ams.Quote;
 
-public class AlipayPayResultNotify {
+public class AlipayPayResultNotify extends AlipayNotify{
 
-    private String          notifyType;
-    private Result          resultInfo;
+    /**
+     * The unique ID that is assigned by a merchant to identify a payment request.
+     */
     private String          paymentRequestId;
 
+    /**
+     * unique id generated from ipay for this payment
+     */
     private String          paymentId;
 
+    /**
+     * amount of this payment
+     */
     private Amount          paymentAmount;
 
+    /**
+     * create time of this payment
+     */
     private String          paymentCreateTime;
 
+    /**
+     * the time of payment finish
+     */
     private String          paymentTime;
 
+    /**
+     * The total amount for customs declaration
+     */
     private Amount          customsDeclarationAmount;
 
+    /**
+     * The value of this field equals to transaction amount multiplied by the value of settlementQuote. This field is returned when the currency exchange is predetermined and the exchange rate is locked at the time of transaction
+     */
     private Amount          grossSettlementAmount;
 
+    /**
+     * The exchange rate between the settlement currency and transaction currency. This field is returned when grossSettlementAmount is returned
+     */
     private Quote           settlementQuote;
 
+    /**
+     * Information about the customer of Alipay+ Mobile Payment Provider (Alipay+ MPP)
+     */
     private PspCustomerInfo pspCustomerInfo;
 
+    /**
+     * The unique ID assigned by the non-Alipay acquirer for the transaction
+     */
     private String          acquirerReferenceNo;
 
-    public String getNotifyType() {
-        return notifyType;
-    }
-
-    public void setNotifyType(String notifyType) {
-        this.notifyType = notifyType;
-    }
 
     public String getPaymentTime() {
         return paymentTime;
@@ -85,13 +105,6 @@ public class AlipayPayResultNotify {
         this.acquirerReferenceNo = acquirerReferenceNo;
     }
 
-    public Result getResultInfo() {
-        return resultInfo;
-    }
-
-    public void setResultInfo(Result resultInfo) {
-        this.resultInfo = resultInfo;
-    }
 
     public String getPaymentRequestId() {
         return paymentRequestId;

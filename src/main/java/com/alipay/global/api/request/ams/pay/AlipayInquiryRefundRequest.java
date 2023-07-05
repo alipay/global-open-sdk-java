@@ -6,8 +6,14 @@ import com.alipay.global.api.response.ams.pay.AlipayInquiryRefundResponse;
 
 public class AlipayInquiryRefundRequest extends AlipayRequest<AlipayInquiryRefundResponse> {
 
+    /**
+     * The unique ID assigned by a merchant to identify a refund request
+     */
     private String refundRequestId;
 
+    /**
+     * The unique ID assigned by Alipay to identify a refund
+     */
     private String refundId;
 
     public String getRefundRequestId() {
