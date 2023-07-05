@@ -3,10 +3,6 @@ package com.alipay.global.api.request.ams.notify;
 import com.alipay.global.api.model.ams.Amount;
 import com.alipay.global.api.model.ams.Quote;
 
-/**
- * @Author yanhong
- * @version $Id: AlipayRefundNotify.java, v 0.1 2023年07月05日 2:50 PM yanhong Exp $
- **/
 public class AlipayRefundNotify extends AlipayNotify{
 
     /**
