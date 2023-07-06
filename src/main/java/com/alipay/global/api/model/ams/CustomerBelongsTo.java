@@ -20,6 +20,21 @@ public enum CustomerBelongsTo {
 
     BKASH,
 
-    EASYPAISA;
+    EASYPAISA,
 
+    PAYPAY,
+
+    BOOST,
+
+    GRABPAY_MY,
+
+    MAYA,
+
+    GRABPAY_PH,
+
+    GRABPAY_SG,
+
+    NAVERPAY,
+
+    ZALOPAY
 }
