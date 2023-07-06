@@ -50,3 +50,11 @@ Upgrade the fastjson version to 1.2.76
 14、Version:2.0.1
 add aps interface and adjust the package for the AMS interface(request/response)
 
+15、Version:2.0.9
+Add comment
+Add card related model（CardInfo、ThreeDSResult、PaymentResultInfo、BrowserInfo）
+Add usable paymentMethod in auth interface(CustomerBelongsTo)
+Add refund、payResult、CaptureResult notify body
+Add excuatble example of cashierPayment
+Upgrade the fastjson version to 1.2.83
+
