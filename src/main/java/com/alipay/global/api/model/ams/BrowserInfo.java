@@ -1,9 +1,5 @@
 package com.alipay.global.api.model.ams;
 
-/**
- * @Author yanhong
- * @version $Id: BrowserInfo.java, v 0.1 2023年07月05日 6:07 PM yanhong Exp $
- **/
 public class BrowserInfo {
 
     /**
