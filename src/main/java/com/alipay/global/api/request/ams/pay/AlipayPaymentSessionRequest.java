@@ -1,5 +1,6 @@
 package com.alipay.global.api.request.ams.pay;
 
+import com.alipay.global.api.model.ams.AgreementInfo;
 import com.alipay.global.api.model.ams.Amount;
 import com.alipay.global.api.model.ams.CreditPayPlan;
 import com.alipay.global.api.model.ams.Env;
@@ -77,6 +78,11 @@ public class AlipayPaymentSessionRequest extends AlipayRequest<AlipayPaymentSess
      * Information about the environment where the order is placed
      */
     private Env                     env;
+
+    /**
+     * Authorization information about Easy Pay payments
+     */
+    private AgreementInfo           agreementInfo;
 
     @Override
     public Class<AlipayPaymentSessionResponse> getResponseClass() {
@@ -185,5 +191,13 @@ public class AlipayPaymentSessionRequest extends AlipayRequest<AlipayPaymentSess
 
     public void setEnv(Env env) {
         this.env = env;
+    }
+
+    public AgreementInfo getAgreementInfo() {
+        return agreementInfo;
+    }
+
+    public void setAgreementInfo(AgreementInfo agreementInfo) {
+        this.agreementInfo = agreementInfo;
     }
 }
