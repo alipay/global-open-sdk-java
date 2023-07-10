@@ -1,11 +1,13 @@
 package com.alipay.global.api.model.ams;
 
+import java.util.Map;
+
 public class PaymentMethod {
-    private String paymentMethodType;
-    private String paymentMethodId;
-    private String paymentMethodMetaData;
-    private String customerId;
-    private String extendInfo;
+    private String             paymentMethodType;
+    private String             paymentMethodId;
+    private Map<String,Object> paymentMethodMetaData;
+    private String             customerId;
+    private String             extendInfo;
 
     public String getPaymentMethodType() {
         return paymentMethodType;
@@ -23,11 +25,11 @@ public class PaymentMethod {
         this.paymentMethodId = paymentMethodId;
     }
 
-    public String getPaymentMethodMetaData() {
+    public Map<String, Object> getPaymentMethodMetaData() {
         return paymentMethodMetaData;
     }
 
-    public void setPaymentMethodMetaData(String paymentMethodMetaData) {
+    public void setPaymentMethodMetaData(Map<String, Object> paymentMethodMetaData) {
         this.paymentMethodMetaData = paymentMethodMetaData;
     }
 

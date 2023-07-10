@@ -56,5 +56,6 @@ Add card related model（CardInfo、ThreeDSResult、PaymentResultInfo、BrowserI
 Add usable paymentMethod in auth interface(CustomerBelongsTo)
 Add refund、payResult、CaptureResult notify body
 Add excuatble example of cashierPayment
+Modify struct of paymentMethodMetaData, convert string to map
 Upgrade the fastjson version to 1.2.83
 

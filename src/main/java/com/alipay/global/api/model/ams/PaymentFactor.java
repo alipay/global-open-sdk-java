@@ -1,10 +1,14 @@
 package com.alipay.global.api.model.ams;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 public class PaymentFactor {
 
     private Boolean                isPaymentEvaluation;
     private InStorePaymentScenario inStorePaymentScenario;
     private PresentmentMode        presentmentMode;
+
+    @JSONField(name="isAuthorization")
     private Boolean                isAuthorization;
 
     public Boolean getIsPaymentEvaluation() {
@@ -39,7 +43,7 @@ public class PaymentFactor {
         isPaymentEvaluation = paymentEvaluation;
     }
 
-    public Boolean getAuthorization() {
+    public Boolean isAuthorization() {
         return isAuthorization;
     }
 
