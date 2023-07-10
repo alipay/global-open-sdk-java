@@ -142,4 +142,12 @@ public class AlipayPayResultNotify extends AlipayNotify{
     public void setPaymentCreateTime(String paymentCreateTime) {
         this.paymentCreateTime = paymentCreateTime;
     }
+
+    public PaymentResultInfo getPaymentResultInfo() {
+        return paymentResultInfo;
+    }
+
+    public void setPaymentResultInfo(PaymentResultInfo paymentResultInfo) {
+        this.paymentResultInfo = paymentResultInfo;
+    }
 }

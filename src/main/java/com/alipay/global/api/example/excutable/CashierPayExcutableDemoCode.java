@@ -13,9 +13,11 @@ import com.alipay.global.api.model.ams.PaymentMethod;
 import com.alipay.global.api.model.ams.ProductCodeType;
 import com.alipay.global.api.model.ams.SettlementStrategy;
 import com.alipay.global.api.model.ams.TerminalType;
+import com.alipay.global.api.request.ams.pay.AlipayPayConsultRequest;
 import com.alipay.global.api.request.ams.pay.AlipayPayQueryRequest;
 import com.alipay.global.api.request.ams.pay.AlipayPayRequest;
 import com.alipay.global.api.request.ams.pay.AlipayPaymentSessionRequest;
+import com.alipay.global.api.response.ams.pay.AlipayPayConsultResponse;
 import com.alipay.global.api.response.ams.pay.AlipayPayQueryResponse;
 import com.alipay.global.api.response.ams.pay.AlipayPayResponse;
 import com.alipay.global.api.response.ams.pay.AlipayPaymentSessionResponse;
@@ -38,12 +40,41 @@ public class CashierPayExcutableDemoCode {
         merchantPrivateKey, alipayPublicKey);
 
     public static void main(String[] args) {
-
+        executeConsult();
         // executePayWithCard();
         // executePayWithBlik();
-         executePaymentSessionCreateWithCard();
+        // executePaymentSessionCreateWithCard();
         // executeInquiry();
 
+    }
+
+    public static void executeConsult() {
+        AlipayPayConsultRequest alipayPayConsultRequest = new AlipayPayConsultRequest();
+        alipayPayConsultRequest.setClientId(CLIENT_ID);
+        alipayPayConsultRequest.setPath("/ams/sandbox/api/v1/payments/consult");
+        alipayPayConsultRequest.setProductCode(ProductCodeType.CASHIER_PAYMENT);
+
+        // set amount
+        Amount amount = new Amount();
+        amount.setCurrency("BRL");
+        amount.setValue("4200");
+        alipayPayConsultRequest.setPaymentAmount(amount);
+
+        //set env Info
+        Env env = new Env();
+        env.setTerminalType(TerminalType.WEB);
+        alipayPayConsultRequest.setEnv(env);
+
+        AlipayPayConsultResponse alipayPayConsultResponse = null;
+
+        try {
+            alipayPayConsultResponse = defaultAlipayClient.execute(alipayPayConsultRequest);
+        } catch (AlipayApiException e) {
+            String errorMsg = e.getMessage();
+            // handle error condition
+        }
+
+        System.out.println(JSONObject.toJSON(alipayPayConsultResponse));
     }
 
     /**
@@ -59,9 +90,10 @@ public class CashierPayExcutableDemoCode {
         // replace to your paymentRequestId
         String paymentRequestId = UUID.randomUUID().toString();
         alipayPayRequest.setPaymentRequestId(paymentRequestId);
-        Amount amount = new Amount();
+
 
         // set amount
+        Amount amount = new Amount();
         amount.setCurrency("BRL");
         amount.setValue("4200");
         alipayPayRequest.setPaymentAmount(amount);
@@ -148,9 +180,10 @@ public class CashierPayExcutableDemoCode {
         // replace to your paymentRequestId
         String paymentRequestId = UUID.randomUUID().toString();
         alipayPayRequest.setPaymentRequestId(paymentRequestId);
-        Amount amount = new Amount();
+
 
         // set amount
+        Amount amount = new Amount();
         amount.setCurrency("PLN");
         amount.setValue("4200");
         alipayPayRequest.setPaymentAmount(amount);
@@ -223,9 +256,9 @@ public class CashierPayExcutableDemoCode {
         // replace to your paymentRequestId
         String paymentRequestId = UUID.randomUUID().toString();
         alipayPaymentSessionRequest.setPaymentRequestId(paymentRequestId);
-        Amount amount = new Amount();
 
         // set amount
+        Amount amount = new Amount();
         amount.setCurrency("BRL");
         amount.setValue("4200");
         alipayPaymentSessionRequest.setPaymentAmount(amount);
