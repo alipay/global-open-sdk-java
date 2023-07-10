@@ -15,8 +15,10 @@ import com.alipay.global.api.model.ams.SettlementStrategy;
 import com.alipay.global.api.model.ams.TerminalType;
 import com.alipay.global.api.request.ams.pay.AlipayPayQueryRequest;
 import com.alipay.global.api.request.ams.pay.AlipayPayRequest;
+import com.alipay.global.api.request.ams.pay.AlipayPaymentSessionRequest;
 import com.alipay.global.api.response.ams.pay.AlipayPayQueryResponse;
 import com.alipay.global.api.response.ams.pay.AlipayPayResponse;
+import com.alipay.global.api.response.ams.pay.AlipayPaymentSessionResponse;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -37,9 +39,10 @@ public class CashierPayExcutableDemoCode {
 
     public static void main(String[] args) {
 
-        executePayWithCard();
-        //executePayWithBlik();
-        //executeInquiry();
+        // executePayWithCard();
+        // executePayWithBlik();
+         executePaymentSessionCreateWithCard();
+        // executeInquiry();
 
     }
 
@@ -99,11 +102,14 @@ public class CashierPayExcutableDemoCode {
         buyer.setReferenceBuyerId("yourBuyerId");
         order.setBuyer(buyer);
         order.setOrderAmount(amount);
+        alipayPayRequest.setOrder(order);
+
+        //set env Info
         Env env = new Env();
         env.setTerminalType(TerminalType.WEB);
         env.setClientIp("114.121.121.01");
+        alipayPayRequest.setEnv(env);
         order.setEnv(env);
-        alipayPayRequest.setOrder(order);
 
         // set auth capture payment mode
         PaymentFactor paymentFactor = new PaymentFactor();
@@ -171,11 +177,13 @@ public class CashierPayExcutableDemoCode {
         buyer.setReferenceBuyerId("yourBuyerId");
         order.setBuyer(buyer);
         order.setOrderAmount(amount);
+        alipayPayRequest.setOrder(order);
+
+        //set env Info
         Env env = new Env();
         env.setTerminalType(TerminalType.WEB);
         env.setClientIp("114.121.121.01");
-        order.setEnv(env);
-        alipayPayRequest.setOrder(order);
+        alipayPayRequest.setEnv(env);
 
         // set auth capture payment mode
         PaymentFactor paymentFactor = new PaymentFactor();
@@ -199,6 +207,81 @@ public class CashierPayExcutableDemoCode {
         }
         //show response
         System.out.println(JSONObject.toJSON(alipayPayResponse));
+
+    }
+
+    /**
+     * show how to card payment Session(need to finish payment by Antom SDK)
+     */
+    public static void executePaymentSessionCreateWithCard(){
+
+        AlipayPaymentSessionRequest alipayPaymentSessionRequest = new AlipayPaymentSessionRequest();
+        alipayPaymentSessionRequest.setClientId(CLIENT_ID);
+        alipayPaymentSessionRequest.setPath("/ams/sandbox/api/v1/payments/createPaymentSession");
+        alipayPaymentSessionRequest.setProductCode(ProductCodeType.CASHIER_PAYMENT);
+
+        // replace to your paymentRequestId
+        String paymentRequestId = UUID.randomUUID().toString();
+        alipayPaymentSessionRequest.setPaymentRequestId(paymentRequestId);
+        Amount amount = new Amount();
+
+        // set amount
+        amount.setCurrency("BRL");
+        amount.setValue("4200");
+        alipayPaymentSessionRequest.setPaymentAmount(amount);
+
+        //set settlement currency
+        SettlementStrategy settlementStrategy = new SettlementStrategy();
+        settlementStrategy.setSettlementCurrency("USD");
+        alipayPaymentSessionRequest.setSettlementStrategy(settlementStrategy);
+
+        // set paymentMethod
+        PaymentMethod paymentMethod = new PaymentMethod();
+        paymentMethod.setPaymentMethodType("CARD");
+        alipayPaymentSessionRequest.setPaymentMethod(paymentMethod);
+
+        // set auth capture payment mode
+        PaymentFactor paymentFactor = new PaymentFactor();
+        paymentFactor.setAuthorization(true);
+        alipayPaymentSessionRequest.setPaymentFactor(paymentFactor);
+
+        // replace to your orderId
+        String orderId = UUID.randomUUID().toString();
+
+        // set order Info
+        Order order = new Order();
+        order.setReferenceOrderId(orderId);
+        order.setOrderDescription("antom test order");
+        order.setOrderAmount(amount);
+        Buyer buyer = new Buyer();
+        buyer.setReferenceBuyerId("yourBuyerId");
+        order.setBuyer(buyer);
+        order.setOrderAmount(amount);
+        alipayPaymentSessionRequest.setOrder(order);
+
+        //set env Info
+        Env env = new Env();
+        env.setTerminalType(TerminalType.WEB);
+        env.setClientIp("114.121.121.01");
+        alipayPaymentSessionRequest.setEnv(env);
+
+        // replace to your notify url
+        alipayPaymentSessionRequest.setPaymentNotifyUrl("http://www.yourNotifyUrl.com");
+
+        // replace to your redirect url
+        alipayPaymentSessionRequest.setPaymentRedirectUrl("http://www.yourRedirectUrl.com");
+
+        //do the Payment
+        AlipayPaymentSessionResponse alipayPaymentSessionResponse = null;
+        System.out.println(JSONObject.toJSON(alipayPaymentSessionRequest));
+        try {
+            alipayPaymentSessionResponse = defaultAlipayClient.execute(alipayPaymentSessionRequest);
+        } catch (AlipayApiException e) {
+            String errorMsg = e.getMessage();
+            // handle error condition
+        }
+        //show response
+        System.out.println(JSONObject.toJSON(alipayPaymentSessionResponse));
 
     }
 
