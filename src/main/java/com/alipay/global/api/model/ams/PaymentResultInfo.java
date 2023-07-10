@@ -33,6 +33,11 @@ public class PaymentResultInfo {
     private String paymentMethodRegion;
 
     /**
+     * The result of 3D Secure authentication
+     */
+    private ThreeDSResult threeDSResult;
+
+    /**
      * The raw AVS result. See AVS result codes to check the valid values
      */
     private String avsResultRaw;

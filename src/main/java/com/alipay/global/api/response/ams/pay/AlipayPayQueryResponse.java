@@ -31,6 +31,7 @@ public class AlipayPayQueryResponse extends AlipayResponse {
     private Amount                customsDeclarationAmount;
     private Amount                grossSettlementAmount;
     private Quote                 settlementQuote;
+    private PaymentResultInfo     paymentResultInfo;
 
     public Amount getCustomsDeclarationAmount() {
         return customsDeclarationAmount;
@@ -206,5 +207,13 @@ public class AlipayPayQueryResponse extends AlipayResponse {
 
     public void setAcquirerReferenceNo(String acquirerReferenceNo) {
         this.acquirerReferenceNo = acquirerReferenceNo;
+    }
+
+    public PaymentResultInfo getPaymentResultInfo() {
+        return paymentResultInfo;
+    }
+
+    public void setPaymentResultInfo(PaymentResultInfo paymentResultInfo) {
+        this.paymentResultInfo = paymentResultInfo;
     }
 }

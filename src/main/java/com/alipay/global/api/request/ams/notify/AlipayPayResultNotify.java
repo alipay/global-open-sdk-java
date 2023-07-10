@@ -1,6 +1,7 @@
 package com.alipay.global.api.request.ams.notify;
 
 import com.alipay.global.api.model.ams.Amount;
+import com.alipay.global.api.model.ams.PaymentResultInfo;
 import com.alipay.global.api.model.ams.PspCustomerInfo;
 import com.alipay.global.api.model.ams.Quote;
 
@@ -56,6 +57,10 @@ public class AlipayPayResultNotify extends AlipayNotify{
      */
     private String          acquirerReferenceNo;
 
+    /**
+     * The payment result information
+     */
+    private PaymentResultInfo paymentResultInfo;
 
     public String getPaymentTime() {
         return paymentTime;
