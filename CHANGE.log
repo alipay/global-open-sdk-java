@@ -59,3 +59,5 @@ Add excuatble example of cashierPayment
 Modify struct of paymentMethodMetaData, convert string to map
 Upgrade the fastjson version to 1.2.83
 
+16、Version:2.0.10
+Fix useless example class problem
