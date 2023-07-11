@@ -28,13 +28,13 @@ import java.util.UUID;
 
 public class CashierPayExcutableDemoCode {
 
-    private static final String       merchantPrivateKey  = "MIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQCbn1zMzJMNkPVYVCQRYV6eHyuR5Jm23dOsPyYDJgZyM51Hn6ykqHfm+HbGO9EwdwxVPQOmSWpjeIgi7yBIE4SzQUEQ8fyQXeHITV/S0lqqdEO6wB/eOzQ2l0He3IRCzWpRECeSXKqriX+vbE9wQR1W3FSjL/cNBekfoEbm0IAiOiD2CpJKECBxZH5ohBLUeNpednqdCGGD8zsRyODa4vUUiNVwsAsLhwCF2Jmr7gl0eRqYKg3vZ0ROnqA78zIfA6g8vX9+n8BgDrw/bHmdSbCFy2kK4Sk9mHZPt8di3z9rVj0l/gGJiKTiN5V0svDPKx0OyhwDnWd3F30rqHINDEJ5AgMBAAECggEAPz8uTQGbhjjyrXpMyk+DT8olP/7jRgGzhF6JyV/L4N//PNu1I5pgWJuEUh5/by4C8iWA9TUDKvgSg/gha4mbNesAUa23UskE+Q4RMrJRLNNhr2VjzkLLfqBMohGHI0suuVFSc9Z7eonAPgBL7LhZ/zI+p6/XvRA45aSTDD2SxdWtp+8aSgyMw4/YnQTis1rG58D0S0EjqCPQu2/DcX+3o/fviyHS0k8gaIng970V/CeEp2nGAOhWqzsNa4Cj+Zy0vuOpO+jjyByouHy/RC+X2LPHWg2PxPiLw5cS92nD4RciDe7FGnu6plnPWP5koJOSE2xTmycoazts6NBZbX1HMQKBgQDQk9gSRhPOAu+S90SwTQ0VbA4pUVOSYv0huVOmTpNr0fr/3gv1+PSYdUWcsvon3nmYOnBTnGYtehPLNODznTUVS8wq/qkRX+xAbbCKczJcd2TzcR++O5P/uyu91fazZsjkihXKU4Tst5TYYqUEPhl4vIe25euaCiZdn65l1ltaRQKBgQC/AUwcwc2Qc+3qhV59d6xCaMERoygIFVO0rsrgjcyFixrlZH42uv5CRqBBtRYBHmETmGE9vAtKfHJf2/G72NnYQML2o5Am6ZnvmNIIgqbsLFpeIZNEBNSewTGPSd8ROUe9J0PBIeFWjWECTa0t4tm8UjKkP67J4Ay3W1S1uNoEpQKBgQCt8C0HiDMp4N7jY5t/nrHjhHoG0NBtymkoP4HXtb1Q9ApqaET3OkbYASwtMkBVET27yjg0McAv+pcZJh7WaeqDuPMpg7eASssdK5xGySxdWh/wuAztuoeAgxlGNXGHSJcNp23mjWHTeoEBNrpAYH0jZ62RxAmHKyG1f92TBYCnNQKBgQCwtaqNEF/2PMroJet9eLJN3kyA3Mm0cMa4at4XUhjdlAyWHZsHV4jUGDM7lyV8c3asglW0n7xydR/7v6itebpRb9jwBfLfjU91c5UdeoKkDYStgbKVQ0LSfTo0rstJTA0q2qC8lXO8d6BAWUzXHwECUam4e5JiAn7BRCXi2doaYQKBgQCzqctEZRJgy2lUwAptKxe1ZyPxhcNDa6KDL5Hu5AyK8HsTZGztRXrvZ0123bLdjVrC81f4Z6cwilMcXP/YMOKxYz43t6OVOkfov3RQnhwY4Z7N0nEXmXkf9g8u4qHhtGevOnKw2qDg8FgsDRwy0XeiV80vzwh81bOKNPBNjeSjzw==";
+    private static final String       merchantPrivateKey  = "";
 
-    private static final String       alipayPublicKey     = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAskVLOmRs1/RuzWHHd3bk5dtRfIDIA7dyDkcCFm5FltWzHotJprQag0wawy1e2sDcBB9CU+8ZTz0hfp+e01k9/qXLPI2LPiTlNaZ4KnbZeRG8VnIaUceZeZP58jBmJ23x+V3Hf/JGJoAdLqHy+ZEsv9VhsuvipCocs1hMDJf2o136Aj+jlsYKvlwuUwp9dhXBwVct+1/0Vv2stgRGxax0Hbm/8caV+0GjWQfTcDoht1s6R8s4D4/XXGPHrXYVy+ZEqF/Msqfv0JQsEfHSsf7FmOvryKyI5kgyIUWgiTg28kgQ93Wd/8ISypxFmKsGAG+8Se8CDxakB9+Cf/D7vN3HuwIDAQAB";
+    private static final String       alipayPublicKey     = "";
 
-    private static final String       CLIENT_ID           = "SANDBOX_5Y684E2YTR2X00990";
+    private static final String       CLIENT_ID           = "";
 
-    private static final String       GATE_WAY_URL        = "https://open-sea-global.alipay.com";
+    private static final String       GATE_WAY_URL        = "";
 
     private static final AlipayClient defaultAlipayClient = new DefaultAlipayClient(GATE_WAY_URL,
         merchantPrivateKey, alipayPublicKey);
@@ -73,8 +73,6 @@ public class CashierPayExcutableDemoCode {
             String errorMsg = e.getMessage();
             // handle error condition
         }
-
-        System.out.println(JSONObject.toJSON(alipayPayConsultResponse));
     }
 
     /**
@@ -163,8 +161,6 @@ public class CashierPayExcutableDemoCode {
             String errorMsg = e.getMessage();
             // handle error condition
         }
-        //show response
-        System.out.println(JSONObject.toJSON(alipayPayResponse));
     }
 
     /**
@@ -238,9 +234,6 @@ public class CashierPayExcutableDemoCode {
             String errorMsg = e.getMessage();
             // handle error condition
         }
-        //show response
-        System.out.println(JSONObject.toJSON(alipayPayResponse));
-
     }
 
     /**
@@ -313,9 +306,6 @@ public class CashierPayExcutableDemoCode {
             String errorMsg = e.getMessage();
             // handle error condition
         }
-        //show response
-        System.out.println(JSONObject.toJSON(alipayPaymentSessionResponse));
-
     }
 
     /**
@@ -336,8 +326,5 @@ public class CashierPayExcutableDemoCode {
             String errorMsg = e.getMessage();
             // handle error condition
         }
-        //show response
-        System.out.println(JSONObject.toJSON(alipayPayQueryResponse));
-
     }
 }
