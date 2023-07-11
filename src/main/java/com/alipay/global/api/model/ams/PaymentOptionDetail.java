@@ -2,10 +2,6 @@ package com.alipay.global.api.model.ams;
 
 import java.util.List;
 
-/**
- * @Author yanhong
- * @version $Id: paymentOptionDetail.java, v 0.1 2023年07月10日 7:57 PM yanhong Exp $
- **/
 public class PaymentOptionDetail {
 
     private List<SupportCardBrand> supportCardBrands;

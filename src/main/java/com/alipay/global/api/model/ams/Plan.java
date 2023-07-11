@@ -1,9 +1,5 @@
 package com.alipay.global.api.model.ams;
 
-/**
- * @Author yanhong
- * @version $Id: Plan.java, v 0.1 2023年07月10日 8:43 PM yanhong Exp $
- **/
 public class Plan {
 
     private String interestRate;
