@@ -6,8 +6,19 @@ import com.alipay.global.api.response.ams.pay.AlipayCaptureResponse;
 
 public class AlipayCaptureRequest extends AlipayRequest<AlipayCaptureResponse> {
 
+    /**
+     * The unique ID that is assigned by the merchant to identify a capture request. Alipay uses this field for idempotence control
+     */
     private String  captureRequestId;
+
+    /**
+     * The unique ID that is assigned by Alipay to identify a payment
+     */
     private String  paymentId;
+
+    /**
+     * The capture amount that the merchant requests to receive in the transaction currency
+     */
     private Amount  captureAmount;
     private Boolean isLastCapture;
 

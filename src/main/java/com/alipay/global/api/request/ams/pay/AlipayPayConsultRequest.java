@@ -8,8 +8,11 @@ import java.util.List;
 
 public class AlipayPayConsultRequest extends AlipayRequest<AlipayPayConsultResponse> {
 
+
     private ProductCodeType productCode;
     private Amount          paymentAmount;
+    private String          merchantRegion;
+    private List<String>    allowedPaymentMethodRegions;
     private List<String>    allowedPaymentMethods;
     private List<String>    blockedPaymentMethods;
     private String          region;
@@ -134,6 +137,22 @@ public class AlipayPayConsultRequest extends AlipayRequest<AlipayPayConsultRespo
 
     public void setAllowedPspRegions(List<String> allowedPspRegions) {
         this.allowedPspRegions = allowedPspRegions;
+    }
+
+    public String getMerchantRegion() {
+        return merchantRegion;
+    }
+
+    public void setMerchantRegion(String merchantRegion) {
+        this.merchantRegion = merchantRegion;
+    }
+
+    public List<String> getAllowedPaymentMethodRegions() {
+        return allowedPaymentMethodRegions;
+    }
+
+    public void setAllowedPaymentMethodRegions(List<String> allowedPaymentMethodRegions) {
+        this.allowedPaymentMethodRegions = allowedPaymentMethodRegions;
     }
 
     @Override

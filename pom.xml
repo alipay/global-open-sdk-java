@@ -4,7 +4,7 @@
     <groupId>com.alipay.global.sdk</groupId>
     <artifactId>global-open-sdk-java</artifactId>
     <packaging>jar</packaging>
-    <version>2.0.8</version>
+    <version>2.0.10</version>
     <name>global-open-sdk-java</name>
     <url>https://github.com/alipay/global-open-sdk-java</url>
     <description>
@@ -67,7 +67,7 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.76</version>
+            <version>1.2.83</version>
         </dependency>
     </dependencies>
 
@@ -89,8 +89,7 @@
                 <version>2.3.2</version>
                 <configuration>
                     <excludes>
-                        <exclude>**/api/example/*</exclude>
-                        <exclude>**/api/example/model/*</exclude>
+                        <exclude>**/api/example/**</exclude>
                     </excludes>
                 </configuration>
             </plugin>

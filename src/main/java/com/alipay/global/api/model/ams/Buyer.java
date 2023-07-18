@@ -6,6 +6,7 @@ public class Buyer {
     private UserName   buyerName;
     private String     buyerPhoneNo;
     private String     buyerEmail;
+    private String     buyerRegistrationTime;
 
     public String getReferenceBuyerId() {
         return referenceBuyerId;
@@ -37,5 +38,13 @@ public class Buyer {
 
     public void setBuyerEmail(String buyerEmail) {
         this.buyerEmail = buyerEmail;
+    }
+
+    public String getBuyerRegistrationTime() {
+        return buyerRegistrationTime;
+    }
+
+    public void setBuyerRegistrationTime(String buyerRegistrationTime) {
+        this.buyerRegistrationTime = buyerRegistrationTime;
     }
 }

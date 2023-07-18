@@ -1,19 +1,52 @@
-package com.alipay.global.api.response.ams.pay;
+package com.alipay.global.api.request.ams.notify;
 
 import com.alipay.global.api.model.ams.Amount;
 import com.alipay.global.api.model.ams.Quote;
-import com.alipay.global.api.response.AlipayResponse;
 
-public class AlipayRefundResponse extends AlipayResponse {
+public class AlipayRefundNotify extends AlipayNotify{
 
+    /**
+     * Indicates the refund result. SUCCESS/FAIL
+     */
+    private String refundStatus;
+
+    /**
+     * The unique ID assigned by a merchant to identify a refund request
+     */
     private String refundRequestId;
+
+    /**
+     * The unique ID that is assigned by Alipay to identify a refund. A one-to-one correspondence between paymentId and paymentRequestId exists
+     */
     private String refundId;
-    private String paymentId;
+
+    /**
+     * The refund amount that is initiated by the merchant
+     */
     private Amount refundAmount;
+
+    /**
+     * The date and time when the refund reaches a final state of success or failure
+     */
     private String refundTime;
-    private Amount refundNonGuaranteeCouponAmount;
+
+    /**
+     * The refund settlement amount, which equals the refund amount multiplied by the value of settlementQuote
+     */
     private Amount grossSettlementAmount;
-    private Quote  settlementQuote;
+
+    /**
+     * The exchange rate between the settlement currency and transaction currency
+     */
+    private Quote settlementQuote;
+
+    public String getRefundStatus() {
+        return refundStatus;
+    }
+
+    public void setRefundStatus(String refundStatus) {
+        this.refundStatus = refundStatus;
+    }
 
     public String getRefundRequestId() {
         return refundRequestId;
@@ -31,14 +64,6 @@ public class AlipayRefundResponse extends AlipayResponse {
         this.refundId = refundId;
     }
 
-    public String getPaymentId() {
-        return paymentId;
-    }
-
-    public void setPaymentId(String paymentId) {
-        this.paymentId = paymentId;
-    }
-
     public Amount getRefundAmount() {
         return refundAmount;
     }
@@ -53,14 +78,6 @@ public class AlipayRefundResponse extends AlipayResponse {
 
     public void setRefundTime(String refundTime) {
         this.refundTime = refundTime;
-    }
-
-    public Amount getRefundNonGuaranteeCouponAmount() {
-        return refundNonGuaranteeCouponAmount;
-    }
-
-    public void setRefundNonGuaranteeCouponAmount(Amount refundNonGuaranteeCouponAmount) {
-        this.refundNonGuaranteeCouponAmount = refundNonGuaranteeCouponAmount;
     }
 
     public Amount getGrossSettlementAmount() {

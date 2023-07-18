@@ -10,6 +10,7 @@ public class AlipayCaptureResponse  extends AlipayResponse {
     private String  paymentId;
     private Amount  captureAmount;
     private String  captureTime;
+    private String  acquirerReferenceNo;
 
     public String getCaptureRequestId() {
         return captureRequestId;
@@ -49,5 +50,13 @@ public class AlipayCaptureResponse  extends AlipayResponse {
 
     public void setCaptureTime(String captureTime) {
         this.captureTime = captureTime;
+    }
+
+    public String getAcquirerReferenceNo() {
+        return acquirerReferenceNo;
+    }
+
+    public void setAcquirerReferenceNo(String acquirerReferenceNo) {
+        this.acquirerReferenceNo = acquirerReferenceNo;
     }
 }

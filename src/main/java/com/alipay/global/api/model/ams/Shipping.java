@@ -7,6 +7,8 @@ public class Shipping {
     private String   shippingCarrier;
     private String   shippingPhoneNo;
 
+    private String   shipToEmail;
+
     public UserName getShippingName() {
         return shippingName;
     }
@@ -37,5 +39,13 @@ public class Shipping {
 
     public void setShippingPhoneNo(String shippingPhoneNo) {
         this.shippingPhoneNo = shippingPhoneNo;
+    }
+
+    public String getShipToEmail() {
+        return shipToEmail;
+    }
+
+    public void setShipToEmail(String shipToEmail) {
+        this.shipToEmail = shipToEmail;
     }
 }

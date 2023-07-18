@@ -1,13 +1,21 @@
 package com.alipay.global.api.request.ams.pay;
 
-import com.alipay.global.api.model.ams.*;
+import com.alipay.global.api.model.ams.AgreementInfo;
+import com.alipay.global.api.model.ams.Amount;
+import com.alipay.global.api.model.ams.CreditPayPlan;
+import com.alipay.global.api.model.ams.Env;
+import com.alipay.global.api.model.ams.Order;
+import com.alipay.global.api.model.ams.PaymentFactor;
+import com.alipay.global.api.model.ams.PaymentMethod;
+import com.alipay.global.api.model.ams.ProductCodeType;
+import com.alipay.global.api.model.ams.SettlementStrategy;
 import com.alipay.global.api.request.AlipayRequest;
-import com.alipay.global.api.response.ams.pay.AlipayPayResponse;
+import com.alipay.global.api.response.ams.pay.AlipayPaymentSessionResponse;
 
-public class AlipayPayRequest extends AlipayRequest<AlipayPayResponse> {
+public class AlipayPaymentSessionRequest extends AlipayRequest<AlipayPaymentSessionResponse> {
 
     /**
-     * Represents the payment product that is being used.
+     * Represents the payment product that is being used. The fixed value is CASHIER_PAYMENT
      */
     private ProductCodeType         productCode;
 
@@ -32,9 +40,9 @@ public class AlipayPayRequest extends AlipayRequest<AlipayPayResponse> {
     private PaymentMethod           paymentMethod;
 
     /**
-     * The specific time after which the payment will expire
+     *  The exipry time of paymentSession
      */
-    private String                  paymentExpiryTime;
+    private String                  paymentSessionExpiryTime;
 
     /**
      * The merchant page URL that the user is redirected to after the payment is completed
@@ -52,7 +60,7 @@ public class AlipayPayRequest extends AlipayRequest<AlipayPayResponse> {
     private PaymentFactor           paymentFactor;
 
     /**
-     * The settlement strategy for the payment request.
+     * The settlement strategy for the payment request
      */
     private SettlementStrategy      settlementStrategy;
 
@@ -62,49 +70,23 @@ public class AlipayPayRequest extends AlipayRequest<AlipayPayResponse> {
     private CreditPayPlan           creditPayPlan;
 
     /**
-     * The unique ID that is assigned by Alipay to identify the mini program
-     */
-    private String                  appId;
-
-    /**
      * The country or region where the merchant operates the business
      */
     private String                  merchantRegion;
 
     /**
-     * A 2-letter country or region code based on the standard of ISO 3166 Country Codes. This parameter is used to sort Alipay+ payment methods according to the user's region
-     */
-    private String                  userRegion;
-
-    /**
-     * Information about the environment where the order is placed, such as the device information
+     * Information about the environment where the order is placed
      */
     private Env                     env;
 
-    private PaymentMethod           payToMethod;
+    /**
+     * Authorization information about Easy Pay payments
+     */
+    private AgreementInfo           agreementInfo;
 
-    private Boolean                 isAuthorization;
-
-    private Merchant                merchant;
-
-    private PaymentVerificationData paymentVerificationData;
-
-    private String                  extendInfo;
-
-    public String getAppId() {
-        return appId;
-    }
-
-    public void setAppId(String appId) {
-        this.appId = appId;
-    }
-
-    public String getMerchantRegion() {
-        return merchantRegion;
-    }
-
-    public void setMerchantRegion(String merchantRegion) {
-        this.merchantRegion = merchantRegion;
+    @Override
+    public Class<AlipayPaymentSessionResponse> getResponseClass() {
+        return AlipayPaymentSessionResponse.class;
     }
 
     public ProductCodeType getProductCode() {
@@ -139,14 +121,6 @@ public class AlipayPayRequest extends AlipayRequest<AlipayPayResponse> {
         this.paymentAmount = paymentAmount;
     }
 
-    public PaymentMethod getPayToMethod() {
-        return payToMethod;
-    }
-
-    public void setPayToMethod(PaymentMethod payToMethod) {
-        this.payToMethod = payToMethod;
-    }
-
     public PaymentMethod getPaymentMethod() {
         return paymentMethod;
     }
@@ -155,12 +129,12 @@ public class AlipayPayRequest extends AlipayRequest<AlipayPayResponse> {
         this.paymentMethod = paymentMethod;
     }
 
-    public String getPaymentExpiryTime() {
-        return paymentExpiryTime;
+    public String getPaymentSessionExpiryTime() {
+        return paymentSessionExpiryTime;
     }
 
-    public void setPaymentExpiryTime(String paymentExpiryTime) {
-        this.paymentExpiryTime = paymentExpiryTime;
+    public void setPaymentSessionExpiryTime(String paymentSessionExpiryTime) {
+        this.paymentSessionExpiryTime = paymentSessionExpiryTime;
     }
 
     public String getPaymentRedirectUrl() {
@@ -179,36 +153,12 @@ public class AlipayPayRequest extends AlipayRequest<AlipayPayResponse> {
         this.paymentNotifyUrl = paymentNotifyUrl;
     }
 
-    public Boolean getIsAuthorization() {
-        return isAuthorization;
-    }
-
-    public void setIsAuthorization(Boolean isAuthorization) {
-        this.isAuthorization = isAuthorization;
-    }
-
-    public PaymentVerificationData getPaymentVerificationData() {
-        return paymentVerificationData;
-    }
-
-    public void setPaymentVerificationData(PaymentVerificationData paymentVerificationData) {
-        this.paymentVerificationData = paymentVerificationData;
-    }
-
     public PaymentFactor getPaymentFactor() {
         return paymentFactor;
     }
 
     public void setPaymentFactor(PaymentFactor paymentFactor) {
         this.paymentFactor = paymentFactor;
-    }
-
-    public Merchant getMerchant() {
-        return merchant;
-    }
-
-    public void setMerchant(Merchant merchant) {
-        this.merchant = merchant;
     }
 
     public SettlementStrategy getSettlementStrategy() {
@@ -219,14 +169,6 @@ public class AlipayPayRequest extends AlipayRequest<AlipayPayResponse> {
         this.settlementStrategy = settlementStrategy;
     }
 
-    public String getExtendInfo() {
-        return extendInfo;
-    }
-
-    public void setExtendInfo(String extendInfo) {
-        this.extendInfo = extendInfo;
-    }
-
     public CreditPayPlan getCreditPayPlan() {
         return creditPayPlan;
     }
@@ -235,12 +177,12 @@ public class AlipayPayRequest extends AlipayRequest<AlipayPayResponse> {
         this.creditPayPlan = creditPayPlan;
     }
 
-    public String getUserRegion() {
-        return userRegion;
+    public String getMerchantRegion() {
+        return merchantRegion;
     }
 
-    public void setUserRegion(String userRegion) {
-        this.userRegion = userRegion;
+    public void setMerchantRegion(String merchantRegion) {
+        this.merchantRegion = merchantRegion;
     }
 
     public Env getEnv() {
@@ -251,9 +193,11 @@ public class AlipayPayRequest extends AlipayRequest<AlipayPayResponse> {
         this.env = env;
     }
 
-    @Override
-    public Class<AlipayPayResponse> getResponseClass() {
-        return AlipayPayResponse.class;
+    public AgreementInfo getAgreementInfo() {
+        return agreementInfo;
     }
 
+    public void setAgreementInfo(AgreementInfo agreementInfo) {
+        this.agreementInfo = agreementInfo;
+    }
 }

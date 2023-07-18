@@ -8,6 +8,8 @@ public class Goods {
     private Amount goodsUnitAmount;
     private String goodsQuantity;
     private String goodsSkuName;
+    private String goodsUrl;
+    private String deliveryMethodType;
 
     public String getReferenceGoodsId() {
         return referenceGoodsId;
@@ -63,5 +65,21 @@ public class Goods {
 
     public void setGoodsSkuName(String goodsSkuName) {
         this.goodsSkuName = goodsSkuName;
+    }
+
+    public String getGoodsUrl() {
+        return goodsUrl;
+    }
+
+    public void setGoodsUrl(String goodsUrl) {
+        this.goodsUrl = goodsUrl;
+    }
+
+    public String getDeliveryMethodType() {
+        return deliveryMethodType;
+    }
+
+    public void setDeliveryMethodType(String deliveryMethodType) {
+        this.deliveryMethodType = deliveryMethodType;
     }
 }

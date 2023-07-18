@@ -9,14 +9,19 @@ public class PaymentOption {
 
     private String                       paymentMethodType;
     private PaymentMethodCategoryType    paymentMethodCategory;
+    private List<String>                 paymentMethodRegion;
     private boolean                      enabled;
     private boolean                      preferred;
     private String                       disableReason;
     private Map<String, AmountLimitInfo> amountLimitInfoMap;
-    private List<String>                 supportedCurrencies;
-    private String                       paymentOptionDetail;
-    private String                       extendInfo;
+    private List<String>        supportedCurrencies;
+    private PaymentOptionDetail paymentOptionDetail;
+    private String              extendInfo;
     private Logo                         logo;
+    private List<String>                 promoNames;
+
+    private Installment                  installment;
+
     public String getPaymentMethodType() {
         return paymentMethodType;
     }
@@ -73,14 +78,6 @@ public class PaymentOption {
         this.supportedCurrencies = supportedCurrencies;
     }
 
-    public String getPaymentOptionDetail() {
-        return paymentOptionDetail;
-    }
-
-    public void setPaymentOptionDetail(String paymentOptionDetail) {
-        this.paymentOptionDetail = paymentOptionDetail;
-    }
-
     public String getExtendInfo() {
         return extendInfo;
     }
@@ -95,5 +92,37 @@ public class PaymentOption {
 
     public void setLogo(Logo logo) {
         this.logo = logo;
+    }
+
+    public List<String> getPaymentMethodRegion() {
+        return paymentMethodRegion;
+    }
+
+    public void setPaymentMethodRegion(List<String> paymentMethodRegion) {
+        this.paymentMethodRegion = paymentMethodRegion;
+    }
+
+    public List<String> getPromoNames() {
+        return promoNames;
+    }
+
+    public void setPromoNames(List<String> promoNames) {
+        this.promoNames = promoNames;
+    }
+
+    public PaymentOptionDetail getPaymentOptionDetail() {
+        return paymentOptionDetail;
+    }
+
+    public void setPaymentOptionDetail(PaymentOptionDetail paymentOptionDetail) {
+        this.paymentOptionDetail = paymentOptionDetail;
+    }
+
+    public Installment getInstallment() {
+        return installment;
+    }
+
+    public void setInstallment(Installment installment) {
+        this.installment = installment;
     }
 }

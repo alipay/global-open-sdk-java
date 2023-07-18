@@ -13,20 +13,25 @@ public class AlipayPayQueryResponse extends AlipayResponse {
     private String                paymentRequestId;
     private String                paymentId;
     private String                authPaymentId;
-    private Amount paymentAmount;
+    private Amount                paymentAmount;
     private Amount                actualPaymentAmount;
-    private Quote paymentQuote;
+    private Quote                 paymentQuote;
     private String                authExpiryTime;
     private String                paymentCreateTime;
     private String                paymentTime;
     private Amount                nonGuaranteeCouponAmount;
-    private PspCustomerInfo pspCustomerInfo;
-    private RedirectActionForm redirectActionForm;
+    private PspCustomerInfo       pspCustomerInfo;
+    private RedirectActionForm    redirectActionForm;
+
+    private CardInfo              cardInfo;
+
+    private String                acquirerReferenceNo;
     private String                extendInfo;
     private List<Transaction>     transactions;
     private Amount                customsDeclarationAmount;
     private Amount                grossSettlementAmount;
     private Quote                 settlementQuote;
+    private PaymentResultInfo     paymentResultInfo;
 
     public Amount getCustomsDeclarationAmount() {
         return customsDeclarationAmount;
@@ -188,4 +193,27 @@ public class AlipayPayQueryResponse extends AlipayResponse {
         this.transactions = transactions;
     }
 
+    public CardInfo getCardInfo() {
+        return cardInfo;
+    }
+
+    public void setCardInfo(CardInfo cardInfo) {
+        this.cardInfo = cardInfo;
+    }
+
+    public String getAcquirerReferenceNo() {
+        return acquirerReferenceNo;
+    }
+
+    public void setAcquirerReferenceNo(String acquirerReferenceNo) {
+        this.acquirerReferenceNo = acquirerReferenceNo;
+    }
+
+    public PaymentResultInfo getPaymentResultInfo() {
+        return paymentResultInfo;
+    }
+
+    public void setPaymentResultInfo(PaymentResultInfo paymentResultInfo) {
+        this.paymentResultInfo = paymentResultInfo;
+    }
 }
