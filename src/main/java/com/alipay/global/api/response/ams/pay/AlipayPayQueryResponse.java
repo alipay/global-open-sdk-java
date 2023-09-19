@@ -33,6 +33,8 @@ public class AlipayPayQueryResponse extends AlipayResponse {
     private Quote                 settlementQuote;
     private PaymentResultInfo     paymentResultInfo;
 
+    private AcquirerInfo        acquirerInfo;
+
     public Amount getCustomsDeclarationAmount() {
         return customsDeclarationAmount;
     }
@@ -215,5 +217,13 @@ public class AlipayPayQueryResponse extends AlipayResponse {
 
     public void setPaymentResultInfo(PaymentResultInfo paymentResultInfo) {
         this.paymentResultInfo = paymentResultInfo;
+    }
+
+    public AcquirerInfo getAcquirerInfo() {
+        return acquirerInfo;
+    }
+
+    public void setAcquirerInfo(AcquirerInfo acquirerInfo) {
+        this.acquirerInfo = acquirerInfo;
     }
 }

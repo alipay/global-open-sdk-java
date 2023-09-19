@@ -8,6 +8,10 @@ public class Buyer {
     private String     buyerEmail;
     private String     buyerRegistrationTime;
 
+    private Boolean    isAccountVerified;
+
+    private Integer    successfulOrderCount;
+
     public String getReferenceBuyerId() {
         return referenceBuyerId;
     }
@@ -46,5 +50,21 @@ public class Buyer {
 
     public void setBuyerRegistrationTime(String buyerRegistrationTime) {
         this.buyerRegistrationTime = buyerRegistrationTime;
+    }
+
+    public Boolean getAccountVerified() {
+        return isAccountVerified;
+    }
+
+    public void setAccountVerified(Boolean accountVerified) {
+        isAccountVerified = accountVerified;
+    }
+
+    public Integer getSuccessfulOrderCount() {
+        return successfulOrderCount;
+    }
+
+    public void setSuccessfulOrderCount(Integer successfulOrderCount) {
+        this.successfulOrderCount = successfulOrderCount;
     }
 }
