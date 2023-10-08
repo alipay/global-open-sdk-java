@@ -16,11 +16,11 @@ import java.util.Map;
 
 public abstract class BaseAlipayClient implements AlipayClient{
 
-    private static final Integer DEFULT_KEY_VERSION = 1;
+    private static final Integer DEFAULT_KEY_VERSION = 1;
     /**
      * eg:https://open-na.alipay.com
      */
-    private String gatewayUrl;
+    private String               gatewayUrl;
     /**
      * merchants private key
      */
@@ -103,11 +103,11 @@ public abstract class BaseAlipayClient implements AlipayClient{
         return alipayResponse;
     }
 
-    private String genSignValue(String httpMethod, String path, String clientId, String requestTime, String reqBody)throws AlipayApiException{
+    private String genSignValue(String httpMethod, String path, String clientId, String requestTime, String reqBody) throws AlipayApiException {
         String signatureValue;
-        try{
+        try {
             signatureValue = SignatureTool.sign(httpMethod, path, clientId, requestTime, reqBody, merchantPrivateKey);
-        } catch(Exception e){
+        } catch (Exception e) {
             throw new AlipayApiException(e);
         }
         return signatureValue;
@@ -167,13 +167,21 @@ public abstract class BaseAlipayClient implements AlipayClient{
 
     }
 
+    /**
+     * Generate required headers
+     * @param requestTime
+     * @param clientId
+     * @param keyVersion
+     * @param signatureValue
+     * @return
+     */
     private Map<String,String> buildBaseHeader(String requestTime, String clientId, Integer keyVersion, String signatureValue){
         Map<String, String> header = new HashMap<String, String>();
         header.put(Constants.CONTENT_TYPE_HEADER, "application/json; charset=UTF-8");
         header.put(Constants.REQ_TIME_HEADER, requestTime);
         header.put(Constants.CLIENT_ID_HEADER, clientId);
         if(keyVersion == null){
-            keyVersion = DEFULT_KEY_VERSION;
+            keyVersion = DEFAULT_KEY_VERSION;
         }
         String signatureHeader = "algorithm=RSA256,keyVersion=" + keyVersion + ",signature=" + signatureValue;
         header.put(Constants.REQ_SIGN_HEADER, signatureHeader);
