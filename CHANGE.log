@@ -61,3 +61,6 @@ Upgrade the fastjson version to 1.2.83
 
 16、Version:2.0.10
 Fix useless example class problem
+
+11、Version:2.0.11
+Add POP Parameters
