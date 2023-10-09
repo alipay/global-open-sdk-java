@@ -1,5 +1,6 @@
 package com.alipay.global.api.request.ams.notify;
 
+import com.alipay.global.api.model.ams.AcquirerInfo;
 import com.alipay.global.api.model.ams.Amount;
 
 public class AlipayCaptureResultNotify extends AlipayNotify{
@@ -33,6 +34,11 @@ public class AlipayCaptureResultNotify extends AlipayNotify{
      * The unique ID assigned by the non-Alipay acquirer for the transaction
      */
     private String acquirerReferenceNo;
+
+    /**
+     * The information of the acquirer that processes the payment.
+     */
+    private AcquirerInfo acquirerInfo;
 
 
     public String getCaptureRequestId() {
@@ -81,5 +87,13 @@ public class AlipayCaptureResultNotify extends AlipayNotify{
 
     public void setAcquirerReferenceNo(String acquirerReferenceNo) {
         this.acquirerReferenceNo = acquirerReferenceNo;
+    }
+
+    public AcquirerInfo getAcquirerInfo() {
+        return acquirerInfo;
+    }
+
+    public void setAcquirerInfo(AcquirerInfo acquirerInfo) {
+        this.acquirerInfo = acquirerInfo;
     }
 }

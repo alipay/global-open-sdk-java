@@ -12,6 +12,8 @@ public class Transaction {
     private String                transactionRequestId;
     private String                transactionTime;
 
+    private AcquirerInfo          acquirerInfo;
+
     public Result getTransactionResult() {
         return transactionResult;
     }
@@ -68,4 +70,11 @@ public class Transaction {
         this.transactionTime = transactionTime;
     }
 
+    public AcquirerInfo getAcquirerInfo() {
+        return acquirerInfo;
+    }
+
+    public void setAcquirerInfo(AcquirerInfo acquirerInfo) {
+        this.acquirerInfo = acquirerInfo;
+    }
 }

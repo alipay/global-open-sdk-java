@@ -1,5 +1,6 @@
 package com.alipay.global.api.response.ams.pay;
 
+import com.alipay.global.api.model.ams.AcquirerInfo;
 import com.alipay.global.api.model.ams.Amount;
 import com.alipay.global.api.model.ams.Quote;
 import com.alipay.global.api.response.AlipayResponse;
@@ -14,6 +15,7 @@ public class AlipayRefundResponse extends AlipayResponse {
     private Amount refundNonGuaranteeCouponAmount;
     private Amount grossSettlementAmount;
     private Quote  settlementQuote;
+    private AcquirerInfo acquirerInfo;
 
     public String getRefundRequestId() {
         return refundRequestId;
@@ -77,5 +79,13 @@ public class AlipayRefundResponse extends AlipayResponse {
 
     public void setSettlementQuote(Quote settlementQuote) {
         this.settlementQuote = settlementQuote;
+    }
+
+    public AcquirerInfo getAcquirerInfo() {
+        return acquirerInfo;
+    }
+
+    public void setAcquirerInfo(AcquirerInfo acquirerInfo) {
+        this.acquirerInfo = acquirerInfo;
     }
 }

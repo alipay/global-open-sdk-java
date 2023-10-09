@@ -1,5 +1,6 @@
 package com.alipay.global.api.request.ams.notify;
 
+import com.alipay.global.api.model.ams.AcquirerInfo;
 import com.alipay.global.api.model.ams.Amount;
 import com.alipay.global.api.model.ams.PaymentResultInfo;
 import com.alipay.global.api.model.ams.PspCustomerInfo;
@@ -61,6 +62,11 @@ public class AlipayPayResultNotify extends AlipayNotify{
      * The payment result information
      */
     private PaymentResultInfo paymentResultInfo;
+
+    /**
+     * The information of the acquirer that processes the payment.
+     */
+    private AcquirerInfo acquirerInfo;
 
     public String getPaymentTime() {
         return paymentTime;
@@ -149,5 +155,13 @@ public class AlipayPayResultNotify extends AlipayNotify{
 
     public void setPaymentResultInfo(PaymentResultInfo paymentResultInfo) {
         this.paymentResultInfo = paymentResultInfo;
+    }
+
+    public AcquirerInfo getAcquirerInfo() {
+        return acquirerInfo;
+    }
+
+    public void setAcquirerInfo(AcquirerInfo acquirerInfo) {
+        this.acquirerInfo = acquirerInfo;
     }
 }

@@ -8,6 +8,7 @@ import com.alipay.global.api.model.ams.Order;
 import com.alipay.global.api.model.ams.PaymentFactor;
 import com.alipay.global.api.model.ams.PaymentMethod;
 import com.alipay.global.api.model.ams.ProductCodeType;
+import com.alipay.global.api.model.ams.RiskData;
 import com.alipay.global.api.model.ams.SettlementStrategy;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.pay.AlipayPaymentSessionResponse;
@@ -83,6 +84,11 @@ public class AlipayPaymentSessionRequest extends AlipayRequest<AlipayPaymentSess
      * Authorization information about Easy Pay payments
      */
     private AgreementInfo           agreementInfo;
+
+    /**
+     * The data used by Ant Group for risk control purposes.
+     */
+    private RiskData                riskData;
 
     @Override
     public Class<AlipayPaymentSessionResponse> getResponseClass() {
@@ -199,5 +205,13 @@ public class AlipayPaymentSessionRequest extends AlipayRequest<AlipayPaymentSess
 
     public void setAgreementInfo(AgreementInfo agreementInfo) {
         this.agreementInfo = agreementInfo;
+    }
+
+    public RiskData getRiskData() {
+        return riskData;
+    }
+
+    public void setRiskData(RiskData riskData) {
+        this.riskData = riskData;
     }
 }
