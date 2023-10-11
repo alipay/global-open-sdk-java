@@ -1,6 +1,9 @@
 package com.alipay.global.api.request.ams.pay;
 
-public class AlipayVaultingSessionRequest {
+import com.alipay.global.api.request.AlipayRequest;
+import com.alipay.global.api.response.ams.pay.AlipayVaultingSessionResponse;
+
+public class AlipayVaultingSessionRequest extends AlipayRequest<AlipayVaultingSessionResponse> {
     private String paymentMethodType;
     private String vaultingRequestId;
     private String vaultingNotificationUrl;
@@ -36,5 +39,10 @@ public class AlipayVaultingSessionRequest {
 
     public void setRedirectUrl(String redirectUrl) {
         this.redirectUrl = redirectUrl;
+    }
+
+    @Override
+    public Class<AlipayVaultingSessionResponse> getResponseClass() {
+        return AlipayVaultingSessionResponse.class;
     }
 }

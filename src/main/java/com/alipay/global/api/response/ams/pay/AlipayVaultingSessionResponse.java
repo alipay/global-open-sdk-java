@@ -1,20 +1,12 @@
 package com.alipay.global.api.response.ams.pay;
 
 import com.alipay.global.api.model.Result;
+import com.alipay.global.api.response.AlipayResponse;
 
-public class AlipayVaultingSessionResponse {
-    private Result result;
+public class AlipayVaultingSessionResponse extends AlipayResponse {
     private String vaultingSessionData;
     private String vaultingSessionId;
     private String vaultingSessionExpiryTime;
-
-    public Result getResult() {
-        return result;
-    }
-
-    public void setResult(Result result) {
-        this.result = result;
-    }
 
     public String getVaultingSessionData() {
         return vaultingSessionData;
