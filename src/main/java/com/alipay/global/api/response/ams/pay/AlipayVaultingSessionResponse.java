@@ -1,6 +1,5 @@
 package com.alipay.global.api.response.ams.pay;
 
-import com.alipay.global.api.model.Result;
 import com.alipay.global.api.response.AlipayResponse;
 
 public class AlipayVaultingSessionResponse extends AlipayResponse {
