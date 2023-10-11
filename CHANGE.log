@@ -67,3 +67,6 @@ Add POP Parameters
 
 18、Version:2.0.12
 Add POP Risk Scene and vaulting session
+
+19、Version:2.0.13
+fix vaulting session bug
