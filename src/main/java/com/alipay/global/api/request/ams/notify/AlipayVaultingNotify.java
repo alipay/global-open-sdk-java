@@ -1,20 +1,16 @@
 package com.alipay.global.api.request.ams.notify;
 
 import com.alipay.global.api.model.Result;
+import com.alipay.global.api.model.ams.AcquirerInfo;
 import com.alipay.global.api.model.ams.VaultingPaymentMethodDetail;
 
-public class AlipayVaultingNotify {
-    private Result                      result;
+public class AlipayVaultingNotify extends AlipayNotify {
     private String                      vaultingRequestId;
     private VaultingPaymentMethodDetail paymentMethodDetail;
 
-    public Result getResult() {
-        return result;
-    }
+    private String vaultingCreateTime;
 
-    public void setResult(Result result) {
-        this.result = result;
-    }
+    private AcquirerInfo acquirerInfo;
 
     public String getVaultingRequestId() {
         return vaultingRequestId;
@@ -30,5 +26,21 @@ public class AlipayVaultingNotify {
 
     public void setPaymentMethodDetail(VaultingPaymentMethodDetail paymentMethodDetail) {
         this.paymentMethodDetail = paymentMethodDetail;
+    }
+
+    public String getVaultingCreateTime() {
+        return vaultingCreateTime;
+    }
+
+    public void setVaultingCreateTime(String vaultingCreateTime) {
+        this.vaultingCreateTime = vaultingCreateTime;
+    }
+
+    public AcquirerInfo getAcquirerInfo() {
+        return acquirerInfo;
+    }
+
+    public void setAcquirerInfo(AcquirerInfo acquirerInfo) {
+        this.acquirerInfo = acquirerInfo;
     }
 }

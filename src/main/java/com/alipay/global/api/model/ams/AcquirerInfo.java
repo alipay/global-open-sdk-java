@@ -7,10 +7,16 @@ package com.alipay.global.api.model.ams;
 public class AcquirerInfo {
 
     private String acquirerName;
-    private String acquirerResponseNo;
+
+    private String referenceRequestId;
+
+    private String acquirerTransactionId;
+
     private String acquirerMerchantId;
-    private String acquirerResponseCode;
-    private String acquirerResponseDescription;
+
+    private String acquirerResultCode;
+
+    private String acquirerResultMessage;
 
     public String getAcquirerName() {
         return acquirerName;
@@ -20,12 +26,20 @@ public class AcquirerInfo {
         this.acquirerName = acquirerName;
     }
 
-    public String getAcquirerResponseNo() {
-        return acquirerResponseNo;
+    public String getReferenceRequestId() {
+        return referenceRequestId;
     }
 
-    public void setAcquirerResponseNo(String acquirerResponseNo) {
-        this.acquirerResponseNo = acquirerResponseNo;
+    public void setReferenceRequestId(String referenceRequestId) {
+        this.referenceRequestId = referenceRequestId;
+    }
+
+    public String getAcquirerTransactionId() {
+        return acquirerTransactionId;
+    }
+
+    public void setAcquirerTransactionId(String acquirerTransactionId) {
+        this.acquirerTransactionId = acquirerTransactionId;
     }
 
     public String getAcquirerMerchantId() {
@@ -36,19 +50,19 @@ public class AcquirerInfo {
         this.acquirerMerchantId = acquirerMerchantId;
     }
 
-    public String getAcquirerResponseCode() {
-        return acquirerResponseCode;
+    public String getAcquirerResultCode() {
+        return acquirerResultCode;
     }
 
-    public void setAcquirerResponseCode(String acquirerResponseCode) {
-        this.acquirerResponseCode = acquirerResponseCode;
+    public void setAcquirerResultCode(String acquirerResultCode) {
+        this.acquirerResultCode = acquirerResultCode;
     }
 
-    public String getAcquirerResponseDescription() {
-        return acquirerResponseDescription;
+    public String getAcquirerResultMessage() {
+        return acquirerResultMessage;
     }
 
-    public void setAcquirerResponseDescription(String acquirerResponseDescription) {
-        this.acquirerResponseDescription = acquirerResponseDescription;
+    public void setAcquirerResultMessage(String acquirerResultMessage) {
+        this.acquirerResultMessage = acquirerResultMessage;
     }
 }
