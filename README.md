@@ -33,7 +33,7 @@ public static boolean verify(String httpMethod, String path, String clientId, St
  
 ```
   
-#### 3 The sample for ams and aps   
+#### 3 The sample for ams、aps、risk   
 
 AMS:
   
@@ -111,6 +111,68 @@ inquiryPaymentRequest.setPaymentRequestId("rtanhU9au6F3VEbvbVWRz");
 AlipayApsInquiryPaymentResponse alipayResponse = defaultAlipayClient.execute(inquiryPaymentRequest);
 
 ```  
+
+RISK:
+
+```
+AlipayClient defaultAlipayClient = new DefaultAlipayClient("https://open-sea-global.alipay.com", merchantPrivateKey, alipayPublicKey);
+
+RiskDecideRequest riskDecideRequest = new RiskDecideRequest();
+riskDecideRequest.setClientId("clietId");
+riskDecideRequest.setPath("/ams/api/v1/risk/payments/decide");
+riskDecideRequest.setReferenceTransactionId("test_referenceTransactionId");
+riskDecideRequest.setAuthorizationPhase(AuthorizationPhase.PRE_AUTHORIZATION);
+
+Order order = new Order();
+order.setReferenceOrderId("test_orderId");
+order.setOrderDescription("test_orderDesc");
+
+Amount orderAmount = new Amount();
+orderAmount.setCurrency("BRL");
+orderAmount.setValue("30000");
+order.setOrderAmount(orderAmount);
+
+Goods goods = new Goods();
+goods.setReferenceGoodsId("test_referenceGoodId");
+order.setGoods(Collections.singletonList(goods));
+
+Merchant merchant = new Merchant();
+merchant.setMerchantMCC("test_merchantMcc");
+merchant.setReferenceMerchantId("test_referenceMerchantId");
+order.setMerchant(merchant);
+riskDecideRequest.setOrders(Collections.singletonList(order));
+
+Buyer buyer = new Buyer();
+buyer.setReferenceBuyerId("test_reference_buyerId");
+buyer.setBuyerPhoneNo("test_phoneNo");
+buyer.setBuyerEmail("test@alipay.com");
+riskDecideRequest.setBuyer(buyer);
+
+Amount actualPaymentAmount = new Amount();
+actualPaymentAmount.setCurrency("BRL");
+actualPaymentAmount.setValue("300000");
+riskDecideRequest.setActualPaymentAmount(actualPaymentAmount);
+
+PaymentDetail paymentDetail = new PaymentDetail();
+Amount paymentAmount = new Amount();
+paymentAmount.setCurrency("BRL");
+paymentAmount.setValue("300000");
+paymentDetail.setAmount(paymentAmount);
+PaymentMethod paymentMethod = new PaymentMethod();
+paymentMethod.setPaymentMethodType("CARD");
+PaymentMethodMetaData paymentMethodMetaData = new PaymentMethodMetaData();
+paymentMethodMetaData.setCardNo("risk_testCardNo");
+paymentMethod.setPaymentMethodMetaData(paymentMethodMetaData);
+paymentDetail.setPaymentMethod(paymentMethod);
+riskDecideRequest.setPaymentDetails(Collections.singletonList(paymentDetail));
+
+Env env = new Env();
+env.setTerminalType(TerminalType.APP);
+env.setOsType(OsType.IOS);
+riskDecideRequest.setEnv(env);
+
+RiskDecideResponse response = defaultAlipayClient.execute(riskDecideRequest);
+```
   
 The execute method contains the HTTP request to the gateway. 
 
