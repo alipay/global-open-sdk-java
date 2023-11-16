@@ -5,6 +5,7 @@
 package com.alipay.global.api.request.ams.risk;
 
 import com.alipay.global.api.model.ams.CardVerificationResult;
+import com.alipay.global.api.model.risk.AuthorizationError;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.risk.SendPaymentResultResponse;
 
@@ -31,7 +32,7 @@ public class SendPaymentResultRequest extends AlipayRequest<SendPaymentResultRes
      * The reason why the card payment authorization provided by the payment method provider failed.
      * 支付方式提供商提供的卡支付授权失败的原因。
      */
-    private Error                  authorizationError;
+    private AuthorizationError     authorizationError;
     /**
      * The result of the verification of the card payment method.
      * 卡支付方式的验证结果。
@@ -59,11 +60,11 @@ public class SendPaymentResultRequest extends AlipayRequest<SendPaymentResultRes
         this.paymentStatus = paymentStatus;
     }
 
-    public Error getAuthorizationError() {
+    public AuthorizationError getAuthorizationError() {
         return authorizationError;
     }
 
-    public void setAuthorizationError(Error authorizationError) {
+    public void setAuthorizationError(AuthorizationError authorizationError) {
         this.authorizationError = authorizationError;
     }
 

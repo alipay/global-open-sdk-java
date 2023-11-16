@@ -76,3 +76,6 @@ risk sdk init
 
 21、Version:2.0.15
 fix paymentResultInfo lack 3dsparam set/get method problem
+
+22、Version:2.0.16
+fix risk authorizationError object
