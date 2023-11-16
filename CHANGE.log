@@ -73,3 +73,6 @@ fix vaulting session bug
 
 20、Version:2.0.14
 risk sdk init
+
+21、Version:2.0.15
+fix paymentResultInfo lack 3dsparam set/get method problem

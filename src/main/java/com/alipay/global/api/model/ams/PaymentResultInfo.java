@@ -123,4 +123,12 @@ public class PaymentResultInfo {
     public void setPaymentMethodRegion(String paymentMethodRegion) {
         this.paymentMethodRegion = paymentMethodRegion;
     }
+
+    public ThreeDSResult getThreeDSResult() {
+        return threeDSResult;
+    }
+
+    public void setThreeDSResult(ThreeDSResult threeDSResult) {
+        this.threeDSResult = threeDSResult;
+    }
 }
