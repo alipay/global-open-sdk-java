@@ -78,4 +78,10 @@ risk sdk init
 fix paymentResultInfo lack 3dsparam set/get method problem
 
 22、Version:2.0.16
+modfiy vaultingNotify, add bin/issuerName param
+
+23、Version:2.0.17
+modify vaultingSessionRequest, add merchantRegion param
+
+24、Version:2.0.18
 fix risk authorizationError object

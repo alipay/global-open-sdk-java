@@ -2,7 +2,9 @@ package com.alipay.global.api.model.ams;
 
 public class VaultingCard {
     private String cardToken;
+
     private String lastFour;
+
     private String brand;
 
     private String expiryMonth;
@@ -18,6 +20,10 @@ public class VaultingCard {
     private String issuingCountry;
 
     private String funding;
+
+    private String bin;
+
+    private String issuerName;
 
     public String getCardToken() {
         return cardToken;
@@ -97,5 +103,21 @@ public class VaultingCard {
 
     public void setFunding(String funding) {
         this.funding = funding;
+    }
+
+    public String getBin() {
+        return bin;
+    }
+
+    public void setBin(String bin) {
+        this.bin = bin;
+    }
+
+    public String getIssuerName() {
+        return issuerName;
+    }
+
+    public void setIssuerName(String issuerName) {
+        this.issuerName = issuerName;
     }
 }
