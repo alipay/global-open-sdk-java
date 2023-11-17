@@ -4,10 +4,16 @@ import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.pay.AlipayVaultingSessionResponse;
 
 public class AlipayVaultingSessionRequest extends AlipayRequest<AlipayVaultingSessionResponse> {
+
     private String paymentMethodType;
+
     private String vaultingRequestId;
+
     private String vaultingNotificationUrl;
+
     private String redirectUrl;
+
+    private String merchantRegion;
 
     public String getPaymentMethodType() {
         return paymentMethodType;
@@ -39,6 +45,14 @@ public class AlipayVaultingSessionRequest extends AlipayRequest<AlipayVaultingSe
 
     public void setRedirectUrl(String redirectUrl) {
         this.redirectUrl = redirectUrl;
+    }
+
+    public String getMerchantRegion() {
+        return merchantRegion;
+    }
+
+    public void setMerchantRegion(String merchantRegion) {
+        this.merchantRegion = merchantRegion;
     }
 
     @Override
