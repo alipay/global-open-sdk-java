@@ -36,5 +36,7 @@ public enum CustomerBelongsTo {
 
     NAVERPAY,
 
+    JKOPAY,
+
     ZALOPAY;
 }
