@@ -85,3 +85,6 @@ modify vaultingSessionRequest, add merchantRegion param
 
 24、Version:2.0.18
 fix risk authorizationError object
+
+25、Version:2.0.19
+add wallet paymentMethod

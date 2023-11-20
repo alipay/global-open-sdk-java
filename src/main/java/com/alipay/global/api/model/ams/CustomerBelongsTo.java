@@ -36,5 +36,11 @@ public enum CustomerBelongsTo {
 
     NAVERPAY,
 
+    JKOPAY,
+
+    DIRECT_DEBIT_SIAMCOMMERCIALBANK,
+
+    DIRECT_DEBIT_KRUNGTHAIBANK,
+
     ZALOPAY;
 }
