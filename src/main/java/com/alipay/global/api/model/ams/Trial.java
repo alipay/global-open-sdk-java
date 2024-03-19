@@ -1,9 +1,5 @@
 package com.alipay.global.api.model.ams;
 
-/**
- * @Author yanhong
- * @version $Id: Trial.java, v 0.1 2024年03月19日 3:49 PM yanhong Exp $
- **/
 public class Trial {
 
     private Integer trialStartPeriod;

@@ -12,10 +12,7 @@ import com.alipay.global.api.response.ams.subscription.AlipaySubscriptionCreateR
 
 import java.util.List;
 
-/**
- * @Author yanhong
- * @version $Id: AlipaySubScriptionCreateRequest.java, v 0.1 2024年03月19日 3:34 PM yanhong Exp $
- **/
+
 public class AlipaySubscriptionCreateRequest extends AlipayRequest<AlipaySubscriptionCreateResponse> {
 
     /**

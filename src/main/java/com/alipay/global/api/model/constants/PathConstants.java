@@ -1,12 +1,7 @@
 package com.alipay.global.api.model.constants;
 
-/**
- * @Author yanhong
- * @version $Id: PathConstants.java, v 0.1 2024年03月14日 4:22 PM yanhong Exp $
- **/
+
 public class PathConstants {
-
-
 
     public static final String PAY_PROD_PATH="/ams/api/v1/payments/pay";
     public static final String REFUND_PROD_PATH="/ams/api/v1/payments/refund";

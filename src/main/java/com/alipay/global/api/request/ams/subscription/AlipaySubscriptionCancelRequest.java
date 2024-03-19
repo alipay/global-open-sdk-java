@@ -3,10 +3,6 @@ package com.alipay.global.api.request.ams.subscription;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.subscription.AlipaySubscriptionCancelResponse;
 
-/**
- * @Author yanhong
- * @version $Id: AlipaySubscriptionCancelRequest.java, v 0.1 2024年03月19日 4:06 PM yanhong Exp $
- **/
 public class AlipaySubscriptionCancelRequest extends AlipayRequest<AlipaySubscriptionCancelResponse> {
 
     /**

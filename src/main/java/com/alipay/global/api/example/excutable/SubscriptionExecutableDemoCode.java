@@ -19,10 +19,6 @@ import com.alipay.global.api.response.ams.subscription.AlipaySubscriptionCreateR
 
 import java.util.UUID;
 
-/**
- * @Author yanhong
- * @version $Id: SubscriptionExecutableDemoCode.java, v 0.1 2024年03月19日 4:11 PM yanhong Exp $
- **/
 public class SubscriptionExecutableDemoCode {
 
 

@@ -6,10 +6,6 @@ import com.alipay.global.api.model.ams.PeriodRule;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.subscription.AlipaySubscriptionChangeResponse;
 
-/**
- * @Author yanhong
- * @version $Id: AlipaySubscriptionChangeRequest.java, v 0.1 2024年03月19日 3:54 PM yanhong Exp $
- **/
 public class AlipaySubscriptionChangeRequest extends AlipayRequest<AlipaySubscriptionChangeResponse> {
 
     /**

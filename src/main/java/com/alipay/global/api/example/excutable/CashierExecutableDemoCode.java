@@ -21,10 +21,7 @@ import com.alipay.global.api.response.ams.pay.AlipayPayResponse;
 
 import java.util.UUID;
 
-/**
- * @Author yanhong
- * @version $Id: CashierSampleCode.java, v 0.1 2024年03月14日 4:30 PM yanhong Exp $
- **/
+
 public class CashierExecutableDemoCode {
 
 

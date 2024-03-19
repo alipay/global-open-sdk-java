@@ -16,10 +16,6 @@ import com.alipay.global.api.response.ams.pay.AlipayPaymentSessionResponse;
 
 import java.util.UUID;
 
-/**
- * @Author yanhong
- * @version $Id: EasyPaySampleCode.java, v 0.1 2024年03月14日 4:53 PM yanhong Exp $
- **/
 public class EasyPayExecutableDemoCode {
 
 
