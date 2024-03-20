@@ -90,6 +90,11 @@ public class AlipayPaymentSessionRequest extends AlipayRequest<AlipayPaymentSess
      */
     private RiskData                riskData;
 
+    /**
+     * This param is used for Easy pay payments,set its value to EASY_PAY
+     */
+    private String                  productScene;
+
     @Override
     public Class<AlipayPaymentSessionResponse> getResponseClass() {
         return AlipayPaymentSessionResponse.class;
@@ -213,5 +218,13 @@ public class AlipayPaymentSessionRequest extends AlipayRequest<AlipayPaymentSess
 
     public void setRiskData(RiskData riskData) {
         this.riskData = riskData;
+    }
+
+    public String getProductScene() {
+        return productScene;
+    }
+
+    public void setProductScene(String productScene) {
+        this.productScene = productScene;
     }
 }
