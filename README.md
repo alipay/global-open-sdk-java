@@ -77,7 +77,7 @@ order.setOrderAmount(orderAmount);
 Env env = new Env();
 env.setTerminalType(TerminalType.APP);
 env.setOsType(OsType.IOS);
-order.setEnv(env);
+alipayPayRequest.setEnv(env);
 
 alipayPayRequest.setOrder(order);
 
