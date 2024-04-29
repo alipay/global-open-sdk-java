@@ -12,11 +12,15 @@ package com.alipay.global.api.request.ams.risk.crypto.enums;
 
 public enum ErrorCodeEnum {
 
-   UNKNOWN_ERROR("UNKNOWN_ERROR", "unknown error"),
+    UNKNOWN_ERROR("UNKNOWN_ERROR", "unknown error"),
 
-   PARAM_ILLEGAL("PARAM_ILLEGAL", "param illegal"),
+    PARAM_ILLEGAL("PARAM_ILLEGAL", "param illegal"),
 
-   ENCRYPT_ERROR("ENCRYPT_ERROR", "encrypt error"),
+    ENCRYPT_ERROR("ENCRYPT_ERROR", "encrypt error"),
+
+    UNKNOWN_ENCRYPT_KEY("UNKNOWN_ENCRYPT_KEY", "unknown encrypt key"),
+
+    MISMATCH_ENCRYPT_STRATEGY("MISMATCH_ENCRYPT_STRATEGY","mismatch encrypt strategy"),
 
     ;
 

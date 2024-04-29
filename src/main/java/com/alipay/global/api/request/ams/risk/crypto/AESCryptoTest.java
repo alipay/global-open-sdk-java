@@ -10,10 +10,10 @@ import java.util.Base64;
 
 public class AESCryptoTest {
     public static void main(String[] args) throws Exception{
-
+        testString1();
     }
 
-    private static void testString() throws Exception{
+    private static void testString1() throws Exception{
         //prepare
         KeyGenerator aesKeyGen = KeyGenerator.getInstance("AES");
         SecretKey key = aesKeyGen.generateKey();
@@ -34,6 +34,28 @@ public class AESCryptoTest {
         System.out.println(plaintext1.equals(plaintext));
         System.out.println(plaintext2.equals(plaintext));
         System.out.println(plaintext1.equals(plaintext2));
+    }
+
+    private static void testString2() throws Exception{
+        //prepare
+        KeyGenerator aesKeyGen = KeyGenerator.getInstance("AES");
+        SecretKey key = aesKeyGen.generateKey();
+        byte[] keyBytes = key.getEncoded();
+        String plaintext = "E;,c(=YD#|";
+
+        // invoke encrypt
+        byte[] encrypt = AESCrypto.getInstance().encrypt(keyBytes,
+                plaintext.getBytes(StandardCharsets.UTF_8));
+        String encryptString = Base64.getEncoder().encodeToString(encrypt);
+
+        // decrypt from byte[]
+        String plaintext1 = new String(decrypt(keyBytes, encrypt));
+        System.out.println(plaintext1.equals(plaintext));
+
+        // decrypt from String
+        byte[] encryptBytes = Base64.getDecoder().decode(encryptString);
+        String plaintext3 = new String(decrypt(keyBytes, encryptBytes));
+        System.out.println(plaintext3.equals(plaintext));
     }
 
     private static void testInteger() throws Exception{
