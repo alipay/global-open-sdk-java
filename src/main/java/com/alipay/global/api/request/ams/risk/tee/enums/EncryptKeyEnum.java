@@ -1,8 +1,8 @@
 package com.alipay.global.api.request.ams.risk.tee.enums;
 
 /**
- * Enumerates merchant selectable encryption keys.
- * 枚举商户可选择的加密字段
+ * Merchant selectable encryption keys enumeration class
+ * 商户可选择的加密字段枚举类
  */
 public enum EncryptKeyEnum {
     MERCHANT_EMAIL("MERCHANT_EMAIL", "orders.merchant.merchantEmail"),

@@ -10,18 +10,16 @@
  */
 package com.alipay.global.api.request.ams.risk.tee.enums;
 
+/**
+ * ErrorCode enumeration class that may occur during encryption
+ * 加密过程中可能出现的 ErrorCode 枚举类
+ */
 public enum ErrorCodeEnum {
-
     UNKNOWN_ERROR("UNKNOWN_ERROR", "unknown error"),
-
     PARAM_ILLEGAL("PARAM_ILLEGAL", "param illegal"),
-
     ENCRYPT_ERROR("ENCRYPT_ERROR", "encrypt error"),
-
     UNKNOWN_ENCRYPT_KEY("UNKNOWN_ENCRYPT_KEY", "unknown encrypt key"),
-
     MISMATCH_ENCRYPT_STRATEGY("MISMATCH_ENCRYPT_STRATEGY","mismatch encrypt strategy"),
-
     ;
 
     private final String code;

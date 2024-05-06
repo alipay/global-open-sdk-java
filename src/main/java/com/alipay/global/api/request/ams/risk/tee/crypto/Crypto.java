@@ -1,13 +1,10 @@
 package com.alipay.global.api.request.ams.risk.tee.crypto;
 
-/**
- * @version global-open-sdk-java 2024/4/26 18:01
- * @author: zhiwen.lw
- */
+
 public interface Crypto {
     /**
      * encrypt by dataKey
-     *
+     * 通过 dataKey 加密数据
      * @param dataKey symmetric key
      * @param data content to encrypt
      * @return encrypted data if data is not null and null if data is null
@@ -16,7 +13,7 @@ public interface Crypto {
 
     /**
      * encrypt by dataKey
-     *
+     * 通过 dataKey 加密数据
      * @param dataKeyBase64 symmetric key encoded by base64
      * @param data content to encrypt
      * @return encrypted data if data is not null and null if data is null

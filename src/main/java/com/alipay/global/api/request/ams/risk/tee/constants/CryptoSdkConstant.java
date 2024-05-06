@@ -2,6 +2,10 @@ package com.alipay.global.api.request.ams.risk.tee.constants;
 
 import java.nio.charset.StandardCharsets;
 
+/**
+ * necessary constants for encrypt sdk
+ * 加密 SDK 必须常量
+ */
 public class CryptoSdkConstant {
     public static final int    TAG_LENGTH             = 96;
 
