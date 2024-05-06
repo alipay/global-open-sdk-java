@@ -1,4 +1,4 @@
-package com.alipay.global.api.request.ams.risk.crypto.constants;
+package com.alipay.global.api.request.ams.risk.tee.constants;
 
 import java.nio.charset.StandardCharsets;
 

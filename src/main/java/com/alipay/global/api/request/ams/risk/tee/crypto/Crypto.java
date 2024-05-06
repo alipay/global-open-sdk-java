@@ -1,4 +1,4 @@
-package com.alipay.global.api.request.ams.risk.crypto;
+package com.alipay.global.api.request.ams.risk.tee.crypto;
 
 /**
  * @version global-open-sdk-java 2024/4/26 18:01

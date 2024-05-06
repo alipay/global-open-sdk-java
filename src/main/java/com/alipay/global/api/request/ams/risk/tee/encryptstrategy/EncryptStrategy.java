@@ -1,7 +1,7 @@
-package com.alipay.global.api.request.ams.risk.crypto.encryptstrategy;
+package com.alipay.global.api.request.ams.risk.tee.encryptstrategy;
 
 import com.alipay.global.api.request.AlipayRequest;
-import com.alipay.global.api.request.ams.risk.crypto.enums.EncryptKeyEnum;
+import com.alipay.global.api.request.ams.risk.tee.enums.EncryptKeyEnum;
 
 import java.util.List;
 

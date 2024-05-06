@@ -8,10 +8,10 @@
  * THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE; and 2. If applicable, the use of the Software is also subject to the terms and
  * conditions of any non-disclosure agreement signed by you and the relevant Ant Group entity.
  */
-package com.alipay.global.api.request.ams.risk.crypto.exception;
+package com.alipay.global.api.request.ams.risk.tee.exception;
 
 
-import com.alipay.global.api.request.ams.risk.crypto.enums.ErrorCodeEnum;
+import com.alipay.global.api.request.ams.risk.tee.enums.ErrorCodeEnum;
 import org.apache.commons.lang3.StringUtils;
 
 public class CryptoException extends RuntimeException {

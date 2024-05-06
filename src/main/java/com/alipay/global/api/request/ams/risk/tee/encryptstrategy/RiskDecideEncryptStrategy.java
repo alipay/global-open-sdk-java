@@ -1,12 +1,12 @@
-package com.alipay.global.api.request.ams.risk.crypto.encryptstrategy;
+package com.alipay.global.api.request.ams.risk.tee.encryptstrategy;
 
 import com.alipay.global.api.model.risk.Order;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.request.ams.risk.RiskDecideRequest;
-import com.alipay.global.api.request.ams.risk.crypto.AESCrypto;
-import com.alipay.global.api.request.ams.risk.crypto.enums.EncryptKeyEnum;
-import com.alipay.global.api.request.ams.risk.crypto.enums.ErrorCodeEnum;
-import com.alipay.global.api.request.ams.risk.crypto.exception.CryptoException;
+import com.alipay.global.api.request.ams.risk.tee.crypto.AESCrypto;
+import com.alipay.global.api.request.ams.risk.tee.enums.EncryptKeyEnum;
+import com.alipay.global.api.request.ams.risk.tee.enums.ErrorCodeEnum;
+import com.alipay.global.api.request.ams.risk.tee.exception.CryptoException;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
@@ -27,14 +27,14 @@ public class RiskDecideEncryptStrategy implements EncryptStrategy{
                 continue;
             }
             switch (key) {
-                case ORDERS_SHIPPING_SHIPPINGADDR_ADDR1:
+                case SHIPPINGADDR_ADDR1:
                     for (Order order : orders) {
                         byte[] encrypt = crypto.encrypt(data_key,
                                 order.getShipping().getShippingAddress().getAddress1().getBytes(StandardCharsets.UTF_8));
                         order.getShipping().getShippingAddress().setAddress1(Base64.getEncoder().encodeToString(encrypt));
                     }
                     break;
-                case ORDERS_SHIPPING_SHIPPINGADDR_ADDR2:
+                case SHIPPINGADDR_ADDR2:
                     for (Order order : orders) {
                         byte[] encrypt = crypto.encrypt(data_key,
                                 order.getShipping().getShippingAddress().getAddress2().getBytes(StandardCharsets.UTF_8));

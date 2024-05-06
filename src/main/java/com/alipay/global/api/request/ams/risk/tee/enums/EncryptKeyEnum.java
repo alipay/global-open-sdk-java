@@ -1,9 +1,9 @@
-package com.alipay.global.api.request.ams.risk.crypto.enums;
+package com.alipay.global.api.request.ams.risk.tee.enums;
 
 public enum EncryptKeyEnum {
-    ORDERS_SHIPPING_SHIPPINGADDR_ADDR1("ORDERS_SHIPPING_SHIPPINGADDR_ADDR1", "orders.shipping.shippingAddress.address1"),
+    SHIPPINGADDR_ADDR1("SHIPPINGADDR_ADDR1", "orders.shipping.shippingAddress.address1"),
 
-    ORDERS_SHIPPING_SHIPPINGADDR_ADDR2("ORDERS_SHIPPING_SHIPPINGADDR_ADDR2", "orders.shipping.shippingAddress.address2"),
+    SHIPPINGADDR_ADDR2("SHIPPINGADDR_ADDR2", "orders.shipping.shippingAddress.address2"),
 
     ;
     private final String code;

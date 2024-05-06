@@ -1,4 +1,6 @@
-package com.alipay.global.api.request.ams.risk.crypto;
+package com.alipay.global.api.request.ams.risk.tee.crypto;
+
+import com.alipay.global.api.request.ams.risk.tee.crypto.AESCrypto;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;

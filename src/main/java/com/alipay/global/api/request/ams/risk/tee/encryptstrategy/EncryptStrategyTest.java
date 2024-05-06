@@ -2,19 +2,18 @@
  * Ant Group
  * Copyright (c) 2004-2023 All Rights Reserved.
  */
-package com.alipay.global.api.request.ams.risk.crypto.encryptstrategy;
+package com.alipay.global.api.request.ams.risk.tee.encryptstrategy;
 
 import com.alibaba.fastjson.JSONObject;
 import com.alipay.global.api.AlipayClient;
 import com.alipay.global.api.DefaultAlipayClient;
-import com.alipay.global.api.exception.AlipayApiException;
 import com.alipay.global.api.model.ams.*;
 import com.alipay.global.api.model.risk.Merchant;
 import com.alipay.global.api.model.risk.Order;
 import com.alipay.global.api.model.risk.PaymentMethod;
 import com.alipay.global.api.model.risk.*;
 import com.alipay.global.api.request.ams.risk.RiskDecideRequest;
-import com.alipay.global.api.request.ams.risk.crypto.enums.EncryptKeyEnum;
+import com.alipay.global.api.request.ams.risk.tee.enums.EncryptKeyEnum;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;

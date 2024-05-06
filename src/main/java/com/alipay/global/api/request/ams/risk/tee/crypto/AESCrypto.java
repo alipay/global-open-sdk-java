@@ -1,15 +1,15 @@
-package com.alipay.global.api.request.ams.risk.crypto;
+package com.alipay.global.api.request.ams.risk.tee.crypto;
 
-import com.alipay.global.api.request.ams.risk.crypto.constants.CryptoSdkConstant;
-import com.alipay.global.api.request.ams.risk.crypto.enums.ErrorCodeEnum;
-import com.alipay.global.api.request.ams.risk.crypto.exception.CryptoException;
+import com.alipay.global.api.request.ams.risk.tee.constants.CryptoSdkConstant;
+import com.alipay.global.api.request.ams.risk.tee.enums.ErrorCodeEnum;
+import com.alipay.global.api.request.ams.risk.tee.exception.CryptoException;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.GCMParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.util.Base64;
 
-public class AESCrypto implements Crypto{
+public class AESCrypto implements Crypto {
     private static volatile AESCrypto instance;
 
     public static AESCrypto getInstance() {
