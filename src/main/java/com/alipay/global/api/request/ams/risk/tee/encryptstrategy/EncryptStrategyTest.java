@@ -13,6 +13,7 @@ import com.alipay.global.api.model.risk.Order;
 import com.alipay.global.api.model.risk.PaymentMethod;
 import com.alipay.global.api.model.risk.*;
 import com.alipay.global.api.request.ams.risk.RiskDecideRequest;
+import com.alipay.global.api.request.ams.risk.tee.crypto.AESCrypto;
 import com.alipay.global.api.request.ams.risk.tee.enums.EncryptKeyEnum;
 
 import javax.crypto.Cipher;
@@ -44,32 +45,116 @@ public class EncryptStrategyTest {
         request.setAuthorizationPhase(AuthorizationPhase.PRE_AUTHORIZATION);
         // 1. 构建明文报文
         buildRiskDecideRequest(request);
-        // 2. 构建 encryptKeyLists
-        List<EncryptKeyEnum> encryptKeyList = Arrays.asList(
-                EncryptKeyEnum.ORDERS_SHIPPING_SHIPPINGADDR_ADDR1,
-                EncryptKeyEnum.ORDERS_SHIPPING_SHIPPINGADDR_ADDR2
-        );
-        // 3. 生成 DK
+        // 2. 生成 DK
         KeyGenerator aesKeyGen = KeyGenerator.getInstance("AES");
         SecretKey key = aesKeyGen.generateKey();
-        byte[] keyBytes = key.getEncoded();
-        // 4. 调用加密方法
+        byte[] data_key = key.getEncoded();
+        // 3. 测试加密
         RiskDecideEncryptStrategy strategy = new RiskDecideEncryptStrategy();
-        strategy.encrypt(keyBytes, request, encryptKeyList);
-        // 5. 调用解密方法，验证加解密是否正确
-        List<Order> orders = request.getOrders();
-        for (Order order : orders) {
-            String encryptAddr1 = order.getShipping().getShippingAddress().getAddress1();
-            String encryptAddr2 = order.getShipping().getShippingAddress().getAddress2();
-            order.getShipping().getShippingAddress().setAddress1(
-                    new String(decrypt(keyBytes, Base64.getDecoder().decode(encryptAddr1))));
-            order.getShipping().getShippingAddress().setAddress2(
-                    new String(decrypt(keyBytes, Base64.getDecoder().decode(encryptAddr2))));
-        }
-        System.out.println(JSONObject.toJSONString(orders));
+        AESCrypto crypto = AESCrypto.getInstance();
+        System.out.println("BEGIN TEST:");
+        testOrders(data_key, request, strategy, crypto);
+        testBuyerRegistrationTime(data_key, request, strategy, crypto);
+        testCardHolderName(data_key, request, strategy, crypto);
     }
 
-    public static void buildRiskDecideRequest(RiskDecideRequest request) {
+    private static void testOrders(byte[] data_key, RiskDecideRequest request,
+                                       RiskDecideEncryptStrategy strategy, AESCrypto crypto) throws Exception {
+        List<Order> orders = request.getOrders();
+        String ordersBeforeEncrypt = JSONObject.toJSONString(orders);
+        // 1. 构建 encryptKeyLists
+        List<EncryptKeyEnum> encryptKeyList = Arrays.asList(
+                EncryptKeyEnum.MERCHANT_EMAIL,
+                EncryptKeyEnum.SHIPPING_ADDR1,
+                EncryptKeyEnum.SHIPPING_ADDR2,
+                EncryptKeyEnum.SHIPPING_NAME,
+                EncryptKeyEnum.SHIPPING_EMAIL,
+                EncryptKeyEnum.SHIPPING_PHONE_NO
+        );
+        // 2. 调用加密策略进行加密
+        strategy.encrypt(data_key, request, encryptKeyList);
+        // 3. 调用解密方法，验证加解密是否正确
+        for (Order order : orders) {
+            // 3.1 MERCHANT_EMAIL
+            if (order.getMerchant().getMerchantEmail() != null) {
+                order.getMerchant().setMerchantEmail(
+                        new String(decrypt(data_key, Base64.getDecoder().decode(order.getMerchant().getMerchantEmail()))));
+            }
+            // 3.2. SHIPPING_ADDR1
+            if (order.getShipping().getShippingAddress().getAddress1() != null) {
+                order.getShipping().getShippingAddress().setAddress1(
+                        new String(decrypt(data_key, Base64.getDecoder().decode(order.getShipping().getShippingAddress().getAddress1()))));
+            }
+            // 3.3. SHIPPING_ADDR2
+            if (order.getShipping().getShippingAddress().getAddress2() != null) {
+                order.getShipping().getShippingAddress().setAddress2(
+                        new String(decrypt(data_key, Base64.getDecoder().decode(order.getShipping().getShippingAddress().getAddress2()))));
+            }
+            // 3.4. SHIPPING_NAME
+            if (order.getShipping().getShippingName() != null) {
+                decryptName(data_key, order.getShipping().getShippingName());
+            }
+            // 3.5. SHIPPING_EMAIL
+            if (order.getShipping().getShipToEmail() != null) {
+                order.getShipping().setShipToEmail(
+                        new String(decrypt(data_key, Base64.getDecoder().decode(order.getShipping().getShipToEmail()))));
+            }
+            // 3.6. SHIPPING_PHONE_NO
+            if (order.getShipping().getShippingPhoneNo() != null) {
+                order.getShipping().setShippingPhoneNo(
+                        new String(decrypt(data_key, Base64.getDecoder().decode(order.getShipping().getShippingPhoneNo()))));
+            }
+        }
+        String ordersAfterDecrypt = JSONObject.toJSONString(orders);
+        // 4. 比较结果
+        System.out.println("+ TEST MERCHANT_EMAIL RESULT: " + ordersAfterDecrypt.equals(ordersBeforeEncrypt));
+        System.out.println("+ TEST SHIPPING_ADDR1 RESULT: " + ordersAfterDecrypt.equals(ordersBeforeEncrypt));
+        System.out.println("+ TEST SHIPPING_ADDR2 RESULT: " + ordersAfterDecrypt.equals(ordersBeforeEncrypt));
+        System.out.println("+ TEST SHIPPING_NAME RESULT: " + ordersAfterDecrypt.equals(ordersBeforeEncrypt));
+        System.out.println("+ TEST MERCHANT_EMAIL RESULT: " + ordersAfterDecrypt.equals(ordersBeforeEncrypt));
+        System.out.println("+ TEST SHIPPING_PHONE_NO RESULT: " + ordersAfterDecrypt.equals(ordersBeforeEncrypt));
+    }
+
+    private static void testBuyerRegistrationTime(byte[] data_key, RiskDecideRequest request,
+                                          RiskDecideEncryptStrategy strategy, AESCrypto crypto) throws Exception {
+        String buyerRegistrationTime = request.getBuyer().getBuyerRegistrationTime();
+        if (buyerRegistrationTime == null) {
+            return;
+        }
+        // 1. 构建 encryptKeyLists
+        List<EncryptKeyEnum> encryptKeyList = Arrays.asList(
+                EncryptKeyEnum.BUYER_REGISTRATION_TIME
+        );
+        // 2. 调用加密策略进行加密
+        strategy.encrypt(data_key, request, encryptKeyList);
+        // 3. 调用解密方法，验证加解密是否正确
+        request.getBuyer().setBuyerRegistrationTime(
+                new String(decrypt(data_key, Base64.getDecoder().decode(request.getBuyer().getBuyerRegistrationTime()))));
+        System.out.println("+ TEST BUYER_REGISTRATION_TIME RESULT: " + buyerRegistrationTime.equals(request.getBuyer().getBuyerRegistrationTime()));
+    }
+
+    private static void testCardHolderName(byte[] data_key, RiskDecideRequest request,
+                                           RiskDecideEncryptStrategy strategy, AESCrypto crypto) throws Exception {
+        List<PaymentDetail> paymentDetails = request.getPaymentDetails();
+        String beforeEncrypt = JSONObject.toJSONString(paymentDetails);
+        // 1. 构建 encryptKeyLists
+        List<EncryptKeyEnum> encryptKeyList = Arrays.asList(
+                EncryptKeyEnum.CARD_HOLDER_NAME
+        );
+        // 2. 调用加密策略进行加密
+        strategy.encrypt(data_key, request, encryptKeyList);
+        // 3. 调用解密方法，验证加解密是否正确
+        for (PaymentDetail paymentDetail : paymentDetails) {
+            UserName cardHolderName = paymentDetail.getPaymentMethod().getPaymentMethodMetaData().getCardholderName();
+            if (cardHolderName != null) {
+                decryptName(data_key, cardHolderName);
+            }
+        }
+        String afterDecrypt = JSONObject.toJSONString(paymentDetails);
+        System.out.println("+ TEST CARD_HOLDER_NAME RESULT: " + afterDecrypt.equals(beforeEncrypt));
+    }
+
+    private static void buildRiskDecideRequest(RiskDecideRequest request) {
         Order order = new Order();
         order.setReferenceOrderId("test_202310120914932421");
         Amount orderAmount = new Amount();
@@ -79,6 +164,7 @@ public class EncryptStrategyTest {
         order.setOrderDescription("Cappuccino #grande (Mika's coffee shop)");
         Merchant merchant = new Merchant();
         merchant.setReferenceMerchantId("SM_001");
+        merchant.setMerchantEmail("12345678@foxmail.com");
         order.setMerchant(merchant);
         Goods goods = new Goods();
         goods.setReferenceGoodsId("383382011_SGAMZ-904520356");
@@ -124,6 +210,7 @@ public class EncryptStrategyTest {
         buyerName.setMiddleName("Skr");
         buyerName.setFullName("Dehua Skr Liu");
         buyer.setBuyerName(buyerName);
+        buyer.setBuyerRegistrationTime("2023-01-01T12:08:56+08:00");
         request.setBuyer(buyer);
 
         Amount actualPaymentAmount = new Amount();
@@ -183,5 +270,20 @@ public class EncryptStrategyTest {
 
         cipher.init(Cipher.DECRYPT_MODE, keySpec, parameterSpec);
         return cipher.doFinal(ciphertext, 0, ciphertext.length - 1);
+    }
+
+    private static void decryptName(byte[] dataKey, UserName userName) throws Exception {
+        if (userName.getFirstName() != null) {
+            userName.setFirstName(new String(decrypt(dataKey, Base64.getDecoder().decode(userName.getFirstName()))));
+        }
+        if (userName.getMiddleName() != null) {
+            userName.setMiddleName(new String(decrypt(dataKey, Base64.getDecoder().decode(userName.getMiddleName()))));
+        }
+        if (userName.getLastName() != null) {
+            userName.setLastName(new String(decrypt(dataKey, Base64.getDecoder().decode(userName.getLastName()))));
+        }
+        if (userName.getFullName() != null) {
+            userName.setFullName(new String(decrypt(dataKey, Base64.getDecoder().decode(userName.getFullName()))));
+        }
     }
 }
