@@ -25,6 +25,7 @@ import java.util.Arrays;
 import java.util.Base64;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class EncryptStrategyTest {
     private static final String       CLIENT_ID           = "SANDBOX_5YBW7N2ZFQKM01671";
@@ -49,19 +50,36 @@ public class EncryptStrategyTest {
         KeyGenerator aesKeyGen = KeyGenerator.getInstance("AES");
         SecretKey key = aesKeyGen.generateKey();
         byte[] data_key = key.getEncoded();
-        // 3. 测试加密
+        String data_keyStr = Base64.getEncoder().encodeToString(data_key);
+        // 3. 加解密测试
         RiskDecideEncryptStrategy strategy = new RiskDecideEncryptStrategy();
         AESCrypto crypto = AESCrypto.getInstance();
         System.out.println("BEGIN TEST:");
         testOrders(data_key, request, strategy, crypto);
-        testBuyerRegistrationTime(data_key, request, strategy, crypto);
+        testBuyerRegistrationTime(data_keyStr, request, strategy, crypto);
         testCardHolderName(data_key, request, strategy, crypto);
     }
 
     private static void testOrders(byte[] data_key, RiskDecideRequest request,
                                        RiskDecideEncryptStrategy strategy, AESCrypto crypto) throws Exception {
         List<Order> orders = request.getOrders();
-        String ordersBeforeEncrypt = JSONObject.toJSONString(orders);
+        // 0. 加密前的数据
+        String merchantEmailBeforeEncrypt = orders.stream().map(Order::getMerchant).map(Merchant::getMerchantEmail).collect(Collectors.joining(","));
+        String shippingAddr1BeforeEncrypt = orders.stream().map(Order::getShipping).map(Shipping::getShippingAddress).map(Address::getAddress1).collect(Collectors.joining(","));
+        String shippingAddr2BeforeEncrypt = orders.stream().map(Order::getShipping).map(Shipping::getShippingAddress).map(Address::getAddress2).collect(Collectors.joining(","));
+        String shippingEmailBeforeEncrypt = orders.stream().map(Order::getShipping).map(Shipping::getShipToEmail).collect(Collectors.joining(","));
+        String shippingPhoneNoBeforeEncrypt = orders.stream().map(Order::getShipping).map(Shipping::getShippingPhoneNo).collect(Collectors.joining(","));
+        String shippingNamesBeforeEncrypt = orders.stream()
+                .map(Order::getShipping)
+                .map(Shipping::getShippingName)
+                .map(userName -> {
+                    String firstName = userName.getFirstName() != null ? userName.getFirstName() : "";
+                    String middleName = userName.getMiddleName() != null ? userName.getMiddleName() : "";
+                    String lastName = userName.getLastName() != null ? userName.getLastName() : "";
+                    return firstName + " " + middleName + " " + lastName;
+                })
+                .collect(Collectors.joining(", "));
+
         // 1. 构建 encryptKeyLists
         List<EncryptKeyEnum> encryptKeyList = Arrays.asList(
                 EncryptKeyEnum.MERCHANT_EMAIL,
@@ -105,17 +123,31 @@ public class EncryptStrategyTest {
                         new String(decrypt(data_key, Base64.getDecoder().decode(order.getShipping().getShippingPhoneNo()))));
             }
         }
-        String ordersAfterDecrypt = JSONObject.toJSONString(orders);
         // 4. 比较结果
-        System.out.println("+ TEST MERCHANT_EMAIL RESULT: " + ordersAfterDecrypt.equals(ordersBeforeEncrypt));
-        System.out.println("+ TEST SHIPPING_ADDR1 RESULT: " + ordersAfterDecrypt.equals(ordersBeforeEncrypt));
-        System.out.println("+ TEST SHIPPING_ADDR2 RESULT: " + ordersAfterDecrypt.equals(ordersBeforeEncrypt));
-        System.out.println("+ TEST SHIPPING_NAME RESULT: " + ordersAfterDecrypt.equals(ordersBeforeEncrypt));
-        System.out.println("+ TEST MERCHANT_EMAIL RESULT: " + ordersAfterDecrypt.equals(ordersBeforeEncrypt));
-        System.out.println("+ TEST SHIPPING_PHONE_NO RESULT: " + ordersAfterDecrypt.equals(ordersBeforeEncrypt));
+        String merchantEmailAfterEncrypt = orders.stream().map(Order::getMerchant).map(Merchant::getMerchantEmail).collect(Collectors.joining(","));
+        String shippingAddr1AfterEncrypt = orders.stream().map(Order::getShipping).map(Shipping::getShippingAddress).map(Address::getAddress1).collect(Collectors.joining(","));
+        String shippingAddr2AfterEncrypt = orders.stream().map(Order::getShipping).map(Shipping::getShippingAddress).map(Address::getAddress2).collect(Collectors.joining(","));
+        String shippingEmailAfterEncrypt = orders.stream().map(Order::getShipping).map(Shipping::getShipToEmail).collect(Collectors.joining(","));
+        String shippingPhoneNoAfterEncrypt = orders.stream().map(Order::getShipping).map(Shipping::getShippingPhoneNo).collect(Collectors.joining(","));
+        String shippingNamesAfterEncrypt = orders.stream()
+                .map(Order::getShipping)
+                .map(Shipping::getShippingName)
+                .map(userName -> {
+                    String firstName = userName.getFirstName() != null ? userName.getFirstName() : "";
+                    String middleName = userName.getMiddleName() != null ? userName.getMiddleName() : "";
+                    String lastName = userName.getLastName() != null ? userName.getLastName() : "";
+                    return firstName + " " + middleName + " " + lastName;
+                })
+                .collect(Collectors.joining(", "));
+        System.out.println("+ TEST MERCHANT_EMAIL RESULT: " + merchantEmailAfterEncrypt.equals(merchantEmailBeforeEncrypt));
+        System.out.println("+ TEST SHIPPING_ADDR1 RESULT: " + shippingAddr1AfterEncrypt.equals(shippingAddr1BeforeEncrypt));
+        System.out.println("+ TEST SHIPPING_ADDR2 RESULT: " + shippingAddr2AfterEncrypt.equals(shippingAddr2BeforeEncrypt));
+        System.out.println("+ TEST SHIPPING_NAME RESULT: " + shippingNamesAfterEncrypt.equals(shippingNamesBeforeEncrypt));
+        System.out.println("+ TEST MERCHANT_EMAIL RESULT: " + shippingEmailAfterEncrypt.equals(shippingEmailBeforeEncrypt));
+        System.out.println("+ TEST SHIPPING_PHONE_NO RESULT: " + shippingPhoneNoAfterEncrypt.equals(shippingPhoneNoBeforeEncrypt));
     }
 
-    private static void testBuyerRegistrationTime(byte[] data_key, RiskDecideRequest request,
+    private static void testBuyerRegistrationTime(String data_key, RiskDecideRequest request,
                                           RiskDecideEncryptStrategy strategy, AESCrypto crypto) throws Exception {
         String buyerRegistrationTime = request.getBuyer().getBuyerRegistrationTime();
         if (buyerRegistrationTime == null) {
@@ -129,7 +161,7 @@ public class EncryptStrategyTest {
         strategy.encrypt(data_key, request, encryptKeyList);
         // 3. 调用解密方法，验证加解密是否正确
         request.getBuyer().setBuyerRegistrationTime(
-                new String(decrypt(data_key, Base64.getDecoder().decode(request.getBuyer().getBuyerRegistrationTime()))));
+                new String(decrypt(Base64.getDecoder().decode(data_key), Base64.getDecoder().decode(request.getBuyer().getBuyerRegistrationTime()))));
         System.out.println("+ TEST BUYER_REGISTRATION_TIME RESULT: " + buyerRegistrationTime.equals(request.getBuyer().getBuyerRegistrationTime()));
     }
 
