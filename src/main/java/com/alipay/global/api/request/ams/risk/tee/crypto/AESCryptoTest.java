@@ -1,6 +1,8 @@
+/*
+ * Ant Group
+ * Copyright (c) 2004-2024 All Rights Reserved.
+ */
 package com.alipay.global.api.request.ams.risk.tee.crypto;
-
-import com.alipay.global.api.request.ams.risk.tee.crypto.AESCrypto;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;

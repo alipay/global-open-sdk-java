@@ -1,3 +1,7 @@
+/*
+ * Ant Group
+ * Copyright (c) 2004-2024 All Rights Reserved.
+ */
 package com.alipay.global.api.request.ams.risk.tee.encryptstrategy;
 
 import com.alipay.global.api.model.ams.UserName;
@@ -32,10 +36,15 @@ public class RiskDecideEncryptStrategy implements EncryptStrategy{
         doEncrypt(data_key, riskDecideRequest, encryptKeyList, crypto);
     }
 
+    @Override
+    public void encrypt(String dataKeyBase64, AlipayRequest<?> request, List<EncryptKeyEnum> encryptKeyList) {
+        encrypt(Base64.getDecoder().decode(dataKeyBase64), request, encryptKeyList);
+    }
+
     /**
-     * do encrypt by encrypt key
-     * 根据 encrypt key 进行加密
-     * @param data_key merchant DK
+     * do encrypt by encryptKeyList
+     * 根据 encryptKeyList 进行加密
+     * @param data_key symmetric key
      * @param request plaintext RiskDecideRequest
      * @param encryptKeyList list of encrypt keys
      * @param crypto AESCrypto instance
@@ -127,7 +136,7 @@ public class RiskDecideEncryptStrategy implements EncryptStrategy{
     /**
      * encrypt username
      * 加密 username
-     * @param data_key merchant DK
+     * @param data_key symmetric key
      * @param userName user name
      * @param crypto AESCrypto instance
      */

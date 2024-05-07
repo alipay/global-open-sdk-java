@@ -1,10 +1,14 @@
+/*
+ * Ant Group
+ * Copyright (c) 2004-2024 All Rights Reserved.
+ */
 package com.alipay.global.api.request.ams.risk.tee.constants;
 
 import java.nio.charset.StandardCharsets;
 
 /**
  * necessary constants for encrypt sdk
- * 加密 SDK 必须常量
+ * 加密 SDK 的必须常量
  */
 public class CryptoSdkConstant {
     public static final int    TAG_LENGTH             = 96;

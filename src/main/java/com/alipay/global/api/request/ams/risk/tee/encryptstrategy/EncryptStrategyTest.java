@@ -1,6 +1,6 @@
 /*
  * Ant Group
- * Copyright (c) 2004-2023 All Rights Reserved.
+ * Copyright (c) 2004-2024 All Rights Reserved.
  */
 package com.alipay.global.api.request.ams.risk.tee.encryptstrategy;
 
