@@ -13,7 +13,6 @@ import com.alipay.global.api.model.risk.Order;
 import com.alipay.global.api.model.risk.PaymentMethod;
 import com.alipay.global.api.model.risk.*;
 import com.alipay.global.api.request.ams.risk.RiskDecideRequest;
-import com.alipay.global.api.request.ams.risk.tee.crypto.AESCrypto;
 import com.alipay.global.api.request.ams.risk.tee.enums.EncryptKeyEnum;
 
 import javax.crypto.Cipher;
@@ -35,10 +34,6 @@ public class EncryptStrategyTest {
     private static final AlipayClient defaultAlipayClient = new DefaultAlipayClient(GATE_WAY_URL, merchantPrivateKey, alipayPublicKey);
 
     public static void main(String[] args) throws Exception {
-        testRiskDecideEncryptStrategy();
-    }
-
-    public static void testRiskDecideEncryptStrategy() throws Exception {
         RiskDecideRequest request = new RiskDecideRequest();
         request.setClientId(CLIENT_ID);
         request.setPath("/ams/api/v1/risk/payments/decide");
@@ -50,18 +45,43 @@ public class EncryptStrategyTest {
         KeyGenerator aesKeyGen = KeyGenerator.getInstance("AES");
         SecretKey key = aesKeyGen.generateKey();
         byte[] data_key = key.getEncoded();
-        String data_keyStr = Base64.getEncoder().encodeToString(data_key);
-        // 3. 加解密测试
+        // 3. 加密策略
         RiskDecideEncryptStrategy strategy = new RiskDecideEncryptStrategy();
-        AESCrypto crypto = AESCrypto.getInstance();
+        // 4. 测试
+        testRiskDecideEncryptStrategy(data_key, request, strategy);
+        timeCostTest(data_key, request, strategy);
+    }
+
+    private static void timeCostTest(byte[] data_key, RiskDecideRequest request,
+                                     RiskDecideEncryptStrategy strategy) throws Exception {
+        // 1. 构建 encryptKeyLists
+        List<EncryptKeyEnum> encryptKeyList = Arrays.asList(
+                EncryptKeyEnum.MERCHANT_EMAIL,
+                EncryptKeyEnum.SHIPPING_ADDR1,
+                EncryptKeyEnum.SHIPPING_ADDR2,
+                EncryptKeyEnum.SHIPPING_NAME,
+                EncryptKeyEnum.SHIPPING_EMAIL,
+                EncryptKeyEnum.SHIPPING_PHONE_NO,
+                EncryptKeyEnum.BUYER_REGISTRATION_TIME,
+                EncryptKeyEnum.CARD_HOLDER_NAME
+        );
+        long start = System.currentTimeMillis();
+        strategy.encrypt(data_key, request, encryptKeyList);
+        long end = System.currentTimeMillis();
+        System.out.println("encrypt time cost:" + (end - start));
+    }
+
+    private static void testRiskDecideEncryptStrategy(byte[] data_key, RiskDecideRequest request,
+                                                      RiskDecideEncryptStrategy strategy) throws Exception {
         System.out.println("BEGIN TEST:");
-        testOrders(data_key, request, strategy, crypto);
-        testBuyerRegistrationTime(data_keyStr, request, strategy, crypto);
-        testCardHolderName(data_key, request, strategy, crypto);
+        testOrders(data_key, request, strategy);
+        String data_keyStr = Base64.getEncoder().encodeToString(data_key);
+        testBuyerRegistrationTime(data_keyStr, request, strategy);
+        testCardHolderName(data_key, request, strategy);
     }
 
     private static void testOrders(byte[] data_key, RiskDecideRequest request,
-                                       RiskDecideEncryptStrategy strategy, AESCrypto crypto) throws Exception {
+                                       RiskDecideEncryptStrategy strategy) throws Exception {
         List<Order> orders = request.getOrders();
         // 0. 加密前的数据
         String merchantEmailBeforeEncrypt = orders.stream().map(Order::getMerchant).map(Merchant::getMerchantEmail).collect(Collectors.joining(","));
@@ -148,7 +168,7 @@ public class EncryptStrategyTest {
     }
 
     private static void testBuyerRegistrationTime(String data_key, RiskDecideRequest request,
-                                          RiskDecideEncryptStrategy strategy, AESCrypto crypto) throws Exception {
+                                          RiskDecideEncryptStrategy strategy) throws Exception {
         String buyerRegistrationTime = request.getBuyer().getBuyerRegistrationTime();
         if (buyerRegistrationTime == null) {
             return;
@@ -166,7 +186,7 @@ public class EncryptStrategyTest {
     }
 
     private static void testCardHolderName(byte[] data_key, RiskDecideRequest request,
-                                           RiskDecideEncryptStrategy strategy, AESCrypto crypto) throws Exception {
+                                           RiskDecideEncryptStrategy strategy) throws Exception {
         List<PaymentDetail> paymentDetails = request.getPaymentDetails();
         String beforeEncrypt = JSONObject.toJSONString(paymentDetails);
         // 1. 构建 encryptKeyLists
