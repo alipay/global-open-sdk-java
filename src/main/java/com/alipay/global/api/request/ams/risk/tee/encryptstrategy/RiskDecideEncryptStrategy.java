@@ -25,11 +25,11 @@ import java.util.List;
 public class RiskDecideEncryptStrategy implements EncryptStrategy{
     @Override
     public void encrypt(byte[] data_key, AlipayRequest<?> request, List<EncryptKeyEnum> encryptKeyList) {
-        if (request == null) {
+        if (request == null || encryptKeyList == null) {
             return;
         }
         if (!(request instanceof RiskDecideRequest)) {
-            throw new CryptoException(ErrorCodeEnum.MISMATCH_ENCRYPT_STRATEGY, "request is not instance of RiskDecideRequest");
+            throw new CryptoException(ErrorCodeEnum.MISMATCH_ENCRYPT_STRATEGY, "Request is not instance of RiskDecideRequest");
         }
         RiskDecideRequest riskDecideRequest = (RiskDecideRequest) request;
         AESCrypto crypto = AESCrypto.getInstance();

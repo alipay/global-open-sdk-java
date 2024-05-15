@@ -1,50 +1,43 @@
 /*
  * Ant Group
- * Copyright (c) 2004-2023 All Rights Reserved.
+ * Copyright (c) 2004-2024 All Rights Reserved.
  */
 package com.alipay.global.api.example;
 
 import com.alipay.global.api.AlipayClient;
 import com.alipay.global.api.DefaultAlipayClient;
 import com.alipay.global.api.exception.AlipayApiException;
-import com.alipay.global.api.model.ams.Address;
-import com.alipay.global.api.model.ams.Amount;
-import com.alipay.global.api.model.ams.Buyer;
-import com.alipay.global.api.model.ams.CardVerificationResult;
-import com.alipay.global.api.model.ams.Env;
-import com.alipay.global.api.model.ams.Goods;
-import com.alipay.global.api.model.ams.OsType;
-import com.alipay.global.api.model.ams.RiskThreeDSResult;
-import com.alipay.global.api.model.ams.Shipping;
-import com.alipay.global.api.model.ams.TerminalType;
-import com.alipay.global.api.model.ams.UserName;
-import com.alipay.global.api.model.risk.AuthorizationPhase;
-import com.alipay.global.api.model.risk.Order;
-import com.alipay.global.api.model.risk.PaymentMethodMetaData;
+import com.alipay.global.api.model.ams.*;
 import com.alipay.global.api.model.risk.Merchant;
-import com.alipay.global.api.model.risk.PaymentDetail;
+import com.alipay.global.api.model.risk.Order;
 import com.alipay.global.api.model.risk.PaymentMethod;
+import com.alipay.global.api.model.risk.*;
 import com.alipay.global.api.request.ams.risk.RiskDecideRequest;
 import com.alipay.global.api.request.ams.risk.RiskReportRequest;
 import com.alipay.global.api.request.ams.risk.SendPaymentResultRequest;
 import com.alipay.global.api.request.ams.risk.SendRefundResultRequest;
+import com.alipay.global.api.request.ams.risk.tee.encryptstrategy.RiskDecideEncryptStrategy;
+import com.alipay.global.api.request.ams.risk.tee.enums.EncryptKeyEnum;
 import com.alipay.global.api.response.ams.risk.RiskDecideResponse;
 import com.alipay.global.api.response.ams.risk.RiskReportResponse;
 import com.alipay.global.api.response.ams.risk.SendPaymentResultResponse;
 import com.alipay.global.api.response.ams.risk.SendRefundResultResponse;
 
-import java.util.Collections;
-import java.util.Date;
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
+import java.security.NoSuchAlgorithmException;
+import java.util.*;
 
-public class RiskDecideDemoCode {
-    private static final String       CLIENT_ID           = "";
-    private static final String       GATE_WAY_URL        = "";
-    private static final String       merchantPrivateKey  = "";
-    private static final String       alipayPublicKey     = "";
+public class RiskDecideTeeDemoCode {
+    private static final String       CLIENT_ID           = "SANDBOX_5YBW7N2ZFQKM01671";
+    private static final String       GATE_WAY_URL        = "https://open-sea-global.alipay.com";
+    private static final String       merchantPrivateKey  = "MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCvmKKTqh8LycwRsKgHbSjaVC1UIc2FLzZoXwDjyje/RGIgXfnQiMTQtbr8PzhK+syD+Lk809QxAWxKJilfysBsMwYHnPrq3bd76cESCht8aEXOlhP3Y6U3Q/ErMCbDLmRGt6KL4EkQXVW/hBDRQfnqn9523n7Vf+QYB8VkdwUmCQoLOAmUa/b0tN20FZiMLOkKoyoR3sfyZkq0tJoc8H5VEp4JCPTePhLHErm0ydPALRATpwe6r5gBTr7afLYp3p4H39pnhAaOLoNgsTRl9iNrZLKW058T0xGN8l6eNQjh4D5Bb4m4cXOYW7EsBMXbv9/zOCSIE3cerUMUapGa+EwNAgMBAAECggEALXn9WPrtMXNg25AB5HJ76xdz6d8bSAvzLlK0e0oq5+lA9JsCEOTq/Bakx6Fj5d9QSjmHV96QjOSOdCGwA3QSI7OPMzePsHYdiAUBELf3aF/k/FzX7PEsn8SD2CiPUWtZYws6GLnMkmVpyMDeTiOlIwOmbOiwtoB5xVN15tAAUFoG2cDEilIluL74bMKWNzym76AC3KFoUG7JHQudGC3li3/tvbiKqdEkVv4KkpxO5L2HoOJcOQ1wbXrXbBr7owCJ1hgOLulWS+I1HUru96+vPnheVuSMOmGwe6Ocs2mz3I9E2yBJS2Et3IaU5blgj2v+mCB+Ef1GhT2P3MbgKcWFDQKBgQDj2UA8PlglClM2SYCuPLI6v8y3CLd45SZNeZJ624VFSKdH5BVn8jJ0s0cQ7tdGVztRIhv9aklZAJoUke6u8dTMcqfP02rDIwrAy4k04RZtaT0fMMLD1UIjNZGjHSNA3RaTALvsOW3a9FrQ0ADq2CGH1AE9UeA3cvYTcCdcqVvnKwKBgQDFSqoLwzS+u1umAKuVxi7EP6mCqrs2G3TYmPPJItDmZ2vvqYJ4FlsCyHOJgwrEiWlBmXHdkoMnDXJVJFW+P6cLQ9V4n3p0Ie9z+o6aMtvlZWuSYltwXm/ycVp/hQPbFFIxJtUfcHeURWXGGIAaaPtE3AEZlLf/6He/EuIx/i39pwKBgHUylFXog5JZ4z9zQ1tcIRkS+wvS0fy/cZo8RFopfD2NB251JYWYENfyN0XAdL7bs8kh0F/jQeMj6h1Wiv01qw2WlDbUOoAxECDnEKZAeTbCAQyAGk587U4LCeRq4m1Ey43FvOPfDmCne+cYdsBVd7nUFOcjrD8ZRPXupHCHNJyNAoGAF4UoMpDKB/cEHQ01Z3yh9Kl2RuqduPya+Ht7jL4G04D+4CqAMFrR7MoC5CDoNrf/AWAOsBCYbB5xQ+85/Z1PB8vFdkTk71VgW55CQ+XOS1HE+kWZixLnG6sh09QCuqp4hf2QKNhamSWQ1YX0N7HOSs5Dn04YhXysUe4pYzZfOz8CgYEAlLvAJ7oqCgCt+d3XjcGW76l+k8seIGjnpyWN5rbCalXnRuFsaNf6RTVskmcVzsZlWLon1fK8IH4xFDrqgXbvERemuaHWnaadZD6i/6tkbyOROAFGbkOSf5Wwe4NS7xzxGM0WSmPArg1nfd/D/8TIgAKQZyIpwPeer51HczR4AX8=";
+    private static final String       alipayPublicKey     = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqWxuPBXkI+9uMFT8gM/jdkNyVVbDix3A5y2mhRMiPPCMh5ArPkrcHGTRQKntQI6flAc6LNuEvB+4i4Eu+jLs3qjmlM6J1Hvhpw/mu9L+V+bypyONx35AtJjEoajD3d+kCtoWqYFylZpXXP4VCGxhVi0N9fI9AIszUNECcbYV9iu7T7cCT388dklvmmOQvT0CvdxBfrlpfVcyCOuShhYTJvsxofYLFbWo7j+ghciVPthvPQ2z8X9ZJcECWG60sr1qvNBbM26F20b59UE79HCjbCV+3KNNztP/PJNQFDkSYeSdvW+f3Uu+k3yrFhUWIR65VwE2L+QIwkQPvFt6mIx8mwIDAQAB";
     private static final AlipayClient defaultAlipayClient = new DefaultAlipayClient(GATE_WAY_URL, merchantPrivateKey, alipayPublicKey);
 
-    public static void main(String[] args) {
-
+    public static void main(String[] args) throws NoSuchAlgorithmException {
+//        preAuthDecide();
+        postAuthDecide();
     }
 
     public static RiskDecideResponse preAuthDecide() {
@@ -53,12 +46,16 @@ public class RiskDecideDemoCode {
         request.setPath("/ams/api/v1/risk/payments/decide");
         request.setReferenceTransactionId("test_20231012091493242");
         request.setAuthorizationPhase(AuthorizationPhase.PRE_AUTHORIZATION);
+        // 1. build plaintext request
         buildRiskDecideRequest(request);
-
+        // 2. encrypt request
+        encryptRequest(request);
+        // 3. send request
         RiskDecideResponse response = null;
         try {
             response = defaultAlipayClient.execute(request);
         } catch (AlipayApiException e) {
+            e.printStackTrace();
             // TODO Handle AlipayApiException and log
         }
         return response;
@@ -70,6 +67,7 @@ public class RiskDecideDemoCode {
         request.setPath("/ams/api/v1/risk/payments/decide");
         request.setReferenceTransactionId("test_20231012091493242");
         request.setAuthorizationPhase(AuthorizationPhase.POST_AUTHORIZATION);
+        // 1. build plaintext request
         buildRiskDecideRequest(request);
         PaymentDetail paymentDetail = request.getPaymentDetails().get(0);
         PaymentMethodMetaData paymentMethodMetaData = paymentDetail.getPaymentMethod().getPaymentMethodMetaData();
@@ -84,6 +82,10 @@ public class RiskDecideDemoCode {
         cardVerificationResult.setThreeDSResult(riskThreeDSResult);
         paymentMethodMetaData.setCardVerificationResult(cardVerificationResult);
 
+        // 2. encrypt request
+        encryptRequest(request);
+
+        // 3. send request
         RiskDecideResponse response = null;
         try {
             response = defaultAlipayClient.execute(request);
@@ -91,6 +93,32 @@ public class RiskDecideDemoCode {
             // TODO Handle AlipayApiException and log
         }
         return response;
+    }
+
+    public static void encryptRequest(RiskDecideRequest request) {
+        // 2.1. build encryptList
+        List<EncryptKeyEnum> encryptList = Arrays.asList(
+                EncryptKeyEnum.MERCHANT_EMAIL,
+                EncryptKeyEnum.BUYER_REGISTRATION_TIME,
+                EncryptKeyEnum.CARD_HOLDER_NAME,
+                EncryptKeyEnum.SHIPPING_ADDR1,
+                EncryptKeyEnum.SHIPPING_ADDR2,
+                EncryptKeyEnum.SHIPPING_NAME,
+                EncryptKeyEnum.SHIPPING_EMAIL,
+                EncryptKeyEnum.SHIPPING_PHONE_NO
+        );
+        // TODO: generate dk, need to be deleted when the toolkit is applied
+        KeyGenerator aesKeyGen = null;
+        try {
+            aesKeyGen = KeyGenerator.getInstance("AES");
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
+        SecretKey key = aesKeyGen.generateKey();
+        byte[] data_key = key.getEncoded();
+        // 2.2. encrypt request by RiskDecideEncryptStrategy
+        RiskDecideEncryptStrategy strategy = new RiskDecideEncryptStrategy();
+        strategy.encrypt(data_key, request, encryptList);
     }
 
     public static SendPaymentResultResponse sendPaymentResult() {
@@ -153,7 +181,7 @@ public class RiskDecideDemoCode {
         return response;
     }
 
-    public static void buildRiskDecideRequest(RiskDecideRequest request) {
+    private static void buildRiskDecideRequest(RiskDecideRequest request) {
         Order order = new Order();
         order.setReferenceOrderId("test_202310120914932421");
         Amount orderAmount = new Amount();
@@ -163,6 +191,7 @@ public class RiskDecideDemoCode {
         order.setOrderDescription("Cappuccino #grande (Mika's coffee shop)");
         Merchant merchant = new Merchant();
         merchant.setReferenceMerchantId("SM_001");
+        merchant.setMerchantEmail("12345678@foxmail.com");
         order.setMerchant(merchant);
         Goods goods = new Goods();
         goods.setReferenceGoodsId("383382011_SGAMZ-904520356");
@@ -208,6 +237,7 @@ public class RiskDecideDemoCode {
         buyerName.setMiddleName("Skr");
         buyerName.setFullName("Dehua Skr Liu");
         buyer.setBuyerName(buyerName);
+        buyer.setBuyerRegistrationTime("2023-01-01T12:08:56+08:00");
         request.setBuyer(buyer);
 
         Amount actualPaymentAmount = new Amount();
@@ -257,4 +287,5 @@ public class RiskDecideDemoCode {
         discountAmount.setValue("0");
         request.setDiscountAmount(discountAmount);
     }
+
 }
