@@ -47,9 +47,11 @@ public class EncryptStrategyTest {
         byte[] data_key = key.getEncoded();
         // 3. 加密策略
         RiskDecideEncryptStrategy strategy = new RiskDecideEncryptStrategy();
-        // 4. 测试
+        // 4. 加解密测试
         testRiskDecideEncryptStrategy(data_key, request, strategy);
-        timeCostTest(data_key, request, strategy);
+
+        // 5. 本地耗时测试
+//        timeCostTest(data_key, request, strategy);
     }
 
     private static void timeCostTest(byte[] data_key, RiskDecideRequest request,
@@ -76,8 +78,8 @@ public class EncryptStrategyTest {
         System.out.println("BEGIN TEST:");
         testOrders(data_key, request, strategy);
         String data_keyStr = Base64.getEncoder().encodeToString(data_key);
-        testBuyerRegistrationTime(data_keyStr, request, strategy);
-        testCardHolderName(data_key, request, strategy);
+//        testBuyerRegistrationTime(data_keyStr, request, strategy);
+//        testCardHolderName(data_key, request, strategy);
     }
 
     private static void testOrders(byte[] data_key, RiskDecideRequest request,
@@ -249,6 +251,8 @@ public class EncryptStrategyTest {
         shipping.setShippingAddress(shippingAddress);
         order.setShipping(shipping);
         request.setOrders(Collections.singletonList(order));
+//        List<Order> orders = Arrays.asList(order, order, order, order, order, order, order, order, order, order);
+//        request.setOrders(orders);
 
         Buyer buyer = new Buyer();
         buyer.setReferenceBuyerId("test12345678");

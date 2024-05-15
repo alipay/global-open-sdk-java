@@ -15,6 +15,25 @@ import java.util.Base64;
 public class AESCryptoTest {
     public static void main(String[] args) throws Exception{
         testString1();
+        timeCostTest();
+    }
+
+    private static void timeCostTest() throws Exception{
+        //prepare
+        KeyGenerator aesKeyGen = KeyGenerator.getInstance("AES");
+        SecretKey key = aesKeyGen.generateKey();
+        byte[] keyBytes = key.getEncoded();
+        String plaintext = "E;,c(=YD#|";
+        // time cost test
+        long start = System.currentTimeMillis();
+        //invoke
+        for (int i = 0; i < 100; i++) {
+            AESCrypto.getInstance().encrypt(keyBytes,
+                    plaintext.getBytes(StandardCharsets.UTF_8));
+        }
+        long end = System.currentTimeMillis();
+        System.out.println((end - start));  // 18ms
+        // 结论：本地测试加密一个字段耗时 0.18 ms
     }
 
     private static void testString1() throws Exception{

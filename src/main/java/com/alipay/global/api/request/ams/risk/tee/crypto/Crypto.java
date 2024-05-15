@@ -14,7 +14,7 @@ public interface Crypto {
      */
     byte[] encrypt(byte[] dataKey, byte[] data);
 
-    /**
+    /*
      * encrypt by dataKey
      * 通过 dataKey 加密数据
      * @param dataKeyBase64 symmetric key String encoded by base64
