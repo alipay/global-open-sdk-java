@@ -14,8 +14,22 @@ import java.util.Base64;
 
 public class AESCryptoTest {
     public static void main(String[] args) throws Exception{
-        testString1();
-        timeCostTest();
+//        testString1();
+//        timeCostTest();
+        testDk();
+    }
+
+    /**
+     * test encrypt and decrypt function by using toolkit dk.txt
+     * @throws Exception
+     */
+    private static void testDk() throws Exception{
+        String dk = "K6GQkxXagvP7bmgGvw70mw==";
+        String plaintext = "E;,c(=YD#|";
+        byte[] ciphertext = AESCrypto.getInstance().encrypt(dk, plaintext.getBytes(StandardCharsets.UTF_8));
+        byte[] decrypt = decrypt(Base64.getDecoder().decode(dk), ciphertext);
+        String afterDecrypt = new String(decrypt);
+        System.out.println(afterDecrypt.equals(plaintext));
     }
 
     private static void timeCostTest() throws Exception{
@@ -28,8 +42,7 @@ public class AESCryptoTest {
         long start = System.currentTimeMillis();
         //invoke
         for (int i = 0; i < 100; i++) {
-            AESCrypto.getInstance().encrypt(keyBytes,
-                    plaintext.getBytes(StandardCharsets.UTF_8));
+            AESCrypto.getInstance().encrypt(keyBytes, plaintext.getBytes(StandardCharsets.UTF_8));
         }
         long end = System.currentTimeMillis();
         System.out.println((end - start));  // 18ms

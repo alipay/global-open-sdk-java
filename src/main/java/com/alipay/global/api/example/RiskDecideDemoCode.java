@@ -43,10 +43,6 @@ public class RiskDecideDemoCode {
     private static final String       alipayPublicKey     = "";
     private static final AlipayClient defaultAlipayClient = new DefaultAlipayClient(GATE_WAY_URL, merchantPrivateKey, alipayPublicKey);
 
-    public static void main(String[] args) {
-
-    }
-
     public static RiskDecideResponse preAuthDecide() {
         RiskDecideRequest request = new RiskDecideRequest();
         request.setClientId(CLIENT_ID);
