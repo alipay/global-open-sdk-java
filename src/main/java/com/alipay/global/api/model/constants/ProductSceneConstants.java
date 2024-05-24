@@ -1,7 +1,7 @@
 package com.alipay.global.api.model.constants;
 
 /**
- * @Author yanhong
+ * @author yanhong
  * @version $Id: productSceneConstants.java, v 0.1 2024年03月14日 5:02 PM yanhong Exp $
  **/
 public class ProductSceneConstants {
