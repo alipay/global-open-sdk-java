@@ -11,6 +11,8 @@ public class Goods {
     private String goodsUrl;
     private String deliveryMethodType;
 
+    private String goodsImageUrl;
+
     public String getReferenceGoodsId() {
         return referenceGoodsId;
     }
@@ -81,5 +83,13 @@ public class Goods {
 
     public void setDeliveryMethodType(String deliveryMethodType) {
         this.deliveryMethodType = deliveryMethodType;
+    }
+
+    public String getGoodsImageUrl() {
+        return goodsImageUrl;
+    }
+
+    public void setGoodsImageUrl(String goodsImageUrl) {
+        this.goodsImageUrl = goodsImageUrl;
     }
 }

@@ -2,12 +2,13 @@ package com.alipay.global.api.model.ams;
 
 public class PaymentMethodDetail {
 
-
     private PaymentMethodDetailType     paymentMethodDetailType;
     private CardPaymentMethodDetail card;
     private ExternalPaymentMethodDetail externalAccount;
     private DiscountPaymentMethodDetail discount;
     private CouponPaymentMethodDetail coupon;
+
+    private String paymentMethodType;
     private String                      extendInfo;
 
     public PaymentMethodDetailType getPaymentMethodDetailType() {
@@ -56,5 +57,14 @@ public class PaymentMethodDetail {
 
     public void setExtendInfo(String extendInfo) {
         this.extendInfo = extendInfo;
+    }
+
+    public String getPaymentMethodType() {
+        return paymentMethodType;
+    }
+
+    public PaymentMethodDetail setPaymentMethodType(String paymentMethodType) {
+        this.paymentMethodType = paymentMethodType;
+        return this;
     }
 }
