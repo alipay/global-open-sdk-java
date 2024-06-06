@@ -8,6 +8,8 @@ public class PaymentFactor {
     private InStorePaymentScenario inStorePaymentScenario;
     private PresentmentMode        presentmentMode;
 
+    private String                 captureMode;
+
     @JSONField(name="isAuthorization")
     private Boolean                isAuthorization;
 
@@ -49,5 +51,17 @@ public class PaymentFactor {
 
     public void setAuthorization(Boolean authorization) {
         isAuthorization = authorization;
+    }
+
+    public String getCaptureMode() {
+        return captureMode;
+    }
+
+    public void setCaptureMode(String captureMode) {
+        this.captureMode = captureMode;
+    }
+
+    public Boolean getAuthorization() {
+        return isAuthorization;
     }
 }

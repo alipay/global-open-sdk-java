@@ -15,6 +15,24 @@ public class CardPaymentMethodDetail {
     private String    last4;
     private String    paymentMethodDetailMetadata;
 
+    private String    maskedCardNo;
+
+    private String    fingerprint;
+
+    private String    authenticationFlow;
+
+    private String    funding;
+
+    private String    avsResultRaw;
+
+    private String    bin;
+
+    private String    issuerName;
+
+    private String    issuingCountry;
+
+    private String    lastFour;
+
     public String getCardToken() {
         return cardToken;
     }
@@ -109,5 +127,77 @@ public class CardPaymentMethodDetail {
 
     public void setPaymentMethodDetailMetadata(String paymentMethodDetailMetadata) {
         this.paymentMethodDetailMetadata = paymentMethodDetailMetadata;
+    }
+
+    public String getMaskedCardNo() {
+        return maskedCardNo;
+    }
+
+    public void setMaskedCardNo(String maskedCardNo) {
+        this.maskedCardNo = maskedCardNo;
+    }
+
+    public String getFingerprint() {
+        return fingerprint;
+    }
+
+    public void setFingerprint(String fingerprint) {
+        this.fingerprint = fingerprint;
+    }
+
+    public String getAuthenticationFlow() {
+        return authenticationFlow;
+    }
+
+    public void setAuthenticationFlow(String authenticationFlow) {
+        this.authenticationFlow = authenticationFlow;
+    }
+
+    public String getFunding() {
+        return funding;
+    }
+
+    public void setFunding(String funding) {
+        this.funding = funding;
+    }
+
+    public String getAvsResultRaw() {
+        return avsResultRaw;
+    }
+
+    public void setAvsResultRaw(String avsResultRaw) {
+        this.avsResultRaw = avsResultRaw;
+    }
+
+    public String getBin() {
+        return bin;
+    }
+
+    public void setBin(String bin) {
+        this.bin = bin;
+    }
+
+    public String getIssuerName() {
+        return issuerName;
+    }
+
+    public void setIssuerName(String issuerName) {
+        this.issuerName = issuerName;
+    }
+
+    public String getIssuingCountry() {
+        return issuingCountry;
+    }
+
+    public void setIssuingCountry(String issuingCountry) {
+        this.issuingCountry = issuingCountry;
+    }
+
+    public String getLastFour() {
+        return lastFour;
+    }
+
+    public void setLastFour(String lastFour) {
+        this.lastFour = lastFour;
     }
 }
