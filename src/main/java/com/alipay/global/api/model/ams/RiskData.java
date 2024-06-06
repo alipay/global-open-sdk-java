@@ -1,5 +1,14 @@
 package com.alipay.global.api.model.ams;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class RiskData {
     /**
      * The order information used for risk control purposes.
@@ -31,51 +40,4 @@ public class RiskData {
      */
     private CardVerificationResult cardVerificationResult;
 
-    public RiskOrder getOrder() {
-        return order;
-    }
-
-    public void setOrder(RiskOrder order) {
-        this.order = order;
-    }
-
-    public RiskBuyer getBuyer() {
-        return buyer;
-    }
-
-    public void setBuyer(RiskBuyer buyer) {
-        this.buyer = buyer;
-    }
-
-    public RiskEnv getEnv() {
-        return env;
-    }
-
-    public void setEnv(RiskEnv env) {
-        this.env = env;
-    }
-
-    public RiskSignal getRiskSignal() {
-        return riskSignal;
-    }
-
-    public void setRiskSignal(RiskSignal riskSignal) {
-        this.riskSignal = riskSignal;
-    }
-
-    public RiskAddress getAddress() {
-        return address;
-    }
-
-    public void setAddress(RiskAddress address) {
-        this.address = address;
-    }
-
-    public CardVerificationResult getCardVerificationResult() {
-        return cardVerificationResult;
-    }
-
-    public void setCardVerificationResult(CardVerificationResult cardVerificationResult) {
-        this.cardVerificationResult = cardVerificationResult;
-    }
 }

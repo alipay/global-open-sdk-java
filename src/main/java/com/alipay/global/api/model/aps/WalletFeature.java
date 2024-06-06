@@ -1,24 +1,17 @@
 package com.alipay.global.api.model.aps;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class WalletFeature {
 
     private Boolean supportCodeScan;
     private Boolean supportCashierRedirection;
-
-    public Boolean getSupportCodeScan() {
-        return supportCodeScan;
-    }
-
-    public void setSupportCodeScan(Boolean supportCodeScan) {
-        this.supportCodeScan = supportCodeScan;
-    }
-
-    public Boolean getSupportCashierRedirection() {
-        return supportCashierRedirection;
-    }
-
-    public void setSupportCashierRedirection(Boolean supportCashierRedirection) {
-        this.supportCashierRedirection = supportCashierRedirection;
-    }
 
 }

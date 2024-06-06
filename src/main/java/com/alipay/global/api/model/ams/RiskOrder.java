@@ -1,6 +1,14 @@
 package com.alipay.global.api.model.ams;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class RiskOrder {
     /**
      * The order type
@@ -12,19 +20,4 @@ public class RiskOrder {
      */
     private String referringSite;
 
-    public String getOrderType() {
-        return orderType;
-    }
-
-    public void setOrderType(String orderType) {
-        this.orderType = orderType;
-    }
-
-    public String getReferringSite() {
-        return referringSite;
-    }
-
-    public void setReferringSite(String referringSite) {
-        this.referringSite = referringSite;
-    }
 }

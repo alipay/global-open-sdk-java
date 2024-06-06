@@ -2,6 +2,6 @@ package com.alipay.global.api.model.aps;
 
 public enum TransactionStatusType {
 
-    SUCCESS,FAIL,PROCESSING,CANCELLED;
+    SUCCESS, FAIL, PROCESSING, CANCELLED;
 
 }

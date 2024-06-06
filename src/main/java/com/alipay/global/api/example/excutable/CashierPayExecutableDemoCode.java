@@ -143,7 +143,7 @@ public class CashierPayExecutableDemoCode {
 
         // set auth capture payment mode
         PaymentFactor paymentFactor = new PaymentFactor();
-        paymentFactor.setAuthorization(true);
+        paymentFactor.setIsAuthorization(true);
         alipayPayRequest.setPaymentFactor(paymentFactor);
 
         // replace to your notify url
@@ -216,7 +216,7 @@ public class CashierPayExecutableDemoCode {
 
         // set auth capture payment mode
         PaymentFactor paymentFactor = new PaymentFactor();
-        paymentFactor.setAuthorization(true);
+        paymentFactor.setIsAuthorization(true);
         alipayPayRequest.setPaymentFactor(paymentFactor);
 
         // replace to your notify url
@@ -268,7 +268,7 @@ public class CashierPayExecutableDemoCode {
 
         // set auth capture payment mode
         PaymentFactor paymentFactor = new PaymentFactor();
-        paymentFactor.setAuthorization(true);
+        paymentFactor.setIsAuthorization(true);
         alipayPaymentSessionRequest.setPaymentFactor(paymentFactor);
 
         // replace to your orderId

@@ -1,9 +1,7 @@
 package com.alipay.global.api.model.ams;
 
+public enum MerchantType {
 
-public enum  MerchantType {
-
-    INDIVIDUAL(),
-    ENTERPRISE();
+    INDIVIDUAL(), ENTERPRISE();
 
 }

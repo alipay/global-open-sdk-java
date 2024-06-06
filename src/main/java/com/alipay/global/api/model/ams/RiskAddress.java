@@ -1,5 +1,14 @@
 package com.alipay.global.api.model.ams;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class RiskAddress {
     /**
      * The type of the receiver's phone number
@@ -26,43 +35,4 @@ public class RiskAddress {
      */
     private Integer minPreviousShipToBillDistance;
 
-    public String getShippingPhoneType() {
-        return shippingPhoneType;
-    }
-
-    public void setShippingPhoneType(String shippingPhoneType) {
-        this.shippingPhoneType = shippingPhoneType;
-    }
-
-    public Boolean getBillShipStateSame() {
-        return isBillShipStateSame;
-    }
-
-    public void setBillShipStateSame(Boolean billShipStateSame) {
-        isBillShipStateSame = billShipStateSame;
-    }
-
-    public Boolean getPreviousStateSame() {
-        return isPreviousStateSame;
-    }
-
-    public void setPreviousStateSame(Boolean previousStateSame) {
-        isPreviousStateSame = previousStateSame;
-    }
-
-    public Integer getLocToShipDistance() {
-        return locToShipDistance;
-    }
-
-    public void setLocToShipDistance(Integer locToShipDistance) {
-        this.locToShipDistance = locToShipDistance;
-    }
-
-    public Integer getMinPreviousShipToBillDistance() {
-        return minPreviousShipToBillDistance;
-    }
-
-    public void setMinPreviousShipToBillDistance(Integer minPreviousShipToBillDistance) {
-        this.minPreviousShipToBillDistance = minPreviousShipToBillDistance;
-    }
 }

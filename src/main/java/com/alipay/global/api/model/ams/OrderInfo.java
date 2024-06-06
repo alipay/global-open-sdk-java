@@ -1,14 +1,16 @@
 package com.alipay.global.api.model.ams;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class OrderInfo {
 
     private Amount orderAmount;
 
-    public Amount getOrderAmount() {
-        return orderAmount;
-    }
-
-    public void setOrderAmount(Amount orderAmount) {
-        this.orderAmount = orderAmount;
-    }
 }

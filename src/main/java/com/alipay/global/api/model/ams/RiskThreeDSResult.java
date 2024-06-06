@@ -1,5 +1,14 @@
 package com.alipay.global.api.model.ams;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class RiskThreeDSResult {
 
     /**
@@ -22,35 +31,4 @@ public class RiskThreeDSResult {
      */
     private String cavv;
 
-    public String getThreeDSVersion() {
-        return threeDSVersion;
-    }
-
-    public void setThreeDSVersion(String threeDSVersion) {
-        this.threeDSVersion = threeDSVersion;
-    }
-
-    public String getThreeDSInteractionMode() {
-        return threeDSInteractionMode;
-    }
-
-    public void setThreeDSInteractionMode(String threeDSInteractionMode) {
-        this.threeDSInteractionMode = threeDSInteractionMode;
-    }
-
-    public String getEci() {
-        return eci;
-    }
-
-    public void setEci(String eci) {
-        this.eci = eci;
-    }
-
-    public String getCavv() {
-        return cavv;
-    }
-
-    public void setCavv(String cavv) {
-        this.cavv = cavv;
-    }
 }
