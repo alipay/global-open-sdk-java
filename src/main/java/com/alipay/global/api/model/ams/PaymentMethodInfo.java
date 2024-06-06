@@ -17,12 +17,4 @@ public class PaymentMethodInfo {
     private boolean preferred;
     private String extendInfo;
 
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    public boolean isPreferred() {
-        return preferred;
-    }
-
 }

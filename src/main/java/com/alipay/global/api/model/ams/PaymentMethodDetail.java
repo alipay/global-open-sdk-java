@@ -20,8 +20,4 @@ public class PaymentMethodDetail {
     private String paymentMethodType;
     private String extendInfo;
 
-    public PaymentMethodDetail setPaymentMethodType(String paymentMethodType) {
-        this.paymentMethodType = paymentMethodType;
-        return this;
-    }
 }

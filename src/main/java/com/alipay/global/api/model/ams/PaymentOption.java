@@ -30,12 +30,4 @@ public class PaymentOption {
 
     private Installment installment;
 
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    public boolean isPreferred() {
-        return preferred;
-    }
-
 }

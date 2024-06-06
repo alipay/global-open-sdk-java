@@ -19,12 +19,4 @@ public class PaymentOption {
     private Logo logo;
     private PaymentOptionDetail paymentOptionDetail;
 
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    public boolean isPreferred() {
-        return preferred;
-    }
-
 }

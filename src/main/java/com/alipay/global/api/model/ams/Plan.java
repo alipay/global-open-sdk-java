@@ -23,8 +23,4 @@ public class Plan {
 
     private boolean enabled;
 
-    public boolean isEnabled() {
-        return enabled;
-    }
-
 }
