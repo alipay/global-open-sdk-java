@@ -28,12 +28,12 @@ import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
 public class RiskDecideTeeDemoCode {
-    private static final String       CLIENT_ID           = "SANDBOX_5YBW7N2ZFQKM01671";
+    private static final String       CLIENT_ID           = "5J5YBT2Y2Y5MSG04004";
     private static final String       GATE_WAY_URL        = "https://open-sea-global.alipay.com";
     private static final String       merchantPrivateKey  = "MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCvmKKTqh8LycwRsKgHbSjaVC1UIc2FLzZoXwDjyje/RGIgXfnQiMTQtbr8PzhK+syD+Lk809QxAWxKJilfysBsMwYHnPrq3bd76cESCht8aEXOlhP3Y6U3Q/ErMCbDLmRGt6KL4EkQXVW/hBDRQfnqn9523n7Vf+QYB8VkdwUmCQoLOAmUa/b0tN20FZiMLOkKoyoR3sfyZkq0tJoc8H5VEp4JCPTePhLHErm0ydPALRATpwe6r5gBTr7afLYp3p4H39pnhAaOLoNgsTRl9iNrZLKW058T0xGN8l6eNQjh4D5Bb4m4cXOYW7EsBMXbv9/zOCSIE3cerUMUapGa+EwNAgMBAAECggEALXn9WPrtMXNg25AB5HJ76xdz6d8bSAvzLlK0e0oq5+lA9JsCEOTq/Bakx6Fj5d9QSjmHV96QjOSOdCGwA3QSI7OPMzePsHYdiAUBELf3aF/k/FzX7PEsn8SD2CiPUWtZYws6GLnMkmVpyMDeTiOlIwOmbOiwtoB5xVN15tAAUFoG2cDEilIluL74bMKWNzym76AC3KFoUG7JHQudGC3li3/tvbiKqdEkVv4KkpxO5L2HoOJcOQ1wbXrXbBr7owCJ1hgOLulWS+I1HUru96+vPnheVuSMOmGwe6Ocs2mz3I9E2yBJS2Et3IaU5blgj2v+mCB+Ef1GhT2P3MbgKcWFDQKBgQDj2UA8PlglClM2SYCuPLI6v8y3CLd45SZNeZJ624VFSKdH5BVn8jJ0s0cQ7tdGVztRIhv9aklZAJoUke6u8dTMcqfP02rDIwrAy4k04RZtaT0fMMLD1UIjNZGjHSNA3RaTALvsOW3a9FrQ0ADq2CGH1AE9UeA3cvYTcCdcqVvnKwKBgQDFSqoLwzS+u1umAKuVxi7EP6mCqrs2G3TYmPPJItDmZ2vvqYJ4FlsCyHOJgwrEiWlBmXHdkoMnDXJVJFW+P6cLQ9V4n3p0Ie9z+o6aMtvlZWuSYltwXm/ycVp/hQPbFFIxJtUfcHeURWXGGIAaaPtE3AEZlLf/6He/EuIx/i39pwKBgHUylFXog5JZ4z9zQ1tcIRkS+wvS0fy/cZo8RFopfD2NB251JYWYENfyN0XAdL7bs8kh0F/jQeMj6h1Wiv01qw2WlDbUOoAxECDnEKZAeTbCAQyAGk587U4LCeRq4m1Ey43FvOPfDmCne+cYdsBVd7nUFOcjrD8ZRPXupHCHNJyNAoGAF4UoMpDKB/cEHQ01Z3yh9Kl2RuqduPya+Ht7jL4G04D+4CqAMFrR7MoC5CDoNrf/AWAOsBCYbB5xQ+85/Z1PB8vFdkTk71VgW55CQ+XOS1HE+kWZixLnG6sh09QCuqp4hf2QKNhamSWQ1YX0N7HOSs5Dn04YhXysUe4pYzZfOz8CgYEAlLvAJ7oqCgCt+d3XjcGW76l+k8seIGjnpyWN5rbCalXnRuFsaNf6RTVskmcVzsZlWLon1fK8IH4xFDrqgXbvERemuaHWnaadZD6i/6tkbyOROAFGbkOSf5Wwe4NS7xzxGM0WSmPArg1nfd/D/8TIgAKQZyIpwPeer51HczR4AX8=";
     private static final String       alipayPublicKey     = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqWxuPBXkI+9uMFT8gM/jdkNyVVbDix3A5y2mhRMiPPCMh5ArPkrcHGTRQKntQI6flAc6LNuEvB+4i4Eu+jLs3qjmlM6J1Hvhpw/mu9L+V+bypyONx35AtJjEoajD3d+kCtoWqYFylZpXXP4VCGxhVi0N9fI9AIszUNECcbYV9iu7T7cCT388dklvmmOQvT0CvdxBfrlpfVcyCOuShhYTJvsxofYLFbWo7j+ghciVPthvPQ2z8X9ZJcECWG60sr1qvNBbM26F20b59UE79HCjbCV+3KNNztP/PJNQFDkSYeSdvW+f3Uu+k3yrFhUWIR65VwE2L+QIwkQPvFt6mIx8mwIDAQAB";
     private static final AlipayClient defaultAlipayClient = new DefaultAlipayClient(GATE_WAY_URL, merchantPrivateKey, alipayPublicKey);
-    private static final String       DATA_KEY = "K6GQkxXagvP7bmgGvw70mw==";
+    private static final String       DATA_KEY = "w7QkIZhPyXqoZTflcQvTVg==";
     public static void main(String[] args) throws NoSuchAlgorithmException {
         preAuthDecide();
 //        postAuthDecide();
@@ -99,9 +99,10 @@ public class RiskDecideTeeDemoCode {
     public static void encryptRequest(RiskDecideRequest request) {
         // 2.1. build encryptList
         List<EncryptKeyEnum> encryptList = Arrays.asList(
-                EncryptKeyEnum.MERCHANT_EMAIL,
+                EncryptKeyEnum.BUYER_EMAIL,
+                EncryptKeyEnum.BUYER_PHONE_NO,
                 EncryptKeyEnum.BUYER_REGISTRATION_TIME,
-                EncryptKeyEnum.CARD_HOLDER_NAME,
+                EncryptKeyEnum.BILL_TO_NAME,
                 EncryptKeyEnum.SHIPPING_ADDR1,
                 EncryptKeyEnum.SHIPPING_ADDR2,
                 EncryptKeyEnum.SHIPPING_NAME,

@@ -14,9 +14,7 @@ import java.util.Base64;
 
 public class AESCryptoTest {
     public static void main(String[] args) throws Exception{
-//        testString1();
-//        timeCostTest();
-        testDk();
+
     }
 
     /**

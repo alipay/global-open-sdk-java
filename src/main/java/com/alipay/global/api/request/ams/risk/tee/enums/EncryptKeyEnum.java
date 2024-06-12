@@ -9,9 +9,10 @@ package com.alipay.global.api.request.ams.risk.tee.enums;
  * 商户可选择的加密字段枚举类
  */
 public enum EncryptKeyEnum {
-    MERCHANT_EMAIL("MERCHANT_EMAIL", "orders.merchant.merchantEmail"),
+    BUYER_EMAIL("BUYER_EMAIL", "buyer.buyerEmail"),
+    BUYER_PHONE_NO("BUYER_PHONE_NO", "buyer.buyerPhoneNo"),
     BUYER_REGISTRATION_TIME("BUYER_REGISTRATION_TIME", "buyer.buyerRegistrationTime"),
-    CARD_HOLDER_NAME("CARD_HOLDER_NAME", "paymentDetails.paymentMethod.paymentMethodMetaData.cardholderName"),
+    BILL_TO_NAME("BILL_TO_NAME", "paymentDetails.paymentMethod.paymentMethodMetaData.cardholderName"),
     SHIPPING_ADDR1("SHIPPING_ADDR1", "orders.shipping.shippingAddress.address1"),
     SHIPPING_ADDR2("SHIPPING_ADDR2", "orders.shipping.shippingAddress.address2"),
     SHIPPING_NAME("SHIPPING_NAME", "orders.shipping.shippingName"),

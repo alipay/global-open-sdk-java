@@ -59,15 +59,21 @@ public class RiskDecideEncryptStrategy implements EncryptStrategy{
                 continue;
             }
             switch (key) {
-                case MERCHANT_EMAIL:
-                    for (Order order : orders) {
-                        String merchantEmail = order.getMerchant().getMerchantEmail();
-                        if (merchantEmail == null || merchantEmail.isEmpty()) {
-                            continue;
-                        }
-                        encrypt = crypto.encrypt(data_key, merchantEmail.getBytes(StandardCharsets.UTF_8));
-                        order.getMerchant().setMerchantEmail(Base64.getEncoder().encodeToString(encrypt));
+                case BUYER_EMAIL:
+                    String buyerEmail = request.getBuyer().getBuyerEmail();
+                    if (buyerEmail == null || buyerEmail.isEmpty()) {
+                        continue;
                     }
+                    encrypt = crypto.encrypt(data_key, buyerEmail.getBytes(StandardCharsets.UTF_8));
+                    request.getBuyer().setBuyerEmail(Base64.getEncoder().encodeToString(encrypt));
+                    break;
+                case BUYER_PHONE_NO:
+                    String buyerPhoneNo = request.getBuyer().getBuyerPhoneNo();
+                    if (buyerPhoneNo == null || buyerPhoneNo.isEmpty()) {
+                        continue;
+                    }
+                    encrypt = crypto.encrypt(data_key, buyerPhoneNo.getBytes(StandardCharsets.UTF_8));
+                    request.getBuyer().setBuyerPhoneNo(Base64.getEncoder().encodeToString(encrypt));
                     break;
                 case BUYER_REGISTRATION_TIME:
                     String buyerRegistrationTime = request.getBuyer().getBuyerRegistrationTime();
@@ -77,7 +83,7 @@ public class RiskDecideEncryptStrategy implements EncryptStrategy{
                     encrypt = crypto.encrypt(data_key, buyerRegistrationTime.getBytes(StandardCharsets.UTF_8));
                     request.getBuyer().setBuyerRegistrationTime(Base64.getEncoder().encodeToString(encrypt));
                     break;
-                case CARD_HOLDER_NAME:
+                case BILL_TO_NAME:
                     for (PaymentDetail paymentDetail : paymentDetails) {
                         encryptName(data_key, paymentDetail.getPaymentMethod().getPaymentMethodMetaData().getCardholderName(), crypto);
                     }
