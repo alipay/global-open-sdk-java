@@ -44,6 +44,14 @@ public class Buyer {
         this.buyerEmail = buyerEmail;
     }
 
+    public Boolean getIsAccountVerified() {
+        return isAccountVerified;
+    }
+
+    public void setIsAccountVerified(Boolean accountVerified) {
+        isAccountVerified = accountVerified;
+    }
+
     public String getBuyerRegistrationTime() {
         return buyerRegistrationTime;
     }
@@ -52,13 +60,6 @@ public class Buyer {
         this.buyerRegistrationTime = buyerRegistrationTime;
     }
 
-    public Boolean getAccountVerified() {
-        return isAccountVerified;
-    }
-
-    public void setAccountVerified(Boolean accountVerified) {
-        isAccountVerified = accountVerified;
-    }
 
     public Integer getSuccessfulOrderCount() {
         return successfulOrderCount;
