@@ -1,5 +1,6 @@
 package com.alipay.global.api.model.constants;
 
+@Deprecated
 public class PathConstants {
 
     public static final String PAY_PROD_PATH = "/ams/api/v1/payments/pay";
