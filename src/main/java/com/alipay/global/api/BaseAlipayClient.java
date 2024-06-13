@@ -52,9 +52,12 @@ public abstract class BaseAlipayClient implements AlipayClient {
 
     public <T extends AlipayResponse> T execute(AlipayRequest<T> alipayRequest) throws AlipayApiException {
 
+        // compatible with old version which clientId does not exist in BaseAlipayClient
+        alipayRequest.setClientId(alipayRequest.getClientId() == null ? this.clientId : alipayRequest.getClientId());
+
         checkRequestParam(alipayRequest);
 
-        String clientId = alipayRequest.getClientId() == null ? this.clientId : alipayRequest.getClientId();
+        String clientId = alipayRequest.getClientId();
         String httpMethod = alipayRequest.getHttpMethod();
         String path = alipayRequest.getPath();
         Integer keyVersion = alipayRequest.getKeyVersion();
@@ -137,7 +140,7 @@ public abstract class BaseAlipayClient implements AlipayClient {
             throw new AlipayApiException("alipayRequest can't null");
         }
 
-        String clientId = alipayRequest.getClientId() == null ? this.clientId : alipayRequest.getClientId();
+        String clientId = alipayRequest.getClientId();
         String httpMethod = alipayRequest.getHttpMethod();
         String path = alipayRequest.getPath();
 
