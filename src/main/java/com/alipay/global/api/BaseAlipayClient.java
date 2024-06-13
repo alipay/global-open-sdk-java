@@ -29,6 +29,10 @@ public abstract class BaseAlipayClient implements AlipayClient {
      * alipay public key
      */
     private String alipayPublicKey;
+    /**
+     * client id
+     */
+    private String clientId;
 
     public BaseAlipayClient() {
     }
@@ -39,11 +43,18 @@ public abstract class BaseAlipayClient implements AlipayClient {
         this.alipayPublicKey = alipayPublicKey;
     }
 
+    public BaseAlipayClient(String gatewayUrl, String merchantPrivateKey, String alipayPublicKey, String clientId) {
+        this.gatewayUrl = gatewayUrl;
+        this.merchantPrivateKey = merchantPrivateKey;
+        this.alipayPublicKey = alipayPublicKey;
+        this.clientId = clientId;
+    }
+
     public <T extends AlipayResponse> T execute(AlipayRequest<T> alipayRequest) throws AlipayApiException {
 
         checkRequestParam(alipayRequest);
 
-        String clientId = alipayRequest.getClientId();
+        String clientId = alipayRequest.getClientId() == null ? this.clientId : alipayRequest.getClientId();
         String httpMethod = alipayRequest.getHttpMethod();
         String path = alipayRequest.getPath();
         Integer keyVersion = alipayRequest.getKeyVersion();
@@ -115,12 +126,10 @@ public abstract class BaseAlipayClient implements AlipayClient {
 
     private boolean checkRspSign(String httpMethod, String path, String clientId, String responseTime, String rspBody, String rspSignValue) throws AlipayApiException {
         try {
-            boolean isVerify = SignatureTool.verify(httpMethod, path, clientId, responseTime, rspBody, rspSignValue, alipayPublicKey);
-            return isVerify;
+            return SignatureTool.verify(httpMethod, path, clientId, responseTime, rspBody, rspSignValue, alipayPublicKey);
         } catch (Exception e) {
             throw new AlipayApiException(e);
         }
-
     }
 
     private void checkRequestParam(AlipayRequest alipayRequest) throws AlipayApiException {
@@ -128,7 +137,7 @@ public abstract class BaseAlipayClient implements AlipayClient {
             throw new AlipayApiException("alipayRequest can't null");
         }
 
-        String clientId = alipayRequest.getClientId();
+        String clientId = alipayRequest.getClientId() == null ? this.clientId : alipayRequest.getClientId();
         String httpMethod = alipayRequest.getHttpMethod();
         String path = alipayRequest.getPath();
 
@@ -141,7 +150,7 @@ public abstract class BaseAlipayClient implements AlipayClient {
         }
 
         if (StringUtils.isBlank(httpMethod)) {
-            throw new AlipayApiException("httpMehod can't null");
+            throw new AlipayApiException("httpMethod can't null");
         }
 
         if (StringUtils.isBlank(path)) {
