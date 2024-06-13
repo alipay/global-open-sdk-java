@@ -1,71 +1,24 @@
 package com.alipay.global.api.model.aps;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.math.BigDecimal;
 
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Quote {
 
-    private String     quoteId;
-    private String     quoteCurrencyPair;
+    private String quoteId;
+    private String quoteCurrencyPair;
     private BigDecimal quotePrice;
-    private String     quoteStartTime	;
-    private String     quoteExpiryTime;
-    private String     baseCurrency;
-    private String     quoteUnit;
-
-    public String getQuoteId() {
-        return quoteId;
-    }
-
-    public void setQuoteId(String quoteId) {
-        this.quoteId = quoteId;
-    }
-
-    public String getQuoteCurrencyPair() {
-        return quoteCurrencyPair;
-    }
-
-    public void setQuoteCurrencyPair(String quoteCurrencyPair) {
-        this.quoteCurrencyPair = quoteCurrencyPair;
-    }
-
-    public BigDecimal getQuotePrice() {
-        return quotePrice;
-    }
-
-    public void setQuotePrice(BigDecimal quotePrice) {
-        this.quotePrice = quotePrice;
-    }
-
-    public String getQuoteStartTime() {
-        return quoteStartTime;
-    }
-
-    public void setQuoteStartTime(String quoteStartTime) {
-        this.quoteStartTime = quoteStartTime;
-    }
-
-    public String getQuoteExpiryTime() {
-        return quoteExpiryTime;
-    }
-
-    public void setQuoteExpiryTime(String quoteExpiryTime) {
-        this.quoteExpiryTime = quoteExpiryTime;
-    }
-
-    public String getBaseCurrency() {
-        return baseCurrency;
-    }
-
-    public void setBaseCurrency(String baseCurrency) {
-        this.baseCurrency = baseCurrency;
-    }
-
-    public String getQuoteUnit() {
-        return quoteUnit;
-    }
-
-    public void setQuoteUnit(String quoteUnit) {
-        this.quoteUnit = quoteUnit;
-    }
+    private String quoteStartTime;
+    private String quoteExpiryTime;
+    private String baseCurrency;
+    private String quoteUnit;
 
 }

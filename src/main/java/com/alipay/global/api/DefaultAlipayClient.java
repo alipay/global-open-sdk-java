@@ -1,10 +1,10 @@
 package com.alipay.global.api;
 
-import java.util.Map;
-
 import com.alipay.global.api.exception.AlipayApiException;
 import com.alipay.global.api.net.DefaultHttpRPC;
 import com.alipay.global.api.net.HttpRpcResult;
+
+import java.util.Map;
 
 public class DefaultAlipayClient extends BaseAlipayClient {
 

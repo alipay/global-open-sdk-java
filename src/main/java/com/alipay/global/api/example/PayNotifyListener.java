@@ -11,35 +11,35 @@ import java.nio.charset.Charset;
 
 public class PayNotifyListener {
 
-    public void acceptNotify(HttpRequest request, HttpResponse response){
+    public void acceptNotify(HttpRequest request, HttpResponse response) {
 
         InputStream inputStream = request.getInputStream();
-        String      reqBody     = read(inputStream);
+        String reqBody = read(inputStream);
 
         PayNotifyRequest payNotifyRequest = JSON.parseObject(reqBody, PayNotifyRequest.class);
 
-        if(!PaymentNotifyType.PAYMENT_RESULT.equals(payNotifyRequest.getNotifyType())){
+        if (!PaymentNotifyType.PAYMENT_RESULT.equals(payNotifyRequest.getNotifyType())) {
             return;
         }
-        Result resultInfo       = payNotifyRequest.getResultInfo();
+        Result resultInfo = payNotifyRequest.getResultInfo();
         String paymentRequestId = payNotifyRequest.getPaymentRequestId();
         ResultStatusType resultStatus = resultInfo.getResultStatus();
 
         boolean isAcceptSuccess = false;
-        if(ResultStatusType.S.equals(resultStatus)){
+        if (ResultStatusType.S.equals(resultStatus)) {
             // TODO Update the record status to success by paymentRequestId
             isAcceptSuccess = true;
-        } else if(ResultStatusType.F.equals(resultStatus)){
+        } else if (ResultStatusType.F.equals(resultStatus)) {
             // TODO Update the record status to fail by paymentRequestId
             isAcceptSuccess = true;
         } else {
             // TODO Notify exception, contact tech support
-            return ;
+            return;
         }
 
-        Result result = new Result("SUCCESS", "success", ResultStatusType.S);
-        if(!isAcceptSuccess){
-            result = new Result("PROCESS_FAIL", "failure", ResultStatusType.F);
+        Result result = new Result("SUCCESS", ResultStatusType.S, "success");
+        if (!isAcceptSuccess) {
+            result = new Result("PROCESS_FAIL", ResultStatusType.F, "failure");
         }
         try {
             PayNotifyResponse payNotifyResponse = new PayNotifyResponse();
@@ -50,7 +50,7 @@ public class PayNotifyListener {
 
     }
 
-    public String read(InputStream inputStream){
+    public String read(InputStream inputStream) {
 
         return null;
     }

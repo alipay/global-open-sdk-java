@@ -1,24 +1,17 @@
 package com.alipay.global.api.model.aps;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Logo {
 
     private String logoName;
     private String logoUrl;
-
-    public String getLogoName() {
-        return logoName;
-    }
-
-    public void setLogoName(String logoName) {
-        this.logoName = logoName;
-    }
-
-    public String getLogoUrl() {
-        return logoUrl;
-    }
-
-    public void setLogoUrl(String logoUrl) {
-        this.logoUrl = logoUrl;
-    }
 
 }

@@ -1,5 +1,14 @@
 package com.alipay.global.api.model.ams;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class CardVerificationResult {
     /**
      * Authentication type
@@ -31,51 +40,4 @@ public class CardVerificationResult {
      */
     private RiskThreeDSResult threeDSResult;
 
-    public String getAuthenticationType() {
-        return authenticationType;
-    }
-
-    public void setAuthenticationType(String authenticationType) {
-        this.authenticationType = authenticationType;
-    }
-
-    public String getAuthenticationMethod() {
-        return authenticationMethod;
-    }
-
-    public void setAuthenticationMethod(String authenticationMethod) {
-        this.authenticationMethod = authenticationMethod;
-    }
-
-    public String getCvvResult() {
-        return cvvResult;
-    }
-
-    public void setCvvResult(String cvvResult) {
-        this.cvvResult = cvvResult;
-    }
-
-    public String getAvsResult() {
-        return avsResult;
-    }
-
-    public void setAvsResult(String avsResult) {
-        this.avsResult = avsResult;
-    }
-
-    public String getAuthorizationCode() {
-        return authorizationCode;
-    }
-
-    public void setAuthorizationCode(String authorizationCode) {
-        this.authorizationCode = authorizationCode;
-    }
-
-    public RiskThreeDSResult getThreeDSResult() {
-        return threeDSResult;
-    }
-
-    public void setThreeDSResult(RiskThreeDSResult threeDSResult) {
-        this.threeDSResult = threeDSResult;
-    }
 }

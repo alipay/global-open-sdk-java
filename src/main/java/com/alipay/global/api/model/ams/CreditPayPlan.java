@@ -1,34 +1,18 @@
 package com.alipay.global.api.model.ams;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class CreditPayPlan {
 
     private int installmentNum;
     private CreditPayFeeType creditPayFeeType;
-    private int feePercentage ;
-
-    public int getInstallmentNum() {
-        return installmentNum;
-    }
-
-    public void setInstallmentNum(int installmentNum) {
-        this.installmentNum = installmentNum;
-    }
-
-    public CreditPayFeeType getCreditPayFeeType() {
-        return creditPayFeeType;
-    }
-
-    public void setCreditPayFeeType(CreditPayFeeType creditPayFeeType) {
-        this.creditPayFeeType = creditPayFeeType;
-    }
-
-    public int getFeePercentage() {
-        return feePercentage;
-    }
-
-    public void setFeePercentage(int feePercentage) {
-        this.feePercentage = feePercentage;
-    }
-
+    private int feePercentage;
 
 }

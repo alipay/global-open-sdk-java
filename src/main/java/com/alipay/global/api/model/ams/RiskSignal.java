@@ -1,5 +1,14 @@
 package com.alipay.global.api.model.ams;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class RiskSignal {
     /**
      * The tag assigned by a merchant to a risky transaction.
@@ -11,19 +20,4 @@ public class RiskSignal {
      */
     private String riskReason;
 
-    public String getRiskCode() {
-        return riskCode;
-    }
-
-    public void setRiskCode(String riskCode) {
-        this.riskCode = riskCode;
-    }
-
-    public String getRiskReason() {
-        return riskReason;
-    }
-
-    public void setRiskReason(String riskReason) {
-        this.riskReason = riskReason;
-    }
 }
