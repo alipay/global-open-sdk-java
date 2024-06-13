@@ -135,7 +135,7 @@ public abstract class BaseAlipayClient implements AlipayClient {
         try {
             signatureValue = SignatureTool.sign(httpMethod, path, clientId, requestTime, reqBody, merchantPrivateKey);
         } catch (Exception e) {
-            throw new AlipayApiException(e);
+            throw new AlipayApiException("generate signature error", e);
         }
         return signatureValue;
     }
@@ -144,7 +144,7 @@ public abstract class BaseAlipayClient implements AlipayClient {
         try {
             return SignatureTool.verify(httpMethod, path, clientId, responseTime, rspBody, rspSignValue, alipayPublicKey);
         } catch (Exception e) {
-            throw new AlipayApiException(e);
+            throw new AlipayApiException("verify signature error", e);
         }
     }
 
