@@ -52,14 +52,11 @@ public abstract class BaseAlipayClient implements AlipayClient {
         this.merchantPrivateKey = merchantPrivateKey;
         this.alipayPublicKey = alipayPublicKey;
         this.clientId = clientId;
-    }
 
-    public BaseAlipayClient(String gatewayUrl, String merchantPrivateKey, String alipayPublicKey, String clientId, boolean isSandboxMode) {
-        this.gatewayUrl = gatewayUrl;
-        this.merchantPrivateKey = merchantPrivateKey;
-        this.alipayPublicKey = alipayPublicKey;
-        this.clientId = clientId;
-        this.isSandboxMode = isSandboxMode;
+        // if client id starts with SANDBOX_, set to sandbox mode
+        if (clientId.startsWith("SANDBOX_")) {
+            this.isSandboxMode = true;
+        }
     }
 
     public <T extends AlipayResponse> T execute(AlipayRequest<T> alipayRequest) throws AlipayApiException {
