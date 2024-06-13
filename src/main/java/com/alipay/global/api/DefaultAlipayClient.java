@@ -12,6 +12,10 @@ public class DefaultAlipayClient extends BaseAlipayClient {
         super(gatewayUrl, merchantPrivateKey, alipayPublicKey);
     }
 
+    public DefaultAlipayClient(String gatewayUrl, String merchantPrivateKey, String alipayPublicKey, String clientId) {
+        super(gatewayUrl, merchantPrivateKey, alipayPublicKey, clientId);
+    }
+
     @Override
     public Map<String, String> buildCustomHeader() {
         return null;

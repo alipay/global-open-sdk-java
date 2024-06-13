@@ -4,16 +4,9 @@ import com.alibaba.fastjson.JSON;
 import com.alipay.global.api.AlipayClient;
 import com.alipay.global.api.DefaultAlipayClient;
 import com.alipay.global.api.exception.AlipayApiException;
-import com.alipay.global.api.model.ams.Amount;
-import com.alipay.global.api.model.ams.Env;
-import com.alipay.global.api.model.ams.OrderInfo;
-import com.alipay.global.api.model.ams.OsType;
-import com.alipay.global.api.model.ams.PaymentMethod;
-import com.alipay.global.api.model.ams.PeriodRule;
-import com.alipay.global.api.model.ams.SettlementStrategy;
-import com.alipay.global.api.model.ams.TerminalType;
+import com.alipay.global.api.model.ams.*;
+import com.alipay.global.api.model.constants.AntomPathConstants;
 import com.alipay.global.api.model.constants.EndPointConstants;
-import com.alipay.global.api.model.constants.PathConstants;
 import com.alipay.global.api.request.ams.subscription.AlipaySubscriptionCreateRequest;
 import com.alipay.global.api.response.ams.subscription.AlipaySubscriptionCreateResponse;
 
@@ -22,25 +15,25 @@ import java.util.UUID;
 public class SubscriptionExecutableDemoCode {
 
 
-    private static final String       merchantPrivateKey = "";
+    private static final String merchantPrivateKey = "";
 
-    private static final String       alipayPublicKey     = "";
+    private static final String alipayPublicKey = "";
 
-    private static final String       CLIENT_ID           = "";
+    private static final String CLIENT_ID = "";
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
 
         createSubScription();
 
     }
 
-    public static void createSubScription(){
+    public static void createSubScription() {
 
         AlipayClient defaultAlipayClient = new DefaultAlipayClient(EndPointConstants.SG,
                 merchantPrivateKey, alipayPublicKey);
 
         AlipaySubscriptionCreateRequest alipaySubscriptionCreateRequest = new AlipaySubscriptionCreateRequest();
-        alipaySubscriptionCreateRequest.setPath(PathConstants.SUBSCRIPTION_CREATE_PROD_PATH);
+        alipaySubscriptionCreateRequest.setPath(AntomPathConstants.SUBSCRIPTION_CREATE_PATH);
         alipaySubscriptionCreateRequest.setClientId(CLIENT_ID);
 
         String subscriptionRequestId = UUID.randomUUID().toString();
@@ -55,7 +48,7 @@ public class SubscriptionExecutableDemoCode {
         periodRule.setPeriodCount(1);
         alipaySubscriptionCreateRequest.setPeriodRule(periodRule);
 
-        PaymentMethod paymentMethod =new PaymentMethod();
+        PaymentMethod paymentMethod = new PaymentMethod();
         paymentMethod.setPaymentMethodType("GCASH");
         alipaySubscriptionCreateRequest.setPaymentMethod(paymentMethod);
 
@@ -82,7 +75,7 @@ public class SubscriptionExecutableDemoCode {
         env.setOsType(OsType.ANDROID);
         alipaySubscriptionCreateRequest.setEnv(env);
 
-        AlipaySubscriptionCreateResponse alipaySubscriptionCreateResponse =null;
+        AlipaySubscriptionCreateResponse alipaySubscriptionCreateResponse = null;
 
         System.out.println(JSON.toJSON(alipaySubscriptionCreateRequest));
 
@@ -97,8 +90,6 @@ public class SubscriptionExecutableDemoCode {
         System.out.println(JSON.toJSON(alipaySubscriptionCreateResponse));
 
     }
-
-
 
 
 }

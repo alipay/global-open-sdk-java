@@ -29,6 +29,14 @@ public abstract class BaseAlipayClient implements AlipayClient {
      * alipay public key
      */
     private String alipayPublicKey;
+    /**
+     * client id
+     */
+    private String clientId;
+    /**
+     * is sandbox mode
+     */
+    private boolean isSandboxMode = false;
 
     public BaseAlipayClient() {
     }
@@ -39,9 +47,28 @@ public abstract class BaseAlipayClient implements AlipayClient {
         this.alipayPublicKey = alipayPublicKey;
     }
 
+    public BaseAlipayClient(String gatewayUrl, String merchantPrivateKey, String alipayPublicKey, String clientId) {
+        this.gatewayUrl = gatewayUrl;
+        this.merchantPrivateKey = merchantPrivateKey;
+        this.alipayPublicKey = alipayPublicKey;
+        this.clientId = clientId;
+
+        // if client id starts with SANDBOX_, set to sandbox mode
+        if (clientId.startsWith("SANDBOX_")) {
+            this.isSandboxMode = true;
+        }
+    }
+
     public <T extends AlipayResponse> T execute(AlipayRequest<T> alipayRequest) throws AlipayApiException {
 
-        checkRequestParam(alipayRequest);
+        // compatible with old version which clientId does not exist in BaseAlipayClient
+        alipayRequest.setClientId(alipayRequest.getClientId() == null ? this.clientId : alipayRequest.getClientId());
+
+        // replace with sandbox url if needed
+        adjustSandboxUrl(alipayRequest);
+
+        // check request params
+        checkRequestParams(alipayRequest);
 
         String clientId = alipayRequest.getClientId();
         String httpMethod = alipayRequest.getHttpMethod();
@@ -108,22 +135,20 @@ public abstract class BaseAlipayClient implements AlipayClient {
         try {
             signatureValue = SignatureTool.sign(httpMethod, path, clientId, requestTime, reqBody, merchantPrivateKey);
         } catch (Exception e) {
-            throw new AlipayApiException(e);
+            throw new AlipayApiException("generate signature error", e);
         }
         return signatureValue;
     }
 
     private boolean checkRspSign(String httpMethod, String path, String clientId, String responseTime, String rspBody, String rspSignValue) throws AlipayApiException {
         try {
-            boolean isVerify = SignatureTool.verify(httpMethod, path, clientId, responseTime, rspBody, rspSignValue, alipayPublicKey);
-            return isVerify;
+            return SignatureTool.verify(httpMethod, path, clientId, responseTime, rspBody, rspSignValue, alipayPublicKey);
         } catch (Exception e) {
-            throw new AlipayApiException(e);
+            throw new AlipayApiException("verify signature error", e);
         }
-
     }
 
-    private void checkRequestParam(AlipayRequest alipayRequest) throws AlipayApiException {
+    private void checkRequestParams(AlipayRequest alipayRequest) throws AlipayApiException {
         if (alipayRequest == null) {
             throw new AlipayApiException("alipayRequest can't null");
         }
@@ -141,7 +166,7 @@ public abstract class BaseAlipayClient implements AlipayClient {
         }
 
         if (StringUtils.isBlank(httpMethod)) {
-            throw new AlipayApiException("httpMehod can't null");
+            throw new AlipayApiException("httpMethod can't null");
         }
 
         if (StringUtils.isBlank(path)) {
@@ -164,6 +189,18 @@ public abstract class BaseAlipayClient implements AlipayClient {
         }
         return gatewayUrl + path;
 
+    }
+
+    /**
+     * If is sandbox mode, modify the path
+     *
+     * @param alipayRequest
+     */
+    private void adjustSandboxUrl(AlipayRequest alipayRequest) {
+        if (isSandboxMode) {
+            String originPath = alipayRequest.getPath();
+            alipayRequest.setPath(originPath.replaceFirst("/ams/api", "/ams/sandbox/api"));
+        }
     }
 
     /**
