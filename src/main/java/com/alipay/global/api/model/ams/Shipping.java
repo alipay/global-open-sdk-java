@@ -18,4 +18,10 @@ public class Shipping {
 
     private String shipToEmail;
 
+    private String shippingFeeId;
+    private Amount shippingFee;
+    private String shippingDescription;
+    private DeliveryEstimate deliveryEstimate;
+
+
 }
