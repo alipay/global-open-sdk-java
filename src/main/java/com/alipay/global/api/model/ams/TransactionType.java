@@ -25,7 +25,6 @@ public enum TransactionType {
     /**
      * VOID
      */
-    VOID
-    ;
+    VOID;
 
 }

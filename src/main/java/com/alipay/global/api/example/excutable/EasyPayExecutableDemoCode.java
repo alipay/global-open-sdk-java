@@ -3,13 +3,9 @@ package com.alipay.global.api.example.excutable;
 import com.alipay.global.api.AlipayClient;
 import com.alipay.global.api.DefaultAlipayClient;
 import com.alipay.global.api.exception.AlipayApiException;
-import com.alipay.global.api.model.ams.Amount;
-import com.alipay.global.api.model.ams.Order;
-import com.alipay.global.api.model.ams.PaymentMethod;
-import com.alipay.global.api.model.ams.ProductCodeType;
-import com.alipay.global.api.model.ams.SettlementStrategy;
+import com.alipay.global.api.model.ams.*;
+import com.alipay.global.api.model.constants.AntomPathConstants;
 import com.alipay.global.api.model.constants.EndPointConstants;
-import com.alipay.global.api.model.constants.PathConstants;
 import com.alipay.global.api.model.constants.ProductSceneConstants;
 import com.alipay.global.api.request.ams.pay.AlipayPaymentSessionRequest;
 import com.alipay.global.api.response.ams.pay.AlipayPaymentSessionResponse;
@@ -19,25 +15,25 @@ import java.util.UUID;
 public class EasyPayExecutableDemoCode {
 
 
-    private static final String       merchantPrivateKey  = "";
+    private static final String merchantPrivateKey = "";
 
-    private static final String       alipayPublicKey     = "";
+    private static final String alipayPublicKey = "";
 
-    private static final String       CLIENT_ID           = "";
+    private static final String CLIENT_ID = "";
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
 
 
     }
 
 
-    public static void easyPaySession(){
+    public static void easyPaySession() {
 
         AlipayClient defaultAlipayClient = new DefaultAlipayClient(EndPointConstants.SG,
                 merchantPrivateKey, alipayPublicKey);
 
         AlipayPaymentSessionRequest alipayPaymentSessionRequest = new AlipayPaymentSessionRequest();
-        alipayPaymentSessionRequest.setPath(PathConstants.CREATE_SESSION_PROD_PATH);
+        alipayPaymentSessionRequest.setPath(AntomPathConstants.CREATE_SESSION_PATH);
         alipayPaymentSessionRequest.setClientId(CLIENT_ID);
 
         alipayPaymentSessionRequest.setProductScene(ProductSceneConstants.EASY_PAY);
@@ -73,7 +69,7 @@ public class EasyPayExecutableDemoCode {
         order.setOrderDescription("antom test order");
         order.setOrderAmount(amount);
 
-        AlipayPaymentSessionResponse alipayPaymentSessionResponse  = null;
+        AlipayPaymentSessionResponse alipayPaymentSessionResponse = null;
 
         try {
             alipayPaymentSessionResponse = defaultAlipayClient.execute(alipayPaymentSessionRequest);

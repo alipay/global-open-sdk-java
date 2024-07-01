@@ -1,6 +1,6 @@
 package com.alipay.global.api.model.ams;
 
-public enum  InStorePaymentScenario {
+public enum InStorePaymentScenario {
     /**
      * User can use paymentcode to pay
      */

@@ -1,5 +1,14 @@
 package com.alipay.global.api.model.ams;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class AgreementInfo {
 
     /**
@@ -22,35 +31,4 @@ public class AgreementInfo {
      */
     private String displayUserLoginId;
 
-    public String getAuthState() {
-        return authState;
-    }
-
-    public void setAuthState(String authState) {
-        this.authState = authState;
-    }
-
-    public String getUserLoginId() {
-        return userLoginId;
-    }
-
-    public void setUserLoginId(String userLoginId) {
-        this.userLoginId = userLoginId;
-    }
-
-    public String getUserLoginType() {
-        return userLoginType;
-    }
-
-    public void setUserLoginType(String userLoginType) {
-        this.userLoginType = userLoginType;
-    }
-
-    public String getDisplayUserLoginId() {
-        return displayUserLoginId;
-    }
-
-    public void setDisplayUserLoginId(String displayUserLoginId) {
-        this.displayUserLoginId = displayUserLoginId;
-    }
 }

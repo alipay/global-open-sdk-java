@@ -1,25 +1,17 @@
 package com.alipay.global.api.model.ams;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class PSPRegistrationResult {
 
     private RegistrationResult registrationResult;
-    private String             pspName;
+    private String pspName;
 
-
-    public RegistrationResult getRegistrationResult() {
-        return registrationResult;
-    }
-
-    public void setRegistrationResult(RegistrationResult registrationResult) {
-        this.registrationResult = registrationResult;
-    }
-
-    public String getPspName() {
-        return pspName;
-    }
-
-    public void setPspName(String pspName) {
-        this.pspName = pspName;
-    }
 }

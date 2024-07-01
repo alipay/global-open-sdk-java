@@ -196,7 +196,7 @@ public class RiskDecideDemoCode {
         buyer.setReferenceBuyerId("test12345678");
         buyer.setBuyerPhoneNo("12345678912");
         buyer.setBuyerEmail("alipay@alipay.com");
-        buyer.setAccountVerified(true);
+        buyer.setIsAccountVerified(true);
         buyer.setSuccessfulOrderCount(100);
         UserName buyerName = new UserName();
         buyerName.setFirstName("Dehua");

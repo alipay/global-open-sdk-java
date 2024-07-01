@@ -1,5 +1,14 @@
 package com.alipay.global.api.model.ams;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Goods {
     private String referenceGoodsId;
     private String goodsName;
@@ -11,75 +20,6 @@ public class Goods {
     private String goodsUrl;
     private String deliveryMethodType;
 
-    public String getReferenceGoodsId() {
-        return referenceGoodsId;
-    }
+    private String goodsImageUrl;
 
-    public void setReferenceGoodsId(String referenceGoodsId) {
-        this.referenceGoodsId = referenceGoodsId;
-    }
-
-    public String getGoodsName() {
-        return goodsName;
-    }
-
-    public void setGoodsName(String goodsName) {
-        this.goodsName = goodsName;
-    }
-
-    public String getGoodsCategory() {
-        return goodsCategory;
-    }
-
-    public void setGoodsCategory(String goodsCategory) {
-        this.goodsCategory = goodsCategory;
-    }
-
-    public String getGoodsBrand() {
-        return goodsBrand;
-    }
-
-    public void setGoodsBrand(String goodsBrand) {
-        this.goodsBrand = goodsBrand;
-    }
-
-    public Amount getGoodsUnitAmount() {
-        return goodsUnitAmount;
-    }
-
-    public void setGoodsUnitAmount(Amount goodsUnitAmount) {
-        this.goodsUnitAmount = goodsUnitAmount;
-    }
-
-    public String getGoodsQuantity() {
-        return goodsQuantity;
-    }
-
-    public void setGoodsQuantity(String goodsQuantity) {
-        this.goodsQuantity = goodsQuantity;
-    }
-
-    public String getGoodsSkuName() {
-        return goodsSkuName;
-    }
-
-    public void setGoodsSkuName(String goodsSkuName) {
-        this.goodsSkuName = goodsSkuName;
-    }
-
-    public String getGoodsUrl() {
-        return goodsUrl;
-    }
-
-    public void setGoodsUrl(String goodsUrl) {
-        this.goodsUrl = goodsUrl;
-    }
-
-    public String getDeliveryMethodType() {
-        return deliveryMethodType;
-    }
-
-    public void setDeliveryMethodType(String deliveryMethodType) {
-        this.deliveryMethodType = deliveryMethodType;
-    }
 }

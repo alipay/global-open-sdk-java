@@ -1,6 +1,5 @@
 package com.alipay.global.api.model.constants;
 
-
 public class EndPointConstants {
 
     public static final String SG = "https://open-sea-global.alipay.com";

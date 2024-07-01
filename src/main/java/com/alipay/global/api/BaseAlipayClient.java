@@ -7,20 +7,20 @@ import com.alipay.global.api.net.HttpRpcResult;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.AlipayResponse;
 import com.alipay.global.api.tools.Constants;
-import com.alipay.global.api.tools.SignatureTool;
 import com.alipay.global.api.tools.DateTool;
+import com.alipay.global.api.tools.SignatureTool;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class BaseAlipayClient implements AlipayClient{
+public abstract class BaseAlipayClient implements AlipayClient {
 
     private static final Integer DEFAULT_KEY_VERSION = 1;
     /**
-     * eg:https://open-na.alipay.com
+     * eg: https://open-na.alipay.com
      */
-    private String               gatewayUrl;
+    private String gatewayUrl;
     /**
      * merchants private key
      */
@@ -29,26 +29,53 @@ public abstract class BaseAlipayClient implements AlipayClient{
      * alipay public key
      */
     private String alipayPublicKey;
+    /**
+     * client id
+     */
+    private String clientId;
+    /**
+     * is sandbox mode
+     */
+    private boolean isSandboxMode = false;
 
-    public BaseAlipayClient(){
+    public BaseAlipayClient() {
     }
 
-    public BaseAlipayClient(String gatewayUrl, String merchantPrivateKey, String alipayPublicKey ){
+    public BaseAlipayClient(String gatewayUrl, String merchantPrivateKey, String alipayPublicKey) {
         this.gatewayUrl = gatewayUrl;
         this.merchantPrivateKey = merchantPrivateKey;
         this.alipayPublicKey = alipayPublicKey;
     }
 
+    public BaseAlipayClient(String gatewayUrl, String merchantPrivateKey, String alipayPublicKey, String clientId) {
+        this.gatewayUrl = gatewayUrl;
+        this.merchantPrivateKey = merchantPrivateKey;
+        this.alipayPublicKey = alipayPublicKey;
+        this.clientId = clientId;
+
+        // if client id starts with SANDBOX_, set to sandbox mode
+        if (clientId.startsWith("SANDBOX_")) {
+            this.isSandboxMode = true;
+        }
+    }
+
     public <T extends AlipayResponse> T execute(AlipayRequest<T> alipayRequest) throws AlipayApiException {
 
-        checkRequestParam(alipayRequest);
+        // compatible with old version which clientId does not exist in BaseAlipayClient
+        alipayRequest.setClientId(alipayRequest.getClientId() == null ? this.clientId : alipayRequest.getClientId());
 
-        String  clientId    = alipayRequest.getClientId();
-        String  httpMethod  = alipayRequest.getHttpMethod();
-        String  path        = alipayRequest.getPath();
-        Integer keyVersion  = alipayRequest.getKeyVersion();
-        String  reqTime     = DateTool.getCurrentTimeMillis();
-        String  reqBody     = JSON.toJSONString(alipayRequest);
+        // replace with sandbox url if needed
+        adjustSandboxUrl(alipayRequest);
+
+        // check request params
+        checkRequestParams(alipayRequest);
+
+        String clientId = alipayRequest.getClientId();
+        String httpMethod = alipayRequest.getHttpMethod();
+        String path = alipayRequest.getPath();
+        Integer keyVersion = alipayRequest.getKeyVersion();
+        String reqTime = DateTool.getCurrentTimeMillis();
+        String reqBody = JSON.toJSONString(alipayRequest);
 
         /**
          * 对内容加签(Sign the content)
@@ -58,9 +85,9 @@ public abstract class BaseAlipayClient implements AlipayClient{
         /**
          *  生成必要header(Generate required headers)
          */
-        Map<String, String> header       = buildBaseHeader(reqTime, clientId, keyVersion, signValue);
+        Map<String, String> header = buildBaseHeader(reqTime, clientId, keyVersion, signValue);
         Map<String, String> customHeader = buildCustomHeader();
-        if(customHeader != null && customHeader.size() > 0){
+        if (customHeader != null && !customHeader.isEmpty()) {
             header.putAll(customHeader);
         }
 
@@ -70,25 +97,25 @@ public abstract class BaseAlipayClient implements AlipayClient{
          */
         HttpRpcResult rsp = sendRequest(requestUrl, httpMethod, header, reqBody);
 
-        if(rsp == null){
+        if (rsp == null) {
             throw new AlipayApiException("HttpRpcResult is null.");
         }
 
-        int    httpRespCode = rsp.getRspCode();
-        String rspBody      = rsp.getRspBody();
-        if(httpRespCode != Constants.HTTP_SUCCESS_CODE){
+        int httpRespCode = rsp.getRspCode();
+        String rspBody = rsp.getRspBody();
+        if (httpRespCode != Constants.HTTP_SUCCESS_CODE) {
             throw new AlipayApiException("Response data error, rspBody:" + rspBody);
         }
-        Class<T> responseClass   = alipayRequest.getResponseClass();
-        T        alipayResponse  = JSON.parseObject(rspBody, responseClass);
-        Result   result          = alipayResponse.getResult();
-        if(result == null){
+        Class<T> responseClass = alipayRequest.getResponseClass();
+        T alipayResponse = JSON.parseObject(rspBody, responseClass);
+        Result result = alipayResponse.getResult();
+        if (result == null) {
             throw new AlipayApiException("Response data error, result field is null, rspBody:" + rspBody);
         }
 
         String rspSignValue = rsp.getRspSign();
-        String rspTime      = rsp.getResponseTime();
-        if(null == rspSignValue || rspSignValue.isEmpty() || null == rspTime || rspTime.isEmpty()){
+        String rspTime = rsp.getResponseTime();
+        if (null == rspSignValue || rspSignValue.isEmpty() || null == rspTime || rspTime.isEmpty()) {
             return alipayResponse;
         }
 
@@ -96,7 +123,7 @@ public abstract class BaseAlipayClient implements AlipayClient{
          * 对返回结果验签(Verify the result signature)
          */
         boolean isVerifySuccess = checkRspSign(httpMethod, path, clientId, rspTime, rspBody, rspSignValue);
-        if(!isVerifySuccess){
+        if (!isVerifySuccess) {
             throw new AlipayApiException("Response signature verify fail.");
         }
 
@@ -108,79 +135,89 @@ public abstract class BaseAlipayClient implements AlipayClient{
         try {
             signatureValue = SignatureTool.sign(httpMethod, path, clientId, requestTime, reqBody, merchantPrivateKey);
         } catch (Exception e) {
-            throw new AlipayApiException(e);
+            throw new AlipayApiException("generate signature error", e);
         }
         return signatureValue;
     }
 
-    private boolean checkRspSign(String httpMethod, String path, String clientId, String responseTime, String rspBody, String rspSignValue) throws AlipayApiException{
-        try{
-            boolean isVerify = SignatureTool.verify(httpMethod, path, clientId, responseTime, rspBody, rspSignValue, alipayPublicKey);
-            return isVerify;
-        } catch(Exception e){
-            throw new AlipayApiException(e);
+    private boolean checkRspSign(String httpMethod, String path, String clientId, String responseTime, String rspBody, String rspSignValue) throws AlipayApiException {
+        try {
+            return SignatureTool.verify(httpMethod, path, clientId, responseTime, rspBody, rspSignValue, alipayPublicKey);
+        } catch (Exception e) {
+            throw new AlipayApiException("verify signature error", e);
         }
-
     }
 
-    private void checkRequestParam(AlipayRequest alipayRequest) throws AlipayApiException{
-        if(alipayRequest == null){
+    private void checkRequestParams(AlipayRequest alipayRequest) throws AlipayApiException {
+        if (alipayRequest == null) {
             throw new AlipayApiException("alipayRequest can't null");
         }
 
         String clientId = alipayRequest.getClientId();
-        String httpMehod = alipayRequest.getHttpMethod();
+        String httpMethod = alipayRequest.getHttpMethod();
         String path = alipayRequest.getPath();
 
-        if(StringUtils.isBlank(gatewayUrl)){
+        if (StringUtils.isBlank(gatewayUrl)) {
             throw new AlipayApiException("gatewayUrl can't null");
         }
 
-        if(StringUtils.isBlank(clientId)){
+        if (StringUtils.isBlank(clientId)) {
             throw new AlipayApiException("clientId can't null");
         }
 
-        if(StringUtils.isBlank(httpMehod)){
-            throw new AlipayApiException("httpMehod can't null");
+        if (StringUtils.isBlank(httpMethod)) {
+            throw new AlipayApiException("httpMethod can't null");
         }
 
-        if(StringUtils.isBlank(path)){
+        if (StringUtils.isBlank(path)) {
             throw new AlipayApiException("path can't null");
         }
 
-        if(!path.startsWith("/")){
+        if (!path.startsWith("/")) {
             throw new AlipayApiException("path must start with /");
         }
 
     }
 
-    private String genRequestUrl(String path){
-        if(!gatewayUrl.startsWith("http://") && !gatewayUrl.startsWith("https://")){
+    private String genRequestUrl(String path) {
+        if (!gatewayUrl.startsWith("http://") && !gatewayUrl.startsWith("https://")) {
             gatewayUrl = "https://" + gatewayUrl;
         }
-        if(gatewayUrl.endsWith("/")){
+        if (gatewayUrl.endsWith("/")) {
             int len = gatewayUrl.length();
             gatewayUrl = gatewayUrl.substring(0, len - 1);
         }
-        String requestUrl = gatewayUrl + path;
-        return requestUrl;
+        return gatewayUrl + path;
 
     }
 
     /**
+     * If is sandbox mode, modify the path
+     *
+     * @param alipayRequest
+     */
+    private void adjustSandboxUrl(AlipayRequest alipayRequest) {
+        if (isSandboxMode) {
+            String originPath = alipayRequest.getPath();
+            alipayRequest.setPath(originPath.replaceFirst("/ams/api", "/ams/sandbox/api"));
+        }
+    }
+
+    /**
      * Generate required headers
+     *
      * @param requestTime
      * @param clientId
      * @param keyVersion
      * @param signatureValue
      * @return
      */
-    private Map<String,String> buildBaseHeader(String requestTime, String clientId, Integer keyVersion, String signatureValue){
+    private Map<String, String> buildBaseHeader(String requestTime, String clientId, Integer keyVersion, String signatureValue) {
         Map<String, String> header = new HashMap<String, String>();
         header.put(Constants.CONTENT_TYPE_HEADER, "application/json; charset=UTF-8");
         header.put(Constants.REQ_TIME_HEADER, requestTime);
         header.put(Constants.CLIENT_ID_HEADER, clientId);
-        if(keyVersion == null){
+        if (keyVersion == null) {
             keyVersion = DEFAULT_KEY_VERSION;
         }
         String signatureHeader = "algorithm=RSA256,keyVersion=" + keyVersion + ",signature=" + signatureValue;
@@ -188,9 +225,8 @@ public abstract class BaseAlipayClient implements AlipayClient{
         return header;
     }
 
-    public abstract Map<String,String> buildCustomHeader();
+    public abstract Map<String, String> buildCustomHeader();
 
-    public abstract HttpRpcResult sendRequest(String requestUrl, String httpMethod, Map<String, String> header, String reqBody)throws AlipayApiException;
-
+    public abstract HttpRpcResult sendRequest(String requestUrl, String httpMethod, Map<String, String> header, String reqBody) throws AlipayApiException;
 
 }

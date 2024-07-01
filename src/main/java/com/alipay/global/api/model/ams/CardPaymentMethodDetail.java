@@ -1,113 +1,45 @@
 package com.alipay.global.api.model.ams;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class CardPaymentMethodDetail {
 
-    private String    cardToken;
-    private String    cardNo;
+    private String cardToken;
+    private String cardNo;
     private CardBrand brand;
-    private String    cardIssuer;
-    private String    countryIssue;
+    private String cardIssuer;
+    private String countryIssue;
     private UserName instUserName;
-    private String    expiryYear;
-    private String    expiryMonth;
-    private Address   billingAddress;
-    private String    mask;
-    private String    last4;
-    private String    paymentMethodDetailMetadata;
+    private String expiryYear;
+    private String expiryMonth;
+    private Address billingAddress;
+    private String mask;
+    private String last4;
+    private String paymentMethodDetailMetadata;
 
-    public String getCardToken() {
-        return cardToken;
-    }
+    private String maskedCardNo;
 
-    public void setCardToken(String cardToken) {
-        this.cardToken = cardToken;
-    }
+    private String fingerprint;
 
-    public String getCardNo() {
-        return cardNo;
-    }
+    private String authenticationFlow;
 
-    public void setCardNo(String cardNo) {
-        this.cardNo = cardNo;
-    }
+    private String funding;
 
-    public CardBrand getBrand() {
-        return brand;
-    }
+    private String avsResultRaw;
 
-    public void setBrand(CardBrand brand) {
-        this.brand = brand;
-    }
+    private String bin;
 
-    public String getCardIssuer() {
-        return cardIssuer;
-    }
+    private String issuerName;
 
-    public void setCardIssuer(String cardIssuer) {
-        this.cardIssuer = cardIssuer;
-    }
+    private String issuingCountry;
 
-    public String getCountryIssue() {
-        return countryIssue;
-    }
+    private String lastFour;
 
-    public void setCountryIssue(String countryIssue) {
-        this.countryIssue = countryIssue;
-    }
-
-    public UserName getInstUserName() {
-        return instUserName;
-    }
-
-    public void setInstUserName(UserName instUserName) {
-        this.instUserName = instUserName;
-    }
-
-    public String getExpiryYear() {
-        return expiryYear;
-    }
-
-    public void setExpiryYear(String expiryYear) {
-        this.expiryYear = expiryYear;
-    }
-
-    public String getExpiryMonth() {
-        return expiryMonth;
-    }
-
-    public void setExpiryMonth(String expiryMonth) {
-        this.expiryMonth = expiryMonth;
-    }
-
-    public Address getBillingAddress() {
-        return billingAddress;
-    }
-
-    public void setBillingAddress(Address billingAddress) {
-        this.billingAddress = billingAddress;
-    }
-
-    public String getMask() {
-        return mask;
-    }
-
-    public void setMask(String mask) {
-        this.mask = mask;
-    }
-
-    public String getLast4() {
-        return last4;
-    }
-
-    public void setLast4(String last4) {
-        this.last4 = last4;
-    }
-
-    public String getPaymentMethodDetailMetadata() {
-        return paymentMethodDetailMetadata;
-    }
-
-    public void setPaymentMethodDetailMetadata(String paymentMethodDetailMetadata) {
-        this.paymentMethodDetailMetadata = paymentMethodDetailMetadata;
-    }
 }
