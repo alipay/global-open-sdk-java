@@ -13,6 +13,8 @@ import com.alipay.global.api.model.ams.SettlementStrategy;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.pay.AlipayPaymentSessionResponse;
 
+import java.util.List;
+
 public class AlipayPaymentSessionRequest extends AlipayRequest<AlipayPaymentSessionResponse> {
 
     /**
@@ -94,6 +96,10 @@ public class AlipayPaymentSessionRequest extends AlipayRequest<AlipayPaymentSess
      * This param is used for Easy pay payments,set its value to EASY_PAY
      */
     private String                  productScene;
+
+    private List<PaymentMethod> savedPaymentMethods;
+
+    private String locale;
 
     @Override
     public Class<AlipayPaymentSessionResponse> getResponseClass() {
@@ -226,5 +232,21 @@ public class AlipayPaymentSessionRequest extends AlipayRequest<AlipayPaymentSess
 
     public void setProductScene(String productScene) {
         this.productScene = productScene;
+    }
+
+    public List<PaymentMethod> getSavedPaymentMethods() {
+        return savedPaymentMethods;
+    }
+
+    public void setSavedPaymentMethods(List<PaymentMethod> savedPaymentMethods) {
+        this.savedPaymentMethods = savedPaymentMethods;
+    }
+
+    public String getLocale() {
+        return locale;
+    }
+
+    public void setLocale(String locale) {
+        this.locale = locale;
     }
 }

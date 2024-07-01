@@ -10,6 +10,8 @@ public class AlipayPaymentSessionResponse extends AlipayResponse {
 
     private String paymentSessionId;
 
+    private String normalUrl;
+
     public String getPaymentSessionData() {
         return paymentSessionData;
     }
@@ -32,5 +34,13 @@ public class AlipayPaymentSessionResponse extends AlipayResponse {
 
     public void setPaymentSessionId(String paymentSessionId) {
         this.paymentSessionId = paymentSessionId;
+    }
+
+    public String getNormalUrl() {
+        return normalUrl;
+    }
+
+    public void setNormalUrl(String normalUrl) {
+        this.normalUrl = normalUrl;
     }
 }
