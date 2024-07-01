@@ -59,7 +59,7 @@ public class PaymentMethodMetaData {
      * The cardholder's name.
      * 持卡人姓名。
      */
-    private UserName cardholderName;
+    private UserName cardHolderName;
     /**
      * The sender's email address.
      * 付款人的邮箱

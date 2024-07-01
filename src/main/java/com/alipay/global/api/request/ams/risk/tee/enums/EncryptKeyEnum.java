@@ -9,15 +9,15 @@ package com.alipay.global.api.request.ams.risk.tee.enums;
  * 商户可选择的加密字段枚举类
  */
 public enum EncryptKeyEnum {
-    BUYER_EMAIL("BUYER_EMAIL", "buyer.buyerEmail"),
-    BUYER_PHONE_NO("BUYER_PHONE_NO", "buyer.buyerPhoneNo"),
-    BUYER_REGISTRATION_TIME("BUYER_REGISTRATION_TIME", "buyer.buyerRegistrationTime"),
-    BILL_TO_NAME("BILL_TO_NAME", "paymentDetails.paymentMethod.paymentMethodMetaData.cardholderName"),
-    SHIPPING_ADDR1("SHIPPING_ADDR1", "orders.shipping.shippingAddress.address1"),
-    SHIPPING_ADDR2("SHIPPING_ADDR2", "orders.shipping.shippingAddress.address2"),
-    SHIPPING_NAME("SHIPPING_NAME", "orders.shipping.shippingName"),
-    SHIPPING_EMAIL("SHIPPING_EMAIL", "orders.shipping.shipToEmail"),
-    SHIPPING_PHONE_NO("SHIPPING_PHONE_NO", "orders.shipping.shippingPhoneNo")
+    BUYER_EMAIL("buyerEmail", "buyer.buyerEmail"),
+    BUYER_PHONE_NO("buyerPhoneNo", "buyer.buyerPhoneNo"),
+    BUYER_REGISTRATION_TIME("buyerRegistrationTime", "buyer.buyerRegistrationTime"),
+    BILL_TO_NAME("cardHolderName", "paymentDetails.paymentMethod.paymentMethodMetaData.cardHolderName"),
+    SHIPPING_ADDRESS1("address1", "orders.shipping.shippingAddress.address1"),
+    SHIPPING_ADDRESS2("address2", "orders.shipping.shippingAddress.address2"),
+    SHIPPING_NAME("shippingName", "orders.shipping.shippingName"),
+    SHIPPING_EMAIL("shipToEmail", "orders.shipping.shipToEmail"),
+    SHIPPING_PHONE_NO("shippingPhoneNo", "orders.shipping.shippingPhoneNo")
 
     ;
     private final String code;

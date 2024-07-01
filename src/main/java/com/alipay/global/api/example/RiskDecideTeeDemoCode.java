@@ -43,7 +43,7 @@ import java.util.List;
 
 public class RiskDecideTeeDemoCode {
     private static final String       CLIENT_ID           = "";
-    private static final String       GATE_WAY_URL        = "https://open-id-pre.alipay.com";
+    private static final String       GATE_WAY_URL        = "";
     private static final String       merchantPrivateKey  = "";
     private static final String       alipayPublicKey     = "";
     private static final AlipayClient defaultAlipayClient = new DefaultAlipayClient(GATE_WAY_URL, merchantPrivateKey, alipayPublicKey);
@@ -68,7 +68,6 @@ public class RiskDecideTeeDemoCode {
             response = defaultAlipayClient.execute(request);
         } catch (AlipayApiException e) {
             // TODO Handle AlipayApiException and log
-            e.printStackTrace();
         }
         return response;
     }
@@ -112,8 +111,8 @@ public class RiskDecideTeeDemoCode {
                 EncryptKeyEnum.BUYER_PHONE_NO,
                 EncryptKeyEnum.BUYER_REGISTRATION_TIME,
                 EncryptKeyEnum.BILL_TO_NAME,
-                EncryptKeyEnum.SHIPPING_ADDR1,
-                EncryptKeyEnum.SHIPPING_ADDR2,
+                EncryptKeyEnum.SHIPPING_ADDRESS1,
+                EncryptKeyEnum.SHIPPING_ADDRESS2,
                 EncryptKeyEnum.SHIPPING_NAME,
                 EncryptKeyEnum.SHIPPING_EMAIL,
                 EncryptKeyEnum.SHIPPING_PHONE_NO
@@ -146,7 +145,6 @@ public class RiskDecideTeeDemoCode {
             response = defaultAlipayClient.execute(request);
         } catch (AlipayApiException e) {
             // TODO Handle AlipayApiException and log
-            e.printStackTrace();
         }
         return response;
     }
@@ -162,7 +160,6 @@ public class RiskDecideTeeDemoCode {
             response = defaultAlipayClient.execute(request);
         } catch (AlipayApiException e) {
             // TODO Handle AlipayApiException and log
-            e.printStackTrace();
         }
         return response;
     }
@@ -181,7 +178,6 @@ public class RiskDecideTeeDemoCode {
             response = defaultAlipayClient.execute(request);
         } catch (AlipayApiException e) {
             // TODO Handle AlipayApiException and log
-            e.printStackTrace();
         }
         return response;
     }
@@ -234,7 +230,7 @@ public class RiskDecideTeeDemoCode {
         buyer.setReferenceBuyerId("test12345678");
         buyer.setBuyerPhoneNo("12345678912");
         buyer.setBuyerEmail("alipay@alipay.com");
-        buyer.setAccountVerified(true);
+        buyer.setIsAccountVerified(true);
         buyer.setSuccessfulOrderCount(100);
         UserName buyerName = new UserName();
         buyerName.setFirstName("Dehua");
