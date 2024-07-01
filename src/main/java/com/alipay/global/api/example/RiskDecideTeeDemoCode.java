@@ -42,12 +42,12 @@ import java.util.List;
 
 
 public class RiskDecideTeeDemoCode {
-    private static final String       CLIENT_ID           = "5J5YBT2Y2Y5MSG04004";
+    private static final String       CLIENT_ID           = "";
     private static final String       GATE_WAY_URL        = "https://open-id-pre.alipay.com";
-    private static final String       merchantPrivateKey  = "MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCEvkX4gF0D/1moCefOF3UsPVULyjUp7uY/hPlrTbO9eqLv+vFwK5Su/sxl2H6xH1T0/LnCt9kp022DzwKq2klF2yOyDR5qngVsSRQKajKA2iVF9/N795TNtw/gb7dzP0J1orjyrNGIKfdCjzcs1kBYgEfg4RAWrehC/EH9jxDFmbIE1q6ctv4cfkAv7hS8bqceiobFiJv7m76MFTCgUTXQckCPR64lRiol037Fen+b0BB6crp1nThNYWbXhiRuyIfBbgiyrZH7RKoVwYqmrgubiPEDrM+lO3P+u31nvVdE5DYNpr+yISWOhAjABQdMuYdoOShh/Kp4bVPBmdrneeMJAgMBAAECggEAcmu8zo5/HxH9i042hLxNoPuhEk+TcfjeeYQ6ppbMxxgt2OQbN5ApUoqJT4TE+BJE3gP2b3Sf+WCo9sP6zaDpJhDV/QU34bkifYukfbG6pLzlAiHPvFzV5FjWk6RYoju2IsZH287BsjhSTQo8CicIQgEZdCsr/hCbsxnUHCc00s4B/b7J2vcp6FR1M/07fxRmBZjooNVp5G/hSAHYCqO1qYdOZSI1BY3NFkp7+q/yQzEHFSH1jv2jELibb9J9lpmpWIPWpPVjplW9SUJAxEUMBLsJrZw3jKXvXTTlo8j0c2Pqym87BlR2SCSD7sVX6EKiNbSmMTmmut6ttE0jC1yBgQKBgQC7scpQw/dDE+IljCtOcADV8a1Kl3cDEh8MZp/RaDgtCDTjmTfoUpJPhPTScO4wVS2/6lKOMnJQwSj6eUxBzjy6fIDINCcFBNNrFxy37sRFbO7yYpzF5jk58voJ2MYWQS15TV97HeYKVrEkXZaI+gQxZXKUfEWFg656P5oAG2I92QKBgQC1DQ2AVql53HAMjZuh1KEqTya896W9W0wQITGPN3boMZVo55yhd2KaM2wY2sJVDZ6VeKIX7ctKPMSGRPCIi7HT2TUg4KVMymNTkGdDs0TfnpRYpyK2ZAc3UTPlQW9VcRt2ZRm/3HtmNLBUG4zUf+Vdg4fmep5aBjxqcMntCiIgsQKBgBj3C+70MdZFNcZCv5veP+41CBSs0tKgvWp71/QVhatPtSE0xv/qw7U5/QpkpPneyogFVde+FABzwMyYB7GVCfTQDJ0UesArJSfQWiyI4KhPVfT9ctbLyX7Qt7tJjwd0weSpivKoRmnHoCYzIIu1nYsocDYZ1XFt025FOWmcOtP5AoGAFPWs4XWm6w+k/R8LrGF0QvSk1G2LB2/hT2C4Xw8Zuem7lUhy7pJmnNllIz94DeakvEMZ6NFDnpWIXs7uVbBuZssXhnXbTReFBjCKc+D2ETlHjTfUIe9UkofZDSpVHDwa5Mrxfy+kLYHeA+6okBU6VWgbvIfnex6LsfratZFdwBECgYAX4txY+kPBMV1dYyTDIRun2Uj1fnsY/P4kZxt37dfDiCj2wYGgEK9i2YphuyDPWVMWTx6xOJdKsypOiYMAjgsKRgCpOlSbHVyaG23GqYAYzaNMP/8fEIcMlEcWR2kdkJe+sAZohn4tm9JlHtvl1EpXFmNaNXoXj+MvgTiQvTppWg==";
-    private static final String       alipayPublicKey     = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAhL5F+IBdA/9ZqAnnzhd1LD1VC8o1Ke7mP4T5a02zvXqi7/rxcCuUrv7MZdh+sR9U9Py5wrfZKdNtg88CqtpJRdsjsg0eap4FbEkUCmoygNolRffze/eUzbcP4G+3cz9CdaK48qzRiCn3Qo83LNZAWIBH4OEQFq3oQvxB/Y8QxZmyBNaunLb+HH5AL+4UvG6nHoqGxYib+5u+jBUwoFE10HJAj0euJUYqJdN+xXp/m9AQenK6dZ04TWFm14YkbsiHwW4Isq2R+0SqFcGKpq4Lm4jxA6zPpTtz/rt9Z71XROQ2Daa/siEljoQIwAUHTLmHaDkoYfyqeG1TwZna53njCQIDAQAB";
+    private static final String       merchantPrivateKey  = "";
+    private static final String       alipayPublicKey     = "";
     private static final AlipayClient defaultAlipayClient = new DefaultAlipayClient(GATE_WAY_URL, merchantPrivateKey, alipayPublicKey);
-    private static final String       DATA_KEY = "w7QkIZhPyXqoZTflcQvTVg==";
+    private static final String       DATA_KEY = "";
     public static void main(String[] args) {
         preAuthDecide();
     }
