@@ -28,6 +28,7 @@ import com.alipay.global.api.request.ams.risk.RiskDecideRequest;
 import com.alipay.global.api.request.ams.risk.RiskReportRequest;
 import com.alipay.global.api.request.ams.risk.SendPaymentResultRequest;
 import com.alipay.global.api.request.ams.risk.SendRefundResultRequest;
+import com.alipay.global.api.request.ams.risk.tee.exception.CryptoException;
 import com.alipay.global.api.response.ams.risk.RiskDecideResponse;
 import com.alipay.global.api.response.ams.risk.RiskReportResponse;
 import com.alipay.global.api.response.ams.risk.SendPaymentResultResponse;
@@ -60,12 +61,14 @@ public class RiskDecideTeeDemoCode {
         request.setAuthorizationPhase(AuthorizationPhase.PRE_AUTHORIZATION);
         // 1. build plaintext request
         buildRiskDecideRequest(request);
-        // 2. encrypt request
-        encryptRequest(request);
-        // 3. send request
         RiskDecideResponse response = null;
         try {
+            // 2. encrypt request
+            encryptRequest(request);
+            // 3. send request
             response = defaultAlipayClient.execute(request);
+        } catch (CryptoException e) {
+            // TODO Handle CryptoException and log
         } catch (AlipayApiException e) {
             // TODO Handle AlipayApiException and log
         }
@@ -92,19 +95,21 @@ public class RiskDecideTeeDemoCode {
         riskThreeDSResult.setThreeDSInteractionMode("CHALLENGED");
         cardVerificationResult.setThreeDSResult(riskThreeDSResult);
         paymentMethodMetaData.setCardVerificationResult(cardVerificationResult);
-        // 2. encrypt request
-        encryptRequest(request);
-        // 3. send request
         RiskDecideResponse response = null;
         try {
+            // 2. encrypt request
+            encryptRequest(request);
+            // 3. send request
             response = defaultAlipayClient.execute(request);
+        } catch (CryptoException e) {
+            // TODO Handle CryptoException and log
         } catch (AlipayApiException e) {
             // TODO Handle AlipayApiException and log
         }
         return response;
     }
 
-    public static void encryptRequest(RiskDecideRequest request) {
+    public static void encryptRequest(RiskDecideRequest request) throws CryptoException {
         // 2.1. build encryptList
         List<EncryptKeyEnum> encryptList = Arrays.asList(
                 EncryptKeyEnum.BUYER_EMAIL,
