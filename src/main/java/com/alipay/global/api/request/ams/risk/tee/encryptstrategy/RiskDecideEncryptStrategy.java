@@ -88,7 +88,7 @@ public class RiskDecideEncryptStrategy implements EncryptStrategy{
                         encryptName(data_key, paymentDetail.getPaymentMethod().getPaymentMethodMetaData().getCardHolderName(), crypto);
                     }
                     break;
-                case SHIPPING_ADDR1:
+                case SHIPPING_ADDRESS1:
                     for (Order order : orders) {
                         String address1 = order.getShipping().getShippingAddress().getAddress1();
                         if (address1 == null || address1.isEmpty()) {
@@ -98,7 +98,7 @@ public class RiskDecideEncryptStrategy implements EncryptStrategy{
                         order.getShipping().getShippingAddress().setAddress1(Base64.getEncoder().encodeToString(encrypt));
                     }
                     break;
-                case SHIPPING_ADDR2:
+                case SHIPPING_ADDRESS2:
                     for (Order order : orders) {
                         String address2 = order.getShipping().getShippingAddress().getAddress2();
                         if (address2 == null || address2.isEmpty()) {
@@ -150,19 +150,19 @@ public class RiskDecideEncryptStrategy implements EncryptStrategy{
         if (userName == null) {
             return;
         }
-        if (userName.getFirstName() != null) {
+        if (userName.getFirstName() != null && !userName.getFirstName().isEmpty()) {
             userName.setFirstName(Base64.getEncoder().encodeToString(
                     crypto.encrypt(data_key, userName.getFirstName().getBytes(StandardCharsets.UTF_8))));
         }
-        if (userName.getMiddleName() != null) {
+        if (userName.getMiddleName() != null && !userName.getMiddleName().isEmpty()) {
             userName.setMiddleName(Base64.getEncoder().encodeToString(
                     crypto.encrypt(data_key, userName.getMiddleName().getBytes(StandardCharsets.UTF_8))));
         }
-        if (userName.getLastName() != null) {
+        if (userName.getLastName() != null && !userName.getLastName().isEmpty()) {
             userName.setLastName(Base64.getEncoder().encodeToString(
                     crypto.encrypt(data_key, userName.getLastName().getBytes(StandardCharsets.UTF_8))));
         }
-        if (userName.getFullName() != null) {
+        if (userName.getFullName() != null && !userName.getFullName().isEmpty()) {
             userName.setFullName(Base64.getEncoder().encodeToString(
                     crypto.encrypt(data_key, userName.getFullName().getBytes(StandardCharsets.UTF_8))));
         }
