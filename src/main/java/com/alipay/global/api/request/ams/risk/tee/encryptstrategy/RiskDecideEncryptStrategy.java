@@ -85,7 +85,7 @@ public class RiskDecideEncryptStrategy implements EncryptStrategy{
                     break;
                 case BILL_TO_NAME:
                     for (PaymentDetail paymentDetail : paymentDetails) {
-                        encryptName(data_key, paymentDetail.getPaymentMethod().getPaymentMethodMetaData().getCardholderName(), crypto);
+                        encryptName(data_key, paymentDetail.getPaymentMethod().getPaymentMethodMetaData().getCardHolderName(), crypto);
                     }
                     break;
                 case SHIPPING_ADDR1:

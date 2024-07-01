@@ -227,7 +227,7 @@ public class RiskDecideDemoCode {
         UserName cardHolderName = new UserName();
         cardHolderName.setFirstName("Tom");
         cardHolderName.setLastName("Jay");
-        paymentMethodMetaData.setCardholderName(cardHolderName);
+        paymentMethodMetaData.setCardHolderName(cardHolderName);
         Address billingAddress = new Address();
         billingAddress.setRegion("CN");
         billingAddress.setState("Zhejiang");
