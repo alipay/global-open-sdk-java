@@ -15,6 +15,11 @@ public class AlipayPayQueryRequest extends AlipayRequest<AlipayPayQueryResponse>
      */
     private String paymentId;
 
+    /**
+     * The unique ID to identify a merchant account.
+     */
+    private String merchantAccountId;
+
     public String getPaymentRequestId() {
         return paymentRequestId;
     }
@@ -30,6 +35,10 @@ public class AlipayPayQueryRequest extends AlipayRequest<AlipayPayQueryResponse>
     public void setPaymentId(String paymentId) {
         this.paymentId = paymentId;
     }
+
+    public String getMerchantAccountId() { return merchantAccountId; }
+
+    public void setMerchantAccountId(String merchantAccountId) { this.merchantAccountId = merchantAccountId; }
 
     @Override
     public Class<AlipayPayQueryResponse> getResponseClass() {

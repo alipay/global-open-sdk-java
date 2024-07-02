@@ -26,6 +26,10 @@ public class AlipayPayConsultRequest extends AlipayRequest<AlipayPayConsultRespo
     private Merchant        merchant;
     private List<String>    allowedPspRegions;
 
+    /**
+     * The unique ID to identify a merchant account.
+     */
+    private String merchantAccountId;
 
     public ProductCodeType getProductCode() {
         return productCode;
@@ -154,6 +158,10 @@ public class AlipayPayConsultRequest extends AlipayRequest<AlipayPayConsultRespo
     public void setAllowedPaymentMethodRegions(List<String> allowedPaymentMethodRegions) {
         this.allowedPaymentMethodRegions = allowedPaymentMethodRegions;
     }
+
+    public String getMerchantAccountId() { return merchantAccountId; }
+
+    public void setMerchantAccountId(String merchantAccountId) { this.merchantAccountId = merchantAccountId; }
 
     @Override
     public Class<AlipayPayConsultResponse> getResponseClass() {

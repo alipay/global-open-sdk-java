@@ -15,6 +15,11 @@ public class AlipayPayCancelRequest extends AlipayRequest<AlipayPayCancelRespons
      */
     private String paymentRequestId;
 
+    /**
+     * The unique ID to identify a merchant account.
+     */
+    private String merchantAccountId;
+
     public String getPaymentId() {
         return paymentId;
     }
@@ -30,6 +35,10 @@ public class AlipayPayCancelRequest extends AlipayRequest<AlipayPayCancelRespons
     public void setPaymentRequestId(String paymentRequestId) {
         this.paymentRequestId = paymentRequestId;
     }
+
+    public String getMerchantAccountId() { return merchantAccountId; }
+
+    public void setMerchantAccountId(String merchantAccountId) { this.merchantAccountId = merchantAccountId; }
 
     @Override
     public Class<AlipayPayCancelResponse> getResponseClass() {
