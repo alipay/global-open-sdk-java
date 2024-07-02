@@ -91,6 +91,11 @@ public class AlipayPayRequest extends AlipayRequest<AlipayPayResponse> {
 
     private String                  extendInfo;
 
+    /**
+     * The unique ID to identify a merchant account.
+     */
+    private String merchantAccountId;
+
     public String getAppId() {
         return appId;
     }
@@ -250,6 +255,10 @@ public class AlipayPayRequest extends AlipayRequest<AlipayPayResponse> {
     public void setEnv(Env env) {
         this.env = env;
     }
+
+    public String getMerchantAccountId() { return merchantAccountId; }
+
+    public void setMerchantAccountId(String merchantAccountId) { this.merchantAccountId = merchantAccountId; }
 
     @Override
     public Class<AlipayPayResponse> getResponseClass() {
