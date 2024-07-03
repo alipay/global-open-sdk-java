@@ -16,6 +16,11 @@ public class AlipayInquiryRefundRequest extends AlipayRequest<AlipayInquiryRefun
      */
     private String refundId;
 
+    /**
+     * The unique ID to identify a merchant account.
+     */
+    private String merchantAccountId;
+
     public String getRefundRequestId() {
         return refundRequestId;
     }
@@ -31,6 +36,10 @@ public class AlipayInquiryRefundRequest extends AlipayRequest<AlipayInquiryRefun
     public void setRefundId(String refundId) {
         this.refundId = refundId;
     }
+
+    public String getMerchantAccountId() { return merchantAccountId; }
+
+    public void setMerchantAccountId(String merchantAccountId) { this.merchantAccountId = merchantAccountId; }
 
     @Override
     public Class getResponseClass() {
