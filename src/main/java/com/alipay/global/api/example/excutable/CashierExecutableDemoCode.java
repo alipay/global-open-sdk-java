@@ -1,49 +1,41 @@
 package com.alipay.global.api.example.excutable;
 
+import java.util.UUID;
+
 import com.alipay.global.api.AlipayClient;
 import com.alipay.global.api.DefaultAlipayClient;
 import com.alipay.global.api.exception.AlipayApiException;
 import com.alipay.global.api.model.ams.*;
-import com.alipay.global.api.model.constants.AntomPathConstants;
 import com.alipay.global.api.model.constants.EndPointConstants;
 import com.alipay.global.api.request.ams.pay.AlipayPayQueryRequest;
 import com.alipay.global.api.request.ams.pay.AlipayPayRequest;
 import com.alipay.global.api.response.ams.pay.AlipayPayQueryResponse;
 import com.alipay.global.api.response.ams.pay.AlipayPayResponse;
 
-import java.util.UUID;
-
-
 public class CashierExecutableDemoCode {
-
 
     private static final String merchantPrivateKey = "";
 
-    private static final String alipayPublicKey = "";
+    private static final String alipayPublicKey    = "";
 
-    private static final String CLIENT_ID = "";
-
+    private static final String CLIENT_ID          = "";
 
     public static void main(String[] args) {
 
     }
 
-
     private static void cashierPay() {
 
         // Select your gateway address according to the recommendations of the developer center.
         AlipayClient defaultAlipayClient = new DefaultAlipayClient(EndPointConstants.SG,
-                merchantPrivateKey, alipayPublicKey);
+            merchantPrivateKey, alipayPublicKey, CLIENT_ID);
 
         AlipayPayRequest alipayPayRequest = new AlipayPayRequest();
-        alipayPayRequest.setClientId(CLIENT_ID);
-        alipayPayRequest.setPath(AntomPathConstants.PAYMENT_PATH);
         alipayPayRequest.setProductCode(ProductCodeType.CASHIER_PAYMENT);
 
         // replace to your paymentRequestId
         String paymentRequestId = UUID.randomUUID().toString();
         alipayPayRequest.setPaymentRequestId(paymentRequestId);
-
 
         // set amount
         Amount amount = new Amount();
@@ -104,15 +96,13 @@ public class CashierExecutableDemoCode {
         System.out.println(alipayPayResponse);
     }
 
-
     private static void cashierInquiryPayment() {
 
         AlipayClient defaultAlipayClient = new DefaultAlipayClient(EndPointConstants.SG,
-                merchantPrivateKey, alipayPublicKey);
+            merchantPrivateKey, alipayPublicKey);
 
         AlipayPayQueryRequest alipayPayQueryRequest = new AlipayPayQueryRequest();
         alipayPayQueryRequest.setClientId(CLIENT_ID);
-        alipayPayQueryRequest.setPath("/ams/api/v1/payments/pay");
 
         AlipayPayQueryResponse alipayPayQueryResponse;
         try {
@@ -122,6 +112,5 @@ public class CashierExecutableDemoCode {
             // handle error condition
         }
     }
-
 
 }

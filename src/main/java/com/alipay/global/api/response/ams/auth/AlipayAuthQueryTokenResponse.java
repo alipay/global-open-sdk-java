@@ -2,6 +2,11 @@ package com.alipay.global.api.response.ams.auth;
 
 import com.alipay.global.api.response.AlipayResponse;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+@EqualsAndHashCode(callSuper = true)
+@Data
 public class AlipayAuthQueryTokenResponse extends AlipayResponse {
 
     private String accessToken;
@@ -9,45 +14,5 @@ public class AlipayAuthQueryTokenResponse extends AlipayResponse {
     private String refreshToken;
     private String refreshTokenExpiryTime;
     private String tokenStatusType;
-
-    public String getAccessToken() {
-        return accessToken;
-    }
-
-    public void setAccessToken(String accessToken) {
-        this.accessToken = accessToken;
-    }
-
-    public String getAccessTokenExpiryTime() {
-        return accessTokenExpiryTime;
-    }
-
-    public void setAccessTokenExpiryTime(String accessTokenExpiryTime) {
-        this.accessTokenExpiryTime = accessTokenExpiryTime;
-    }
-
-    public String getRefreshToken() {
-        return refreshToken;
-    }
-
-    public void setRefreshToken(String refreshToken) {
-        this.refreshToken = refreshToken;
-    }
-
-    public String getRefreshTokenExpiryTime() {
-        return refreshTokenExpiryTime;
-    }
-
-    public void setRefreshTokenExpiryTime(String refreshTokenExpiryTime) {
-        this.refreshTokenExpiryTime = refreshTokenExpiryTime;
-    }
-
-    public String getTokenStatusType() {
-        return tokenStatusType;
-    }
-
-    public void setTokenStatusType(String tokenStatusType) {
-        this.tokenStatusType = tokenStatusType;
-    }
 
 }

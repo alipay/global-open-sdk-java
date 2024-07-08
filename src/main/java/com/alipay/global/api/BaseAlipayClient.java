@@ -197,7 +197,7 @@ public abstract class BaseAlipayClient implements AlipayClient {
      * @param alipayRequest
      */
     private void adjustSandboxUrl(AlipayRequest alipayRequest) {
-        if (isSandboxMode) {
+        if (isSandboxMode && alipayRequest.usingSandboxUrl()) {
             String originPath = alipayRequest.getPath();
             alipayRequest.setPath(originPath.replaceFirst("/ams/api", "/ams/sandbox/api"));
         }

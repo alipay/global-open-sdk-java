@@ -1,5 +1,9 @@
 package com.alipay.global.api.example;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import com.alipay.global.api.AlipayClient;
 import com.alipay.global.api.DefaultAlipayClient;
 import com.alipay.global.api.example.model.Callback;
@@ -16,24 +20,20 @@ import com.alipay.global.api.response.ams.merchant.AlipayMerchantRegistrationInf
 import com.alipay.global.api.response.ams.merchant.AlipayMerchantRegistrationResponse;
 import com.alipay.global.api.response.ams.merchant.AlipayMerchantRegistrationStatusQueryResponse;
 
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-
 public class RegistrationDemoCode {
 
-    private static final Integer TIMEOUT_RETRY_COUNT = 3;
-    private static final Integer REGISTER_RETRY_COUNT = 3;
-    private static final String  GATE_WAY_URL = "";
-    private static final String  merchantPrivateKey = "";
-    private static final String  alipayPublicKey    = "";
-    private static final String  CLIENT_ID = "";
-    private static final String  PAYMENT_REQUEST_ID = "";
-    private static final AlipayClient defaultAlipayClient = new DefaultAlipayClient(GATE_WAY_URL, merchantPrivateKey, alipayPublicKey);
-    private static final String registrationRequestId = "";
-    private static final String referenceMerchantId = "";
+    private static final Integer      TIMEOUT_RETRY_COUNT   = 3;
+    private static final Integer      REGISTER_RETRY_COUNT  = 3;
+    private static final String       GATE_WAY_URL          = "";
+    private static final String       merchantPrivateKey    = "";
+    private static final String       alipayPublicKey       = "";
+    private static final String       CLIENT_ID             = "";
+    private static final String       PAYMENT_REQUEST_ID    = "";
+    private static final AlipayClient defaultAlipayClient   = new DefaultAlipayClient(GATE_WAY_URL,
+        merchantPrivateKey, alipayPublicKey);
+    private static final String       registrationRequestId = "";
+    private static final String       referenceMerchantId   = "";
+
     public static void main(String[] args) {
         //step1 register merchant info
         AlipayMerchantRegistrationResponse response = registerMerchant(buildRegisterRequest());
@@ -45,8 +45,8 @@ public class RegistrationDemoCode {
             }
             //step2. query registration status.
             if (ResultStatusType.S.equals(result.getResultStatus())) {
-                AlipayMerchantRegistrationStatusQueryResponse statusResponse =
-                        queryRegistrationStatus(buildAlipayMerchantRegistrationStatusQueryRequest());
+                AlipayMerchantRegistrationStatusQueryResponse statusResponse = queryRegistrationStatus(
+                    buildAlipayMerchantRegistrationStatusQueryRequest());
                 if (statusResponse != null) {
                     Result statusResult = statusResponse.getResult();
                     if (ResultStatusType.F.equals(statusResult.getResultStatus())) {
@@ -55,8 +55,8 @@ public class RegistrationDemoCode {
                     }
                 }
                 //step3. query registration info.
-                AlipayMerchantRegistrationInfoQueryResponse infoResponse =
-                        queryRegistrationInfo(buildAlipayMerchantRegistrationInfoQueryRequest());
+                AlipayMerchantRegistrationInfoQueryResponse infoResponse = queryRegistrationInfo(
+                    buildAlipayMerchantRegistrationInfoQueryRequest());
                 if (infoResponse != null) {
                     Result infoResult = infoResponse.getResult();
                     if (ResultStatusType.F.equals(infoResult.getResultStatus())) {
@@ -70,11 +70,9 @@ public class RegistrationDemoCode {
 
     }
 
-
     public static AlipayMerchantRegistrationRequest buildRegisterRequest() {
         final AlipayMerchantRegistrationRequest request = new AlipayMerchantRegistrationRequest();
 
-        request.setPath("/ams/sandbox/api/v1/merchants/registration");
         request.setClientId(CLIENT_ID);
 
         //TODO build your merchant info request
@@ -122,8 +120,6 @@ public class RegistrationDemoCode {
         contactInfos.add(contactInfo);
         detail.setContactInfo(contactInfos);
 
-
-
         Address registrationAddress = new Address();
         registrationAddress.setRegion("HK");
         detail.setRegistrationAddress(registrationAddress);
@@ -141,15 +137,12 @@ public class RegistrationDemoCode {
         merchant.setReferenceMerchantId(referenceMerchantId);
         request.setMerchantInfo(merchant);
 
-
         return request;
     }
 
     public static AlipayMerchantRegistrationInfoQueryRequest buildAlipayMerchantRegistrationInfoQueryRequest() {
         final AlipayMerchantRegistrationInfoQueryRequest request = new AlipayMerchantRegistrationInfoQueryRequest();
-        request.setPath("/ams/sandbox/api/v1/merchants/inquiryRegistrationInfo");
         request.setClientId(CLIENT_ID);
-
 
         request.setReferenceMerchantId(referenceMerchantId);
         return request;
@@ -164,7 +157,7 @@ public class RegistrationDemoCode {
                     response = defaultAlipayClient.execute(request);
                 } catch (AlipayApiException e) {
                     String errorMsg = e.getMessage();
-                    if(errorMsg.indexOf("SocketTimeoutException") > 0){
+                    if (errorMsg.indexOf("SocketTimeoutException") > 0) {
                         // TODO timeout retry and log
                         return RetryResult.ofResult(true);
                     } else {
@@ -175,13 +168,11 @@ public class RegistrationDemoCode {
                 return RetryResult.ofResult(false, response);
             }
         });
-        return obj != null ? (AlipayMerchantRegistrationInfoQueryResponse)obj : null;
+        return obj != null ? (AlipayMerchantRegistrationInfoQueryResponse) obj : null;
     }
-
 
     public static AlipayMerchantRegistrationStatusQueryRequest buildAlipayMerchantRegistrationStatusQueryRequest() {
         final AlipayMerchantRegistrationStatusQueryRequest request = new AlipayMerchantRegistrationStatusQueryRequest();
-        request.setPath("/ams/sandbox/api/v1/merchants/inquiryRegistrationStatus");
         request.setClientId(CLIENT_ID);
 
         request.setReferenceMerchantId(referenceMerchantId);
@@ -198,7 +189,7 @@ public class RegistrationDemoCode {
                     response = defaultAlipayClient.execute(request);
                 } catch (AlipayApiException e) {
                     String errorMsg = e.getMessage();
-                    if(errorMsg.indexOf("SocketTimeoutException") > 0){
+                    if (errorMsg.indexOf("SocketTimeoutException") > 0) {
                         // TODO timeout retry and log
                         return RetryResult.ofResult(true);
                     } else {
@@ -209,7 +200,7 @@ public class RegistrationDemoCode {
                 return RetryResult.ofResult(false, response);
             }
         });
-        return obj != null ? (AlipayMerchantRegistrationStatusQueryResponse)obj : null;
+        return obj != null ? (AlipayMerchantRegistrationStatusQueryResponse) obj : null;
     }
 
     public static AlipayMerchantRegistrationResponse registerMerchant(final AlipayMerchantRegistrationRequest request) {
@@ -222,7 +213,7 @@ public class RegistrationDemoCode {
                     response = defaultAlipayClient.execute(request);
                 } catch (AlipayApiException e) {
                     String errorMsg = e.getMessage();
-                    if(errorMsg.indexOf("SocketTimeoutException") > 0){
+                    if (errorMsg.indexOf("SocketTimeoutException") > 0) {
                         // TODO timeout retry and log
                         return RetryResult.ofResult(true);
                     } else {
@@ -233,6 +224,6 @@ public class RegistrationDemoCode {
                 return RetryResult.ofResult(false, response);
             }
         });
-        return obj != null ? (AlipayMerchantRegistrationResponse)obj : null;
+        return obj != null ? (AlipayMerchantRegistrationResponse) obj : null;
     }
 }

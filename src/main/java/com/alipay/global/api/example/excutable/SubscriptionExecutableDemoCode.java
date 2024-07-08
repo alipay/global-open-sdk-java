@@ -1,39 +1,36 @@
 package com.alipay.global.api.example.excutable;
 
+import java.util.UUID;
+
 import com.alibaba.fastjson.JSON;
 import com.alipay.global.api.AlipayClient;
 import com.alipay.global.api.DefaultAlipayClient;
 import com.alipay.global.api.exception.AlipayApiException;
 import com.alipay.global.api.model.ams.*;
-import com.alipay.global.api.model.constants.AntomPathConstants;
 import com.alipay.global.api.model.constants.EndPointConstants;
 import com.alipay.global.api.request.ams.subscription.AlipaySubscriptionCreateRequest;
 import com.alipay.global.api.response.ams.subscription.AlipaySubscriptionCreateResponse;
 
-import java.util.UUID;
-
 public class SubscriptionExecutableDemoCode {
-
 
     private static final String merchantPrivateKey = "";
 
-    private static final String alipayPublicKey = "";
+    private static final String alipayPublicKey    = "";
 
-    private static final String CLIENT_ID = "";
+    private static final String CLIENT_ID          = "";
 
     public static void main(String[] args) {
 
-        createSubScription();
+        createSubscription();
 
     }
 
-    public static void createSubScription() {
+    public static void createSubscription() {
 
         AlipayClient defaultAlipayClient = new DefaultAlipayClient(EndPointConstants.SG,
-                merchantPrivateKey, alipayPublicKey);
+            merchantPrivateKey, alipayPublicKey);
 
         AlipaySubscriptionCreateRequest alipaySubscriptionCreateRequest = new AlipaySubscriptionCreateRequest();
-        alipaySubscriptionCreateRequest.setPath(AntomPathConstants.SUBSCRIPTION_CREATE_PATH);
         alipaySubscriptionCreateRequest.setClientId(CLIENT_ID);
 
         String subscriptionRequestId = UUID.randomUUID().toString();
@@ -66,8 +63,10 @@ public class SubscriptionExecutableDemoCode {
         settlementStrategy.setSettlementCurrency("USD");
         alipaySubscriptionCreateRequest.setSettlementStrategy(settlementStrategy);
 
-        alipaySubscriptionCreateRequest.setSubscriptionRedirectUrl("https://www.yourRedirectUrl.com");
-        alipaySubscriptionCreateRequest.setSubscriptionNotificationUrl("https://www.yourNotify.com");
+        alipaySubscriptionCreateRequest
+            .setSubscriptionRedirectUrl("https://www.yourRedirectUrl.com");
+        alipaySubscriptionCreateRequest
+            .setSubscriptionNotificationUrl("https://www.yourNotify.com");
         alipaySubscriptionCreateRequest.setPaymentNotificationUrl("https://www.yourNotify.com");
 
         Env env = new Env();
@@ -80,7 +79,8 @@ public class SubscriptionExecutableDemoCode {
         System.out.println(JSON.toJSON(alipaySubscriptionCreateRequest));
 
         try {
-            alipaySubscriptionCreateResponse = defaultAlipayClient.execute(alipaySubscriptionCreateRequest);
+            alipaySubscriptionCreateResponse = defaultAlipayClient
+                .execute(alipaySubscriptionCreateRequest);
         } catch (AlipayApiException e) {
             String errorMsg = e.getMessage();
             System.out.println(e);
@@ -90,6 +90,5 @@ public class SubscriptionExecutableDemoCode {
         System.out.println(JSON.toJSON(alipaySubscriptionCreateResponse));
 
     }
-
 
 }

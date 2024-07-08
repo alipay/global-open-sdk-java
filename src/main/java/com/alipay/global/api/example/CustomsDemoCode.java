@@ -1,5 +1,7 @@
 package com.alipay.global.api.example;
 
+import java.util.ArrayList;
+import java.util.List;
 
 import com.alipay.global.api.AlipayClient;
 import com.alipay.global.api.DefaultAlipayClient;
@@ -14,20 +16,18 @@ import com.alipay.global.api.request.ams.customs.AlipayCustomsQueryRequest;
 import com.alipay.global.api.response.ams.customs.AlipayCustomsDeclareResponse;
 import com.alipay.global.api.response.ams.customs.AlipayCustomsQueryResponse;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class CustomsDemoCode {
 
-    private static final Integer TIMEOUT_RETRY_COUNT = 3;
-    private static final Integer QUERY_DECLARE_RETRY_COUNT = 3;
-    private static final Integer DECLARE_RETRY_COUNT = 3;
+    private static final Integer      TIMEOUT_RETRY_COUNT       = 3;
+    private static final Integer      QUERY_DECLARE_RETRY_COUNT = 3;
+    private static final Integer      DECLARE_RETRY_COUNT       = 3;
     //TODO build your clientId
-    private static final String  clientId = "";
-    private static final String  GATE_WAY_URL = "";
-    private static final String  merchantPrivateKey = "";
-    private static final String  alipayPublicKey    = "";
-    private static final AlipayClient defaultAlipayClient = new DefaultAlipayClient(GATE_WAY_URL, merchantPrivateKey, alipayPublicKey);
+    private static final String       clientId                  = "";
+    private static final String       GATE_WAY_URL              = "";
+    private static final String       merchantPrivateKey        = "";
+    private static final String       alipayPublicKey           = "";
+    private static final AlipayClient defaultAlipayClient       = new DefaultAlipayClient(
+        GATE_WAY_URL, merchantPrivateKey, alipayPublicKey);
 
     public static void main(String[] args) {
         //step.1 finish a payment. Because transmit information to customs need a paymentId;
@@ -47,7 +47,8 @@ public class CustomsDemoCode {
             if (ResultStatusType.S.equals(result.getResultStatus())) {
                 List<String> requestIds = new ArrayList<String>();
                 requestIds.add(declareRequest.getDeclarationRequestId());
-                AlipayCustomsQueryResponse customsQueryResponse = queryCustomsDeclare(buildAlipayCustomsQueryRequest(requestIds));
+                AlipayCustomsQueryResponse customsQueryResponse = queryCustomsDeclare(
+                    buildAlipayCustomsQueryRequest(requestIds));
                 if (customsQueryResponse != null) {
                     Result statusResult = customsQueryResponse.getResult();
                     if (ResultStatusType.F.equals(statusResult.getResultStatus())) {
@@ -58,15 +59,10 @@ public class CustomsDemoCode {
             }
         }
 
-
-
     }
-
 
     public static AlipayCustomsDeclareRequest buildAlipayCustomsDeclareRequest(String paymentId) {
         final AlipayCustomsDeclareRequest request = new AlipayCustomsDeclareRequest();
-        request.setPath("/ams/sandbox/api/v1/customs/declare");
-
         request.setClientId(clientId);
 
         Certificate buyerCertificate = new Certificate();
@@ -105,7 +101,6 @@ public class CustomsDemoCode {
         return request;
     }
 
-
     public static AlipayCustomsDeclareResponse declare(final AlipayCustomsDeclareRequest request) {
         Object obj = RetryExecutor.execute(DECLARE_RETRY_COUNT, new Callback() {
             @Override
@@ -115,7 +110,7 @@ public class CustomsDemoCode {
                     response = defaultAlipayClient.execute(request);
                 } catch (AlipayApiException e) {
                     String errorMsg = e.getMessage();
-                    if(errorMsg.indexOf("SocketTimeoutException") > 0){
+                    if (errorMsg.indexOf("SocketTimeoutException") > 0) {
                         // TODO timeout retry and log
                         return RetryResult.ofResult(true);
                     } else {
@@ -126,13 +121,11 @@ public class CustomsDemoCode {
                 return RetryResult.ofResult(false, response);
             }
         });
-        return obj != null ? (AlipayCustomsDeclareResponse)obj : null;
+        return obj != null ? (AlipayCustomsDeclareResponse) obj : null;
     }
-
 
     public static AlipayCustomsQueryRequest buildAlipayCustomsQueryRequest(List<String> requestIds) {
         final AlipayCustomsQueryRequest request = new AlipayCustomsQueryRequest();
-        request.setPath("/ams/sandbox/api/v1/customs/inquiryDeclarationRequests");
         request.setClientId(clientId);
         request.setDeclarationRequestIds(requestIds);
         return request;
@@ -147,7 +140,7 @@ public class CustomsDemoCode {
                     response = defaultAlipayClient.execute(request);
                 } catch (AlipayApiException e) {
                     String errorMsg = e.getMessage();
-                    if(errorMsg.indexOf("SocketTimeoutException") > 0){
+                    if (errorMsg.indexOf("SocketTimeoutException") > 0) {
                         // TODO timeout retry and log
                         return RetryResult.ofResult(true);
                     } else {
@@ -158,7 +151,7 @@ public class CustomsDemoCode {
                 return RetryResult.ofResult(false, response);
             }
         });
-        return obj != null ? (AlipayCustomsQueryResponse)obj : null;
+        return obj != null ? (AlipayCustomsQueryResponse) obj : null;
     }
 
 }

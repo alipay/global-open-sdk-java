@@ -4,10 +4,15 @@
  */
 package com.alipay.global.api.response.ams.risk;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 /**
  * The response of Ant Group's risk decide API.
  * 调用蚂蚁集团风控实时决策接口的响应结果。
  */
+@EqualsAndHashCode(callSuper = true)
+@Data
 public class RiskDecideResponse extends RiskResponse {
     /**
      * Ant Group's risk decisions. Valid values are as follows:
@@ -28,19 +33,4 @@ public class RiskDecideResponse extends RiskResponse {
      */
     private String authenticationDecision;
 
-    public String getDecision() {
-        return decision;
-    }
-
-    public void setDecision(String decision) {
-        this.decision = decision;
-    }
-
-    public String getAuthenticationDecision() {
-        return authenticationDecision;
-    }
-
-    public void setAuthenticationDecision(String authenticationDecision) {
-        this.authenticationDecision = authenticationDecision;
-    }
 }

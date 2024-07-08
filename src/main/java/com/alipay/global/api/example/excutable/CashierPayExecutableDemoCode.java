@@ -1,18 +1,14 @@
 package com.alipay.global.api.example.excutable;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 import com.alibaba.fastjson.JSONObject;
 import com.alipay.global.api.AlipayClient;
 import com.alipay.global.api.DefaultAlipayClient;
 import com.alipay.global.api.exception.AlipayApiException;
-import com.alipay.global.api.model.ams.Amount;
-import com.alipay.global.api.model.ams.Buyer;
-import com.alipay.global.api.model.ams.Env;
-import com.alipay.global.api.model.ams.Order;
-import com.alipay.global.api.model.ams.PaymentFactor;
-import com.alipay.global.api.model.ams.PaymentMethod;
-import com.alipay.global.api.model.ams.ProductCodeType;
-import com.alipay.global.api.model.ams.SettlementStrategy;
-import com.alipay.global.api.model.ams.TerminalType;
+import com.alipay.global.api.model.ams.*;
 import com.alipay.global.api.request.ams.pay.AlipayPayConsultRequest;
 import com.alipay.global.api.request.ams.pay.AlipayPayQueryRequest;
 import com.alipay.global.api.request.ams.pay.AlipayPayRequest;
@@ -21,10 +17,6 @@ import com.alipay.global.api.response.ams.pay.AlipayPayConsultResponse;
 import com.alipay.global.api.response.ams.pay.AlipayPayQueryResponse;
 import com.alipay.global.api.response.ams.pay.AlipayPayResponse;
 import com.alipay.global.api.response.ams.pay.AlipayPaymentSessionResponse;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 
 public class CashierPayExecutableDemoCode {
 
@@ -51,7 +43,6 @@ public class CashierPayExecutableDemoCode {
     public static void executeConsult() {
         AlipayPayConsultRequest alipayPayConsultRequest = new AlipayPayConsultRequest();
         alipayPayConsultRequest.setClientId(CLIENT_ID);
-        alipayPayConsultRequest.setPath("/ams/sandbox/api/v1/payments/consult");
         alipayPayConsultRequest.setProductCode(ProductCodeType.CASHIER_PAYMENT);
 
         // set amount
@@ -82,13 +73,11 @@ public class CashierPayExecutableDemoCode {
 
         AlipayPayRequest alipayPayRequest = new AlipayPayRequest();
         alipayPayRequest.setClientId(CLIENT_ID);
-        alipayPayRequest.setPath("/ams/sandbox/api/v1/payments/pay");
         alipayPayRequest.setProductCode(ProductCodeType.CASHIER_PAYMENT);
 
         // replace to your paymentRequestId
         String paymentRequestId = UUID.randomUUID().toString();
         alipayPayRequest.setPaymentRequestId(paymentRequestId);
-
 
         // set amount
         Amount amount = new Amount();
@@ -170,13 +159,11 @@ public class CashierPayExecutableDemoCode {
 
         AlipayPayRequest alipayPayRequest = new AlipayPayRequest();
         alipayPayRequest.setClientId(CLIENT_ID);
-        alipayPayRequest.setPath("/ams/sandbox/api/v1/payments/pay");
         alipayPayRequest.setProductCode(ProductCodeType.CASHIER_PAYMENT);
 
         // replace to your paymentRequestId
         String paymentRequestId = UUID.randomUUID().toString();
         alipayPayRequest.setPaymentRequestId(paymentRequestId);
-
 
         // set amount
         Amount amount = new Amount();
@@ -239,11 +226,10 @@ public class CashierPayExecutableDemoCode {
     /**
      * show how to card payment Session(need to finish payment by Antom SDK)
      */
-    public static void executePaymentSessionCreateWithCard(){
+    public static void executePaymentSessionCreateWithCard() {
 
         AlipayPaymentSessionRequest alipayPaymentSessionRequest = new AlipayPaymentSessionRequest();
         alipayPaymentSessionRequest.setClientId(CLIENT_ID);
-        alipayPaymentSessionRequest.setPath("/ams/sandbox/api/v1/payments/createPaymentSession");
         alipayPaymentSessionRequest.setProductCode(ProductCodeType.CASHIER_PAYMENT);
 
         // replace to your paymentRequestId
@@ -315,7 +301,6 @@ public class CashierPayExecutableDemoCode {
 
         AlipayPayQueryRequest alipayPayQueryRequest = new AlipayPayQueryRequest();
         alipayPayQueryRequest.setClientId(CLIENT_ID);
-        alipayPayQueryRequest.setPath("/ams/sandbox/api/v1/payments/inquiryPayment");
 
         //inquiry payment result
         alipayPayQueryRequest.setPaymentRequestId("yourPaymentRequestId");

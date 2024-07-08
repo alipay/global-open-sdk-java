@@ -4,17 +4,22 @@
  */
 package com.alipay.global.api.request.ams.risk;
 
+import java.util.List;
+
 import com.alipay.global.api.model.ams.Amount;
 import com.alipay.global.api.model.risk.RefundRecord;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.risk.SendRefundResultResponse;
 
-import java.util.List;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * The request of Ant Group's send refund result API.
  * 调用蚂蚁集团退款结果通知接口的请求参数。
  */
+@EqualsAndHashCode(callSuper = true)
+@Data
 public class SendRefundResultRequest extends AlipayRequest<SendRefundResultResponse> {
     /**
      * A unique ID assigned to a merchant who provides a service or product directly to a customer and is used to identify the transaction.
@@ -37,36 +42,13 @@ public class SendRefundResultRequest extends AlipayRequest<SendRefundResultRespo
      */
     private List<RefundRecord> refundRecords;
 
-    public String getReferenceTransactionId() {
-        return referenceTransactionId;
+    public SendRefundResultRequest() {
+        this.setPath("/ams/api/v1/risk/privacy/payments/sendRefundResult");
     }
 
-    public void setReferenceTransactionId(String referenceTransactionId) {
-        this.referenceTransactionId = referenceTransactionId;
-    }
-
-    public String getReferenceRefundId() {
-        return referenceRefundId;
-    }
-
-    public void setReferenceRefundId(String referenceRefundId) {
-        this.referenceRefundId = referenceRefundId;
-    }
-
-    public Amount getActualRefundAmount() {
-        return actualRefundAmount;
-    }
-
-    public void setActualRefundAmount(Amount actualRefundAmount) {
-        this.actualRefundAmount = actualRefundAmount;
-    }
-
-    public List<RefundRecord> getRefundRecords() {
-        return refundRecords;
-    }
-
-    public void setRefundRecords(List<RefundRecord> refundRecords) {
-        this.refundRecords = refundRecords;
+    @Override
+    public boolean usingSandboxUrl() {
+        return false;
     }
 
     @Override

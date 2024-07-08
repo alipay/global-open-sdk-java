@@ -1,5 +1,8 @@
 package com.alipay.global.api.example;
 
+import java.util.Arrays;
+import java.util.List;
+
 import com.alipay.global.api.AlipayClient;
 import com.alipay.global.api.DefaultAlipayClient;
 import com.alipay.global.api.example.model.Callback;
@@ -16,23 +19,21 @@ import com.alipay.global.api.response.ams.pay.AlipayPayCancelResponse;
 import com.alipay.global.api.response.ams.pay.AlipayPayQueryResponse;
 import com.alipay.global.api.response.ams.pay.AlipayPayResponse;
 
-import java.util.Arrays;
-import java.util.List;
-
 /**
  * The demo code mainly shows how to use the API correctly and the specific implementation needs to be performed by merchants.
  */
 public class CashierPayDemoCode {
 
-    private static final Integer TIMEOUT_RETRY_COUNT = 3;
-    private static final Integer CANCEL_RETRY_COUNT = 3;
-    private static final Integer PAY_RETRY_COUNT = 3;
-    private static final String  GATE_WAY_URL = "";
-    private static final String  merchantPrivateKey = "";
-    private static final String  alipayPublicKey    = "";
-    private static final String  CLIENT_ID = "";
-    private static final String  PAYMENT_REQUEST_ID = "";
-    private static final AlipayClient defaultAlipayClient = new DefaultAlipayClient(GATE_WAY_URL, merchantPrivateKey, alipayPublicKey);
+    private static final Integer      TIMEOUT_RETRY_COUNT = 3;
+    private static final Integer      CANCEL_RETRY_COUNT  = 3;
+    private static final Integer      PAY_RETRY_COUNT     = 3;
+    private static final String       GATE_WAY_URL        = "";
+    private static final String       merchantPrivateKey  = "";
+    private static final String       alipayPublicKey     = "";
+    private static final String       CLIENT_ID           = "";
+    private static final String       PAYMENT_REQUEST_ID  = "";
+    private static final AlipayClient defaultAlipayClient = new DefaultAlipayClient(GATE_WAY_URL,
+        merchantPrivateKey, alipayPublicKey);
 
     public static void main(String[] args) {
 
@@ -42,27 +43,28 @@ public class CashierPayDemoCode {
             public RetryResult doProcess() {
                 final String paymentRequestId = PAYMENT_REQUEST_ID;
                 AlipayPayResponse alipayPayResponse = pay(paymentRequestId);
-                if(alipayPayResponse == null){
+                if (alipayPayResponse == null) {
 
                     RetryExecutor.execute(CANCEL_RETRY_COUNT, new Callback() {
 
                         @Override
                         public RetryResult doProcess() {
-                            AlipayPayCancelResponse alipayPayCancelResponse = cancel(paymentRequestId);
-                            if(alipayPayCancelResponse == null){
+                            AlipayPayCancelResponse alipayPayCancelResponse = cancel(
+                                paymentRequestId);
+                            if (alipayPayCancelResponse == null) {
                                 // TODO Cancel fail
                                 return RetryResult.ofResult(false);
                             }
                             Result cancelResult = alipayPayCancelResponse.getResult();
-                            if(ResultStatusType.U.equals(cancelResult.getResultStatus())){
+                            if (ResultStatusType.U.equals(cancelResult.getResultStatus())) {
                                 // TODO check times, retry cancel
                                 return RetryResult.ofResult(true);
                             }
-                            if(ResultStatusType.S.equals(cancelResult.getResultStatus())){
+                            if (ResultStatusType.S.equals(cancelResult.getResultStatus())) {
                                 // TODO Cancel success
                                 return RetryResult.ofResult(false);
                             }
-                            if(ResultStatusType.F.equals(cancelResult.getResultStatus())){
+                            if (ResultStatusType.F.equals(cancelResult.getResultStatus())) {
                                 // TODO Cancel fail,Contact tech support
                                 return RetryResult.ofResult(false);
                             }
@@ -76,15 +78,16 @@ public class CashierPayDemoCode {
                 /**
                  * If payment failed，terminate this transaction.
                  */
-                if(ResultStatusType.F.equals(payResult.getResultStatus())){
+                if (ResultStatusType.F.equals(payResult.getResultStatus())) {
                     // TODO Payment fail
                     return RetryResult.ofResult(false);
                 }
-                if(ResultStatusType.U.equals(payResult.getResultStatus())){
-                    if(!ResultCode.PAYMENT_IN_PROCESS.name().equals(payResult.getResultCode())){
+                if (ResultStatusType.U.equals(payResult.getResultStatus())) {
+                    if (!ResultCode.PAYMENT_IN_PROCESS.name().equals(payResult.getResultCode())) {
                         return RetryResult.ofResult(true);
                     }
-                    RedirectActionForm  redirectActionForm = alipayPayResponse.getRedirectActionForm();
+                    RedirectActionForm redirectActionForm = alipayPayResponse
+                        .getRedirectActionForm();
                     String redirectUrl = redirectActionForm.getRedirectUrl();
                     String method = redirectActionForm.getMethod();
                     String parameters = redirectActionForm.getParameters();
@@ -99,7 +102,7 @@ public class CashierPayDemoCode {
 
     }
 
-    public static void asyncQueryTask(final String paymentRequestId){
+    public static void asyncQueryTask(final String paymentRequestId) {
         // 1、TODO Wait 3 minutes for execution
 
         String orderStatus = TransactionStatusType.PROCESSING.name();
@@ -108,8 +111,8 @@ public class CashierPayDemoCode {
         /**
          * Is it in process?
          */
-        if(!TransactionStatusType.PROCESSING.name().equals(orderStatus)){
-            return ;
+        if (!TransactionStatusType.PROCESSING.name().equals(orderStatus)) {
+            return;
         }
         /**
          * Pause interval when the state is PROCESSING
@@ -119,20 +122,20 @@ public class CashierPayDemoCode {
         Integer QUERY_RETRY_COUNT = 10;
         TransactionStatusType paymentStatus = null;
         AlipayPayQueryResponse alipayPayQueryResponse = null;
-        while(isContinue){
+        while (isContinue) {
             alipayPayQueryResponse = inquiryPayment(paymentRequestId);
-            if(alipayPayQueryResponse == null){
-                return ;
+            if (alipayPayQueryResponse == null) {
+                return;
             }
             Result payQueryResult = alipayPayQueryResponse.getResult();
-            if(ResultStatusType.F.equals(payQueryResult.getResultStatus())){
+            if (ResultStatusType.F.equals(payQueryResult.getResultStatus())) {
                 // TODO Contact tech support
-                return ;
+                return;
             }
-            if(ResultStatusType.U.equals(payQueryResult.getResultStatus())){
+            if (ResultStatusType.U.equals(payQueryResult.getResultStatus())) {
                 // TODO retry queryPay
                 --QUERY_RETRY_COUNT;
-                if(QUERY_RETRY_COUNT > 0 ){
+                if (QUERY_RETRY_COUNT > 0) {
                     continue;
                 } else {
                     isContinue = false;
@@ -140,9 +143,9 @@ public class CashierPayDemoCode {
                 }
             }
             paymentStatus = alipayPayQueryResponse.getPaymentStatus();
-            if(paymentStatus != null){
-                if(TransactionStatusType.PROCESSING.equals(paymentStatus)){
-                    if(!pauseInterval.isEmpty()){
+            if (paymentStatus != null) {
+                if (TransactionStatusType.PROCESSING.equals(paymentStatus)) {
+                    if (!pauseInterval.isEmpty()) {
                         long sleepTime = pauseInterval.remove(0);
                         // TODO to wait sleepTime
                         continue;
@@ -154,63 +157,63 @@ public class CashierPayDemoCode {
             }
         }
 
-        if(alipayPayQueryResponse == null || TransactionStatusType.PROCESSING.equals(paymentStatus)){
+        if (alipayPayQueryResponse == null
+            || TransactionStatusType.PROCESSING.equals(paymentStatus)) {
             RetryExecutor.execute(CANCEL_RETRY_COUNT, new Callback() {
 
                 @Override
                 public RetryResult doProcess() {
                     AlipayPayCancelResponse alipayPayCancelResponse = cancel(paymentRequestId);
-                    if(alipayPayCancelResponse == null){
+                    if (alipayPayCancelResponse == null) {
                         // TODO Cancel fail
                         return RetryResult.ofResult(false);
                     }
                     Result cancelResult = alipayPayCancelResponse.getResult();
-                    if(ResultStatusType.U.equals(cancelResult.getResultStatus())){
+                    if (ResultStatusType.U.equals(cancelResult.getResultStatus())) {
                         // TODO check times, retry cancel
                         return RetryResult.ofResult(true);
                     }
-                    if(ResultStatusType.S.equals(cancelResult.getResultStatus())){
+                    if (ResultStatusType.S.equals(cancelResult.getResultStatus())) {
                         // TODO Cancel success
                         return RetryResult.ofResult(false);
                     }
-                    if(ResultStatusType.F.equals(cancelResult.getResultStatus())){
+                    if (ResultStatusType.F.equals(cancelResult.getResultStatus())) {
                         // TODO Cancel fail,contact tech support
                         return RetryResult.ofResult(false);
                     }
                     return RetryResult.ofResult(false);
                 }
             });
-            return ;
+            return;
         }
         /**
          * The transaction failed，terminate this transaction.
          */
-        if(TransactionStatusType.FAIL.equals(paymentStatus)){
+        if (TransactionStatusType.FAIL.equals(paymentStatus)) {
             // TODO Payment FAIL
-            return ;
+            return;
         }
         /**
          * The transaction cancelled，terminate this transaction.
          */
-        if(TransactionStatusType.CANCELLED.equals(paymentStatus)){
+        if (TransactionStatusType.CANCELLED.equals(paymentStatus)) {
             // TODO Payment CANCELLED
-            return ;
+            return;
         }
         /**
          * The transaction succeeded，proceed with other logic.
          */
-        if(TransactionStatusType.SUCCESS.equals(paymentStatus)){
+        if (TransactionStatusType.SUCCESS.equals(paymentStatus)) {
             // TODO Payment SUCCESS
-            return ;
+            return;
         }
 
     }
 
-    public static AlipayPayResponse pay(String paymentRequestId){
+    public static AlipayPayResponse pay(String paymentRequestId) {
 
         final AlipayPayRequest alipayPayRequest = new AlipayPayRequest();
         alipayPayRequest.setClientId(CLIENT_ID);
-        alipayPayRequest.setPath("/ams/sandbox/api/v1/payments/pay");
         alipayPayRequest.setProductCode(ProductCodeType.CASHIER_PAYMENT);
         alipayPayRequest.setPaymentRequestId(paymentRequestId);
 
@@ -221,7 +224,8 @@ public class CashierPayDemoCode {
 
         Order order = new Order();
         order.setReferenceOrderId("102775765075669");
-        order.setOrderDescription("Mi Band 3 Wrist Strap Metal Screwless Stainless Steel For Xiaomi Mi Band 3");
+        order.setOrderDescription(
+            "Mi Band 3 Wrist Strap Metal Screwless Stainless Steel For Xiaomi Mi Band 3");
 
         Merchant merchant = new Merchant();
         merchant.setMerchantMCC("Test");
@@ -247,7 +251,7 @@ public class CashierPayDemoCode {
         alipayPayRequest.setPaymentNotifyUrl("https://www.gcash.com/notify");
         alipayPayRequest.setPaymentRedirectUrl("https://www.gcash.com?param1=sl");
 
-        SettlementStrategy settlementStrategy  = new SettlementStrategy();
+        SettlementStrategy settlementStrategy = new SettlementStrategy();
         settlementStrategy.setSettlementCurrency("USD");
         alipayPayRequest.setSettlementStrategy(settlementStrategy);
 
@@ -260,9 +264,9 @@ public class CashierPayDemoCode {
                 AlipayPayResponse alipayPayResponse = null;
                 try {
                     alipayPayResponse = defaultAlipayClient.execute(alipayPayRequest);
-                } catch(AlipayApiException e){
+                } catch (AlipayApiException e) {
                     String errorMsg = e.getMessage();
-                    if(errorMsg.indexOf("SocketTimeoutException") > 0){
+                    if (errorMsg.indexOf("SocketTimeoutException") > 0) {
                         // TODO timeout retry and log
                         return RetryResult.ofResult(true);
                     } else {
@@ -274,13 +278,12 @@ public class CashierPayDemoCode {
             }
         });
 
-        return obj == null ? null:(AlipayPayResponse)obj;
+        return obj == null ? null : (AlipayPayResponse) obj;
     }
 
     public static AlipayPayQueryResponse inquiryPayment(String paymentRequestId) {
         final AlipayPayQueryRequest alipayPayQueryRequest = new AlipayPayQueryRequest();
         alipayPayQueryRequest.setClientId(CLIENT_ID);
-        alipayPayQueryRequest.setPath("/ams/sandbox/api/v1/payments/inquiryPayment");
         alipayPayQueryRequest.setPaymentRequestId(paymentRequestId);
 
         Object obj = RetryExecutor.execute(TIMEOUT_RETRY_COUNT, new Callback() {
@@ -289,9 +292,9 @@ public class CashierPayDemoCode {
                 AlipayPayQueryResponse alipayPayQueryResponse = null;
                 try {
                     alipayPayQueryResponse = defaultAlipayClient.execute(alipayPayQueryRequest);
-                } catch(AlipayApiException e){
+                } catch (AlipayApiException e) {
                     String errorMsg = e.getMessage();
-                    if(errorMsg.indexOf("SocketTimeoutException") > 0){
+                    if (errorMsg.indexOf("SocketTimeoutException") > 0) {
                         // TODO timeout retry and log
                         return RetryResult.ofResult(true);
                     } else {
@@ -303,13 +306,12 @@ public class CashierPayDemoCode {
             }
         });
 
-        return obj == null ? null:(AlipayPayQueryResponse)obj;
+        return obj == null ? null : (AlipayPayQueryResponse) obj;
     }
 
     public static AlipayPayCancelResponse cancel(String paymentRequestId) {
         final AlipayPayCancelRequest alipayPayCancelRequest = new AlipayPayCancelRequest();
         alipayPayCancelRequest.setClientId(CLIENT_ID);
-        alipayPayCancelRequest.setPath("/ams/sandbox/api/v1/payments/cancel");
         alipayPayCancelRequest.setPaymentRequestId(paymentRequestId);
 
         Object obj = RetryExecutor.execute(TIMEOUT_RETRY_COUNT, new Callback() {
@@ -318,9 +320,9 @@ public class CashierPayDemoCode {
                 AlipayPayCancelResponse alipayPayCancelResponse = null;
                 try {
                     alipayPayCancelResponse = defaultAlipayClient.execute(alipayPayCancelRequest);
-                } catch(AlipayApiException e){
+                } catch (AlipayApiException e) {
                     String errorMsg = e.getMessage();
-                    if(errorMsg.indexOf("SocketTimeoutException") > 0){
+                    if (errorMsg.indexOf("SocketTimeoutException") > 0) {
                         // TODO timeout retry and log
                         return RetryResult.ofResult(true);
                     } else {
@@ -332,7 +334,7 @@ public class CashierPayDemoCode {
             }
         });
 
-        return obj == null ? null:(AlipayPayCancelResponse)obj;
+        return obj == null ? null : (AlipayPayCancelResponse) obj;
     }
 
 }
