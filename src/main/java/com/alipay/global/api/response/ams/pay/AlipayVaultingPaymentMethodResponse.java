@@ -8,18 +8,16 @@ import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class AlipayVaultingQueryResponse extends AlipayResponse {
+public class AlipayVaultingPaymentMethodResponse extends AlipayResponse {
 
     private String              vaultingRequestId;
+
+    private PaymentMethodDetail paymentMethodDetail;
 
     private String              normalUrl;
 
     private String              schemeUrl;
 
     private String              applinkUrl;
-
-    private String              vaultingStatus;
-
-    private PaymentMethodDetail paymentMethodDetail;
 
 }

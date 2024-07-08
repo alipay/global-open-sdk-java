@@ -9,10 +9,15 @@ import com.alipay.global.api.model.risk.AuthorizationError;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.risk.SendPaymentResultResponse;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 /**
  * The request of Ant Group's send payment result API.
  * 调用蚂蚁集团支付结果通知接口的请求参数。
  */
+@EqualsAndHashCode(callSuper = true)
+@Data
 public class SendPaymentResultRequest extends AlipayRequest<SendPaymentResultResponse> {
     /**
      * A unique ID assigned to a merchant who provides a service or product directly to a customer and is used to identify the transaction.
@@ -44,44 +49,13 @@ public class SendPaymentResultRequest extends AlipayRequest<SendPaymentResultRes
      */
     private String                 paymentMethodProvider;
 
-    public String getReferenceTransactionId() {
-        return referenceTransactionId;
+    public SendPaymentResultRequest() {
+        this.setPath("/ams/api/v1/risk/privacy/payments/sendPaymentResult");
     }
 
-    public void setReferenceTransactionId(String referenceTransactionId) {
-        this.referenceTransactionId = referenceTransactionId;
-    }
-
-    public String getPaymentStatus() {
-        return paymentStatus;
-    }
-
-    public void setPaymentStatus(String paymentStatus) {
-        this.paymentStatus = paymentStatus;
-    }
-
-    public AuthorizationError getAuthorizationError() {
-        return authorizationError;
-    }
-
-    public void setAuthorizationError(AuthorizationError authorizationError) {
-        this.authorizationError = authorizationError;
-    }
-
-    public CardVerificationResult getCardVerificationResult() {
-        return cardVerificationResult;
-    }
-
-    public void setCardVerificationResult(CardVerificationResult cardVerificationResult) {
-        this.cardVerificationResult = cardVerificationResult;
-    }
-
-    public String getPaymentMethodProvider() {
-        return paymentMethodProvider;
-    }
-
-    public void setPaymentMethodProvider(String paymentMethodProvider) {
-        this.paymentMethodProvider = paymentMethodProvider;
+    @Override
+    public boolean usingSandboxUrl() {
+        return false;
     }
 
     @Override

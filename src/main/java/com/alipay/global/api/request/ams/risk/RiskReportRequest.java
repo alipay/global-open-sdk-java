@@ -4,15 +4,20 @@
  */
 package com.alipay.global.api.request.ams.risk;
 
+import java.util.Date;
+
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.risk.RiskReportResponse;
 
-import java.util.Date;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * The request of Ant Group's risk report API.
  * 调用蚂蚁集团风险上报接口的请求参数。
  */
+@EqualsAndHashCode(callSuper = true)
+@Data
 public class RiskReportRequest extends AlipayRequest<RiskReportResponse> {
     /**
      * A unique ID assigned to a merchant who provides a service or product directly to a customer and is used to identify the transaction.
@@ -50,36 +55,13 @@ public class RiskReportRequest extends AlipayRequest<RiskReportResponse> {
      */
     private Date   riskOccurrenceTime;
 
-    public String getReferenceTransactionId() {
-        return referenceTransactionId;
+    public RiskReportRequest() {
+        this.setPath("/ams/api/v1/risk/privacy/payments/reportRisk");
     }
 
-    public void setReferenceTransactionId(String referenceTransactionId) {
-        this.referenceTransactionId = referenceTransactionId;
-    }
-
-    public String getReportReason() {
-        return reportReason;
-    }
-
-    public void setReportReason(String reportReason) {
-        this.reportReason = reportReason;
-    }
-
-    public String getRiskType() {
-        return riskType;
-    }
-
-    public void setRiskType(String riskType) {
-        this.riskType = riskType;
-    }
-
-    public Date getRiskOccurrenceTime() {
-        return riskOccurrenceTime;
-    }
-
-    public void setRiskOccurrenceTime(Date riskOccurrenceTime) {
-        this.riskOccurrenceTime = riskOccurrenceTime;
+    @Override
+    public boolean usingSandboxUrl() {
+        return false;
     }
 
     @Override

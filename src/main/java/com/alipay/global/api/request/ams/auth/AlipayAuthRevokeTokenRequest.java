@@ -1,27 +1,21 @@
 package com.alipay.global.api.request.ams.auth;
 
+import com.alipay.global.api.model.constants.AntomPathConstants;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.auth.AlipayAuthRevokeTokenResponse;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+@EqualsAndHashCode(callSuper = true)
+@Data
 public class AlipayAuthRevokeTokenRequest extends AlipayRequest<AlipayAuthRevokeTokenResponse> {
 
     private String accessToken;
     private String extendInfo;
 
-    public String getAccessToken() {
-        return accessToken;
-    }
-
-    public void setAccessToken(String accessToken) {
-        this.accessToken = accessToken;
-    }
-
-    public String getExtendInfo() {
-        return extendInfo;
-    }
-
-    public void setExtendInfo(String extendInfo) {
-        this.extendInfo = extendInfo;
+    public AlipayAuthRevokeTokenRequest() {
+        this.setPath(AntomPathConstants.AUTH_REVOKE_PATH);
     }
 
     @Override

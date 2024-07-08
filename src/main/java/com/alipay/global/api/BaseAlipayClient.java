@@ -1,6 +1,12 @@
 package com.alipay.global.api;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.apache.commons.lang3.StringUtils;
+
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alipay.global.api.exception.AlipayApiException;
 import com.alipay.global.api.model.Result;
 import com.alipay.global.api.net.HttpRpcResult;
@@ -9,10 +15,6 @@ import com.alipay.global.api.response.AlipayResponse;
 import com.alipay.global.api.tools.Constants;
 import com.alipay.global.api.tools.DateTool;
 import com.alipay.global.api.tools.SignatureTool;
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public abstract class BaseAlipayClient implements AlipayClient {
 
@@ -75,7 +77,7 @@ public abstract class BaseAlipayClient implements AlipayClient {
         String path = alipayRequest.getPath();
         Integer keyVersion = alipayRequest.getKeyVersion();
         String reqTime = DateTool.getCurrentTimeMillis();
-        String reqBody = JSON.toJSONString(alipayRequest);
+        String reqBody = JSON.toJSONString(alipayRequest, SerializerFeature.DisableCircularReferenceDetect);
 
         /**
          * 对内容加签(Sign the content)
@@ -197,7 +199,7 @@ public abstract class BaseAlipayClient implements AlipayClient {
      * @param alipayRequest
      */
     private void adjustSandboxUrl(AlipayRequest alipayRequest) {
-        if (isSandboxMode) {
+        if (isSandboxMode && alipayRequest.usingSandboxUrl()) {
             String originPath = alipayRequest.getPath();
             alipayRequest.setPath(originPath.replaceFirst("/ams/api", "/ams/sandbox/api"));
         }

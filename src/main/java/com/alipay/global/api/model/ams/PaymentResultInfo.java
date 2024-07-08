@@ -61,4 +61,9 @@ public class PaymentResultInfo {
      */
     private String networkTransactionId;
 
+    /**
+     * The installment plan information for an installment payment
+     */
+    private CreditPayPlan creditPayPlan;
+
 }

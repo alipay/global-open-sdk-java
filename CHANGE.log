@@ -100,3 +100,6 @@ add lombok support
 
 29、Version:2.0.27
 add Checkout Payment Page support
+
+30、Version:2.0.29
+adding path to request, using lombok for ams api, update sample code

@@ -4,6 +4,8 @@
  */
 package com.alipay.global.api.request.ams.risk;
 
+import java.util.List;
+
 import com.alipay.global.api.model.ams.Amount;
 import com.alipay.global.api.model.ams.Buyer;
 import com.alipay.global.api.model.ams.Env;
@@ -13,12 +15,15 @@ import com.alipay.global.api.model.risk.PaymentDetail;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.risk.RiskDecideResponse;
 
-import java.util.List;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * The request of Ant Group's risk decide API.
  * 调用蚂蚁集团风控实时决策接口的请求参数。
  */
+@EqualsAndHashCode(callSuper = true)
+@Data
 public class RiskDecideRequest extends AlipayRequest<RiskDecideResponse> {
     /**
      * A unique ID assigned to a merchant who provides a service or product directly to a customer and is used to identify the transaction.
@@ -65,68 +70,13 @@ public class RiskDecideRequest extends AlipayRequest<RiskDecideResponse> {
      */
     private Env                 env;
 
-    public String getReferenceTransactionId() {
-        return referenceTransactionId;
+    public RiskDecideRequest() {
+        this.setPath("/ams/api/v1/risk/privacy/payments/decide");
     }
 
-    public void setReferenceTransactionId(String referenceTransactionId) {
-        this.referenceTransactionId = referenceTransactionId;
-    }
-
-    public AuthorizationPhase getAuthorizationPhase() {
-        return authorizationPhase;
-    }
-
-    public void setAuthorizationPhase(AuthorizationPhase authorizationPhase) {
-        this.authorizationPhase = authorizationPhase;
-    }
-
-    public List<Order> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
-    }
-
-    public Buyer getBuyer() {
-        return buyer;
-    }
-
-    public void setBuyer(Buyer buyer) {
-        this.buyer = buyer;
-    }
-
-    public Amount getActualPaymentAmount() {
-        return actualPaymentAmount;
-    }
-
-    public void setActualPaymentAmount(Amount actualPaymentAmount) {
-        this.actualPaymentAmount = actualPaymentAmount;
-    }
-
-    public List<PaymentDetail> getPaymentDetails() {
-        return paymentDetails;
-    }
-
-    public void setPaymentDetails(List<PaymentDetail> paymentDetails) {
-        this.paymentDetails = paymentDetails;
-    }
-
-    public Amount getDiscountAmount() {
-        return discountAmount;
-    }
-
-    public void setDiscountAmount(Amount discountAmount) {
-        this.discountAmount = discountAmount;
-    }
-
-    public Env getEnv() {
-        return env;
-    }
-
-    public void setEnv(Env env) {
-        this.env = env;
+    @Override
+    public boolean usingSandboxUrl() {
+        return false;
     }
 
     @Override

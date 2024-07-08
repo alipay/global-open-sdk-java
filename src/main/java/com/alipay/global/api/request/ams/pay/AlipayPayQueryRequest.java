@@ -1,8 +1,14 @@
 package com.alipay.global.api.request.ams.pay;
 
+import com.alipay.global.api.model.constants.AntomPathConstants;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.pay.AlipayPayQueryResponse;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+@EqualsAndHashCode(callSuper = true)
+@Data
 public class AlipayPayQueryRequest extends AlipayRequest<AlipayPayQueryResponse> {
 
     /**
@@ -20,25 +26,9 @@ public class AlipayPayQueryRequest extends AlipayRequest<AlipayPayQueryResponse>
      */
     private String merchantAccountId;
 
-    public String getPaymentRequestId() {
-        return paymentRequestId;
+    public AlipayPayQueryRequest() {
+        this.setPath(AntomPathConstants.INQUIRY_PAYMENT_PATH);
     }
-
-    public void setPaymentRequestId(String paymentRequestId) {
-        this.paymentRequestId = paymentRequestId;
-    }
-
-    public String getPaymentId() {
-        return paymentId;
-    }
-
-    public void setPaymentId(String paymentId) {
-        this.paymentId = paymentId;
-    }
-
-    public String getMerchantAccountId() { return merchantAccountId; }
-
-    public void setMerchantAccountId(String merchantAccountId) { this.merchantAccountId = merchantAccountId; }
 
     @Override
     public Class<AlipayPayQueryResponse> getResponseClass() {
