@@ -5,7 +5,10 @@ import java.util.UUID;
 import com.alipay.global.api.AlipayClient;
 import com.alipay.global.api.DefaultAlipayClient;
 import com.alipay.global.api.exception.AlipayApiException;
-import com.alipay.global.api.model.ams.*;
+import com.alipay.global.api.model.ams.Amount;
+import com.alipay.global.api.model.ams.Order;
+import com.alipay.global.api.model.ams.PaymentMethod;
+import com.alipay.global.api.model.ams.ProductCodeType;
 import com.alipay.global.api.model.constants.EndPointConstants;
 import com.alipay.global.api.model.constants.ProductSceneConstants;
 import com.alipay.global.api.request.ams.pay.AlipayPaymentSessionRequest;
@@ -13,11 +16,29 @@ import com.alipay.global.api.response.ams.pay.AlipayPaymentSessionResponse;
 
 public class EasyPayExecutableDemoCode {
 
-    private static final String merchantPrivateKey = "";
+    /**
+     * replace with your client id
+     * find your client id here: <a href="https://dashboard.alipay.com/global-payments/developers/quickStart">quickStart</a>
+     */
+    public static final String        CLIENT_ID            = "";
 
-    private static final String alipayPublicKey    = "";
+    /**
+     * replace with your antom public key (used to verify signature)
+     * find your antom public key here: <a href="https://dashboard.alipay.com/global-payments/developers/quickStart">quickStart</a>
+     */
+    public static final String        ANTOM_PUBLIC_KEY     = "";
 
-    private static final String CLIENT_ID          = "";
+    /**
+     * replace with your private key (used to sign)
+     * please ensure the secure storage of your private key to prevent leakage
+     */
+    public static final String        MERCHANT_PRIVATE_KEY = "";
+
+    /**
+     * using your endpoint
+     */
+    private final static AlipayClient CLIENT               = new DefaultAlipayClient(
+        EndPointConstants.SG, MERCHANT_PRIVATE_KEY, ANTOM_PUBLIC_KEY, CLIENT_ID);
 
     public static void main(String[] args) {
 
@@ -25,48 +46,35 @@ public class EasyPayExecutableDemoCode {
 
     public static void easyPaySession() {
 
-        AlipayClient defaultAlipayClient = new DefaultAlipayClient(EndPointConstants.SG,
-            merchantPrivateKey, alipayPublicKey);
-
         AlipayPaymentSessionRequest alipayPaymentSessionRequest = new AlipayPaymentSessionRequest();
-        alipayPaymentSessionRequest.setClientId(CLIENT_ID);
 
         alipayPaymentSessionRequest.setProductScene(ProductSceneConstants.EASY_PAY);
         alipayPaymentSessionRequest.setProductCode(ProductCodeType.CASHIER_PAYMENT);
 
-        // replace to your paymentRequestId
+        // replace with your paymentRequestId
         String paymentRequestId = UUID.randomUUID().toString();
         alipayPaymentSessionRequest.setPaymentRequestId(paymentRequestId);
 
         // set amount
-        Amount amount = new Amount();
-        amount.setCurrency("HKD");
-        amount.setValue("4200");
+        Amount amount = Amount.builder().value("4200").currency("HKD").build();
         alipayPaymentSessionRequest.setPaymentAmount(amount);
 
-        //set settlement currency
-        SettlementStrategy settlementStrategy = new SettlementStrategy();
-        settlementStrategy.setSettlementCurrency("USD");
-        alipayPaymentSessionRequest.setSettlementStrategy(settlementStrategy);
-
         // set paymentMethod
-        PaymentMethod paymentMethod = new PaymentMethod();
-        paymentMethod.setPaymentMethodType("CARD");
+        PaymentMethod paymentMethod = PaymentMethod.builder().paymentMethodType("CARD").build();
         alipayPaymentSessionRequest.setPaymentMethod(paymentMethod);
 
-        // replace to your orderId
+        // replace with your orderId
         String orderId = UUID.randomUUID().toString();
 
-        // set order Info
-        Order order = new Order();
-        order.setReferenceOrderId(orderId);
-        order.setOrderDescription("antom test order");
-        order.setOrderAmount(amount);
+        // set order info
+        Order order = Order.builder().referenceOrderId(orderId)
+            .orderDescription("antom testing order").orderAmount(amount).build();
+        alipayPaymentSessionRequest.setOrder(order);
 
         AlipayPaymentSessionResponse alipayPaymentSessionResponse = null;
 
         try {
-            alipayPaymentSessionResponse = defaultAlipayClient.execute(alipayPaymentSessionRequest);
+            alipayPaymentSessionResponse = CLIENT.execute(alipayPaymentSessionRequest);
         } catch (AlipayApiException e) {
             String errorMsg = e.getMessage();
             // handle error condition
