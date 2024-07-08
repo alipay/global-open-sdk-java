@@ -11,6 +11,7 @@ import com.alipay.global.api.AlipayClient;
 import com.alipay.global.api.DefaultAlipayClient;
 import com.alipay.global.api.exception.AlipayApiException;
 import com.alipay.global.api.model.ams.*;
+import com.alipay.global.api.model.constants.EndPointConstants;
 import com.alipay.global.api.model.risk.*;
 import com.alipay.global.api.model.risk.Merchant;
 import com.alipay.global.api.model.risk.Order;
@@ -25,23 +26,44 @@ import com.alipay.global.api.response.ams.risk.SendPaymentResultResponse;
 import com.alipay.global.api.response.ams.risk.SendRefundResultResponse;
 
 public class RiskDecideDemoCode {
-    private static final String       CLIENT_ID           = "";
-    private static final String       GATE_WAY_URL        = "";
-    private static final String       merchantPrivateKey  = "";
-    private static final String       alipayPublicKey     = "";
-    private static final AlipayClient defaultAlipayClient = new DefaultAlipayClient(GATE_WAY_URL,
-        merchantPrivateKey, alipayPublicKey);
+    /**
+     * replace with your client id.
+     * find your client id here: <a href="https://dashboard.alipay.com/global-payments/developers/quickStart">quickStart</a>
+     */
+    public static final String        CLIENT_ID            = "";
+
+    /**
+     * replace with your antom public key (used to verify signature).
+     * find your antom public key here: <a href="https://dashboard.alipay.com/global-payments/developers/quickStart">quickStart</a>
+     */
+    public static final String        ANTOM_PUBLIC_KEY     = "";
+
+    /**
+     * replace with your private key (used to sign).
+     * please ensure the secure storage of your private key to prevent leakage
+     */
+    public static final String        MERCHANT_PRIVATE_KEY = "";
+
+    /**
+     * please replace with your endpoint.
+     * find your endpoint here: <a href="https://dashboard.alipay.com/global-payments/developers/quickStart">quickStart</a>
+     */
+    private final static AlipayClient CLIENT               = new DefaultAlipayClient(
+        EndPointConstants.SG, MERCHANT_PRIVATE_KEY, ANTOM_PUBLIC_KEY, CLIENT_ID);
+
+    public static void main(String[] args) {
+        preAuthDecide();
+    }
 
     public static RiskDecideResponse preAuthDecide() {
         RiskDecideRequest request = new RiskDecideRequest();
-        request.setClientId(CLIENT_ID);
         request.setReferenceTransactionId("test_20231012091493242");
         request.setAuthorizationPhase(AuthorizationPhase.PRE_AUTHORIZATION);
         buildRiskDecideRequest(request);
 
         RiskDecideResponse response = null;
         try {
-            response = defaultAlipayClient.execute(request);
+            response = CLIENT.execute(request);
         } catch (AlipayApiException e) {
             // TODO Handle AlipayApiException and log
         }
@@ -50,7 +72,6 @@ public class RiskDecideDemoCode {
 
     public static RiskDecideResponse postAuthDecide() {
         RiskDecideRequest request = new RiskDecideRequest();
-        request.setClientId(CLIENT_ID);
         request.setReferenceTransactionId("test_20231012091493242");
         request.setAuthorizationPhase(AuthorizationPhase.POST_AUTHORIZATION);
         buildRiskDecideRequest(request);
@@ -70,7 +91,7 @@ public class RiskDecideDemoCode {
 
         RiskDecideResponse response = null;
         try {
-            response = defaultAlipayClient.execute(request);
+            response = CLIENT.execute(request);
         } catch (AlipayApiException e) {
             // TODO Handle AlipayApiException and log
         }
@@ -79,7 +100,6 @@ public class RiskDecideDemoCode {
 
     public static SendPaymentResultResponse sendPaymentResult() {
         SendPaymentResultRequest request = new SendPaymentResultRequest();
-        request.setClientId(CLIENT_ID);
         request.setReferenceTransactionId("test_20231012091493242");
 
         request.setPaymentStatus("SUCCESS");
@@ -96,7 +116,7 @@ public class RiskDecideDemoCode {
         request.setCardVerificationResult(cardVerificationResult);
         SendPaymentResultResponse response = null;
         try {
-            response = defaultAlipayClient.execute(request);
+            response = CLIENT.execute(request);
         } catch (AlipayApiException e) {
             // TODO Handle AlipayApiException and log
         }
@@ -105,12 +125,11 @@ public class RiskDecideDemoCode {
 
     public static SendRefundResultResponse sendPaymentRefund() {
         SendRefundResultRequest request = new SendRefundResultRequest();
-        request.setClientId(CLIENT_ID);
         request.setReferenceTransactionId("test_20231012091493242");
 
         SendRefundResultResponse response = null;
         try {
-            response = defaultAlipayClient.execute(request);
+            response = CLIENT.execute(request);
         } catch (AlipayApiException e) {
             // TODO Handle AlipayApiException and log
         }
@@ -119,7 +138,6 @@ public class RiskDecideDemoCode {
 
     public static RiskReportResponse reportRisk() {
         RiskReportRequest request = new RiskReportRequest();
-        request.setClientId(CLIENT_ID);
         request.setReferenceTransactionId("test_20231012091493242");
         request.setReportReason("test");
         request.setRiskType("FRAUD");
@@ -127,7 +145,7 @@ public class RiskDecideDemoCode {
 
         RiskReportResponse response = null;
         try {
-            response = defaultAlipayClient.execute(request);
+            response = CLIENT.execute(request);
         } catch (AlipayApiException e) {
             // TODO Handle AlipayApiException and log
         }

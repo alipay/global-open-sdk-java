@@ -1,4 +1,4 @@
-package com.alipay.global.api.example;
+package com.alipay.global.api.example.legacy;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,6 +13,7 @@ import com.alipay.global.api.model.Result;
 import com.alipay.global.api.model.ResultStatusType;
 import com.alipay.global.api.model.ams.*;
 import com.alipay.global.api.model.aps.Logo;
+import com.alipay.global.api.model.constants.EndPointConstants;
 import com.alipay.global.api.request.ams.merchant.AlipayMerchantRegistrationInfoQueryRequest;
 import com.alipay.global.api.request.ams.merchant.AlipayMerchantRegistrationRequest;
 import com.alipay.global.api.request.ams.merchant.AlipayMerchantRegistrationStatusQueryRequest;
@@ -25,14 +26,14 @@ public class RegistrationDemoCode {
     private static final Integer      TIMEOUT_RETRY_COUNT   = 3;
     private static final Integer      REGISTER_RETRY_COUNT  = 3;
     private static final String       GATE_WAY_URL          = "";
-    private static final String       merchantPrivateKey    = "";
-    private static final String       alipayPublicKey       = "";
+    private static final String       MERCHANT_PRIVATE_KEY  = "";
+    private static final String       ANTOM_PUBLIC_KEY      = "";
     private static final String       CLIENT_ID             = "";
     private static final String       PAYMENT_REQUEST_ID    = "";
-    private static final AlipayClient defaultAlipayClient   = new DefaultAlipayClient(GATE_WAY_URL,
-        merchantPrivateKey, alipayPublicKey);
     private static final String       registrationRequestId = "";
     private static final String       referenceMerchantId   = "";
+    private final static AlipayClient CLIENT                = new DefaultAlipayClient(
+        EndPointConstants.SG, MERCHANT_PRIVATE_KEY, ANTOM_PUBLIC_KEY, CLIENT_ID);
 
     public static void main(String[] args) {
         //step1 register merchant info
@@ -72,8 +73,6 @@ public class RegistrationDemoCode {
 
     public static AlipayMerchantRegistrationRequest buildRegisterRequest() {
         final AlipayMerchantRegistrationRequest request = new AlipayMerchantRegistrationRequest();
-
-        request.setClientId(CLIENT_ID);
 
         //TODO build your merchant info request
         request.setRegistrationRequestId(registrationRequestId);
@@ -142,8 +141,6 @@ public class RegistrationDemoCode {
 
     public static AlipayMerchantRegistrationInfoQueryRequest buildAlipayMerchantRegistrationInfoQueryRequest() {
         final AlipayMerchantRegistrationInfoQueryRequest request = new AlipayMerchantRegistrationInfoQueryRequest();
-        request.setClientId(CLIENT_ID);
-
         request.setReferenceMerchantId(referenceMerchantId);
         return request;
     }
@@ -154,7 +151,7 @@ public class RegistrationDemoCode {
             public RetryResult doProcess() {
                 AlipayMerchantRegistrationInfoQueryResponse response = null;
                 try {
-                    response = defaultAlipayClient.execute(request);
+                    response = CLIENT.execute(request);
                 } catch (AlipayApiException e) {
                     String errorMsg = e.getMessage();
                     if (errorMsg.indexOf("SocketTimeoutException") > 0) {
@@ -173,8 +170,6 @@ public class RegistrationDemoCode {
 
     public static AlipayMerchantRegistrationStatusQueryRequest buildAlipayMerchantRegistrationStatusQueryRequest() {
         final AlipayMerchantRegistrationStatusQueryRequest request = new AlipayMerchantRegistrationStatusQueryRequest();
-        request.setClientId(CLIENT_ID);
-
         request.setReferenceMerchantId(referenceMerchantId);
         //request.setRegistrationRequestId(registrationRequestId);
         return request;
@@ -186,7 +181,7 @@ public class RegistrationDemoCode {
             public RetryResult doProcess() {
                 AlipayMerchantRegistrationStatusQueryResponse response = null;
                 try {
-                    response = defaultAlipayClient.execute(request);
+                    response = CLIENT.execute(request);
                 } catch (AlipayApiException e) {
                     String errorMsg = e.getMessage();
                     if (errorMsg.indexOf("SocketTimeoutException") > 0) {
@@ -210,7 +205,7 @@ public class RegistrationDemoCode {
             public RetryResult doProcess() {
                 AlipayMerchantRegistrationResponse response = null;
                 try {
-                    response = defaultAlipayClient.execute(request);
+                    response = CLIENT.execute(request);
                 } catch (AlipayApiException e) {
                     String errorMsg = e.getMessage();
                     if (errorMsg.indexOf("SocketTimeoutException") > 0) {

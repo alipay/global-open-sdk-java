@@ -1,4 +1,4 @@
-package com.alipay.global.api.example.excutable;
+package com.alipay.global.api.example;
 
 import java.util.UUID;
 
@@ -14,40 +14,39 @@ import com.alipay.global.api.model.constants.ProductSceneConstants;
 import com.alipay.global.api.request.ams.pay.AlipayPaymentSessionRequest;
 import com.alipay.global.api.response.ams.pay.AlipayPaymentSessionResponse;
 
-public class EasyPayExecutableDemoCode {
+public class EasyPayDemoCode {
 
     /**
-     * replace with your client id
+     * replace with your client id.
      * find your client id here: <a href="https://dashboard.alipay.com/global-payments/developers/quickStart">quickStart</a>
      */
     public static final String        CLIENT_ID            = "";
 
     /**
-     * replace with your antom public key (used to verify signature)
+     * replace with your antom public key (used to verify signature).
      * find your antom public key here: <a href="https://dashboard.alipay.com/global-payments/developers/quickStart">quickStart</a>
      */
     public static final String        ANTOM_PUBLIC_KEY     = "";
 
     /**
-     * replace with your private key (used to sign)
+     * replace with your private key (used to sign).
      * please ensure the secure storage of your private key to prevent leakage
      */
     public static final String        MERCHANT_PRIVATE_KEY = "";
 
     /**
-     * using your endpoint
+     * please replace with your endpoint.
+     * find your endpoint here: <a href="https://dashboard.alipay.com/global-payments/developers/quickStart">quickStart</a>
      */
     private final static AlipayClient CLIENT               = new DefaultAlipayClient(
         EndPointConstants.SG, MERCHANT_PRIVATE_KEY, ANTOM_PUBLIC_KEY, CLIENT_ID);
 
     public static void main(String[] args) {
-
+        easyPaySession();
     }
 
     public static void easyPaySession() {
-
         AlipayPaymentSessionRequest alipayPaymentSessionRequest = new AlipayPaymentSessionRequest();
-
         alipayPaymentSessionRequest.setProductScene(ProductSceneConstants.EASY_PAY);
         alipayPaymentSessionRequest.setProductCode(ProductCodeType.CASHIER_PAYMENT);
 

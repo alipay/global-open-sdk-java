@@ -1,4 +1,4 @@
-package com.alipay.global.api.example;
+package com.alipay.global.api.example.legacy;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,6 +12,7 @@ import com.alipay.global.api.exception.AlipayApiException;
 import com.alipay.global.api.model.Result;
 import com.alipay.global.api.model.ResultStatusType;
 import com.alipay.global.api.model.ams.*;
+import com.alipay.global.api.model.constants.EndPointConstants;
 import com.alipay.global.api.request.ams.auth.AlipayAuthApplyTokenRequest;
 import com.alipay.global.api.request.ams.auth.AlipayAuthConsultRequest;
 import com.alipay.global.api.request.ams.pay.AlipayPayCancelRequest;
@@ -29,16 +30,16 @@ import com.alipay.global.api.response.ams.pay.AlipayPayResponse;
  */
 public class AgreementPayDemoCode {
 
-    private static final Integer      TIMEOUT_RETRY_COUNT = 3;
-    private static final Integer      CANCEL_RETRY_COUNT  = 3;
-    private static final Integer      PAY_RETRY_COUNT     = 3;
-    private static final String       GATE_WAY_URL        = "";
-    private static final String       merchantPrivateKey  = "";
-    private static final String       alipayPublicKey     = "";
-    private static final String       CLIENT_ID           = "";
-    private static final String       PAYMENT_REQUEST_ID  = "";
-    private static final AlipayClient defaultAlipayClient = new DefaultAlipayClient(GATE_WAY_URL,
-        merchantPrivateKey, alipayPublicKey);
+    private static final Integer      TIMEOUT_RETRY_COUNT  = 3;
+    private static final Integer      CANCEL_RETRY_COUNT   = 3;
+    private static final Integer      PAY_RETRY_COUNT      = 3;
+    private static final String       GATE_WAY_URL         = "";
+    private static final String       MERCHANT_PRIVATE_KEY = "";
+    private static final String       ANTOM_PUBLIC_KEY     = "";
+    private static final String       CLIENT_ID            = "";
+    private static final String       PAYMENT_REQUEST_ID   = "";
+    private final static AlipayClient CLIENT               = new DefaultAlipayClient(
+        EndPointConstants.SG, MERCHANT_PRIVATE_KEY, ANTOM_PUBLIC_KEY, CLIENT_ID);
 
     public static void main(String[] args) {
 
@@ -221,7 +222,6 @@ public class AgreementPayDemoCode {
     public static AlipayPayResponse pay(String accessToken, String paymentRequestId) {
 
         final AlipayPayRequest alipayPayRequest = new AlipayPayRequest();
-        alipayPayRequest.setClientId(CLIENT_ID);
         alipayPayRequest.setProductCode(ProductCodeType.AGREEMENT_PAYMENT);
         alipayPayRequest.setPaymentRequestId(paymentRequestId);
 
@@ -269,7 +269,7 @@ public class AgreementPayDemoCode {
             public RetryResult doProcess() {
                 AlipayPayResponse alipayPayResponse = null;
                 try {
-                    alipayPayResponse = defaultAlipayClient.execute(alipayPayRequest);
+                    alipayPayResponse = CLIENT.execute(alipayPayRequest);
                 } catch (AlipayApiException e) {
                     String errorMsg = e.getMessage();
                     if (errorMsg.indexOf("SocketTimeoutException") > 0) {
@@ -289,7 +289,6 @@ public class AgreementPayDemoCode {
 
     public static AlipayPayQueryResponse inquiryPayment(String paymentRequestId) {
         final AlipayPayQueryRequest alipayPayQueryRequest = new AlipayPayQueryRequest();
-        alipayPayQueryRequest.setClientId(CLIENT_ID);
         alipayPayQueryRequest.setPaymentRequestId(paymentRequestId);
 
         Object obj = RetryExecutor.execute(TIMEOUT_RETRY_COUNT, new Callback() {
@@ -297,7 +296,7 @@ public class AgreementPayDemoCode {
             public RetryResult doProcess() {
                 AlipayPayQueryResponse alipayPayQueryResponse = null;
                 try {
-                    alipayPayQueryResponse = defaultAlipayClient.execute(alipayPayQueryRequest);
+                    alipayPayQueryResponse = CLIENT.execute(alipayPayQueryRequest);
                 } catch (AlipayApiException e) {
                     String errorMsg = e.getMessage();
                     if (errorMsg.indexOf("SocketTimeoutException") > 0) {
@@ -317,7 +316,6 @@ public class AgreementPayDemoCode {
 
     public static AlipayPayCancelResponse cancel(String paymentRequestId) {
         final AlipayPayCancelRequest alipayPayCancelRequest = new AlipayPayCancelRequest();
-        alipayPayCancelRequest.setClientId(CLIENT_ID);
         alipayPayCancelRequest.setPaymentRequestId(paymentRequestId);
 
         Object obj = RetryExecutor.execute(TIMEOUT_RETRY_COUNT, new Callback() {
@@ -325,7 +323,7 @@ public class AgreementPayDemoCode {
             public RetryResult doProcess() {
                 AlipayPayCancelResponse alipayPayCancelResponse = null;
                 try {
-                    alipayPayCancelResponse = defaultAlipayClient.execute(alipayPayCancelRequest);
+                    alipayPayCancelResponse = CLIENT.execute(alipayPayCancelRequest);
                 } catch (AlipayApiException e) {
                     String errorMsg = e.getMessage();
                     if (errorMsg.indexOf("SocketTimeoutException") > 0) {
@@ -346,7 +344,6 @@ public class AgreementPayDemoCode {
     public static String applyToken(String authCode) {
 
         final AlipayAuthApplyTokenRequest applyTokenRequest = new AlipayAuthApplyTokenRequest();
-        applyTokenRequest.setClientId(CLIENT_ID);
         applyTokenRequest.setGrantType(GrantType.AUTHORIZATION_CODE);
         applyTokenRequest.setCustomerBelongsTo(CustomerBelongsTo.BKASH);
         applyTokenRequest.setAuthCode(authCode);
@@ -357,7 +354,7 @@ public class AgreementPayDemoCode {
             public RetryResult doProcess() {
                 AlipayAuthApplyTokenResponse alipayAuthApplyTokenResponse = null;
                 try {
-                    alipayAuthApplyTokenResponse = defaultAlipayClient.execute(applyTokenRequest);
+                    alipayAuthApplyTokenResponse = CLIENT.execute(applyTokenRequest);
                 } catch (AlipayApiException e) {
                     String errorMsg = e.getMessage();
                     if (errorMsg.indexOf("SocketTimeoutException") > 0) {
@@ -378,7 +375,6 @@ public class AgreementPayDemoCode {
 
     public static String authConsult() {
         final AlipayAuthConsultRequest authConsultRequest = new AlipayAuthConsultRequest();
-        authConsultRequest.setClientId(CLIENT_ID);
         authConsultRequest.setAuthRedirectUrl("https://www.taobao.com/?param1=567&param2=123");
         authConsultRequest.setAuthState("663A8FA9D83656EE8AA1dd6F6F682ff989DC7");
         authConsultRequest.setCustomerBelongsTo(CustomerBelongsTo.GCASH);
@@ -394,7 +390,7 @@ public class AgreementPayDemoCode {
             public RetryResult doProcess() {
                 AlipayAuthConsultResponse alipayAuthConsultResponse = null;
                 try {
-                    alipayAuthConsultResponse = defaultAlipayClient.execute(authConsultRequest);
+                    alipayAuthConsultResponse = CLIENT.execute(authConsultRequest);
                 } catch (AlipayApiException e) {
                     String errorMsg = e.getMessage();
                     if (errorMsg.indexOf("SocketTimeoutException") > 0) {
