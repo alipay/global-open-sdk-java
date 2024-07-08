@@ -42,7 +42,6 @@ AlipayClient defaultAlipayClient = new DefaultAlipayClient("https://open-na.alip
 
 AlipayPayRequest alipayPayRequest = new AlipayPayRequest();
 alipayPayRequest.setClientId("clientId");
-alipayPayRequest.setPath("/ams/api/v1/payments/pay");
 alipayPayRequest.setProductCode(ProductCodeType.CASHIER_PAYMENT);
 alipayPayRequest.setPaymentRequestId("pay_test_99");
 
@@ -103,7 +102,6 @@ AlipayClient defaultAlipayClient = new DefaultAlipayClient("https://open-na.alip
  
 AlipayApsInquiryPaymentRequest inquiryPaymentRequest = new AlipayApsInquiryPaymentRequest();
  
-inquiryPaymentRequest.setPath("/aps/api/v1/payments/inquiryPayment");
 inquiryPaymentRequest.setClientId("clientId");
 inquiryPaymentRequest.setPaymentId("20210518190796060008A0001628707");
 inquiryPaymentRequest.setPaymentRequestId("rtanhU9au6F3VEbvbVWRz");
@@ -119,7 +117,6 @@ AlipayClient defaultAlipayClient = new DefaultAlipayClient("https://open-sea-glo
 
 RiskDecideRequest riskDecideRequest = new RiskDecideRequest();
 riskDecideRequest.setClientId("clietId");
-riskDecideRequest.setPath("/ams/api/v1/risk/payments/decide");
 riskDecideRequest.setReferenceTransactionId("test_referenceTransactionId");
 riskDecideRequest.setAuthorizationPhase(AuthorizationPhase.PRE_AUTHORIZATION);
 
