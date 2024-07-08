@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 public class CreditPayPlan {
 
     private int installmentNum;
+    private String interval;
     private CreditPayFeeType creditPayFeeType;
     private int feePercentage;
 

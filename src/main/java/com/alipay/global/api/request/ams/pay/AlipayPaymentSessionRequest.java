@@ -40,7 +40,7 @@ public class AlipayPaymentSessionRequest extends AlipayRequest<AlipayPaymentSess
     private PaymentMethod       paymentMethod;
 
     /**
-     *  The exipry time of paymentSession
+     *  The expiry time of paymentSession
      */
     private String              paymentSessionExpiryTime;
 
@@ -63,6 +63,11 @@ public class AlipayPaymentSessionRequest extends AlipayRequest<AlipayPaymentSess
      * The settlement strategy for the payment request
      */
     private SettlementStrategy  settlementStrategy;
+
+    /**
+     * Indicates whether Antom collects the installment information for the payment.
+     */
+    private Boolean             enableInstallmentCollection;
 
     /**
      * The credit payment plan information for this payment
