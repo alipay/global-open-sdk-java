@@ -4,47 +4,31 @@ import com.alibaba.fastjson.annotation.JSONField;
 import com.alipay.global.api.net.HttpMethod;
 import com.alipay.global.api.response.AlipayResponse;
 
-public abstract class AlipayRequest <T extends AlipayResponse>{
+import lombok.Data;
+
+@Data
+public abstract class AlipayRequest<T extends AlipayResponse> {
     /**
      * client id
      */
     @JSONField(serialize = false)
-    private String clientId;
+    private String   clientId;
     @JSONField(serialize = false)
-    private String path;
+    private String   path;
     @JSONField(serialize = false)
-    private Integer keyVersion;
+    private Integer  keyVersion;
     @JSONField(serialize = false)
-    private  Class<T> responseClass;
+    private Class<T> responseClass;
     @JSONField(serialize = false)
-    private static String httpMethod = HttpMethod.POST.name();
+    private String   httpMethod = HttpMethod.POST.name();
 
-    public String getClientId() {
-        return clientId;
-    }
-
-    public void setClientId(String clientId) {
-        this.clientId = clientId;
-    }
-
-    public String getPath(){
-        return this.path;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
-    }
-
-    public Integer getKeyVersion() {
-        return keyVersion;
-    }
-
-    public void setKeyVersion(Integer keyVersion) {
-        this.keyVersion = keyVersion;
-    }
-
-    public String getHttpMethod() {
-        return httpMethod;
+    /**
+     * 是否使用沙箱url
+     *
+     * @return true/false
+     */
+    public boolean usingSandboxUrl() {
+        return true;
     }
 
     /**

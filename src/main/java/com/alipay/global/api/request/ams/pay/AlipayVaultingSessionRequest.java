@@ -1,8 +1,14 @@
 package com.alipay.global.api.request.ams.pay;
 
+import com.alipay.global.api.model.constants.AntomPathConstants;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.pay.AlipayVaultingSessionResponse;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+@EqualsAndHashCode(callSuper = true)
+@Data
 public class AlipayVaultingSessionRequest extends AlipayRequest<AlipayVaultingSessionResponse> {
 
     private String paymentMethodType;
@@ -15,44 +21,8 @@ public class AlipayVaultingSessionRequest extends AlipayRequest<AlipayVaultingSe
 
     private String merchantRegion;
 
-    public String getPaymentMethodType() {
-        return paymentMethodType;
-    }
-
-    public void setPaymentMethodType(String paymentMethodType) {
-        this.paymentMethodType = paymentMethodType;
-    }
-
-    public String getVaultingRequestId() {
-        return vaultingRequestId;
-    }
-
-    public void setVaultingRequestId(String vaultingRequestId) {
-        this.vaultingRequestId = vaultingRequestId;
-    }
-
-    public String getVaultingNotificationUrl() {
-        return vaultingNotificationUrl;
-    }
-
-    public void setVaultingNotificationUrl(String vaultingNotificationUrl) {
-        this.vaultingNotificationUrl = vaultingNotificationUrl;
-    }
-
-    public String getRedirectUrl() {
-        return redirectUrl;
-    }
-
-    public void setRedirectUrl(String redirectUrl) {
-        this.redirectUrl = redirectUrl;
-    }
-
-    public String getMerchantRegion() {
-        return merchantRegion;
-    }
-
-    public void setMerchantRegion(String merchantRegion) {
-        this.merchantRegion = merchantRegion;
+    public AlipayVaultingSessionRequest() {
+        this.setPath(AntomPathConstants.CREATE_VAULTING_SESSION_PATH);
     }
 
     @Override

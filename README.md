@@ -12,7 +12,7 @@ https://mvnrepository.com/artifact/com.alipay.global.sdk/global-open-sdk-java
 <dependency>
     <groupId>com.alipay.global.sdk</groupId>
     <artifactId>global-open-sdk-java</artifactId>
-    <version>2.0.26</version>
+    <version>2.0.29</version>
 </dependency>
 ```
    
@@ -38,11 +38,10 @@ public static boolean verify(String httpMethod, String path, String clientId, St
 AMS:
   
 ```
-AlipayClient defaultAlipayClient = new DefaultAlipayClient("https://open-na.alipay.com", merchantPrivateKey, alipayPublicKey);
+AlipayClient CLIENT = new DefaultAlipayClient("https://open-na.alipay.com", merchantPrivateKey, alipayPublicKey, clientid);
 
 AlipayPayRequest alipayPayRequest = new AlipayPayRequest();
 alipayPayRequest.setClientId("clientId");
-alipayPayRequest.setPath("/ams/api/v1/payments/pay");
 alipayPayRequest.setProductCode(ProductCodeType.CASHIER_PAYMENT);
 alipayPayRequest.setPaymentRequestId("pay_test_99");
 
@@ -92,34 +91,32 @@ SettlementStrategy settlementStrategy  = new SettlementStrategy();
 settlementStrategy.setSettlementCurrency("USD");
 alipayPayRequest.setSettlementStrategy(settlementStrategy);
 
-AlipayPayResponse alipayPayResponse = defaultAlipayClient.execute(alipayPayRequest);
+AlipayPayResponse alipayPayResponse = CLIENT.execute(alipayPayRequest);
   
 ```  
 
 APS:
 
 ```  
-AlipayClient defaultAlipayClient = new DefaultAlipayClient("https://open-na.alipay.com", merchantPrivateKey, alipayPublicKey);
+AlipayClient CLIENT = new DefaultAlipayClient("https://open-na.alipay.com", merchantPrivateKey, alipayPublicKey, clientid);
  
 AlipayApsInquiryPaymentRequest inquiryPaymentRequest = new AlipayApsInquiryPaymentRequest();
  
-inquiryPaymentRequest.setPath("/aps/api/v1/payments/inquiryPayment");
 inquiryPaymentRequest.setClientId("clientId");
 inquiryPaymentRequest.setPaymentId("20210518190796060008A0001628707");
 inquiryPaymentRequest.setPaymentRequestId("rtanhU9au6F3VEbvbVWRz");
  
-AlipayApsInquiryPaymentResponse alipayResponse = defaultAlipayClient.execute(inquiryPaymentRequest);
+AlipayApsInquiryPaymentResponse alipayResponse = CLIENT.execute(inquiryPaymentRequest);
 
 ```  
 
 RISK:
 
 ```
-AlipayClient defaultAlipayClient = new DefaultAlipayClient("https://open-sea-global.alipay.com", merchantPrivateKey, alipayPublicKey);
+AlipayClient CLIENT = new DefaultAlipayClient("https://open-sea-global.alipay.com", merchantPrivateKey, alipayPublicKey, clientid);
 
 RiskDecideRequest riskDecideRequest = new RiskDecideRequest();
 riskDecideRequest.setClientId("clietId");
-riskDecideRequest.setPath("/ams/api/v1/risk/payments/decide");
 riskDecideRequest.setReferenceTransactionId("test_referenceTransactionId");
 riskDecideRequest.setAuthorizationPhase(AuthorizationPhase.PRE_AUTHORIZATION);
 
@@ -171,7 +168,7 @@ env.setTerminalType(TerminalType.APP);
 env.setOsType(OsType.IOS);
 riskDecideRequest.setEnv(env);
 
-RiskDecideResponse response = defaultAlipayClient.execute(riskDecideRequest);
+RiskDecideResponse response = CLIENT.execute(riskDecideRequest);
 ```
   
 The execute method contains the HTTP request to the gateway. 

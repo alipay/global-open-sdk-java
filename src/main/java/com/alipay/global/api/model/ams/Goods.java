@@ -21,5 +21,7 @@ public class Goods {
     private String deliveryMethodType;
 
     private String goodsImageUrl;
+    private String priceId;
+
 
 }

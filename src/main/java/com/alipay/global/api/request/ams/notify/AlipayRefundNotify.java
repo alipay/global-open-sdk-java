@@ -3,7 +3,12 @@ package com.alipay.global.api.request.ams.notify;
 import com.alipay.global.api.model.ams.Amount;
 import com.alipay.global.api.model.ams.Quote;
 
-public class AlipayRefundNotify extends AlipayNotify{
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+@EqualsAndHashCode(callSuper = true)
+@Data
+public class AlipayRefundNotify extends AlipayNotify {
 
     /**
      * Indicates the refund result. SUCCESS/FAIL
@@ -38,61 +43,6 @@ public class AlipayRefundNotify extends AlipayNotify{
     /**
      * The exchange rate between the settlement currency and transaction currency
      */
-    private Quote settlementQuote;
+    private Quote  settlementQuote;
 
-    public String getRefundStatus() {
-        return refundStatus;
-    }
-
-    public void setRefundStatus(String refundStatus) {
-        this.refundStatus = refundStatus;
-    }
-
-    public String getRefundRequestId() {
-        return refundRequestId;
-    }
-
-    public void setRefundRequestId(String refundRequestId) {
-        this.refundRequestId = refundRequestId;
-    }
-
-    public String getRefundId() {
-        return refundId;
-    }
-
-    public void setRefundId(String refundId) {
-        this.refundId = refundId;
-    }
-
-    public Amount getRefundAmount() {
-        return refundAmount;
-    }
-
-    public void setRefundAmount(Amount refundAmount) {
-        this.refundAmount = refundAmount;
-    }
-
-    public String getRefundTime() {
-        return refundTime;
-    }
-
-    public void setRefundTime(String refundTime) {
-        this.refundTime = refundTime;
-    }
-
-    public Amount getGrossSettlementAmount() {
-        return grossSettlementAmount;
-    }
-
-    public void setGrossSettlementAmount(Amount grossSettlementAmount) {
-        this.grossSettlementAmount = grossSettlementAmount;
-    }
-
-    public Quote getSettlementQuote() {
-        return settlementQuote;
-    }
-
-    public void setSettlementQuote(Quote settlementQuote) {
-        this.settlementQuote = settlementQuote;
-    }
 }

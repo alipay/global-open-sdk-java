@@ -3,17 +3,18 @@ package com.alipay.global.api.request.ams.merchant;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.merchant.AlipayMerchantRegistrationInfoQueryResponse;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-public class AlipayMerchantRegistrationInfoQueryRequest extends AlipayRequest<AlipayMerchantRegistrationInfoQueryResponse> {
+@EqualsAndHashCode(callSuper = true)
+@Data
+public class AlipayMerchantRegistrationInfoQueryRequest extends
+                                                        AlipayRequest<AlipayMerchantRegistrationInfoQueryResponse> {
 
     private String referenceMerchantId;
 
-    public String getReferenceMerchantId() {
-        return referenceMerchantId;
-    }
-
-    public void setReferenceMerchantId(String referenceMerchantId) {
-        this.referenceMerchantId = referenceMerchantId;
+    public AlipayMerchantRegistrationInfoQueryRequest() {
+        this.setPath("/ams/api/v1/merchants/inquiryRegistrationInfo");
     }
 
     @Override

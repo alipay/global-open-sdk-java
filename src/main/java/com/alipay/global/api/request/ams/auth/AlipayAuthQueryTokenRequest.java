@@ -3,16 +3,17 @@ package com.alipay.global.api.request.ams.auth;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.auth.AlipayAuthQueryTokenResponse;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+@EqualsAndHashCode(callSuper = true)
+@Data
 public class AlipayAuthQueryTokenRequest extends AlipayRequest<AlipayAuthQueryTokenResponse> {
 
     private String accessToken;
 
-    public String getAccessToken() {
-        return accessToken;
-    }
-
-    public void setAccessToken(String accessToken) {
-        this.accessToken = accessToken;
+    public AlipayAuthQueryTokenRequest() {
+        this.setPath("/ams/api/v1/authorizations/query");
     }
 
     @Override

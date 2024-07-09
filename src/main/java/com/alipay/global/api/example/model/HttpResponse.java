@@ -7,4 +7,3 @@ public interface HttpResponse {
     OutputStream getOutputStream();
 
 }
-

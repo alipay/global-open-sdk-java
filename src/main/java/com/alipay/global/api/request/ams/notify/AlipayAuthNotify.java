@@ -1,7 +1,11 @@
 package com.alipay.global.api.request.ams.notify;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-public class AlipayAuthNotify extends AlipayNotify{
+@EqualsAndHashCode(callSuper = true)
+@Data
+public class AlipayAuthNotify extends AlipayNotify {
 
     /**
      * Authorization notification type
@@ -43,67 +47,4 @@ public class AlipayAuthNotify extends AlipayNotify{
      */
     private String userId;
 
-    public String getAuthorizationNotifyType() {
-        return authorizationNotifyType;
-    }
-
-    public void setAuthorizationNotifyType(String authorizationNotifyType) {
-        this.authorizationNotifyType = authorizationNotifyType;
-    }
-
-    public String getAuthClientId() {
-        return authClientId;
-    }
-
-    public void setAuthClientId(String authClientId) {
-        this.authClientId = authClientId;
-    }
-
-    public String getAccessToken() {
-        return accessToken;
-    }
-
-    public void setAccessToken(String accessToken) {
-        this.accessToken = accessToken;
-    }
-
-    public String getAuthState() {
-        return authState;
-    }
-
-    public void setAuthState(String authState) {
-        this.authState = authState;
-    }
-
-    public String getAuthCode() {
-        return authCode;
-    }
-
-    public void setAuthCode(String authCode) {
-        this.authCode = authCode;
-    }
-
-    public String getReason() {
-        return reason;
-    }
-
-    public void setReason(String reason) {
-        this.reason = reason;
-    }
-
-    public String getUserLoginId() {
-        return userLoginId;
-    }
-
-    public void setUserLoginId(String userLoginId) {
-        this.userLoginId = userLoginId;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
 }

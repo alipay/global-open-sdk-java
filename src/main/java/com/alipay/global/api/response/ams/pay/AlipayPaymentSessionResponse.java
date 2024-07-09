@@ -2,6 +2,11 @@ package com.alipay.global.api.response.ams.pay;
 
 import com.alipay.global.api.response.AlipayResponse;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+@EqualsAndHashCode(callSuper = true)
+@Data
 public class AlipayPaymentSessionResponse extends AlipayResponse {
 
     private String paymentSessionData;
@@ -10,27 +15,6 @@ public class AlipayPaymentSessionResponse extends AlipayResponse {
 
     private String paymentSessionId;
 
-    public String getPaymentSessionData() {
-        return paymentSessionData;
-    }
+    private String normalUrl;
 
-    public void setPaymentSessionData(String paymentSessionData) {
-        this.paymentSessionData = paymentSessionData;
-    }
-
-    public String getPaymentSessionExpiryTime() {
-        return paymentSessionExpiryTime;
-    }
-
-    public void setPaymentSessionExpiryTime(String paymentSessionExpiryTime) {
-        this.paymentSessionExpiryTime = paymentSessionExpiryTime;
-    }
-
-    public String getPaymentSessionId() {
-        return paymentSessionId;
-    }
-
-    public void setPaymentSessionId(String paymentSessionId) {
-        this.paymentSessionId = paymentSessionId;
-    }
 }

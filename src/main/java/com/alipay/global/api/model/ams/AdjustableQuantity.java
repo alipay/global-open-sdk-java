@@ -5,15 +5,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreditPayPlan {
+public class AdjustableQuantity {
 
-    private int installmentNum;
-    private String interval;
-    private CreditPayFeeType creditPayFeeType;
-    private int feePercentage;
+    private Integer maximum;
+
+    private int minimum;
 
 }

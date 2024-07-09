@@ -12,7 +12,9 @@ import lombok.NoArgsConstructor;
 public class PaymentFactor {
 
     private Boolean isPaymentEvaluation;
+
     private InStorePaymentScenario inStorePaymentScenario;
+
     private PresentmentMode presentmentMode;
 
     private String captureMode;

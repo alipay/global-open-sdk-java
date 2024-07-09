@@ -1,9 +1,15 @@
 package com.alipay.global.api.request.ams.pay;
 
 import com.alipay.global.api.model.ams.Amount;
+import com.alipay.global.api.model.constants.AntomPathConstants;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.pay.AlipayRefundResponse;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+@EqualsAndHashCode(callSuper = true)
+@Data
 public class AlipayRefundRequest extends AlipayRequest<AlipayRefundResponse> {
 
     /**
@@ -34,73 +40,14 @@ public class AlipayRefundRequest extends AlipayRequest<AlipayRefundResponse> {
     /**
      * The URL that is used to receive the refund result notification. The URL must be either specified in the request or set in Alipay Developer Center
      */
-    private String refundNotifyUrl;
+    private String  refundNotifyUrl;
 
     private Boolean isAsyncRefund;
+
     private String  extendInfo;
 
-    public String getRefundRequestId() {
-        return refundRequestId;
-    }
-
-    public void setRefundRequestId(String refundRequestId) {
-        this.refundRequestId = refundRequestId;
-    }
-
-    public String getPaymentId() {
-        return paymentId;
-    }
-
-    public void setPaymentId(String paymentId) {
-        this.paymentId = paymentId;
-    }
-
-    public String getReferenceRefundId() {
-        return referenceRefundId;
-    }
-
-    public void setReferenceRefundId(String referenceRefundId) {
-        this.referenceRefundId = referenceRefundId;
-    }
-
-    public Amount getRefundAmount() {
-        return refundAmount;
-    }
-
-    public void setRefundAmount(Amount refundAmount) {
-        this.refundAmount = refundAmount;
-    }
-
-    public String getRefundReason() {
-        return refundReason;
-    }
-
-    public void setRefundReason(String refundReason) {
-        this.refundReason = refundReason;
-    }
-
-    public Boolean getIsAsyncRefund() {
-        return isAsyncRefund;
-    }
-
-    public void setIsAsyncRefund(Boolean isAsyncRefund) {
-        this.isAsyncRefund = isAsyncRefund;
-    }
-
-    public String getExtendInfo() {
-        return extendInfo;
-    }
-
-    public void setExtendInfo(String extendInfo) {
-        this.extendInfo = extendInfo;
-    }
-
-    public String getRefundNotifyUrl() {
-        return refundNotifyUrl;
-    }
-
-    public void setRefundNotifyUrl(String refundNotifyUrl) {
-        this.refundNotifyUrl = refundNotifyUrl;
+    public AlipayRefundRequest() {
+        this.setPath(AntomPathConstants.REFUND_PATH);
     }
 
     @Override

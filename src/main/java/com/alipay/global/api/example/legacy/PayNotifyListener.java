@@ -1,13 +1,13 @@
-package com.alipay.global.api.example;
+package com.alipay.global.api.example.legacy;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.Charset;
 
 import com.alibaba.fastjson.JSON;
 import com.alipay.global.api.example.model.*;
 import com.alipay.global.api.model.Result;
 import com.alipay.global.api.model.ResultStatusType;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.Charset;
 
 public class PayNotifyListener {
 
@@ -44,7 +44,8 @@ public class PayNotifyListener {
         try {
             PayNotifyResponse payNotifyResponse = new PayNotifyResponse();
             payNotifyResponse.setResult(result);
-            response.getOutputStream().write(JSON.toJSONString(payNotifyResponse).getBytes(Charset.forName("UTF-8")));
+            response.getOutputStream()
+                .write(JSON.toJSONString(payNotifyResponse).getBytes(Charset.forName("UTF-8")));
         } catch (IOException e) {
         }
 

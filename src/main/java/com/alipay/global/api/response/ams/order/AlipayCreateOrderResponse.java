@@ -4,6 +4,7 @@ import com.alipay.global.api.model.ams.Amount;
 import com.alipay.global.api.model.ams.RedirectActionForm;
 import com.alipay.global.api.response.AlipayResponse;
 
+@Deprecated
 public class AlipayCreateOrderResponse extends AlipayResponse {
 
     private String             paymentId;
