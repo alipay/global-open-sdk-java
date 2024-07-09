@@ -123,7 +123,7 @@ public class CashierPayDemoCode {
 
         // set env info
         Env env = Env.builder().terminalType(TerminalType.WEB)
-            .clientIp(IpAddressTool.getIpAddress()).build();
+            .clientIp("1.2.3.4").build();
         alipayPayRequest.setEnv(env);
 
         // set auth capture payment mode
@@ -178,7 +178,7 @@ public class CashierPayDemoCode {
 
         // set env info
         Env env = Env.builder().terminalType(TerminalType.WEB)
-            .clientIp(IpAddressTool.getIpAddress()).build();
+            .clientIp("1.2.3.4").build();
         alipayPayRequest.setEnv(env);
 
         // replace with your notify url
