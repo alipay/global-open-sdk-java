@@ -13,9 +13,8 @@ import com.alipay.global.api.request.ams.risk.tee.crypto.AESCrypto;
 import com.alipay.global.api.request.ams.risk.tee.enums.EncryptKeyEnum;
 import com.alipay.global.api.request.ams.risk.tee.enums.ErrorCodeEnum;
 import com.alipay.global.api.request.ams.risk.tee.exception.CryptoException;
-
-import java.nio.charset.StandardCharsets;
-import java.util.Base64;
+import javax.xml.bind.DatatypeConverter;
+import java.nio.charset.Charset;
 import java.util.List;
 
 /**
@@ -23,6 +22,9 @@ import java.util.List;
  * risk decide API 的请求加密策略
  */
 public class RiskDecideEncryptStrategy implements EncryptStrategy{
+
+    Charset utf8Charset = Charset.forName("UTF-8");
+
     @Override
     public void encrypt(byte[] data_key, AlipayRequest<?> request, List<EncryptKeyEnum> encryptKeyList) {
         if (request == null || encryptKeyList == null) {
@@ -38,7 +40,7 @@ public class RiskDecideEncryptStrategy implements EncryptStrategy{
 
     @Override
     public void encrypt(String dataKeyBase64, AlipayRequest<?> request, List<EncryptKeyEnum> encryptKeyList) {
-        encrypt(Base64.getDecoder().decode(dataKeyBase64), request, encryptKeyList);
+        encrypt(DatatypeConverter.parseBase64Binary(dataKeyBase64), request, encryptKeyList);
     }
 
     /**
@@ -64,24 +66,24 @@ public class RiskDecideEncryptStrategy implements EncryptStrategy{
                     if (buyerEmail == null || buyerEmail.isEmpty()) {
                         continue;
                     }
-                    encrypt = crypto.encrypt(data_key, buyerEmail.getBytes(StandardCharsets.UTF_8));
-                    request.getBuyer().setBuyerEmail(Base64.getEncoder().encodeToString(encrypt));
+                    encrypt = crypto.encrypt(data_key, buyerEmail.getBytes(utf8Charset));
+                    request.getBuyer().setBuyerEmail(DatatypeConverter.printBase64Binary(encrypt));
                     break;
                 case BUYER_PHONE_NO:
                     String buyerPhoneNo = request.getBuyer().getBuyerPhoneNo();
                     if (buyerPhoneNo == null || buyerPhoneNo.isEmpty()) {
                         continue;
                     }
-                    encrypt = crypto.encrypt(data_key, buyerPhoneNo.getBytes(StandardCharsets.UTF_8));
-                    request.getBuyer().setBuyerPhoneNo(Base64.getEncoder().encodeToString(encrypt));
+                    encrypt = crypto.encrypt(data_key, buyerPhoneNo.getBytes(utf8Charset));
+                    request.getBuyer().setBuyerPhoneNo(DatatypeConverter.printBase64Binary(encrypt));
                     break;
                 case BUYER_REGISTRATION_TIME:
                     String buyerRegistrationTime = request.getBuyer().getBuyerRegistrationTime();
                     if (buyerRegistrationTime == null || buyerRegistrationTime.isEmpty()) {
                         continue;
                     }
-                    encrypt = crypto.encrypt(data_key, buyerRegistrationTime.getBytes(StandardCharsets.UTF_8));
-                    request.getBuyer().setBuyerRegistrationTime(Base64.getEncoder().encodeToString(encrypt));
+                    encrypt = crypto.encrypt(data_key, buyerRegistrationTime.getBytes(utf8Charset));
+                    request.getBuyer().setBuyerRegistrationTime(DatatypeConverter.printBase64Binary(encrypt));
                     break;
                 case BILL_TO_NAME:
                     for (PaymentDetail paymentDetail : paymentDetails) {
@@ -94,8 +96,8 @@ public class RiskDecideEncryptStrategy implements EncryptStrategy{
                         if (address1 == null || address1.isEmpty()) {
                             continue;
                         }
-                        encrypt = crypto.encrypt(data_key, address1.getBytes(StandardCharsets.UTF_8));
-                        order.getShipping().getShippingAddress().setAddress1(Base64.getEncoder().encodeToString(encrypt));
+                        encrypt = crypto.encrypt(data_key, address1.getBytes(utf8Charset));
+                        order.getShipping().getShippingAddress().setAddress1(DatatypeConverter.printBase64Binary(encrypt));
                     }
                     break;
                 case SHIPPING_ADDRESS2:
@@ -104,8 +106,8 @@ public class RiskDecideEncryptStrategy implements EncryptStrategy{
                         if (address2 == null || address2.isEmpty()) {
                             continue;
                         }
-                        encrypt = crypto.encrypt(data_key, address2.getBytes(StandardCharsets.UTF_8));
-                        order.getShipping().getShippingAddress().setAddress2(Base64.getEncoder().encodeToString(encrypt));
+                        encrypt = crypto.encrypt(data_key, address2.getBytes(utf8Charset));
+                        order.getShipping().getShippingAddress().setAddress2(DatatypeConverter.printBase64Binary(encrypt));
                     }
                     break;
                 case SHIPPING_NAME:
@@ -119,8 +121,8 @@ public class RiskDecideEncryptStrategy implements EncryptStrategy{
                         if (email == null || email.isEmpty()) {
                             continue;
                         }
-                        encrypt = crypto.encrypt(data_key, email.getBytes(StandardCharsets.UTF_8));
-                        order.getShipping().setShipToEmail(Base64.getEncoder().encodeToString(encrypt));
+                        encrypt = crypto.encrypt(data_key, email.getBytes(utf8Charset));
+                        order.getShipping().setShipToEmail(DatatypeConverter.printBase64Binary(encrypt));
                     }
                     break;
                 case SHIPPING_PHONE_NO:
@@ -129,8 +131,8 @@ public class RiskDecideEncryptStrategy implements EncryptStrategy{
                         if (phoneNo == null || phoneNo.isEmpty()) {
                             continue;
                         }
-                        encrypt = crypto.encrypt(data_key, phoneNo.getBytes(StandardCharsets.UTF_8));
-                        order.getShipping().setShippingPhoneNo(Base64.getEncoder().encodeToString(encrypt));
+                        encrypt = crypto.encrypt(data_key, phoneNo.getBytes(utf8Charset));
+                        order.getShipping().setShippingPhoneNo(DatatypeConverter.printBase64Binary(encrypt));
                     }
                     break;
                 default:
@@ -151,20 +153,20 @@ public class RiskDecideEncryptStrategy implements EncryptStrategy{
             return;
         }
         if (userName.getFirstName() != null && !userName.getFirstName().isEmpty()) {
-            userName.setFirstName(Base64.getEncoder().encodeToString(
-                    crypto.encrypt(data_key, userName.getFirstName().getBytes(StandardCharsets.UTF_8))));
+            userName.setFirstName(DatatypeConverter.printBase64Binary(
+                    crypto.encrypt(data_key, userName.getFirstName().getBytes(utf8Charset))));
         }
         if (userName.getMiddleName() != null && !userName.getMiddleName().isEmpty()) {
-            userName.setMiddleName(Base64.getEncoder().encodeToString(
-                    crypto.encrypt(data_key, userName.getMiddleName().getBytes(StandardCharsets.UTF_8))));
+            userName.setMiddleName(DatatypeConverter.printBase64Binary(
+                    crypto.encrypt(data_key, userName.getMiddleName().getBytes(utf8Charset))));
         }
         if (userName.getLastName() != null && !userName.getLastName().isEmpty()) {
-            userName.setLastName(Base64.getEncoder().encodeToString(
-                    crypto.encrypt(data_key, userName.getLastName().getBytes(StandardCharsets.UTF_8))));
+            userName.setLastName(DatatypeConverter.printBase64Binary(
+                    crypto.encrypt(data_key, userName.getLastName().getBytes(utf8Charset))));
         }
         if (userName.getFullName() != null && !userName.getFullName().isEmpty()) {
-            userName.setFullName(Base64.getEncoder().encodeToString(
-                    crypto.encrypt(data_key, userName.getFullName().getBytes(StandardCharsets.UTF_8))));
+            userName.setFullName(DatatypeConverter.printBase64Binary(
+                    crypto.encrypt(data_key, userName.getFullName().getBytes(utf8Charset))));
         }
     }
 }

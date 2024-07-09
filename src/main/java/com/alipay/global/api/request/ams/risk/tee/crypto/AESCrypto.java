@@ -7,11 +7,16 @@ package com.alipay.global.api.request.ams.risk.tee.crypto;
 import com.alipay.global.api.request.ams.risk.tee.constants.CryptoSdkConstant;
 import com.alipay.global.api.request.ams.risk.tee.enums.ErrorCodeEnum;
 import com.alipay.global.api.request.ams.risk.tee.exception.CryptoException;
+import org.bouncycastle.crypto.CipherParameters;
+import org.bouncycastle.crypto.engines.AESEngine;
+import org.bouncycastle.crypto.modes.GCMBlockCipher;
+import org.bouncycastle.crypto.params.AEADParameters;
+import org.bouncycastle.crypto.params.KeyParameter;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
-import javax.crypto.Cipher;
-import javax.crypto.spec.GCMParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
-import java.util.Base64;
+import javax.xml.bind.DatatypeConverter;
+import java.security.Security;
 
 /**
  * AES crypto implementation
@@ -19,6 +24,10 @@ import java.util.Base64;
  */
 public class AESCrypto implements Crypto {
     private static volatile AESCrypto instance;
+
+    static {
+        Security.addProvider(new BouncyCastleProvider());
+    }
 
     public static AESCrypto getInstance() {
         if (instance == null) {
@@ -68,19 +77,27 @@ public class AESCrypto implements Crypto {
         if (dataKeyBase64 == null || dataKeyBase64.length() == 0) {
             throw new CryptoException(ErrorCodeEnum.PARAM_ILLEGAL, "dataKey cannot be empty");
         }
-        return encrypt(Base64.getDecoder().decode(dataKeyBase64), data);
+        return encrypt(DatatypeConverter.parseBase64Binary(dataKeyBase64), data);
     }
 
     private byte[] encrypt(byte[] data, SecretKeySpec keySpec) throws Exception {
-        GCMParameterSpec parameterSpec = new GCMParameterSpec(CryptoSdkConstant.TAG_LENGTH,
-                CryptoSdkConstant.COMMON_IV);
-        Cipher cipher = Cipher.getInstance(CryptoSdkConstant.ENCRYPT_ALGORITHM);
-        cipher.init(Cipher.ENCRYPT_MODE, keySpec, parameterSpec);
-        byte[] encrypted = cipher.doFinal(data);
-        byte[] result = new byte[CryptoSdkConstant.COMMON_IV.length + encrypted.length];
-        System.arraycopy(CryptoSdkConstant.COMMON_IV, 0, result, encrypted.length,
-                CryptoSdkConstant.COMMON_IV.length);
-        System.arraycopy(encrypted, 0, result, 0, encrypted.length);
+
+        GCMBlockCipher gcmEngine = new GCMBlockCipher(new AESEngine());
+
+        CipherParameters params = new AEADParameters(
+                new KeyParameter(keySpec.getEncoded()), CryptoSdkConstant.TAG_LENGTH,
+                CryptoSdkConstant.COMMON_IV
+        );
+
+        gcmEngine.init(true, params);
+        int encryptedDataLength = gcmEngine.getOutputSize(data.length);
+        byte[] encryptedData = new byte[encryptedDataLength];
+        int outputLen = gcmEngine.processBytes(data, 0, data.length, encryptedData, 0);
+        gcmEngine.doFinal(encryptedData, outputLen);
+        byte[] result = new byte[CryptoSdkConstant.COMMON_IV.length + encryptedData.length];
+        System.arraycopy(encryptedData, 0, result, 0, encryptedData.length);
+        System.arraycopy(CryptoSdkConstant.COMMON_IV, 0, result, encryptedData.length, CryptoSdkConstant.COMMON_IV.length);
         return result;
     }
+
 }
