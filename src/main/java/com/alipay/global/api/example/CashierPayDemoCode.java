@@ -18,7 +18,6 @@ import com.alipay.global.api.response.ams.pay.AlipayPayConsultResponse;
 import com.alipay.global.api.response.ams.pay.AlipayPayQueryResponse;
 import com.alipay.global.api.response.ams.pay.AlipayPayResponse;
 import com.alipay.global.api.response.ams.pay.AlipayPaymentSessionResponse;
-import com.alipay.global.api.tools.IpAddressTool;
 
 public class CashierPayDemoCode {
 
