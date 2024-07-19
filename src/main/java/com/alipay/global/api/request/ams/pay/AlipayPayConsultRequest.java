@@ -30,6 +30,7 @@ public class AlipayPayConsultRequest extends AlipayRequest<AlipayPayConsultRespo
     private SettlementStrategy settlementStrategy;
     private Merchant           merchant;
     private List<String>       allowedPspRegions;
+    private Buyer              buyer;
 
     /**
      * The unique ID to identify a merchant account.
