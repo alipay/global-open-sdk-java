@@ -9,11 +9,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Attachment {
+public class SettlementDetail {
 
-    private String attachmentType;
-    private String file;
-    private String attachmentName;
-    private String fileKey;
-
+    private String settleTo;
+    private Amount settlementAmount;
 }

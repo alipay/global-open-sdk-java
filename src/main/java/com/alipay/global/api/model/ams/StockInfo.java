@@ -7,13 +7,9 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
-public class Attachment {
-
-    private String attachmentType;
-    private String file;
-    private String attachmentName;
-    private String fileKey;
-
+@NoArgsConstructor
+public class StockInfo {
+    private String listedRegion;
+    private String tickerSymbol;
 }

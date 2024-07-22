@@ -4,15 +4,15 @@
  */
 package com.alipay.global.api.request.ams.risk;
 
-import java.util.List;
-
 import com.alipay.global.api.model.ams.Amount;
+import com.alipay.global.api.model.constants.AntomPathConstants;
 import com.alipay.global.api.model.risk.RefundRecord;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.risk.SendRefundResultResponse;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import java.util.List;
 
 /**
  * The request of Ant Group's send refund result API.
@@ -43,7 +43,7 @@ public class SendRefundResultRequest extends AlipayRequest<SendRefundResultRespo
     private List<RefundRecord> refundRecords;
 
     public SendRefundResultRequest() {
-        this.setPath("/ams/api/v1/risk/privacy/payments/sendRefundResult");
+        this.setPath(AntomPathConstants.RISK_SEND_REFUND_RESULT_PATH);
     }
 
     @Override

@@ -9,11 +9,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Attachment {
+public class Discount {
 
-    private String attachmentType;
-    private String file;
-    private String attachmentName;
-    private String fileKey;
+    private String discountName;
+    private Amount savingsAmount;
 
 }

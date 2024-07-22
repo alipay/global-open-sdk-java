@@ -9,11 +9,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Attachment {
+public class TransferFromDetail {
 
-    private String attachmentType;
-    private String file;
-    private String attachmentName;
-    private String fileKey;
-
+    private PaymentMethod transferFromMethod;
+    private Amount        transferFromAmount;
 }

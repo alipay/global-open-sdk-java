@@ -52,4 +52,26 @@ public class Order {
      */
     private String orderDescription;
 
+    /**
+     * Trip information, including trip modes, legs of trips and passenger information.
+     * 行程信息，包括行程模式、行程段和乘客信息。
+     */
+    private Transit transit;
+
+    /**
+     * Information about lodging service that was purchased,
+     * including hotel name, hotel address, check-in date, check-out date,
+     * number of booked rooms, number of booked nights and guest names.
+     * 酒店信息，包括酒店名称、酒店地址、入住日期、离店日期、预订房间数、预订天数和入住人姓名。
+     *
+     */
+    private Lodging lodging;
+
+    /**
+     * Information about gaming top-up, including game name,
+     * the topped up user name or ID, user email and user phone number.
+     * 游戏充值信息，包括游戏名称、充值用户姓名或ID、用户邮箱和用户电话号码。
+     */
+    private Gaming gaming;
+
 }

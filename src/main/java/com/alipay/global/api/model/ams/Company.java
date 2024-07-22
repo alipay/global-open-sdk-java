@@ -1,0 +1,26 @@
+package com.alipay.global.api.model.ams;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.List;
+
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class Company {
+    private String          legalName;
+    private String          companyType;
+    private Address         registeredAddress;
+    private Address         operatingAddress;
+    private String          incorporationDate;
+    private StockInfo       stockInfo;
+    private Certificate     certificates;
+    private Attachment      attachments;
+    private String          companyUnit;
+    private List<Contact>   contacts;
+    private String          vatNo;
+}

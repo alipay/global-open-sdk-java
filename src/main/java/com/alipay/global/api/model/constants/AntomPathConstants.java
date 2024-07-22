@@ -126,4 +126,60 @@ public class AntomPathConstants {
      */
     public static final String INQUIRY_DECLARE_PATH = "/ams/api/v1/customs/inquiryDeclarationRequests";
 
+    /**
+     * see <a href="https://global.alipay.com/docs/ac/marketplace/attachment">marketplace submitAttachment</a>
+     */
+    public static final String MARKETPLACE_SUBMITATTACHMENT_PATH = "/ams/api/open/openapiv2_file/v1/business/attachment/submitAttachment";
+
+    /**
+     * see <a href="https://global.alipay.com/docs/ac/marketplace/attachment">marketplace register</a>
+     */
+    public static final String MARKETPLACE_REGISTER_PATH = "/ams/api/v1/merchants/register";
+
+    /**
+     * see <a href="https://global.alipay.com/docs/ac/marketplace/attachment">marketplace settlementInfo update</a>
+     */
+    public static final String MARKETPLACE_SETTLEMENTINFO_UPDATE_PATH = "/ams/api/v1/merchants/settlementInfo/update";
+
+    /**
+     * see <a href="https://global.alipay.com/docs/ac/marketplace/attachment">marketplace accounts inquireBalance</a>
+     */
+    public static final String MARKETPLACE_INQUIREBALANCE_PATH = "/ams/api/v1/accounts/inquireBalance";
+
+
+    /**
+     * see <a href="https://global.alipay.com/docs/ac/marketplace/attachment">marketplace payments settle</a>
+     */
+    public static final String MARKETPLACE_SETTLE_PATH = "/ams/api/v1/payments/settle";
+
+    /**
+     * see <a href="https://global.alipay.com/docs/ac/marketplace/attachment">marketplace funds createPayout</a>
+     */
+    public static final String MARKETPLACE_CREATEPAYOUT_PATH = "/ams/api/v1/funds/createPayout";
+
+    /**
+     * see <a href="https://global.alipay.com/docs/ac/marketplace/attachment">marketplace funds createTransfer</a>
+     */
+    public static final String MARKETPLACE_CREATETRANSFER_PATH = "/ams/api/v1/funds/createTransfer";
+
+    /**
+     * see <a href="https://global.alipay.com/docs/ac/risk_control/decide">risk payments decide</a>
+     */
+    public static final String RISK_DECIDE_PATH = "/ams/api/v1/risk/payments/decide";
+
+    /**
+     * see <a href="https://global.alipay.com/docs/ac/risk_control/decide">risk payments reportRisk</a>
+     */
+    public static final String RISK_REPORT_PATH = "/ams/api/v1/risk/payments/reportRisk";
+
+    /**
+     * see <a href="https://global.alipay.com/docs/ac/risk_control/decide">risk payments sendPaymentResult</a>
+     */
+    public static final String RISK_SEND_PAYMENT_RESULT_PATH = "/ams/api/v1/risk/payments/sendPaymentResult";
+
+    /**
+     * see <a href="https://global.alipay.com/docs/ac/risk_control/decide">risk payments sendRefundResult</a>
+     */
+    public static final String RISK_SEND_REFUND_RESULT_PATH = "/ams/api/v1/risk/payments/sendRefundResult";
+
 }

@@ -5,6 +5,7 @@
 package com.alipay.global.api.request.ams.risk;
 
 import com.alipay.global.api.model.ams.CardVerificationResult;
+import com.alipay.global.api.model.constants.AntomPathConstants;
 import com.alipay.global.api.model.risk.AuthorizationError;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.risk.SendPaymentResultResponse;
@@ -50,7 +51,7 @@ public class SendPaymentResultRequest extends AlipayRequest<SendPaymentResultRes
     private String                 paymentMethodProvider;
 
     public SendPaymentResultRequest() {
-        this.setPath("/ams/api/v1/risk/privacy/payments/sendPaymentResult");
+        this.setPath(AntomPathConstants.RISK_SEND_PAYMENT_RESULT_PATH);
     }
 
     @Override

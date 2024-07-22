@@ -4,13 +4,13 @@
  */
 package com.alipay.global.api.request.ams.risk;
 
-import java.util.Date;
-
+import com.alipay.global.api.model.constants.AntomPathConstants;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.risk.RiskReportResponse;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import java.util.Date;
 
 /**
  * The request of Ant Group's risk report API.
@@ -56,7 +56,7 @@ public class RiskReportRequest extends AlipayRequest<RiskReportResponse> {
     private Date   riskOccurrenceTime;
 
     public RiskReportRequest() {
-        this.setPath("/ams/api/v1/risk/privacy/payments/reportRisk");
+        this.setPath(AntomPathConstants.RISK_REPORT_PATH);
     }
 
     @Override

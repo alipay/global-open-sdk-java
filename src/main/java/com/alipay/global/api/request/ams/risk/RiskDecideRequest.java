@@ -4,19 +4,19 @@
  */
 package com.alipay.global.api.request.ams.risk;
 
-import java.util.List;
-
 import com.alipay.global.api.model.ams.Amount;
 import com.alipay.global.api.model.ams.Buyer;
 import com.alipay.global.api.model.ams.Env;
+import com.alipay.global.api.model.constants.AntomPathConstants;
 import com.alipay.global.api.model.risk.AuthorizationPhase;
 import com.alipay.global.api.model.risk.Order;
 import com.alipay.global.api.model.risk.PaymentDetail;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.risk.RiskDecideResponse;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import java.util.List;
 
 /**
  * The request of Ant Group's risk decide API.
@@ -71,7 +71,7 @@ public class RiskDecideRequest extends AlipayRequest<RiskDecideResponse> {
     private Env                 env;
 
     public RiskDecideRequest() {
-        this.setPath("/ams/api/v1/risk/privacy/payments/decide");
+        this.setPath(AntomPathConstants.RISK_DECIDE_PATH);
     }
 
     @Override

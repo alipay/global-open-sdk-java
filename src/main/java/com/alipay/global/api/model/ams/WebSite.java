@@ -14,5 +14,6 @@ public class WebSite {
     private String name;
     private String url;
     private String desc;
+    private String type;
 
 }

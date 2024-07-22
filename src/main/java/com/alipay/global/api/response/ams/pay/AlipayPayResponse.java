@@ -34,5 +34,6 @@ public class AlipayPayResponse extends AlipayResponse {
     private String              appIdentifier;
     private PaymentResultInfo   paymentResultInfo;
     private AcquirerInfo        acquirerInfo;
+    private Discount            discount;
 
 }
