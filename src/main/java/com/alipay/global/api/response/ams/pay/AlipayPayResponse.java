@@ -6,34 +6,37 @@ import com.alipay.global.api.response.AlipayResponse;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.util.List;
+
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class AlipayPayResponse extends AlipayResponse {
 
-    private String              paymentRequestId;
-    private String              paymentId;
-    private Amount              paymentAmount;
-    private String              paymentData;
-    private Amount              actualPaymentAmount;
-    private Quote               paymentQuote;
-    private String              paymentTime;
-    private String              paymentCreateTime;
-    private String              authExpiryTime;
-    private Amount              nonGuaranteeCouponValue;
-    private String              paymentActionForm;
-    private PspCustomerInfo     pspCustomerInfo;
-    private ChallengeActionForm challengeActionForm;
-    private RedirectActionForm  redirectActionForm;
-    private OrderCodeForm       orderCodeForm;
-    private Amount              grossSettlementAmount;
-    private Quote               settlementQuote;
-    private String              extendInfo;
-    private String              normalUrl;
-    private String              schemeUrl;
-    private String              applinkUrl;
-    private String              appIdentifier;
-    private PaymentResultInfo   paymentResultInfo;
-    private AcquirerInfo        acquirerInfo;
-    private Discount            discount;
+    private String                  paymentRequestId;
+    private String                  paymentId;
+    private Amount                  paymentAmount;
+    private String                  paymentData;
+    private Amount                  actualPaymentAmount;
+    private Quote                   paymentQuote;
+    private String                  paymentTime;
+    private String                  paymentCreateTime;
+    private String                  authExpiryTime;
+    private Amount                  nonGuaranteeCouponValue;
+    private String                  paymentActionForm;
+    private PspCustomerInfo         pspCustomerInfo;
+    private ChallengeActionForm     challengeActionForm;
+    private RedirectActionForm      redirectActionForm;
+    private OrderCodeForm           orderCodeForm;
+    private Amount                  grossSettlementAmount;
+    private Quote                   settlementQuote;
+    private String                  extendInfo;
+    private String                  normalUrl;
+    private String                  schemeUrl;
+    private String                  applinkUrl;
+    private String                  appIdentifier;
+    private PaymentResultInfo       paymentResultInfo;
+    private AcquirerInfo            acquirerInfo;
+    private Discount                discount;
+    private List<PromotionResult>   promotionResult;
 
 }

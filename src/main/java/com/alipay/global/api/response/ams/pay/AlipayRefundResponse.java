@@ -21,5 +21,6 @@ public class AlipayRefundResponse extends AlipayResponse {
     private Amount       grossSettlementAmount;
     private Quote        settlementQuote;
     private AcquirerInfo acquirerInfo;
+    private String       acquirerReferenceNo;
 
 }
