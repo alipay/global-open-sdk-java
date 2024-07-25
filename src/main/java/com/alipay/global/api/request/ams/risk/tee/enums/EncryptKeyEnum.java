@@ -16,7 +16,7 @@ public enum EncryptKeyEnum {
     SHIPPING_ADDRESS1("address1", "orders.shipping.shippingAddress.address1"),
     SHIPPING_ADDRESS2("address2", "orders.shipping.shippingAddress.address2"),
     SHIPPING_NAME("shippingName", "orders.shipping.shippingName"),
-    SHIPPING_EMAIL("shipToEmail", "orders.shipping.shipToEmail"),
+    SHIP_TO_EMAIL("shipToEmail", "orders.shipping.shipToEmail"),
     SHIPPING_PHONE_NO("shippingPhoneNo", "orders.shipping.shippingPhoneNo")
 
     ;

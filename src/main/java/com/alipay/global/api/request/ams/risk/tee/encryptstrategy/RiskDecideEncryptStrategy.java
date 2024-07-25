@@ -115,7 +115,7 @@ public class RiskDecideEncryptStrategy implements EncryptStrategy{
                         encryptName(data_key, order.getShipping().getShippingName(), crypto);
                     }
                     break;
-                case SHIPPING_EMAIL:
+                case SHIP_TO_EMAIL:
                     for (Order order : orders) {
                         String email = order.getShipping().getShipToEmail();
                         if (email == null || email.isEmpty()) {

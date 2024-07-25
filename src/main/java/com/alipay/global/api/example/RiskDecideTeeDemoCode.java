@@ -119,7 +119,7 @@ public class RiskDecideTeeDemoCode {
                 EncryptKeyEnum.SHIPPING_ADDRESS1,
                 EncryptKeyEnum.SHIPPING_ADDRESS2,
                 EncryptKeyEnum.SHIPPING_NAME,
-                EncryptKeyEnum.SHIPPING_EMAIL,
+                EncryptKeyEnum.SHIP_TO_EMAIL,
                 EncryptKeyEnum.SHIPPING_PHONE_NO
         );
         // 2.2. encrypt request by using RiskDecideEncryptStrategy
