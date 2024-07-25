@@ -47,7 +47,8 @@ public class RiskDecideTeeDemoCode {
     private static final String       GATE_WAY_URL        = "";
     private static final String       merchantPrivateKey  = "";
     private static final String       alipayPublicKey     = "";
-    private static final AlipayClient defaultAlipayClient = new DefaultAlipayClient(GATE_WAY_URL, merchantPrivateKey, alipayPublicKey);
+    private static final AlipayClient defaultAlipayClient = new DefaultAlipayClient(GATE_WAY_URL, merchantPrivateKey, alipayPublicKey, CLIENT_ID);
+
     private static final String       DATA_KEY = "";
     public static void main(String[] args) {
         preAuthDecide();
@@ -55,8 +56,6 @@ public class RiskDecideTeeDemoCode {
 
     public static RiskDecideResponse preAuthDecide() {
         RiskDecideRequest request = new RiskDecideRequest();
-        request.setClientId(CLIENT_ID);
-        request.setPath("/ams/api/v1/risk/privacy/payments/decide");
         request.setReferenceTransactionId("test_20231012091493242");
         request.setAuthorizationPhase(AuthorizationPhase.PRE_AUTHORIZATION);
         // 1. build plaintext request
@@ -77,8 +76,6 @@ public class RiskDecideTeeDemoCode {
 
     public static RiskDecideResponse postAuthDecide() {
         RiskDecideRequest request = new RiskDecideRequest();
-        request.setClientId(CLIENT_ID);
-        request.setPath("/ams/api/v1/risk/privacy/payments/decide");
         request.setReferenceTransactionId("test_20231012091493242");
         request.setAuthorizationPhase(AuthorizationPhase.POST_AUTHORIZATION);
         // 1. build plaintext request
@@ -129,8 +126,6 @@ public class RiskDecideTeeDemoCode {
 
     public static SendPaymentResultResponse sendPaymentResult() {
         SendPaymentResultRequest request = new SendPaymentResultRequest();
-        request.setClientId(CLIENT_ID);
-        request.setPath("/ams/api/v1/risk/privacy/payments/sendPaymentResult");
         request.setReferenceTransactionId("test_20231012091493242");
 
         request.setPaymentStatus("SUCCESS");
@@ -156,8 +151,6 @@ public class RiskDecideTeeDemoCode {
 
     public static SendRefundResultResponse sendPaymentRefund() {
         SendRefundResultRequest request = new SendRefundResultRequest();
-        request.setClientId(CLIENT_ID);
-        request.setPath("/ams/api/v1/risk/privacy/payments/sendRefundResult");
         request.setReferenceTransactionId("test_20231012091493242");
 
         SendRefundResultResponse response = null;
@@ -171,8 +164,6 @@ public class RiskDecideTeeDemoCode {
 
     public static RiskReportResponse reportRisk() {
         RiskReportRequest request = new RiskReportRequest();
-        request.setClientId(CLIENT_ID);
-        request.setPath("/ams/api/v1/risk/privacy/payments/reportRisk");
         request.setReferenceTransactionId("test_20231012091493242");
         request.setReportReason("test");
         request.setRiskType("FRAUD");
