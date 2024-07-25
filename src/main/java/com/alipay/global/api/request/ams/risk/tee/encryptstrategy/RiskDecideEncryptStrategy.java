@@ -85,7 +85,7 @@ public class RiskDecideEncryptStrategy implements EncryptStrategy{
                     encrypt = crypto.encrypt(data_key, buyerRegistrationTime.getBytes(utf8Charset));
                     request.getBuyer().setBuyerRegistrationTime(DatatypeConverter.printBase64Binary(encrypt));
                     break;
-                case BILL_TO_NAME:
+                case CARDHOLDER_NAME:
                     for (PaymentDetail paymentDetail : paymentDetails) {
                         encryptName(data_key, paymentDetail.getPaymentMethod().getPaymentMethodMetaData().getCardHolderName(), crypto);
                     }

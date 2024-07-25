@@ -115,7 +115,7 @@ public class RiskDecideTeeDemoCode {
                 EncryptKeyEnum.BUYER_EMAIL,
                 EncryptKeyEnum.BUYER_PHONE_NO,
                 EncryptKeyEnum.BUYER_REGISTRATION_TIME,
-                EncryptKeyEnum.BILL_TO_NAME,
+                EncryptKeyEnum.CARDHOLDER_NAME,
                 EncryptKeyEnum.SHIPPING_ADDRESS1,
                 EncryptKeyEnum.SHIPPING_ADDRESS2,
                 EncryptKeyEnum.SHIPPING_NAME,

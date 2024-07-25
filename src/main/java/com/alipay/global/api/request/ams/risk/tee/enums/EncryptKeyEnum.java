@@ -12,7 +12,7 @@ public enum EncryptKeyEnum {
     BUYER_EMAIL("buyerEmail", "buyer.buyerEmail"),
     BUYER_PHONE_NO("buyerPhoneNo", "buyer.buyerPhoneNo"),
     BUYER_REGISTRATION_TIME("buyerRegistrationTime", "buyer.buyerRegistrationTime"),
-    BILL_TO_NAME("cardHolderName", "paymentDetails.paymentMethod.paymentMethodMetaData.cardHolderName"),
+    CARDHOLDER_NAME("cardHolderName", "paymentDetails.paymentMethod.paymentMethodMetaData.cardHolderName"),
     SHIPPING_ADDRESS1("address1", "orders.shipping.shippingAddress.address1"),
     SHIPPING_ADDRESS2("address2", "orders.shipping.shippingAddress.address2"),
     SHIPPING_NAME("shippingName", "orders.shipping.shippingName"),
