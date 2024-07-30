@@ -1,56 +1,55 @@
 /*
  * Ant Group
- * Copyright (c) 2004-2023 All Rights Reserved.
+ * Copyright (c) 2004-2024 All Rights Reserved.
  */
 package com.alipay.global.api.example;
 
 import com.alipay.global.api.AlipayClient;
 import com.alipay.global.api.DefaultAlipayClient;
 import com.alipay.global.api.exception.AlipayApiException;
-import com.alipay.global.api.model.ams.*;
-import com.alipay.global.api.model.constants.EndPointConstants;
-import com.alipay.global.api.model.risk.Merchant;
+import com.alipay.global.api.model.ams.Address;
+import com.alipay.global.api.model.ams.Amount;
+import com.alipay.global.api.model.ams.Buyer;
+import com.alipay.global.api.model.ams.CardVerificationResult;
+import com.alipay.global.api.model.ams.Env;
+import com.alipay.global.api.model.ams.Goods;
+import com.alipay.global.api.model.ams.OsType;
+import com.alipay.global.api.model.ams.RiskThreeDSResult;
+import com.alipay.global.api.model.ams.Shipping;
+import com.alipay.global.api.model.ams.TerminalType;
+import com.alipay.global.api.model.ams.UserName;
+import com.alipay.global.api.model.risk.AuthorizationPhase;
 import com.alipay.global.api.model.risk.Order;
+import com.alipay.global.api.model.risk.PaymentMethodMetaData;
+import com.alipay.global.api.model.risk.Merchant;
+import com.alipay.global.api.model.risk.PaymentDetail;
 import com.alipay.global.api.model.risk.PaymentMethod;
-import com.alipay.global.api.model.risk.*;
 import com.alipay.global.api.request.ams.risk.RiskDecideRequest;
 import com.alipay.global.api.request.ams.risk.RiskReportRequest;
 import com.alipay.global.api.request.ams.risk.SendPaymentResultRequest;
 import com.alipay.global.api.request.ams.risk.SendRefundResultRequest;
+import com.alipay.global.api.request.ams.risk.tee.exception.CryptoException;
 import com.alipay.global.api.response.ams.risk.RiskDecideResponse;
 import com.alipay.global.api.response.ams.risk.RiskReportResponse;
 import com.alipay.global.api.response.ams.risk.SendPaymentResultResponse;
 import com.alipay.global.api.response.ams.risk.SendRefundResultResponse;
+import com.alipay.global.api.request.ams.risk.tee.encryptstrategy.RiskDecideEncryptStrategy;
+import com.alipay.global.api.request.ams.risk.tee.enums.EncryptKeyEnum;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
-public class RiskDecideDemoCode {
-    /**
-     * replace with your client id.
-     * find your client id here: <a href="https://dashboard.alipay.com/global-payments/developers/quickStart">quickStart</a>
-     */
-    public static final String        CLIENT_ID            = "";
 
-    /**
-     * replace with your antom public key (used to verify signature).
-     * find your antom public key here: <a href="https://dashboard.alipay.com/global-payments/developers/quickStart">quickStart</a>
-     */
-    public static final String        ANTOM_PUBLIC_KEY     = "";
+public class RiskDecideTeeDemoCode {
+    private static final String       CLIENT_ID           = "";
+    private static final String       GATE_WAY_URL        = "";
+    private static final String       merchantPrivateKey  = "";
+    private static final String       alipayPublicKey     = "";
+    private static final AlipayClient defaultAlipayClient = new DefaultAlipayClient(GATE_WAY_URL, merchantPrivateKey, alipayPublicKey, CLIENT_ID);
 
-    /**
-     * replace with your private key (used to sign).
-     * please ensure the secure storage of your private key to prevent leakage
-     */
-    public static final String        MERCHANT_PRIVATE_KEY = "";
-
-    /**
-     * please replace with your endpoint.
-     * find your endpoint here: <a href="https://dashboard.alipay.com/global-payments/developers/quickStart">quickStart</a>
-     */
-    private final static AlipayClient CLIENT               = new DefaultAlipayClient(
-        EndPointConstants.SG, MERCHANT_PRIVATE_KEY, ANTOM_PUBLIC_KEY, CLIENT_ID);
-
+    private static final String       DATA_KEY = "";
     public static void main(String[] args) {
         preAuthDecide();
     }
@@ -59,11 +58,16 @@ public class RiskDecideDemoCode {
         RiskDecideRequest request = new RiskDecideRequest();
         request.setReferenceTransactionId("test_20231012091493242");
         request.setAuthorizationPhase(AuthorizationPhase.PRE_AUTHORIZATION);
+        // 1. build plaintext request
         buildRiskDecideRequest(request);
-
         RiskDecideResponse response = null;
         try {
-            response = CLIENT.execute(request);
+            // 2. encrypt request
+            encryptRequest(request);
+            // 3. send request
+            response = defaultAlipayClient.execute(request);
+        } catch (CryptoException e) {
+            // TODO Handle CryptoException and log
         } catch (AlipayApiException e) {
             // TODO Handle AlipayApiException and log
         }
@@ -74,10 +78,10 @@ public class RiskDecideDemoCode {
         RiskDecideRequest request = new RiskDecideRequest();
         request.setReferenceTransactionId("test_20231012091493242");
         request.setAuthorizationPhase(AuthorizationPhase.POST_AUTHORIZATION);
+        // 1. build plaintext request
         buildRiskDecideRequest(request);
         PaymentDetail paymentDetail = request.getPaymentDetails().get(0);
-        PaymentMethodMetaData paymentMethodMetaData = paymentDetail.getPaymentMethod()
-            .getPaymentMethodMetaData();
+        PaymentMethodMetaData paymentMethodMetaData = paymentDetail.getPaymentMethod().getPaymentMethodMetaData();
         CardVerificationResult cardVerificationResult = new CardVerificationResult();
         cardVerificationResult.setAuthenticationType("3D");
         cardVerificationResult.setAuthorizationCode("10000");
@@ -85,24 +89,46 @@ public class RiskDecideDemoCode {
         riskThreeDSResult.setEci("00");
         riskThreeDSResult.setThreeDSVersion("2.0");
         riskThreeDSResult.setCavv("0");
-        riskThreeDSResult.setThreeDSInteractionMode(ThreeDSInteractionMode.CHALLENGE);
+        riskThreeDSResult.setThreeDSInteractionMode("CHALLENGED");
         cardVerificationResult.setThreeDSResult(riskThreeDSResult);
         paymentMethodMetaData.setCardVerificationResult(cardVerificationResult);
-
         RiskDecideResponse response = null;
         try {
-            response = CLIENT.execute(request);
+            // 2. encrypt request
+            encryptRequest(request);
+            // 3. send request
+            response = defaultAlipayClient.execute(request);
+        } catch (CryptoException e) {
+            // TODO Handle CryptoException and log
         } catch (AlipayApiException e) {
             // TODO Handle AlipayApiException and log
         }
         return response;
     }
 
+    public static void encryptRequest(RiskDecideRequest request) throws CryptoException {
+        // 2.1. build encryptList
+        List<EncryptKeyEnum> encryptList = Arrays.asList(
+                EncryptKeyEnum.BUYER_EMAIL,
+                EncryptKeyEnum.BUYER_PHONE_NO,
+                EncryptKeyEnum.BUYER_REGISTRATION_TIME,
+                EncryptKeyEnum.CARDHOLDER_NAME,
+                EncryptKeyEnum.SHIPPING_ADDRESS1,
+                EncryptKeyEnum.SHIPPING_ADDRESS2,
+                EncryptKeyEnum.SHIPPING_NAME,
+                EncryptKeyEnum.SHIP_TO_EMAIL,
+                EncryptKeyEnum.SHIPPING_PHONE_NO
+        );
+        // 2.2. encrypt request by using RiskDecideEncryptStrategy
+        RiskDecideEncryptStrategy strategy = new RiskDecideEncryptStrategy();
+        strategy.encrypt(DATA_KEY, request, encryptList);
+    }
+
     public static SendPaymentResultResponse sendPaymentResult() {
         SendPaymentResultRequest request = new SendPaymentResultRequest();
         request.setReferenceTransactionId("test_20231012091493242");
 
-        request.setPaymentStatus(PaymentStatus.SUCCESS);
+        request.setPaymentStatus("SUCCESS");
         request.setReferenceTransactionId("test_20231012091493242");
         CardVerificationResult cardVerificationResult = new CardVerificationResult();
         cardVerificationResult.setAuthenticationType("3D");
@@ -111,12 +137,12 @@ public class RiskDecideDemoCode {
         threeDSResult.setEci("05");
         threeDSResult.setThreeDSVersion("2.0");
         threeDSResult.setCavv("0");
-        threeDSResult.setThreeDSInteractionMode(ThreeDSInteractionMode.CHALLENGE);
+        threeDSResult.setThreeDSInteractionMode("CHALLENGED");
         cardVerificationResult.setThreeDSResult(threeDSResult);
         request.setCardVerificationResult(cardVerificationResult);
         SendPaymentResultResponse response = null;
         try {
-            response = CLIENT.execute(request);
+            response = defaultAlipayClient.execute(request);
         } catch (AlipayApiException e) {
             // TODO Handle AlipayApiException and log
         }
@@ -129,7 +155,7 @@ public class RiskDecideDemoCode {
 
         SendRefundResultResponse response = null;
         try {
-            response = CLIENT.execute(request);
+            response = defaultAlipayClient.execute(request);
         } catch (AlipayApiException e) {
             // TODO Handle AlipayApiException and log
         }
@@ -140,19 +166,19 @@ public class RiskDecideDemoCode {
         RiskReportRequest request = new RiskReportRequest();
         request.setReferenceTransactionId("test_20231012091493242");
         request.setReportReason("test");
-        request.setRiskType(RiskType.FRAUD);
+        request.setRiskType("FRAUD");
         request.setRiskOccurrenceTime(new Date());
 
         RiskReportResponse response = null;
         try {
-            response = CLIENT.execute(request);
+            response = defaultAlipayClient.execute(request);
         } catch (AlipayApiException e) {
             // TODO Handle AlipayApiException and log
         }
         return response;
     }
 
-    public static void buildRiskDecideRequest(RiskDecideRequest request) {
+    private static void buildRiskDecideRequest(RiskDecideRequest request) {
         Order order = new Order();
         order.setReferenceOrderId("test_202310120914932421");
         Amount orderAmount = new Amount();
@@ -162,13 +188,13 @@ public class RiskDecideDemoCode {
         order.setOrderDescription("Cappuccino #grande (Mika's coffee shop)");
         Merchant merchant = new Merchant();
         merchant.setReferenceMerchantId("SM_001");
+        merchant.setMerchantEmail("12345678@foxmail.com");
         order.setMerchant(merchant);
         Goods goods = new Goods();
         goods.setReferenceGoodsId("383382011_SGAMZ-904520356");
-        goods.setGoodsName(
-            "[3 Boxes] Starbucks Cappuccino Milk Coffee Pods / Coffee Capsules by Nescafe Dolce Gusto");
+        goods.setGoodsName("[3 Boxes] Starbucks Cappuccino Milk Coffee Pods / Coffee Capsules by Nescafe Dolce Gusto");
         goods.setGoodsCategory("Digital  Goods/Digital  Vouchers/Food  and Beverages");
-        goods.setDeliveryMethodType(DeliveryMethodType.DIGITAL);
+        goods.setDeliveryMethodType("DIGITAL");
         goods.setGoodsQuantity("1");
         Amount goodsAmount = new Amount();
         goodsAmount.setValue("30000");
@@ -208,6 +234,7 @@ public class RiskDecideDemoCode {
         buyerName.setMiddleName("Skr");
         buyerName.setFullName("Dehua Skr Liu");
         buyer.setBuyerName(buyerName);
+        buyer.setBuyerRegistrationTime("2023-01-01T12:08:56+08:00");
         request.setBuyer(buyer);
 
         Amount actualPaymentAmount = new Amount();
@@ -257,4 +284,5 @@ public class RiskDecideDemoCode {
         discountAmount.setValue("0");
         request.setDiscountAmount(discountAmount);
     }
+
 }
