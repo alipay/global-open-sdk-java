@@ -1,8 +1,5 @@
 package com.alipay.global.api.example.legacy;
 
-import java.util.Arrays;
-import java.util.List;
-
 import com.alipay.global.api.AlipayClient;
 import com.alipay.global.api.DefaultAlipayClient;
 import com.alipay.global.api.example.model.Callback;
@@ -19,6 +16,9 @@ import com.alipay.global.api.request.ams.pay.AlipayPayRequest;
 import com.alipay.global.api.response.ams.pay.AlipayPayCancelResponse;
 import com.alipay.global.api.response.ams.pay.AlipayPayQueryResponse;
 import com.alipay.global.api.response.ams.pay.AlipayPayResponse;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * The demo code mainly shows how to use the API correctly and the specific implementation needs to be performed by merchants.
@@ -90,7 +90,7 @@ public class CashierPayDemoCode {
                     RedirectActionForm redirectActionForm = alipayPayResponse
                         .getRedirectActionForm();
                     String redirectUrl = redirectActionForm.getRedirectUrl();
-                    String method = redirectActionForm.getMethod();
+                    String method = redirectActionForm.getMethod().name();
                     String parameters = redirectActionForm.getParameters();
                     // TODO 1、Jump to the checkout page
                     // TODO 2、Wait notify，eg: PayNotifyListener

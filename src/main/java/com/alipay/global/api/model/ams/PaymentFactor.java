@@ -17,7 +17,7 @@ public class PaymentFactor {
 
     private PresentmentMode presentmentMode;
 
-    private String captureMode;
+    private CaptureModeType captureMode;
 
     private Boolean isAuthorization;
 

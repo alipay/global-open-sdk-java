@@ -1,14 +1,14 @@
 package com.alipay.global.api.request.ams.pay;
 
-import java.util.List;
-
 import com.alipay.global.api.model.ams.*;
+import com.alipay.global.api.model.ams.ProductCodeType;
 import com.alipay.global.api.model.constants.AntomPathConstants;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.pay.AlipayPayConsultResponse;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -16,8 +16,14 @@ public class AlipayPayConsultRequest extends AlipayRequest<AlipayPayConsultRespo
 
     private ProductCodeType    productCode;
     private Amount             paymentAmount;
+    /**
+     * The country or region where the merchant operates the business. The parameter is a 2-letter country or region code that follows ISO 3166 Country Codes standard.
+     *
+     * Some possible values are US, SG, HK, PK, JP, CN, BR, AU, and MY.
+     * value: MerchantRegionType.*.name
+     */
     private String             merchantRegion;
-    private List<String>       allowedPaymentMethodRegions;
+    private List<String> allowedPaymentMethodRegions;
     private List<String>       allowedPaymentMethods;
     private List<String>       blockedPaymentMethods;
     private String             region;
@@ -31,7 +37,6 @@ public class AlipayPayConsultRequest extends AlipayRequest<AlipayPayConsultRespo
     private Merchant           merchant;
     private List<String>       allowedPspRegions;
     private Buyer              buyer;
-
     /**
      * The unique ID to identify a merchant account.
      */

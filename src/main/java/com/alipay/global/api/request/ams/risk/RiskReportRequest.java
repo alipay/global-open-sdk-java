@@ -4,6 +4,7 @@
  */
 package com.alipay.global.api.request.ams.risk;
 
+import com.alipay.global.api.model.ams.RiskType;
 import com.alipay.global.api.model.constants.AntomPathConstants;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.risk.RiskReportResponse;
@@ -40,7 +41,7 @@ public class RiskReportRequest extends AlipayRequest<RiskReportResponse> {
      * CHARGEBACK：表示买家发起了拒付。
      * FRAUD：表示发生了卡盗刷行为。
      */
-    private String riskType;
+    private RiskType riskType;
     /**
      * Represents the time when a risk event occurs, defined as follows:
      * If the riskType value is SUSPICIOUS, the value of this field is the time when you identified the risky transaction.

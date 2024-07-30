@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 public class Company {
     private String          legalName;
-    private String          companyType;
+    private CompanyType     companyType;
     private Address         registeredAddress;
     private Address         operatingAddress;
     private String          incorporationDate;

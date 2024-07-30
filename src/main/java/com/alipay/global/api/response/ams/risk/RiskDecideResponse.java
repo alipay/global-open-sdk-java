@@ -4,6 +4,7 @@
  */
 package com.alipay.global.api.response.ams.risk;
 
+import com.alipay.global.api.model.ams.DecisionType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -22,7 +23,7 @@ public class RiskDecideResponse extends RiskResponse {
      * ACCEPT：表示建议接受该笔支付。
      * REJECT：表示建议拒绝该笔支付。
      */
-    private String decision;
+    private DecisionType decision;
     /**
      * Ant Group's recommended authentication method. Valid values are as follows:
      * 3D: 3D authentication is recommended for this transaction.

@@ -20,7 +20,7 @@ public class PaymentOption {
     private List<String> paymentMethodRegion;
     private boolean enabled;
     private boolean preferred;
-    private String disableReason;
+    private DisableReasonType disableReason;
     private Map<String, AmountLimitInfo> amountLimitInfoMap;
     private List<String> supportedCurrencies;
     private PaymentOptionDetail paymentOptionDetail;

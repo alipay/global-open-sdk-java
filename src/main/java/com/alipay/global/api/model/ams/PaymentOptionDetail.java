@@ -15,7 +15,7 @@ public class PaymentOptionDetail {
 
     private List<SupportCardBrand> supportCardBrands;
 
-    private List<String> funding;
+    private List<FundingType> funding;
 
     private List<SupportBank> supportBanks;
 

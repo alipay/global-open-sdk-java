@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PeriodRule {
 
-    private String periodType;
+    private PeriodType periodType;
 
     private Integer periodCount;
 

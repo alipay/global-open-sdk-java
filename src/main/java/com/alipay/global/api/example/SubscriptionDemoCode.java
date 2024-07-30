@@ -1,7 +1,5 @@
 package com.alipay.global.api.example;
 
-import java.util.UUID;
-
 import com.alibaba.fastjson.JSON;
 import com.alipay.global.api.AlipayClient;
 import com.alipay.global.api.DefaultAlipayClient;
@@ -10,6 +8,8 @@ import com.alipay.global.api.model.ams.*;
 import com.alipay.global.api.model.constants.EndPointConstants;
 import com.alipay.global.api.request.ams.subscription.AlipaySubscriptionCreateRequest;
 import com.alipay.global.api.response.ams.subscription.AlipaySubscriptionCreateResponse;
+
+import java.util.UUID;
 
 public class SubscriptionDemoCode {
 
@@ -52,7 +52,7 @@ public class SubscriptionDemoCode {
         alipaySubscriptionCreateRequest.setSubscriptionEndTime("2024-06-27T12:01:01+08:00");
         alipaySubscriptionCreateRequest.setSubscriptionExpiryTime("2024-03-20T18:20:06+08:00");
 
-        PeriodRule periodRule = PeriodRule.builder().periodType("MONTH").periodCount(1).build();
+        PeriodRule periodRule = PeriodRule.builder().periodType(PeriodType.DAY).periodCount(1).build();
         alipaySubscriptionCreateRequest.setPeriodRule(periodRule);
 
         PaymentMethod paymentMethod = PaymentMethod.builder().paymentMethodType("GCASH").build();

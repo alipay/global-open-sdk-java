@@ -19,7 +19,7 @@ public class RiskThreeDSResult {
     /**
      * Indicates the type of user interactions during 3DS 2.0 authentication
      */
-    private String threeDSInteractionMode;
+    private ThreeDSInteractionMode threeDSInteractionMode;
 
     /**
      * Electronic Commerce Indicator (ECI) that is returned by the card scheme

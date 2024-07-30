@@ -18,7 +18,7 @@ public class Goods {
     private String goodsQuantity;
     private String goodsSkuName;
     private String goodsUrl;
-    private String deliveryMethodType;
+    private DeliveryMethodType deliveryMethodType;
 
     private String goodsImageUrl;
     private String priceId;

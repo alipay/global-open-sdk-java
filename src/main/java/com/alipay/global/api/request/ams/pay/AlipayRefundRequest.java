@@ -1,12 +1,14 @@
 package com.alipay.global.api.request.ams.pay;
 
 import com.alipay.global.api.model.ams.Amount;
+import com.alipay.global.api.model.ams.RefundDetail;
 import com.alipay.global.api.model.constants.AntomPathConstants;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.pay.AlipayRefundResponse;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -45,6 +47,11 @@ public class AlipayRefundRequest extends AlipayRequest<AlipayRefundResponse> {
     private Boolean isAsyncRefund;
 
     private String  extendInfo;
+
+    private List<RefundDetail> refundDetails;
+
+    private String  refundSourceAccountNo;
+
 
     public AlipayRefundRequest() {
         this.setPath(AntomPathConstants.REFUND_PATH);

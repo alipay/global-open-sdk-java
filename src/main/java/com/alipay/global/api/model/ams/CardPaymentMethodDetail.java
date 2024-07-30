@@ -42,4 +42,8 @@ public class CardPaymentMethodDetail {
 
     private String lastFour;
 
+    private UserName cardholderName;
+
+    private String cvv;
+
 }

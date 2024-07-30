@@ -4,18 +4,15 @@
  */
 package com.alipay.global.api.example;
 
-import java.util.Collections;
-import java.util.Date;
-
 import com.alipay.global.api.AlipayClient;
 import com.alipay.global.api.DefaultAlipayClient;
 import com.alipay.global.api.exception.AlipayApiException;
 import com.alipay.global.api.model.ams.*;
 import com.alipay.global.api.model.constants.EndPointConstants;
-import com.alipay.global.api.model.risk.*;
 import com.alipay.global.api.model.risk.Merchant;
 import com.alipay.global.api.model.risk.Order;
 import com.alipay.global.api.model.risk.PaymentMethod;
+import com.alipay.global.api.model.risk.*;
 import com.alipay.global.api.request.ams.risk.RiskDecideRequest;
 import com.alipay.global.api.request.ams.risk.RiskReportRequest;
 import com.alipay.global.api.request.ams.risk.SendPaymentResultRequest;
@@ -24,6 +21,9 @@ import com.alipay.global.api.response.ams.risk.RiskDecideResponse;
 import com.alipay.global.api.response.ams.risk.RiskReportResponse;
 import com.alipay.global.api.response.ams.risk.SendPaymentResultResponse;
 import com.alipay.global.api.response.ams.risk.SendRefundResultResponse;
+
+import java.util.Collections;
+import java.util.Date;
 
 public class RiskDecideDemoCode {
     /**
@@ -85,7 +85,7 @@ public class RiskDecideDemoCode {
         riskThreeDSResult.setEci("00");
         riskThreeDSResult.setThreeDSVersion("2.0");
         riskThreeDSResult.setCavv("0");
-        riskThreeDSResult.setThreeDSInteractionMode("CHALLENGED");
+        riskThreeDSResult.setThreeDSInteractionMode(ThreeDSInteractionMode.CHALLENGE);
         cardVerificationResult.setThreeDSResult(riskThreeDSResult);
         paymentMethodMetaData.setCardVerificationResult(cardVerificationResult);
 
@@ -102,7 +102,7 @@ public class RiskDecideDemoCode {
         SendPaymentResultRequest request = new SendPaymentResultRequest();
         request.setReferenceTransactionId("test_20231012091493242");
 
-        request.setPaymentStatus("SUCCESS");
+        request.setPaymentStatus(PaymentStatus.SUCCESS);
         request.setReferenceTransactionId("test_20231012091493242");
         CardVerificationResult cardVerificationResult = new CardVerificationResult();
         cardVerificationResult.setAuthenticationType("3D");
@@ -111,7 +111,7 @@ public class RiskDecideDemoCode {
         threeDSResult.setEci("05");
         threeDSResult.setThreeDSVersion("2.0");
         threeDSResult.setCavv("0");
-        threeDSResult.setThreeDSInteractionMode("CHALLENGED");
+        threeDSResult.setThreeDSInteractionMode(ThreeDSInteractionMode.CHALLENGE);
         cardVerificationResult.setThreeDSResult(threeDSResult);
         request.setCardVerificationResult(cardVerificationResult);
         SendPaymentResultResponse response = null;
@@ -140,7 +140,7 @@ public class RiskDecideDemoCode {
         RiskReportRequest request = new RiskReportRequest();
         request.setReferenceTransactionId("test_20231012091493242");
         request.setReportReason("test");
-        request.setRiskType("FRAUD");
+        request.setRiskType(RiskType.FRAUD);
         request.setRiskOccurrenceTime(new Date());
 
         RiskReportResponse response = null;
@@ -168,7 +168,7 @@ public class RiskDecideDemoCode {
         goods.setGoodsName(
             "[3 Boxes] Starbucks Cappuccino Milk Coffee Pods / Coffee Capsules by Nescafe Dolce Gusto");
         goods.setGoodsCategory("Digital  Goods/Digital  Vouchers/Food  and Beverages");
-        goods.setDeliveryMethodType("DIGITAL");
+        goods.setDeliveryMethodType(DeliveryMethodType.DIGITAL);
         goods.setGoodsQuantity("1");
         Amount goodsAmount = new Amount();
         goodsAmount.setValue("30000");

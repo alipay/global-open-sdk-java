@@ -1,6 +1,7 @@
 package com.alipay.global.api.model.risk;
 
 import com.alipay.global.api.model.ams.Address;
+import com.alipay.global.api.model.ams.ClassType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,5 +20,5 @@ public class Leg {
     private Address arrivalAddress;
     private String carrierName;
     private String carrierNo;
-    private String classType;
+    private ClassType classType;
 }

@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PromotionResult {
 
-    private String promotionType;
+    private PromotionType promotionType;
     private Discount discount;
 }

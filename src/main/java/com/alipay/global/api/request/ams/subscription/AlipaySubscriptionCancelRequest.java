@@ -1,9 +1,9 @@
 package com.alipay.global.api.request.ams.subscription;
 
+import com.alipay.global.api.model.ams.CancellationType;
 import com.alipay.global.api.model.constants.AntomPathConstants;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.subscription.AlipaySubscriptionCancelResponse;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -28,7 +28,7 @@ public class AlipaySubscriptionCancelRequest extends
      * CANCEL: indicates canceling the subscription. The subscription service is not provided to the user after the current subscription period ends.
      * TERMINATE: indicates terminating the subscription. The subscription service is ceased immediately.
      */
-    private String cancellationType;
+    private CancellationType cancellationType;
 
     public AlipaySubscriptionCancelRequest() {
         this.setPath(AntomPathConstants.SUBSCRIPTION_CANCEL_PATH);

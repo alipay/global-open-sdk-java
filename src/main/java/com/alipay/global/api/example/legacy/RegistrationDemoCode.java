@@ -1,9 +1,5 @@
 package com.alipay.global.api.example.legacy;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import com.alipay.global.api.AlipayClient;
 import com.alipay.global.api.DefaultAlipayClient;
 import com.alipay.global.api.example.model.Callback;
@@ -20,6 +16,10 @@ import com.alipay.global.api.request.ams.merchant.AlipayMerchantRegistrationStat
 import com.alipay.global.api.response.ams.merchant.AlipayMerchantRegistrationInfoQueryResponse;
 import com.alipay.global.api.response.ams.merchant.AlipayMerchantRegistrationResponse;
 import com.alipay.global.api.response.ams.merchant.AlipayMerchantRegistrationStatusQueryResponse;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class RegistrationDemoCode {
 
@@ -107,7 +107,7 @@ public class RegistrationDemoCode {
         List<Attachment> attachments = new ArrayList<Attachment>();
         Attachment attachment = new Attachment();
         attachment.setAttachmentName("attachmentTestName");
-        attachment.setAttachmentType("ARTICLES_OF_ASSOCIATION");
+        attachment.setAttachmentType(AttachmentType.ARTICLES_OF_ASSOCIATION);
         attachment.setFile("testFile");
         attachments.add(attachment);
         detail.setAttachments(attachments);

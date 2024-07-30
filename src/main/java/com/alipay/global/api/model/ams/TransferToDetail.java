@@ -13,6 +13,10 @@ public class TransferToDetail {
 
     private PaymentMethod transferToMethod;
     private String transferToCurrency;
+    /**
+     * Defines the purpose of the payout.
+     * The value of this parameter is fixed to GSD, which means goods bought or sold.
+     */
     private String purposeCode;
     private String transferNotifyUrl;
     private String transferRemark;

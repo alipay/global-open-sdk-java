@@ -6,8 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @Builder
 @NoArgsConstructor
@@ -15,6 +13,6 @@ import java.util.List;
 public class SettlementInfo {
 
     private String                         settlementCurrency;
-    private List<SettlementBankAccount>    settlementBankAccount;
+    private SettlementBankAccount          settlementBankAccount;
 
 }

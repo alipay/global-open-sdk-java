@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -12,10 +14,10 @@ import lombok.NoArgsConstructor;
 public class MerchantInfo {
     private String referenceMerchantId;
     private String loginId;
-    private String legalEntityType;
+    private LegalEntityType legalEntityType;
     private Company company;
     private BusinessInfo businessInfo;
-    private EntityAssociations entityAssociations;
+    private List<EntityAssociations> entityAssociations;
 
 
 }

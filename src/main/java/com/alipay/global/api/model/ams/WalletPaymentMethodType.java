@@ -66,6 +66,12 @@ public enum WalletPaymentMethodType {
 
     ZALOPAY,
 
-    CONNECT_WALLET;
+    CONNECT_WALLET,
+
+    SETTLEMENT_CARD,
+
+    BALANCE_ACCOUNT,
+
+    ;
 
 }

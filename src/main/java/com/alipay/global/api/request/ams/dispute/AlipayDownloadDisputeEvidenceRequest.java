@@ -1,6 +1,7 @@
 package com.alipay.global.api.request.ams.dispute;
 
 
+import com.alipay.global.api.model.ams.DisputeEvidenceType;
 import com.alipay.global.api.model.constants.AntomPathConstants;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.dispute.AlipayDownloadDisputeEvidenceResponse;
@@ -12,8 +13,8 @@ import lombok.EqualsAndHashCode;
 @Data
 public class AlipayDownloadDisputeEvidenceRequest  extends AlipayRequest<AlipayDownloadDisputeEvidenceResponse> {
 
-    private String      disputeId;
-    private String      disputeEvidenceType;
+    private String                  disputeId;
+    private DisputeEvidenceType     disputeEvidenceType;
 
 
     public AlipayDownloadDisputeEvidenceRequest() {

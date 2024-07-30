@@ -19,7 +19,7 @@ public class AlipayMarketplaceRegisterRequest extends AlipayRequest<AlipayMarket
 
     private String                  registrationRequestId;
     private List<SettlementInfo>    settlementInfos;
-    private List<MerchantInfo>      merchantInfo;
+    private MerchantInfo            merchantInfo;
     private List<PaymentMethod>     paymentMethods;
 
 

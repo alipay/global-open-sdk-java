@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class RedirectActionForm {
 
-    private String method;
+    private MethodType method;
     private String parameters;
     private String redirectUrl;
 

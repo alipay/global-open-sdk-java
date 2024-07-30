@@ -1,6 +1,7 @@
 package com.alipay.global.api.response.ams.dispute;
 
 
+import com.alipay.global.api.model.ams.DisputeEvidenceFormatType;
 import com.alipay.global.api.response.AlipayResponse;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -12,7 +13,7 @@ public class AlipayDownloadDisputeEvidenceResponse extends AlipayResponse {
 
     private String     disputeEvidence;
 
-    private String     disputeEvidenceFormat;
+    private DisputeEvidenceFormatType disputeEvidenceFormat;
 
 
 }
