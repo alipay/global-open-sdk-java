@@ -1,11 +1,10 @@
 package com.alipay.global.api.model.ams;
 
 public enum AttachmentType {
+
     SIGNATURE_AUTHORIZATION_LETTER,
     ARTICLES_OF_ASSOCIATION,
     LOGO,
-
-
     AUTHORIZER_SIGNATURE_CONFIRMATION_LETTER,
     ASSOCIATION_ARTICLE,
     FINANCIAL_REPORT,
@@ -19,9 +18,6 @@ public enum AttachmentType {
     DRIVING_LICENSE,
     CPF,
     CNPJ,
-
-
-
     ;
 
 }

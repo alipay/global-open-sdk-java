@@ -5,6 +5,7 @@
 package com.alipay.global.api.response.ams.risk;
 
 import com.alipay.global.api.model.ams.DecisionType;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -32,6 +33,6 @@ public class RiskDecideResponse extends RiskResponse {
      * * 3D：本次交易建议使用 3D 认证。
      * * NON_3D：本次交易建议使用非 3D 认证。
      */
-    private String authenticationDecision;
+    private String       authenticationDecision;
 
 }
