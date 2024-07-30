@@ -7,17 +7,7 @@ package com.alipay.global.api.example;
 import com.alipay.global.api.AlipayClient;
 import com.alipay.global.api.DefaultAlipayClient;
 import com.alipay.global.api.exception.AlipayApiException;
-import com.alipay.global.api.model.ams.Address;
-import com.alipay.global.api.model.ams.Amount;
-import com.alipay.global.api.model.ams.Buyer;
-import com.alipay.global.api.model.ams.CardVerificationResult;
-import com.alipay.global.api.model.ams.Env;
-import com.alipay.global.api.model.ams.Goods;
-import com.alipay.global.api.model.ams.OsType;
-import com.alipay.global.api.model.ams.RiskThreeDSResult;
-import com.alipay.global.api.model.ams.Shipping;
-import com.alipay.global.api.model.ams.TerminalType;
-import com.alipay.global.api.model.ams.UserName;
+import com.alipay.global.api.model.ams.*;
 import com.alipay.global.api.model.risk.AuthorizationPhase;
 import com.alipay.global.api.model.risk.Order;
 import com.alipay.global.api.model.risk.PaymentMethodMetaData;
@@ -166,7 +156,7 @@ public class RiskDecideTeeDemoCode {
         RiskReportRequest request = new RiskReportRequest();
         request.setReferenceTransactionId("test_20231012091493242");
         request.setReportReason("test");
-        request.setRiskType("FRAUD");
+        request.setRiskType(RiskType.FRAUD);
         request.setRiskOccurrenceTime(new Date());
 
         RiskReportResponse response = null;

@@ -14,6 +14,7 @@ public class CardPaymentMethodDetail {
     private String cardToken;
     private String cardNo;
     private CardBrand brand;
+    private CardBrand selectedCardBrand;
     private String cardIssuer;
     private String countryIssue;
     private UserName instUserName;
@@ -45,5 +46,15 @@ public class CardPaymentMethodDetail {
     private UserName cardholderName;
 
     private String cvv;
+
+    private String dateOfBirth;
+
+    private String businessNo;
+
+    private String cardPasswordDigest;
+
+    private String cpf;
+
+    private String payerEmail;
 
 }

@@ -1,14 +1,14 @@
 package com.alipay.global.api.request.ams.pay;
 
+import java.util.List;
+
 import com.alipay.global.api.model.ams.*;
-import com.alipay.global.api.model.ams.ProductCodeType;
 import com.alipay.global.api.model.constants.AntomPathConstants;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.pay.AlipayPayConsultResponse;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
-import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -23,7 +23,7 @@ public class AlipayPayConsultRequest extends AlipayRequest<AlipayPayConsultRespo
      * value: MerchantRegionType.*.name
      */
     private String             merchantRegion;
-    private List<String> allowedPaymentMethodRegions;
+    private List<String>       allowedPaymentMethodRegions;
     private List<String>       allowedPaymentMethods;
     private List<String>       blockedPaymentMethods;
     private String             region;
