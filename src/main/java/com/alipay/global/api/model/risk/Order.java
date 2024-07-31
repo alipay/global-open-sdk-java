@@ -12,6 +12,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -51,5 +52,11 @@ public class Order {
      * 订单的简要描述
      */
     private String orderDescription;
+
+    /**
+     * The time when the order is created.
+     * 订单创建时间
+     */
+    private Date orderCreatedTime;
 
 }
