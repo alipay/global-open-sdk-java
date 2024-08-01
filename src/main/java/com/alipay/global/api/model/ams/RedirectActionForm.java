@@ -15,4 +15,6 @@ public class RedirectActionForm {
     private String parameters;
     private String redirectUrl;
 
+    private String actionFormType;
+
 }

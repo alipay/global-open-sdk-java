@@ -52,7 +52,7 @@ public class SubscriptionDemoCode {
         alipaySubscriptionCreateRequest.setSubscriptionEndTime("2024-06-27T12:01:01+08:00");
         alipaySubscriptionCreateRequest.setSubscriptionExpiryTime("2024-03-20T18:20:06+08:00");
 
-        PeriodRule periodRule = PeriodRule.builder().periodType(PeriodType.DAY).periodCount(1).build();
+        PeriodRule periodRule = PeriodRule.builder().periodType(PeriodType.MONTH).periodCount(1).build();
         alipaySubscriptionCreateRequest.setPeriodRule(periodRule);
 
         PaymentMethod paymentMethod = PaymentMethod.builder().paymentMethodType("GCASH").build();

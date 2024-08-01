@@ -1,4 +1,4 @@
-package com.alipay.global.api.model.risk;
+package com.alipay.global.api.model.ams;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

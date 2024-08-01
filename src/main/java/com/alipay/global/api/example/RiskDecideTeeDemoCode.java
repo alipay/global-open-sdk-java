@@ -79,7 +79,7 @@ public class RiskDecideTeeDemoCode {
         riskThreeDSResult.setEci("00");
         riskThreeDSResult.setThreeDSVersion("2.0");
         riskThreeDSResult.setCavv("0");
-        riskThreeDSResult.setThreeDSInteractionMode("CHALLENGED");
+        riskThreeDSResult.setThreeDSInteractionMode(ThreeDSInteractionMode.CHALLENGE);
         cardVerificationResult.setThreeDSResult(riskThreeDSResult);
         paymentMethodMetaData.setCardVerificationResult(cardVerificationResult);
         RiskDecideResponse response = null;
@@ -118,7 +118,7 @@ public class RiskDecideTeeDemoCode {
         SendPaymentResultRequest request = new SendPaymentResultRequest();
         request.setReferenceTransactionId("test_20231012091493242");
 
-        request.setPaymentStatus("SUCCESS");
+        request.setPaymentStatus(PaymentStatus.SUCCESS);
         request.setReferenceTransactionId("test_20231012091493242");
         CardVerificationResult cardVerificationResult = new CardVerificationResult();
         cardVerificationResult.setAuthenticationType("3D");
@@ -127,7 +127,7 @@ public class RiskDecideTeeDemoCode {
         threeDSResult.setEci("05");
         threeDSResult.setThreeDSVersion("2.0");
         threeDSResult.setCavv("0");
-        threeDSResult.setThreeDSInteractionMode("CHALLENGED");
+        threeDSResult.setThreeDSInteractionMode(ThreeDSInteractionMode.CHALLENGE);
         cardVerificationResult.setThreeDSResult(threeDSResult);
         request.setCardVerificationResult(cardVerificationResult);
         SendPaymentResultResponse response = null;
@@ -184,7 +184,7 @@ public class RiskDecideTeeDemoCode {
         goods.setReferenceGoodsId("383382011_SGAMZ-904520356");
         goods.setGoodsName("[3 Boxes] Starbucks Cappuccino Milk Coffee Pods / Coffee Capsules by Nescafe Dolce Gusto");
         goods.setGoodsCategory("Digital  Goods/Digital  Vouchers/Food  and Beverages");
-        goods.setDeliveryMethodType("DIGITAL");
+        goods.setDeliveryMethodType(DeliveryMethodType.DIGITAL);
         goods.setGoodsQuantity("1");
         Amount goodsAmount = new Amount();
         goodsAmount.setValue("30000");

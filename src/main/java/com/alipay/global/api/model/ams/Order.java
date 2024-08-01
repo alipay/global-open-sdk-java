@@ -1,8 +1,6 @@
 package com.alipay.global.api.model.ams;
 
-import com.alipay.global.api.model.risk.Gaming;
-import com.alipay.global.api.model.risk.Lodging;
-import com.alipay.global.api.model.risk.Transit;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,7 +22,7 @@ public class Order {
     private Shipping shipping;
     private Buyer buyer;
     private Env env;
-    private String extendInfo;
+    private  extendInfo;
     private Transit transit;
     private Lodging lodging;
     private Gaming gaming;

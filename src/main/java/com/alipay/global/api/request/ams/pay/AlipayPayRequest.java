@@ -95,7 +95,7 @@ public class AlipayPayRequest extends AlipayRequest<AlipayPayResponse> {
 
     private PaymentVerificationData paymentVerificationData;
 
-    private ExtendInfo              extendInfo;
+    private String                  extendInfo;
 
     /**
      * The unique ID to identify a merchant account.

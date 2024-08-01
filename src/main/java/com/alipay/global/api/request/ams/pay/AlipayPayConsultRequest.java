@@ -16,12 +16,6 @@ public class AlipayPayConsultRequest extends AlipayRequest<AlipayPayConsultRespo
 
     private ProductCodeType    productCode;
     private Amount             paymentAmount;
-    /**
-     * The country or region where the merchant operates the business. The parameter is a 2-letter country or region code that follows ISO 3166 Country Codes standard.
-     *
-     * Some possible values are US, SG, HK, PK, JP, CN, BR, AU, and MY.
-     * value: MerchantRegionType.*.name
-     */
     private String             merchantRegion;
     private List<String>       allowedPaymentMethodRegions;
     private List<String>       allowedPaymentMethods;

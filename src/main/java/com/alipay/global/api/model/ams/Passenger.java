@@ -9,10 +9,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class RefundDetail {
-
-    private Amount refundAmount;
-    private RefundFromType refundFrom;
-
-
+public class Passenger {
+    private UserName passengerName;
+    private String passengerEmail;
+    private String passengerPhoneNo;
 }

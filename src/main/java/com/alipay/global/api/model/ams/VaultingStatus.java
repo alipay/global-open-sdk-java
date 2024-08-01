@@ -4,5 +4,5 @@ public enum VaultingStatus {
     SUCCESS,
     FAIL,
     PROCESSING,
-    UNKNOWN
+    ;
 }

@@ -4,9 +4,7 @@
  */
 package com.alipay.global.api.model.risk;
 
-import com.alipay.global.api.model.ams.Amount;
-import com.alipay.global.api.model.ams.Goods;
-import com.alipay.global.api.model.ams.Shipping;
+import com.alipay.global.api.model.ams.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -42,4 +42,6 @@ public class AlipayPayQueryResponse extends AlipayResponse {
     private String                merchantAccountId;
 
     private List<PromotionResult> promotionResult;
+
+    private String                earliestSettlementTime;
 }
