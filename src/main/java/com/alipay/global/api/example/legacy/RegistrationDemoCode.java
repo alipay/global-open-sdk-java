@@ -107,7 +107,7 @@ public class RegistrationDemoCode {
         List<Attachment> attachments = new ArrayList<Attachment>();
         Attachment attachment = new Attachment();
         attachment.setAttachmentName("attachmentTestName");
-        attachment.setAttachmentType(AttachmentType.ARTICLES_OF_ASSOCIATION);
+        attachment.setAttachmentType("ARTICLES_OF_ASSOCIATION");
         attachment.setFile("testFile");
         attachments.add(attachment);
         detail.setAttachments(attachments);

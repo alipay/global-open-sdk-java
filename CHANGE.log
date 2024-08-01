@@ -103,3 +103,6 @@ add Checkout Payment Page support
 
 30、Version:2.0.29
 adding path to request, using lombok for ams api, update sample code
+
+31、Version:2.0.32
+align antom doc and library

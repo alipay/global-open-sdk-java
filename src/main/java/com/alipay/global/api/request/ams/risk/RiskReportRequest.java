@@ -6,7 +6,6 @@ package com.alipay.global.api.request.ams.risk;
 
 import java.util.Date;
 
-import com.alipay.global.api.model.ams.RiskType;
 import com.alipay.global.api.model.constants.AntomPathConstants;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.risk.RiskReportResponse;
@@ -25,13 +24,13 @@ public class RiskReportRequest extends AlipayRequest<RiskReportResponse> {
      * A unique ID assigned to a merchant who provides a service or product directly to a customer and is used to identify the transaction.
      * 直接向买家提供服务或商品的商户分配的唯一ID，用于识别交易。
      */
-    private String   referenceTransactionId;
+    private String referenceTransactionId;
     /**
      * The reason for the report.Providing this information can help improve the accuracy of fraud detection, and increase payment success
      * rates.
      * 上报的原因,提供这些信息有助于提升欺诈检测的准确性，提高支付成功率。
      */
-    private String   reportReason;
+    private String reportReason;
     /**
      * The type of risk reported. Valid values are as follows:
      * SUSPICIOUS: indicates that the transaction is considered risky by the merchant, such as the buyer hit the merchant's blacklist.
@@ -55,7 +54,7 @@ public class RiskReportRequest extends AlipayRequest<RiskReportResponse> {
      * 如果 riskType 的值为 CHARGEBACK，该字段的值为支付方式向您发送的通知中包含的拒付发生时间。
      * 如果 riskType 的值为 FRAUD，该字段的值为支付方式向您发送的通知中包含的盗卡发生时间。
      */
-    private Date     riskOccurrenceTime;
+    private Date   riskOccurrenceTime;
 
     public RiskReportRequest() {
         this.setPath(AntomPathConstants.RISK_REPORT_PATH);

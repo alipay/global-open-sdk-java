@@ -4,32 +4,30 @@
  */
 package com.alipay.global.api.example;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
+
 import com.alipay.global.api.AlipayClient;
 import com.alipay.global.api.DefaultAlipayClient;
 import com.alipay.global.api.exception.AlipayApiException;
 import com.alipay.global.api.model.ams.*;
-import com.alipay.global.api.model.risk.AuthorizationPhase;
-import com.alipay.global.api.model.risk.Order;
-import com.alipay.global.api.model.risk.PaymentMethodMetaData;
+import com.alipay.global.api.model.risk.*;
 import com.alipay.global.api.model.risk.Merchant;
-import com.alipay.global.api.model.risk.PaymentDetail;
+import com.alipay.global.api.model.risk.Order;
 import com.alipay.global.api.model.risk.PaymentMethod;
 import com.alipay.global.api.request.ams.risk.RiskDecideRequest;
 import com.alipay.global.api.request.ams.risk.RiskReportRequest;
 import com.alipay.global.api.request.ams.risk.SendPaymentResultRequest;
 import com.alipay.global.api.request.ams.risk.SendRefundResultRequest;
+import com.alipay.global.api.request.ams.risk.tee.encryptstrategy.RiskDecideEncryptStrategy;
+import com.alipay.global.api.request.ams.risk.tee.enums.EncryptKeyEnum;
 import com.alipay.global.api.request.ams.risk.tee.exception.CryptoException;
 import com.alipay.global.api.response.ams.risk.RiskDecideResponse;
 import com.alipay.global.api.response.ams.risk.RiskReportResponse;
 import com.alipay.global.api.response.ams.risk.SendPaymentResultResponse;
 import com.alipay.global.api.response.ams.risk.SendRefundResultResponse;
-import com.alipay.global.api.request.ams.risk.tee.encryptstrategy.RiskDecideEncryptStrategy;
-import com.alipay.global.api.request.ams.risk.tee.enums.EncryptKeyEnum;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
 
 
 public class RiskDecideTeeDemoCode {
@@ -79,7 +77,7 @@ public class RiskDecideTeeDemoCode {
         riskThreeDSResult.setEci("00");
         riskThreeDSResult.setThreeDSVersion("2.0");
         riskThreeDSResult.setCavv("0");
-        riskThreeDSResult.setThreeDSInteractionMode(ThreeDSInteractionMode.CHALLENGE);
+        riskThreeDSResult.setThreeDSInteractionMode("CHALLENGE");
         cardVerificationResult.setThreeDSResult(riskThreeDSResult);
         paymentMethodMetaData.setCardVerificationResult(cardVerificationResult);
         RiskDecideResponse response = null;
@@ -118,7 +116,7 @@ public class RiskDecideTeeDemoCode {
         SendPaymentResultRequest request = new SendPaymentResultRequest();
         request.setReferenceTransactionId("test_20231012091493242");
 
-        request.setPaymentStatus(PaymentStatus.SUCCESS);
+        request.setPaymentStatus("SUCCESS");
         request.setReferenceTransactionId("test_20231012091493242");
         CardVerificationResult cardVerificationResult = new CardVerificationResult();
         cardVerificationResult.setAuthenticationType("3D");
@@ -127,7 +125,7 @@ public class RiskDecideTeeDemoCode {
         threeDSResult.setEci("05");
         threeDSResult.setThreeDSVersion("2.0");
         threeDSResult.setCavv("0");
-        threeDSResult.setThreeDSInteractionMode(ThreeDSInteractionMode.CHALLENGE);
+        threeDSResult.setThreeDSInteractionMode("CHALLENGE");
         cardVerificationResult.setThreeDSResult(threeDSResult);
         request.setCardVerificationResult(cardVerificationResult);
         SendPaymentResultResponse response = null;
@@ -156,7 +154,7 @@ public class RiskDecideTeeDemoCode {
         RiskReportRequest request = new RiskReportRequest();
         request.setReferenceTransactionId("test_20231012091493242");
         request.setReportReason("test");
-        request.setRiskType(RiskType.FRAUD);
+        request.setRiskType("FRAUD");
         request.setRiskOccurrenceTime(new Date());
 
         RiskReportResponse response = null;
@@ -184,8 +182,8 @@ public class RiskDecideTeeDemoCode {
         goods.setReferenceGoodsId("383382011_SGAMZ-904520356");
         goods.setGoodsName("[3 Boxes] Starbucks Cappuccino Milk Coffee Pods / Coffee Capsules by Nescafe Dolce Gusto");
         goods.setGoodsCategory("Digital  Goods/Digital  Vouchers/Food  and Beverages");
-        goods.setDeliveryMethodType(DeliveryMethodType.DIGITAL);
-        goods.setGoodsQuantity("1");
+        goods.setDeliveryMethodType("DIGITAL");
+        goods.setGoodsQuantity(1);
         Amount goodsAmount = new Amount();
         goodsAmount.setValue("30000");
         goodsAmount.setCurrency("BRL");
