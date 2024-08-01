@@ -10,8 +10,8 @@ public enum CompanyType {
     LTDA,
     SA,
     EIRELI,
-    MEI,
     BOFC,
+    MEI,
     EI,
 
 }

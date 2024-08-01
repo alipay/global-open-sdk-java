@@ -1,13 +1,13 @@
-package com.alipay.global.api.response.ams.marketPlace;
-
+package com.alipay.global.api.response.ams.marketplace;
 
 import com.alipay.global.api.response.AlipayResponse;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class AlipayMarketplaceRegisterResponse extends AlipayResponse {
+public class AlipayRegisterResponse extends AlipayResponse {
 
     /**
      * The registration status of the merchant. The value of this parameter is fixed to PROCESSING.

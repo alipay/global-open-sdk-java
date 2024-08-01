@@ -1,7 +1,7 @@
-package com.alipay.global.api.response.ams.marketPlace;
-
+package com.alipay.global.api.response.ams.marketplace;
 
 import com.alipay.global.api.response.AlipayResponse;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

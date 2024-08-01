@@ -10,9 +10,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class EntityAssociations {
-    private AssociationType      associationType;
-    private LegalEntityType      legalEntityType;
-    private Company     company;
-    private Individual  individual;
-    private String      shareholdingRatio;
+    private AssociationType associationType;
+    private LegalEntityType legalEntityType;
+    private Company         company;
+    private Individual      individual;
+    private String          shareholdingRatio;
 }

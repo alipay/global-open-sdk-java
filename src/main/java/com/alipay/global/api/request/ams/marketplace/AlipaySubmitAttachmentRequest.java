@@ -1,9 +1,10 @@
-package com.alipay.global.api.request.ams.marketPlace;
+package com.alipay.global.api.request.ams.marketplace;
 
 import com.alipay.global.api.model.ams.AttachmentType;
 import com.alipay.global.api.model.constants.AntomPathConstants;
 import com.alipay.global.api.request.AlipayRequest;
-import com.alipay.global.api.response.ams.marketPlace.AlipaySubmitAttachmentResponse;
+import com.alipay.global.api.response.ams.marketplace.AlipaySubmitAttachmentResponse;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -11,9 +12,7 @@ import lombok.EqualsAndHashCode;
 @Data
 public class AlipaySubmitAttachmentRequest extends AlipayRequest<AlipaySubmitAttachmentResponse> {
 
-
-    private String        submitAttachmentRequestId;
-
+    private String         submitAttachmentRequestId;
 
     /**
      * The type of the attachment that you submit. Valid values are:
@@ -35,11 +34,9 @@ public class AlipaySubmitAttachmentRequest extends AlipayRequest<AlipaySubmitAtt
     private AttachmentType attachmentType;
     private String         fileSha256;
 
-
     public AlipaySubmitAttachmentRequest() {
         this.setPath(AntomPathConstants.MARKETPLACE_SUBMITATTACHMENT_PATH);
     }
-
 
     @Override
     public Class<AlipaySubmitAttachmentResponse> getResponseClass() {
