@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class SupportCardBrand {
 
-    private CardBrandType cardBrand;
+    private String cardBrand;
 
-    private Logo logo;
+    private Logo   logo;
 
 }
