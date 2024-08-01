@@ -24,7 +24,7 @@ public class RiskDecideResponse extends RiskResponse {
      * ACCEPT：表示建议接受该笔支付。
      * REJECT：表示建议拒绝该笔支付。
      */
-    private DecisionType decision;
+    private String decision;
     /**
      * Ant Group's recommended authentication method. Valid values are as follows:
      * 3D: 3D authentication is recommended for this transaction.

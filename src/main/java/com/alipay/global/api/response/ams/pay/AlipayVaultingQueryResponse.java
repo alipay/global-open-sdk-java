@@ -18,7 +18,7 @@ public class AlipayVaultingQueryResponse extends AlipayResponse {
 
     private String              applinkUrl;
 
-    private VaultingStatus      vaultingStatus;
+    private String      vaultingStatus;
 
     private PaymentMethodDetail paymentMethodDetail;
 

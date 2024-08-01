@@ -34,7 +34,7 @@ public class SendPaymentResultRequest extends AlipayRequest<SendPaymentResultRes
      * SUCCESS：表示支付成功。
      * FAIL：表示支付失败。
      */
-    private PaymentStatus          paymentStatus;
+    private String                 paymentStatus;
     /**
      * The reason why the card payment authorization provided by the payment method provider failed.
      * 支付方式提供商提供的卡支付授权失败的原因。

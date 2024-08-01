@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Attachment {
 
-    private AttachmentType attachmentType;
+    private String attachmentType;
     private String         file;
     private String         attachmentName;
     private String         fileKey;

@@ -28,7 +28,7 @@ public class AlipaySubscriptionCancelRequest extends
      * CANCEL: indicates canceling the subscription. The subscription service is not provided to the user after the current subscription period ends.
      * TERMINATE: indicates terminating the subscription. The subscription service is ceased immediately.
      */
-    private CancellationType cancellationType;
+    private String cancellationType;
 
     public AlipaySubscriptionCancelRequest() {
         this.setPath(AntomPathConstants.SUBSCRIPTION_CANCEL_PATH);

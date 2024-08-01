@@ -42,7 +42,7 @@ public class RiskReportRequest extends AlipayRequest<RiskReportResponse> {
      * CHARGEBACK：表示买家发起了拒付。
      * FRAUD：表示发生了卡盗刷行为。
      */
-    private RiskType riskType;
+    private String riskType;
     /**
      * Represents the time when a risk event occurs, defined as follows:
      * If the riskType value is SUSPICIOUS, the value of this field is the time when you identified the risky transaction.

@@ -22,7 +22,7 @@ public class Order {
     private Shipping shipping;
     private Buyer buyer;
     private Env env;
-    private  extendInfo;
+    private String extendInfo;
     private Transit transit;
     private Lodging lodging;
     private Gaming gaming;
