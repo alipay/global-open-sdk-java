@@ -15,7 +15,7 @@ public class Goods {
     private String goodsCategory;
     private String goodsBrand;
     private Amount goodsUnitAmount;
-    private Integer goodsQuantity;
+    private String goodsQuantity;
     private String goodsSkuName;
     private String goodsUrl;
     private String deliveryMethodType;
