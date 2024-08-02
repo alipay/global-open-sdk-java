@@ -126,4 +126,28 @@ public class AntomPathConstants {
      */
     public static final String INQUIRY_DECLARE_PATH = "/ams/api/v1/customs/inquiryDeclarationRequests";
 
+
+    public static final String MARKETPLACE_SUBMITATTACHMENT_PATH = "/ams/api/open/openapiv2_file/v1/business/attachment/submitAttachment";
+
+    public static final String MARKETPLACE_REGISTER_PATH = "/ams/api/v1/merchants/register";
+
+    public static final String MARKETPLACE_SETTLEMENTINFO_UPDATE_PATH = "/ams/api/v1/merchants/settlementInfo/update";
+
+    public static final String MARKETPLACE_INQUIREBALANCE_PATH = "/ams/api/v1/accounts/inquireBalance";
+
+    public static final String MARKETPLACE_SETTLE_PATH = "/ams/api/v1/payments/settle";
+
+    public static final String MARKETPLACE_CREATEPAYOUT_PATH = "/ams/api/v1/funds/createPayout";
+
+    public static final String MARKETPLACE_CREATETRANSFER_PATH = "/ams/api/v1/funds/createTransfer";
+
+
+    public static final String RISK_DECIDE_PATH = "/ams/api/v1/risk/payments/decide";
+
+    public static final String RISK_REPORT_PATH = "/ams/api/v1/risk/payments/reportRisk";
+
+    public static final String RISK_SEND_PAYMENT_RESULT_PATH = "/ams/api/v1/risk/payments/sendPaymentResult";
+
+    public static final String RISK_SEND_REFUND_RESULT_PATH = "/ams/api/v1/risk/payments/sendRefundResult";
+
 }

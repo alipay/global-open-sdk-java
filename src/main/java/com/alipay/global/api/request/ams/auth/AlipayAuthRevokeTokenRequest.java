@@ -3,7 +3,6 @@ package com.alipay.global.api.request.ams.auth;
 import com.alipay.global.api.model.constants.AntomPathConstants;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.auth.AlipayAuthRevokeTokenResponse;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

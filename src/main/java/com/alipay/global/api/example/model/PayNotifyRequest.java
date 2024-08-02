@@ -5,8 +5,8 @@ import com.alipay.global.api.model.Result;
 public class PayNotifyRequest {
 
     private PaymentNotifyType notifyType;
-    private Result            resultInfo;
-    private String            paymentRequestId;
+    private Result resultInfo;
+    private String paymentRequestId;
     // TODO other field
 
     public PaymentNotifyType getNotifyType() {

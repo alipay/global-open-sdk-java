@@ -2,7 +2,6 @@ package com.alipay.global.api.request.ams.auth;
 
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.auth.AlipayAuthQueryTokenResponse;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

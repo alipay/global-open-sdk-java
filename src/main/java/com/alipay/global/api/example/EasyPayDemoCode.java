@@ -1,7 +1,5 @@
 package com.alipay.global.api.example;
 
-import java.util.UUID;
-
 import com.alipay.global.api.AlipayClient;
 import com.alipay.global.api.DefaultAlipayClient;
 import com.alipay.global.api.exception.AlipayApiException;
@@ -14,32 +12,34 @@ import com.alipay.global.api.model.constants.ProductSceneConstants;
 import com.alipay.global.api.request.ams.pay.AlipayPaymentSessionRequest;
 import com.alipay.global.api.response.ams.pay.AlipayPaymentSessionResponse;
 
+import java.util.UUID;
+
 public class EasyPayDemoCode {
 
     /**
      * replace with your client id.
      * find your client id here: <a href="https://dashboard.alipay.com/global-payments/developers/quickStart">quickStart</a>
      */
-    public static final String        CLIENT_ID            = "";
+    public static final String CLIENT_ID = "";
 
     /**
      * replace with your antom public key (used to verify signature).
      * find your antom public key here: <a href="https://dashboard.alipay.com/global-payments/developers/quickStart">quickStart</a>
      */
-    public static final String        ANTOM_PUBLIC_KEY     = "";
+    public static final String ANTOM_PUBLIC_KEY = "";
 
     /**
      * replace with your private key (used to sign).
      * please ensure the secure storage of your private key to prevent leakage
      */
-    public static final String        MERCHANT_PRIVATE_KEY = "";
+    public static final String MERCHANT_PRIVATE_KEY = "";
 
     /**
      * please replace with your endpoint.
      * find your endpoint here: <a href="https://dashboard.alipay.com/global-payments/developers/quickStart">quickStart</a>
      */
-    private final static AlipayClient CLIENT               = new DefaultAlipayClient(
-        EndPointConstants.SG, MERCHANT_PRIVATE_KEY, ANTOM_PUBLIC_KEY, CLIENT_ID);
+    private final static AlipayClient CLIENT = new DefaultAlipayClient(
+            EndPointConstants.SG, MERCHANT_PRIVATE_KEY, ANTOM_PUBLIC_KEY, CLIENT_ID);
 
     public static void main(String[] args) {
         easyPaySession();
@@ -67,7 +67,7 @@ public class EasyPayDemoCode {
 
         // set order info
         Order order = Order.builder().referenceOrderId(orderId)
-            .orderDescription("antom testing order").orderAmount(amount).build();
+                .orderDescription("antom testing order").orderAmount(amount).build();
         alipayPaymentSessionRequest.setOrder(order);
 
         AlipayPaymentSessionResponse alipayPaymentSessionResponse = null;

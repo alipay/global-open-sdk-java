@@ -1,13 +1,12 @@
 package com.alipay.global.api.request.ams.customs;
 
-import java.util.List;
-
 import com.alipay.global.api.model.constants.AntomPathConstants;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.customs.AlipayCustomsQueryResponse;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data

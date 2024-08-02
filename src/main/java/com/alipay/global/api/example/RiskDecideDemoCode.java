@@ -4,18 +4,15 @@
  */
 package com.alipay.global.api.example;
 
-import java.util.Collections;
-import java.util.Date;
-
 import com.alipay.global.api.AlipayClient;
 import com.alipay.global.api.DefaultAlipayClient;
 import com.alipay.global.api.exception.AlipayApiException;
 import com.alipay.global.api.model.ams.*;
 import com.alipay.global.api.model.constants.EndPointConstants;
-import com.alipay.global.api.model.risk.*;
 import com.alipay.global.api.model.risk.Merchant;
 import com.alipay.global.api.model.risk.Order;
 import com.alipay.global.api.model.risk.PaymentMethod;
+import com.alipay.global.api.model.risk.*;
 import com.alipay.global.api.request.ams.risk.RiskDecideRequest;
 import com.alipay.global.api.request.ams.risk.RiskReportRequest;
 import com.alipay.global.api.request.ams.risk.SendPaymentResultRequest;
@@ -25,31 +22,34 @@ import com.alipay.global.api.response.ams.risk.RiskReportResponse;
 import com.alipay.global.api.response.ams.risk.SendPaymentResultResponse;
 import com.alipay.global.api.response.ams.risk.SendRefundResultResponse;
 
+import java.util.Collections;
+import java.util.Date;
+
 public class RiskDecideDemoCode {
     /**
      * replace with your client id.
      * find your client id here: <a href="https://dashboard.alipay.com/global-payments/developers/quickStart">quickStart</a>
      */
-    public static final String        CLIENT_ID            = "";
+    public static final String CLIENT_ID = "";
 
     /**
      * replace with your antom public key (used to verify signature).
      * find your antom public key here: <a href="https://dashboard.alipay.com/global-payments/developers/quickStart">quickStart</a>
      */
-    public static final String        ANTOM_PUBLIC_KEY     = "";
+    public static final String ANTOM_PUBLIC_KEY = "";
 
     /**
      * replace with your private key (used to sign).
      * please ensure the secure storage of your private key to prevent leakage
      */
-    public static final String        MERCHANT_PRIVATE_KEY = "";
+    public static final String MERCHANT_PRIVATE_KEY = "";
 
     /**
      * please replace with your endpoint.
      * find your endpoint here: <a href="https://dashboard.alipay.com/global-payments/developers/quickStart">quickStart</a>
      */
-    private final static AlipayClient CLIENT               = new DefaultAlipayClient(
-        EndPointConstants.SG, MERCHANT_PRIVATE_KEY, ANTOM_PUBLIC_KEY, CLIENT_ID);
+    private final static AlipayClient CLIENT = new DefaultAlipayClient(
+            EndPointConstants.SG, MERCHANT_PRIVATE_KEY, ANTOM_PUBLIC_KEY, CLIENT_ID);
 
     public static void main(String[] args) {
         preAuthDecide();
@@ -77,7 +77,7 @@ public class RiskDecideDemoCode {
         buildRiskDecideRequest(request);
         PaymentDetail paymentDetail = request.getPaymentDetails().get(0);
         PaymentMethodMetaData paymentMethodMetaData = paymentDetail.getPaymentMethod()
-            .getPaymentMethodMetaData();
+                .getPaymentMethodMetaData();
         CardVerificationResult cardVerificationResult = new CardVerificationResult();
         cardVerificationResult.setAuthenticationType("3D");
         cardVerificationResult.setAuthorizationCode("10000");
@@ -85,7 +85,7 @@ public class RiskDecideDemoCode {
         riskThreeDSResult.setEci("00");
         riskThreeDSResult.setThreeDSVersion("2.0");
         riskThreeDSResult.setCavv("0");
-        riskThreeDSResult.setThreeDSInteractionMode("CHALLENGED");
+        riskThreeDSResult.setThreeDSInteractionMode("CHALLENGE");
         cardVerificationResult.setThreeDSResult(riskThreeDSResult);
         paymentMethodMetaData.setCardVerificationResult(cardVerificationResult);
 
@@ -111,7 +111,7 @@ public class RiskDecideDemoCode {
         threeDSResult.setEci("05");
         threeDSResult.setThreeDSVersion("2.0");
         threeDSResult.setCavv("0");
-        threeDSResult.setThreeDSInteractionMode("CHALLENGED");
+        threeDSResult.setThreeDSInteractionMode("CHALLENGE");
         cardVerificationResult.setThreeDSResult(threeDSResult);
         request.setCardVerificationResult(cardVerificationResult);
         SendPaymentResultResponse response = null;
@@ -166,10 +166,10 @@ public class RiskDecideDemoCode {
         Goods goods = new Goods();
         goods.setReferenceGoodsId("383382011_SGAMZ-904520356");
         goods.setGoodsName(
-            "[3 Boxes] Starbucks Cappuccino Milk Coffee Pods / Coffee Capsules by Nescafe Dolce Gusto");
+                "[3 Boxes] Starbucks Cappuccino Milk Coffee Pods / Coffee Capsules by Nescafe Dolce Gusto");
         goods.setGoodsCategory("Digital  Goods/Digital  Vouchers/Food  and Beverages");
         goods.setDeliveryMethodType("DIGITAL");
-        goods.setGoodsQuantity("1");
+        goods.setGoodsQuantity(1);
         Amount goodsAmount = new Amount();
         goodsAmount.setValue("30000");
         goodsAmount.setCurrency("BRL");

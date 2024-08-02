@@ -3,7 +3,7 @@ package com.alipay.global.api.example.model;
 public class RetryResult {
 
     private Boolean isRetry;
-    private Object  obj;
+    private Object obj;
 
     private RetryResult(Boolean isRetry, Object obj) {
         this.isRetry = isRetry;

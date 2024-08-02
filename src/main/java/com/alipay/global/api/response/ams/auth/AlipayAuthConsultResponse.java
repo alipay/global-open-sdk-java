@@ -1,7 +1,7 @@
 package com.alipay.global.api.response.ams.auth;
 
+import com.alipay.global.api.model.ams.AuthCodeForm;
 import com.alipay.global.api.response.AlipayResponse;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -15,5 +15,6 @@ public class AlipayAuthConsultResponse extends AlipayResponse {
     private String schemeUrl;
     private String applinkUrl;
     private String appIdentifier;
+    private AuthCodeForm authCodeForm;
 
 }

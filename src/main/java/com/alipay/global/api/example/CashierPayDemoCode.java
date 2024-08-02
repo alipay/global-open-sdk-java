@@ -1,9 +1,5 @@
 package com.alipay.global.api.example;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
-
 import com.alibaba.fastjson.JSONObject;
 import com.alipay.global.api.AlipayClient;
 import com.alipay.global.api.DefaultAlipayClient;
@@ -19,32 +15,36 @@ import com.alipay.global.api.response.ams.pay.AlipayPayQueryResponse;
 import com.alipay.global.api.response.ams.pay.AlipayPayResponse;
 import com.alipay.global.api.response.ams.pay.AlipayPaymentSessionResponse;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 public class CashierPayDemoCode {
 
     /**
      * replace with your client id.
      * find your client id here: <a href="https://dashboard.alipay.com/global-payments/developers/quickStart">quickStart</a>
      */
-    public static final String        CLIENT_ID            = "";
+    public static final String CLIENT_ID = "";
 
     /**
      * replace with your antom public key (used to verify signature).
      * find your antom public key here: <a href="https://dashboard.alipay.com/global-payments/developers/quickStart">quickStart</a>
      */
-    public static final String        ANTOM_PUBLIC_KEY     = "";
+    public static final String ANTOM_PUBLIC_KEY = "";
 
     /**
      * replace with your private key (used to sign).
      * please ensure the secure storage of your private key to prevent leakage
      */
-    public static final String        MERCHANT_PRIVATE_KEY = "";
+    public static final String MERCHANT_PRIVATE_KEY = "";
 
     /**
      * please replace with your endpoint.
      * find your endpoint here: <a href="https://dashboard.alipay.com/global-payments/developers/quickStart">quickStart</a>
      */
-    private final static AlipayClient CLIENT               = new DefaultAlipayClient(
-        EndPointConstants.SG, MERCHANT_PRIVATE_KEY, ANTOM_PUBLIC_KEY, CLIENT_ID);
+    private final static AlipayClient CLIENT = new DefaultAlipayClient(
+            EndPointConstants.SG, MERCHANT_PRIVATE_KEY, ANTOM_PUBLIC_KEY, CLIENT_ID);
 
     public static void main(String[] args) {
         executeConsult();
@@ -77,7 +77,7 @@ public class CashierPayDemoCode {
     }
 
     /**
-     *  show how to finish a payment by Card paymentMethod 
+     * show how to finish a payment by Card paymentMethod
      */
     public static void executePayWithCard() {
         AlipayPayRequest alipayPayRequest = new AlipayPayRequest();
@@ -106,7 +106,7 @@ public class CashierPayDemoCode {
 
         // set paymentMethod
         PaymentMethod paymentMethod = PaymentMethod.builder().paymentMethodType("CARD")
-            .paymentMethodMetaData(paymentMethodMetaData).build();
+                .paymentMethodMetaData(paymentMethodMetaData).build();
         alipayPayRequest.setPaymentMethod(paymentMethod);
 
         // replace with your orderId
@@ -117,12 +117,12 @@ public class CashierPayDemoCode {
 
         // set order info
         Order order = Order.builder().referenceOrderId(orderId)
-            .orderDescription("antom testing order").orderAmount(amount).buyer(buyer).build();
+                .orderDescription("antom testing order").orderAmount(amount).buyer(buyer).build();
         alipayPayRequest.setOrder(order);
 
         // set env info
         Env env = Env.builder().terminalType(TerminalType.WEB)
-            .clientIp("1.2.3.4").build();
+                .clientIp("1.2.3.4").build();
         alipayPayRequest.setEnv(env);
 
         // set auth capture payment mode
@@ -146,7 +146,7 @@ public class CashierPayDemoCode {
     }
 
     /**
-     *  show how to finish a payment by Blik
+     * show how to finish a payment by Blik
      */
     public static void executePayWithBlik() {
         AlipayPayRequest alipayPayRequest = new AlipayPayRequest();
@@ -172,12 +172,12 @@ public class CashierPayDemoCode {
 
         // set order info
         Order order = Order.builder().referenceOrderId(orderId)
-            .orderDescription("antom testing order").orderAmount(amount).buyer(buyer).build();
+                .orderDescription("antom testing order").orderAmount(amount).buyer(buyer).build();
         alipayPayRequest.setOrder(order);
 
         // set env info
         Env env = Env.builder().terminalType(TerminalType.WEB)
-            .clientIp("1.2.3.4").build();
+                .clientIp("1.2.3.4").build();
         alipayPayRequest.setEnv(env);
 
         // replace with your notify url
@@ -227,7 +227,7 @@ public class CashierPayDemoCode {
 
         // set order info
         Order order = Order.builder().referenceOrderId(orderId)
-            .orderDescription("antom testing order").orderAmount(amount).buyer(buyer).build();
+                .orderDescription("antom testing order").orderAmount(amount).buyer(buyer).build();
         alipayPaymentSessionRequest.setOrder(order);
 
         // replace with your notify url
@@ -247,7 +247,7 @@ public class CashierPayDemoCode {
     }
 
     /**
-     *  show how to inquiry PaymentResult
+     * show how to inquiry PaymentResult
      */
     public static void executeInquiry() {
         AlipayPayQueryRequest alipayPayQueryRequest = new AlipayPayQueryRequest();

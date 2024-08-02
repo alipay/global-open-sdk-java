@@ -29,5 +29,6 @@ public class PaymentOption {
     private List<String> promoNames;
 
     private Installment installment;
+    private List<PromotionInfo> promotionInfos;
 
 }

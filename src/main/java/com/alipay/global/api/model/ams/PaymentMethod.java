@@ -17,5 +17,6 @@ public class PaymentMethod {
     private Map<String, Object> paymentMethodMetaData;
     private String customerId;
     private String extendInfo;
+    private Boolean requireIssuerAuthentication;
 
 }

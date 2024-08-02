@@ -17,8 +17,9 @@ public interface EncryptStrategy {
     /**
      * encrypt method
      * 加密方法
-     * @param data_key symmetric key
-     * @param request plaintext request
+     *
+     * @param data_key       symmetric key
+     * @param request        plaintext request
      * @param encryptKeyList list of keys to encrypt
      */
     void encrypt(byte[] data_key, AlipayRequest<?> request, List<EncryptKeyEnum> encryptKeyList);
@@ -26,8 +27,9 @@ public interface EncryptStrategy {
     /**
      * encrypt method
      * 加密方法
-     * @param dataKeyBase64 symmetric key String encoded by Base64
-     * @param request plaintext request
+     *
+     * @param dataKeyBase64  symmetric key String encoded by Base64
+     * @param request        plaintext request
      * @param encryptKeyList list of keys to encrypt
      */
     void encrypt(String dataKeyBase64, AlipayRequest<?> request, List<EncryptKeyEnum> encryptKeyList);

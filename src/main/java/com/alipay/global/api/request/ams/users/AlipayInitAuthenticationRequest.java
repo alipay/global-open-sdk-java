@@ -5,20 +5,19 @@ import com.alipay.global.api.model.ams.AuthenticationType;
 import com.alipay.global.api.model.ams.UserIdentityType;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.users.AlipayInitAuthenticationResponse;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class AlipayInitAuthenticationRequest extends
-                                             AlipayRequest<AlipayInitAuthenticationResponse> {
+        AlipayRequest<AlipayInitAuthenticationResponse> {
 
-    private AuthenticationType        authenticationType;
-    private String                    authenticationRequestId;
+    private AuthenticationType authenticationType;
+    private String authenticationRequestId;
     private AuthenticationChannelType authenticationChannelType;
-    private UserIdentityType          userIdentityType;
-    private String                    userIdentityValue;
+    private UserIdentityType userIdentityType;
+    private String userIdentityValue;
 
     public AlipayInitAuthenticationRequest() {
         this.setPath("/ams/api/v1/users/initAuthentication");

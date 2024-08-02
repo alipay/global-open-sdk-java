@@ -1,8 +1,5 @@
 package com.alipay.global.api.example.legacy;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.alipay.global.api.AlipayClient;
 import com.alipay.global.api.DefaultAlipayClient;
 import com.alipay.global.api.example.model.Callback;
@@ -17,18 +14,21 @@ import com.alipay.global.api.request.ams.customs.AlipayCustomsQueryRequest;
 import com.alipay.global.api.response.ams.customs.AlipayCustomsDeclareResponse;
 import com.alipay.global.api.response.ams.customs.AlipayCustomsQueryResponse;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CustomsDemoCode {
 
-    private static final Integer      TIMEOUT_RETRY_COUNT       = 3;
-    private static final Integer      QUERY_DECLARE_RETRY_COUNT = 3;
-    private static final Integer      DECLARE_RETRY_COUNT       = 3;
+    private static final Integer TIMEOUT_RETRY_COUNT = 3;
+    private static final Integer QUERY_DECLARE_RETRY_COUNT = 3;
+    private static final Integer DECLARE_RETRY_COUNT = 3;
     //TODO build your clientId
-    private static final String       GATE_WAY_URL              = "";
-    private static final String       MERCHANT_PRIVATE_KEY      = "";
-    private static final String       ANTOM_PUBLIC_KEY          = "";
-    private static final String       CLIENT_ID                 = "";
-    private final static AlipayClient CLIENT                    = new DefaultAlipayClient(
-        EndPointConstants.SG, MERCHANT_PRIVATE_KEY, ANTOM_PUBLIC_KEY, CLIENT_ID);
+    private static final String GATE_WAY_URL = "";
+    private static final String MERCHANT_PRIVATE_KEY = "";
+    private static final String ANTOM_PUBLIC_KEY = "";
+    private static final String CLIENT_ID = "";
+    private final static AlipayClient CLIENT = new DefaultAlipayClient(
+            EndPointConstants.SG, MERCHANT_PRIVATE_KEY, ANTOM_PUBLIC_KEY, CLIENT_ID);
 
     public static void main(String[] args) {
         //step.1 finish a payment. Because transmit information to customs need a paymentId;
@@ -49,7 +49,7 @@ public class CustomsDemoCode {
                 List<String> requestIds = new ArrayList<String>();
                 requestIds.add(declareRequest.getDeclarationRequestId());
                 AlipayCustomsQueryResponse customsQueryResponse = queryCustomsDeclare(
-                    buildAlipayCustomsQueryRequest(requestIds));
+                        buildAlipayCustomsQueryRequest(requestIds));
                 if (customsQueryResponse != null) {
                     Result statusResult = customsQueryResponse.getResult();
                     if (ResultStatusType.F.equals(statusResult.getResultStatus())) {
