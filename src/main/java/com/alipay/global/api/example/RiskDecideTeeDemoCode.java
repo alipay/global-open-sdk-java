@@ -184,7 +184,7 @@ public class RiskDecideTeeDemoCode {
         goods.setGoodsName("[3 Boxes] Starbucks Cappuccino Milk Coffee Pods / Coffee Capsules by Nescafe Dolce Gusto");
         goods.setGoodsCategory("Digital  Goods/Digital  Vouchers/Food  and Beverages");
         goods.setDeliveryMethodType("DIGITAL");
-        goods.setGoodsQuantity(1);
+        goods.setGoodsQuantity("1");
         Amount goodsAmount = new Amount();
         goodsAmount.setValue("30000");
         goodsAmount.setCurrency("BRL");
