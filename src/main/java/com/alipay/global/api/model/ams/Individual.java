@@ -20,6 +20,5 @@ public class Individual {
     private List<Certificate> certificates;
     private String            nationality;
     private List<Contact>     contacts;
-    private String            residentAddress;
 
 }
