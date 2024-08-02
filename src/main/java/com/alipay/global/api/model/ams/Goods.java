@@ -10,17 +10,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Goods {
-    private String  referenceGoodsId;
-    private String  goodsName;
-    private String  goodsCategory;
-    private String  goodsBrand;
-    private Amount  goodsUnitAmount;
+    private String referenceGoodsId;
+    private String goodsName;
+    private String goodsCategory;
+    private String goodsBrand;
+    private Amount goodsUnitAmount;
     private Integer goodsQuantity;
-    private String  goodsSkuName;
-    private String  goodsUrl;
-    private String  deliveryMethodType;
+    private String goodsSkuName;
+    private String goodsUrl;
+    private String deliveryMethodType;
 
-    private String  goodsImageUrl;
-    private String  priceId;
+    private String goodsImageUrl;
+    private String priceId;
 
 }

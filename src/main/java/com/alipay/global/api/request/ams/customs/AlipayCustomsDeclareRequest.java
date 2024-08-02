@@ -7,7 +7,6 @@ import com.alipay.global.api.model.ams.MerchantCustomsInfo;
 import com.alipay.global.api.model.constants.AntomPathConstants;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.customs.AlipayCustomsDeclareResponse;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -15,14 +14,14 @@ import lombok.EqualsAndHashCode;
 @Data
 public class AlipayCustomsDeclareRequest extends AlipayRequest<AlipayCustomsDeclareResponse> {
 
-    private String              declarationRequestId;
-    private String              paymentId;
-    private Amount              declarationAmount;
-    private CustomsInfo         customs;
+    private String declarationRequestId;
+    private String paymentId;
+    private Amount declarationAmount;
+    private CustomsInfo customs;
     private MerchantCustomsInfo merchantCustomsInfo;
-    private Boolean             splitOrder;
-    private String              subOrderId;
-    private Certificate         buyerCertificate;
+    private Boolean splitOrder;
+    private String subOrderId;
+    private Certificate buyerCertificate;
 
     public AlipayCustomsDeclareRequest() {
         this.setPath(AntomPathConstants.DECLARE_PATH);

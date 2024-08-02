@@ -2,7 +2,6 @@ package com.alipay.global.api.request.ams.users;
 
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.users.AlipayUserQueryInfoResponse;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

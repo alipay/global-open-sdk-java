@@ -13,6 +13,6 @@ public class SupportCardBrand {
 
     private String cardBrand;
 
-    private Logo   logo;
+    private Logo logo;
 
 }

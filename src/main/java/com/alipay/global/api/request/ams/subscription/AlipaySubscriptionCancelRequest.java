@@ -1,6 +1,5 @@
 package com.alipay.global.api.request.ams.subscription;
 
-import com.alipay.global.api.model.ams.CancellationType;
 import com.alipay.global.api.model.constants.AntomPathConstants;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.subscription.AlipaySubscriptionCancelResponse;
@@ -10,7 +9,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class AlipaySubscriptionCancelRequest extends
-                                             AlipayRequest<AlipaySubscriptionCancelResponse> {
+        AlipayRequest<AlipaySubscriptionCancelResponse> {
 
     /**
      * The unique ID assigned by Alipay to identify a subscription.

@@ -12,5 +12,5 @@ import lombok.NoArgsConstructor;
 public class TransferFromDetail {
 
     private PaymentMethod transferFromMethod;
-    private Amount        transferFromAmount;
+    private Amount transferFromAmount;
 }

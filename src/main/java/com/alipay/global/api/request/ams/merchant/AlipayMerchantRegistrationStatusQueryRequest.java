@@ -2,14 +2,13 @@ package com.alipay.global.api.request.ams.merchant;
 
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.merchant.AlipayMerchantRegistrationStatusQueryResponse;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class AlipayMerchantRegistrationStatusQueryRequest extends
-                                                          AlipayRequest<AlipayMerchantRegistrationStatusQueryResponse> {
+        AlipayRequest<AlipayMerchantRegistrationStatusQueryResponse> {
 
     private String registrationRequestId;
     private String referenceMerchantId;

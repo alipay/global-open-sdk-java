@@ -13,6 +13,7 @@ import com.alipay.global.api.request.ams.risk.tee.crypto.AESCrypto;
 import com.alipay.global.api.request.ams.risk.tee.enums.EncryptKeyEnum;
 import com.alipay.global.api.request.ams.risk.tee.enums.ErrorCodeEnum;
 import com.alipay.global.api.request.ams.risk.tee.exception.CryptoException;
+
 import javax.xml.bind.DatatypeConverter;
 import java.nio.charset.Charset;
 import java.util.List;
@@ -21,7 +22,7 @@ import java.util.List;
  * request encrypt strategy for risk decide API
  * risk decide API 的请求加密策略
  */
-public class RiskDecideEncryptStrategy implements EncryptStrategy{
+public class RiskDecideEncryptStrategy implements EncryptStrategy {
 
     Charset utf8Charset = Charset.forName("UTF-8");
 
@@ -46,10 +47,11 @@ public class RiskDecideEncryptStrategy implements EncryptStrategy{
     /**
      * do encrypt by encryptKeyList
      * 根据 encryptKeyList 进行加密
-     * @param data_key symmetric key
-     * @param request plaintext RiskDecideRequest
+     *
+     * @param data_key       symmetric key
+     * @param request        plaintext RiskDecideRequest
      * @param encryptKeyList list of encrypt keys
-     * @param crypto AESCrypto instance
+     * @param crypto         AESCrypto instance
      */
     private void doEncrypt(byte[] data_key, RiskDecideRequest request, List<EncryptKeyEnum> encryptKeyList,
                            AESCrypto crypto) {
@@ -144,9 +146,10 @@ public class RiskDecideEncryptStrategy implements EncryptStrategy{
     /**
      * encrypt username
      * 加密 username
+     *
      * @param data_key symmetric key
      * @param userName user name
-     * @param crypto AESCrypto instance
+     * @param crypto   AESCrypto instance
      */
     private void encryptName(byte[] data_key, UserName userName, AESCrypto crypto) {
         if (userName == null) {

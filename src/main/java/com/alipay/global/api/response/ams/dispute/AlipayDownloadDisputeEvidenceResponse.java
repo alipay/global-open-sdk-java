@@ -10,7 +10,7 @@ import lombok.EqualsAndHashCode;
 @Data
 public class AlipayDownloadDisputeEvidenceResponse extends AlipayResponse {
 
-    private String                    disputeEvidence;
+    private String disputeEvidence;
 
     private DisputeEvidenceFormatType disputeEvidenceFormat;
 

@@ -5,12 +5,10 @@
 package com.alipay.global.api.request.ams.risk;
 
 import com.alipay.global.api.model.ams.CardVerificationResult;
-import com.alipay.global.api.model.ams.PaymentStatus;
 import com.alipay.global.api.model.constants.AntomPathConstants;
 import com.alipay.global.api.model.risk.AuthorizationError;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.risk.SendPaymentResultResponse;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -25,7 +23,7 @@ public class SendPaymentResultRequest extends AlipayRequest<SendPaymentResultRes
      * A unique ID assigned to a merchant who provides a service or product directly to a customer and is used to identify the transaction.
      * 直接向买家提供服务或商品的商户分配的唯一ID，用于识别交易。
      */
-    private String                 referenceTransactionId;
+    private String referenceTransactionId;
     /**
      * Payment result status. Valid values are as follows:
      * SUCCESS: indicates that the payment is successful.
@@ -34,12 +32,12 @@ public class SendPaymentResultRequest extends AlipayRequest<SendPaymentResultRes
      * SUCCESS：表示支付成功。
      * FAIL：表示支付失败。
      */
-    private String                 paymentStatus;
+    private String paymentStatus;
     /**
      * The reason why the card payment authorization provided by the payment method provider failed.
      * 支付方式提供商提供的卡支付授权失败的原因。
      */
-    private AuthorizationError     authorizationError;
+    private AuthorizationError authorizationError;
     /**
      * The result of the verification of the card payment method.
      * 卡支付方式的验证结果。
@@ -49,7 +47,7 @@ public class SendPaymentResultRequest extends AlipayRequest<SendPaymentResultRes
      * Payment method providers.
      * 支付方式提供商。
      */
-    private String                 paymentMethodProvider;
+    private String paymentMethodProvider;
 
     public SendPaymentResultRequest() {
         this.setPath(AntomPathConstants.RISK_SEND_PAYMENT_RESULT_PATH);

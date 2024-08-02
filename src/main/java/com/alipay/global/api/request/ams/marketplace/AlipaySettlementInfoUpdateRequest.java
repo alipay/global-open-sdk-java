@@ -4,18 +4,17 @@ import com.alipay.global.api.model.ams.SettlementBankAccount;
 import com.alipay.global.api.model.constants.AntomPathConstants;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.marketplace.AlipaySettlementInfoUpdateResponse;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class AlipaySettlementInfoUpdateRequest extends
-                                               AlipayRequest<AlipaySettlementInfoUpdateResponse> {
+        AlipayRequest<AlipaySettlementInfoUpdateResponse> {
 
-    private String                updateRequestId;
-    private String                referenceMerchantId;
-    private String                settlementCurrency;
+    private String updateRequestId;
+    private String referenceMerchantId;
+    private String settlementCurrency;
     private SettlementBankAccount settlementBankAccount;
 
     public AlipaySettlementInfoUpdateRequest() {

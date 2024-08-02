@@ -4,6 +4,5 @@ public enum RefundFromType {
 
     SELLER,
     MARKETPLACE,
-    UNSETTLED_FUNDS
-    ;
+    UNSETTLED_FUNDS;
 }

@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class SettlementInfo {
 
-    private String                         settlementCurrency;
-    private SettlementBankAccount          settlementBankAccount;
+    private String settlementCurrency;
+    private SettlementBankAccount settlementBankAccount;
 
 }

@@ -4,7 +4,6 @@ import com.alipay.global.api.model.ams.AttachmentType;
 import com.alipay.global.api.model.constants.AntomPathConstants;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.marketplace.AlipaySubmitAttachmentResponse;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -12,11 +11,11 @@ import lombok.EqualsAndHashCode;
 @Data
 public class AlipaySubmitAttachmentRequest extends AlipayRequest<AlipaySubmitAttachmentResponse> {
 
-    private String         submitAttachmentRequestId;
+    private String submitAttachmentRequestId;
 
     /**
      * The type of the attachment that you submit. Valid values are:
-     *
+     * <p>
      * AUTHORIZER_SIGNATURE_CONFIRMATION_LETTER: indicates that the attachment is a document that someone signs on behalf of an individual or a company.
      * ASSOCIATION_ARTICLE: indicates that the attachment contains the rules and regulations of the company.
      * FINANCIAL_REPORT: indicates that the attachment is the company's financial report.
@@ -32,7 +31,7 @@ public class AlipaySubmitAttachmentRequest extends AlipayRequest<AlipaySubmitAtt
      * CNPJ: indicates that the certificate is the Cadastro Nacional da Pessoa Jurídica (CNPJ), which is a federal identification number assigned to companies and businesses operating in Brazil.
      */
     private AttachmentType attachmentType;
-    private String         fileSha256;
+    private String fileSha256;
 
     public AlipaySubmitAttachmentRequest() {
         this.setPath(AntomPathConstants.MARKETPLACE_SUBMITATTACHMENT_PATH);

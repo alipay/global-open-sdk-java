@@ -5,7 +5,6 @@ import com.alipay.global.api.model.ams.GrantType;
 import com.alipay.global.api.model.constants.AntomPathConstants;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.auth.AlipayAuthApplyTokenResponse;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -13,12 +12,12 @@ import lombok.EqualsAndHashCode;
 @Data
 public class AlipayAuthApplyTokenRequest extends AlipayRequest<AlipayAuthApplyTokenResponse> {
 
-    private GrantType         grantType;
+    private GrantType grantType;
     private CustomerBelongsTo customerBelongsTo;
-    private String            authCode;
-    private String            refreshToken;
-    private String            extendInfo;
-    private String            merchantRegion;
+    private String authCode;
+    private String refreshToken;
+    private String extendInfo;
+    private String merchantRegion;
 
     public AlipayAuthApplyTokenRequest() {
         this.setPath(AntomPathConstants.AUTH_APPLY_TOKEN_PATH);

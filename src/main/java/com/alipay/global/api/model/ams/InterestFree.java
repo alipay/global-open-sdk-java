@@ -1,11 +1,11 @@
 package com.alipay.global.api.model.ams;
 
-import java.util.List;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @Builder
@@ -13,16 +13,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class InterestFree {
 
-    private String        provider;
+    private String provider;
 
-    private String        expireTime;
+    private String expireTime;
 
     private List<Integer> installmentFreeNums;
 
-    private Amount        minPaymentAmount;
+    private Amount minPaymentAmount;
 
-    private Amount        maxPaymentAmount;
+    private Amount maxPaymentAmount;
 
-    private Integer       freePercentage;
+    private Integer freePercentage;
 
 }

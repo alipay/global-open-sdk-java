@@ -4,19 +4,14 @@
  */
 package com.alipay.global.api.example;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-
 import com.alipay.global.api.AlipayClient;
 import com.alipay.global.api.DefaultAlipayClient;
 import com.alipay.global.api.exception.AlipayApiException;
 import com.alipay.global.api.model.ams.*;
-import com.alipay.global.api.model.risk.*;
 import com.alipay.global.api.model.risk.Merchant;
 import com.alipay.global.api.model.risk.Order;
 import com.alipay.global.api.model.risk.PaymentMethod;
+import com.alipay.global.api.model.risk.*;
 import com.alipay.global.api.request.ams.risk.RiskDecideRequest;
 import com.alipay.global.api.request.ams.risk.RiskReportRequest;
 import com.alipay.global.api.request.ams.risk.SendPaymentResultRequest;
@@ -29,15 +24,21 @@ import com.alipay.global.api.response.ams.risk.RiskReportResponse;
 import com.alipay.global.api.response.ams.risk.SendPaymentResultResponse;
 import com.alipay.global.api.response.ams.risk.SendRefundResultResponse;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
+
 
 public class RiskDecideTeeDemoCode {
-    private static final String       CLIENT_ID           = "";
-    private static final String       GATE_WAY_URL        = "";
-    private static final String       merchantPrivateKey  = "";
-    private static final String       alipayPublicKey     = "";
+    private static final String CLIENT_ID = "";
+    private static final String GATE_WAY_URL = "";
+    private static final String merchantPrivateKey = "";
+    private static final String alipayPublicKey = "";
     private static final AlipayClient defaultAlipayClient = new DefaultAlipayClient(GATE_WAY_URL, merchantPrivateKey, alipayPublicKey, CLIENT_ID);
 
-    private static final String       DATA_KEY = "";
+    private static final String DATA_KEY = "";
+
     public static void main(String[] args) {
         preAuthDecide();
     }
