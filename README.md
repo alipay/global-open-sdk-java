@@ -12,7 +12,7 @@ https://mvnrepository.com/artifact/com.alipay.global.sdk/global-open-sdk-java
 <dependency>
     <groupId>com.alipay.global.sdk</groupId>
     <artifactId>global-open-sdk-java</artifactId>
-    <version>2.0.34</version>
+    <version>2.0.35</version>
 </dependency>
 ```
    
