@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 public class Installment {
 
-    List<SupportCardBrand> supportCardBrands;
+    private List<SupportCardBrand> supportCardBrands;
 
-    List<Plan> plans;
+    private List<Plan> plans;
 }
