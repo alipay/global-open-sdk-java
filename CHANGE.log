@@ -109,3 +109,6 @@ align antom doc and library
 
 32、Version:2.0.33
 add PspCustomerInfo add  extendInfo
+
+33、Version:2.0.38
+add:ScopeType add TAOBAO_REBIND
