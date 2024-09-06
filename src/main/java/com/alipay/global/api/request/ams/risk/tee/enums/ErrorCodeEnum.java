@@ -12,7 +12,7 @@ public enum ErrorCodeEnum {
     PARAM_ILLEGAL("PARAM_ILLEGAL", "param illegal"),
     ENCRYPT_ERROR("ENCRYPT_ERROR", "encrypt error"),
     UNKNOWN_ENCRYPT_KEY("UNKNOWN_ENCRYPT_KEY", "unknown encrypt key"),
-    MISMATCH_ENCRYPT_STRATEGY("MISMATCH_ENCRYPT_STRATEGY","mismatch encrypt strategy"),
+    MISMATCH_ENCRYPT_UTIL("MISMATCH_ENCRYPT_UTIL","mismatch encrypt util"),
     ;
 
     private final String code;

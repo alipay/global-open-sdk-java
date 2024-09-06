@@ -2,7 +2,7 @@
  * Ant Group
  * Copyright (c) 2004-2024 All Rights Reserved.
  */
-package com.alipay.global.api.request.ams.risk.tee.encryptstrategy;
+package com.alipay.global.api.request.ams.risk.tee.encryptutil;
 
 import com.alipay.global.api.model.ams.UserName;
 import com.alipay.global.api.model.risk.Order;
@@ -21,26 +21,20 @@ import java.util.List;
  * request encrypt strategy for risk decide API
  * risk decide API 的请求加密策略
  */
-public class RiskDecideEncryptStrategy implements EncryptStrategy{
+public class RiskDecideEncryptUtil {
 
-    Charset utf8Charset = Charset.forName("UTF-8");
+    private static Charset utf8Charset = Charset.forName("UTF-8");
 
-    @Override
-    public void encrypt(byte[] data_key, AlipayRequest<?> request, List<EncryptKeyEnum> encryptKeyList) {
+    public static void encrypt(String dataKeyBase64, AlipayRequest<?> request, List<EncryptKeyEnum> encryptKeyList) {
         if (request == null || encryptKeyList == null) {
             return;
         }
         if (!(request instanceof RiskDecideRequest)) {
-            throw new CryptoException(ErrorCodeEnum.MISMATCH_ENCRYPT_STRATEGY, "Request is not instance of RiskDecideRequest");
+            throw new CryptoException(ErrorCodeEnum.MISMATCH_ENCRYPT_UTIL, "Request is not instance of RiskDecideRequest");
         }
         RiskDecideRequest riskDecideRequest = (RiskDecideRequest) request;
         AESCrypto crypto = AESCrypto.getInstance();
-        doEncrypt(data_key, riskDecideRequest, encryptKeyList, crypto);
-    }
-
-    @Override
-    public void encrypt(String dataKeyBase64, AlipayRequest<?> request, List<EncryptKeyEnum> encryptKeyList) {
-        encrypt(DatatypeConverter.parseBase64Binary(dataKeyBase64), request, encryptKeyList);
+        doEncrypt(DatatypeConverter.parseBase64Binary(dataKeyBase64), riskDecideRequest, encryptKeyList, crypto);
     }
 
     /**
@@ -51,7 +45,7 @@ public class RiskDecideEncryptStrategy implements EncryptStrategy{
      * @param encryptKeyList list of encrypt keys
      * @param crypto AESCrypto instance
      */
-    private void doEncrypt(byte[] data_key, RiskDecideRequest request, List<EncryptKeyEnum> encryptKeyList,
+    private static void doEncrypt(byte[] data_key, RiskDecideRequest request, List<EncryptKeyEnum> encryptKeyList,
                            AESCrypto crypto) {
         List<Order> orders = request.getOrders();
         List<PaymentDetail> paymentDetails = request.getPaymentDetails();
@@ -148,7 +142,7 @@ public class RiskDecideEncryptStrategy implements EncryptStrategy{
      * @param userName user name
      * @param crypto AESCrypto instance
      */
-    private void encryptName(byte[] data_key, UserName userName, AESCrypto crypto) {
+    private static void encryptName(byte[] data_key, UserName userName, AESCrypto crypto) {
         if (userName == null) {
             return;
         }
