@@ -16,13 +16,13 @@ import com.alipay.global.api.request.ams.risk.RiskDecideRequest;
 import com.alipay.global.api.request.ams.risk.RiskReportRequest;
 import com.alipay.global.api.request.ams.risk.SendPaymentResultRequest;
 import com.alipay.global.api.request.ams.risk.SendRefundResultRequest;
-import com.alipay.global.api.request.ams.risk.tee.encryptstrategy.RiskDecideEncryptStrategy;
-import com.alipay.global.api.request.ams.risk.tee.enums.EncryptKeyEnum;
 import com.alipay.global.api.request.ams.risk.tee.exception.CryptoException;
 import com.alipay.global.api.response.ams.risk.RiskDecideResponse;
 import com.alipay.global.api.response.ams.risk.RiskReportResponse;
 import com.alipay.global.api.response.ams.risk.SendPaymentResultResponse;
 import com.alipay.global.api.response.ams.risk.SendRefundResultResponse;
+import com.alipay.global.api.request.ams.risk.tee.encryptutil.RiskDecideEncryptUtil;
+import com.alipay.global.api.request.ams.risk.tee.enums.EncryptKeyEnum;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -95,8 +95,8 @@ public class RiskDecideTeeDemoCode {
         return response;
     }
 
-    public static void encryptRequest(RiskDecideRequest request) throws CryptoException {
-        // 2.1. build encryptList
+    private static void encryptRequest(RiskDecideRequest request) throws CryptoException {
+        // 2.1. please confirm selected encryptKey whit Ant Group, build encryptList
         List<EncryptKeyEnum> encryptList = Arrays.asList(
                 EncryptKeyEnum.BUYER_EMAIL,
                 EncryptKeyEnum.BUYER_PHONE_NO,
@@ -108,9 +108,8 @@ public class RiskDecideTeeDemoCode {
                 EncryptKeyEnum.SHIP_TO_EMAIL,
                 EncryptKeyEnum.SHIPPING_PHONE_NO
         );
-        // 2.2. encrypt request by using RiskDecideEncryptStrategy
-        RiskDecideEncryptStrategy strategy = new RiskDecideEncryptStrategy();
-        strategy.encrypt(DATA_KEY, request, encryptList);
+        // 2.2. encrypt request by using RiskDecideEncryptUtil
+        RiskDecideEncryptUtil.encrypt(DATA_KEY, request, encryptList);
     }
 
     public static SendPaymentResultResponse sendPaymentResult() {
