@@ -5,26 +5,25 @@ import com.alipay.global.api.model.ams.PaymentMethodDetail;
 import com.alipay.global.api.model.constants.AntomPathConstants;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.pay.AlipayVaultingPaymentMethodResponse;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class AlipayVaultingPaymentMethodRequest extends
-                                                AlipayRequest<AlipayVaultingPaymentMethodResponse> {
+        AlipayRequest<AlipayVaultingPaymentMethodResponse> {
 
-    private String              vaultingRequestId;
+    private String vaultingRequestId;
 
-    private String              vaultingNotificationUrl;
+    private String vaultingNotificationUrl;
 
-    private String              redirectUrl;
+    private String redirectUrl;
 
-    private String              merchantRegion;
+    private String merchantRegion;
 
     private PaymentMethodDetail paymentMethodDetail;
 
-    private Env                 env;
+    private Env env;
 
     public AlipayVaultingPaymentMethodRequest() {
         this.setPath(AntomPathConstants.VAULT_PAYMENT_METHOD_PATH);

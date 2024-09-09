@@ -4,13 +4,13 @@
  */
 package com.alipay.global.api.request.ams.risk;
 
-import java.util.Date;
-
+import com.alipay.global.api.model.constants.AntomPathConstants;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.risk.RiskReportResponse;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import java.util.Date;
 
 /**
  * The request of Ant Group's risk report API.
@@ -53,10 +53,10 @@ public class RiskReportRequest extends AlipayRequest<RiskReportResponse> {
      * 如果 riskType 的值为 CHARGEBACK，该字段的值为支付方式向您发送的通知中包含的拒付发生时间。
      * 如果 riskType 的值为 FRAUD，该字段的值为支付方式向您发送的通知中包含的盗卡发生时间。
      */
-    private Date   riskOccurrenceTime;
+    private Date riskOccurrenceTime;
 
     public RiskReportRequest() {
-        this.setPath("/ams/api/v1/risk/privacy/payments/reportRisk");
+        this.setPath(AntomPathConstants.RISK_REPORT_PATH);
     }
 
     @Override

@@ -17,9 +17,7 @@ public enum EncryptKeyEnum {
     SHIPPING_ADDRESS2("address2", "orders.shipping.shippingAddress.address2"),
     SHIPPING_NAME("shippingName", "orders.shipping.shippingName"),
     SHIP_TO_EMAIL("shipToEmail", "orders.shipping.shipToEmail"),
-    SHIPPING_PHONE_NO("shippingPhoneNo", "orders.shipping.shippingPhoneNo")
-
-    ;
+    SHIPPING_PHONE_NO("shippingPhoneNo", "orders.shipping.shippingPhoneNo");
     private final String code;
 
     private final String description;
@@ -43,5 +41,7 @@ public enum EncryptKeyEnum {
         return code;
     }
 
-    public String getDescription() { return description; }
+    public String getDescription() {
+        return description;
+    }
 }

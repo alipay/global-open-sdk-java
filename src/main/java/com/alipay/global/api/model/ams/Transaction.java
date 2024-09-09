@@ -1,7 +1,6 @@
 package com.alipay.global.api.model.ams;
 
 import com.alipay.global.api.model.Result;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

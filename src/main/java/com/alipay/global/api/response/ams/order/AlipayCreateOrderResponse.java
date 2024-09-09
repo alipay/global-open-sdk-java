@@ -7,10 +7,10 @@ import com.alipay.global.api.response.AlipayResponse;
 @Deprecated
 public class AlipayCreateOrderResponse extends AlipayResponse {
 
-    private String             paymentId;
-    private String             paymentRequestId;
-    private String             clientPaymentToken;
-    private Amount             paymentAmount;
+    private String paymentId;
+    private String paymentRequestId;
+    private String clientPaymentToken;
+    private Amount paymentAmount;
     private RedirectActionForm redirectActionForm;
 
     public String getPaymentId() {

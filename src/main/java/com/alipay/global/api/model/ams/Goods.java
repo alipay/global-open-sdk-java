@@ -23,5 +23,4 @@ public class Goods {
     private String goodsImageUrl;
     private String priceId;
 
-
 }

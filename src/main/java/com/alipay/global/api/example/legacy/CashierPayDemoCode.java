@@ -1,8 +1,5 @@
 package com.alipay.global.api.example.legacy;
 
-import java.util.Arrays;
-import java.util.List;
-
 import com.alipay.global.api.AlipayClient;
 import com.alipay.global.api.DefaultAlipayClient;
 import com.alipay.global.api.example.model.Callback;
@@ -20,21 +17,24 @@ import com.alipay.global.api.response.ams.pay.AlipayPayCancelResponse;
 import com.alipay.global.api.response.ams.pay.AlipayPayQueryResponse;
 import com.alipay.global.api.response.ams.pay.AlipayPayResponse;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * The demo code mainly shows how to use the API correctly and the specific implementation needs to be performed by merchants.
  */
 public class CashierPayDemoCode {
 
-    private static final Integer      TIMEOUT_RETRY_COUNT  = 3;
-    private static final Integer      CANCEL_RETRY_COUNT   = 3;
-    private static final Integer      PAY_RETRY_COUNT      = 3;
-    private static final String       GATE_WAY_URL         = "";
-    private static final String       MERCHANT_PRIVATE_KEY = "";
-    private static final String       ANTOM_PUBLIC_KEY     = "";
-    private static final String       CLIENT_ID            = "";
-    private static final String       PAYMENT_REQUEST_ID   = "";
-    private final static AlipayClient CLIENT               = new DefaultAlipayClient(
-        EndPointConstants.SG, MERCHANT_PRIVATE_KEY, ANTOM_PUBLIC_KEY, CLIENT_ID);
+    private static final Integer TIMEOUT_RETRY_COUNT = 3;
+    private static final Integer CANCEL_RETRY_COUNT = 3;
+    private static final Integer PAY_RETRY_COUNT = 3;
+    private static final String GATE_WAY_URL = "";
+    private static final String MERCHANT_PRIVATE_KEY = "";
+    private static final String ANTOM_PUBLIC_KEY = "";
+    private static final String CLIENT_ID = "";
+    private static final String PAYMENT_REQUEST_ID = "";
+    private final static AlipayClient CLIENT = new DefaultAlipayClient(
+            EndPointConstants.SG, MERCHANT_PRIVATE_KEY, ANTOM_PUBLIC_KEY, CLIENT_ID);
 
     public static void main(String[] args) {
 
@@ -51,7 +51,7 @@ public class CashierPayDemoCode {
                         @Override
                         public RetryResult doProcess() {
                             AlipayPayCancelResponse alipayPayCancelResponse = cancel(
-                                paymentRequestId);
+                                    paymentRequestId);
                             if (alipayPayCancelResponse == null) {
                                 // TODO Cancel fail
                                 return RetryResult.ofResult(false);
@@ -88,7 +88,7 @@ public class CashierPayDemoCode {
                         return RetryResult.ofResult(true);
                     }
                     RedirectActionForm redirectActionForm = alipayPayResponse
-                        .getRedirectActionForm();
+                            .getRedirectActionForm();
                     String redirectUrl = redirectActionForm.getRedirectUrl();
                     String method = redirectActionForm.getMethod();
                     String parameters = redirectActionForm.getParameters();
@@ -159,7 +159,7 @@ public class CashierPayDemoCode {
         }
 
         if (alipayPayQueryResponse == null
-            || TransactionStatusType.PROCESSING.equals(paymentStatus)) {
+                || TransactionStatusType.PROCESSING.equals(paymentStatus)) {
             RetryExecutor.execute(CANCEL_RETRY_COUNT, new Callback() {
 
                 @Override
@@ -225,7 +225,7 @@ public class CashierPayDemoCode {
         Order order = new Order();
         order.setReferenceOrderId("102775765075669");
         order.setOrderDescription(
-            "Mi Band 3 Wrist Strap Metal Screwless Stainless Steel For Xiaomi Mi Band 3");
+                "Mi Band 3 Wrist Strap Metal Screwless Stainless Steel For Xiaomi Mi Band 3");
 
         Merchant merchant = new Merchant();
         merchant.setMerchantMCC("Test");

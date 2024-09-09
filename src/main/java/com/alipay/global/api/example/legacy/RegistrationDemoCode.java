@@ -1,9 +1,5 @@
 package com.alipay.global.api.example.legacy;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import com.alipay.global.api.AlipayClient;
 import com.alipay.global.api.DefaultAlipayClient;
 import com.alipay.global.api.example.model.Callback;
@@ -21,19 +17,23 @@ import com.alipay.global.api.response.ams.merchant.AlipayMerchantRegistrationInf
 import com.alipay.global.api.response.ams.merchant.AlipayMerchantRegistrationResponse;
 import com.alipay.global.api.response.ams.merchant.AlipayMerchantRegistrationStatusQueryResponse;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class RegistrationDemoCode {
 
-    private static final Integer      TIMEOUT_RETRY_COUNT   = 3;
-    private static final Integer      REGISTER_RETRY_COUNT  = 3;
-    private static final String       GATE_WAY_URL          = "";
-    private static final String       MERCHANT_PRIVATE_KEY  = "";
-    private static final String       ANTOM_PUBLIC_KEY      = "";
-    private static final String       CLIENT_ID             = "";
-    private static final String       PAYMENT_REQUEST_ID    = "";
-    private static final String       registrationRequestId = "";
-    private static final String       referenceMerchantId   = "";
-    private final static AlipayClient CLIENT                = new DefaultAlipayClient(
-        EndPointConstants.SG, MERCHANT_PRIVATE_KEY, ANTOM_PUBLIC_KEY, CLIENT_ID);
+    private static final Integer TIMEOUT_RETRY_COUNT = 3;
+    private static final Integer REGISTER_RETRY_COUNT = 3;
+    private static final String GATE_WAY_URL = "";
+    private static final String MERCHANT_PRIVATE_KEY = "";
+    private static final String ANTOM_PUBLIC_KEY = "";
+    private static final String CLIENT_ID = "";
+    private static final String PAYMENT_REQUEST_ID = "";
+    private static final String registrationRequestId = "";
+    private static final String referenceMerchantId = "";
+    private final static AlipayClient CLIENT = new DefaultAlipayClient(
+            EndPointConstants.SG, MERCHANT_PRIVATE_KEY, ANTOM_PUBLIC_KEY, CLIENT_ID);
 
     public static void main(String[] args) {
         //step1 register merchant info
@@ -47,7 +47,7 @@ public class RegistrationDemoCode {
             //step2. query registration status.
             if (ResultStatusType.S.equals(result.getResultStatus())) {
                 AlipayMerchantRegistrationStatusQueryResponse statusResponse = queryRegistrationStatus(
-                    buildAlipayMerchantRegistrationStatusQueryRequest());
+                        buildAlipayMerchantRegistrationStatusQueryRequest());
                 if (statusResponse != null) {
                     Result statusResult = statusResponse.getResult();
                     if (ResultStatusType.F.equals(statusResult.getResultStatus())) {
@@ -57,7 +57,7 @@ public class RegistrationDemoCode {
                 }
                 //step3. query registration info.
                 AlipayMerchantRegistrationInfoQueryResponse infoResponse = queryRegistrationInfo(
-                    buildAlipayMerchantRegistrationInfoQueryRequest());
+                        buildAlipayMerchantRegistrationInfoQueryRequest());
                 if (infoResponse != null) {
                     Result infoResult = infoResponse.getResult();
                     if (ResultStatusType.F.equals(infoResult.getResultStatus())) {

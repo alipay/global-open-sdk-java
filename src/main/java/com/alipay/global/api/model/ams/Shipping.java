@@ -23,5 +23,4 @@ public class Shipping {
     private String shippingDescription;
     private DeliveryEstimate deliveryEstimate;
 
-
 }

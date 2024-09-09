@@ -103,3 +103,12 @@ add Checkout Payment Page support
 
 30、Version:2.0.29
 adding path to request, using lombok for ams api, update sample code
+
+31、Version:2.0.32
+align antom doc and library
+
+32、Version:2.0.33
+add PspCustomerInfo add  extendInfo
+
+33、Version:2.0.38
+add:ScopeType add TAOBAO_REBIND

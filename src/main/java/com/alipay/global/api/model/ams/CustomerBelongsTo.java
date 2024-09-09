@@ -38,9 +38,13 @@ public enum CustomerBelongsTo {
 
     JKOPAY,
 
+    KPLUS,
+
     DIRECT_DEBIT_SIAMCOMMERCIALBANK,
 
     DIRECT_DEBIT_KRUNGTHAIBANK,
 
-    ZALOPAY;
+    ZALOPAY,
+
+    DIRECTDEBIT_YAPILY;
 }

@@ -14,5 +14,6 @@ public class Attachment {
     private String attachmentType;
     private String file;
     private String attachmentName;
+    private String fileKey;
 
 }

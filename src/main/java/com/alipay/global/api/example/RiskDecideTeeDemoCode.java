@@ -7,23 +7,11 @@ package com.alipay.global.api.example;
 import com.alipay.global.api.AlipayClient;
 import com.alipay.global.api.DefaultAlipayClient;
 import com.alipay.global.api.exception.AlipayApiException;
-import com.alipay.global.api.model.ams.Address;
-import com.alipay.global.api.model.ams.Amount;
-import com.alipay.global.api.model.ams.Buyer;
-import com.alipay.global.api.model.ams.CardVerificationResult;
-import com.alipay.global.api.model.ams.Env;
-import com.alipay.global.api.model.ams.Goods;
-import com.alipay.global.api.model.ams.OsType;
-import com.alipay.global.api.model.ams.RiskThreeDSResult;
-import com.alipay.global.api.model.ams.Shipping;
-import com.alipay.global.api.model.ams.TerminalType;
-import com.alipay.global.api.model.ams.UserName;
-import com.alipay.global.api.model.risk.AuthorizationPhase;
-import com.alipay.global.api.model.risk.Order;
-import com.alipay.global.api.model.risk.PaymentMethodMetaData;
+import com.alipay.global.api.model.ams.*;
 import com.alipay.global.api.model.risk.Merchant;
-import com.alipay.global.api.model.risk.PaymentDetail;
+import com.alipay.global.api.model.risk.Order;
 import com.alipay.global.api.model.risk.PaymentMethod;
+import com.alipay.global.api.model.risk.*;
 import com.alipay.global.api.request.ams.risk.RiskDecideRequest;
 import com.alipay.global.api.request.ams.risk.RiskReportRequest;
 import com.alipay.global.api.request.ams.risk.SendPaymentResultRequest;
@@ -43,13 +31,14 @@ import java.util.List;
 
 
 public class RiskDecideTeeDemoCode {
-    private static final String       CLIENT_ID           = "";
-    private static final String       GATE_WAY_URL        = "";
-    private static final String       merchantPrivateKey  = "";
-    private static final String       alipayPublicKey     = "";
+    private static final String CLIENT_ID = "";
+    private static final String GATE_WAY_URL = "";
+    private static final String merchantPrivateKey = "";
+    private static final String alipayPublicKey = "";
     private static final AlipayClient defaultAlipayClient = new DefaultAlipayClient(GATE_WAY_URL, merchantPrivateKey, alipayPublicKey, CLIENT_ID);
 
-    private static final String       DATA_KEY = "";
+    private static final String DATA_KEY = "";
+
     public static void main(String[] args) {
         preAuthDecide();
     }
@@ -89,7 +78,7 @@ public class RiskDecideTeeDemoCode {
         riskThreeDSResult.setEci("00");
         riskThreeDSResult.setThreeDSVersion("2.0");
         riskThreeDSResult.setCavv("0");
-        riskThreeDSResult.setThreeDSInteractionMode("CHALLENGED");
+        riskThreeDSResult.setThreeDSInteractionMode("CHALLENGE");
         cardVerificationResult.setThreeDSResult(riskThreeDSResult);
         paymentMethodMetaData.setCardVerificationResult(cardVerificationResult);
         RiskDecideResponse response = null;
@@ -136,7 +125,7 @@ public class RiskDecideTeeDemoCode {
         threeDSResult.setEci("05");
         threeDSResult.setThreeDSVersion("2.0");
         threeDSResult.setCavv("0");
-        threeDSResult.setThreeDSInteractionMode("CHALLENGED");
+        threeDSResult.setThreeDSInteractionMode("CHALLENGE");
         cardVerificationResult.setThreeDSResult(threeDSResult);
         request.setCardVerificationResult(cardVerificationResult);
         SendPaymentResultResponse response = null;

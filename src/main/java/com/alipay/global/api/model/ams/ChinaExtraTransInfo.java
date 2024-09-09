@@ -11,6 +11,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ChinaExtraTransInfo {
 
+    /**
+     * value of BusinessType
+     */
     private String businessType;
     private String flightNumber;
     private String departureTime;

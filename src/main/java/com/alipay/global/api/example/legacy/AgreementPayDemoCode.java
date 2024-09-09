@@ -1,8 +1,5 @@
 package com.alipay.global.api.example.legacy;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import com.alipay.global.api.AlipayClient;
 import com.alipay.global.api.DefaultAlipayClient;
 import com.alipay.global.api.example.model.Callback;
@@ -24,22 +21,25 @@ import com.alipay.global.api.response.ams.pay.AlipayPayCancelResponse;
 import com.alipay.global.api.response.ams.pay.AlipayPayQueryResponse;
 import com.alipay.global.api.response.ams.pay.AlipayPayResponse;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  * The demo Code mainly shows the correct use of API,
  * and the specific implementation needs to be implemented by merchants
  */
 public class AgreementPayDemoCode {
 
-    private static final Integer      TIMEOUT_RETRY_COUNT  = 3;
-    private static final Integer      CANCEL_RETRY_COUNT   = 3;
-    private static final Integer      PAY_RETRY_COUNT      = 3;
-    private static final String       GATE_WAY_URL         = "";
-    private static final String       MERCHANT_PRIVATE_KEY = "";
-    private static final String       ANTOM_PUBLIC_KEY     = "";
-    private static final String       CLIENT_ID            = "";
-    private static final String       PAYMENT_REQUEST_ID   = "";
-    private final static AlipayClient CLIENT               = new DefaultAlipayClient(
-        EndPointConstants.SG, MERCHANT_PRIVATE_KEY, ANTOM_PUBLIC_KEY, CLIENT_ID);
+    private static final Integer TIMEOUT_RETRY_COUNT = 3;
+    private static final Integer CANCEL_RETRY_COUNT = 3;
+    private static final Integer PAY_RETRY_COUNT = 3;
+    private static final String GATE_WAY_URL = "";
+    private static final String MERCHANT_PRIVATE_KEY = "";
+    private static final String ANTOM_PUBLIC_KEY = "";
+    private static final String CLIENT_ID = "";
+    private static final String PAYMENT_REQUEST_ID = "";
+    private final static AlipayClient CLIENT = new DefaultAlipayClient(
+            EndPointConstants.SG, MERCHANT_PRIVATE_KEY, ANTOM_PUBLIC_KEY, CLIENT_ID);
 
     public static void main(String[] args) {
 
@@ -70,7 +70,7 @@ public class AgreementPayDemoCode {
                         @Override
                         public RetryResult doProcess() {
                             AlipayPayCancelResponse alipayPayCancelResponse = cancel(
-                                paymentRequestId);
+                                    paymentRequestId);
                             if (alipayPayCancelResponse == null) {
                                 // TODO Cancel fail
                                 return RetryResult.ofResult(false);
@@ -116,7 +116,7 @@ public class AgreementPayDemoCode {
                      * Pause interval when the state is PROCESSING
                      */
                     ArrayList<Integer> pauseInterval = (ArrayList<Integer>) Arrays.asList(2, 4, 8,
-                        16, 32);
+                            16, 32);
                     /**
                      * Number of retries when the state is U
                      */
@@ -159,14 +159,14 @@ public class AgreementPayDemoCode {
                      * If the result is still unavailable after retry, cancel the payment.
                      */
                     if (alipayPayQueryResponse == null
-                        || TransactionStatusType.PROCESSING.equals(paymentStatus)) {
+                            || TransactionStatusType.PROCESSING.equals(paymentStatus)) {
 
                         RetryExecutor.execute(CANCEL_RETRY_COUNT, new Callback() {
 
                             @Override
                             public RetryResult doProcess() {
                                 AlipayPayCancelResponse alipayPayCancelResponse = cancel(
-                                    paymentRequestId);
+                                        paymentRequestId);
                                 if (alipayPayCancelResponse == null) {
                                     // TODO Cancel fail
                                     return RetryResult.ofResult(false);
@@ -233,7 +233,7 @@ public class AgreementPayDemoCode {
         Order order = new Order();
         order.setReferenceOrderId("102775765075669");
         order.setOrderDescription(
-            "Mi Band 3 Wrist Strap Metal Screwless Stainless Steel For Xiaomi Mi Band 3");
+                "Mi Band 3 Wrist Strap Metal Screwless Stainless Steel For Xiaomi Mi Band 3");
 
         Merchant merchant = new Merchant();
         merchant.setMerchantMCC("Test");
@@ -380,7 +380,7 @@ public class AgreementPayDemoCode {
         authConsultRequest.setCustomerBelongsTo(CustomerBelongsTo.GCASH);
         authConsultRequest.setOsType(OsType.ANDROID);
         authConsultRequest.setOsVersion("6.6.6");
-        ScopeType[] scopes = { ScopeType.USER_LOGIN_ID };
+        ScopeType[] scopes = {ScopeType.USER_LOGIN_ID};
         authConsultRequest.setScopes(scopes);
         authConsultRequest.setTerminalType(TerminalType.APP);
         authConsultRequest.setMerchantRegion("US");
