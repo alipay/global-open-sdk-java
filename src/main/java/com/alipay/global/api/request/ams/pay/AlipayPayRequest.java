@@ -101,6 +101,8 @@ public class AlipayPayRequest extends AlipayRequest<AlipayPayResponse> {
      */
     private String merchantAccountId;
 
+    private Boolean dualOfflinePayment;
+
     public AlipayPayRequest() {
         this.setPath(AntomPathConstants.PAYMENT_PATH);
     }

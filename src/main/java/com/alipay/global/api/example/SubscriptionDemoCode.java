@@ -50,6 +50,7 @@ public class SubscriptionDemoCode {
         alipaySubscriptionCreateRequest.setSubscriptionDescription("desc");
         alipaySubscriptionCreateRequest.setSubscriptionStartTime("2024-03-19T12:01:01+08:00");
         alipaySubscriptionCreateRequest.setSubscriptionEndTime("2024-06-27T12:01:01+08:00");
+        // The duration of subscription preparation process should be less than 48 hours
         alipaySubscriptionCreateRequest.setSubscriptionExpiryTime("2024-03-20T18:20:06+08:00");
 
         PeriodRule periodRule = PeriodRule.builder().periodType("MONTH").periodCount(1).build();

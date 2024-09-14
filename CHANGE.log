@@ -112,3 +112,8 @@ add PspCustomerInfo add  extendInfo
 
 33、Version:2.0.38
 add:ScopeType add TAOBAO_REBIND
+
+34、Version:2.0.40
+update：alipayPayRequest
+add：payments/syncArrear
+add：payments/createDeviceCertificate

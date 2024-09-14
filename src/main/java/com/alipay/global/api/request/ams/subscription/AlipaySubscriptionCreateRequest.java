@@ -46,6 +46,7 @@ public class AlipaySubscriptionCreateRequest extends
 
     /**
      * A specific date and time after which the created subscription expires.
+     * The duration of subscription preparation process should be less than 48 hours
      */
     private String subscriptionExpiryTime;
 
