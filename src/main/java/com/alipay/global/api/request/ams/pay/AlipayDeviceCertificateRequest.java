@@ -16,7 +16,7 @@ public class AlipayDeviceCertificateRequest extends AlipayRequest<AlipayDeviceCe
 
 
     public AlipayDeviceCertificateRequest() {
-        this.setPath(AntomPathConstants.DEVICECERTIFICATE);
+        this.setPath(AntomPathConstants.CREATE_DEVICE_CERTIFICATE_PATH);
     }
 
     @Override

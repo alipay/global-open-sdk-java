@@ -15,7 +15,7 @@ public class AlipaySyncArrearRequest extends AlipayRequest<AlipaySyncArrearRespo
 
 
     public AlipaySyncArrearRequest() {
-        this.setPath(AntomPathConstants.SYNCARREAR);
+        this.setPath(AntomPathConstants.SYNC_ARREAR_PATH);
     }
 
     @Override
