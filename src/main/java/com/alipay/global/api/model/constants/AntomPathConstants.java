@@ -72,6 +72,10 @@ public class AntomPathConstants {
      */
     public static final String CANCEL_PATH = "/ams/api/v1/payments/cancel";
 
+    public static final String SYNCARREAR = "/ams/api/v1/payments/syncArrear";
+
+    public static final String DEVICECERTIFICATE = "/ams/api/v1/payments/createDeviceCertificate";
+
 
     /**
      * see <a href="https://global.alipay.com/docs/ac/ams/create_sub">create subscription</a>
