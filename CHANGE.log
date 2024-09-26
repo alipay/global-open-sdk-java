@@ -117,3 +117,5 @@ add:ScopeType add TAOBAO_REBIND
 update：alipayPayRequest
 add：payments/syncArrear
 add：payments/createDeviceCertificate
+35、Version:2.0.41
+add：Boolean  request.order.needDeclaration

@@ -26,5 +26,6 @@ public class Order {
     private Transit transit;
     private Lodging lodging;
     private Gaming gaming;
+    private Boolean needDeclaration;
 
 }
