@@ -1,9 +1,6 @@
 package com.alipay.global.api.request.ams.auth;
 
-import com.alipay.global.api.model.ams.CustomerBelongsTo;
-import com.alipay.global.api.model.ams.OsType;
-import com.alipay.global.api.model.ams.ScopeType;
-import com.alipay.global.api.model.ams.TerminalType;
+import com.alipay.global.api.model.ams.*;
 import com.alipay.global.api.model.constants.AntomPathConstants;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.auth.AlipayAuthConsultResponse;
@@ -25,6 +22,7 @@ public class AlipayAuthConsultRequest extends AlipayRequest<AlipayAuthConsultRes
     private String extendInfo;
     private String merchantRegion;
     private Boolean recurringPayment;
+    private AuthMetaData authMetaData;
 
     public AlipayAuthConsultRequest() {
         this.setPath(AntomPathConstants.AUTH_CONSULT_PATH);
