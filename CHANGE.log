@@ -119,3 +119,5 @@ add：payments/syncArrear
 add：payments/createDeviceCertificate
 35、Version:2.0.41
 add：Boolean  request.order.needDeclaration
+35、Version:2.0.42
+add AlipayAuthConsultRequest.authMetaData AE企业支付宝代扣集成方案
