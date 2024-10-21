@@ -57,4 +57,6 @@ public class CardPaymentMethodDetail {
 
     private String payerEmail;
 
+    private String networkTransactionId;
+
 }

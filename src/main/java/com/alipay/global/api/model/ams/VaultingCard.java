@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class VaultingCard {
+public class VaultingCard extends CardPaymentMethodDetail {
     private String cardToken;
 
     private String lastFour;

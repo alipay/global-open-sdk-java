@@ -20,6 +20,8 @@ public class AlipayVaultingSessionRequest extends AlipayRequest<AlipayVaultingSe
 
     private String merchantRegion;
 
+    private Boolean is3DSAuthentication;
+
     public AlipayVaultingSessionRequest() {
         this.setPath(AntomPathConstants.CREATE_VAULTING_SESSION_PATH);
     }
