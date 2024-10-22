@@ -6,32 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Builder
-@NoArgsConstructor
 @AllArgsConstructor
 public class VaultingCard extends CardPaymentMethodDetail {
-    private String cardToken;
 
-    private String lastFour;
 
-    private String brand;
-
-    private String expiryMonth;
-
-    private String expiryYear;
-
-    private Address billingAddress;
-
-    private String avsResultRaw;
-
-    private String cvvResultRaw;
-
-    private String issuingCountry;
-
-    private String funding;
-
-    private String bin;
-
-    private String issuerName;
 
 }
