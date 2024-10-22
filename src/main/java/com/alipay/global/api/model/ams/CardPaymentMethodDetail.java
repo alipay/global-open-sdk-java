@@ -35,6 +35,8 @@ public class CardPaymentMethodDetail {
 
     private String avsResultRaw;
 
+    private String cvvResultRaw;
+
     private String bin;
 
     private String issuerName;
