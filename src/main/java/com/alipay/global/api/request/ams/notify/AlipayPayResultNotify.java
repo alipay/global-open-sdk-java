@@ -4,6 +4,8 @@ import com.alipay.global.api.model.ams.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.util.List;
+
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class AlipayPayResultNotify extends AlipayNotify {
@@ -67,5 +69,7 @@ public class AlipayPayResultNotify extends AlipayNotify {
      * The information of the acquirer that processes the payment.
      */
     private AcquirerInfo acquirerInfo;
+
+    private List<PromotionResult> promotionResult;
 
 }
