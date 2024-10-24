@@ -123,3 +123,5 @@ add：Boolean  request.order.needDeclaration
 add AlipayAuthConsultRequest.authMetaData AE企业支付宝代扣集成方案
 37、Version:2.0.43
 add AlipayVaultingSessionRequest.is3DSAuthentication 哈啰集成绑卡SDK
+37、Version:2.0.44
+update --- notify
