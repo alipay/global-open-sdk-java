@@ -72,4 +72,6 @@ public class AlipayPayResultNotify extends AlipayNotify {
 
     private List<PromotionResult> promotionResult;
 
+    private String paymentMethodType;
+
 }
