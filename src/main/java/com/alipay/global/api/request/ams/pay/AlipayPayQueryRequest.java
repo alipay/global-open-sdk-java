@@ -25,6 +25,8 @@ public class AlipayPayQueryRequest extends AlipayRequest<AlipayPayQueryResponse>
      */
     private String merchantAccountId;
 
+    private String paymentMethodType;
+
     public AlipayPayQueryRequest() {
         this.setPath(AntomPathConstants.INQUIRY_PAYMENT_PATH);
     }
