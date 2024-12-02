@@ -43,4 +43,6 @@ public class AlipayPayQueryResponse extends AlipayResponse {
     private List<PromotionResult> promotionResult;
 
     private String earliestSettlementTime;
+
+    private String paymentMethodType;
 }

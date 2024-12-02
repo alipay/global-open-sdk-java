@@ -128,3 +128,5 @@ update --- notify
 37、Version:2.0.45
 update --- Leg 航司场景，风控诉求
 CKP二期支付结果查询和支付结果通知透出支付方式信息
+38、Version:2.0.46
+update --- notify_dispute 拒付通知增加争议类型

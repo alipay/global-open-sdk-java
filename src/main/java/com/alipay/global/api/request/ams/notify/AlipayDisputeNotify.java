@@ -25,4 +25,5 @@ public class AlipayDisputeNotify extends AlipayNotify {
     private String arn;
     private String disputeAcceptReason;
     private String disputeAcceptTime;
+    private String disputeType;
 }
