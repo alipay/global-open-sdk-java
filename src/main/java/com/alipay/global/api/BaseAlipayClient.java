@@ -1,8 +1,13 @@
 package com.alipay.global.api;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.alipay.global.api.net.HttpClientPoolUtil;
+import com.alipay.global.api.net.HttpClientRpc;
+import com.alipay.global.api.net.HttpConnectionPool;
+import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;
 
 import com.alibaba.fastjson.JSON;
@@ -15,6 +20,9 @@ import com.alipay.global.api.response.AlipayResponse;
 import com.alipay.global.api.tools.Constants;
 import com.alipay.global.api.tools.DateTool;
 import com.alipay.global.api.tools.SignatureTool;
+import org.apache.http.impl.client.CloseableHttpClient;
+
+import javax.net.ssl.HttpsURLConnection;
 
 public abstract class BaseAlipayClient implements AlipayClient {
 
@@ -40,6 +48,16 @@ public abstract class BaseAlipayClient implements AlipayClient {
      */
     private boolean isSandboxMode = false;
 
+    @Getter
+    private CloseableHttpClient httpClient;
+
+    /**
+     * 启用http连接池
+     */
+    private boolean enableConnectionPool = false;
+
+    private HttpConnectionPool connectionPool;
+
     public BaseAlipayClient() {
     }
 
@@ -47,6 +65,12 @@ public abstract class BaseAlipayClient implements AlipayClient {
         this.gatewayUrl = gatewayUrl;
         this.merchantPrivateKey = merchantPrivateKey;
         this.alipayPublicKey = alipayPublicKey;
+        this.httpClient = new HttpClientPoolUtil().getHttpClient();
+        try {
+            this.connectionPool = new HttpConnectionPool(5, 10, gatewayUrl);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public BaseAlipayClient(String gatewayUrl, String merchantPrivateKey, String alipayPublicKey, String clientId) {
@@ -58,6 +82,34 @@ public abstract class BaseAlipayClient implements AlipayClient {
         // if client id starts with SANDBOX_, set to sandbox mode
         if (clientId.startsWith("SANDBOX_")) {
             this.isSandboxMode = true;
+        }
+
+        this.httpClient = new HttpClientPoolUtil().getHttpClient();
+
+        try {
+            this.connectionPool = new HttpConnectionPool(5, 10, gatewayUrl);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public BaseAlipayClient(String gatewayUrl, String merchantPrivateKey, String alipayPublicKey, String clientId,CloseableHttpClient httpClient) {
+        this.gatewayUrl = gatewayUrl;
+        this.merchantPrivateKey = merchantPrivateKey;
+        this.alipayPublicKey = alipayPublicKey;
+        this.clientId = clientId;
+
+        // if client id starts with SANDBOX_, set to sandbox mode
+        if (clientId.startsWith("SANDBOX_")) {
+            this.isSandboxMode = true;
+        }
+
+        this.httpClient = httpClient;
+
+        try {
+            this.connectionPool = new HttpConnectionPool(5, 10, gatewayUrl);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -94,10 +146,10 @@ public abstract class BaseAlipayClient implements AlipayClient {
         }
 
         String requestUrl = genRequestUrl(path);
-        /**
-         * 向网关发起http请求(Make an HTTP request to the gateway)
-         */
+
+
         HttpRpcResult rsp = sendRequest(requestUrl, httpMethod, header, reqBody);
+
 
         if (rsp == null) {
             throw new AlipayApiException("HttpRpcResult is null.");

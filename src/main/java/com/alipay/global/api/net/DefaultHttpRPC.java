@@ -29,7 +29,7 @@ public class DefaultHttpRPC {
 
         try {
             ctx = SSLContext.getInstance("TLS");
-            ctx.init(new KeyManager[0], new TrustManager[] {new X509TrustManagerImp()},
+            ctx.init(new KeyManager[0], new TrustManager[]{new X509TrustManagerImp()},
                     new SecureRandom());
 
             ctx.getClientSessionContext().setSessionTimeout(15);
@@ -137,13 +137,13 @@ public class DefaultHttpRPC {
         }
 
         String[] valueItem = signatureValue.split(",");
-        if(valueItem.length < 3){
+        if (valueItem.length < 3) {
             return null;
         }
 
         String signatureItem = valueItem[2];
-        String[]  itemArr = signatureItem.split("=");
-        if(itemArr.length != 2){
+        String[] itemArr = signatureItem.split("=");
+        if (itemArr.length != 2) {
             return null;
         }
 
