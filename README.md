@@ -12,7 +12,7 @@ https://mvnrepository.com/artifact/com.alipay.global.sdk/global-open-sdk-java
 <dependency>
     <groupId>com.alipay.global.sdk</groupId>
     <artifactId>global-open-sdk-java</artifactId>
-    <version>2.0.46</version>
+    <version>2.0.48</version>
 </dependency>
 ```
    
@@ -238,7 +238,7 @@ boolean isPass    = SignatureTool.verify(httpMethod, path, clientId, rspTimeStr,
 For compatibility with lower version of Java JDK, signatureTool provided a base64 encryptor DefaultBase64Encryptor by default. 
 
 ```
-public class DefaultBase64Encryptor implements Base64Encryptor{
+public class DefaultBase64Encryptor implements Base64Encryptor {
 
     @Override
     public String encodeToString(byte[] src) {
@@ -272,6 +272,6 @@ public class YourBase64Encryptor implements Base64Encryptor{
     
 }
 
-SignatureTool.setBase64Encryptor(new YourBase64Encryptor());
+Base64Provider.setBase64Encryptor(new YourBase64Encryptor());
 
 ```
