@@ -217,7 +217,7 @@ AlipayPayResponse  alipayPayResponse = yourAlipayClient.execute(aliPayRequest);
 ```
   
 #### 4 If you don't care about HTTP calls,the sample for sign and verify  
-```  
+```java
 String httpMethod = "POST";
 String path       = "/ams/sandbox/api/v1/payments/pay";
 String clientId   = "T_client";
