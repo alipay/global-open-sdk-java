@@ -11,6 +11,7 @@ import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.Optional;
 
 public class HttpClientRpc {
 
@@ -55,7 +56,8 @@ public class HttpClientRpc {
                 httpRpcResult.setRspSign(getResponseSignature(response));
 
                 // 此处假设您有某种方法来获取响应时间
-                String responseTime = response.getHeaders(Constants.RSP_TIME_HEADER) != null ? response.getFirstHeader(Constants.RSP_TIME_HEADER).getValue() : null; // 仅为示例
+                String responseTime = Optional.ofNullable(response.getFirstHeader(Constants.RSP_TIME_HEADER))
+                                    .map(Header::getValue).orElse(null);
                 httpRpcResult.setResponseTime(responseTime);
             }
         } catch (IOException e) {
@@ -69,7 +71,8 @@ public class HttpClientRpc {
 
 
     public static String getResponseSignature(CloseableHttpResponse response) {
-        String signatureValue = response.getHeaders("Signature") != null ? response.getFirstHeader("Signature").getValue() : null;
+        String signatureValue = Optional.ofNullable(response.getFirstHeader("Signature"))
+                                    .map(Header::getValue).orElse(null);
         if (StringUtils.isBlank(signatureValue)) {
             return null;
         }
