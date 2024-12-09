@@ -83,9 +83,6 @@ public abstract class BaseAlipayClient implements AlipayClient {
         if (clientId.startsWith("SANDBOX_")) {
             this.isSandboxMode = true;
         }
-
-        this.httpClient = new HttpClientPoolUtil().getHttpClient();
-
         try {
             this.connectionPool = new HttpConnectionPool(5, 10, gatewayUrl);
         } catch (IOException e) {

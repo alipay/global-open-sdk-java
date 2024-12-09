@@ -4,6 +4,7 @@ import com.alipay.global.api.exception.AlipayApiException;
 import com.alipay.global.api.net.DefaultHttpRPC;
 import com.alipay.global.api.net.HttpClientRpc;
 import com.alipay.global.api.net.HttpRpcResult;
+import okhttp3.OkHttpClient;
 import org.apache.http.impl.client.CloseableHttpClient;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -20,7 +21,7 @@ public class DefaultAlipayClient extends BaseAlipayClient {
     }
 
     public DefaultAlipayClient(String gatewayUrl, String merchantPrivateKey, String alipayPublicKey, String clientId, CloseableHttpClient httpClient) {
-        super(gatewayUrl, merchantPrivateKey, alipayPublicKey, clientId);
+        super(gatewayUrl, merchantPrivateKey, alipayPublicKey, clientId,httpClient);
     }
 
     @Override
@@ -32,7 +33,8 @@ public class DefaultAlipayClient extends BaseAlipayClient {
         HttpRpcResult httpRpcResult;
         try {
             if (this.getHttpClient() != null) {
-                httpRpcResult = HttpClientRpc.doPost(this.getHttpClient(), requestUrl, header, reqBody);
+                    httpRpcResult = HttpClientRpc.doPost((CloseableHttpClient)this.getHttpClient(), requestUrl, header, reqBody);
+
             } else {
                 httpRpcResult = DefaultHttpRPC.doPost(requestUrl, header, reqBody);
             }
