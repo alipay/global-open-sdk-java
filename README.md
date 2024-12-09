@@ -1,6 +1,6 @@
 ```
 Language：JAVA  
-JDK version：1.6+  
+JDK version：1.8+  
 Copyright：Ant financial services group  
 ```
 
