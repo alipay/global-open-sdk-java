@@ -258,7 +258,7 @@ For better performance, you can also customize the base64 tool. For example, jdk
 
   
 ```
-public class YourBase64Encryptor implements Base64Encryptor{
+public class YourBase64Encryptor implements Base64Encryptor {
 
     @Override
     public String encodeToString(byte[] src) {
