@@ -15,8 +15,8 @@ import org.bouncycastle.crypto.params.KeyParameter;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import javax.crypto.spec.SecretKeySpec;
-import javax.xml.bind.DatatypeConverter;
 import java.security.Security;
+import java.util.Base64;
 
 /**
  * AES crypto implementation
@@ -79,7 +79,7 @@ public class AESCrypto implements Crypto {
         if (dataKeyBase64 == null || dataKeyBase64.length() == 0) {
             throw new CryptoException(ErrorCodeEnum.PARAM_ILLEGAL, "dataKey cannot be empty");
         }
-        return encrypt(DatatypeConverter.parseBase64Binary(dataKeyBase64), data);
+        return encrypt(Base64.getDecoder().decode(dataKeyBase64), data);
     }
 
     private byte[] encrypt(byte[] data, SecretKeySpec keySpec) throws Exception {
