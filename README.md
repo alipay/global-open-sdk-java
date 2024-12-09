@@ -8,7 +8,7 @@ Copyright：Ant financial services group
 
 https://mvnrepository.com/artifact/com.alipay.global.sdk/global-open-sdk-java
 
-```  
+```xml
 <dependency>
     <groupId>com.alipay.global.sdk</groupId>
     <artifactId>global-open-sdk-java</artifactId>
@@ -17,7 +17,7 @@ https://mvnrepository.com/artifact/com.alipay.global.sdk/global-open-sdk-java
 ```
    
 #### 2 Main class file  
-```
+```java
 DefaultAlipayClient.java  
 
 public DefaultAlipayClient(String gatewayUrl, String merchantPrivateKey, String alipayPublicKey);  
@@ -25,10 +25,10 @@ public <T extends AlipayResponse> T execute(AlipayRequest<T> alipayRequest);
   
 ```
   
-``` 
+```java
 SignatureTool.java 
 
-public static String  sign(String httpMethod, String path, String clientId, String reqTimeStr, String reqBody, String merchantPrivateKey);  
+public static String sign(String httpMethod, String path, String clientId, String reqTimeStr, String reqBody, String merchantPrivateKey);  
 public static boolean verify(String httpMethod, String path, String clientId, String rspTimeStr, String rspBody, String signature, String alipayPublicKey);  
  
 ```
@@ -37,7 +37,7 @@ public static boolean verify(String httpMethod, String path, String clientId, St
 
 AMS:
   
-```
+```java
 AlipayClient CLIENT = new DefaultAlipayClient("https://open-na.alipay.com", merchantPrivateKey, alipayPublicKey, clientid);
 
 AlipayPayRequest alipayPayRequest = new AlipayPayRequest();
@@ -97,7 +97,7 @@ AlipayPayResponse alipayPayResponse = CLIENT.execute(alipayPayRequest);
 
 APS:
 
-```  
+```java
 AlipayClient CLIENT = new DefaultAlipayClient("https://open-na.alipay.com", merchantPrivateKey, alipayPublicKey, clientid);
  
 AlipayApsInquiryPaymentRequest inquiryPaymentRequest = new AlipayApsInquiryPaymentRequest();
@@ -112,7 +112,7 @@ AlipayApsInquiryPaymentResponse alipayResponse = CLIENT.execute(inquiryPaymentRe
 
 RISK:
 
-```
+```java
 AlipayClient CLIENT = new DefaultAlipayClient("https://open-sea-global.alipay.com", merchantPrivateKey, alipayPublicKey, clientid);
 
 RiskDecideRequest riskDecideRequest = new RiskDecideRequest();
@@ -175,7 +175,7 @@ The execute method contains the HTTP request to the gateway.
 
 If you're concerned about HTTP invocation performance, you can implement HTTP invocation yourself.
  
-```
+```java
 public class YourAlipayClient extends BaseAlipayClient{
 
     public YourAlipayClient(String gatewayUrl, String merchantPrivateKey, String alipayPublicKey ){
@@ -237,7 +237,7 @@ boolean isPass    = SignatureTool.verify(httpMethod, path, clientId, rspTimeStr,
 
 For compatibility with lower version of Java JDK, signatureTool provided a base64 encryptor DefaultBase64Encryptor by default. 
 
-```
+```java
 public class DefaultBase64Encryptor implements Base64Encryptor {
 
     @Override
@@ -256,9 +256,9 @@ public class DefaultBase64Encryptor implements Base64Encryptor {
 
 For better performance, you can also customize the base64 tool. For example, jdk8 API Base64.
 
-  
-```
-public class YourBase64Encryptor implements Base64Encryptor {
+##### 5.1 add "MyBase64Encryptor"
+```java
+public class MyBase64Encryptor implements Base64Encryptor {
 
     @Override
     public String encodeToString(byte[] src) {
@@ -271,7 +271,10 @@ public class YourBase64Encryptor implements Base64Encryptor {
     }
     
 }
-
-Base64Provider.setBase64Encryptor(new YourBase64Encryptor());
-
+```
+##### 5.2 init before invoke alipayClient
+```java
+static {
+    Base64Provider.setBase64Encryptor(new MyBase64Encryptor());
+}
 ```
