@@ -1,6 +1,6 @@
 ```
 Language：JAVA  
-JDK version：1.8+  
+JDK version：1.6+  
 Copyright：Ant financial services group  
 ```
 
@@ -242,12 +242,12 @@ public class DefaultBase64Encryptor implements Base64Encryptor{
 
     @Override
     public String encodeToString(byte[] src) {
-        return Base64.getEncoder().encodeToString(src);
+        return DatatypeConverter.printBase64Binary(src);
     }
 
     @Override
     public byte[] decode(String src) {
-        return Base64.getDecoder().decode(src);
+        return DatatypeConverter.parseBase64Binary(src);
     }
 
 }

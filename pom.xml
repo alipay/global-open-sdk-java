@@ -4,7 +4,7 @@
     <groupId>com.alipay.global.sdk</groupId>
     <artifactId>global-open-sdk-java</artifactId>
     <packaging>jar</packaging>
-    <version>2.0.47</version>
+    <version>2.0.48</version>
     <name>global-open-sdk-java</name>
     <url>https://github.com/alipay/global-open-sdk-java</url>
     <description>
@@ -85,6 +85,12 @@
             <groupId>org.bouncycastle</groupId>
             <artifactId>bcprov-jdk15on</artifactId>
             <version>1.61</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.15</version>
         </dependency>
     </dependencies>
 

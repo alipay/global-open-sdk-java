@@ -7,6 +7,7 @@ package com.alipay.global.api.request.ams.risk.tee.crypto;
 import com.alipay.global.api.request.ams.risk.tee.constants.CryptoSdkConstant;
 import com.alipay.global.api.request.ams.risk.tee.enums.ErrorCodeEnum;
 import com.alipay.global.api.request.ams.risk.tee.exception.CryptoException;
+import org.apache.commons.codec.binary.Base64;
 import org.bouncycastle.crypto.CipherParameters;
 import org.bouncycastle.crypto.engines.AESEngine;
 import org.bouncycastle.crypto.modes.GCMBlockCipher;
@@ -16,7 +17,6 @@ import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import javax.crypto.spec.SecretKeySpec;
 import java.security.Security;
-import java.util.Base64;
 
 /**
  * AES crypto implementation
@@ -79,7 +79,7 @@ public class AESCrypto implements Crypto {
         if (dataKeyBase64 == null || dataKeyBase64.length() == 0) {
             throw new CryptoException(ErrorCodeEnum.PARAM_ILLEGAL, "dataKey cannot be empty");
         }
-        return encrypt(Base64.getDecoder().decode(dataKeyBase64), data);
+        return encrypt(Base64.decodeBase64(dataKeyBase64), data);
     }
 
     private byte[] encrypt(byte[] data, SecretKeySpec keySpec) throws Exception {
