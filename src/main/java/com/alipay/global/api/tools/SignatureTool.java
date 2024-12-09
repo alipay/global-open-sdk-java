@@ -4,13 +4,16 @@ package com.alipay.global.api.tools;
 /**
  * Alipay.com Inc. Copyright (c) 2004-2019 All Rights Reserved.
  */
-import com.alipay.global.api.base64.Base64Encryptor;
-import com.alipay.global.api.base64.DefaultBase64Encryptor;
+
+import com.alipay.global.api.base64.Base64Provider;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.security.*;
+import java.security.KeyFactory;
+import java.security.PrivateKey;
+import java.security.PublicKey;
+import java.security.Signature;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 
@@ -19,8 +22,6 @@ public class SignatureTool {
     private static final String RSA             = "RSA";
     private static final String SHA256WITHRSA   = "SHA256withRSA";
     private static final String DEFAULT_CHARSET = "UTF-8";
-
-    private static Base64Encryptor base64Encryptor = new DefaultBase64Encryptor();
 
     public static String sign(String httpMethod, String path, String clientId, String reqTimeStr, String reqBody, String merchantPrivateKey) throws Exception{
         String reqContent = genSignContent(httpMethod, path, clientId, reqTimeStr, reqBody);
@@ -80,7 +81,7 @@ public class SignatureTool {
         publicSignature.initVerify(publicKey);
         publicSignature.update(rspContent.getBytes(DEFAULT_CHARSET));
 
-        byte[] signatureBytes = base64Encryptor.decode(signature);
+        byte[] signatureBytes = Base64Provider.getBase64Encryptor().decode(signature);
         return publicSignature.verify(signatureBytes);
 
     }
@@ -100,7 +101,7 @@ public class SignatureTool {
         privateSignature.update(reqContent.getBytes(DEFAULT_CHARSET));
         byte[] s = privateSignature.sign();
 
-        return base64Encryptor.encodeToString(s);
+        return Base64Provider.getBase64Encryptor().encodeToString(s);
     }
 
     /**
@@ -109,7 +110,7 @@ public class SignatureTool {
      * @return
      */
     private static PublicKey getPublicKeyFromBase64String(String publicKeyString) throws Exception{
-        byte[] b1 = base64Encryptor.decode(publicKeyString);
+        byte[] b1 = Base64Provider.getBase64Encryptor().decode(publicKeyString);
         X509EncodedKeySpec X509publicKey = new X509EncodedKeySpec(b1);
         KeyFactory kf = KeyFactory.getInstance(RSA);
         return kf.generatePublic(X509publicKey);
@@ -122,7 +123,7 @@ public class SignatureTool {
      * @throws Exception
      */
     private static PrivateKey getPrivateKeyFromBase64String(String privateKeyString) throws Exception{
-        byte[] b1 = base64Encryptor.decode(privateKeyString);
+        byte[] b1 = Base64Provider.getBase64Encryptor().decode(privateKeyString);
         PKCS8EncodedKeySpec spec = new PKCS8EncodedKeySpec(b1);
         KeyFactory kf = KeyFactory.getInstance(RSA);
         return kf.generatePrivate(spec);
@@ -150,10 +151,6 @@ public class SignatureTool {
     private static String decode(String originalStr,
                                 String characterEncoding) throws UnsupportedEncodingException {
         return URLDecoder.decode(originalStr, characterEncoding);
-    }
-
-    public static void setBase64Encryptor(Base64Encryptor customBase64Encryptor){
-        base64Encryptor = customBase64Encryptor;
     }
 
 }
