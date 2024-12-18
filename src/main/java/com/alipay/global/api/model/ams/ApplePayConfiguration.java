@@ -15,5 +15,6 @@ public class ApplePayConfiguration {
     private List<String> requiredBillingContactFields;
     private List<String> requiredShippingContactFields;
     private Boolean buttonsBundled;
+    private String applePayToken;
 
 }
