@@ -1,6 +1,7 @@
 package com.alipay.global.api.request.ams.notify;
 
 import com.alipay.global.api.model.ams.Amount;
+import com.alipay.global.api.model.ams.DisputeAcceptReasonType;
 import com.alipay.global.api.model.ams.DisputeJudgedResult;
 import com.alipay.global.api.model.ams.DisputeNotificationType;
 import lombok.Data;
@@ -23,7 +24,8 @@ public class AlipayDisputeNotify extends AlipayNotify {
     private String disputeReasonCode;
     private String disputeSource;
     private String arn;
-    private String disputeAcceptReason;
+    private DisputeAcceptReasonType disputeAcceptReason;
     private String disputeAcceptTime;
     private String disputeType;
+    private Boolean defendable;
 }

@@ -132,3 +132,6 @@ CKP二期支付结果查询和支付结果通知透出支付方式信息
 update --- notify_dispute 拒付通知增加争议类型
 39、Version:2.0.48
 update --- 优化base64多jdk版本兼容
+40、Version:2.0.48
+1. RDR拒付通知优化通用能力变更
+2. Antom新增ApplePay支付方式
