@@ -20,4 +20,6 @@ public class PaymentMethodDetail {
     private String paymentMethodType;
     private String extendInfo;
 
+    private Boolean is3DSAuthentication;
+
 }
