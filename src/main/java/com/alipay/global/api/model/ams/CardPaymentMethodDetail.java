@@ -61,4 +61,6 @@ public class CardPaymentMethodDetail {
 
     private String networkTransactionId;
 
+    private Boolean is3DSAuthentication;
+
 }
