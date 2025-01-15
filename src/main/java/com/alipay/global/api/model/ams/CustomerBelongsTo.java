@@ -46,5 +46,7 @@ public enum CustomerBelongsTo {
 
     ZALOPAY,
 
-    DIRECTDEBIT_YAPILY;
+    DIRECTDEBIT_YAPILY,
+
+    ANTOM_BIZ_ACCOUNT;
 }
