@@ -138,3 +138,5 @@ update --- 优化base64多jdk版本兼容
 41、Version:2.0.50
 1. CKP二期支持商户传入可选支付方式列表
 2. AMS独立绑卡支持MIT交易
+42、Version:2.0.51
+update --- 支付方式枚举类新增ABA
