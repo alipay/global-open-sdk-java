@@ -92,6 +92,8 @@ public class AntomPathConstants {
      */
     public static final String SUBSCRIPTION_CANCEL_PATH = "/ams/api/v1/subscriptions/cancel";
 
+    public static final String SUBSCRIPTION_UPDATE_PATH = "/ams/api/v1/subscriptions/update";
+
 
     /**
      * see <a href="https://global.alipay.com/docs/ac/ams/accept">accept dispute</a>
