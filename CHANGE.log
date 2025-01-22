@@ -142,3 +142,5 @@ update --- 优化base64多jdk版本兼容
 update --- 支付方式枚举类新增ABA
 43、Version:2.0.52
 1. 订阅支付新增“更新接口”
+44、Version:2.0.53
+1. update promotionResults
