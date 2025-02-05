@@ -66,4 +66,14 @@ public class PaymentResultInfo {
      */
     private CreditPayPlan creditPayPlan;
 
+    private String cardholderName;
+
+    private String cardBin;
+
+    private String lastFour;
+
+    private String expiryMonth;
+
+    private String expiryYear;
+
 }
