@@ -63,4 +63,13 @@ public class CardPaymentMethodDetail {
 
     private Boolean is3DSAuthentication;
 
+    private String request3DS;
+
+    private String scaExemptionIndicator;
+
+    private String enableAuthenticationUpgrade;
+
+    private MpiData mpiData;
+
+
 }
