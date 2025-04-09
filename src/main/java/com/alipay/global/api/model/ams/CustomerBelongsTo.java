@@ -48,5 +48,9 @@ public enum CustomerBelongsTo {
 
     DIRECTDEBIT_YAPILY,
 
+    TOSSPAY,
+
+    MOMO,
+
     ANTOM_BIZ_ACCOUNT;
 }

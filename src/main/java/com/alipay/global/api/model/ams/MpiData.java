@@ -7,12 +7,11 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
-public class Contact {
-    private ContactType type;
-    private String info;
-    private String home;
-    private String work;
-    private String mobile;
+@AllArgsConstructor
+public class MpiData {
+    private String threeDSVersion;
+    private String eci;
+    private String cavv;
+    private String dsTransactionId;
 }

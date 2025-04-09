@@ -1,5 +1,6 @@
 package com.alipay.global.api.request.ams.pay;
 
+import com.alipay.global.api.model.ams.CustomizedInfo;
 import com.alipay.global.api.model.ams.Env;
 import com.alipay.global.api.model.ams.PaymentMethodDetail;
 import com.alipay.global.api.model.constants.AntomPathConstants;
@@ -24,6 +25,13 @@ public class AlipayVaultingPaymentMethodRequest extends
     private PaymentMethodDetail paymentMethodDetail;
 
     private Env env;
+
+    private String merchantAccountId;
+
+    private String vaultingCurrency;
+
+    private CustomizedInfo customizedInfo;
+
 
     public AlipayVaultingPaymentMethodRequest() {
         this.setPath(AntomPathConstants.VAULT_PAYMENT_METHOD_PATH);
