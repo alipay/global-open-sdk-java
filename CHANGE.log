@@ -143,5 +143,5 @@ update --- 支付方式枚举类新增ABA
 44、Version:2.0.53
 1. update promotionResults
 2. 支付、查询、支付结果通知新增卡相关信息字段
-44、Version:2.0.54
+45、Version:2.0.54
 1. oneApi绑卡补全
