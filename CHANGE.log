@@ -157,6 +157,9 @@ update --- 支付方式枚举类新增ABA
 
 45、Version:2.0.54
 1. 支付、查询、支付结果通知新增卡相关信息字段
-
 46、Version:2.0.55
 1. oneApi绑卡补全
+47、Version:2.0.56
+1. Antom 印度渠道接入AMS拒付相关接口的标准变更
+2. Antom印度渠道接入（UPI/CARD/NETBAKING）相关接口标准变更
+3. CKP二期支持商户传入支付方式地区和支付方式要素
