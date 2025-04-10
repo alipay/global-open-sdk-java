@@ -17,6 +17,9 @@ public class AlipayUploadInvoiceShippingFileRequest extends AlipayRequest<Alipay
     private String fileType;
     private String fileName;
 
+    public AlipayUploadInvoiceShippingFileRequest() {
+        this.setPath("/ams/api/v1/payments/uploadInvoiceShippingFile");
+    }
 
     @Override
     public Class<AlipayUploadInvoiceShippingFileResponse> getResponseClass() {
