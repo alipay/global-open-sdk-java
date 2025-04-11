@@ -12,5 +12,5 @@ import lombok.NoArgsConstructor;
 public class VaultingPaymentMethodDetail {
     private String paymentMethodType;
     private VaultingCard card;
-
+    private Wallet wallet;
 }
