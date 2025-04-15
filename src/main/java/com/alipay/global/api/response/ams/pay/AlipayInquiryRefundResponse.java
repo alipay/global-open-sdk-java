@@ -1,9 +1,6 @@
 package com.alipay.global.api.response.ams.pay;
 
-import com.alipay.global.api.model.ams.AcquirerInfo;
-import com.alipay.global.api.model.ams.Amount;
-import com.alipay.global.api.model.ams.Quote;
-import com.alipay.global.api.model.ams.TransactionStatusType;
+import com.alipay.global.api.model.ams.*;
 import com.alipay.global.api.response.AlipayResponse;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -26,5 +23,7 @@ public class AlipayInquiryRefundResponse extends AlipayResponse {
     private Quote settlementQuote;
 
     private AcquirerInfo acquirerInfo;
+
+    private CustomizedInfo customizedInfo;
 
 }

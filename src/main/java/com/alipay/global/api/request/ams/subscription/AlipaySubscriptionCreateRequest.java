@@ -90,6 +90,11 @@ public class AlipaySubscriptionCreateRequest extends
      */
     private List<Trial> trials;
 
+    private String merchantAccountId;
+    private Boolean allowAccumulate;
+    private Amount maxAccumulateAmount;
+    private CustomizedInfo customizedInfo;
+
     public AlipaySubscriptionCreateRequest() {
         this.setPath(AntomPathConstants.SUBSCRIPTION_CREATE_PATH);
     }

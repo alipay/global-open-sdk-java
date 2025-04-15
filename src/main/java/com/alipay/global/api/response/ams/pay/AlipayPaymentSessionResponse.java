@@ -16,4 +16,6 @@ public class AlipayPaymentSessionResponse extends AlipayResponse {
 
     private String normalUrl;
 
+    private String url;
+
 }

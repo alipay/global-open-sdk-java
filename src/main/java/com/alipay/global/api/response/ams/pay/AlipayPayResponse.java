@@ -36,5 +36,6 @@ public class AlipayPayResponse extends AlipayResponse {
     private PaymentResultInfo paymentResultInfo;
     private AcquirerInfo acquirerInfo;
     private List<PromotionResult> promotionResult;
+    private Amount processingAmount;
 
 }

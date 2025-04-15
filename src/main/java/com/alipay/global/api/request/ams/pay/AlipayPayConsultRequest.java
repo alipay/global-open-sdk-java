@@ -34,6 +34,7 @@ public class AlipayPayConsultRequest extends AlipayRequest<AlipayPayConsultRespo
      * The unique ID to identify a merchant account.
      */
     private String merchantAccountId;
+    private PaymentMethodCategoryType paymentMethodCategory;
 
     public AlipayPayConsultRequest() {
         this.setPath(AntomPathConstants.CONSULT_PAYMENT_PATH);

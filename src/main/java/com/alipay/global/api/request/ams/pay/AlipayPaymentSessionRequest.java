@@ -104,6 +104,15 @@ public class AlipayPaymentSessionRequest extends AlipayRequest<AlipayPaymentSess
 
     private AvailablePaymentMethod availablePaymentMethod;
 
+    private CustomizedInfo customizedInfo;
+
+    private Quote paymentQuote;
+
+    private Amount processingAmount;
+
+    private SubscriptionPlan subscriptionPlan;
+
+
     public AlipayPaymentSessionRequest() {
         this.setPath(AntomPathConstants.CREATE_SESSION_PATH);
     }
