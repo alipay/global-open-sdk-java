@@ -41,6 +41,20 @@ public class AntomPathConstants {
      */
     public static final String INQUIRE_VAULTING_PATH = "/ams/api/v1/vaults/inquireVaulting";
 
+    /**
+     * see <a href="https://global.alipay.com/docs/ac/oneapi/inquire_token">inquireToken vaulting</a>
+     */
+    public static final String INQUIRE_TOKEN_VAULTING_PATH = "/ams/api/v1/vaults/inquireToken";
+
+    /**
+     * see <a href="https://global.alipay.com/docs/ac/oneapi/update_token">updateToken vaulting</a>
+     */
+    public static final String UPDATE_TOKEN_VAULTING_PATH = "/ams/api/v1/vaults/updateToken";
+
+    /**
+     * see <a href="https://global.alipay.com/docs/ac/oneapi/delete_token">deleteToken vaulting</a>
+     */
+    public static final String DELETE_TOKEN_VAULTING_PATH = "/ams/api/v1/vaults/deleteToken";
 
     /**
      * see <a href="https://global.alipay.com/docs/ac/ams/consult">consult</a>
@@ -51,6 +65,21 @@ public class AntomPathConstants {
      * see <a href="https://global.alipay.com/docs/ac/ams/payment_cashier">pay (Checkout Payment)</a> or <a href="https://global.alipay.com/docs/ac/ams/payment_agreement">pay (Auto Debit)</a>
      */
     public static final String PAYMENT_PATH = "/ams/api/v1/payments/pay";
+
+    /**
+     * see <a href="https://global.alipay.com/docs/ac/oneapi/fetch">fetchNonce </a>
+     */
+    public static final String PAYMENT_FETCH_NONCE_PATH = "/ams/api/v1/payments/fetchNonce";
+
+    /**
+     * see <a href="https://global.alipay.com/docs/ac/oneapi/inquireInstallment">inquireInstallment </a>
+     */
+    public static final String PAYMENT_INQUIRE_INSTALLMENT_PATH = "/ams/api/v1/payments/inquireInstallment";
+
+    /**
+     * see <a href="https://global.alipay.com/docs/ac/oneapi/inquireExchangeRate">inquireExchangeRate </a>
+     */
+    public static final String PAYMENT_INQUIRE_EXCHANGE_RATE_PATH = "/ams/api/v1/payments/inquireExchangeRate";
 
     /**
      * see <a href="https://global.alipay.com/docs/ac/ams/session_cashier">create payment session</a> or <a href="https://global.alipay.com/docs/ac/ams/createpaymentsession_easypay">create payment session</a>
@@ -94,6 +123,7 @@ public class AntomPathConstants {
 
     public static final String SUBSCRIPTION_UPDATE_PATH = "/ams/api/v1/subscriptions/update";
 
+    public static final String SUBSCRIPTION_INQUIRE_PATH = "/ams/api/v1/payments/inquire";
 
     /**
      * see <a href="https://global.alipay.com/docs/ac/ams/accept">accept dispute</a>

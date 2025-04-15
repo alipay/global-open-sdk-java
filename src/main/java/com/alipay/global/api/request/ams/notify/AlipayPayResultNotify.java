@@ -74,4 +74,8 @@ public class AlipayPayResultNotify extends AlipayNotify {
 
     private String paymentMethodType;
 
+    private CustomizedInfo customizedInfo;
+    private Quote paymentQuote;
+    private Amount processingAmount;
+
 }

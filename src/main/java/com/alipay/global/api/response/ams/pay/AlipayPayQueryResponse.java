@@ -45,4 +45,10 @@ public class AlipayPayQueryResponse extends AlipayResponse {
     private String earliestSettlementTime;
 
     private String paymentMethodType;
+
+    private String authExpirytime;
+    private CustomizedInfo customizedInfo;
+    private Amount processingAmount;
+
+
 }

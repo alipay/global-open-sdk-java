@@ -64,6 +64,10 @@ public class AlipaySubscriptionChangeRequest extends
      */
     private Amount paymentAmountDifference;
 
+    private Boolean allowAccumulate;
+
+    private Amount maxAccumulateAmount;
+
     public AlipaySubscriptionChangeRequest() {
         this.setPath(AntomPathConstants.SUBSCRIPTION_CHANGE_PATH);
     }

@@ -1,6 +1,7 @@
 package com.alipay.global.api.request.ams.notify;
 
 import com.alipay.global.api.model.ams.Amount;
+import com.alipay.global.api.model.ams.CustomizedInfo;
 import com.alipay.global.api.model.ams.Quote;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -43,5 +44,7 @@ public class AlipayRefundNotify extends AlipayNotify {
      * The exchange rate between the settlement currency and transaction currency
      */
     private Quote settlementQuote;
+
+    private CustomizedInfo customizedInfo;
 
 }
