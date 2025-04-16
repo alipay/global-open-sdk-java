@@ -8,7 +8,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 
-@Data@EqualsAndHashCode(callSuper = true)
+@Data
+@EqualsAndHashCode(callSuper = true)
 public class AlipayAuthConsultRequest extends AlipayRequest<AlipayAuthConsultResponse> {
 
     private CustomerBelongsTo customerBelongsTo;
