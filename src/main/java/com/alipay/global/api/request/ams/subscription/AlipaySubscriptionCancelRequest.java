@@ -6,8 +6,8 @@ import com.alipay.global.api.response.ams.subscription.AlipaySubscriptionCancelR
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class AlipaySubscriptionCancelRequest extends
         AlipayRequest<AlipaySubscriptionCancelResponse> {
 

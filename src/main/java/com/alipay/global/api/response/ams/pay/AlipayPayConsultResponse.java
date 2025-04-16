@@ -8,8 +8,8 @@ import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class AlipayPayConsultResponse extends AlipayResponse {
 
     private List<PaymentOption> paymentOptions;

@@ -11,7 +11,7 @@ import lombok.EqualsAndHashCode;
  * The response of Ant Group's risk send payment result API.
  * 调用蚂蚁集团风控支付结果通知接口的响应结果。
  */
-@EqualsAndHashCode(callSuper = true)
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class SendPaymentResultResponse extends RiskResponse {
 }

@@ -9,8 +9,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Deprecated
-@EqualsAndHashCode(callSuper = true)
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class AlipayCreateOrderRequest extends AlipayRequest<AlipayCreateOrderResponse> {
 
     private ProductCodeType productCode;

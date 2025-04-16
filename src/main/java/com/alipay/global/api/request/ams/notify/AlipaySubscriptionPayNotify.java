@@ -5,8 +5,8 @@ import com.alipay.global.api.request.ams.pay.AlipayPayRequest;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class AlipaySubscriptionPayNotify extends AlipayPayResultNotify {
     private String subscriptionRequestId;
     private String subscriptionId;

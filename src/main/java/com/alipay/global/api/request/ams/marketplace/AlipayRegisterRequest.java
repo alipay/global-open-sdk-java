@@ -11,8 +11,8 @@ import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class AlipayRegisterRequest extends AlipayRequest<AlipayRegisterResponse> {
 
     private String registrationRequestId;

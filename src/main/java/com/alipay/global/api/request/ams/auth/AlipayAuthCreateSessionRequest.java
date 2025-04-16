@@ -10,8 +10,8 @@ import com.alipay.global.api.response.ams.auth.AlipayAuthCreateSessionResponse;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class AlipayAuthCreateSessionRequest extends AlipayRequest<AlipayAuthCreateSessionResponse> {
 
     private ProductCodeType productCode;

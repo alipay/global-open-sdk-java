@@ -10,8 +10,8 @@ import com.alipay.global.api.response.ams.customs.AlipayCustomsDeclareResponse;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class AlipayCustomsDeclareRequest extends AlipayRequest<AlipayCustomsDeclareResponse> {
 
     private String declarationRequestId;

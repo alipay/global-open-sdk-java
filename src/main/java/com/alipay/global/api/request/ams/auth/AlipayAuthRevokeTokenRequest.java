@@ -6,8 +6,8 @@ import com.alipay.global.api.response.ams.auth.AlipayAuthRevokeTokenResponse;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class AlipayAuthRevokeTokenRequest extends AlipayRequest<AlipayAuthRevokeTokenResponse> {
 
     private String accessToken;

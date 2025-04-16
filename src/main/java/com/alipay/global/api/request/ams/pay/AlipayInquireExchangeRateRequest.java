@@ -7,8 +7,8 @@ import com.alipay.global.api.response.ams.pay.AlipayPayResponse;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class AlipayInquireExchangeRateRequest extends AlipayRequest<AlipayInquireExchangeRateResponse> {
 
     private String merchantAccountId;

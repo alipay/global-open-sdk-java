@@ -7,8 +7,8 @@ import com.alipay.global.api.response.ams.vaults.AlipayUpdateTokenResponse;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class AlipayDeleteTokenRequest  extends
         AlipayRequest<AlipayDeleteTokenResponse> {
     private String merchantAccountId;

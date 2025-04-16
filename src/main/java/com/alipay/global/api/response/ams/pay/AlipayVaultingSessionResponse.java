@@ -4,8 +4,8 @@ import com.alipay.global.api.response.AlipayResponse;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class AlipayVaultingSessionResponse extends AlipayResponse {
 
     private String vaultingSessionData;

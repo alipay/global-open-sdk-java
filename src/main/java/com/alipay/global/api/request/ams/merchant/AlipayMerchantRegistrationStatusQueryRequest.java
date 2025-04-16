@@ -5,8 +5,8 @@ import com.alipay.global.api.response.ams.merchant.AlipayMerchantRegistrationSta
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class AlipayMerchantRegistrationStatusQueryRequest extends
         AlipayRequest<AlipayMerchantRegistrationStatusQueryResponse> {
 
