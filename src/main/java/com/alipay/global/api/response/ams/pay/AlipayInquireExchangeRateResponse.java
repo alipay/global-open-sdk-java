@@ -6,8 +6,8 @@ import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class AlipayInquireExchangeRateResponse extends AlipayPayResponse{
     private List<Quote> quotes;
 }

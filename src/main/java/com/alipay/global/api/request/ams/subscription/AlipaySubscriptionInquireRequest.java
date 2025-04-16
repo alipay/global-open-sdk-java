@@ -7,8 +7,8 @@ import com.alipay.global.api.response.ams.subscription.AlipaySubscriptionInquire
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class AlipaySubscriptionInquireRequest extends AlipayRequest<AlipaySubscriptionInquireResponse> {
     private String subscriptionId;
     private String merchantSubscriptionId;

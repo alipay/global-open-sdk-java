@@ -9,8 +9,8 @@ import com.alipay.global.api.response.ams.subscription.AlipaySubscriptionChangeR
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class AlipaySubscriptionChangeRequest extends
         AlipayRequest<AlipaySubscriptionChangeResponse> {
 

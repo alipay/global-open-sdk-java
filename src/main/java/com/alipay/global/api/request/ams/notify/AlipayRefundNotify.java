@@ -6,8 +6,8 @@ import com.alipay.global.api.model.ams.Quote;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class AlipayRefundNotify extends AlipayNotify {
 
     /**

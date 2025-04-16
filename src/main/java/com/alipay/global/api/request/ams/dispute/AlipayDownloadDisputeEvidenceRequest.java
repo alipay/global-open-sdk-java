@@ -7,8 +7,8 @@ import com.alipay.global.api.response.ams.dispute.AlipayDownloadDisputeEvidenceR
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class AlipayDownloadDisputeEvidenceRequest extends
         AlipayRequest<AlipayDownloadDisputeEvidenceResponse> {
 

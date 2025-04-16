@@ -8,8 +8,8 @@ import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class AlipayMerchantRegistrationStatusQueryResponse extends AlipayResponse {
 
     private RegistrationResult registrationResult;

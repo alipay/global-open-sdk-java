@@ -6,8 +6,8 @@ import com.alipay.global.api.response.ams.vaults.AlipayVaultingInquireTokenRespo
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class AlipayVaultingInquireTokenRequest extends AlipayRequest<AlipayVaultingInquireTokenResponse> {
     private String merchantAccountId;
     private String token;

@@ -8,8 +8,8 @@ import com.alipay.global.api.response.ams.users.AlipayInitAuthenticationResponse
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class AlipayInitAuthenticationRequest extends
         AlipayRequest<AlipayInitAuthenticationResponse> {
 

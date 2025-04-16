@@ -16,8 +16,8 @@ import java.util.Date;
  * The request of Ant Group's risk report API.
  * 调用蚂蚁集团风险上报接口的请求参数。
  */
-@EqualsAndHashCode(callSuper = true)
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class RiskReportRequest extends AlipayRequest<RiskReportResponse> {
     /**
      * A unique ID assigned to a merchant who provides a service or product directly to a customer and is used to identify the transaction.

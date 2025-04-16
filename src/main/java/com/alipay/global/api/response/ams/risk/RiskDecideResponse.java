@@ -11,8 +11,8 @@ import lombok.EqualsAndHashCode;
  * The response of Ant Group's risk decide API.
  * 调用蚂蚁集团风控实时决策接口的响应结果。
  */
-@EqualsAndHashCode(callSuper = true)
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class RiskDecideResponse extends RiskResponse {
     /**
      * Ant Group's risk decisions. Valid values are as follows:

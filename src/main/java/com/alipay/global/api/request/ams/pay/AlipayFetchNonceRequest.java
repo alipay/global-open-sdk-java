@@ -8,8 +8,8 @@ import com.alipay.global.api.response.ams.pay.AlipayPayResponse;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class AlipayFetchNonceRequest extends AlipayRequest<AlipayFetchNonceResponse> {
     private CardPaymentMethodDetail card;
 

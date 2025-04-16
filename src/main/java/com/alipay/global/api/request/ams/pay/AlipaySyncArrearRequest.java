@@ -6,7 +6,7 @@ import com.alipay.global.api.response.ams.pay.AlipaySyncArrearResponse;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@EqualsAndHashCode(callSuper = true)
+
 @Data
 public class AlipaySyncArrearRequest extends AlipayRequest<AlipaySyncArrearResponse> {
 

@@ -8,8 +8,8 @@ import com.alipay.global.api.response.ams.auth.AlipayAuthApplyTokenResponse;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@EqualsAndHashCode(callSuper = true)
-@Data
+
+@Data@EqualsAndHashCode(callSuper = true)
 public class AlipayAuthApplyTokenRequest extends AlipayRequest<AlipayAuthApplyTokenResponse> {
 
     private GrantType grantType;

@@ -6,8 +6,8 @@ import com.alipay.global.api.response.ams.dispute.AlipaySupplyDefenseDocumentRes
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class AlipaySupplyDefenseDocumentRequest extends
         AlipayRequest<AlipaySupplyDefenseDocumentResponse> {
 
