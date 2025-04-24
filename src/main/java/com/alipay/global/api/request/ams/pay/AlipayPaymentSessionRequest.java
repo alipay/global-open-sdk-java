@@ -104,6 +104,8 @@ public class AlipayPaymentSessionRequest extends AlipayRequest<AlipayPaymentSess
 
     private AvailablePaymentMethod availablePaymentMethod;
 
+    private List<String> allowedPaymentMethodRegions;
+
     private CustomizedInfo customizedInfo;
 
     private Quote paymentQuote;
