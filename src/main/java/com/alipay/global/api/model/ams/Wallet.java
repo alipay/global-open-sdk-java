@@ -15,4 +15,6 @@ public class Wallet {
     private String phoneNo;
     private String email;
     private Address billingAddress;
+    private String token;
+    private String tokenExpiryTime;
 }
