@@ -18,8 +18,8 @@ import java.util.List;
  * The request of Ant Group's send refund result API.
  * 调用蚂蚁集团退款结果通知接口的请求参数。
  */
-@EqualsAndHashCode(callSuper = true)
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class SendRefundResultRequest extends AlipayRequest<SendRefundResultResponse> {
     /**
      * A unique ID assigned to a merchant who provides a service or product directly to a customer and is used to identify the transaction.

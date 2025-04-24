@@ -7,8 +7,9 @@ import com.alipay.global.api.response.ams.auth.AlipayAuthConsultResponse;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@EqualsAndHashCode(callSuper = true)
+
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class AlipayAuthConsultRequest extends AlipayRequest<AlipayAuthConsultResponse> {
 
     private CustomerBelongsTo customerBelongsTo;

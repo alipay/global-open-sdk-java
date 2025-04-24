@@ -16,8 +16,8 @@ import lombok.EqualsAndHashCode;
  * The request of Ant Group's send payment result API.
  * 调用蚂蚁集团支付结果通知接口的请求参数。
  */
-@EqualsAndHashCode(callSuper = true)
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class SendPaymentResultRequest extends AlipayRequest<SendPaymentResultResponse> {
     /**
      * A unique ID assigned to a merchant who provides a service or product directly to a customer and is used to identify the transaction.

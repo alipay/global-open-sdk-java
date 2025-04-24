@@ -1,13 +1,14 @@
 package com.alipay.global.api.request.ams.notify;
 
+import com.alipay.global.api.model.ams.Amount;
 import com.alipay.global.api.model.ams.PeriodRule;
 import com.alipay.global.api.model.ams.SubscriptionNotificationType;
 import com.alipay.global.api.model.ams.SubscriptionStatus;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class AlipaySubscriptionNotify extends AlipayNotify{
     private String subscriptionRequestId;
     private String subscriptionId;
@@ -16,4 +17,6 @@ public class AlipaySubscriptionNotify extends AlipayNotify{
     private String subscriptionStartTime;
     private String subscriptionEndTime;
     private PeriodRule periodRule;
+    private Boolean allowAccumulate;
+    private Amount maxAccumulateAmount;
 }

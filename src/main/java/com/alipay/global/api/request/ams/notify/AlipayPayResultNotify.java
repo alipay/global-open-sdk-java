@@ -6,8 +6,8 @@ import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class AlipayPayResultNotify extends AlipayNotify {
 
     /**
@@ -73,5 +73,9 @@ public class AlipayPayResultNotify extends AlipayNotify {
     private List<PromotionResult> promotionResult;
 
     private String paymentMethodType;
+
+    private CustomizedInfo customizedInfo;
+    private Quote paymentQuote;
+    private Amount processingAmount;
 
 }

@@ -6,8 +6,8 @@ import com.alipay.global.api.response.ams.pay.AlipayVaultingQueryResponse;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class AlipayVaultingQueryRequest extends AlipayRequest<AlipayVaultingQueryResponse> {
 
     private String vaultingRequestId;

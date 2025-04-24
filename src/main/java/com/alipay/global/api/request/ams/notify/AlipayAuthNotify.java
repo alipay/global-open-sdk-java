@@ -3,8 +3,8 @@ package com.alipay.global.api.request.ams.notify;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class AlipayAuthNotify extends AlipayNotify {
 
     /**

@@ -9,8 +9,8 @@ import com.alipay.global.api.response.ams.subscription.AlipaySubscriptionChangeR
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class AlipaySubscriptionChangeRequest extends
         AlipayRequest<AlipaySubscriptionChangeResponse> {
 
@@ -63,6 +63,10 @@ public class AlipaySubscriptionChangeRequest extends
      * The payment amount for the initial subscription period after changing the payment amount for subsequent subscription periods.
      */
     private Amount paymentAmountDifference;
+
+    private Boolean allowAccumulate;
+
+    private Amount maxAccumulateAmount;
 
     public AlipaySubscriptionChangeRequest() {
         this.setPath(AntomPathConstants.SUBSCRIPTION_CHANGE_PATH);

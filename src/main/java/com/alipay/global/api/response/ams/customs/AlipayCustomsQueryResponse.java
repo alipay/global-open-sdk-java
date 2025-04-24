@@ -7,8 +7,8 @@ import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class AlipayCustomsQueryResponse extends AlipayResponse {
 
     private List<String> declarationRequestsNotFound;

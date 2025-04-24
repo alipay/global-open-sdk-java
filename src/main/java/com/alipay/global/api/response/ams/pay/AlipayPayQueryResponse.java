@@ -7,8 +7,8 @@ import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class AlipayPayQueryResponse extends AlipayResponse {
 
     private TransactionStatusType paymentStatus;
@@ -45,4 +45,10 @@ public class AlipayPayQueryResponse extends AlipayResponse {
     private String earliestSettlementTime;
 
     private String paymentMethodType;
+
+    private String authExpirytime;
+    private CustomizedInfo customizedInfo;
+    private Amount processingAmount;
+
+
 }

@@ -22,8 +22,8 @@ import java.util.List;
  * The request of Ant Group's risk decide API.
  * 调用蚂蚁集团风控实时决策接口的请求参数。
  */
-@EqualsAndHashCode(callSuper = true)
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class RiskDecideRequest extends AlipayRequest<RiskDecideResponse> {
     /**
      * A unique ID assigned to a merchant who provides a service or product directly to a customer and is used to identify the transaction.

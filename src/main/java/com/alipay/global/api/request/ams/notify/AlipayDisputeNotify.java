@@ -7,8 +7,8 @@ import com.alipay.global.api.model.ams.DisputeNotificationType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class AlipayDisputeNotify extends AlipayNotify {
     private String paymentRequestId;
     private String disputeId;

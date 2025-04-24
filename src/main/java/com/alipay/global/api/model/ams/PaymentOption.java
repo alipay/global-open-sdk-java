@@ -31,4 +31,7 @@ public class PaymentOption {
     private Installment installment;
     private List<PromotionInfo> promotionInfos;
 
+    private InteractionType interactionType;
+    private String bankIdentifierCode;
+
 }

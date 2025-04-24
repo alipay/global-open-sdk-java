@@ -6,8 +6,8 @@ import com.alipay.global.api.model.constants.ProductSceneConstants;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class AlipayCheckoutPaymentSessionRequest extends AlipayPaymentSessionRequest {
 
     public AlipayCheckoutPaymentSessionRequest() {

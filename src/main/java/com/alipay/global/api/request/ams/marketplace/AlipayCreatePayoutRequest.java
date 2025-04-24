@@ -8,8 +8,8 @@ import com.alipay.global.api.response.ams.marketplace.AlipayCreatePayoutResponse
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class AlipayCreatePayoutRequest extends AlipayRequest<AlipayCreatePayoutResponse> {
 
     private String transferRequestId;

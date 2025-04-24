@@ -9,8 +9,8 @@ import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class AlipayPaymentSessionRequest extends AlipayRequest<AlipayPaymentSessionResponse> {
 
     /**
@@ -105,6 +105,15 @@ public class AlipayPaymentSessionRequest extends AlipayRequest<AlipayPaymentSess
     private AvailablePaymentMethod availablePaymentMethod;
 
     private List<String> allowedPaymentMethodRegions;
+
+    private CustomizedInfo customizedInfo;
+
+    private Quote paymentQuote;
+
+    private Amount processingAmount;
+
+    private SubscriptionPlan subscriptionPlan;
+
 
     public AlipayPaymentSessionRequest() {
         this.setPath(AntomPathConstants.CREATE_SESSION_PATH);

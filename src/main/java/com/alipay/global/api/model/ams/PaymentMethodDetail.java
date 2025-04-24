@@ -17,6 +17,12 @@ public class PaymentMethodDetail {
     private DiscountPaymentMethodDetail discount;
     private CouponPaymentMethodDetail coupon;
 
+    /**
+     * The type of payment method to be vaulted. Valid values are:
+     *
+     * CARD: the card used to be vaulted
+     * WALLET: the wallet used to be vaulted
+     */
     private String paymentMethodType;
     private String extendInfo;
 

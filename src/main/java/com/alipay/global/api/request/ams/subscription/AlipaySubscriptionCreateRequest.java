@@ -9,8 +9,8 @@ import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class AlipaySubscriptionCreateRequest extends
         AlipayRequest<AlipaySubscriptionCreateResponse> {
 
@@ -89,6 +89,11 @@ public class AlipaySubscriptionCreateRequest extends
      * The list of trial information of a subscription.
      */
     private List<Trial> trials;
+
+    private String merchantAccountId;
+    private Boolean allowAccumulate;
+    private Amount maxAccumulateAmount;
+    private CustomizedInfo customizedInfo;
 
     public AlipaySubscriptionCreateRequest() {
         this.setPath(AntomPathConstants.SUBSCRIPTION_CREATE_PATH);
