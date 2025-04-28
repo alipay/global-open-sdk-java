@@ -26,4 +26,5 @@ public class AlipayInquiryRefundResponse extends AlipayResponse {
 
     private CustomizedInfo customizedInfo;
 
+    private String arn;
 }
