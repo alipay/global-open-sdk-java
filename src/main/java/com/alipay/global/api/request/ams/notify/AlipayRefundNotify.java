@@ -47,4 +47,5 @@ public class AlipayRefundNotify extends AlipayNotify {
 
     private CustomizedInfo customizedInfo;
 
+    private String arn;
 }
