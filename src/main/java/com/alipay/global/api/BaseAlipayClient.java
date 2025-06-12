@@ -40,6 +40,8 @@ public abstract class BaseAlipayClient implements AlipayClient {
      */
     private boolean isSandboxMode = false;
 
+    private String agentToken;
+
     public BaseAlipayClient() {
     }
 
@@ -54,6 +56,19 @@ public abstract class BaseAlipayClient implements AlipayClient {
         this.merchantPrivateKey = merchantPrivateKey;
         this.alipayPublicKey = alipayPublicKey;
         this.clientId = clientId;
+
+        // if client id starts with SANDBOX_, set to sandbox mode
+        if (clientId.startsWith("SANDBOX_")) {
+            this.isSandboxMode = true;
+        }
+    }
+
+    public BaseAlipayClient(String gatewayUrl, String merchantPrivateKey, String alipayPublicKey, String clientId, String agentToken) {
+        this.gatewayUrl = gatewayUrl;
+        this.merchantPrivateKey = merchantPrivateKey;
+        this.alipayPublicKey = alipayPublicKey;
+        this.clientId = clientId;
+        this.agentToken = agentToken;
 
         // if client id starts with SANDBOX_, set to sandbox mode
         if (clientId.startsWith("SANDBOX_")) {
@@ -224,6 +239,9 @@ public abstract class BaseAlipayClient implements AlipayClient {
         }
         String signatureHeader = "algorithm=RSA256,keyVersion=" + keyVersion + ",signature=" + signatureValue;
         header.put(Constants.REQ_SIGN_HEADER, signatureHeader);
+        if (StringUtils.isNotBlank(agentToken)) {
+            header.put(Constants.AGENT_TOKEN_HEADER, agentToken);
+        }
         return header;
     }
 

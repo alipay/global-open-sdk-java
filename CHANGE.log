@@ -169,3 +169,5 @@ update --- 支付方式枚举类新增ABA
 1. Antom 印度渠道接入AMS拒付相关接口的标准变更
 2. Antom印度渠道接入（UPI/CARD/NETBAKING）相关接口标准变更
 3. CKP二期支持商户传入支付方式地区和支付方式要素
+49、Version:2.0.59
+1. 新增ISV模式
