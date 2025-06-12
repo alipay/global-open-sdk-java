@@ -24,7 +24,7 @@ public interface Constants {
 
     String RSP_TIME_HEADER = "response-time";
 
-    String AGENT_TOKEN_HEADER = "Agent-Token";
+    String AGENT_TOKEN_HEADER = "agent-token";
 
     int HTTP_SUCCESS_CODE = 200;
 
