@@ -76,4 +76,6 @@ public class PaymentResultInfo {
 
     private String expiryYear;
 
+    private String accountNo;
+
 }

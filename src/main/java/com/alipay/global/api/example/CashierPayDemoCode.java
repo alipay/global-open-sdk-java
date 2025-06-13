@@ -70,6 +70,7 @@ public class CashierPayDemoCode {
 
         try {
             alipayPayConsultResponse = CLIENT.execute(alipayPayConsultRequest);
+            System.out.println(JSONObject.toJSON(alipayPayConsultResponse));
         } catch (AlipayApiException e) {
             String errorMsg = e.getMessage();
             // handle error condition
@@ -139,6 +140,7 @@ public class CashierPayDemoCode {
         AlipayPayResponse alipayPayResponse = null;
         try {
             alipayPayResponse = CLIENT.execute(alipayPayRequest);
+            System.out.println(JSONObject.toJSON(alipayPayResponse));
         } catch (AlipayApiException e) {
             String errorMsg = e.getMessage();
             // handle error condition
