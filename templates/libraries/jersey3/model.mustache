@@ -1,0 +1,69 @@
+{{>licenseInfo}}
+
+package {{package}};
+
+import java.util.Objects;
+import java.util.Arrays;
+import java.util.Map;
+import java.util.HashMap;
+import lombok.*;
+import io.swagger.annotations.ApiModel;
+import com.alipay.global.api.request.AlipayRequest;
+import com.alipay.global.api.response.AlipayResponse;
+import com.alipay.global.api.model.ams.*;
+import com.alipay.global.api.model.Result;
+{{#lambdas.skipResultImport}}
+{{#imports}}
+    import {{import}};
+{{/imports}}
+{{/lambdas.skipResultImport}}
+
+{{#serializableModel}}
+    import java.io.Serializable;
+{{/serializableModel}}
+
+{{#withXml}}
+    import javax.xml.bind.annotation.*;
+{{/withXml}}
+{{#parcelableModel}}
+    import android.os.Parcelable;
+    import android.os.Parcel;
+{{/parcelableModel}}
+{{#useBeanValidation}}
+    import javax.validation.constraints.*;
+    import javax.validation.Valid;
+{{/useBeanValidation}}
+{{#performBeanValidation}}
+    import org.hibernate.validator.constraints.*;
+{{/performBeanValidation}}
+
+{{#models}}
+    {{#model}}
+        {{#oneOf}}
+            {{#first}}
+                import com.fasterxml.jackson.core.type.TypeReference;
+            {{/first}}
+        {{/oneOf}}
+
+        {{#isEnum}}
+            {{>modelEnum}}
+        {{/isEnum}}
+
+        {{^isEnum}}
+            {{#oneOf}}
+            {{! 将oneOf的逻辑内容放置此处 }}
+            {{/oneOf}}
+
+            {{^oneOf}}
+                {{#anyOf}}
+                {{! 将anyOf的逻辑内容放置此处 }}
+                {{/anyOf}}
+
+                {{^anyOf}}
+                    {{>pojo}}
+                {{/anyOf}}
+            {{/oneOf}}
+        {{/isEnum}}
+    {{/model}}
+{{/models}}
+
