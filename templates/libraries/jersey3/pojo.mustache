@@ -1,0 +1,85 @@
+/**
+* {{description}}{{^description}}{{classname}}{{/description}}
+*/
+{{#isDeprecated}}
+    @Deprecated{{/isDeprecated}}
+{{#description}}
+    @ApiModel(description = "{{{.}}}")
+{{/description}}
+{{#lambdas.lombokRequest}}
+    {{classname}}
+{{/lambdas.lombokRequest}}
+{{>additionalModelTypeAnnotations}}{{#discriminator}}{{>typeInfoAnnotation}}{{/discriminator}}{{>xmlAnnotation}}
+{{#vendorExtensions.x-class-extra-annotation}}
+    {{{vendorExtensions.x-class-extra-annotation}}}
+{{/vendorExtensions.x-class-extra-annotation}}
+public class {{classname}} {{#lambdas.parent}}{{classname}} 1 {{/lambdas.parent}} {
+{{#serializableModel}}
+    private static final long serialVersionUID = 1L;
+{{/serializableModel}}
+
+
+{{#vars}}
+    {{#lambdas.skipResult}}
+        {{#shouldRender}}
+
+            {{#isEnum}}
+                {{^isContainer}}
+                    {{^vendorExtensions.x-enum-as-string}}
+                        {{>modelInnerEnum}}
+                    {{/vendorExtensions.x-enum-as-string}}
+                {{/isContainer}}
+                {{#isContainer}}
+                    {{#mostInnerItems}}
+                        {{>modelInnerEnum}}
+                    {{/mostInnerItems}}
+                {{/isContainer}}
+            {{/isEnum}}
+
+
+            {{^vendorExtensions.x-is-jackson-optional-nullable}}
+                {{#isContainer}}
+                    {{#deprecated}}
+                        @Deprecated // deprecated {{#vendorExtensions.x-deprecatedInVersion}}since {{#appName}}{{{.}}}{{/appName}} v{{.}}{{/vendorExtensions.x-deprecatedInVersion}}{{#vendorExtensions.x-deprecatedMessage}}: {{{.}}}{{/vendorExtensions.x-deprecatedMessage}}
+                    {{/deprecated}}
+                    {{#description}}
+                        /**
+                        * {{.}}
+                        */
+                    {{/description}}
+                    private {{{datatypeWithEnum}}} {{#lambdas.camelCase}} {{name}} {{/lambdas.camelCase}};
+                {{/isContainer}}
+                {{^isContainer}}
+                    {{#deprecated}}
+                        @Deprecated // d
+                        eprecated {{#vendorExtensions.x-deprecatedInVersion}}since {{#appName}}{{{.}}}{{/appName}} v{{.}}{{/vendorExtensions.x-deprecatedInVersion}}{{#vendorExtensions.x-deprecatedMessage}}: {{{.}}}{{/vendorExtensions.x-deprecatedMessage}}
+                    {{/deprecated}}
+                    {{#description}}
+                        /**
+                        * {{.}}
+                        */
+                    {{/description}}
+                    private {{{datatypeWithEnum}}} {{#lambdas.camelCase}} {{name}} {{/lambdas.camelCase}};
+                {{/isContainer}}
+            {{/vendorExtensions.x-is-jackson-optional-nullable}}
+
+        {{/shouldRender}}
+    {{/lambdas.skipResult}}
+
+
+{{/vars}}
+
+
+
+
+{{#lambdas.equals}}{{classname}}   {{serverUrl}}
+{{/lambdas.equals}}
+
+
+{{#lambdas.parent}}{{classname}} 2
+{{/lambdas.parent}}
+
+
+
+
+}
