@@ -58,6 +58,8 @@ public class AlipayRefundRequest extends AlipayRequest<AlipayRefundResponse> {
 
     private CustomizedInfo customizedInfo;
 
+    private String captureId;
+
 
     public AlipayRefundRequest() {
         this.setPath(AntomPathConstants.REFUND_PATH);

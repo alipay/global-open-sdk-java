@@ -14,6 +14,12 @@ import java.util.List;
 @AllArgsConstructor
 public class Transit {
     private TransitType transitType;
+    private String agentCode;
+    private String agentName;
+    private String ticketNumber;
+    private String  ticketIssuerCode;
+    private String restrictedTicketIndicator;
     private List<Leg> legs;
     private List<Passenger> passengers;
+    private AncillaryData ancillaryData;
 }

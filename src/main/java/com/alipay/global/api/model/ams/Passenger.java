@@ -13,4 +13,6 @@ public class Passenger {
     private UserName passengerName;
     private String passengerEmail;
     private String passengerPhoneNo;
+    private String passengerId;
+    private PassengerIdType passengerIdType;
 }

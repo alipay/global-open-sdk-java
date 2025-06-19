@@ -1,6 +1,7 @@
 package com.alipay.global.api.request.ams.pay;
 
 import com.alipay.global.api.model.ams.Amount;
+import com.alipay.global.api.model.ams.Transit;
 import com.alipay.global.api.model.constants.AntomPathConstants;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.pay.AlipayCaptureResponse;
@@ -27,6 +28,8 @@ public class AlipayCaptureRequest extends AlipayRequest<AlipayCaptureResponse> {
     private Amount captureAmount;
 
     private Boolean isLastCapture;
+
+    private Transit transit;
 
     public AlipayCaptureRequest() {
         this.setPath(AntomPathConstants.CAPTURE_PATH);

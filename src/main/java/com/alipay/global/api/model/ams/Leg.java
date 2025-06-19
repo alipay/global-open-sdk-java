@@ -16,6 +16,9 @@ public class Leg {
     private Address arrivalAddress;
     private String carrierName;
     private String carrierNo;
+    private String fareBasis;
+    private String couponNumber;
+    private String flightNumber;
     private ClassType classType;
     private String departureAirportCode;
     private String arrivalAirportCode;
