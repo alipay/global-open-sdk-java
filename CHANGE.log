@@ -173,3 +173,5 @@ update --- 支付方式枚举类新增ABA
 1. 新增ISV模式
 50、Version:2.0.60
 1. SG B15 Airline航司接入全球卡(Visa/Mastercard)接口变更
+51、Version:2.0.61
+1. Iyzico渠道接入AMS变更
