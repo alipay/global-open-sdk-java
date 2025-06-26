@@ -11,9 +11,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Shipping {
 
-    private UserName shippingName;
-    private Address shippingAddress;
-    private String shippingCarrier;
-    private String shippingPhoneNo;
-
+  private UserName shippingName;
+  private Address shippingAddress;
+  private String shippingCarrier;
+  private String shippingPhoneNo;
 }

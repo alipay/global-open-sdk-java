@@ -10,6 +10,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Service {
-    private String categoryCode;
-    private String subCategoryCode;
+  private String categoryCode;
+  private String subCategoryCode;
 }

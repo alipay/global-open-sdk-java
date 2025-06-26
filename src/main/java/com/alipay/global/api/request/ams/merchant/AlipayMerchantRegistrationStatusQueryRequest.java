@@ -7,18 +7,18 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class AlipayMerchantRegistrationStatusQueryRequest extends
-        AlipayRequest<AlipayMerchantRegistrationStatusQueryResponse> {
+public class AlipayMerchantRegistrationStatusQueryRequest
+    extends AlipayRequest<AlipayMerchantRegistrationStatusQueryResponse> {
 
-    private String registrationRequestId;
-    private String referenceMerchantId;
+  private String registrationRequestId;
+  private String referenceMerchantId;
 
-    public AlipayMerchantRegistrationStatusQueryRequest() {
-        this.setPath("/ams/api/v1/merchants/inquiryRegistrationStatus");
-    }
+  public AlipayMerchantRegistrationStatusQueryRequest() {
+    this.setPath("/ams/api/v1/merchants/inquiryRegistrationStatus");
+  }
 
-    @Override
-    public Class<AlipayMerchantRegistrationStatusQueryResponse> getResponseClass() {
-        return AlipayMerchantRegistrationStatusQueryResponse.class;
-    }
+  @Override
+  public Class<AlipayMerchantRegistrationStatusQueryResponse> getResponseClass() {
+    return AlipayMerchantRegistrationStatusQueryResponse.class;
+  }
 }

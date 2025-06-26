@@ -11,8 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class AmountLimit {
 
-    private Amount maxAmount;
-    private Amount minAmount;
-    private Amount remainAmount;
-
+  private Amount maxAmount;
+  private Amount minAmount;
+  private Amount remainAmount;
 }

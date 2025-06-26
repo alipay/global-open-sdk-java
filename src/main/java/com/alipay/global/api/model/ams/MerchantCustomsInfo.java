@@ -11,8 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class MerchantCustomsInfo {
 
-    private String merchantCustomsCode;
+  private String merchantCustomsCode;
 
-    private String merchantCustomsName;
-
+  private String merchantCustomsName;
 }

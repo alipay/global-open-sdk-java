@@ -12,6 +12,5 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class RiskResponse extends AlipayResponse {
 
-    private String securityId;
-
+  private String securityId;
 }
