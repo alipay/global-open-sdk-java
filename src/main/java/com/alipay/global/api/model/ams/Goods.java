@@ -22,5 +22,7 @@ public class Goods {
 
     private String goodsImageUrl;
     private String priceId;
+    private Amount goodsDiscountAmount;
+    private Goods crossSell;
 
 }

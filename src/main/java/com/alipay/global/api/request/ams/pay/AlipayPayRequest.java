@@ -109,6 +109,8 @@ public class AlipayPayRequest extends AlipayRequest<AlipayPayResponse> {
 
     private Amount processingAmount;
 
+    private SubscriptionInfo subscriptionInfo;
+
     public AlipayPayRequest() {
         this.setPath(AntomPathConstants.PAYMENT_PATH);
     }

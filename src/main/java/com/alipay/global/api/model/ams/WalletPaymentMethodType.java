@@ -78,7 +78,7 @@ public enum WalletPaymentMethodType {
     ZALOPAY,
     MOMO,
     ONLINEBANKING_YAPILY,
-
+    DIDI_PAY_LATER,
     ;
 
 }

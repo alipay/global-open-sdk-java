@@ -147,6 +147,11 @@ public class AntomPathConstants {
     public static final String REFUND_PATH = "/ams/api/v1/payments/refund";
 
     /**
+     * see <a href="https://global.alipay.com/docs/ac/ams/refund_online">refund</a>
+     */
+    public static final String RETRIEVE_PATH = "/ams/api//v1/payments/retrievePaymentSession";
+
+    /**
      * see <a href="https://global.alipay.com/docs/ac/ams/ir_online">inquiry refund</a>
      */
     public static final String INQUIRY_REFUND_PATH = "/ams/api/v1/payments/inquiryRefund";

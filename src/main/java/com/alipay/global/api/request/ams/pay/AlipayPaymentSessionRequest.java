@@ -114,6 +114,8 @@ public class AlipayPaymentSessionRequest extends AlipayRequest<AlipayPaymentSess
 
     private SubscriptionPlan subscriptionPlan;
 
+    private SubscriptionInfo subscriptionInfo;
+
 
     public AlipayPaymentSessionRequest() {
         this.setPath(AntomPathConstants.CREATE_SESSION_PATH);

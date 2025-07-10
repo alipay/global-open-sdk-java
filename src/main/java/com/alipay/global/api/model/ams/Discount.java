@@ -15,5 +15,6 @@ public class Discount {
     private String discountName;
     private Amount savingsAmount;
     private Amount estimateSavingsAmount;
+    private String promotionCode;
 
 }

@@ -8,6 +8,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class AlipayVaultingSessionResponse extends AlipayResponse {
 
+    private String normalUrl;
     private String vaultingSessionData;
     private String vaultingSessionId;
     private String vaultingSessionExpiryTime;

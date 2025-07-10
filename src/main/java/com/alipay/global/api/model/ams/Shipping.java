@@ -15,12 +15,11 @@ public class Shipping {
     private Address shippingAddress;
     private String shippingCarrier;
     private String shippingPhoneNo;
-
+    private String shippingNumber;
     private String shipToEmail;
-
+    private String notes;
     private String shippingFeeId;
     private Amount shippingFee;
     private String shippingDescription;
     private DeliveryEstimate deliveryEstimate;
-
 }

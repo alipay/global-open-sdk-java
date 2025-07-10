@@ -27,5 +27,7 @@ public class Order {
     private Lodging lodging;
     private Gaming gaming;
     private Boolean needDeclaration;
+    private Amount orderDiscountAmount;
+    private Amount subTotalOrderAmount;
 
 }
