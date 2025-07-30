@@ -7,5 +7,5 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class AlipayDeviceCertificateResponse extends AlipayResponse {
-    private String deviceCertificate;
+  private String deviceCertificate;
 }
