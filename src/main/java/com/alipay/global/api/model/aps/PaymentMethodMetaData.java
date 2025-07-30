@@ -11,6 +11,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PaymentMethodMetaData {
 
-    private String authClientId;
-
+  private String authClientId;
 }

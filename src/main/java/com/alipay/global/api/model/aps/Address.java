@@ -11,11 +11,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Address {
 
-    private String region;
-    private String state;
-    private String city;
-    private String address1;
-    private String address2;
-    private String zipCode;
-
+  private String region;
+  private String state;
+  private String city;
+  private String address1;
+  private String address2;
+  private String zipCode;
 }

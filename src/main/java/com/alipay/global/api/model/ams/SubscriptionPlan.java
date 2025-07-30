@@ -11,10 +11,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class SubscriptionPlan {
 
-    private Boolean allowAccumulate;
-    private Amount maxAccumulateAmount;
-    private PeriodRule periodRule;
-    private String subscriptionStartTime;
-    private String subscriptionNotificationUrl;
-
+  private Boolean allowAccumulate;
+  private Amount maxAccumulateAmount;
+  private PeriodRule periodRule;
+  private String subscriptionStartTime;
+  private String subscriptionNotificationUrl;
 }

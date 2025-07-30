@@ -13,19 +13,17 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class AlipayCreateOrderRequest extends AlipayRequest<AlipayCreateOrderResponse> {
 
-    private ProductCodeType productCode;
-    private String paymentRequestId;
-    private Order order;
-    private Amount paymentAmount;
-    private String paymentRedirectUrl;
-    private String paymentNotifyUrl;
+  private ProductCodeType productCode;
+  private String paymentRequestId;
+  private Order order;
+  private Amount paymentAmount;
+  private String paymentRedirectUrl;
+  private String paymentNotifyUrl;
 
-    public AlipayCreateOrderRequest() {
-    }
+  public AlipayCreateOrderRequest() {}
 
-    @Override
-    public Class<AlipayCreateOrderResponse> getResponseClass() {
-        return AlipayCreateOrderResponse.class;
-    }
-
+  @Override
+  public Class<AlipayCreateOrderResponse> getResponseClass() {
+    return AlipayCreateOrderResponse.class;
+  }
 }
