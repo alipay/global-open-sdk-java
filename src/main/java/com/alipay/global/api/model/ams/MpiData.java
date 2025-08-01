@@ -14,4 +14,5 @@ public class MpiData {
     private String eci;
     private String cavv;
     private String dsTransactionId;
+    private String credentialType;
 }
