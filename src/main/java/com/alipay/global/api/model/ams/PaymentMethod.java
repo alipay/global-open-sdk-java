@@ -18,5 +18,6 @@ public class PaymentMethod {
     private String customerId;
     private String extendInfo;
     private Boolean requireIssuerAuthentication;
+    private FundingType funding;
 
 }

@@ -29,6 +29,8 @@ public class AlipayCaptureRequest extends AlipayRequest<AlipayCaptureResponse> {
 
     private Boolean isLastCapture;
 
+    private String captureType;
+
     private Transit transit;
 
     public AlipayCaptureRequest() {

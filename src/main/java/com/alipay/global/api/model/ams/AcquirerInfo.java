@@ -23,6 +23,8 @@ public class AcquirerInfo {
 
     private String acquirerMerchantId;
 
+    private String acquirerMerchantName;
+
     private String acquirerResultCode;
 
     private String acquirerResultMessage;

@@ -78,4 +78,10 @@ public class PaymentResultInfo {
 
     private String accountNo;
 
+    private String refusalCodeRaw;
+    private String refusalReasonRaw;
+    private String merchantAdviceCode;
+
+    private AcquirerInfo acquirerInfo;
+
 }
