@@ -116,6 +116,11 @@ public class AlipayPaymentSessionRequest extends AlipayRequest<AlipayPaymentSess
 
     private SubscriptionInfo subscriptionInfo;
 
+    /**
+     * A 2-letter country or region code based on the standard of ISO 3166 Country Codes. This parameter is used to sort Alipay+ payment methods according to the user's region
+     */
+    private String userRegion;
+
 
     public AlipayPaymentSessionRequest() {
         this.setPath(AntomPathConstants.CREATE_SESSION_PATH);
