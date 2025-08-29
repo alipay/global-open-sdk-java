@@ -176,6 +176,8 @@ update --- 支付方式枚举类新增ABA
 51、Version:2.0.61
 1. Iyzico渠道接入AMS变更
 2. update 0710
-51、Version:2.0.62
+52、Version:2.0.62
 1. AMS支付接口、支付通知、支付查询接口透传卡组ISO code和Mac code及渠道DE42和DE43
+53、Version:2.0.63
+1. 新增getCardInfo接口
 

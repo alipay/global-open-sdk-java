@@ -66,6 +66,8 @@ public class AntomPathConstants {
      */
     public static final String PAYMENT_PATH = "/ams/api/v1/payments/pay";
 
+    public static final String CARD_INFO_PATH = "/ams/api/v1/payments/getCardInfo";
+
     /**
      * see <a href="https://global.alipay.com/docs/ac/oneapi/fetch">fetchNonce </a>
      */
