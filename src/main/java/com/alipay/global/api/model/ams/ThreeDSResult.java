@@ -36,4 +36,8 @@ public class ThreeDSResult {
      */
     private String xid;
 
+    private String threeDStransactionStatusReason;
+
+    private String challengeCancel;
+
 }

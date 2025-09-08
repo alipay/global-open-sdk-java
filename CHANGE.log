@@ -182,4 +182,6 @@ update --- 支付方式枚举类新增ABA
 1. 新增getCardInfo接口
 54、Version:2.0.64
 1. add userRegion
+55、Version:2.0.65
+1. 返回3DS认证失败原因
 
