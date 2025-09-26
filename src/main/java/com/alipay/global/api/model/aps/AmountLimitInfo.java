@@ -11,8 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class AmountLimitInfo {
 
-    private AmountLimit singleLimit;
-    private AmountLimit dayLimit;
-    private AmountLimit monthLimit;
-
+  private AmountLimit singleLimit;
+  private AmountLimit dayLimit;
+  private AmountLimit monthLimit;
 }

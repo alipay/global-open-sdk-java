@@ -14,15 +14,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AuthorizationError {
-    /**
-     * Authorization error code.
-     * 授权错误码
-     */
-    private String errorCode;
-    /**
-     * Description of the Authorization error code.
-     * 授权错误码的描述
-     */
-    private String errorMessage;
-
+  /** Authorization error code. 授权错误码 */
+  private String errorCode;
+  /** Description of the Authorization error code. 授权错误码的描述 */
+  private String errorMessage;
 }

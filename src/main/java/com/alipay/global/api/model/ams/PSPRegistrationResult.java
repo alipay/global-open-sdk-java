@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PSPRegistrationResult {
 
-    private RegistrationResult registrationResult;
-    private String pspName;
-
+  private RegistrationResult registrationResult;
+  private String pspName;
 }

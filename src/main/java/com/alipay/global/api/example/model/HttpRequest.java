@@ -4,8 +4,7 @@ import java.io.InputStream;
 
 public interface HttpRequest {
 
-    String getHeader(String name);
+  String getHeader(String name);
 
-    InputStream getInputStream();
-
+  InputStream getInputStream();
 }

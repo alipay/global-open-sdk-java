@@ -11,8 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Result {
 
-    private String resultCode;
-    private ResultStatusType resultStatus;
-    private String resultMessage;
-
+  private String resultCode;
+  private ResultStatusType resultStatus;
+  private String resultMessage;
 }

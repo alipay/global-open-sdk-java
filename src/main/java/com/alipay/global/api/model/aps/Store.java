@@ -11,13 +11,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Store {
 
-    private String referenceStoreId;
-    private String storeName;
-    private String storeMCC;
-    private String storeDisplayName;
-    private String storeTerminalId;
-    private String storeOperatorId;
-    private String storePhoneNo;
-    private Address storeAddress;
-
+  private String referenceStoreId;
+  private String storeName;
+  private String storeMCC;
+  private String storeDisplayName;
+  private String storeTerminalId;
+  private String storeOperatorId;
+  private String storePhoneNo;
+  private Address storeAddress;
 }

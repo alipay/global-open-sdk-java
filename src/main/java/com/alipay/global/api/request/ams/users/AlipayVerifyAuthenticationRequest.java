@@ -8,20 +8,19 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class AlipayVerifyAuthenticationRequest extends
-        AlipayRequest<AlipayVerifyAuthenticationResponse> {
+public class AlipayVerifyAuthenticationRequest
+    extends AlipayRequest<AlipayVerifyAuthenticationResponse> {
 
-    private AuthenticationType authenticationType;
-    private String authenticationRequestId;
-    private String authenticationValue;
+  private AuthenticationType authenticationType;
+  private String authenticationRequestId;
+  private String authenticationValue;
 
-    public AlipayVerifyAuthenticationRequest() {
-        this.setPath("/ams/api/v1/users/verifyAuthentication");
-    }
+  public AlipayVerifyAuthenticationRequest() {
+    this.setPath("/ams/api/v1/users/verifyAuthentication");
+  }
 
-    @Override
-    public Class<AlipayVerifyAuthenticationResponse> getResponseClass() {
-        return AlipayVerifyAuthenticationResponse.class;
-    }
-
+  @Override
+  public Class<AlipayVerifyAuthenticationResponse> getResponseClass() {
+    return AlipayVerifyAuthenticationResponse.class;
+  }
 }
