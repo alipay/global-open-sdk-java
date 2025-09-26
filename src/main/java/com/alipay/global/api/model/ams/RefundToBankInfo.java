@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RefundToBankInfo {
-    private String bankCode;
-    private UserName accountHolderName;
-    private String accountNo;
+  private String bankCode;
+  private UserName accountHolderName;
+  private String accountNo;
 }

@@ -10,18 +10,16 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class AlipayDeviceCertificateRequest extends AlipayRequest<AlipayDeviceCertificateResponse> {
 
-    private String devicePublicKey;
+  private String devicePublicKey;
 
-    private String deviceRequestId;
+  private String deviceRequestId;
 
+  public AlipayDeviceCertificateRequest() {
+    this.setPath(AntomPathConstants.CREATE_DEVICE_CERTIFICATE_PATH);
+  }
 
-    public AlipayDeviceCertificateRequest() {
-        this.setPath(AntomPathConstants.CREATE_DEVICE_CERTIFICATE_PATH);
-    }
-
-    @Override
-    public Class<AlipayDeviceCertificateResponse> getResponseClass() {
-        return AlipayDeviceCertificateResponse.class;
-    }
-
+  @Override
+  public Class<AlipayDeviceCertificateResponse> getResponseClass() {
+    return AlipayDeviceCertificateResponse.class;
+  }
 }

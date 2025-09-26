@@ -6,5 +6,4 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class AlipayDeleteTokenResponse extends AlipayResponse {
-}
+public class AlipayDeleteTokenResponse extends AlipayResponse {}

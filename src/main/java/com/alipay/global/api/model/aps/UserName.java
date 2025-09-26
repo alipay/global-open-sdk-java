@@ -11,9 +11,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class UserName {
 
-    private String firstName;
-    private String middleName;
-    private String lastName;
-    private String fullName;
-
+  private String firstName;
+  private String middleName;
+  private String lastName;
+  private String fullName;
 }
