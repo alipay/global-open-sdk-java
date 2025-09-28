@@ -184,4 +184,7 @@ update --- 支付方式枚举类新增ABA
 1. add userRegion
 55、Version:2.0.65
 1. 返回3DS认证失败原因
+56、Version:2.0.66
+1. DFM 支付中支持OTA行业结汇入中申报
+
 

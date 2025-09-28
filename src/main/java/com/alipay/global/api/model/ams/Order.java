@@ -29,5 +29,6 @@ public class Order {
     private Boolean needDeclaration;
     private Amount orderDiscountAmount;
     private Amount subTotalOrderAmount;
+    private Declaration declaration;
 
 }
