@@ -19,5 +19,6 @@ public class Quote {
     private String quoteStartTime;
     private String quoteExpiryTime;
     private Boolean guaranteed;
+    private Amount exchangeAmount;
 
 }
