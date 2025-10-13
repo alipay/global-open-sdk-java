@@ -1,6 +1,7 @@
 package com.alipay.global.api.request.ams.pay;
 
 import com.alipay.global.api.model.ams.CurrencyPair;
+import com.alipay.global.api.model.ams.ProductCodeType;
 import com.alipay.global.api.model.constants.AntomPathConstants;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.pay.AlipayInquireExchangeRateResponse;
@@ -19,6 +20,7 @@ public class AlipayInquireExchangeRateRequest extends AlipayRequest<AlipayInquir
     private List<CurrencyPair> currencyPairs;
     private String sellCurrency;
     private String buyCurrency;
+    private ProductCodeType productCode;
 
     public AlipayInquireExchangeRateRequest() {
         this.setPath(AntomPathConstants.PAYMENT_INQUIRE_EXCHANGE_RATE_PATH);
