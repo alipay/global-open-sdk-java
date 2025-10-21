@@ -84,4 +84,6 @@ public class PaymentResultInfo {
 
     private AcquirerInfo acquirerInfo;
 
+    private String exemptionRequested;
+
 }

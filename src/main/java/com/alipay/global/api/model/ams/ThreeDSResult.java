@@ -40,4 +40,8 @@ public class ThreeDSResult {
 
     private String challengeCancel;
 
+    private Boolean challenged;
+
+    private String exemptionType;
+
 }
