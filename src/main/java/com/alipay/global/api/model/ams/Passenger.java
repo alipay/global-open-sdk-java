@@ -15,4 +15,5 @@ public class Passenger {
     private String passengerPhoneNo;
     private String passengerId;
     private PassengerIdType passengerIdType;
+    private String passengerCode;
 }

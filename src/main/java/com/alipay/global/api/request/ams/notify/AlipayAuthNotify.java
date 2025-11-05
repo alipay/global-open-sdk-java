@@ -47,4 +47,6 @@ public class AlipayAuthNotify extends AlipayNotify {
      */
     private String userId;
 
+    private String passThroughInfo;
+
 }

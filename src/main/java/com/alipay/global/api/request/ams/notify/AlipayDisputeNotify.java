@@ -1,9 +1,6 @@
 package com.alipay.global.api.request.ams.notify;
 
-import com.alipay.global.api.model.ams.Amount;
-import com.alipay.global.api.model.ams.DisputeAcceptReasonType;
-import com.alipay.global.api.model.ams.DisputeJudgedResult;
-import com.alipay.global.api.model.ams.DisputeNotificationType;
+import com.alipay.global.api.model.ams.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -30,4 +27,5 @@ public class AlipayDisputeNotify extends AlipayNotify {
     private Boolean defendable;
     private String captureId;
     private String autoDefendReason;
+    private AcquirerInfo acquirerInfo;
 }

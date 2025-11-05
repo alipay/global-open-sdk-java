@@ -121,6 +121,8 @@ public class AlipayPaymentSessionRequest extends AlipayRequest<AlipayPaymentSess
      */
     private String userRegion;
 
+    private List<String> scopes;
+
 
     public AlipayPaymentSessionRequest() {
         this.setPath(AntomPathConstants.CREATE_SESSION_PATH);

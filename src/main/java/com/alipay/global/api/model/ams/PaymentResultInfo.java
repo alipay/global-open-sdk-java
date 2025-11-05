@@ -66,6 +66,8 @@ public class PaymentResultInfo {
      */
     private CreditPayPlan creditPayPlan;
 
+    private String cardCategory;
+
     private String cardholderName;
 
     private String cardBin;
@@ -85,5 +87,7 @@ public class PaymentResultInfo {
     private AcquirerInfo acquirerInfo;
 
     private String exemptionRequested;
+
+    private String credentialTypeUsed;
 
 }

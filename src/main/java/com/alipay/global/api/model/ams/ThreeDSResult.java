@@ -44,4 +44,6 @@ public class ThreeDSResult {
 
     private String exemptionType;
 
+    private Boolean threeDSOffered;
+
 }

@@ -29,4 +29,6 @@ public class AcquirerInfo {
 
     private String acquirerResultMessage;
 
+    private String acquirerReasonDescription;
+
 }
