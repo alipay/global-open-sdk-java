@@ -2,6 +2,7 @@ package com.alipay.global.api.request.ams.notify;
 
 import com.alipay.global.api.model.ams.AcquirerInfo;
 import com.alipay.global.api.model.ams.Amount;
+import com.alipay.global.api.model.ams.PaymentResultInfo;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -43,5 +44,9 @@ public class AlipayCaptureResultNotify extends AlipayNotify {
      * The information of the acquirer that processes the payment.
      */
     private AcquirerInfo acquirerInfo;
+
+
+    private PaymentResultInfo paymentResultInfo;
+
 
 }

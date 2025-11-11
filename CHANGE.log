@@ -194,5 +194,7 @@ update --- 支付方式枚举类新增ABA
 1. 返回 3DS 是否无摩擦
 60、Version:2.0.70
 1. update20251105
+61、Version:2.0.71
+1. update20251111
 
 
