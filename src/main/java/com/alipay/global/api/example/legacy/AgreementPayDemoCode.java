@@ -379,7 +379,7 @@ public class AgreementPayDemoCode {
     authConsultRequest.setOsType(OsType.ANDROID);
     authConsultRequest.setOsVersion("6.6.6");
     ScopeType[] scopes = {ScopeType.USER_LOGIN_ID};
-    authConsultRequest.setScopes(scopes);
+    authConsultRequest.setScopes(Arrays.asList(scopes));
     authConsultRequest.setTerminalType(TerminalType.APP);
     authConsultRequest.setMerchantRegion("US");
 
