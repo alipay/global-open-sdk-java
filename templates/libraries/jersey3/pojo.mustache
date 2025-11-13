@@ -47,7 +47,7 @@ public class {{classname}} {{#lambdas.parent}}{{classname}} 1 {{/lambdas.parent}
                         * {{.}}
                         */
                     {{/description}}
-                    private {{{datatypeWithEnum}}} {{#lambdas.camelCase}} {{name}} {{/lambdas.camelCase}};
+                    private {{#lambdas.specificScopeType}} {{name}}  {{{datatypeWithEnum}}}{{/lambdas.specificScopeType}}  {{#lambdas.camelCase}} {{name}} {{/lambdas.camelCase}};
                 {{/isContainer}}
                 {{^isContainer}}
                     {{#deprecated}}
@@ -59,7 +59,7 @@ public class {{classname}} {{#lambdas.parent}}{{classname}} 1 {{/lambdas.parent}
                         * {{.}}
                         */
                     {{/description}}
-                    private {{{datatypeWithEnum}}} {{#lambdas.camelCase}} {{name}} {{/lambdas.camelCase}};
+                    private {{#lambdas.specificScopeType}} {{name}}  {{{datatypeWithEnum}}}{{/lambdas.specificScopeType}}  {{#lambdas.camelCase}} {{name}} {{/lambdas.camelCase}};
                 {{/isContainer}}
             {{/vendorExtensions.x-is-jackson-optional-nullable}}
 
