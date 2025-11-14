@@ -8,8 +8,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class AlipayAuthCreateSessionResponse extends AlipayResponse {
 
-    private String paymentSessionId;
-    private String paymentSessionData;
-    private String paymentSessionExpiryTime;
-
+  private String paymentSessionId;
+  private String paymentSessionData;
+  private String paymentSessionExpiryTime;
 }

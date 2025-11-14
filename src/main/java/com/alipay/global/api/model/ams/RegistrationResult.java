@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class RegistrationResult {
 
-    private String registrationStatus;
-    private String rejectReasons;
-
+  private String registrationStatus;
+  private String rejectReasons;
 }

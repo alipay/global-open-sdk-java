@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CurrencyPair {
-    private String sellCurrency;
-    private String buyCurrency;
+  private String sellCurrency;
+  private String buyCurrency;
 }

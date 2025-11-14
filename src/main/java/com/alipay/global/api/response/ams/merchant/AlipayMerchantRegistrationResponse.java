@@ -8,6 +8,5 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class AlipayMerchantRegistrationResponse extends AlipayResponse {
 
-    private String passThroughInfo;
-
+  private String passThroughInfo;
 }

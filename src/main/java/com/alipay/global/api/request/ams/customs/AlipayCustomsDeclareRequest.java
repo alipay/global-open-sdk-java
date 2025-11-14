@@ -14,22 +14,21 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class AlipayCustomsDeclareRequest extends AlipayRequest<AlipayCustomsDeclareResponse> {
 
-    private String declarationRequestId;
-    private String paymentId;
-    private Amount declarationAmount;
-    private CustomsInfo customs;
-    private MerchantCustomsInfo merchantCustomsInfo;
-    private Boolean splitOrder;
-    private String subOrderId;
-    private Certificate buyerCertificate;
+  private String declarationRequestId;
+  private String paymentId;
+  private Amount declarationAmount;
+  private CustomsInfo customs;
+  private MerchantCustomsInfo merchantCustomsInfo;
+  private Boolean splitOrder;
+  private String subOrderId;
+  private Certificate buyerCertificate;
 
-    public AlipayCustomsDeclareRequest() {
-        this.setPath(AntomPathConstants.DECLARE_PATH);
-    }
+  public AlipayCustomsDeclareRequest() {
+    this.setPath(AntomPathConstants.DECLARE_PATH);
+  }
 
-    @Override
-    public Class<AlipayCustomsDeclareResponse> getResponseClass() {
-        return AlipayCustomsDeclareResponse.class;
-    }
-
+  @Override
+  public Class<AlipayCustomsDeclareResponse> getResponseClass() {
+    return AlipayCustomsDeclareResponse.class;
+  }
 }
