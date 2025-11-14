@@ -1,12 +1,11 @@
 package com.alipay.global.api.model.ams;
 
+import java.math.BigDecimal;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.math.BigDecimal;
-import java.util.List;
 
 @Data
 @Builder
@@ -14,8 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 public class RiskScoreResult {
 
-    private RiskScoreType riskScoreType;
-    private BigDecimal riskScore;
-    private List<RiskScoreDetail> riskScoreDetails;
-
+  private RiskScoreType riskScoreType;
+  private BigDecimal riskScore;
+  private List<RiskScoreDetail> riskScoreDetails;
 }

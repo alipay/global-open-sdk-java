@@ -12,9 +12,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Buyer {
 
-    private String referenceBuyerId;
-    private UserName buyerName;
-    private String buyerPhoneNo;
-    private String buyerEmail;
-
+  private String referenceBuyerId;
+  private UserName buyerName;
+  private String buyerPhoneNo;
+  private String buyerEmail;
 }

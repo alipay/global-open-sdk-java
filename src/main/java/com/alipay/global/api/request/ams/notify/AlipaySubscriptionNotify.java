@@ -9,14 +9,14 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class AlipaySubscriptionNotify extends AlipayNotify{
-    private String subscriptionRequestId;
-    private String subscriptionId;
-    private SubscriptionStatus subscriptionStatus ;
-    private SubscriptionNotificationType subscriptionNotificationType;
-    private String subscriptionStartTime;
-    private String subscriptionEndTime;
-    private PeriodRule periodRule;
-    private Boolean allowAccumulate;
-    private Amount maxAccumulateAmount;
+public class AlipaySubscriptionNotify extends AlipayNotify {
+  private String subscriptionRequestId;
+  private String subscriptionId;
+  private SubscriptionStatus subscriptionStatus;
+  private SubscriptionNotificationType subscriptionNotificationType;
+  private String subscriptionStartTime;
+  private String subscriptionEndTime;
+  private PeriodRule periodRule;
+  private Boolean allowAccumulate;
+  private Amount maxAccumulateAmount;
 }

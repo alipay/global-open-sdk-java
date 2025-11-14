@@ -5,24 +5,22 @@ import com.alipay.global.api.model.ams.CustomerIdType;
 import com.alipay.global.api.model.ams.RiskScoreType;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.risk.AlipayRiskScoreInquiryResponse;
+import java.util.List;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
-import java.util.List;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Deprecated
 public class AlipayRiskScoreInquiryRequest extends AlipayRequest<AlipayRiskScoreInquiryResponse> {
 
-    private CustomerBelongsTo customerBelongsTo;
-    private CustomerIdType customerIdType;
-    private String customerId;
-    private List<RiskScoreType> riskScoreTypes;
+  private CustomerBelongsTo customerBelongsTo;
+  private CustomerIdType customerIdType;
+  private String customerId;
+  private List<RiskScoreType> riskScoreTypes;
 
-    @Override
-    public Class<AlipayRiskScoreInquiryResponse> getResponseClass() {
-        return AlipayRiskScoreInquiryResponse.class;
-    }
-
+  @Override
+  public Class<AlipayRiskScoreInquiryResponse> getResponseClass() {
+    return AlipayRiskScoreInquiryResponse.class;
+  }
 }

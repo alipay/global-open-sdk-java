@@ -9,13 +9,13 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class AlipayGetCardInfoResponse  extends AlipayResponse {
-    private String cardBrand;
-    private String localCardBrand;
-    private String coBagedCardBrand;
-    private String issuingRegion;
-    private FundingType funding;
-    private CardCategoryType cardCategory;
-    private Boolean supportInstallment;
-    private Installment installment;
+public class AlipayGetCardInfoResponse extends AlipayResponse {
+  private String cardBrand;
+  private String localCardBrand;
+  private String coBagedCardBrand;
+  private String issuingRegion;
+  private FundingType funding;
+  private CardCategoryType cardCategory;
+  private Boolean supportInstallment;
+  private Installment installment;
 }

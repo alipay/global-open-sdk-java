@@ -6,8 +6,7 @@ import lombok.Data;
 @Data
 public class AlipayNotify {
 
-    private String notifyType;
+  private String notifyType;
 
-    private Result result;
-
+  private Result result;
 }

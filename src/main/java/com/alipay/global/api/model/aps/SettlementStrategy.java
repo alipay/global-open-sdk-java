@@ -11,6 +11,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class SettlementStrategy {
 
-    private String settlementCurrency;
-
+  private String settlementCurrency;
 }

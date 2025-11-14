@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Mobile {
-    private String regionCode;
-    private String phoneNo;
+  private String regionCode;
+  private String phoneNo;
 }
