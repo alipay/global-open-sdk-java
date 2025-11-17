@@ -86,9 +86,6 @@ public class DefaultHttpRPC {
                 String responseTime = getResponseTime(conns);
                 httpRpcResult.setResponseTime(responseTime);
 
-                // 设置keepAliveTimeout（一般服务端通过Keep-Alive头设置），这里一定要在解析header之后，否则会被覆盖为默认的5s或者服务端带回的Keep-Alive头的timeout值
-                setConnKeepAliveTimeout(conns);
-
                 int httpRespCode = conns.getResponseCode();
                 httpRpcResult.setRspCode(httpRespCode);
                 String rspBody = getResponseAsString(conns);
@@ -213,29 +210,6 @@ public class DefaultHttpRPC {
             if (stream != null) {
                 stream.close();
             }
-        }
-    }
-
-    private static void setConnKeepAliveTimeout(HttpURLConnection connection) {
-        if (keepAliveTimeout == 0) {
-            return;
-        }
-        try {
-
-            Field delegateHttpsUrlConnectionField = Class.forName("sun.net.www.protocol.https.HttpsURLConnectionImpl").getDeclaredField(
-                    "delegate");
-            delegateHttpsUrlConnectionField.setAccessible(true);
-            Object delegateHttpsUrlConnection = delegateHttpsUrlConnectionField.get(connection);
-
-            Field httpClientField = Class.forName("sun.net.www.protocol.http.HttpURLConnection").getDeclaredField("http");
-            httpClientField.setAccessible(true);
-            Object httpClient = httpClientField.get(delegateHttpsUrlConnection);
-
-            Field keepAliveTimeoutField = Class.forName("sun.net.www.http.HttpClient").getDeclaredField("keepAliveTimeout");
-            keepAliveTimeoutField.setAccessible(true);
-            keepAliveTimeoutField.setInt(httpClient, keepAliveTimeout);
-        } catch (Throwable ignored) {
-
         }
     }
 
