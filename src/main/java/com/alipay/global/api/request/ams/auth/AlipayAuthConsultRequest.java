@@ -25,6 +25,7 @@ public class AlipayAuthConsultRequest extends AlipayRequest<AlipayAuthConsultRes
     private Boolean recurringPayment;
     private AuthMetaData authMetaData;
     private String authNotifyUrl;
+    private Env env;
 
     public AlipayAuthConsultRequest() {
         this.setPath(AntomPathConstants.AUTH_CONSULT_PATH);
