@@ -11,9 +11,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PaymentMethod {
 
-    private String paymentMethodType;
-    private String paymentMethodId;
-    private String customerId;
-    private PaymentMethodMetaData paymentMethodMetaData;
-
+  private String paymentMethodType;
+  private String paymentMethodId;
+  private String customerId;
+  private PaymentMethodMetaData paymentMethodMetaData;
 }

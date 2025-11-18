@@ -11,12 +11,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PaymentOption {
 
-    private String paymentMethodType;
-    private PaymentMethodCategoryType paymentMethodCategory;
-    private boolean enabled;
-    private boolean preferred;
-    private String disableReason;
-    private Logo logo;
-    private PaymentOptionDetail paymentOptionDetail;
-
+  private String paymentMethodType;
+  private PaymentMethodCategoryType paymentMethodCategory;
+  private boolean enabled;
+  private boolean preferred;
+  private String disableReason;
+  private Logo logo;
+  private PaymentOptionDetail paymentOptionDetail;
 }

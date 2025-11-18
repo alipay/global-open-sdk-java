@@ -10,19 +10,15 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class AlipayVaultingNotify extends AlipayNotify {
 
-    /**
-     * The unique ID that is assigned by a merchant to identify a card vaulting request.
-     */
-    private String vaultingRequestId;
+  /** The unique ID that is assigned by a merchant to identify a card vaulting request. */
+  private String vaultingRequestId;
 
-    /**
-     * The details about the card payment method.
-     */
-    private VaultingPaymentMethodDetail paymentMethodDetail;
+  /** The details about the card payment method. */
+  private VaultingPaymentMethodDetail paymentMethodDetail;
 
-    private String vaultingCreateTime;
+  private String vaultingCreateTime;
 
-    private AcquirerInfo acquirerInfo;
+  private AcquirerInfo acquirerInfo;
 
-    private CustomizedInfo customizedInfo;
+  private CustomizedInfo customizedInfo;
 }

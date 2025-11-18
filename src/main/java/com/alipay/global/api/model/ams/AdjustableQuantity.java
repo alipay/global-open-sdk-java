@@ -5,15 +5,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class AdjustableQuantity {
 
-    private Integer maximum;
+  private Integer maximum;
 
-    private int minimum;
-
+  private int minimum;
 }

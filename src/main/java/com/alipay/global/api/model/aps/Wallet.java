@@ -11,10 +11,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Wallet {
 
-    private String walletName;
-    private String walletBrandName;
-    private Logo walletLogo;
-    private String walletRegion;
-    private WalletFeature walletFeature;
-
+  private String walletName;
+  private String walletBrandName;
+  private Logo walletLogo;
+  private String walletRegion;
+  private WalletFeature walletFeature;
 }

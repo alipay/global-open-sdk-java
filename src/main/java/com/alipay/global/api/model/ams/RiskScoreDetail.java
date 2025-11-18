@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class RiskScoreDetail {
 
-    private String riskInfoCode;
-    private String riskInfoCodeResult;
-
+  private String riskInfoCode;
+  private String riskInfoCodeResult;
 }

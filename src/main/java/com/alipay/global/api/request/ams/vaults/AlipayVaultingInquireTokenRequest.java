@@ -8,18 +8,17 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class AlipayVaultingInquireTokenRequest extends AlipayRequest<AlipayVaultingInquireTokenResponse> {
-    private String merchantAccountId;
-    private String token;
+public class AlipayVaultingInquireTokenRequest
+    extends AlipayRequest<AlipayVaultingInquireTokenResponse> {
+  private String merchantAccountId;
+  private String token;
 
+  public AlipayVaultingInquireTokenRequest() {
+    this.setPath(AntomPathConstants.INQUIRE_TOKEN_VAULTING_PATH);
+  }
 
-    public AlipayVaultingInquireTokenRequest() {
-        this.setPath(AntomPathConstants.INQUIRE_TOKEN_VAULTING_PATH);
-    }
-
-
-    @Override
-    public Class<AlipayVaultingInquireTokenResponse> getResponseClass() {
-        return AlipayVaultingInquireTokenResponse.class;
-    }
+  @Override
+  public Class<AlipayVaultingInquireTokenResponse> getResponseClass() {
+    return AlipayVaultingInquireTokenResponse.class;
+  }
 }
