@@ -29,5 +29,6 @@ public class Env {
     private String deviceModel;
     private String deviceLanguage;
     private String deviceId;
+    private String osVersion;
 
 }

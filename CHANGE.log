@@ -196,5 +196,7 @@ update --- 支付方式枚举类新增ABA
 1. update20251105
 61、Version:2.0.71
 1. update20251111
-
+62、Version:2.0.72
+1. ABA Statement
+2. ESP & 普通代扣 API集成方案
 

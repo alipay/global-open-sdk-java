@@ -193,4 +193,7 @@ public class AntomPathConstants {
 
     public static final String RISK_SEND_REFUND_RESULT_PATH = "/ams/api/v1/risk/payments/sendRefundResult";
 
+
+    public static final String ABA_INQUERY_STATEMENT_LIST_PATH = "/ams/api/v1/aba/accounts/inquiryStatementList";
+
 }
