@@ -6,5 +6,4 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class AlipaySyncArrearResponse extends AlipayResponse {
-}
+public class AlipaySyncArrearResponse extends AlipayResponse {}

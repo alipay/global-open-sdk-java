@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PaymentOptionDetail {
 
-    private PaymentOptionDetailType paymentOptionDetailType;
-    private WalletPaymentOptionDetail connectWallet;
-
+  private PaymentOptionDetailType paymentOptionDetailType;
+  private WalletPaymentOptionDetail connectWallet;
 }
