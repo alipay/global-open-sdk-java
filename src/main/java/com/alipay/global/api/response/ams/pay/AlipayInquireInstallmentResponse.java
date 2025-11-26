@@ -8,5 +8,5 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class AlipayInquireInstallmentResponse extends AlipayResponse {
-    private InstallmentBank installmentBanks;
+  private InstallmentBank installmentBanks;
 }

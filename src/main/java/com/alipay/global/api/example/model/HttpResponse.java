@@ -4,6 +4,5 @@ import java.io.OutputStream;
 
 public interface HttpResponse {
 
-    OutputStream getOutputStream();
-
+  OutputStream getOutputStream();
 }

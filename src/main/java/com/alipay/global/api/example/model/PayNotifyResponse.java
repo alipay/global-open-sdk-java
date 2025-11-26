@@ -4,14 +4,13 @@ import com.alipay.global.api.model.Result;
 
 public class PayNotifyResponse {
 
-    private Result result;
+  private Result result;
 
-    public Result getResult() {
-        return result;
-    }
+  public Result getResult() {
+    return result;
+  }
 
-    public void setResult(Result result) {
-        this.result = result;
-    }
-
+  public void setResult(Result result) {
+    this.result = result;
+  }
 }

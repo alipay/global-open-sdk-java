@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class WalletFeature {
 
-    private Boolean supportCodeScan;
-    private Boolean supportCashierRedirection;
-
+  private Boolean supportCodeScan;
+  private Boolean supportCashierRedirection;
 }

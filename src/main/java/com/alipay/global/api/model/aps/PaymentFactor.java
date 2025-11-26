@@ -11,9 +11,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PaymentFactor {
 
-    private Boolean isInStorePayment;
-    private Boolean isCashierPayment;
-    private PresentmentMode presentmentMode;
-    private InStorePaymentScenario inStorePaymentScenario;
-
+  private Boolean isInStorePayment;
+  private Boolean isCashierPayment;
+  private PresentmentMode presentmentMode;
+  private InStorePaymentScenario inStorePaymentScenario;
 }

@@ -14,20 +14,19 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class AlipayAuthCreateSessionRequest extends AlipayRequest<AlipayAuthCreateSessionResponse> {
 
-    private ProductCodeType productCode;
-    private AgreementInfo agreementInfo;
-    private ScopeType[] scopes;
-    private PaymentMethod paymentMethod;
-    private String paymentRedirectUrl;
+  private ProductCodeType productCode;
+  private AgreementInfo agreementInfo;
+  private ScopeType[] scopes;
+  private PaymentMethod paymentMethod;
+  private String paymentRedirectUrl;
 
-    public AlipayAuthCreateSessionRequest() {
-        this.setPath(AntomPathConstants.CREATE_SESSION_PATH);
-        this.setProductCode(ProductCodeType.AGREEMENT_PAYMENT);
-    }
+  public AlipayAuthCreateSessionRequest() {
+    this.setPath(AntomPathConstants.CREATE_SESSION_PATH);
+    this.setProductCode(ProductCodeType.AGREEMENT_PAYMENT);
+  }
 
-    @Override
-    public Class<AlipayAuthCreateSessionResponse> getResponseClass() {
-        return AlipayAuthCreateSessionResponse.class;
-    }
-
+  @Override
+  public Class<AlipayAuthCreateSessionResponse> getResponseClass() {
+    return AlipayAuthCreateSessionResponse.class;
+  }
 }
