@@ -4,33 +4,33 @@ import com.alipay.global.api.model.Result;
 
 public class PayNotifyRequest {
 
-    private PaymentNotifyType notifyType;
-    private Result resultInfo;
-    private String paymentRequestId;
-    // TODO other field
+  private PaymentNotifyType notifyType;
+  private Result resultInfo;
+  private String paymentRequestId;
 
-    public PaymentNotifyType getNotifyType() {
-        return notifyType;
-    }
+  // TODO other field
 
-    public void setNotifyType(PaymentNotifyType notifyType) {
-        this.notifyType = notifyType;
-    }
+  public PaymentNotifyType getNotifyType() {
+    return notifyType;
+  }
 
-    public Result getResultInfo() {
-        return resultInfo;
-    }
+  public void setNotifyType(PaymentNotifyType notifyType) {
+    this.notifyType = notifyType;
+  }
 
-    public void setResultInfo(Result resultInfo) {
-        this.resultInfo = resultInfo;
-    }
+  public Result getResultInfo() {
+    return resultInfo;
+  }
 
-    public String getPaymentRequestId() {
-        return paymentRequestId;
-    }
+  public void setResultInfo(Result resultInfo) {
+    this.resultInfo = resultInfo;
+  }
 
-    public void setPaymentRequestId(String paymentRequestId) {
-        this.paymentRequestId = paymentRequestId;
-    }
+  public String getPaymentRequestId() {
+    return paymentRequestId;
+  }
 
+  public void setPaymentRequestId(String paymentRequestId) {
+    this.paymentRequestId = paymentRequestId;
+  }
 }

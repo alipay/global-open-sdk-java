@@ -11,8 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CodeDetail {
 
-    private CodeValueType codeValueType;
-    private String codeValue;
-    private DisplayType displayType;
-
+  private CodeValueType codeValueType;
+  private String codeValue;
+  private DisplayType displayType;
 }

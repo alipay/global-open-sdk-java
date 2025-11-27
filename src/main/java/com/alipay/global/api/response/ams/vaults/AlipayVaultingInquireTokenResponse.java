@@ -8,10 +8,10 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class AlipayVaultingInquireTokenResponse extends AlipayResponse {
-    private String token;
-    private UserName accountHolderName;
-    private String email;
-    private String issuerName;
-    private String issuingCountry;
-    private String tokenExpiryTime;
+  private String token;
+  private UserName accountHolderName;
+  private String email;
+  private String issuerName;
+  private String issuingCountry;
+  private String tokenExpiryTime;
 }

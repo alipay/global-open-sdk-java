@@ -9,15 +9,14 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class AlipayUserQueryInfoRequest extends AlipayRequest<AlipayUserQueryInfoResponse> {
 
-    private String accessToken;
+  private String accessToken;
 
-    public AlipayUserQueryInfoRequest() {
-        this.setPath("/ams/api/v1/users/inquiryUserInfo");
-    }
+  public AlipayUserQueryInfoRequest() {
+    this.setPath("/ams/api/v1/users/inquiryUserInfo");
+  }
 
-    @Override
-    public Class<AlipayUserQueryInfoResponse> getResponseClass() {
-        return AlipayUserQueryInfoResponse.class;
-    }
-
+  @Override
+  public Class<AlipayUserQueryInfoResponse> getResponseClass() {
+    return AlipayUserQueryInfoResponse.class;
+  }
 }

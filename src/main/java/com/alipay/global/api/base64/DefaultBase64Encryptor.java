@@ -1,20 +1,23 @@
 package com.alipay.global.api.base64;
 
-import javax.xml.bind.DatatypeConverter;
+
+import org.apache.commons.codec.binary.Base64;
 
 /**
- * 为兼容低版本的java，默认使用javax.xml.bind.DatatypeConverter
+ * Base64 encoding and decoding using Apache Commons Codec
+ * You can also customize the base64 tool. See the end of the README.
+ * compatible JDK 6, 8, 11+
  */
 public class DefaultBase64Encryptor implements Base64Encryptor {
 
-    @Override
-    public String encodeToString(byte[] src) {
-        return DatatypeConverter.printBase64Binary(src);
-    }
+  @Override
+  public String encodeToString(byte[] src) {
+    return Base64.encodeBase64String(src);
+  }
 
-    @Override
-    public byte[] decode(String src) {
-        return DatatypeConverter.parseBase64Binary(src);
-    }
+  @Override
+  public byte[] decode(String src) {
+    return Base64.decodeBase64(src);
+  }
 
 }

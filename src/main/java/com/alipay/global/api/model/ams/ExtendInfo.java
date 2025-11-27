@@ -11,6 +11,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ExtendInfo {
 
-    private ChinaExtraTransInfo chinaExtraTransInfo;
-
+  private ChinaExtraTransInfo chinaExtraTransInfo;
 }
