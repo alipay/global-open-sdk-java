@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ContactInfo {
-    private String contactNo;
-    private String contactType;
-
+  private String contactNo;
+  private String contactType;
 }

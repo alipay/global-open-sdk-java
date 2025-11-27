@@ -11,11 +11,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Goods {
 
-    private String referenceGoodsId;
-    private String goodsName;
-    private String goodsCategory;
-    private String goodsBrand;
-    private Amount goodsUnitAmount;
-    private String goodsQuantity;
-
+  private String referenceGoodsId;
+  private String goodsName;
+  private String goodsCategory;
+  private String goodsBrand;
+  private Amount goodsUnitAmount;
+  private String goodsQuantity;
 }

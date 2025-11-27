@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Amount {
 
-    private String currency;
-    private String value;
-
+  private String currency;
+  private String value;
 }

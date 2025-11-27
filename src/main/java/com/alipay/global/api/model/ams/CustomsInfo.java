@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CustomsInfo {
 
-    private String customsCode;
-    private String region;
-
+  private String customsCode;
+  private String region;
 }

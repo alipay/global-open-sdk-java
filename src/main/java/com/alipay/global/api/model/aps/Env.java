@@ -11,13 +11,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Env {
 
-    private TerminalType terminalType;
-    private OsType osType;
-    private String userAgent;
-    private String deviceTokenId;
-    private String clientIp;
-    private String storeTerminalId;
-    private String cookieId;
-    private String storeTerminalRequestTime;
-
+  private TerminalType terminalType;
+  private OsType osType;
+  private String userAgent;
+  private String deviceTokenId;
+  private String clientIp;
+  private String storeTerminalId;
+  private String cookieId;
+  private String storeTerminalRequestTime;
 }

@@ -8,8 +8,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class AlipayUserQueryInfoResponse extends AlipayResponse {
 
-    private String userId;
-    private String userLoginId;
-    private String hashUserLoginId;
-
+  private String userId;
+  private String userLoginId;
+  private String hashUserLoginId;
 }

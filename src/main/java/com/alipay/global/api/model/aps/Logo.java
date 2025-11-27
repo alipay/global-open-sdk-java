@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Logo {
 
-    private String logoName;
-    private String logoUrl;
-
+  private String logoName;
+  private String logoUrl;
 }
