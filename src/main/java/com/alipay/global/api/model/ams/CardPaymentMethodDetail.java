@@ -21,6 +21,9 @@ import lombok.*;
 @AllArgsConstructor
 public class CardPaymentMethodDetail {
 
+  /** Supported card brands for this payment method */
+  private String supportedBrands;
+
   /**
    * The token of the card. The value of this parameter is used by paymentMethodId in the pay
    * (Checkout Payment) API when initiating payments. More information: Maximum length: 2048
@@ -28,6 +31,7 @@ public class CardPaymentMethodDetail {
    */
   private String cardToken;
 
+  /** The card number. More information: Maximum length: 32 characters */
   private String cardNo;
 
   private CardBrand brand;
@@ -40,8 +44,18 @@ public class CardPaymentMethodDetail {
 
   private UserName instUserName;
 
+  /**
+   * The year the card expires. Pass in the last two digits of the year number. For example, if the
+   * expiration year is 2025, the value of this parameter is 25. More information: Maximum length: 2
+   * characters
+   */
   private String expiryYear;
 
+  /**
+   * The month the card expires. Pass in two digits representing the month. For example, if the
+   * expiration month is February, the value of this parameter is 02. More information: Maximum
+   * length: 2 characters
+   */
   private String expiryMonth;
 
   private Address billingAddress;
@@ -78,16 +92,48 @@ public class CardPaymentMethodDetail {
 
   private UserName cardholderName;
 
+  /**
+   * The card verification value (CVV), which is also known as a card security code (CSC) or a card
+   * verification code (CVC). Note: Specify this parameter when the card issuing bank is in Brazil,
+   * Chile, Mexico, or Peru, or the card is a global card. More information: Maximum length: 3
+   * characters
+   */
   private String cvv;
 
+  /**
+   * The date of birth of the cardholder. The value of this parameter is an 8-digit date of birth in
+   * the format of YYYY-MM-DD that follows the ISO 8601 standard. For example, 1971-06-07 means the
+   * cardholder&#39;s birthday is June 7, 1971. Specify this parameter when all the following
+   * conditions are met: The card issuing bank is in Korea. The card is a personal card. More
+   * information: Maximum length: 10 characters
+   */
   private String dateOfBirth;
 
+  /**
+   * The business number of the company that holds the corporate card. The value of this parameter
+   * is a 10-digit business number, such as 97XXXXXX11. Specify this parameter when all the
+   * following conditions are met: The card issuing bank is in Korea. The card is a corporate card.
+   * More information: Maximum length: 10 characters
+   */
   private String businessNo;
 
+  /**
+   * The first two digits of the card payment password. Note: Specify this parameter when the card
+   * issuing bank is in Korea. More information: Maximum length: 2 characters
+   */
   private String cardPasswordDigest;
 
+  /**
+   * The Cadastro Pessoal de Pessoa Física (CPF) is the tax ID of the Brazilian individual taxpayer.
+   * Note: Specify this parameter when the card issuing bank is in Brazil. More information: Maximum
+   * length: 11 characters
+   */
   private String cpf;
 
+  /**
+   * The email address of the payer. Note: Specify this parameter when the card issuing bank is in
+   * Brazil, Chile, Mexico, or Peru. More information: Maximum length: 64 characters
+   */
   private String payerEmail;
 
   /**
@@ -96,6 +142,10 @@ public class CardPaymentMethodDetail {
    */
   private String networkTransactionId;
 
+  /**
+   * Indicates whether the transaction authentication type is 3D secure. Specify this parameter when
+   * the value of paymentMethodType is CARD.
+   */
   private Boolean is3DSAuthentication;
 
   private String request3DS;

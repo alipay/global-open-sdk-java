@@ -1,0 +1,60 @@
+name: Java CI
+
+on:
+  push:
+    branches:
+      - master
+      - sdk-automation/**
+  pull_request:
+    branches:
+      - master
+      - sdk-automation/**
+  workflow_dispatch: { }
+
+jobs:
+  java-check:
+    name: Java Code Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+      - name: Cache Maven packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-m2-
+      - name: Compile Code for Errors
+        run: mvn -B compile --no-transfer-progress
+
+  java-test:
+    name: Build and Test
+    runs-on: ubuntu-latest
+    needs: java-check
+
+    strategy:
+      matrix:
+        java: [ '8', '11', '17', '20' ]
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up JDK ${{ matrix.java }}
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{ matrix.java }}
+          distribution: 'adopt'
+      - name: Cache Maven packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-m2-
+      - name: Run tests with coverage
+        run: mvn -B clean test package --no-transfer-progress

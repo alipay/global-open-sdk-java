@@ -64,4 +64,7 @@ public class AlipayInquiryRefundResponse extends AlipayResponse {
   private Quote settlementQuote;
 
   private AcquirerInfo acquirerInfo;
+
+  /** 检索参考号，可提供给用户用于跟踪支付/退款/争议的详细信息 */
+  private String rrn;
 }
