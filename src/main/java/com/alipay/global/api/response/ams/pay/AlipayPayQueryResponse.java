@@ -31,6 +31,9 @@ import lombok.*;
 @Data
 public class AlipayPayQueryResponse extends AlipayResponse {
 
+  /** Additional metadata about the payment */
+  private String metadata;
+
   private CustomizedInfo customizedInfo;
 
   private Amount processingAmount;
