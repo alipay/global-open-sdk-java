@@ -23,8 +23,8 @@ import lombok.*;
 @AllArgsConstructor
 public class AvailablePaymentMethod {
 
-  private List<PaymentMethodTypeItem> paymentMethodTypeList;
-
   /** Additional information required for some specific payment methods. */
   private Map<String, Object> paymentMethodMetaData;
+
+  private List<PaymentMethodTypeItem> paymentMethodTypeList;
 }

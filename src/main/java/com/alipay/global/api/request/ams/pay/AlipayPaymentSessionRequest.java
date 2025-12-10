@@ -38,6 +38,12 @@ import lombok.*;
 @Data
 public class AlipayPaymentSessionRequest extends AlipayRequest<AlipayPaymentSessionResponse> {
 
+  /** The merchant account ID */
+  private String merchantAccountId;
+
+  /** Additional metadata for the payment session */
+  private String metadata;
+
   /** Allowed payment method regions */
   private String allowedPaymentMethodRegions;
 
