@@ -30,6 +30,9 @@ public class AlipayAuthRevokeTokenRequest extends AlipayRequest<AlipayAuthRevoke
 
   private String extendInfo;
 
+  /** The merchant account ID for 2C2P Replatform scenario. */
+  private String merchantAccountId;
+
   public AlipayAuthRevokeTokenRequest() {
     this.setPath("/ams/api/v1/authorizations/revoke");
   }
