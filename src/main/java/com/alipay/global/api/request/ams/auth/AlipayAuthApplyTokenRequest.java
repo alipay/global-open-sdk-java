@@ -24,6 +24,9 @@ import lombok.*;
 @Data
 public class AlipayAuthApplyTokenRequest extends AlipayRequest<AlipayAuthApplyTokenResponse> {
 
+  /** The merchant account ID */
+  private String merchantAccountId;
+
   private GrantType grantType;
 
   private CustomerBelongsTo customerBelongsTo;
