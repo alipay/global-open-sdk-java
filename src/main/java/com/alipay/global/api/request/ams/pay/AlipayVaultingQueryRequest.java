@@ -30,6 +30,9 @@ public class AlipayVaultingQueryRequest extends AlipayRequest<AlipayVaultingQuer
    */
   private String vaultingRequestId;
 
+  /** Merchant account ID for 2C2P integration scenario */
+  private String merchantAccountId;
+
   public AlipayVaultingQueryRequest() {
     this.setPath("/ams/api/v1/vaults/inquireVaulting");
   }
