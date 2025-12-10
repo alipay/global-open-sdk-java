@@ -36,6 +36,9 @@ import lombok.*;
 @Data
 public class AlipayPayRequest extends AlipayRequest<AlipayPayResponse> {
 
+  /** 用于商户自定义元数据信息，支持JSON格式 */
+  private String metadata;
+
   private CustomizedInfo customizedInfo;
 
   private Quote paymentQuote;
