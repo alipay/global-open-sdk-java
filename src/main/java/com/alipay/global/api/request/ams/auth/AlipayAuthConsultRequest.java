@@ -28,6 +28,9 @@ import lombok.*;
 @Data
 public class AlipayAuthConsultRequest extends AlipayRequest<AlipayAuthConsultResponse> {
 
+  /** A unique identifier for a specific merchant account. */
+  private String merchantAccountId;
+
   /** The notification URL for authorization result. */
   private String authNotifyUrl;
 
@@ -48,14 +51,6 @@ public class AlipayAuthConsultRequest extends AlipayRequest<AlipayAuthConsultRes
    */
   private String authRedirectUrl;
 
-  /**
-   * The authorization scope. Valid values are: BASE_USER_INFO: Indicates that the unique user ID
-   * can be obtained. USER_INFO: Indicates that the complete user information can be obtained, for
-   * example, user name, avatar, and other user information. AGREEMENT_PAY: Indicates that the user
-   * agrees to authorize for auto debit so that the merchant can use the access token to
-   * automatically deduct money from the user&#39;s account. More information: Maximum size: 4
-   * elements
-   */
   private ScopeType[] scopes;
 
   /**
