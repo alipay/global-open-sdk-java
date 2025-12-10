@@ -27,6 +27,9 @@ import lombok.*;
 @Data
 public class AlipayRefundRequest extends AlipayRequest<AlipayRefundResponse> {
 
+  /** Additional metadata about the refund request */
+  private String metadata;
+
   private CustomizedInfo customizedInfo;
 
   private String captureId;
