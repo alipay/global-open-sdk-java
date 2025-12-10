@@ -21,6 +21,9 @@ import lombok.*;
 @AllArgsConstructor
 public class PaymentResultInfo {
 
+  /** The name of the card issuer bank */
+  private String issuerName;
+
   /** 卡支付失败且渠道返回时的原始错误码 */
   private String refusalCodeRaw;
 
