@@ -59,4 +59,7 @@ public class AlipayPayResultNotify extends AlipayNotify {
   private CustomizedInfo customizedInfo;
   private Quote paymentQuote;
   private Amount processingAmount;
+
+    /** 用于商户自定义元数据信息，支持JSON格式 */
+    private String metadata;
 }

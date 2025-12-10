@@ -21,4 +21,7 @@ public class AlipayVaultingNotify extends AlipayNotify {
   private AcquirerInfo acquirerInfo;
 
   private CustomizedInfo customizedInfo;
+
+    /** 用于商户自定义元数据信息，支持JSON格式 */
+    private String metadata;
 }
