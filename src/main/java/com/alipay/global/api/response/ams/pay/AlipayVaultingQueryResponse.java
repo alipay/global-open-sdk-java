@@ -64,4 +64,7 @@ public class AlipayVaultingQueryResponse extends AlipayResponse {
   private String vaultingStatus;
 
   private PaymentMethodDetail paymentMethodDetail;
+
+  /** Metadata for custom data transmission */
+  private String metadata;
 }
