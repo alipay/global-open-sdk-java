@@ -42,4 +42,7 @@ public class PaymentOptionDetail {
    * ​P24​ or ONLINEBANKING_FPX.
    */
   private List<SupportBank> supportBanks;
+
+  /** 表示支付方式支持的交互类型，有效取值包括QR(扫码支付)和REDIRECT(重定向支付) */
+  private List<String> interactionTypes;
 }
