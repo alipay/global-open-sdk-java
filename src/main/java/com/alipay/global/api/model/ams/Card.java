@@ -14,22 +14,20 @@ package com.alipay.global.api.model.ams;
 
 import lombok.*;
 
-/** UserName */
+/** Card */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserName {
+public class Card {
 
-  /** First name. More information: Maximum length: 32 characters */
-  private String firstName;
+  private String cardNo;
 
-  /** Middle name More information: Maximum length: 32 characters */
-  private String middleName;
+  private String cvv;
 
-  /** Last name More information: Maximum length: 32 characters */
-  private String lastName;
+  private String expiryYear;
 
-  /** Full name More information: Maximum length: 128 characters */
-  private String fullName;
+  private String expiryMonth;
+
+  private UserName cardholderName;
 }
