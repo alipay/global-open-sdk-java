@@ -26,6 +26,12 @@ import lombok.*;
 public class AlipayVaultingPaymentMethodRequest
     extends AlipayRequest<AlipayVaultingPaymentMethodResponse> {
 
+  /** 一点集成场景使用 */
+  private String merchantAccountId;
+
+  /** 商户使用，Json Format，用于提交元数据信息 */
+  private String metadata;
+
   /**
    * The unique ID that is assigned by a merchant to identify a card vaulting request. More
    * information: This field is an API idempotency field.For vaulting requests that are initiated
@@ -57,8 +63,6 @@ public class AlipayVaultingPaymentMethodRequest
   private PaymentMethodDetail paymentMethodDetail;
 
   private Env env;
-
-  private String merchantAccountId;
 
   private String vaultingCurrency;
 
