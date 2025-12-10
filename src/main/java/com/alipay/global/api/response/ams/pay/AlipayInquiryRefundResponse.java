@@ -26,6 +26,12 @@ import lombok.*;
 @Data
 public class AlipayInquiryRefundResponse extends AlipayResponse {
 
+  /**
+   * Your metadata provided during the refund process. This parameter is returned when you provided
+   * value to the parameter in the refund API. Json format
+   */
+  private String metadata;
+
   private CustomizedInfo customizedInfo;
 
   /** Acquirer Reference Number */
