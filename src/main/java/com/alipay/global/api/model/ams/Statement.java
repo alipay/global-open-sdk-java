@@ -24,4 +24,8 @@ public class Statement {
   private String statementId;
 
   private FundMoveDetail fundMoveDetail;
+
+  private String transactionType;
+
+  private String beneficiaryAssetId;
 }

@@ -24,4 +24,8 @@ public class FundMoveDetail {
   private String memo;
 
   private String referenceTransactionId;
+
+  private String payerAssetId;
+
+  private String beneficiaryAssetId;
 }
