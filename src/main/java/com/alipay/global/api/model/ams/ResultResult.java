@@ -14,18 +14,18 @@ package com.alipay.global.api.model.ams;
 
 import lombok.*;
 
-/** FundMoveDetail */
+/** ResultResult */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class FundMoveDetail {
+public class ResultResult {
 
-  private String memo;
+  /** The result code. */
+  private String resultCode;
 
-  private String referenceTransactionId;
+  private ResultStatusType resultStatus;
 
-  private String payerAssetId;
-
-  private String beneficiaryAssetId;
+  /** The result message. */
+  private String resultMessage;
 }
