@@ -17,6 +17,7 @@ import com.alipay.global.api.model.ams.Amount;
 import com.alipay.global.api.model.ams.Buyer;
 import com.alipay.global.api.model.ams.Env;
 import com.alipay.global.api.model.ams.Merchant;
+import com.alipay.global.api.model.ams.PaymentEvaluation;
 import com.alipay.global.api.model.ams.PaymentFactor;
 import com.alipay.global.api.model.ams.ProductCodeType;
 import com.alipay.global.api.model.ams.SettlementStrategy;
@@ -29,6 +30,8 @@ import lombok.*;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class AlipayPayConsultRequest extends AlipayRequest<AlipayPayConsultResponse> {
+
+  private PaymentEvaluation paymentEvaluation;
 
   private ProductCodeType productCode;
 
