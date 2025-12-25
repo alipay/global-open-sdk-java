@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class FailReason {
-    private String errorCode;
-    private String errorDesc;
+  private String errorCode;
+  private String errorDesc;
 }
