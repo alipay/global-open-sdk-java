@@ -18,29 +18,79 @@ import lombok.*;
 
 /** Gets or Sets CardBrand */
 public enum CardBrand {
-  VISA("VISA"),
-
-  MASTERCARD("MASTERCARD"),
-
-  MAESTRO("MAESTRO"),
-
   AMEX("AMEX"),
 
-  JCB("JCB"),
+  BC("BC"),
+
+  CARNET("CARNET"),
+
+  CARTES_BANCAIRES("CARTES_BANCAIRES"),
+
+  CITI("CITI"),
+
+  CUP("CUP"),
 
   DINERS("DINERS"),
 
   DISCOVER("DISCOVER"),
 
-  CUP("CUP"),
-
-  MIR("MIR"),
-
   ELO("ELO"),
+
+  GWANGJUBANK("GWANGJUBANK"),
 
   HIPERCARD("HIPERCARD"),
 
-  TROY("TROY");
+  HYUNDAI("HYUNDAI"),
+
+  IBK_BC("IBK_BC"),
+
+  JCB("JCB"),
+
+  JEJUBANK("JEJUBANK"),
+
+  JEONBUKBANK("JEONBUKBANK"),
+
+  KAKAOBANK("KAKAOBANK"),
+
+  KBANK("KBANK"),
+
+  KDBBANK("KDBBANK"),
+
+  KEBHANA("KEBHANA"),
+
+  KOOKMIN("KOOKMIN"),
+
+  LOTTE("LOTTE"),
+
+  MAESTRO("MAESTRO"),
+
+  MASTERCARD("MASTERCARD"),
+
+  MIR("MIR"),
+
+  NONGHYUP("NONGHYUP"),
+
+  POST("POST"),
+
+  SAEMAUL("SAEMAUL"),
+
+  SAMSUNG("SAMSUNG"),
+
+  SAVINGBANK("SAVINGBANK"),
+
+  SHINHAN("SHINHAN"),
+
+  SHINHYEOP("SHINHYEOP"),
+
+  SUHYEOP("SUHYEOP"),
+
+  TOSSBANK("TOSSBANK"),
+
+  TROY("TROY"),
+
+  VISA("VISA"),
+
+  WOORI("WOORI");
 
   private String value;
 
