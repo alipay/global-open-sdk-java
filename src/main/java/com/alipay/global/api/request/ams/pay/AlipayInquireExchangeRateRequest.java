@@ -15,6 +15,7 @@ package com.alipay.global.api.request.ams.pay;
 import com.alipay.global.api.model.ams.*;
 import com.alipay.global.api.model.ams.CurrencyPair;
 import com.alipay.global.api.model.ams.ProductCodeType;
+import com.alipay.global.api.model.ams.RateType;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.pay.AlipayInquireExchangeRateResponse;
 import java.util.List;
@@ -37,6 +38,8 @@ public class AlipayInquireExchangeRateRequest
   private String buyCurrency;
 
   private ProductCodeType productCode;
+
+  private RateType rateType;
 
   public AlipayInquireExchangeRateRequest() {
     this.setPath("/ams/api/v1/payments/inquireExchangeRate");
