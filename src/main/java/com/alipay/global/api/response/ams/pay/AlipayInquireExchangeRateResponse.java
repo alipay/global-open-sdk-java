@@ -13,6 +13,7 @@
 package com.alipay.global.api.response.ams.pay;
 
 import com.alipay.global.api.model.ams.*;
+import com.alipay.global.api.model.ams.PaymentQuote;
 import com.alipay.global.api.model.ams.Quote;
 import com.alipay.global.api.response.AlipayResponse;
 import java.util.List;
@@ -24,4 +25,6 @@ import lombok.*;
 public class AlipayInquireExchangeRateResponse extends AlipayResponse {
 
   private List<Quote> quotes;
+
+  private List<PaymentQuote> paymentQuotes;
 }
