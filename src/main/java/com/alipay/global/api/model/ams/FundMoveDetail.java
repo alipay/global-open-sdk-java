@@ -21,19 +21,45 @@ import lombok.*;
 @AllArgsConstructor
 public class FundMoveDetail {
 
-  private String moveType;
+  /** 付款人姓名 */
+  private String payerName;
 
-  private String sourceAccount;
+  /** 付款人账号 */
+  private String payerAccountNo;
 
-  private String targetAccount;
+  /** 付款渠道账号 */
+  private String payerChaneelAccountnumber;
 
-  private String moveTime;
+  /** 付款人账户类型 */
+  private String payerAccountType;
 
-  private String memo;
-
-  private String referenceTransactionId;
-
+  /** 付款人资产ID */
   private String payerAssetId;
 
+  /** 受益人姓名 */
+  private String beneficiaryName;
+
+  /** 受益人账户类型 */
+  private String beneficiaryAccountType;
+
+  /** 受益人银行所在国家 */
+  private String beneficiaryBankCountry;
+
+  /** 受益人银行名称 */
+  private String beneficiaryBankName;
+
+  /** 受益人资产ID */
   private String beneficiaryAssetId;
+
+  /** 备注 */
+  private String remarks;
+
+  /** 描述 */
+  private String description;
+
+  /** 备忘录 */
+  private String memo;
+
+  /** 参考交易ID */
+  private String referenceTransactionId;
 }

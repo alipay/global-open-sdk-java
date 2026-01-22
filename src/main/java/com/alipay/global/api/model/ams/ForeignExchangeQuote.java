@@ -28,4 +28,6 @@ public class ForeignExchangeQuote {
   private String targetCurrency;
 
   private String quoteTime;
+
+  private String quotePrice;
 }

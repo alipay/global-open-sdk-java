@@ -27,8 +27,4 @@ public class AlipayInquiryStatementListResponse extends AlipayResponse {
   private List<Statement> statementList;
 
   private TotalCount totalCount;
-
-  private String totalPageNumber;
-
-  private String currentPageNumber;
 }
