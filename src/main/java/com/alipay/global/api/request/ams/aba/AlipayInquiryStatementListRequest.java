@@ -24,6 +24,8 @@ import lombok.*;
 public class AlipayInquiryStatementListRequest
     extends AlipayRequest<AlipayInquiryStatementListResponse> {
 
+  private String fuzzyName;
+
   private String customerId;
 
   private String accessToken;

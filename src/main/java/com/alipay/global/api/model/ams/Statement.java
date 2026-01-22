@@ -21,11 +21,31 @@ import lombok.*;
 @AllArgsConstructor
 public class Statement {
 
-  private String statementId;
-
   private FundMoveDetail fundMoveDetail;
 
+  private ForeignExchangeQuote foreignExchangeQuote;
+
+  private String statementId;
+
+  private String transactionTime;
+
   private String transactionType;
+
+  private Amount originalTransactionAmount;
+
+  private Amount transactionAmount;
+
+  private Amount feeAmount;
+
+  private Amount netAmount;
+
+  private Amount accountBalance;
+
+  private String transactionId;
+
+  private String extTransactionId;
+
+  private String transactionStatus;
 
   private String beneficiaryAssetId;
 }

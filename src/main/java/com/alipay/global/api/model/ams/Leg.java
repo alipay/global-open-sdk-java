@@ -70,4 +70,7 @@ public class Leg {
 
   /** Flight number for this leg of the trip. */
   private String flightNumber;
+
+  /** Unique record locator for passenger booking */
+  private String passengerNameRecord;
 }
