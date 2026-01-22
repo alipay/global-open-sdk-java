@@ -14,26 +14,18 @@ package com.alipay.global.api.model.ams;
 
 import lombok.*;
 
-/** FundMoveDetail */
+/** ForeignExchangeQuote */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class FundMoveDetail {
+public class ForeignExchangeQuote {
 
-  private String moveType;
+  private String exchangeRate;
 
-  private String sourceAccount;
+  private String sourceCurrency;
 
-  private String targetAccount;
+  private String targetCurrency;
 
-  private String moveTime;
-
-  private String memo;
-
-  private String referenceTransactionId;
-
-  private String payerAssetId;
-
-  private String beneficiaryAssetId;
+  private String quoteTime;
 }

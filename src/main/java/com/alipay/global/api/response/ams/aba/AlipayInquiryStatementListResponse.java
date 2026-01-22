@@ -14,6 +14,7 @@ package com.alipay.global.api.response.ams.aba;
 
 import com.alipay.global.api.model.ams.*;
 import com.alipay.global.api.model.ams.Statement;
+import com.alipay.global.api.model.ams.TotalCount;
 import com.alipay.global.api.response.AlipayResponse;
 import java.util.List;
 import lombok.*;
@@ -24,4 +25,10 @@ import lombok.*;
 public class AlipayInquiryStatementListResponse extends AlipayResponse {
 
   private List<Statement> statementList;
+
+  private TotalCount totalCount;
+
+  private String totalPageNumber;
+
+  private String currentPageNumber;
 }
