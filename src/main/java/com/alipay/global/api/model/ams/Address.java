@@ -21,17 +21,47 @@ import lombok.*;
 @AllArgsConstructor
 public class Address {
 
+  /**
+   * The 2-letter country or region code. For more information, see the ISO 3166 Country Codes
+   * standard. More information: Maximum length: 2 characters
+   */
   private String region;
 
+  /**
+   * The state, country, or province name. For card payments, if your business entity is in the
+   * United States, and the card issuing country is Canada, the United States, or the United
+   * Kingdom, set the value to a region code that consists of two to three characters and follows
+   * the ISO 3166-2 standard. More information: Maximum length: 8 characters
+   */
   private String state;
 
+  /**
+   * The city, district, suburb, town, or village name. More information: Maximum length: 32
+   * characters
+   */
   private String city;
 
+  /**
+   * Address line 1, for example, the street address, PO box, and company name. More information:
+   * Maximum length: 256 characters
+   */
   private String address1;
 
+  /**
+   * Address line 2, for example, the apartment, suite, unit, and building information. More
+   * information: Maximum length: 256 characters
+   */
   private String address2;
 
+  /**
+   * The ZIP or postal code. For card payments, if your business entity is in the United States,
+   * specify this parameter according to the following parameter value requirements: Only contains
+   * numbers, letters, hyphens, and spaces. Must be within ten characters. More information: Maximum
+   * length: 32 characters
+   */
   private String zipCode;
 
   private String label;
+
+  private String address3;
 }
