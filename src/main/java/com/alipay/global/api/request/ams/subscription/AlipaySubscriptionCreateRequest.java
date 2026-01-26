@@ -43,6 +43,14 @@ public class AlipaySubscriptionCreateRequest
   private Amount maxAccumulateAmount;
 
   /**
+   * This field is only used in the PIX recurrence scenario. Default &#x3D; false Whether to allow a
+   * retry in the event that a recurring payment fails due to insufficient balance.
+   */
+  private Boolean allowRetry;
+
+  private Amount maxAmountFloor;
+
+  /**
    * The unique ID assigned by a merchant to identify a subscription request. Antom uses this field
    * for idempotency control. More information: This field is an API idempotency field.For
    * subscription requests that are initiated with the same value of subscriptionRequestId and reach

@@ -41,4 +41,12 @@ public class SubscriptionInfo {
 
   /** Expiry time of the subscription in ISO 8601 format */
   private String subscriptionExpiryTime;
+
+  /**
+   * Field is used only in the PIX recurrence scenario. Whether to allow a retry in the event that a
+   * recurring payment fails due to insufficient balance.
+   */
+  private Boolean allowRetry;
+
+  private Amount maxAmountFloor;
 }
