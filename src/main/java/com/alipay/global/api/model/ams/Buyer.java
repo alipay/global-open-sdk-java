@@ -22,10 +22,8 @@ import lombok.*;
 public class Buyer {
 
   /**
-   * The unique ID to identify the buyer. Specify this parameter: When you require risk control.
-   * When the value of paymentMethodType is CARD. Providing this information helps to increase the
-   * accuracy of anti-money laundering and fraud detection, and increase payment success rates. More
-   * information: Maximum length: 64 characters
+   * The unique ID to identify the buyer. Note: Specify this parameter when you want to use the
+   * promotion offered by Antom to this order. More information: Maximum length: 64 characters
    */
   private String referenceBuyerId;
 
@@ -59,4 +57,7 @@ public class Buyer {
   private Boolean isAccountVerified;
 
   private Integer successfulOrderCount;
+
+  /** 用于指定买家电话号码的国家代码，当支付方式为STCPAY时为必填字段 */
+  private String buyerPhoneNoContryCode;
 }
