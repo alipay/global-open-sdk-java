@@ -65,5 +65,4 @@ public class AlipayPayResultNotify extends AlipayNotify {
 
   private String subscriptionOrderId;
   private RetryInfo retryInfo;
-
 }
