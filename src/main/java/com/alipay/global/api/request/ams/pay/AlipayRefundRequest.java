@@ -83,6 +83,8 @@ public class AlipayRefundRequest extends AlipayRequest<AlipayRefundResponse> {
 
   private String refundSourceAccountNo;
 
+  private Amount actualRefundAmount;
+
   public AlipayRefundRequest() {
     this.setPath("/ams/api/v1/payments/refund");
   }
