@@ -23,7 +23,7 @@ import lombok.*;
 public class CardPaymentMethodDetail {
 
   /** Supported card brands for this payment method */
-  private List supportedBrands;
+  private List<String> supportedBrands;
 
   /**
    * The token of the card. The value of this parameter is used by paymentMethodId in the pay

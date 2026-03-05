@@ -57,9 +57,7 @@ public class StatementDemoCode {
     inquiryStatementDetail();
   }
 
-  /**
-   * General Query
-   */
+  /** General Query */
   public static void inquiryStatementGeneral() {
     AlipayInquiryStatementRequest request = new AlipayInquiryStatementRequest();
     request.setStartTime("2025-10-01T00:00:00");
@@ -78,9 +76,7 @@ public class StatementDemoCode {
     System.out.println("Inquiry Statement General Response: " + response);
   }
 
-  /**
-   * General Query with Currency Filter
-   */
+  /** General Query with Currency Filter */
   public static void inquiryStatementWithCurrencyFilter() {
     AlipayInquiryStatementRequest request = new AlipayInquiryStatementRequest();
     request.setStartTime("2025-10-01T00:00:00");
@@ -100,19 +96,17 @@ public class StatementDemoCode {
     System.out.println("Inquiry Statement With Currency Filter Response: " + response);
   }
 
-  /**
-   * General Query with Transaction Type Filter
-   */
+  /** General Query with Transaction Type Filter */
   public static void inquiryStatementWithTransactionTypeFilter() {
     AlipayInquiryStatementRequest request = new AlipayInquiryStatementRequest();
     request.setStartTime("2025-10-01T00:00:00");
     request.setEndTime("2025-12-30T00:00:00");
     request.setPageSize(30);
     request.setPageNumber(1);
-    request.setTransactionTypeList(Arrays.asList(
-        AlipayInquiryStatementRequest.TransactionTypeListEnum.TRANSFER,
-        AlipayInquiryStatementRequest.TransactionTypeListEnum.CARD_PAYMENT
-    ));
+    request.setTransactionTypeList(
+        Arrays.asList(
+            AlipayInquiryStatementRequest.TransactionTypeListEnum.TRANSFER,
+            AlipayInquiryStatementRequest.TransactionTypeListEnum.CARD_PAYMENT));
 
     AlipayInquiryStatementResponse response = null;
     try {
@@ -125,9 +119,7 @@ public class StatementDemoCode {
     System.out.println("Inquiry Statement With Transaction Type Filter Response: " + response);
   }
 
-  /**
-   * Query with an ID (fuzzyName)
-   */
+  /** Query with an ID (fuzzyName) */
   public static void inquiryStatementWithFuzzyName() {
     AlipayInquiryStatementListRequest request = new AlipayInquiryStatementListRequest();
     request.setPageSize("30");
@@ -145,9 +137,7 @@ public class StatementDemoCode {
     System.out.println("Inquiry Statement With FuzzyName Response: " + response);
   }
 
-  /**
-   * Inquiry Statement Detail
-   */
+  /** Inquiry Statement Detail */
   public static void inquiryStatementDetail() {
     AlipayInquiryStatementDetailRequest request = new AlipayInquiryStatementDetailRequest();
     request.setStatementId("id123");
