@@ -12,6 +12,7 @@
 
 package com.alipay.global.api.model.ams;
 
+import java.util.List;
 import lombok.*;
 
 /** CardPaymentMethodDetail */
@@ -22,7 +23,7 @@ import lombok.*;
 public class CardPaymentMethodDetail {
 
   /** Supported card brands for this payment method */
-  private String supportedBrands;
+  private List supportedBrands;
 
   /**
    * The token of the card. The value of this parameter is used by paymentMethodId in the pay
