@@ -127,4 +127,10 @@ public class PaymentResultInfo {
 
   /** 检索参考号，可提供给用户用于跟踪支付/退款/争议的详细信息 */
   private String rrn;
+
+  /**
+   * 交易中用户是否授权绑定，当用户使用PAYPAY支付并且指定支付要素smartPaymentEnabled&#x3D;true的情况下才会返回。 ● AUTHORIZED -
+   * 用户发起交易时时已授权，直接付款 ● UNAUTHORIZED - 用户发起交易时未授权，现授权后付款
+   */
+  private String userAuthorizationStatus;
 }

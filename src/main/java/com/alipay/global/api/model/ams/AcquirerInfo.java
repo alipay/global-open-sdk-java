@@ -64,4 +64,6 @@ public class AcquirerInfo {
 
   /** The reason description provided by the acquirer */
   private String acquirerReasonDescription;
+
+  private String ptspTransactionId;
 }
