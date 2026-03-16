@@ -24,4 +24,7 @@ public class CardholderInfo {
   private UserName cardHolderName;
 
   private Address billAddress;
+
+  /** The name that is displayed on the card */
+  private String displayName;
 }
