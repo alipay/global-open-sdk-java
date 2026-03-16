@@ -16,6 +16,7 @@ import com.alipay.global.api.model.ams.*;
 import com.alipay.global.api.model.ams.Amount;
 import com.alipay.global.api.model.ams.OrderInfo;
 import com.alipay.global.api.model.ams.PeriodRule;
+import com.alipay.global.api.model.ams.ProrationSettings;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.subscription.AlipaySubscriptionUpdateResponse;
 import lombok.*;
@@ -55,6 +56,14 @@ public class AlipaySubscriptionUpdateRequest
   private String subscriptionEndTime;
 
   private OrderInfo orderInfo;
+
+  private ProrationSettings prorationSettings;
+
+  /**
+   * 商户指定的下次扣款时间。遵循ISO 8601标准。 允许更改的时间要在一个周期内。
+   * 注意：由于订阅产品会在履约时间24小时前开始尝试扣款，商户指定的下次扣款时间至少要在当前时间的24小时之后。如商户指定的下次扣款时间小于当前时间的24小时，预期订阅升级失败并返回PROCCESS_FAIL错误码。
+   */
+  private String nextSubscriptionDate;
 
   public AlipaySubscriptionUpdateRequest() {
     this.setPath("/ams/api/v1/subscriptions/update");
