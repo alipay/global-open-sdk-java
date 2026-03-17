@@ -66,4 +66,10 @@ public class AcquirerInfo {
   private String acquirerReasonDescription;
 
   private String ptspTransactionId;
+
+  /**
+   * The card token assigned by the acquirer for card tokenization. Note: This parameter is returned
+   * if you integrate the APO product. More information: Maximum length: 64 characters
+   */
+  private String acquirerCardToken;
 }
