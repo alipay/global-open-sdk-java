@@ -79,7 +79,7 @@ public class AlipayCreateDirectRefundRequest
   private String refundNotifyUrl;
 
   public AlipayCreateDirectRefundRequest() {
-    this.setPath("/ams/aba/funds/createDirectRefund");
+    this.setPath("/ams/api/v1/aba/funds/createDirectRefund");
   }
 
   @Override

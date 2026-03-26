@@ -25,7 +25,7 @@ public class AlipayInquireExchangeRequest extends AlipayRequest<AlipayInquireExc
   private String exchangeRequestId;
 
   public AlipayInquireExchangeRequest() {
-    this.setPath("/ams/v1/aba/funds/inquireExchange");
+    this.setPath("/ams/api/v1/aba/funds/inquireExchange");
   }
 
   @Override

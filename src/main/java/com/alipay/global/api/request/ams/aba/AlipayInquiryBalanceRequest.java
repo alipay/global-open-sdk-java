@@ -34,7 +34,7 @@ public class AlipayInquiryBalanceRequest extends AlipayRequest<AlipayInquiryBala
   private String customerId;
 
   public AlipayInquiryBalanceRequest() {
-    this.setPath("/ams/v1/aba/accounts/inquiryBalance");
+    this.setPath("/ams/api/v1/aba/accounts/inquiryBalance");
   }
 
   @Override

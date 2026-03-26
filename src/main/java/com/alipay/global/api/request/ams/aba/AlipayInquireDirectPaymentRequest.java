@@ -40,7 +40,7 @@ public class AlipayInquireDirectPaymentRequest
   private String paymentRequestId;
 
   public AlipayInquireDirectPaymentRequest() {
-    this.setPath("/ams/aba/funds/inquireDirectPayment");
+    this.setPath("/ams/api/v1/aba/funds/inquireDirectPayment");
   }
 
   @Override

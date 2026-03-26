@@ -27,7 +27,7 @@ public class AlipayInquiryRateRequest extends AlipayRequest<AlipayInquiryRateRes
   private List<InquiryRateCondition> rateConditionList;
 
   public AlipayInquiryRateRequest() {
-    this.setPath("/ams/v1/aba/funds/inquireRate");
+    this.setPath("/ams/api/v1/aba/funds/inquireRate");
   }
 
   @Override
