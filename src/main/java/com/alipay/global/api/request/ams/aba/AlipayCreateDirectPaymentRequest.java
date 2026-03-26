@@ -43,7 +43,7 @@ public class AlipayCreateDirectPaymentRequest
   private Amount payFromAmount;
 
   public AlipayCreateDirectPaymentRequest() {
-    this.setPath("/ams/aba/funds/createDirectPayment");
+    this.setPath("/ams/api/v1/aba/funds/createDirectPayment");
   }
 
   @Override

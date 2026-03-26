@@ -28,7 +28,7 @@ public class AlipaySubscriptionsInquiryRequest
   private String subscriptionRequestId;
 
   public AlipaySubscriptionsInquiryRequest() {
-    this.setPath("/ams/v1/subscriptions/inquiry");
+    this.setPath("/ams/api/v1/subscriptions/inquiry");
   }
 
   @Override

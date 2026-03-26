@@ -39,7 +39,7 @@ public class AlipayInquireDirectRefundRequest
   private String refundRequestId;
 
   public AlipayInquireDirectRefundRequest() {
-    this.setPath("/ams/aba/funds/inquireDirectRefund");
+    this.setPath("/ams/api/v1/aba/funds/inquireDirectRefund");
   }
 
   @Override

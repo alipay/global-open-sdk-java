@@ -31,7 +31,7 @@ public class AlipayCreateQuoteRequest extends AlipayRequest<AlipayCreateQuoteRes
   private String exchangeTradeType;
 
   public AlipayCreateQuoteRequest() {
-    this.setPath("/ams/v1/aba/funds/createQuote");
+    this.setPath("/ams/api/v1/aba/funds/createQuote");
   }
 
   @Override

@@ -27,7 +27,7 @@ public class AlipayInquireAvailableQuotaRequest
   private String currency;
 
   public AlipayInquireAvailableQuotaRequest() {
-    this.setPath("/ams/v1/aba/account/inquireAvailableQuota");
+    this.setPath("/ams/api/v1/aba/account/inquireAvailableQuota");
   }
 
   @Override
