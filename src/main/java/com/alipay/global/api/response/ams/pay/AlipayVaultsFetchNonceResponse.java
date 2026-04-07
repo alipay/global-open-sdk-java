@@ -21,5 +21,9 @@ import lombok.*;
 @Data
 public class AlipayVaultsFetchNonceResponse extends AlipayResponse {
 
+  /**
+   * The token of the card. The value of this parameter is used by paymentMethodId in the pay
+   * (One-time Payments) API when initiating payments.
+   */
   private String cardToken;
 }

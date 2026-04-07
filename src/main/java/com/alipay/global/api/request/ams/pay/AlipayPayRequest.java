@@ -36,7 +36,10 @@ import lombok.*;
 @Data
 public class AlipayPayRequest extends AlipayRequest<AlipayPayResponse> {
 
-  /** 用于商户自定义元数据信息，支持JSON格式 */
+  /**
+   * Use this parameter to submit metadata, including information for special use cases. Specify
+   * this parameter when you need to add metadata information.
+   */
   private String metadata;
 
   private CustomizedInfo customizedInfo;
