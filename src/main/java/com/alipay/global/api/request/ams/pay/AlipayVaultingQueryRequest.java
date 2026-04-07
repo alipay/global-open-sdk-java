@@ -30,7 +30,10 @@ public class AlipayVaultingQueryRequest extends AlipayRequest<AlipayVaultingQuer
    */
   private String vaultingRequestId;
 
-  /** Merchant account ID for 2C2P integration scenario */
+  /**
+   * A unique ID to identify a specific merchant account. Note: Specify this parameter when you use
+   * one client ID across multiple locations.
+   */
   private String merchantAccountId;
 
   public AlipayVaultingQueryRequest() {

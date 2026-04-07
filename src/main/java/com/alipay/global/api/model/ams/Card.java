@@ -21,12 +21,26 @@ import lombok.*;
 @AllArgsConstructor
 public class Card {
 
+  /** The card number. */
   private String cardNo;
 
+  /**
+   * The card verification value (CVV), which is also known as a card security code (CSC) or a card
+   * verification code (CVC).Specify this parameter when the value of paymentMethodRegion is GLOBAL,
+   * BR, CL, MX, or PE.
+   */
   private String cvv;
 
+  /**
+   * The year the card expires. Pass in the last two digits of the year number. For example, if the
+   * expiry year is 2025, the value of this parameter is ​25​.
+   */
   private String expiryYear;
 
+  /**
+   * The month the card expires. Pass in two digits representing the month. For example, if the
+   * expiry month is February, the value of this parameter is ​02​.
+   */
   private String expiryMonth;
 
   private UserName cardholderName;
