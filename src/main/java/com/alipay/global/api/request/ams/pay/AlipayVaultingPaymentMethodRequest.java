@@ -26,10 +26,16 @@ import lombok.*;
 public class AlipayVaultingPaymentMethodRequest
     extends AlipayRequest<AlipayVaultingPaymentMethodResponse> {
 
-  /** 一点集成场景使用 */
+  /**
+   * A unique ID to identify a specific merchant account. Note: Specify this parameter when you use
+   * one client ID across multiple locations.
+   */
   private String merchantAccountId;
 
-  /** 商户使用，Json Format，用于提交元数据信息 */
+  /**
+   * This parameter is used for submitting metadata, including information for special use cases.
+   * Specify this parameter when you need to add metadata information.
+   */
   private String metadata;
 
   /**

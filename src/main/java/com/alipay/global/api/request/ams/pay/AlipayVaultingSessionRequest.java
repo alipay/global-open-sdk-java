@@ -22,15 +22,14 @@ import lombok.*;
 @Data
 public class AlipayVaultingSessionRequest extends AlipayRequest<AlipayVaultingSessionResponse> {
 
-  /**
-   * The payment method type is included in payment method options. See Payment methods to check the
-   * valid values for card payments. More information: Maximum length: 64 characters
-   */
+  /** The type of payment method to be vaulted. The value of this parameter is fixed to CARD. */
   private String paymentMethodType;
 
   /**
    * The unique ID that is assigned by a merchant to identify a card vaulting request. More
-   * information: Maximum length: 64 characters
+   * information: This field is an API idempotency field. For vaulting requests that are initiated
+   * with the same value of vaultingRequestId and reach a final status of S or F, the same result is
+   * to be returned for the request.
    */
   private String vaultingRequestId;
 
