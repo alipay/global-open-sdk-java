@@ -40,6 +40,6 @@ public class AlipayVaultingSessionResponse extends AlipayResponse {
    */
   private String vaultingSessionExpiryTime;
 
-  /** The normal URL for vaulting session */
+  /** The URL used to redirect to the card-binding page. */
   private String normalUrl;
 }
