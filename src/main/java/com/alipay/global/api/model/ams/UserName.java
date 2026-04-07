@@ -21,13 +21,13 @@ import lombok.*;
 @AllArgsConstructor
 public class UserName {
 
-  /** First name. More information: Maximum length: 32 characters */
+  /** The cardholder&#39;s first name. More information: Maximum length: 32 characters */
   private String firstName;
 
   /** Middle name More information: Maximum length: 32 characters */
   private String middleName;
 
-  /** Last name More information: Maximum length: 32 characters */
+  /** The cardholder&#39;s last name. More information: Maximum length: 32 characters */
   private String lastName;
 
   /** Full name More information: Maximum length: 128 characters */
