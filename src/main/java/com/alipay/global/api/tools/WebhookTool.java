@@ -15,7 +15,7 @@ public class WebhookTool {
    *     algorithm=RSA256,keyVersion=1,signature=xxx
    * @param notifyBody notify body
    * @param alipayPublicKey alipay public key
-   * @return
+   * @return true if signature is valid
    * @throws AlipayApiException
    */
   public static boolean checkSignature(
