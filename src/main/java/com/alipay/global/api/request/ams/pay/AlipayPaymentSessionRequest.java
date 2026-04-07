@@ -38,13 +38,24 @@ import lombok.*;
 @Data
 public class AlipayPaymentSessionRequest extends AlipayRequest<AlipayPaymentSessionResponse> {
 
-  /** The merchant account ID */
+  /**
+   * A unique ID to identify a specific merchant account. Note: Specify this parameter when you use
+   * one client ID across multiple locations.
+   */
   private String merchantAccountId;
 
-  /** Additional metadata for the payment session */
+  /**
+   * This parameter is used for submitting metadata, including information for special use cases.
+   * Specify this parameter when you need to add metadata information.
+   */
   private String metadata;
 
-  /** Allowed payment method regions */
+  /**
+   * A list of region codes that represent the countries or regions of payment methods. The value of
+   * this parameter is a 2-letter ISO country code or GLOBAL. Note: Specify this parameter if you
+   * want available payment methods from specific regions to be returned. For example, if you pass
+   * in GLOBAL, global cards Visa and Mastercard are returned.
+   */
   private String allowedPaymentMethodRegions;
 
   private CustomizedInfo customizedInfo;

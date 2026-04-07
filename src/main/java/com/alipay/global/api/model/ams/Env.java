@@ -38,7 +38,12 @@ public class Env {
    */
   private String deviceTokenId;
 
-  /** Client IP address of the device. */
+  /**
+   * The IP address of the client device. Note: Specify this parameter when one of the following
+   * conditions is met: You require risk control. The value of paymentMethodType is CARD. Providing
+   * this information helps to increase the accuracy of anti-money laundering and fraud detection,
+   * and increase payment success rates.
+   */
   private String clientIp;
 
   private String cookieId;
@@ -102,10 +107,18 @@ public class Env {
    */
   private String deviceModel;
 
-  /** Device language of the user. */
+  /**
+   * The language of the device where the user places an order. Note: Specify this parameter if you
+   * require risk control. Providing this information helps to identify black-market behavior.
+   */
   private String deviceLanguage;
 
-  /** Device ID of the user. */
+  /**
+   * The unique ID of the device the user places an order with. Note: Specify this parameter if you
+   * require risk control. This parameter can be used to build a trusted relationship between users
+   * and commonly used devices, thereby reducing risk control interruptions and increasing the
+   * payment success rate.
+   */
   private String deviceId;
 
   /** Version of the operation system. */

@@ -120,6 +120,9 @@ public class AlipayPayResponse extends AlipayResponse {
 
   private AcquirerInfo acquirerInfo;
 
-  /** Promotion result. */
+  /**
+   * Promotion result. Note: This parameter is generated when the buyer applies a promotion during
+   * the process of placing an order.
+   */
   private List<PromotionResult> promotionResult;
 }
