@@ -22,16 +22,66 @@ import lombok.*;
 @AllArgsConstructor
 public class SubscriptionInfo {
 
+  /** The unique ID assigned by Antom to identify a subscription. */
+  private String subscriptionId;
+
+  /**
+   * The description of the subscription, used for displaying user consumption records and other
+   * actions.
+   */
+  private String description;
+
   /** Description of the subscription plan */
   private String subscriptionDescription;
 
-  /** Start time of the subscription in ISO 8601 format */
+  private SubscriptionStatus status;
+
+  /**
+   * The date and time when the subscription becomes active. The value follows the ISO 8601 standard
+   * format.
+   */
   private String subscriptionStartTime;
 
-  /** End time of the subscription in ISO 8601 format */
+  /**
+   * The date and time when the subscription ends. The value follows the ISO 8601 standard format.
+   * The subscriptionEndTime can be NULL.
+   */
   private String subscriptionEndTime;
 
+  private PeriodType periodType;
+
+  /**
+   * The number of times the period type repeats in one subscription cycle. For example, a
+   * periodCount of 2 with periodType MONTH means the subscription period is 2 months.
+   */
+  private Integer periodCount;
+
   private PeriodRule periodRule;
+
+  /** Start time of current period. */
+  private String currentPeriodStart;
+
+  /** End time of current period. */
+  private String currentPeriodEnd;
+
+  /** Indicates current phase of subscription period, start from 1. */
+  private Integer currentPhaseNo;
+
+  private PaymentMethod paymentMethod;
+
+  private Amount paymentAmount;
+
+  /** DateTime when the subscription is changed using the Change/Update API. */
+  private String lastUpdateTime;
+
+  /**
+   * When merchants use Change API, a new subscription is created base on the current one. This
+   * field stores the ID of the original subscription and represents the relationship between the
+   * old and new subscription.
+   */
+  private String relatedSubscriptionId;
+
+  private TrialPlan trialPlan;
 
   /** List of trial periods for the subscription */
   private List<Trial> trials;
