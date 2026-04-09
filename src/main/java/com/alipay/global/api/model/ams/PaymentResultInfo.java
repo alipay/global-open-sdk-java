@@ -145,4 +145,7 @@ public class PaymentResultInfo {
    * 用户发起交易时时已授权，直接付款 ● UNAUTHORIZED - 用户发起交易时未授权，现授权后付款
    */
   private String userAuthorizationStatus;
+
+  /** The authorization code returned by the payment channel upon successful authorization. */
+  private String authorizationCode;
 }
