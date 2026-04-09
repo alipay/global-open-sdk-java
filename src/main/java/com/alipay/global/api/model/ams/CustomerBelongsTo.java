@@ -18,31 +18,25 @@ import lombok.*;
 
 /** Gets or Sets CustomerBelongsTo */
 public enum CustomerBelongsTo {
-  RABBIT_LINE_PAY("RABBIT_LINE_PAY"),
-
-  TRUEMONEY("TRUEMONEY"),
+  ALIPAY_CN("ALIPAY_CN"),
 
   ALIPAY_HK("ALIPAY_HK"),
 
-  TNG("TNG"),
-
-  ALIPAY_CN("ALIPAY_CN"),
-
-  GCASH("GCASH"),
+  MPAY("MPAY"),
 
   DANA("DANA"),
-
-  KAKAOPAY("KAKAOPAY"),
-
-  BKASH("BKASH"),
-
-  EASYPAISA("EASYPAISA"),
 
   PAYPAY("PAYPAY"),
 
   BOOST("BOOST"),
 
+  TNG("TNG"),
+
   GRABPAY_MY("GRABPAY_MY"),
+
+  HIPAY("HIPAY"),
+
+  GCASH("GCASH"),
 
   MAYA("MAYA"),
 
@@ -50,9 +44,15 @@ public enum CustomerBelongsTo {
 
   GRABPAY_SG("GRABPAY_SG"),
 
+  KAKAOPAY("KAKAOPAY"),
+
   NAVERPAY("NAVERPAY"),
 
-  JKOPAY("JKOPAY"),
+  TOSSPAY("TOSSPAY"),
+
+  RABBIT_LINE_PAY("RABBIT_LINE_PAY"),
+
+  TRUEMONEY("TRUEMONEY"),
 
   KPLUS("KPLUS"),
 
@@ -60,15 +60,13 @@ public enum CustomerBelongsTo {
 
   DIRECT_DEBIT_KRUNGTHAIBANK("DIRECT_DEBIT_KRUNGTHAIBANK"),
 
+  ACH_DIRECT_DEBIT("ACH_DIRECT_DEBIT"),
+
   ZALOPAY("ZALOPAY"),
-
-  DIRECTDEBIT_YAPILY("DIRECTDEBIT_YAPILY"),
-
-  TOSSPAY("TOSSPAY"),
 
   MOMO("MOMO"),
 
-  ANTOM_BIZ_ACCOUNT("ANTOM_BIZ_ACCOUNT");
+  VIETTELMONEY("VIETTELMONEY");
 
   private String value;
 
