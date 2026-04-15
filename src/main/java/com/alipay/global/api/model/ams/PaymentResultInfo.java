@@ -100,16 +100,14 @@ public class PaymentResultInfo {
   /**
    * The month the card expires. Pass in two digits representing the month. For example, if the
    * expiry month is February, the value of this parameter is 02. Note: This parameter is returned
-   * when the value of paymentMethodType in the pay (Checkout Payment) API is CARD for specific
-   * merchants in specific regions. More information: Maximum length: 2 characters
+   * when the value of paymentMethodType in the pay (One-time Payments) API is CARD.
    */
   private String expiryMonth;
 
   /**
    * The year the card expires. Pass in the last two digits of the year number. For example, if the
    * expiry year is 2025, the value of this parameter is 25. Note: This parameter is returned when
-   * the value of paymentMethodType in the pay (Checkout Payment) API is CARD for specific merchants
-   * in specific regions. More information: Maximum length: 2 characters
+   * the value of paymentMethodType in the pay (One-time Payments) API is CARD.
    */
   private String expiryYear;
 
