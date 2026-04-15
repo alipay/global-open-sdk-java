@@ -30,7 +30,9 @@ public enum PaymentMethodCategoryType {
 
   CARD("CARD"),
 
-  OTC("OTC");
+  OTC("OTC"),
+
+  VA("VA");
 
   private String value;
 
