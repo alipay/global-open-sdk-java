@@ -12,6 +12,8 @@
 
 package com.alipay.global.api.model.ams;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.List;
 import lombok.*;
 
@@ -77,7 +79,57 @@ public class CardPaymentMethodDetail {
 
   private String authenticationFlow;
 
-  private String funding;
+  /**
+   * The funding type of the card. Valid values are: CREDIT: indicates a credit card. DEBIT:
+   * indicates a debit card. PREPAID: indicates a prepaid card. CHARGE: indicates a charge card.
+   * DEFERRED_DEBIT: indicates a deferred debit card. This parameter is returned when the value of
+   * paymentMethodType is CARD and the information is available from the channel.
+   */
+  public enum FundingEnum {
+    CREDIT("CREDIT"),
+
+    DEBIT("DEBIT"),
+
+    PREPAID("PREPAID"),
+
+    CHARGE("CHARGE"),
+
+    DEFERRED_DEBIT("DEFERRED_DEBIT");
+
+    private String value;
+
+    FundingEnum(String value) {
+      this.value = value;
+    }
+
+    @JsonValue
+    public String getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    @JsonCreator
+    public static FundingEnum fromValue(String value) {
+      for (FundingEnum b : FundingEnum.values()) {
+        if (b.value.equals(value)) {
+          return b;
+        }
+      }
+      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    }
+  }
+
+  /**
+   * The funding type of the card. Valid values are: CREDIT: indicates a credit card. DEBIT:
+   * indicates a debit card. PREPAID: indicates a prepaid card. CHARGE: indicates a charge card.
+   * DEFERRED_DEBIT: indicates a deferred debit card. This parameter is returned when the value of
+   * paymentMethodType is CARD and the information is available from the channel.
+   */
+  private FundingEnum funding;
 
   private String avsResultRaw;
 
@@ -85,8 +137,17 @@ public class CardPaymentMethodDetail {
 
   private String bin;
 
+  /**
+   * The issuer name of the card. This parameter is returned when the value of paymentMethodType is
+   * CARD and the information is available from the channel.
+   */
   private String issuerName;
 
+  /**
+   * The issuing country of the card. The value of this parameter is a 2-letter country code that
+   * follows ISO 3166 Country Codes standard. This parameter is returned when the value of
+   * paymentMethodType is CARD and the information is available from the channel.
+   */
   private String issuingCountry;
 
   private String lastFour;

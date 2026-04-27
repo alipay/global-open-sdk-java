@@ -123,6 +123,11 @@ public class AlipayInquiryStatementRequest extends AlipayRequest<AlipayInquirySt
   /** Indicates the current page index that contains statement information. */
   private Integer pageNumber;
 
+  /**
+   * The card&#39;s assetId that merchants want to query. Only available if they want to filter by.
+   */
+  private String assetId;
+
   public AlipayInquiryStatementRequest() {
     this.setPath("/ams/api/v1/aba/accounts/inquiryStatement");
   }

@@ -11,15 +11,12 @@ import lombok.EqualsAndHashCode;
 public class AlipayABATransferNotify extends AlipayNotify {
 
   /**
-   * The unique ID assigned by the merchant to identify a transfer request.
-   * Maximum length: 64 characters
+   * The unique ID assigned by the merchant to identify a transfer request. Maximum length: 64
+   * characters
    */
   private String transferRequestId;
 
-  /**
-   * The unique ID assigned by Antom to identify a transfer.
-   * Maximum length: 64 characters
-   */
+  /** The unique ID assigned by Antom to identify a transfer. Maximum length: 64 characters */
   private String transferId;
 
   /** The result of the transfer request. */
