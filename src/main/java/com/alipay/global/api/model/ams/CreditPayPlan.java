@@ -12,6 +12,7 @@
 
 package com.alipay.global.api.model.ams;
 
+import java.util.List;
 import lombok.*;
 
 /** CreditPayPlan */
@@ -22,7 +23,7 @@ import lombok.*;
 public class CreditPayPlan {
 
   /**
-   * The number of installments. The valid value is from 2 to 12. More information: Maximum length:
+   * The number of installments. The valid value is from 2 to 36. More information: Maximum length:
    * 8 characters
    */
   private Integer installmentNum;
@@ -37,4 +38,25 @@ public class CreditPayPlan {
    * when the value of creditPayFeeType is PERCENTAGE. More information: Value range: 0 - 100
    */
   private Integer feePercentage;
+
+  /**
+   * Select Installment Payment Plan Period that the merchant wants to offer. Example: Available
+   * periods are 3,6,12,24 months, but if the merchant wants to restrict to 3 &amp; 6 months only,
+   * enter the value as [3,6] Note: This field is mutually exclusive with installmentNum. When both
+   * fields are provided, installmentNum takes priority. More information: Maximum length: 100
+   * elements Value range: 2 - 36
+   */
+  private List<Integer> filteredInstallmentPeriods;
+
+  /**
+   * The installment interest rate in percentage. For example, interestRate &#x3D; 0.1 indicates
+   * that the installment interest rate is 0.1%. Note: This field is returned when the payment
+   * method is CARD, the payment is paid in installments, and the channel provides the interest rate
+   * information. More information: Maximum length: 16 characters The value must be a decimal. Field
+   * attributes: - Idempotency: Not applicable for notification fields - Nullable: Yes - Invalid
+   * input restrictions: Must be a decimal number - Return condition: Returned when the payment
+   * method is CARD, the payment is paid in installments, and the channel provides the interest rate
+   * information
+   */
+  private String interestRate;
 }
