@@ -11,6 +11,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AlipayCardBillNotify {
+  /**
+   * The unique identifier for a single card authorization within an order.
+   * Each card authorization creates exactly one bill. Multiple bills can belong to the same order.
+   * Maximum length: 32 characters
+   */
+  private String billNo;
+
   private String assetId;
   private String maskedCardNo;
   private String orderNo;
