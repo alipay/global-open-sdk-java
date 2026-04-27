@@ -9,7 +9,10 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class AlipayDirectRefundNotify extends AlipayNotify {
 
-  /** The refund status: SUCCESS/PROCESSING/REFUND_AMOUNT_EXCEED/MERCHANT_BALANCE_NOT_ENOUGH/PROCESS_FAIL/PARAM_ILLEGAL/REFUND_WINDOW_EXCEED/ACCESS_DENIED/INVALID_ACCESS_TOKEN */
+  /**
+   * The refund status:
+   * SUCCESS/PROCESSING/REFUND_AMOUNT_EXCEED/MERCHANT_BALANCE_NOT_ENOUGH/PROCESS_FAIL/PARAM_ILLEGAL/REFUND_WINDOW_EXCEED/ACCESS_DENIED/INVALID_ACCESS_TOKEN
+   */
   private String refundStatus;
 
   /** The unique ID assigned by Alipay to identify a refund */
