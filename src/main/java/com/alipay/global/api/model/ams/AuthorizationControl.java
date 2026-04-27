@@ -52,4 +52,6 @@ public class AuthorizationControl {
   private CardLimitDetail cardLimitDetail;
 
   private CardLimitInfo cardLimitInfo;
+
+  private RefundPreference refundPreference;
 }
