@@ -29,9 +29,9 @@ public class ProrationSettings {
    * IMMEDIATE_REFUND_CUSTOM_AMOUNT：商户指定金额退款模式，在这个模式下商户可以用customAmount的指定金额来退差价，差价需要商户提前算好
    */
   public enum ProrationModeEnum {
-    PAY_CUSTOM_AMOUNT("IMMEDIATE_PAY_CUSTOM_AMOUNT"),
+    IMMEDIATE_PAY_CUSTOM_AMOUNT("IMMEDIATE_PAY_CUSTOM_AMOUNT"),
 
-    REFUND_CUSTOM_AMOUNT("IMMEDIATE_REFUND_CUSTOM_AMOUNT");
+    IMMEDIATE_REFUND_CUSTOM_AMOUNT("IMMEDIATE_REFUND_CUSTOM_AMOUNT");
 
     private String value;
 
