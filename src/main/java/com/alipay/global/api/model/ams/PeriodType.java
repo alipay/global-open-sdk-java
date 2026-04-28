@@ -17,13 +17,15 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.*;
 
 /**
- * The subscription period type. Valid values are: WEEK: indicates that the subscription period is
- * measured in weeks. MONTH: indicates that the subscription period is measured in months. QUARTER:
- * indicates that the subscription period is measured in quarters. HALF_YEAR: indicates that the
- * subscription period is measured in half years. YEAR: indicates that the subscription period is
- * measured in years.
+ * The subscription period type. Valid values are: DAY: indicates that the subscription period is
+ * measured in days. WEEK: indicates that the subscription period is measured in weeks. MONTH:
+ * indicates that the subscription period is measured in months. QUARTER: indicates that the
+ * subscription period is measured in quarters. HALF_YEAR: indicates that the subscription period is
+ * measured in half years. YEAR: indicates that the subscription period is measured in years.
  */
 public enum PeriodType {
+  DAY("DAY"),
+
   WEEK("WEEK"),
 
   MONTH("MONTH"),
