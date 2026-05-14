@@ -55,4 +55,7 @@ public class AlipayCaptureResponse extends AlipayResponse {
    * length: 64 characters
    */
   private String acquirerReferenceNo;
+
+  /** 5.11号测试 */
+  private String yimutestopenapi;
 }
