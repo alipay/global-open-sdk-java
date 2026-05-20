@@ -76,5 +76,12 @@ public class Goods {
 
   private Amount goodsDiscountAmount;
 
+  /**
+   * The maximum end date for the service goods. Applicable when the merchant type is Service (e.g.,
+   * online courses, beauty packages). The value follows the ISO 8601 standard format. For example,
+   * \&quot;2025-11-27T12:00:01+08:30\&quot;.
+   */
+  private String goodsEndsOnTime;
+
   private Goods crossSell;
 }
