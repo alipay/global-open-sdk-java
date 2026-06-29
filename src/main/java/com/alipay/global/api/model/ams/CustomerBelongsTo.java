@@ -76,7 +76,7 @@ public enum CustomerBelongsTo {
 
   DIRECTDEBIT_YAPILY("DIRECTDEBIT_YAPILY"),
 
-  ANTIM_BIZ_ACCOUNT("ANTIM_BIZ_ACCOUNT");
+  ANTOM_BIZ_ACCOUNT("ANTOM_BIZ_ACCOUNT");
 
   private String value;
 
