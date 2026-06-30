@@ -67,4 +67,30 @@ public class AlipayVaultingQueryResponse extends AlipayResponse {
 
   /** Metadata for custom data transmission */
   private String metadata;
+
+  /**
+   * The vaulting result code, corresponding to vaultingStatus. When vaultingStatus is SUCCESS, the
+   * value is SUCCESS. When vaultingStatus is PROCESSING, the value is VERIFICATION_IN_PROCESS. When
+   * vaultingStatus is FAIL, the value is a specific error code returned by the card scheme, issuing
+   * bank, or acquirer; when the channel error cannot be mapped, the value is PROCESS_FAIL. Note:
+   * This parameter is returned when the value of result.resultStatus is S. Possible values when
+   * vaultingStatus is FAIL include: ACCESS_DENIED, ACCOUNT_CLOSED, AUTHENTICATION_REQUIRED,
+   * BLOCKED_FIRST_USED, CARD_EXPIRED, CARD_NOT_SUPPORTED, DO_NOT_HONOR, FRAUD_REJECT,
+   * INVALID_CARD_NUMBER, INVALID_CVV, INVALID_EXPIRATION_DATE, LOST_CARD, NO_SELECTED_ACCOUNT,
+   * ORDER_IS_CLOSED, PAYMENT_AMOUNT_EXCEED_LIMIT, PAYMENT_COUNT_EXCEED_LIMIT, PICKUP_CARD, POLICY,
+   * PROCESS_FAIL, RESTRICTED_CARD, STOLEN_CARD, USER_BALANCE_NOT_ENOUGH,
+   * USER_PAYMENT_VERIFICATION_FAILED, VERIFY_TIMES_EXCEED_LIMIT. Additional values may be added in
+   * the future as channel capabilities evolve. More information: Maximum length: 64 characters
+   */
+  private String vaultingResultCode;
+
+  /**
+   * The readable description of vaultingResultCode. When vaultingResultCode is SUCCESS, the value
+   * is \&quot;success.\&quot;. When vaultingResultCode is VERIFICATION_IN_PROCESS, the value is
+   * \&quot;The verification is still under process.\&quot;. When vaultingStatus is FAIL, the value
+   * is the specific error description corresponding to vaultingResultCode. Note: This parameter is
+   * returned when the value of result.resultStatus is S. More information: Maximum length: 256
+   * characters
+   */
+  private String vaultingResultMessage;
 }
