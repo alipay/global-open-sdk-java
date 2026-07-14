@@ -13,10 +13,9 @@
 package com.alipay.global.api.request.ams.aba;
 
 import com.alipay.global.api.model.ams.*;
+import com.alipay.global.api.model.ams.StatementTransactionType;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.aba.AlipayInquiryStatementResponse;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.List;
 import lombok.*;
 
@@ -44,72 +43,17 @@ public class AlipayInquiryStatementRequest extends AlipayRequest<AlipayInquirySt
   private String endTime;
 
   /**
-   * If no value passed, the API shall return all transactions. Antom only supports [0-1] single
-   * type for the current time.
+   * The type of transaction that this API requests. If no value passed, the API shall return all
+   * transactions. Antom only supports [0-1] single type for the current time. Valid values: -
+   * OVERFLOW_DEBIT: Indicates a fund outflow from the main account to the overflow account.
+   * Applicable to MY region merchants only. - OVERFLOW_CREDIT: Indicates a fund inflow to the main
+   * account back from the overflow account. Applicable to MY region merchants only. - CASH_BACK:
+   * Indicates a fund inflow for cashBack credit settlement to the merchant&#39;s main account.
+   * Applicable to CN and HK region merchants with VCC cashback feature enabled only. If not
+   * provided, returns all transaction types (including OVERFLOW_DEBIT, OVERFLOW_CREDIT, CASH_BACK).
+   * Unknown enum value: rejected with INVALID_PARAMETER.
    */
-  public enum TransactionTypeListEnum {
-    PAYMENT("PAYMENT"),
-
-    PAYMENT_REFUND("PAYMENT_REFUND"),
-
-    TOPUP("TOPUP"),
-
-    SETTLEMENT("SETTLEMENT"),
-
-    WITHDRAW("WITHDRAW"),
-
-    WITHDRAW_RETURN("WITHDRAW_RETURN"),
-
-    TRANSFER("TRANSFER"),
-
-    TRANSFER_RETURN("TRANSFER_RETURN"),
-
-    TRANSFER_TO_CHINA("TRANSFER_TO_CHINA"),
-
-    TRANSFER_RECIPIENT("TRANSFER_RECIPIENT"),
-
-    EXCHANGE("EXCHANGE"),
-
-    CREDIT_LOAN("CREDIT_LOAN"),
-
-    CREDIT_REPAY("CREDIT_REPAY"),
-
-    CARD_PAYMENT("CARD_PAYMENT"),
-
-    CARD_REFUND("CARD_REFUND");
-
-    private String value;
-
-    TransactionTypeListEnum(String value) {
-      this.value = value;
-    }
-
-    @JsonValue
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    @JsonCreator
-    public static TransactionTypeListEnum fromValue(String value) {
-      for (TransactionTypeListEnum b : TransactionTypeListEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-  }
-
-  /**
-   * If no value passed, the API shall return all transactions. Antom only supports [0-1] single
-   * type for the current time.
-   */
-  private List<TransactionTypeListEnum> transactionTypeList;
+  private List<StatementTransactionType> transactionTypeList;
 
   /**
    * If no value passed, the API shall return the defined transaction type with all currencies. The
