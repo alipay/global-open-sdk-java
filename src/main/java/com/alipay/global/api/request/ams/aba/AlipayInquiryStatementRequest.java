@@ -12,13 +12,14 @@
 
 package com.alipay.global.api.request.ams.aba;
 
-import com.alipay.global.api.model.ams.*;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.aba.AlipayInquiryStatementResponse;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 import java.util.List;
-import lombok.*;
 
 /** AlipayInquiryStatementRequest */
 @EqualsAndHashCode(callSuper = true)
@@ -52,6 +53,10 @@ public class AlipayInquiryStatementRequest extends AlipayRequest<AlipayInquirySt
 
     PAYMENT_REFUND("PAYMENT_REFUND"),
 
+    CHARGE("CHARGE"),
+
+    CHARGE_REFUND("CHARGE_REFUND"),
+
     TOPUP("TOPUP"),
 
     SETTLEMENT("SETTLEMENT"),
@@ -74,9 +79,21 @@ public class AlipayInquiryStatementRequest extends AlipayRequest<AlipayInquirySt
 
     CREDIT_REPAY("CREDIT_REPAY"),
 
+    CREDIT_REPAYMENT("CREDIT_REPAYMENT"),
+
+    DIRECT_PAYMENT("DIRECT_PAYMENT"),
+
+    DIRECT_REFUND("DIRECT_REFUND"),
+
     CARD_PAYMENT("CARD_PAYMENT"),
 
-    CARD_REFUND("CARD_REFUND");
+    CARD_REFUND("CARD_REFUND"),
+
+    OVERFLOW_DEBIT("OVERFLOW_DEBIT"),
+
+    OVERFLOW_CREDIT("OVERFLOW_CREDIT"),
+
+    CASH_BACK("CASH_BACK");
 
     private String value;
 

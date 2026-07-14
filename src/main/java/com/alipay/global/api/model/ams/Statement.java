@@ -29,7 +29,7 @@ public class Statement {
 
   private String transactionTime;
 
-  private String transactionType;
+  private StatementTransactionType transactionType;
 
   private Amount originalTransactionAmount;
 
