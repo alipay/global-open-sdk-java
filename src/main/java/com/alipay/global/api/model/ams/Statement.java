@@ -12,6 +12,8 @@
 
 package com.alipay.global.api.model.ams;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.*;
 
 /** Statement */
@@ -29,7 +31,97 @@ public class Statement {
 
   private String transactionTime;
 
-  private String transactionType;
+  /**
+   * The type of transaction. Valid values: - OVERFLOW_DEBIT: Indicates a fund outflow from the main
+   * account to the overflow account. Applicable to MY region merchants only. - OVERFLOW_CREDIT:
+   * Indicates a fund inflow to the main account back from the overflow account. Applicable to MY
+   * region merchants only. - CASH_BACK: Indicates a fund inflow for cashBack credit settlement to
+   * the merchant&#39;s main account. Applicable to CN and HK region merchants with VCC cashback
+   * feature enabled only.
+   */
+  public enum TransactionTypeEnum {
+    PAYMENT("PAYMENT"),
+
+    PAYMENT_REFUND("PAYMENT_REFUND"),
+
+    CHARGE("CHARGE"),
+
+    CHARGE_REFUND("CHARGE_REFUND"),
+
+    TOPUP("TOPUP"),
+
+    SETTLEMENT("SETTLEMENT"),
+
+    WITHDRAW("WITHDRAW"),
+
+    WITHDRAW_RETURN("WITHDRAW_RETURN"),
+
+    TRANSFER("TRANSFER"),
+
+    TRANSFER_RETURN("TRANSFER_RETURN"),
+
+    TRANSFER_TO_CHINA("TRANSFER_TO_CHINA"),
+
+    TRANSFER_RECIPIENT("TRANSFER_RECIPIENT"),
+
+    EXCHANGE("EXCHANGE"),
+
+    CREDIT_LOAN("CREDIT_LOAN"),
+
+    CREDIT_REPAY("CREDIT_REPAY"),
+
+    CREDIT_REPAYMENT("CREDIT_REPAYMENT"),
+
+    DIRECT_PAYMENT("DIRECT_PAYMENT"),
+
+    DIRECT_REFUND("DIRECT_REFUND"),
+
+    CARD_PAYMENT("CARD_PAYMENT"),
+
+    CARD_REFUND("CARD_REFUND"),
+
+    OVERFLOW_DEBIT("OVERFLOW_DEBIT"),
+
+    OVERFLOW_CREDIT("OVERFLOW_CREDIT"),
+
+    CASH_BACK("CASH_BACK");
+
+    private String value;
+
+    TransactionTypeEnum(String value) {
+      this.value = value;
+    }
+
+    @JsonValue
+    public String getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    @JsonCreator
+    public static TransactionTypeEnum fromValue(String value) {
+      for (TransactionTypeEnum b : TransactionTypeEnum.values()) {
+        if (b.value.equals(value)) {
+          return b;
+        }
+      }
+      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    }
+  }
+
+  /**
+   * The type of transaction. Valid values: - OVERFLOW_DEBIT: Indicates a fund outflow from the main
+   * account to the overflow account. Applicable to MY region merchants only. - OVERFLOW_CREDIT:
+   * Indicates a fund inflow to the main account back from the overflow account. Applicable to MY
+   * region merchants only. - CASH_BACK: Indicates a fund inflow for cashBack credit settlement to
+   * the merchant&#39;s main account. Applicable to CN and HK region merchants with VCC cashback
+   * feature enabled only.
+   */
+  private TransactionTypeEnum transactionType;
 
   private Amount originalTransactionAmount;
 

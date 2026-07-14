@@ -44,13 +44,24 @@ public class AlipayInquiryStatementRequest extends AlipayRequest<AlipayInquirySt
   private String endTime;
 
   /**
-   * If no value passed, the API shall return all transactions. Antom only supports [0-1] single
-   * type for the current time.
+   * The type of transaction that this API requests. If no value passed, the API shall return all
+   * transactions. Antom only supports [0-1] single type for the current time. Valid values: -
+   * OVERFLOW_DEBIT: Indicates a fund outflow from the main account to the overflow account.
+   * Applicable to MY region merchants only. - OVERFLOW_CREDIT: Indicates a fund inflow to the main
+   * account back from the overflow account. Applicable to MY region merchants only. - CASH_BACK:
+   * Indicates a fund inflow for cashBack credit settlement to the merchant&#39;s main account.
+   * Applicable to CN and HK region merchants with VCC cashback feature enabled only. If not
+   * provided, returns all transaction types (including OVERFLOW_DEBIT, OVERFLOW_CREDIT, CASH_BACK).
+   * Unknown enum value: rejected with INVALID_PARAMETER.
    */
   public enum TransactionTypeListEnum {
     PAYMENT("PAYMENT"),
 
     PAYMENT_REFUND("PAYMENT_REFUND"),
+
+    CHARGE("CHARGE"),
+
+    CHARGE_REFUND("CHARGE_REFUND"),
 
     TOPUP("TOPUP"),
 
@@ -74,9 +85,21 @@ public class AlipayInquiryStatementRequest extends AlipayRequest<AlipayInquirySt
 
     CREDIT_REPAY("CREDIT_REPAY"),
 
+    CREDIT_REPAYMENT("CREDIT_REPAYMENT"),
+
+    DIRECT_PAYMENT("DIRECT_PAYMENT"),
+
+    DIRECT_REFUND("DIRECT_REFUND"),
+
     CARD_PAYMENT("CARD_PAYMENT"),
 
-    CARD_REFUND("CARD_REFUND");
+    CARD_REFUND("CARD_REFUND"),
+
+    OVERFLOW_DEBIT("OVERFLOW_DEBIT"),
+
+    OVERFLOW_CREDIT("OVERFLOW_CREDIT"),
+
+    CASH_BACK("CASH_BACK");
 
     private String value;
 
@@ -106,8 +129,15 @@ public class AlipayInquiryStatementRequest extends AlipayRequest<AlipayInquirySt
   }
 
   /**
-   * If no value passed, the API shall return all transactions. Antom only supports [0-1] single
-   * type for the current time.
+   * The type of transaction that this API requests. If no value passed, the API shall return all
+   * transactions. Antom only supports [0-1] single type for the current time. Valid values: -
+   * OVERFLOW_DEBIT: Indicates a fund outflow from the main account to the overflow account.
+   * Applicable to MY region merchants only. - OVERFLOW_CREDIT: Indicates a fund inflow to the main
+   * account back from the overflow account. Applicable to MY region merchants only. - CASH_BACK:
+   * Indicates a fund inflow for cashBack credit settlement to the merchant&#39;s main account.
+   * Applicable to CN and HK region merchants with VCC cashback feature enabled only. If not
+   * provided, returns all transaction types (including OVERFLOW_DEBIT, OVERFLOW_CREDIT, CASH_BACK).
+   * Unknown enum value: rejected with INVALID_PARAMETER.
    */
   private List<TransactionTypeListEnum> transactionTypeList;
 
