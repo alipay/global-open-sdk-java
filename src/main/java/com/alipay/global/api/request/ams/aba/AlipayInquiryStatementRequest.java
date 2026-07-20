@@ -158,6 +158,9 @@ public class AlipayInquiryStatementRequest extends AlipayRequest<AlipayInquirySt
    */
   private String assetId;
 
+  /** The value used to filter beneficiaries using fuzzy matching. */
+  private String fuzzyName;
+
   public AlipayInquiryStatementRequest() {
     this.setPath("/ams/api/v1/aba/accounts/inquiryStatement");
   }
