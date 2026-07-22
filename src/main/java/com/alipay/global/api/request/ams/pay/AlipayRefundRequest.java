@@ -62,6 +62,9 @@ public class AlipayRefundRequest extends AlipayRequest<AlipayRefundResponse> {
 
   private Amount refundAmount;
 
+  /** Pricing amount for custom settlement, e.g. {"currency":"HKD","value":"43000"} */
+  private Amount pricingAmount;
+
   /**
    * The refund reason. Note: Specify this field if you want to provide the refund reason to the
    * user and payment method. More information: Maximum length: 256 characters

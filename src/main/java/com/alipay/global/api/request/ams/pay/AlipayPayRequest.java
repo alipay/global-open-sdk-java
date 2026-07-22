@@ -52,6 +52,9 @@ public class AlipayPayRequest extends AlipayRequest<AlipayPayResponse> {
 
   private Amount processingAmount;
 
+  /** Pricing amount for custom settlement, e.g. {"currency":"HKD","value":"43000"} */
+  private Amount pricingAmount;
+
   private ProductCodeType productCode;
 
   /**
