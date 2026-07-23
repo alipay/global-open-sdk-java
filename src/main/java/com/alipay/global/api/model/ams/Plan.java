@@ -45,4 +45,12 @@ public class Plan {
 
   /** Indicates whether the installment payment is available. */
   private Boolean enabled;
+
+  /**
+   * Extended information field, used to return extended information of the payment installment plan
+   * in the payment consultation interface. The extended fields in the installment plan include
+   * interest rates and various amount details to meet the merchant&#39;s amount display
+   * requirements. More information: Maximum length: 4096 characters
+   */
+  private String extendInfo;
 }

@@ -49,4 +49,8 @@ public class Transaction {
   private String transactionTime;
 
   private AcquirerInfo acquirerInfo;
+
+  private Amount grossSettlementAmount;
+
+  private Quote settlementQuote;
 }

@@ -28,7 +28,9 @@ public enum TransactionType {
 
   AUTHORIZATION("AUTHORIZATION"),
 
-  VOID("VOID");
+  VOID("VOID"),
+
+  INCREMENTAL("INCREMENTAL");
 
   private String value;
 
