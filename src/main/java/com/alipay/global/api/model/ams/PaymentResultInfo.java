@@ -146,4 +146,13 @@ public class PaymentResultInfo {
 
   /** The authorization code returned by the payment channel upon successful authorization. */
   private String authorizationCode;
+
+  /** Whether this pre-auth supports incremental auth. Returned when auth is successful. */
+  private Boolean incrementalAuthorizationAvailable;
+
+  /** Whether this pre-auth supports extended auth. Returned when auth is successful. */
+  private Boolean extendedAuthorizationAvailable;
+
+  /** Whether subsequent refunds can be made via paymentId. Returned when auth is successful. */
+  private Boolean refundOnAuthorizationAvailable;
 }
