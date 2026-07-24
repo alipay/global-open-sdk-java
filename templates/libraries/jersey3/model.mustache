@@ -7,6 +7,13 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.HashMap;
 import lombok.*;
+{{#models}}
+{{#model}}
+{{#vendorExtensions.x-has-wire-name}}
+import com.alibaba.fastjson.annotation.JSONField;
+{{/vendorExtensions.x-has-wire-name}}
+{{/model}}
+{{/models}}
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.AlipayResponse;
 import com.alipay.global.api.model.ams.*;
@@ -65,4 +72,3 @@ import com.alipay.global.api.model.Result;
         {{/isEnum}}
     {{/model}}
 {{/models}}
-
