@@ -44,6 +44,10 @@ public class {{classname}} {{#lambdas.parent}}{{classname}} 1 {{/lambdas.parent}
                         * {{.}}
                         */
                     {{/description}}
+                    {{#vendorExtensions.x-wire-name}}
+                    @JSONField(name = "{{vendorExtensions.x-wire-name}}")
+                    @JsonProperty("{{vendorExtensions.x-wire-name}}")
+                    {{/vendorExtensions.x-wire-name}}
                     private {{#lambdas.specificScopeType}} {{name}}|{{{datatypeWithEnum}}}{{/lambdas.specificScopeType}}  {{#lambdas.camelCase}} {{name}} {{/lambdas.camelCase}};
                 {{/isContainer}}
                 {{^isContainer}}
@@ -56,6 +60,10 @@ public class {{classname}} {{#lambdas.parent}}{{classname}} 1 {{/lambdas.parent}
                         * {{.}}
                         */
                     {{/description}}
+                    {{#vendorExtensions.x-wire-name}}
+                    @JSONField(name = "{{vendorExtensions.x-wire-name}}")
+                    @JsonProperty("{{vendorExtensions.x-wire-name}}")
+                    {{/vendorExtensions.x-wire-name}}
                     private {{#lambdas.specificScopeType}} {{name}}|{{{datatypeWithEnum}}}{{/lambdas.specificScopeType}}  {{#lambdas.camelCase}} {{name}} {{/lambdas.camelCase}};
                 {{/isContainer}}
             {{/vendorExtensions.x-is-jackson-optional-nullable}}
