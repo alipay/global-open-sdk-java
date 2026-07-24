@@ -125,4 +125,16 @@ public class AlipayPayResponse extends AlipayResponse {
    * the process of placing an order.
    */
   private List<PromotionResult> promotionResult;
+
+  /** The subscription ID echo. */
+  private String subscriptionId;
+
+  /** The subscription status after payment/token binding. */
+  private String status;
+
+  /** The start time of the billing cycle. */
+  private String currentPeriodStart;
+
+  /** The end time of the billing cycle. */
+  private String currentPeriodEnd;
 }

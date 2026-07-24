@@ -148,6 +148,15 @@ public class AlipayPayRequest extends AlipayRequest<AlipayPayResponse> {
 
   private Boolean dualOfflinePayment;
 
+  /** The existing subscription ID, pre-created via the create subscription API. */
+  private String subscriptionId;
+
+  /**
+   * The tax calculation ID. This ID is obtained from the calculate API and used for subsequent
+   * payment posting verification and tax records.
+   */
+  private String taxCalculationId;
+
   public AlipayPayRequest() {
     this.setPath("/ams/api/v1/payments/pay");
   }
