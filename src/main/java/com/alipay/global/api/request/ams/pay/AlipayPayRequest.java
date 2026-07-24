@@ -148,6 +148,9 @@ public class AlipayPayRequest extends AlipayRequest<AlipayPayResponse> {
 
   private Boolean dualOfflinePayment;
 
+  /** Test parameter for TeaDrinkerPlus */
+  private String teaDrinkerPlusTest;
+
   public AlipayPayRequest() {
     this.setPath("/ams/api/v1/payments/pay");
   }
