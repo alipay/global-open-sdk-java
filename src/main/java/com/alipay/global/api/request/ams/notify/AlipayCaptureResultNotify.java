@@ -32,4 +32,7 @@ public class AlipayCaptureResultNotify extends AlipayNotify {
   private AcquirerInfo acquirerInfo;
 
   private PaymentResultInfo paymentResultInfo;
+
+  /** The tax calculation ID for billing. */
+  private String taxCalculationId;
 }

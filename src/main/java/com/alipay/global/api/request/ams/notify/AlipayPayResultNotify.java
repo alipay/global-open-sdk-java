@@ -74,4 +74,7 @@ public class AlipayPayResultNotify extends AlipayNotify {
    * updateAmount calls do not reset this value. ISO 8601 format string.
    */
   private String authExpiryTime;
+
+  /** The tax calculation ID for billing. */
+  private String taxCalculationId;
 }

@@ -10,8 +10,11 @@ import com.alipay.global.api.response.AlipayResponse;
 import com.alipay.global.api.tools.Constants;
 import com.alipay.global.api.tools.DateTool;
 import com.alipay.global.api.tools.SignatureTool;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import org.apache.commons.lang3.StringUtils;
 
 public abstract class BaseAlipayClient implements AlipayClient {
@@ -141,6 +144,87 @@ public abstract class BaseAlipayClient implements AlipayClient {
     return alipayResponse;
   }
 
+  private static final Set<String> RESERVED_HEADERS = new HashSet<>(Arrays.asList(
+      "signature", "client-id", "request-time", "content-type", "agent-token"));
+
+  public <T extends AlipayResponse> T executeWithHeaders(
+      AlipayRequest<T> alipayRequest, Map<String, String> extraHeaders)
+      throws AlipayApiException {
+
+    // compatible with old version which clientId does not exist in BaseAlipayClient
+    alipayRequest.setClientId(
+        alipayRequest.getClientId() == null ? this.clientId : alipayRequest.getClientId());
+
+    // replace with sandbox url if needed
+    adjustSandboxUrl(alipayRequest);
+
+    // check request params
+    checkRequestParams(alipayRequest);
+
+    String clientId = alipayRequest.getClientId();
+    String httpMethod = alipayRequest.getHttpMethod();
+    String path = alipayRequest.getPath();
+    Integer keyVersion = alipayRequest.getKeyVersion();
+    String reqTime = DateTool.getCurrentTimeMillis();
+    String reqBody =
+        JSON.toJSONString(alipayRequest, SerializerFeature.DisableCircularReferenceDetect);
+
+    /** 对内容加签(Sign the content) */
+    String signValue = genSignValue(httpMethod, path, clientId, reqTime, reqBody);
+
+    /** 生成必要header(Generate required headers) */
+    Map<String, String> header = buildBaseHeader(reqTime, clientId, keyVersion, signValue);
+    Map<String, String> customHeader = buildCustomHeader();
+    if (customHeader != null && !customHeader.isEmpty()) {
+      header.putAll(customHeader);
+    }
+    if (extraHeaders != null && !extraHeaders.isEmpty()) {
+      for (Map.Entry<String, String> entry : extraHeaders.entrySet()) {
+        if (entry.getKey() == null) {
+          continue;
+        }
+        if (!RESERVED_HEADERS.contains(entry.getKey().toLowerCase())) {
+          header.put(entry.getKey(), entry.getValue());
+        }
+      }
+    }
+
+    String requestUrl = genRequestUrl(path);
+    /** 向网关发起http请求(Make an HTTP request to the gateway) */
+    HttpRpcResult rsp = sendRequest(requestUrl, httpMethod, header, reqBody);
+
+    if (rsp == null) {
+      throw new AlipayApiException("HttpRpcResult is null.");
+    }
+
+    int httpRespCode = rsp.getRspCode();
+    String rspBody = rsp.getRspBody();
+    if (httpRespCode != Constants.HTTP_SUCCESS_CODE) {
+      throw new AlipayApiException("Response data error, rspBody:" + rspBody);
+    }
+    Class<T> responseClass = alipayRequest.getResponseClass();
+    T alipayResponse = JSON.parseObject(rspBody, responseClass);
+    Result result = alipayResponse.getResult();
+    if (result == null) {
+      throw new AlipayApiException("Response data error, result field is null, rspBody:" + rspBody);
+    }
+
+    String rspSignValue = rsp.getRspSign();
+    String rspTime = rsp.getResponseTime();
+    if (null == rspSignValue || rspSignValue.isEmpty() || null == rspTime || rspTime.isEmpty()) {
+      return alipayResponse;
+    }
+
+    /** 对返回结果验签(Verify the result signature) */
+    boolean isVerifySuccess =
+        checkRspSign(httpMethod, path, clientId, rspTime, rspBody, rspSignValue);
+    if (!isVerifySuccess) {
+      throw new AlipayApiException("Response signature verify fail.");
+    }
+
+    return alipayResponse;
+  }
+
   private String genSignValue(
       String httpMethod, String path, String clientId, String requestTime, String reqBody)
       throws AlipayApiException {
@@ -219,6 +303,11 @@ public abstract class BaseAlipayClient implements AlipayClient {
   private void adjustSandboxUrl(AlipayRequest alipayRequest) {
     if (isSandboxMode && alipayRequest.usingSandboxUrl()) {
       String originPath = alipayRequest.getPath();
+      // billing/* and meter/* use production path + sandbox clientId (no path isolation)
+      if (originPath.startsWith("/ams/api/v1/billing/")
+          || originPath.startsWith("/ams/api/v1/meter/")) {
+        return;
+      }
       alipayRequest.setPath(originPath.replaceFirst("/ams/api", "/ams/sandbox/api"));
     }
   }
