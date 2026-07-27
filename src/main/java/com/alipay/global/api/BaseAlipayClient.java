@@ -21,6 +21,9 @@ public abstract class BaseAlipayClient implements AlipayClient {
 
   private static final Integer DEFAULT_KEY_VERSION = 1;
 
+  private static final Set<String> SANDBOX_PRODUCTION_PATH_PREFIXES =
+      new HashSet<>(Arrays.asList("/ams/api/v1/billing/", "/ams/api/v1/meter/"));
+
   /** eg: https://open-na.alipay.com */
   private String gatewayUrl;
 
@@ -303,13 +306,20 @@ public abstract class BaseAlipayClient implements AlipayClient {
   private void adjustSandboxUrl(AlipayRequest alipayRequest) {
     if (isSandboxMode && alipayRequest.usingSandboxUrl()) {
       String originPath = alipayRequest.getPath();
-      // billing/* and meter/* use production path + sandbox clientId (no path isolation)
-      if (originPath.startsWith("/ams/api/v1/billing/")
-          || originPath.startsWith("/ams/api/v1/meter/")) {
+      if (shouldUseProductionPathInSandbox(originPath)) {
         return;
       }
       alipayRequest.setPath(originPath.replaceFirst("/ams/api", "/ams/sandbox/api"));
     }
+  }
+
+  private boolean shouldUseProductionPathInSandbox(String path) {
+    for (String prefix : SANDBOX_PRODUCTION_PATH_PREFIXES) {
+      if (path.startsWith(prefix)) {
+        return true;
+      }
+    }
+    return false;
   }
 
   /**

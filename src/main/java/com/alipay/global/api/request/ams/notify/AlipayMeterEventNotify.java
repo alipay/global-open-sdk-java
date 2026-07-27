@@ -1,6 +1,7 @@
 package com.alipay.global.api.request.ams.notify;
 
 import com.alipay.global.api.model.ams.ErrorEvent;
+import java.util.List;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -12,5 +13,5 @@ public class AlipayMeterEventNotify extends AlipayNotify {
   private String eventName;
 
   /** The error event details. */
-  private ErrorEvent errorEvents;
+  private List<ErrorEvent> errorEvents;
 }
