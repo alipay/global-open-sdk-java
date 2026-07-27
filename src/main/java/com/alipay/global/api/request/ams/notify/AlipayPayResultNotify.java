@@ -70,8 +70,8 @@ public class AlipayPayResultNotify extends AlipayNotify {
   private String updateRequestId;
 
   /**
-   * The absolute expiry time of this pre-authorization. Returned when auth is successful.
-   * Multiple updateAmount calls do not reset this value. ISO 8601 format string.
+   * The absolute expiry time of this pre-authorization. Returned when auth is successful. Multiple
+   * updateAmount calls do not reset this value. ISO 8601 format string.
    */
   private String authExpiryTime;
 }
