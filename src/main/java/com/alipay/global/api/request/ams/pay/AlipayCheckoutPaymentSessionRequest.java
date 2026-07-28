@@ -1,6 +1,5 @@
 package com.alipay.global.api.request.ams.pay;
 
-
 import com.alipay.global.api.model.ams.ProductCodeType;
 import com.alipay.global.api.model.constants.AntomPathConstants;
 import com.alipay.global.api.model.constants.ProductSceneConstants;
