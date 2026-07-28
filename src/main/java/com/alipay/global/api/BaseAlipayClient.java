@@ -147,12 +147,12 @@ public abstract class BaseAlipayClient implements AlipayClient {
     return alipayResponse;
   }
 
-  private static final Set<String> RESERVED_HEADERS = new HashSet<>(Arrays.asList(
-      "signature", "client-id", "request-time", "content-type", "agent-token"));
+  private static final Set<String> RESERVED_HEADERS =
+      new HashSet<>(
+          Arrays.asList("signature", "client-id", "request-time", "content-type", "agent-token"));
 
   public <T extends AlipayResponse> T executeWithHeaders(
-      AlipayRequest<T> alipayRequest, Map<String, String> extraHeaders)
-      throws AlipayApiException {
+      AlipayRequest<T> alipayRequest, Map<String, String> extraHeaders) throws AlipayApiException {
 
     // compatible with old version which clientId does not exist in BaseAlipayClient
     alipayRequest.setClientId(
