@@ -1,26 +1,26 @@
 package com.alipay.global.api.request;
 
-import com.alibaba.fastjson.annotation.JSONField;
 import com.alipay.global.api.net.HttpMethod;
 import com.alipay.global.api.response.AlipayResponse;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 @Data
 public abstract class AlipayRequest<T extends AlipayResponse> {
   /** client id */
-  @JSONField(serialize = false)
+  @JsonIgnore
   private String clientId;
 
-  @JSONField(serialize = false)
+  @JsonIgnore
   private String path;
 
-  @JSONField(serialize = false)
+  @JsonIgnore
   private Integer keyVersion;
 
-  @JSONField(serialize = false)
+  @JsonIgnore
   private Class<T> responseClass;
 
-  @JSONField(serialize = false)
+  @JsonIgnore
   private String httpMethod = HttpMethod.POST.name();
 
   /**

@@ -1,7 +1,5 @@
 package com.alipay.global.api;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alipay.global.api.exception.AlipayApiException;
 import com.alipay.global.api.model.Result;
 import com.alipay.global.api.net.HttpRpcResult;
@@ -9,6 +7,7 @@ import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.AlipayResponse;
 import com.alipay.global.api.tools.Constants;
 import com.alipay.global.api.tools.DateTool;
+import com.alipay.global.api.tools.JsonUtil;
 import com.alipay.global.api.tools.SignatureTool;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -98,8 +97,7 @@ public abstract class BaseAlipayClient implements AlipayClient {
     String path = alipayRequest.getPath();
     Integer keyVersion = alipayRequest.getKeyVersion();
     String reqTime = DateTool.getCurrentTimeMillis();
-    String reqBody =
-        JSON.toJSONString(alipayRequest, SerializerFeature.DisableCircularReferenceDetect);
+    String reqBody = JsonUtil.toJson(alipayRequest);
 
     /** 对内容加签(Sign the content) */
     String signValue = genSignValue(httpMethod, path, clientId, reqTime, reqBody);
@@ -125,7 +123,7 @@ public abstract class BaseAlipayClient implements AlipayClient {
       throw new AlipayApiException("Response data error, rspBody:" + rspBody);
     }
     Class<T> responseClass = alipayRequest.getResponseClass();
-    T alipayResponse = JSON.parseObject(rspBody, responseClass);
+    T alipayResponse = JsonUtil.parse(rspBody, responseClass);
     Result result = alipayResponse.getResult();
     if (result == null) {
       throw new AlipayApiException("Response data error, result field is null, rspBody:" + rspBody);
@@ -169,8 +167,7 @@ public abstract class BaseAlipayClient implements AlipayClient {
     String path = alipayRequest.getPath();
     Integer keyVersion = alipayRequest.getKeyVersion();
     String reqTime = DateTool.getCurrentTimeMillis();
-    String reqBody =
-        JSON.toJSONString(alipayRequest, SerializerFeature.DisableCircularReferenceDetect);
+    String reqBody = JsonUtil.toJson(alipayRequest);
 
     /** 对内容加签(Sign the content) */
     String signValue = genSignValue(httpMethod, path, clientId, reqTime, reqBody);
@@ -206,7 +203,7 @@ public abstract class BaseAlipayClient implements AlipayClient {
       throw new AlipayApiException("Response data error, rspBody:" + rspBody);
     }
     Class<T> responseClass = alipayRequest.getResponseClass();
-    T alipayResponse = JSON.parseObject(rspBody, responseClass);
+    T alipayResponse = JsonUtil.parse(rspBody, responseClass);
     Result result = alipayResponse.getResult();
     if (result == null) {
       throw new AlipayApiException("Response data error, result field is null, rspBody:" + rspBody);

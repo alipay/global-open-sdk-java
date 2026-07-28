@@ -1,6 +1,5 @@
 package com.alipay.global.api.example;
 
-import com.alibaba.fastjson.JSON;
 import com.alipay.global.api.AlipayClient;
 import com.alipay.global.api.DefaultAlipayClient;
 import com.alipay.global.api.exception.AlipayApiException;
@@ -77,7 +76,7 @@ public class SubscriptionDemoCode {
 
     AlipaySubscriptionCreateResponse alipaySubscriptionCreateResponse = null;
 
-    System.out.println(JSON.toJSON(alipaySubscriptionCreateRequest));
+    System.out.println(alipaySubscriptionCreateRequest);
 
     try {
       alipaySubscriptionCreateResponse = CLIENT.execute(alipaySubscriptionCreateRequest);
@@ -87,6 +86,6 @@ public class SubscriptionDemoCode {
       // handle error condition
     }
 
-    System.out.println(JSON.toJSON(alipaySubscriptionCreateResponse));
+    System.out.println(alipaySubscriptionCreateResponse);
   }
 }
