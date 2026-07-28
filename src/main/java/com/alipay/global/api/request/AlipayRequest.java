@@ -8,20 +8,15 @@ import lombok.Data;
 @Data
 public abstract class AlipayRequest<T extends AlipayResponse> {
   /** client id */
-  @JsonIgnore
-  private String clientId;
+  @JsonIgnore private String clientId;
 
-  @JsonIgnore
-  private String path;
+  @JsonIgnore private String path;
 
-  @JsonIgnore
-  private Integer keyVersion;
+  @JsonIgnore private Integer keyVersion;
 
-  @JsonIgnore
-  private Class<T> responseClass;
+  @JsonIgnore private Class<T> responseClass;
 
-  @JsonIgnore
-  private String httpMethod = HttpMethod.POST.name();
+  @JsonIgnore private String httpMethod = HttpMethod.POST.name();
 
   /**
    * 是否使用沙箱url
