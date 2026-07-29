@@ -9,6 +9,9 @@ import java.util.HashMap;
 import lombok.*;
 {{#models}}
 {{#model}}
+{{#vendorExtensions.x-has-wire-name}}
+import com.alibaba.fastjson.annotation.JSONField;
+{{/vendorExtensions.x-has-wire-name}}
 {{/model}}
 {{/models}}
 import com.alipay.global.api.request.AlipayRequest;

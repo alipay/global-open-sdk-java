@@ -1,10 +1,9 @@
 package com.alipay.global.api.example.legacy;
 
+import com.alibaba.fastjson.JSON;
 import com.alipay.global.api.example.model.*;
-import com.alipay.global.api.exception.AlipayApiException;
 import com.alipay.global.api.model.Result;
 import com.alipay.global.api.model.ResultStatusType;
-import com.alipay.global.api.tools.JsonUtil;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
@@ -16,12 +15,7 @@ public class PayNotifyListener {
     InputStream inputStream = request.getInputStream();
     String reqBody = read(inputStream);
 
-    PayNotifyRequest payNotifyRequest;
-    try {
-      payNotifyRequest = JsonUtil.parse(reqBody, PayNotifyRequest.class);
-    } catch (AlipayApiException e) {
-      return;
-    }
+    PayNotifyRequest payNotifyRequest = JSON.parseObject(reqBody, PayNotifyRequest.class);
 
     if (!PaymentNotifyType.PAYMENT_RESULT.equals(payNotifyRequest.getNotifyType())) {
       return;
@@ -51,8 +45,8 @@ public class PayNotifyListener {
       payNotifyResponse.setResult(result);
       response
           .getOutputStream()
-          .write(JsonUtil.toJson(payNotifyResponse).getBytes(Charset.forName("UTF-8")));
-    } catch (IOException | AlipayApiException e) {
+          .write(JSON.toJSONString(payNotifyResponse).getBytes(Charset.forName("UTF-8")));
+    } catch (IOException e) {
     }
   }
 
