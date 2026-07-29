@@ -12,7 +12,6 @@
 
 package com.alipay.global.api.request.ams.billing;
 
-import com.alibaba.fastjson.annotation.JSONField;
 import com.alipay.global.api.model.ams.*;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.billing.AlipayInvoiceReviseResponse;
@@ -34,7 +33,6 @@ public class AlipayInvoiceReviseRequest extends AlipayRequest<AlipayInvoiceRevis
   private String invoiceRevisionRequestId;
 
   /** The void. */
-  @JSONField(name = "void")
   @JsonProperty("void")
   private Boolean voidValue;
 

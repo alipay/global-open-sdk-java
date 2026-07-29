@@ -1,6 +1,5 @@
 package com.alipay.global.api.example;
 
-import com.alibaba.fastjson.JSONObject;
 import com.alipay.global.api.AlipayClient;
 import com.alipay.global.api.DefaultAlipayClient;
 import com.alipay.global.api.exception.AlipayApiException;
@@ -70,7 +69,7 @@ public class CashierPayDemoCode {
 
     try {
       alipayPayConsultResponse = CLIENT.execute(alipayPayConsultRequest);
-      System.out.println(JSONObject.toJSON(alipayPayConsultResponse));
+      System.out.println(alipayPayConsultResponse);
     } catch (AlipayApiException e) {
       String errorMsg = e.getMessage();
       // handle error condition
@@ -98,7 +97,7 @@ public class CashierPayDemoCode {
     paymentMethodMetaData.put("expiryYear", "28");
     paymentMethodMetaData.put("tokenize", false);
     paymentMethodMetaData.put("cpf", "671.998.112-31");
-    JSONObject cardholderName = new JSONObject();
+    java.util.Map<String, Object> cardholderName = new java.util.HashMap<String, Object>();
     cardholderName.put("firstName", "Alan");
     cardholderName.put("lastName", "Wallex");
     paymentMethodMetaData.put("cardholderName", cardholderName);
@@ -145,7 +144,7 @@ public class CashierPayDemoCode {
     AlipayPayResponse alipayPayResponse = null;
     try {
       alipayPayResponse = CLIENT.execute(alipayPayRequest);
-      System.out.println(JSONObject.toJSON(alipayPayResponse));
+      System.out.println(alipayPayResponse);
     } catch (AlipayApiException e) {
       String errorMsg = e.getMessage();
       // handle error condition
