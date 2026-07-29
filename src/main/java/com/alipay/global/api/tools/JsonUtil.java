@@ -35,17 +35,12 @@ public final class JsonUtil {
     return mapper;
   }
 
-  /** 返回共享的 ObjectMapper（只读用途，勿修改其配置）。 */
-  public static ObjectMapper mapper() {
-    return MAPPER;
-  }
-
   /** 序列化对象为 JSON 字符串。 */
   public static String toJson(Object value) throws AlipayApiException {
     try {
       return MAPPER.writeValueAsString(value);
     } catch (JsonProcessingException e) {
-      throw new AlipayApiException("JSON serialize error: " + e.getMessage());
+      throw new AlipayApiException("JSON serialize error", e);
     }
   }
 
@@ -54,7 +49,7 @@ public final class JsonUtil {
     try {
       return MAPPER.readValue(content, clazz);
     } catch (JsonProcessingException e) {
-      throw new AlipayApiException("JSON parse error: " + e.getMessage());
+      throw new AlipayApiException("JSON parse error", e);
     }
   }
 }
