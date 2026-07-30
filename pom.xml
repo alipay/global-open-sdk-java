@@ -4,7 +4,7 @@
     <groupId>com.alipay.global.sdk</groupId>
     <artifactId>global-open-sdk-java</artifactId>
     <packaging>jar</packaging>
-    <version>2.2.4</version>
+    <version>2.2.5</version>
     <name>global-open-sdk-java</name>
     <url>https://github.com/alipay/global-open-sdk-java</url>
     <description>
@@ -77,7 +77,7 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.83_noneautotype</version>
+            <version>1.2.84</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
         <dependency>
