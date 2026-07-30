@@ -4,6 +4,7 @@ import com.alipay.global.api.exception.AlipayApiException;
 import com.alipay.global.api.ssl.TrueHostnameVerifier;
 import com.alipay.global.api.ssl.X509TrustManagerImp;
 import com.alipay.global.api.tools.Constants;
+import com.alipay.global.api.tools.SdkVersion;
 import java.io.*;
 import java.lang.reflect.Field;
 import java.net.HttpURLConnection;
@@ -126,7 +127,7 @@ public class DefaultHttpRPC {
     connHttps.setDoOutput(true);
     connHttps.setRequestProperty(
         Constants.ACCEPT_HEADER, "text/plain,text/xml,text/javascript,text/html");
-    connHttps.setRequestProperty(Constants.USER_AGENT_HEADER, "global-sdk-java");
+    connHttps.setRequestProperty(Constants.USER_AGENT_HEADER, SdkVersion.getUserAgent());
     connHttps.setRequestProperty(Constants.CONTENT_TYPE_HEADER, ctype);
     connHttps.setRequestProperty(Constants.CONNECTION_HEADER, "keep-alive");
     return connHttps;

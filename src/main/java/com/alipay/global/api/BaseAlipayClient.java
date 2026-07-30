@@ -9,10 +9,12 @@ import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.AlipayResponse;
 import com.alipay.global.api.tools.Constants;
 import com.alipay.global.api.tools.DateTool;
+import com.alipay.global.api.tools.SdkVersion;
 import com.alipay.global.api.tools.SignatureTool;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import org.apache.commons.lang3.StringUtils;
@@ -110,6 +112,7 @@ public abstract class BaseAlipayClient implements AlipayClient {
     if (customHeader != null && !customHeader.isEmpty()) {
       header.putAll(customHeader);
     }
+    applySdkUserAgent(header);
 
     String requestUrl = genRequestUrl(path);
     /** 向网关发起http请求(Make an HTTP request to the gateway) */
@@ -149,7 +152,13 @@ public abstract class BaseAlipayClient implements AlipayClient {
 
   private static final Set<String> RESERVED_HEADERS =
       new HashSet<>(
-          Arrays.asList("signature", "client-id", "request-time", "content-type", "agent-token"));
+          Arrays.asList(
+              "signature",
+              "client-id",
+              "request-time",
+              "content-type",
+              "agent-token",
+              "user-agent"));
 
   public <T extends AlipayResponse> T executeWithHeaders(
       AlipayRequest<T> alipayRequest, Map<String, String> extraHeaders) throws AlipayApiException {
@@ -191,6 +200,7 @@ public abstract class BaseAlipayClient implements AlipayClient {
         }
       }
     }
+    applySdkUserAgent(header);
 
     String requestUrl = genRequestUrl(path);
     /** 向网关发起http请求(Make an HTTP request to the gateway) */
@@ -335,6 +345,7 @@ public abstract class BaseAlipayClient implements AlipayClient {
       String requestTime, String clientId, Integer keyVersion, String signatureValue) {
     Map<String, String> header = new HashMap<String, String>();
     header.put(Constants.CONTENT_TYPE_HEADER, "application/json; charset=UTF-8");
+    header.put(Constants.USER_AGENT_HEADER, SdkVersion.getUserAgent());
     header.put(Constants.REQ_TIME_HEADER, requestTime);
     header.put(Constants.CLIENT_ID_HEADER, clientId);
     if (keyVersion == null) {
@@ -347,6 +358,17 @@ public abstract class BaseAlipayClient implements AlipayClient {
       header.put(Constants.AGENT_TOKEN_HEADER, agentToken);
     }
     return header;
+  }
+
+  private void applySdkUserAgent(Map<String, String> header) {
+    Iterator<Map.Entry<String, String>> iterator = header.entrySet().iterator();
+    while (iterator.hasNext()) {
+      Map.Entry<String, String> entry = iterator.next();
+      if (Constants.USER_AGENT_HEADER.equalsIgnoreCase(entry.getKey())) {
+        iterator.remove();
+      }
+    }
+    header.put(Constants.USER_AGENT_HEADER, SdkVersion.getUserAgent());
   }
 
   public abstract Map<String, String> buildCustomHeader();
