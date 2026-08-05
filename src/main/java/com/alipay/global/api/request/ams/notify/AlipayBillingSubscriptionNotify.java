@@ -1,5 +1,6 @@
 package com.alipay.global.api.request.ams.notify;
 
+import com.alipay.global.api.model.ams.Amount;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -30,4 +31,7 @@ public class AlipayBillingSubscriptionNotify extends AlipayNotify {
 
   /** The previous subscription status. */
   private String previousStatus;
+
+  /** The fixed subscription amount per period. Returned when subscription has fixed pricing and subscriptionNotificationType is CREATE. */
+  private Amount fixedAmount;
 }
