@@ -22,7 +22,7 @@ import lombok.*;
 public class Tier {
 
   /** The up to. */
-  private Integer upTo;
+  private Long upTo;
 
   private Amount unitAmount;
 

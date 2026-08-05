@@ -37,8 +37,8 @@ public class AlipayPriceInquireListRequest extends AlipayRequest<AlipayPriceInqu
   /** The ending before. Maximum length: 32 characters. Note: See documentation for details. */
   private String endingBefore;
 
-  /** The list. Maximum length: 32 characters. */
-  private Integer list;
+  /** The maximum number of prices returned per page. Value range: 1 - 100. Default value: 20. */
+  private Integer limit;
 
   /** The include total. */
   private Boolean includeTotal;

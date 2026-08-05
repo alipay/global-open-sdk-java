@@ -52,7 +52,7 @@ public class Price {
   private Boolean active;
 
   /** The included quantity. */
-  private Integer includedQuantity;
+  private Long includedQuantity;
 
   /** The tiers mode. Maximum length: 16 characters. */
   private String tiersMode;

@@ -54,6 +54,9 @@ public class AlipayPriceInquireDetailsResponse extends AlipayResponse {
   /** The active. */
   private Boolean active;
 
+  /** The included quantity. */
+  private Long includedQuantity;
+
   /** The tiers mode. Maximum length: 16 characters. */
   private String tiersMode;
 

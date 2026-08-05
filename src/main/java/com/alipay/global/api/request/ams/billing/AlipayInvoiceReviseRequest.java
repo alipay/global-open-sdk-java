@@ -38,6 +38,12 @@ public class AlipayInvoiceReviseRequest extends AlipayRequest<AlipayInvoiceRevis
   @JsonProperty("void")
   private Boolean voidValue;
 
+  /**
+   * The URL that Antom uses to send the invoice payment status change notification to. Only HTTPS
+   * is supported. Maximum length: 2048 characters.
+   */
+  private String invoiceNotifyUrl;
+
   public AlipayInvoiceReviseRequest() {
     this.setPath("/ams/api/v1/billing/invoice/revise");
   }

@@ -15,6 +15,7 @@ package com.alipay.global.api.response.ams.billing;
 import com.alipay.global.api.model.ams.*;
 import com.alipay.global.api.model.ams.CreditGrant;
 import com.alipay.global.api.response.AlipayResponse;
+import java.util.List;
 import lombok.*;
 
 /** AlipayCreditGrantInquireListResponse */
@@ -22,5 +23,6 @@ import lombok.*;
 @Data
 public class AlipayCreditGrantInquireListResponse extends AlipayResponse {
 
-  private CreditGrant creditGrants;
+  /** The credit grants. Note: See documentation for details. */
+  private List<CreditGrant> creditGrants;
 }

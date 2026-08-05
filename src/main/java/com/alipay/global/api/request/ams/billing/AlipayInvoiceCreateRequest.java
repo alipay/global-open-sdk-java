@@ -71,6 +71,12 @@ public class AlipayInvoiceCreateRequest extends AlipayRequest<AlipayInvoiceCreat
   /** The discounts applied. */
   private List<BillingDiscount> discounts;
 
+  /**
+   * The URL that Antom uses to send the invoice payment status change notification to. Only HTTPS
+   * is supported. Maximum length: 2048 characters.
+   */
+  private String invoiceNotifyUrl;
+
   public AlipayInvoiceCreateRequest() {
     this.setPath("/ams/api/v1/billing/invoice/create");
   }
