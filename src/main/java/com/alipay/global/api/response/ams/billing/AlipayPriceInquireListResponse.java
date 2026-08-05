@@ -30,5 +30,5 @@ public class AlipayPriceInquireListResponse extends AlipayResponse {
   private Boolean hasMore;
 
   /** The total number of records. Note: See documentation for details. */
-  private Integer totalCount;
+  private Integer total;
 }

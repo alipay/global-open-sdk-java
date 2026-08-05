@@ -44,6 +44,12 @@ public class AlipayProductInquireListRequest
   /** The include total. */
   private Boolean includeTotal;
 
+  /**
+   * Filter by usage type. Valid values: LICENSED, METERED. O - When provided, returns only products
+   * that have prices with matching usage type.
+   */
+  private String usageType;
+
   public AlipayProductInquireListRequest() {
     this.setPath("/ams/api/v1/billing/product/inquireList");
   }
