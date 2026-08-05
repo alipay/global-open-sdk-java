@@ -49,7 +49,7 @@ public class Invoice {
 
   private Amount paidAmount;
 
-  private Amount remainingAmount;
+  private Amount remainAmount;
 
   /**
    * The 3-letter currency code that follows the ISO 4217 standard. Maximum length: 3 characters.

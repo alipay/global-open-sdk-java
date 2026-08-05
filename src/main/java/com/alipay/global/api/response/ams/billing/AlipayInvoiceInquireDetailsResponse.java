@@ -75,7 +75,7 @@ public class AlipayInvoiceInquireDetailsResponse extends AlipayResponse {
 
   private Amount paidAmount;
 
-  private Amount remainingAmount;
+  private Amount remainAmount;
 
   private Amount taxAmount;
 

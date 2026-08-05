@@ -99,4 +99,18 @@ public class SubscriptionInfo {
   private Boolean allowRetry;
 
   private Amount maxAmountFloor;
+
+  private Amount fixedAmount;
+
+  /**
+   * The retry mode. Valid values are MANUAL and AUTOMATIC. Defaults to MANUAL when allowRetry is
+   * true. Only used in the PIX recurrence scenario. Maximum length: 9 characters.
+   */
+  private String retryMode;
+
+  /**
+   * The order number for this subscription period. Used in PIX recurrence retry schedule payment
+   * scenarios. Maximum length: 32 characters.
+   */
+  private String subscriptionOrderId;
 }

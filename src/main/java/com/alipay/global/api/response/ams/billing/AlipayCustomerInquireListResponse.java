@@ -34,4 +34,35 @@ public class AlipayCustomerInquireListResponse extends AlipayResponse {
 
   /** The next cursor. Maximum length: 64 characters. Note: See documentation for details. */
   private String nextCursor;
+
+  /**
+   * The customer&#39;s phone number (digits only). Replaces deprecated mobileNo. Maximum length: 32
+   * characters.
+   */
+  private String phoneNo;
+
+  /**
+   * ISO 3166-1 alpha-2 country code paired with phoneNo. Required when phoneNo is provided. Maximum
+   * length: 2 characters.
+   */
+  private String countryCode;
+
+  /**
+   * Invoice recipient email address (independent of account email). Maximum length: 256 characters.
+   */
+  private String billingEmail;
+
+  /**
+   * Shipping recipient first name. Replaces deprecated shippingName. Maximum length: 256
+   * characters.
+   */
+  private String shippingFirstName;
+
+  /**
+   * Shipping recipient last name. Replaces deprecated shippingName. Maximum length: 256 characters.
+   */
+  private String shippingLastName;
+
+  /** ISO 3166-1 alpha-2 country code paired with shippingPhone. Maximum length: 8 characters. */
+  private String shippingCountryCode;
 }

@@ -14,6 +14,7 @@ package com.alipay.global.api.request.ams.subscription;
 
 import com.alipay.global.api.model.ams.*;
 import com.alipay.global.api.model.ams.Amount;
+import com.alipay.global.api.model.ams.CreateSubscriptionInfo;
 import com.alipay.global.api.model.ams.CustomizedInfo;
 import com.alipay.global.api.model.ams.Env;
 import com.alipay.global.api.model.ams.OrderInfo;
@@ -129,6 +130,8 @@ public class AlipaySubscriptionCreateRequest
    * subscription includes any trial periods.
    */
   private List<Trial> trials;
+
+  private CreateSubscriptionInfo subscriptionInfo;
 
   public AlipaySubscriptionCreateRequest() {
     this.setPath("/ams/api/v1/subscriptions/create");

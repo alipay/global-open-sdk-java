@@ -14,6 +14,7 @@ package com.alipay.global.api.response.ams.billing;
 
 import com.alipay.global.api.model.ams.*;
 import com.alipay.global.api.response.AlipayResponse;
+import java.util.List;
 import java.util.Map;
 import lombok.*;
 
@@ -47,11 +48,6 @@ public class AlipayCustomerInquireDetailsResponse extends AlipayResponse {
   private String lastName;
 
   /**
-   * The mobile phone number. Maximum length: 32 characters. Note: See documentation for details.
-   */
-  private String mobileNo;
-
-  /**
    * The country or region code. Maximum length: 8 characters. Note: See documentation for details.
    */
   private String country;
@@ -73,9 +69,6 @@ public class AlipayCustomerInquireDetailsResponse extends AlipayResponse {
 
   /** The ZIP or postal code. Maximum length: 32 characters. Note: See documentation for details. */
   private String zipcode;
-
-  /** The shipping name. Maximum length: 512 characters. Note: See documentation for details. */
-  private String shippingName;
 
   /** The shipping phone. Maximum length: 32 characters. Note: See documentation for details. */
   private String shippingPhone;
@@ -114,7 +107,7 @@ public class AlipayCustomerInquireDetailsResponse extends AlipayResponse {
    * The preferred language or locale settings. Maximum length: 256 characters. Note: See
    * documentation for details.
    */
-  private String preferredLocales;
+  private List<String> preferredLocales;
 
   /**
    * The default payment method token. Maximum length: 64 characters. Note: See documentation for
@@ -133,4 +126,35 @@ public class AlipayCustomerInquireDetailsResponse extends AlipayResponse {
 
   /** Custom metadata for special use cases. Note: See documentation for details. */
   private Map<String, String> metadata;
+
+  /**
+   * The customer&#39;s phone number (digits only). Replaces deprecated mobileNo. Maximum length: 32
+   * characters.
+   */
+  private String phoneNo;
+
+  /**
+   * ISO 3166-1 alpha-2 country code paired with phoneNo. Required when phoneNo is provided. Maximum
+   * length: 2 characters.
+   */
+  private String countryCode;
+
+  /**
+   * Invoice recipient email address (independent of account email). Maximum length: 256 characters.
+   */
+  private String billingEmail;
+
+  /**
+   * Shipping recipient first name. Replaces deprecated shippingName. Maximum length: 256
+   * characters.
+   */
+  private String shippingFirstName;
+
+  /**
+   * Shipping recipient last name. Replaces deprecated shippingName. Maximum length: 256 characters.
+   */
+  private String shippingLastName;
+
+  /** ISO 3166-1 alpha-2 country code paired with shippingPhone. Maximum length: 8 characters. */
+  private String shippingCountryCode;
 }

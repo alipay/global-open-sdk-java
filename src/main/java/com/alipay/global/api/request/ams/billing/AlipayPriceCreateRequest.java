@@ -53,7 +53,7 @@ public class AlipayPriceCreateRequest extends AlipayRequest<AlipayPriceCreateRes
   private RecurringSettings recurring;
 
   /** The included quantity. Note: See documentation for details. */
-  private Integer includedQuantity;
+  private Long includedQuantity;
 
   /** The tiers mode. Maximum length: 16 characters. Note: See documentation for details. */
   private String tiersMode;

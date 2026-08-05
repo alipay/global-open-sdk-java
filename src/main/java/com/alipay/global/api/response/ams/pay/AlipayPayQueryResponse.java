@@ -20,6 +20,7 @@ import com.alipay.global.api.model.ams.CustomizedInfo;
 import com.alipay.global.api.model.ams.PspCustomerInfo;
 import com.alipay.global.api.model.ams.Quote;
 import com.alipay.global.api.model.ams.RedirectActionForm;
+import com.alipay.global.api.model.ams.RetryInfo;
 import com.alipay.global.api.model.ams.Transaction;
 import com.alipay.global.api.model.ams.TransactionStatusType;
 import com.alipay.global.api.response.AlipayResponse;
@@ -152,4 +153,6 @@ public class AlipayPayQueryResponse extends AlipayResponse {
    * Page integration. More information: Maximum length: 64 characters
    */
   private String paymentMethodType;
+
+  private RetryInfo retryInfo;
 }

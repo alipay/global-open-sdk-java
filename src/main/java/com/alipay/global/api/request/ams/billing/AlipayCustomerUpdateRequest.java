@@ -15,6 +15,7 @@ package com.alipay.global.api.request.ams.billing;
 import com.alipay.global.api.model.ams.*;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.billing.AlipayCustomerUpdateResponse;
+import java.util.List;
 import java.util.Map;
 import lombok.*;
 
@@ -41,9 +42,6 @@ public class AlipayCustomerUpdateRequest extends AlipayRequest<AlipayCustomerUpd
   /** The last name. Maximum length: 256 characters. */
   private String lastName;
 
-  /** The mobile phone number. Maximum length: 32 characters. */
-  private String mobileNo;
-
   /** The country or region code. Maximum length: 8 characters. */
   private String country;
 
@@ -61,9 +59,6 @@ public class AlipayCustomerUpdateRequest extends AlipayRequest<AlipayCustomerUpd
 
   /** The ZIP or postal code. Maximum length: 32 characters. */
   private String zipcode;
-
-  /** The shipping name. Maximum length: 512 characters. */
-  private String shippingName;
 
   /** The shipping phone. Maximum length: 32 characters. */
   private String shippingPhone;
@@ -94,8 +89,8 @@ public class AlipayCustomerUpdateRequest extends AlipayRequest<AlipayCustomerUpd
    */
   private String currency;
 
-  /** The preferred language or locale settings. Maximum length: 256 characters. */
-  private String preferredLocales;
+  /** The preferred language or locale settings. */
+  private List<String> preferredLocales;
 
   /** The default payment method token. Maximum length: 64 characters. */
   private String defaultPaymentMethod;
@@ -105,6 +100,37 @@ public class AlipayCustomerUpdateRequest extends AlipayRequest<AlipayCustomerUpd
    * documentation for details.
    */
   private Map<String, String> metadata;
+
+  /**
+   * The customer&#39;s phone number (digits only). Replaces deprecated mobileNo. Maximum length: 32
+   * characters.
+   */
+  private String phoneNo;
+
+  /**
+   * ISO 3166-1 alpha-2 country code paired with phoneNo. Required when phoneNo is provided. Maximum
+   * length: 2 characters.
+   */
+  private String countryCode;
+
+  /**
+   * Invoice recipient email address (independent of account email). Maximum length: 256 characters.
+   */
+  private String billingEmail;
+
+  /**
+   * Shipping recipient first name. Replaces deprecated shippingName. Maximum length: 256
+   * characters.
+   */
+  private String shippingFirstName;
+
+  /**
+   * Shipping recipient last name. Replaces deprecated shippingName. Maximum length: 256 characters.
+   */
+  private String shippingLastName;
+
+  /** ISO 3166-1 alpha-2 country code paired with shippingPhone. Maximum length: 8 characters. */
+  private String shippingCountryCode;
 
   public AlipayCustomerUpdateRequest() {
     this.setPath("/ams/api/v1/billing/customer/update");
