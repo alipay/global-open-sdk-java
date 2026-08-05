@@ -32,6 +32,9 @@ public class AlipayBillingSubscriptionNotify extends AlipayNotify {
   /** The previous subscription status. */
   private String previousStatus;
 
-  /** The fixed subscription amount per period. Returned when subscription has fixed pricing and subscriptionNotificationType is CREATE. */
+  /**
+   * The fixed subscription amount per period. Returned when subscription has fixed pricing and
+   * subscriptionNotificationType is CREATE.
+   */
   private Amount fixedAmount;
 }

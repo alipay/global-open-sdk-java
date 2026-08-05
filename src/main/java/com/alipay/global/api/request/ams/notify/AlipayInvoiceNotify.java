@@ -10,22 +10,34 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class AlipayInvoiceNotify extends AlipayNotify {
 
-  /** The unique ID assigned by the merchant to identify the invoice creation request. Maximum length: 64 characters. */
+  /**
+   * The unique ID assigned by the merchant to identify the invoice creation request. Maximum
+   * length: 64 characters.
+   */
   private String invoiceRequestId;
 
   /** The unique ID assigned by Antom to identify the invoice. Maximum length: 64 characters. */
   private String invoiceId;
 
-  /** The current invoice status after the payment event. Valid values: PAID, UNPAID, VOID, UNCOLLECTIBLE. Maximum length: 32 characters. */
+  /**
+   * The current invoice status after the payment event. Valid values: PAID, UNPAID, VOID,
+   * UNCOLLECTIBLE. Maximum length: 32 characters.
+   */
   private String invoiceStatus;
 
   /** The total invoice amount. */
   private Amount invoiceAmount;
 
-  /** Payment result details for the invoice payment attempt. Null when no payment was attempted (e.g., VOID from DRAFT). */
+  /**
+   * Payment result details for the invoice payment attempt. Null when no payment was attempted
+   * (e.g., VOID from DRAFT).
+   */
   private InvoicePaymentInfo paymentInfo;
 
-  /** Associated subscription details. Present when invoice is linked to a subscription. Null for one-time payment invoices. */
+  /**
+   * Associated subscription details. Present when invoice is linked to a subscription. Null for
+   * one-time payment invoices.
+   */
   private SubscriptionInfo subscription;
 
   /** The customer ID associated with the invoice. Maximum length: 64 characters. */
@@ -34,6 +46,9 @@ public class AlipayInvoiceNotify extends AlipayNotify {
   /** Machine-readable reason for status change. Maximum length: 64 characters. */
   private String reason;
 
-  /** Human-readable description of the reason. Valid values: PAYMENT_SUCCESS, PAYMENT_FAILED, PAYMENT_TIMEOUT, MANUAL_VOID, MANUAL_MARK_UNCOLLECTIBLE. Maximum length: 64 characters. */
+  /**
+   * Human-readable description of the reason. Valid values: PAYMENT_SUCCESS, PAYMENT_FAILED,
+   * PAYMENT_TIMEOUT, MANUAL_VOID, MANUAL_MARK_UNCOLLECTIBLE. Maximum length: 64 characters.
+   */
   private String reasonDescription;
 }
