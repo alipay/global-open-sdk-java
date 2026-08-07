@@ -23,8 +23,15 @@ public abstract class BaseAlipayClient implements AlipayClient {
 
   private static final Integer DEFAULT_KEY_VERSION = 1;
 
-  private static final Set<String> SANDBOX_PRODUCTION_PATH_PREFIXES =
-      new HashSet<>(Arrays.asList("/ams/api/v1/billing/", "/ams/api/v1/meter/"));
+  /**
+   * Path prefixes that must use the production gateway even in sandbox mode.
+   *
+   * <p>Billing and Meter APIs were previously listed here because the sandbox did not support them.
+   * As of 2026-08-05, the sandbox now fully supports both, so this set is empty. The filtering
+   * logic ({@link #shouldUseProductionPathInSandbox}) is kept intact so that future APIs that
+   * require production-only routing can be added here without modifying the call chain.
+   */
+  private static final Set<String> SANDBOX_PRODUCTION_PATH_PREFIXES = new HashSet<>();
 
   /** eg: https://open-na.alipay.com */
   private String gatewayUrl;
