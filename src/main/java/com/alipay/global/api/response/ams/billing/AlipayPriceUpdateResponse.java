@@ -18,7 +18,6 @@ import com.alipay.global.api.model.ams.RecurringSettings;
 import com.alipay.global.api.model.ams.Tier;
 import com.alipay.global.api.response.AlipayResponse;
 import java.util.List;
-import java.util.Map;
 import lombok.*;
 
 /** AlipayPriceUpdateResponse */
@@ -26,52 +25,97 @@ import lombok.*;
 @Data
 public class AlipayPriceUpdateResponse extends AlipayResponse {
 
-  /** The price ID. Maximum length: 32 characters. */
+  /** Updated price ID Returned only when result.resultCode is SUCCESS. */
   private String priceId;
 
-  /** The product ID. Maximum length: 32 characters. */
+  /** Associated product ID Returned only when result.resultCode is SUCCESS. */
   private String productId;
 
-  /** The name. Maximum length: 128 characters. */
+  /**
+   * Price name. O - May be null in the response when the value is not set Returned only when
+   * result.resultCode is SUCCESS.
+   */
   private String name;
 
-  /** The pricing model. Maximum length: 24 characters. */
+  /**
+   * Pricing model type. Always returned. Enum: PER_UNIT/TIERED. See Section 4.1.3 Create Price
+   * request for full behavioral descriptions and Section 6.11 for pricing model semantics Returned
+   * only when result.resultCode is SUCCESS.
+   */
   private String pricingModel;
 
-  /** The usage type. Maximum length: 16 characters. */
+  /**
+   * Usage type. O - May be null in the response when the value is not set Returned only when
+   * result.resultCode is SUCCESS.
+   */
   private String usageType;
 
-  /** The unit label. Maximum length: 64 characters. */
+  /**
+   * Price-level unit label. O - May be null in the response when the value is not set Returned only
+   * when result.resultCode is SUCCESS.
+   */
   private String unitLabel;
 
-  /** The meter ID. Maximum length: 32 characters. */
+  /**
+   * External meter reference. O - May be null in the response when the value is not set Returned
+   * only when result.resultCode is SUCCESS.
+   */
   private String meterId;
 
   private Amount unitAmount;
 
   private RecurringSettings recurring;
 
-  /** The active. */
+  /**
+   * Price active status. true&#x3D;active, false&#x3D;deactivated. Cannot be null Returned only
+   * when result.resultCode is SUCCESS.
+   */
   private Boolean active;
 
-  /** The included quantity. */
+  /**
+   * Included quantity for package pricing. O - May be null in the response when the value is not
+   * set Returned only when result.resultCode is SUCCESS.
+   */
   private Long includedQuantity;
 
-  /** The tiers mode. Maximum length: 16 characters. */
+  /**
+   * Tiered pricing mode. O - May be null in the response when the value is not set Returned only
+   * when result.resultCode is SUCCESS.
+   */
   private String tiersMode;
 
-  /** The tiers. */
+  /**
+   * Tier definitions. O - May be null in the response when the value is not set Returned only when
+   * result.resultCode is SUCCESS.
+   */
   private List<Tier> tiers;
 
-  /** Custom metadata for special use cases. Maximum length: 20 characters. */
-  private Map<String, String> metadata;
+  /**
+   * Custom metadata encoded as a JSON object string. The returned value reflects the full stored
+   * metadata after replacement. PII must not be stored. Returned only when result.resultCode is
+   * SUCCESS.
+   */
+  private String metadata;
 
-  /** The created at. Maximum length: 29 characters. */
+  /** ISO 8601 creation timestamp Returned only when result.resultCode is SUCCESS. */
   private String createdAt;
 
-  /** The deactivated at. Maximum length: 29 characters. */
+  /**
+   * ISO 8601 deactivation timestamp. O - Returned when price has been deactivated
+   * (active&#x3D;false); absent when price is active Returned only when result.resultCode is
+   * SUCCESS.
+   */
   private String deactivatedAt;
 
-  /** The updated at. Maximum length: 29 characters. */
+  /**
+   * ISO 8601 last update timestamp. O - May be null in the response when the value is not set
+   * Returned only when result.resultCode is SUCCESS.
+   */
   private String updatedAt;
+
+  /**
+   * Whether this price is the default price for the product. When true, this price is the primary
+   * price shown for the product Returned only when result.resultCode is SUCCESS.
+   */
+  private Boolean defaultPrice;
 }

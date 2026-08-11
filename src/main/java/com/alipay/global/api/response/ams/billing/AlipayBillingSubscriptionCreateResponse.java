@@ -13,7 +13,7 @@
 package com.alipay.global.api.response.ams.billing;
 
 import com.alipay.global.api.model.ams.*;
-import com.alipay.global.api.model.ams.BillingSubscriptionCreateDiscount;
+import com.alipay.global.api.model.ams.BillingDiscount;
 import com.alipay.global.api.model.ams.SubscriptionItem;
 import com.alipay.global.api.response.AlipayResponse;
 import java.util.List;
@@ -24,60 +24,91 @@ import lombok.*;
 @Data
 public class AlipayBillingSubscriptionCreateResponse extends AlipayResponse {
 
-  /** The subscription request id. Maximum length: 64 characters. */
+  /** Idempotency key echo-back. Not null Returned only when result.resultCode is SUCCESS. */
   private String subscriptionRequestId;
 
-  /** The subscription ID. Maximum length: 64 characters. */
+  /** Created subscription ID. Not null Returned only when result.resultCode is SUCCESS. */
   private String subscriptionId;
 
-  /** The unique ID assigned by Antom to identify a customer. Maximum length: 64 characters. */
+  /**
+   * The customer this subscription belongs to. Not null Returned only when result.resultCode is
+   * SUCCESS.
+   */
   private String customerId;
 
-  /** The invoice ID. Maximum length: 64 characters. Note: See documentation for details. */
+  /**
+   * ID of the draft Invoice created alongside the subscription. Returned when subscription creation
+   * generates an invoice (i.e., non-zero amount or trial with invoice). Can be null Returned only
+   * when result.resultCode is SUCCESS.
+   */
   private String invoiceId;
 
-  /** The current status. Maximum length: 20 characters. */
+  /**
+   * Subscription status after creation. Possible values at creation: INCOMPLETE (first payment
+   * pending), TRIALING (trial configured). ACTIVE can only appear after Step 2
+   * (&#x60;payments/pay&#x60;) succeeds and is never returned at creation (2026-08-06 code-verified
+   * darksite audit). Not null Returned only when result.resultCode is SUCCESS.
+   */
   private String status;
 
-  /** The current period start. */
+  /**
+   * Billing period start. ISO 8601 with timezone offset. Not null Returned only when
+   * result.resultCode is SUCCESS.
+   */
   private String currentPeriodStart;
 
-  /** The current period end. */
+  /**
+   * Billing period end. ISO 8601 with timezone offset. Not null Returned only when
+   * result.resultCode is SUCCESS.
+   */
   private String currentPeriodEnd;
 
-  /** The billing cycle anchor. Note: See documentation for details. */
+  /**
+   * Billing cycle anchor - the reference point all future billing periods are measured from.
+   * System-derived, not merchant-writable (it was withdrawn from the request; see the request
+   * table). Derivation: without a trial -&gt; the subscription creation timestamp (NOW); with a
+   * trial -&gt; the trial end date (&#x60;trialEnd&#x60;), so the first paid cycle begins when the
+   * trial ends. The anchor always describes the full, uncapped cycle - setting &#x60;cancelAt&#x60;
+   * inside the first period shortens &#x60;currentPeriodEnd&#x60; but leaves
+   * &#x60;billingCycleAnchor&#x60; unchanged. ISO 8601 with timezone offset. Not null Returned only
+   * when result.resultCode is SUCCESS.
+   */
   private String billingCycleAnchor;
 
-  /** The trial start. Maximum length: 32 characters. Note: See documentation for details. */
+  /** Trial start. ISO 8601 with timezone offset Returned only when result.resultCode is SUCCESS. */
   private String trialStart;
 
-  /** The trial end. Note: See documentation for details. */
+  /** Trial end. ISO 8601 with timezone offset Returned only when result.resultCode is SUCCESS. */
   private String trialEnd;
 
-  /** The cancel at. Note: See documentation for details. */
+  /** Scheduled cancellation timestamp Returned only when result.resultCode is SUCCESS. */
   private String cancelAt;
 
-  /** The cancel at period end. Note: See documentation for details. */
-  private Boolean cancelAtPeriodEnd;
-
-  /** The description. Maximum length: 500 characters. Note: See documentation for details. */
+  /**
+   * Subscription description echo-back. No HTML tags Returned only when result.resultCode is
+   * SUCCESS.
+   */
   private String description;
 
-  /** The collection method. */
+  /** Collection method echo-back. Not null Returned only when result.resultCode is SUCCESS. */
   private String collectionMethod;
 
-  /** The days until due. Note: See documentation for details. */
+  /** Days until invoice due Returned only when result.resultCode is SUCCESS. */
   private Integer daysUntilDue;
 
-  /** The subscription items. */
+  /**
+   * The created subscription items, one for each request &#x60;priceItems&#x60; entry. A successful
+   * response contains at most 20 items.
+   */
   private List<SubscriptionItem> subscriptionItems;
 
-  /** The discounts applied. Note: See documentation for details. */
-  private List<BillingSubscriptionCreateDiscount> discounts;
-
   /**
-   * The subscription notify url. Maximum length: 512 characters. Note: See documentation for
-   * details.
+   * Discount preference echo-back from request - at most 1 item, matching the request limit. Not
+   * Antom-generated data - echoed as provided by merchant in request Returned only when
+   * result.resultCode is SUCCESS.
    */
+  private List<BillingDiscount> discounts;
+
+  /** Subscription notification URL echo-back Returned only when result.resultCode is SUCCESS. */
   private String subscriptionNotifyUrl;
 }

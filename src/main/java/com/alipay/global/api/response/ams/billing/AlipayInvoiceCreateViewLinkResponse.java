@@ -21,12 +21,30 @@ import lombok.*;
 @Data
 public class AlipayInvoiceCreateViewLinkResponse extends AlipayResponse {
 
-  /** The encrypted token. Maximum length: 1024 characters. Note: See documentation for details. */
+  /**
+   * Encrypted token embedding &#x60;invoiceId&#x60;, &#x60;merchantId&#x60;, and
+   * &#x60;expiryTimestamp&#x60; in the pipe-delimited format
+   * &#x60;invoiceId|merchantId|expiryTimestamp&#x60; (e.g.,
+   * &#x60;inv_20260413_000123|MID_001|1713590400000&#x60;). Encrypted via AES-CBC through iBCM.
+   * Returned only when result.resultCode is SUCCESS. Maximum length: 1024 characters.
+   */
   private String token;
 
-  /** The view url. Maximum length: 2048 characters. Note: See documentation for details. */
+  /**
+   * Full shareable URL for the invoice view page. Format:
+   * &#x60;{baseUrl}?token&#x3D;{encodedToken}&#x60;. Returned when &#x60;resultStatus&#x60; is
+   * &#x60;S&#x60; and &#x60;resultCode&#x60; is &#x60;SUCCESS&#x60;, and DRM &#x60;baseUrl&#x60; is
+   * configured. When DRM &#x60;baseUrl&#x60; is not configured, this field is absent; the
+   * &#x60;token&#x60; is still returned and merchants can construct the URL client-side. Maximum
+   * length: 2048 characters.
+   */
   private String viewUrl;
 
-  /** The expiration time. Maximum length: 24 characters. Note: See documentation for details. */
+  /**
+   * ISO 8601 absolute timestamp indicating when the token and view link expire. Calculated as
+   * &#x60;requestProcessingTime + (linkExpiryDays x 86400 seconds)&#x60;, then rounded up to the
+   * start of the following UTC day. When &#x60;linkExpiryDays&#x60; is not provided, the default of
+   * 7 days is used. Returned only when result.resultCode is SUCCESS. Maximum length: 29 characters.
+   */
   private String expiresAt;
 }

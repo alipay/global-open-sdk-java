@@ -29,23 +29,41 @@ public class AlipayBillingSubscriptionInquireListRequest
   /** The unique ID assigned by Antom to identify a customer. Maximum length: 64 characters. */
   private String customerId;
 
-  /** The expires before. */
-  private String expiresBefore;
+  /** Filters by an exact subscription ID. Maximum length: 64 characters. */
+  private String subscriptionId;
 
-  /** The expires after. */
-  private String expiresAfter;
+  /**
+   * Filters subscriptions whose &#x60;createTime&#x60; is greater than or equal to this ISO 8601
+   * date-time.
+   */
+  private String gmtCreateStart;
 
-  /** The starting after. Maximum length: 64 characters. Note: See documentation for details. */
+  /**
+   * Filters subscriptions whose &#x60;createTime&#x60; is less than or equal to this ISO 8601
+   * date-time.
+   */
+  private String gmtCreateEnd;
+
+  /**
+   * The creation-time sort order. Valid values are ASC and DESC. The default value is DESC. Maximum
+   * length: 4 characters.
+   */
+  private String sortOrder;
+
+  /**
+   * The forward-pagination cursor. This field is mutually exclusive with &#x60;endingBefore&#x60;.
+   * Maximum length: 64 characters.
+   */
   private String startingAfter;
 
-  /** The ending before. Maximum length: 64 characters. Note: See documentation for details. */
+  /**
+   * The backward-pagination cursor. This field is mutually exclusive with
+   * &#x60;startingAfter&#x60;. Maximum length: 64 characters.
+   */
   private String endingBefore;
 
-  /** The limit. */
+  /** The maximum number of results per page. Value range: 1-100. The default value is 20. */
   private Integer limit;
-
-  /** The include total. */
-  private Boolean includeTotal;
 
   public AlipayBillingSubscriptionInquireListRequest() {
     this.setPath("/ams/api/v1/billing/subscription/inquireList");

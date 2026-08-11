@@ -21,26 +21,38 @@ import lombok.*;
 @AllArgsConstructor
 public class Coupon {
 
-  /** The coupon ID. Maximum length: 64 characters. */
+  /** System-generated coupon ID. */
   private String couponId;
 
-  /** The coupon name. Maximum length: 128 characters. */
+  /** Coupon display name. */
   private String couponName;
 
-  /** The discount type. Maximum length: 16 characters. */
+  /**
+   * Filter by discount type. Allowed values: &#x60;PERCENT&#x60;, &#x60;AMOUNT&#x60;. If not
+   * provided, returns all discount types.
+   */
   private String discountType;
 
-  /** The percent off. Note: See documentation for details. */
+  /**
+   * Percentage discount (up to 2 decimal places). Returned when &#x60;discountType&#x60; &#x3D;
+   * &#x60;PERCENT&#x60;.
+   */
   private String percentOff;
 
   private Amount amountOff;
 
-  /** The redeem by. */
+  /** Redemption expiry time. */
   private String redeemBy;
 
-  /** The current status. Maximum length: 16 characters. */
+  /**
+   * Filter by coupon status. Allowed values: &#x60;ACTIVE&#x60;, &#x60;INACTIVE&#x60;. If not
+   * provided, returns coupons of all statuses.
+   */
   private String status;
 
-  /** The create time. */
-  private String createTime;
+  /** The maximum redemption count. */
+  private Integer maxRedemptions;
+
+  /** The number of times the coupon has been redeemed. */
+  private Integer redeemedCount;
 }

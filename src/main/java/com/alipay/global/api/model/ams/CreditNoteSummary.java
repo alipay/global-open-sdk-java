@@ -38,6 +38,8 @@ public class CreditNoteSummary {
 
   private Amount totalAmount;
 
+  private Amount refundAmount;
+
   /** The reason for the status change. Maximum length: 32 characters. */
   private String reason;
 

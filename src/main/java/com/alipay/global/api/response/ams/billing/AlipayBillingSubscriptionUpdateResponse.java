@@ -13,8 +13,6 @@
 package com.alipay.global.api.response.ams.billing;
 
 import com.alipay.global.api.model.ams.*;
-import com.alipay.global.api.model.ams.BillingSubscriptionUpdatePauseCollection;
-import com.alipay.global.api.model.ams.BillingSubscriptionUpdateTrialSettings;
 import com.alipay.global.api.model.ams.SubscriptionItem;
 import com.alipay.global.api.response.AlipayResponse;
 import java.util.List;
@@ -31,13 +29,6 @@ public class AlipayBillingSubscriptionUpdateResponse extends AlipayResponse {
   /** The current status. Maximum length: 20 characters. */
   private String status;
 
-  /** The billing cycle anchor. Note: See documentation for details. */
-  private String billingCycleAnchor;
-
-  private BillingSubscriptionUpdatePauseCollection pauseCollection;
-
-  private BillingSubscriptionUpdateTrialSettings trialSettings;
-
   /** The subscription items. Note: See documentation for details. */
   private List<SubscriptionItem> subscriptionItems;
 
@@ -46,15 +37,27 @@ public class AlipayBillingSubscriptionUpdateResponse extends AlipayResponse {
    */
   private String prorationInvoiceId;
 
+  /**
+   * The proration invoice amount in the smallest currency unit. Returned together with
+   * prorationInvoiceId.
+   */
+  private Long prorationInvoiceAmount;
+
+  /** The currency of prorationInvoiceAmount as a three-letter ISO 4217 code. */
+  private String prorationInvoiceCurrency;
+
   /** The credit note ID. Maximum length: 64 characters. Note: See documentation for details. */
   private String creditNoteId;
 
-  /** The cancel at period end. Note: See documentation for details. */
-  private Boolean cancelAtPeriodEnd;
+  /** The credit note amount in the smallest currency unit. Returned together with creditNoteId. */
+  private Long creditNoteAmount;
 
-  /** The canceled at. Note: See documentation for details. */
-  private String canceledAt;
+  /** The currency of creditNoteAmount as a three-letter ISO 4217 code. */
+  private String creditNoteCurrency;
 
-  /** The proration date. Note: See documentation for details. */
-  private String prorationDate;
+  /**
+   * Whether a payment-gated upgrade or quantity increase is staged but not yet effective. When
+   * true, subscriptionItems can still describe the currently effective items.
+   */
+  private Boolean pendingUpdate;
 }

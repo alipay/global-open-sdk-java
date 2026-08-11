@@ -21,13 +21,13 @@ import lombok.*;
 @AllArgsConstructor
 public class ReceiptItem {
 
-  /** The item id. Maximum length: 64 characters. */
+  /** Line item ID. Unique identifier. */
   private String itemId;
 
-  /** The description. Maximum length: 512 characters. */
+  /** Line item description (e.g., \&quot;1 x Pro Plan (at $10.00/month)\&quot;). */
   private String description;
 
-  /** The quantity. */
+  /** Quantity of the item. Default: 1. */
   private Integer quantity;
 
   private Amount unitAmount;
@@ -36,28 +36,28 @@ public class ReceiptItem {
 
   private Amount usageAmount;
 
-  /** The usage quantity. */
+  /** Metered usage quantity. Null if not metered. */
   private String usageQuantity;
 
-  /** The usage unit. Maximum length: 32 characters. */
+  /** Usage unit (e.g., &#x60;requests&#x60;, &#x60;gb&#x60;). Null if not metered. */
   private String usageUnit;
 
   private Amount discountAmount;
 
   private Amount taxAmount;
 
-  /** The period start. Maximum length: 24 characters. */
+  /** ISO 8601 timestamp of coverage period start. Null if not subscription-based. */
   private String periodStart;
 
-  /** The period end. Maximum length: 24 characters. */
+  /** ISO 8601 timestamp of coverage period end. Null if not subscription-based. */
   private String periodEnd;
 
-  /** The proration. */
+  /** Whether this is a proration adjustment. Default: false. */
   private Boolean proration;
 
-  /** The creation time. Maximum length: 24 characters. */
+  /** ISO 8601 timestamp of line item creation. Maximum length: 29 characters. */
   private String gmtCreate;
 
-  /** The gmt update. Maximum length: 24 characters. */
+  /** ISO 8601 timestamp of last line item update. Maximum length: 29 characters. */
   private String gmtUpdate;
 }

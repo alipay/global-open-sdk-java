@@ -13,13 +13,12 @@
 package com.alipay.global.api.request.ams.billing;
 
 import com.alipay.global.api.model.ams.*;
-import com.alipay.global.api.model.ams.BillingSubscriptionUpdatePauseCollection;
-import com.alipay.global.api.model.ams.BillingSubscriptionUpdateTrialSettings;
+import com.alipay.global.api.model.ams.BillingSubscriptionCancellationDetails;
+import com.alipay.global.api.model.ams.BillingTrialSettings;
 import com.alipay.global.api.model.ams.PriceItemChange;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.billing.AlipayBillingSubscriptionUpdateResponse;
 import java.util.List;
-import java.util.Map;
 import lombok.*;
 
 /** AlipayBillingSubscriptionUpdateRequest */
@@ -34,21 +33,26 @@ public class AlipayBillingSubscriptionUpdateRequest
   /** The price item changes. */
   private List<PriceItemChange> priceItemChanges;
 
-  /** The proration behavior. Maximum length: 18 characters. */
+  /**
+   * Controls when the subscription update takes effect. Valid values are ALWAYS_INVOICE and NONE.
+   * ALWAYS_INVOICE applies the change immediately and generates an invoice or credit note for the
+   * prorated difference. NONE defers the change until the next billing cycle without generating a
+   * proration invoice. The default value is NONE.
+   */
   private String prorationBehavior;
 
-  /** The proration date. */
-  private String prorationDate;
+  /** Whether to reset the billing cycle anchor when the update takes effect. */
+  private Boolean resetBillingCycleAnchor;
 
-  private BillingSubscriptionUpdatePauseCollection pauseCollection;
-
-  /** The billing cycle anchor. Maximum length: 9 characters. */
-  private String billingCycleAnchor;
-
-  private BillingSubscriptionUpdateTrialSettings trialSettings;
+  private BillingTrialSettings trialSettings;
 
   /** The cancel at period end. Note: See documentation for details. */
   private Boolean cancelAtPeriodEnd;
+
+  /** The time when the subscription is scheduled for cancellation in ISO 8601 format. */
+  private String cancelAt;
+
+  private BillingSubscriptionCancellationDetails cancellationDetails;
 
   /** The collection method. Maximum length: 22 characters. */
   private String collectionMethod;
@@ -56,14 +60,14 @@ public class AlipayBillingSubscriptionUpdateRequest
   /** The days until due. Note: See documentation for details. */
   private Integer daysUntilDue;
 
-  /** The default payment method token. Maximum length: 64 characters. */
-  private String defaultPaymentMethod;
-
   /** The description. Maximum length: 500 characters. */
   private String description;
 
-  /** Custom metadata for special use cases. */
-  private Map<String, String> metadata;
+  /**
+   * Custom metadata encoded as a JSON object string. When provided, the value fully replaces the
+   * existing metadata. When omitted, the existing value is unchanged.
+   */
+  private String metadata;
 
   public AlipayBillingSubscriptionUpdateRequest() {
     this.setPath("/ams/api/v1/billing/subscription/update");

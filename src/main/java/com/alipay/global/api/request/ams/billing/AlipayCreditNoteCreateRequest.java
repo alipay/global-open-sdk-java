@@ -14,11 +14,10 @@ package com.alipay.global.api.request.ams.billing;
 
 import com.alipay.global.api.model.ams.*;
 import com.alipay.global.api.model.ams.Amount;
-import com.alipay.global.api.model.ams.LineItem;
+import com.alipay.global.api.model.ams.CreditNoteCreateItem;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.billing.AlipayCreditNoteCreateResponse;
 import java.util.List;
-import java.util.Map;
 import lombok.*;
 
 /** AlipayCreditNoteCreateRequest */
@@ -37,8 +36,11 @@ public class AlipayCreditNoteCreateRequest extends AlipayRequest<AlipayCreditNot
 
   private Amount totalAmount;
 
-  /** The items. Note: See documentation for details. */
-  private List<LineItem> items;
+  /**
+   * The credit note items. Item-level quantity and itemAmount follow the conditional rules
+   * documented by CreditNoteCreateItem.
+   */
+  private List<CreditNoteCreateItem> items;
 
   private Amount refundAmount;
 
@@ -63,8 +65,14 @@ public class AlipayCreditNoteCreateRequest extends AlipayRequest<AlipayCreditNot
   /** The effective date. Maximum length: 29 characters. Note: See documentation for details. */
   private String effectiveDate;
 
-  /** Custom metadata for special use cases. Maximum length: 65535 characters. */
-  private Map<String, String> metadata;
+  /**
+   * Custom metadata for special use cases. Maximum length: 65535 characters. The value must be a
+   * valid JSON object string.
+   */
+  private String metadata;
+
+  /** The URL that receives credit note notifications. Maximum length: 2048 characters. */
+  private String creditNoteNotifyUrl;
 
   public AlipayCreditNoteCreateRequest() {
     this.setPath("/ams/api/v1/billing/creditNote/create");

@@ -23,18 +23,25 @@ import lombok.*;
 @Data
 public class AlipayBillingSubscriptionInquireListResponse extends AlipayResponse {
 
-  /** The subscriptions. */
+  /**
+   * The subscription summaries returned when result.resultCode is SUCCESS. The array contains at
+   * most 100 items.
+   */
   private List<Subscription> subscriptions;
 
-  /** The has more. */
+  /** Whether more results are available after the current page. */
   private Boolean hasMore;
 
-  /** The next cursor. Maximum length: 64 characters. Note: See documentation for details. */
+  /**
+   * The ID of the last record on the current page. Pass it as &#x60;startingAfter&#x60; to retrieve
+   * the next page. Returned only when &#x60;hasMore&#x60; is true. Maximum length: 64 characters.
+   */
   private String nextCursor;
 
-  /** The prev cursor. Maximum length: 64 characters. Note: See documentation for details. */
-  private String prevCursor;
-
-  /** The total. Note: See documentation for details. */
-  private Integer total;
+  /**
+   * The ID of the first record on the current page. Pass it as &#x60;endingBefore&#x60; to retrieve
+   * the previous page. Returned when the request used &#x60;endingBefore&#x60;. Maximum length: 64
+   * characters.
+   */
+  private String previousCursor;
 }

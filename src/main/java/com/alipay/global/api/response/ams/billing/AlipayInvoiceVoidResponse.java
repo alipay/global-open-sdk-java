@@ -21,18 +21,30 @@ import lombok.*;
 @Data
 public class AlipayInvoiceVoidResponse extends AlipayResponse {
 
-  /** The void request id. Maximum length: 64 characters. */
-  private String voidRequestId;
-
-  /** The invoice ID. Maximum length: 64 characters. */
+  /**
+   * Invoice ID that was voided (echo-back of request). Cannot be null. Returned only when
+   * result.resultCode is SUCCESS.
+   */
   private String invoiceId;
 
-  /** The current status. Maximum length: 16 characters. */
+  /**
+   * New invoice status after void: &#x60;VOID&#x60;. The invoice is now in a terminal cancelled
+   * state and cannot be modified or paid. Cannot be null. Returned only when result.resultCode is
+   * SUCCESS.
+   */
   private String status;
 
-  /** The voided at. Maximum length: 24 characters. */
+  /**
+   * ISO 8601 timestamp of when the invoice was voided (e.g.,
+   * &#x60;2026-05-10T09:15:00+00:00&#x60;). This is the official time the invoice entered the VOID
+   * state. Cannot be null. Returned only when result.resultCode is SUCCESS.
+   */
   private String voidedAt;
 
-  /** The invoice note. Maximum length: 512 characters. */
+  /**
+   * Echo-back of the &#x60;invoiceNote&#x60; provided in the request, if any. The note is stored in
+   * the &#x60;invoiceNotes&#x60; array in the invoice metadata with &#x60;action&#x3D;void&#x60;.
+   * Can be null (no note provided). Returned only when result.resultCode is SUCCESS.
+   */
   private String invoiceNote;
 }

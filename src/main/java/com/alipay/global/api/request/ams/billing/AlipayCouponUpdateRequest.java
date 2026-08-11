@@ -15,7 +15,6 @@ package com.alipay.global.api.request.ams.billing;
 import com.alipay.global.api.model.ams.*;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.billing.AlipayCouponUpdateResponse;
-import java.util.Map;
 import lombok.*;
 
 /** AlipayCouponUpdateRequest */
@@ -23,23 +22,37 @@ import lombok.*;
 @Data
 public class AlipayCouponUpdateRequest extends AlipayRequest<AlipayCouponUpdateResponse> {
 
-  /** The coupon ID. Maximum length: 64 characters. */
+  /** System-generated coupon ID to update. Cannot be empty. */
   private String couponId;
 
-  /** The coupon name. Maximum length: 128 characters. */
+  /** Updated display name. Maximum length: 128 characters. */
   private String couponName;
 
-  /** The current status. Maximum length: 16 characters. */
+  /**
+   * Status transition. Accepted values: &#x60;ACTIVE&#x60; / &#x60;INACTIVE&#x60;. Drives an ACTIVE
+   * &lt;-&gt; INACTIVE state change. When null/blank, status is left unchanged. &#x60;EXPIRED&#x60;
+   * is system-derived and cannot be set via this API - passing &#x60;EXPIRED&#x60; returns
+   * &#x60;PARAM_ILLEGAL&#x60;.
+   */
   private String status;
 
-  /** The max redemptions. Note: See documentation for details. */
-  private Integer maxRedemptions;
-
-  /** The redeem by. */
+  /**
+   * Updated redemption expiry time (UTC, ISO 8601). The new deadline must not be earlier than the
+   * current &#x60;redeemBy&#x60; - shortening is rejected with &#x60;PARAM_ILLEGAL&#x60;.
+   */
   private String redeemBy;
 
-  /** Custom metadata for special use cases. */
-  private Map<String, String> metadata;
+  /**
+   * Updated merchant-defined key-value pairs. Full replacement semantics: the entire metadata
+   * object is replaced. The value must be a valid JSON object string.
+   */
+  private String metadata;
+
+  /**
+   * Updated maximum redemption count. The new value must be greater than or equal to the number of
+   * times already redeemed (&#x60;redeemedCount&#x60;).
+   */
+  private Integer maxRedemptions;
 
   public AlipayCouponUpdateRequest() {
     this.setPath("/ams/api/v1/billing/coupon/update");

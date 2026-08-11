@@ -21,24 +21,27 @@ import lombok.*;
 @AllArgsConstructor
 public class PromotionCodeInfo {
 
-  /** The promotion code ID. Maximum length: 64 characters. */
+  /** System-generated promotion code ID. */
   private String promotionCodeId;
 
-  /** The code. Maximum length: 128 characters. */
+  /** The promotion code string. */
   private String code;
 
-  /** The current status. Maximum length: 16 characters. Note: See documentation for details. */
+  /**
+   * Filter by promotion code status. Allowed values: &#x60;ACTIVE&#x60;, &#x60;INACTIVE&#x60;. If
+   * not provided, returns all statuses.
+   */
   private String status;
 
-  /** The max redemptions. */
+  /** Maximum redemption count. Value range: 0-999999. */
   private Integer maxRedemptions;
 
-  /** The redeemed count. */
+  /** Number of times redeemed. Value range: 0-999999. */
   private Integer redeemedCount;
 
-  /** The expiry time. Note: See documentation for details. */
+  /** Expiry time. Returned when the field was set. */
   private String expiryTime;
 
-  /** The create time. */
+  /** Creation time (UTC, ISO 8601). */
   private String createTime;
 }

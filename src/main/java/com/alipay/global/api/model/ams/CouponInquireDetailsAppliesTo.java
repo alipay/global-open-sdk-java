@@ -22,6 +22,6 @@ import lombok.*;
 @AllArgsConstructor
 public class CouponInquireDetailsAppliesTo {
 
-  /** The product ids. Maximum length: 64 characters. */
-  private List<String> productIds;
+  /** Products to which the coupon applies. Product details are assembled by the server. */
+  private List<CouponApplicableProduct> products;
 }

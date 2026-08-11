@@ -12,6 +12,7 @@
 
 package com.alipay.global.api.model.ams;
 
+import java.util.List;
 import lombok.*;
 
 /** Subscription */
@@ -24,15 +25,66 @@ public class Subscription {
   /** The subscription ID. Maximum length: 64 characters. */
   private String subscriptionId;
 
+  /**
+   * The original idempotency key used to create the subscription. Maximum length: 64 characters.
+   */
+  private String subscriptionRequestId;
+
   /** The current status. Maximum length: 20 characters. */
   private String status;
 
   /** The unique ID assigned by Antom to identify a customer. Maximum length: 64 characters. */
   private String customerId;
 
-  /** The current period end. */
+  /** The subscription description. Maximum length: 500 characters. */
+  private String description;
+
+  /**
+   * The billing mode. Valid values are LICENSED, METERED, and MIXED. Maximum length: 8 characters.
+   */
+  private String billingMode;
+
+  /** The start of the current billing period in ISO 8601 format. */
+  private String currentPeriodStart;
+
+  /** The end of the current billing period in ISO 8601 format. */
   private String currentPeriodEnd;
 
-  /** The created at. */
-  private String createdAt;
+  /** Whether the subscription is scheduled to be canceled at the end of the current period. */
+  private Boolean cancelAtPeriodEnd;
+
+  /** The cancellation time in ISO 8601 format. */
+  private String canceledAt;
+
+  /** The scheduled cancellation time in ISO 8601 format. */
+  private String cancelAt;
+
+  /** The billing cycle anchor in ISO 8601 format. */
+  private String billingCycleAnchor;
+
+  /** The trial start time in ISO 8601 format. */
+  private String trialStart;
+
+  /** The trial end time in ISO 8601 format. */
+  private String trialEnd;
+
+  private Amount subtotal;
+
+  private Amount discountAmount;
+
+  private Amount totalAmount;
+
+  /** The subscription price items. */
+  private List<BillingSubscriptionPriceItem> priceItems;
+
+  /**
+   * The termination reason. Returned when the status is TERMINATED. Maximum length: 64 characters.
+   */
+  private String terminationReason;
+
+  /**
+   * The subscription creation time in ISO 8601 format. List results are sorted by this field in
+   * descending order by default.
+   */
+  private String createTime;
 }

@@ -14,7 +14,7 @@ package com.alipay.global.api.response.ams.billing;
 
 import com.alipay.global.api.model.ams.*;
 import com.alipay.global.api.model.ams.Amount;
-import com.alipay.global.api.model.ams.Payment;
+import com.alipay.global.api.model.ams.InvoicePayment;
 import com.alipay.global.api.model.ams.ReceiptItem;
 import com.alipay.global.api.response.AlipayResponse;
 import java.util.List;
@@ -25,48 +25,96 @@ import lombok.*;
 @Data
 public class AlipayReceiptInquireDetailsResponse extends AlipayResponse {
 
-  /** The receipt ID. Maximum length: 64 characters. */
+  /**
+   * Receipt ID. Unique identifier for the receipt. Returned only when result.resultCode is SUCCESS.
+   */
   private String receiptId;
 
   /**
-   * The original receipt id. Maximum length: 64 characters. Note: See documentation for details.
+   * Original receipt ID for refund receipts (FK -&gt; ibilling_receipt.receipt_id). Only set when
+   * receiptType&#x3D;REFUND. Null for PAYMENT receipts. Returned only when result.resultCode is
+   * SUCCESS.
    */
   private String originalReceiptId;
 
-  /** The invoice ID. Maximum length: 64 characters. */
+  /** Associated Invoice ID. Returned only when result.resultCode is SUCCESS. */
   private String invoiceId;
 
-  /** The subscription ID. Maximum length: 64 characters. */
+  /**
+   * Associated Subscription ID. Null for standalone receipts not tied to a subscription. Returned
+   * only when result.resultCode is SUCCESS.
+   */
   private String subscriptionId;
 
-  /** The unique ID assigned by Antom to identify a customer. Maximum length: 64 characters. */
+  /** Customer ID. Returned only when result.resultCode is SUCCESS. */
   private String customerId;
 
-  /** The unique ID assigned by Antom to identify a payment. Maximum length: 64 characters. */
+  /**
+   * Associated Payment transaction ID. Null for refund receipts. Returned only when
+   * result.resultCode is SUCCESS.
+   */
   private String paymentId;
 
-  /** The refund id. Maximum length: 64 characters. */
+  /**
+   * Associated Refund transaction ID. Null for payment receipts. Returned only when
+   * result.resultCode is SUCCESS.
+   */
   private String refundId;
 
-  /** The receipt type. Maximum length: 16 characters. */
+  /**
+   * Receipt type. Allowed values: &#x60;PAYMENT&#x60; - receipt for a payment transaction;
+   * &#x60;REFUND&#x60; - receipt for a refund transaction. Merchants should handle unknown enum
+   * values gracefully. Returned only when result.resultCode is SUCCESS.
+   */
   private String receiptType;
 
-  /** The current status. Maximum length: 32 characters. */
+  /**
+   * Receipt lifecycle status. Allowed values: &#x60;ACTIVE&#x60; - payment receipt with no refunds
+   * applied, receipt is final; &#x60;PARTIALLY_REFUNDED&#x60; - some amount has been refunded,
+   * receipt reflects partial refund; &#x60;REFUNDED&#x60; - fully refunded, no remaining balance.
+   * Merchants should handle unknown enum values gracefully. Returned only when result.resultCode is
+   * SUCCESS.
+   */
   private String status;
 
-  /** The reason for the status change. Maximum length: 32 characters. */
+  /**
+   * Reason for receipt creation. Allowed values: &#x60;SUBSCRIPTION_CREATION&#x60; - receipt
+   * generated when a new subscription is first charged; &#x60;RECURRENCE&#x60; - receipt generated
+   * for a recurring billing cycle; &#x60;UPDATE&#x60; - receipt generated when a subscription
+   * change (upgrade, downgrade, or quantity change) triggers a proration charge or credit;
+   * &#x60;TRIAL_END&#x60; - receipt generated when a free trial ends and the first paid charge
+   * occurs; &#x60;REFUND&#x60; - receipt generated for a refund transaction. Merchants should
+   * handle unknown enum values gracefully. Returned only when result.resultCode is SUCCESS.
+   */
   private String reason;
 
-  /** The customer first name. Maximum length: 256 characters. */
+  /**
+   * Customer&#39;s first name. Populated from the customer record at receipt creation time. Null if
+   * the customer record had no &#x60;firstName&#x60; at receipt creation time. Returned only when
+   * result.resultCode is SUCCESS.
+   */
   private String customerFirstName;
 
-  /** The customer last name. Maximum length: 256 characters. */
+  /**
+   * Customer&#39;s last name. Populated from the customer record at receipt creation time. Null if
+   * the customer record had no &#x60;lastName&#x60; at receipt creation time. Returned only when
+   * result.resultCode is SUCCESS.
+   */
   private String customerLastName;
 
-  /** The email address of the customer. Maximum length: 256 characters. */
+  /**
+   * Customer&#39;s email address. Populated from the customer record at receipt creation time. Null
+   * if the customer record had no email at receipt creation time. Returned only when
+   * result.resultCode is SUCCESS.
+   */
   private String customerEmail;
 
-  /** The collection method. Maximum length: 32 characters. */
+  /**
+   * Payment collection method. Allowed values: &#x60;CHARGE_AUTOMATICALLY&#x60; - payment is
+   * collected automatically at billing cycle; &#x60;SEND_INVOICE&#x60; - payment is collected via a
+   * sent invoice. Null when not applicable (e.g., manual payment confirmation). Returned only when
+   * result.resultCode is SUCCESS.
+   */
   private String collectionMethod;
 
   private Amount totalAmount;
@@ -91,60 +139,111 @@ public class AlipayReceiptInquireDetailsResponse extends AlipayResponse {
 
   private Amount settlementAmount;
 
-  /** The fx rate. Maximum length: 32 characters. */
+  /**
+   * Foreign exchange rate applied when payment currency differs from settlement currency (e.g.,
+   * &#x60;1.0600&#x60;). Null for same-currency transactions. Returned only when result.resultCode
+   * is SUCCESS.
+   */
   private String fxRate;
 
-  /** The fx rate id. Maximum length: 64 characters. */
+  /**
+   * FX rate reference ID for audit and reconciliation. Null when no FX rate was applied. Returned
+   * only when result.resultCode is SUCCESS.
+   */
   private String fxRateId;
 
-  /** The payment method. Maximum length: 32 characters. */
+  /**
+   * Payment method used. Allowed values: &#x60;CARD&#x60;, &#x60;BANK_TRANSFER&#x60;,
+   * &#x60;WALLET&#x60;, &#x60;OFFLINE&#x60;. Null for offline payment or when payment method is not
+   * available. Returned only when result.resultCode is SUCCESS.
+   */
   private String paymentMethod;
 
-  /** The period start. Maximum length: 24 characters. */
+  /**
+   * ISO 8601 timestamp of billing period start. Null if not subscription-based. Returned only when
+   * result.resultCode is SUCCESS.
+   */
   private String periodStart;
 
-  /** The period end. Maximum length: 24 characters. */
+  /**
+   * ISO 8601 timestamp of billing period end. Null if not subscription-based. Returned only when
+   * result.resultCode is SUCCESS.
+   */
   private String periodEnd;
 
-  /** The paid time. Maximum length: 24 characters. */
+  /**
+   * ISO 8601 timestamp of when payment was completed. Null for REFUND-type receipts or unpaid
+   * receipts. Returned only when result.resultCode is SUCCESS.
+   */
   private String paidTime;
 
-  /** The due date. Maximum length: 24 characters. */
+  /**
+   * ISO 8601 timestamp of payment due date. Null for receipts without a due date (e.g.,
+   * auto-charged subscriptions). Returned only when result.resultCode is SUCCESS.
+   */
   private String dueDate;
 
   /**
-   * The unique ID assigned by a merchant to identify a payment request. Maximum length: 128
-   * characters.
+   * Outbound payment request ID used as idempotency key for the payment call. Null for offline
+   * confirmations or when no payment was initiated. Returned only when result.resultCode is
+   * SUCCESS.
    */
   private String paymentRequestId;
 
-  /** The pay to request id. Maximum length: 128 characters. */
+  /**
+   * Payment order request ID. Null if not applicable. Returned only when result.resultCode is
+   * SUCCESS.
+   */
   private String payToRequestId;
 
-  /** The pay to id. Maximum length: 64 characters. */
+  /** Payment order ID. Null if not applicable. Returned only when result.resultCode is SUCCESS. */
   private String payToId;
 
-  /** The description. Maximum length: 512 characters. */
+  /**
+   * Receipt description or narrative set by the merchant. Null if no description was provided.
+   * Returned only when result.resultCode is SUCCESS.
+   */
   private String description;
 
-  /** The file url. Maximum length: 2048 characters. */
+  /**
+   * URL to the hosted receipt page or downloadable receipt PDF. Null if receipt file has not been
+   * generated. Returned only when result.resultCode is SUCCESS.
+   */
   private String fileUrl;
 
-  /** The items. */
+  /**
+   * Line items from the associated invoice. Sorted by &#x60;periodStart&#x60; desc, then
+   * &#x60;itemId&#x60; desc. Invoices rarely exceed 100 line items; if truncated, use the Invoice
+   * Detail API for the full list. See LineItem Object below. Note: When the associated invoice has
+   * more than 100 items, only the 100 most recent items are returned. Check the Invoice Detail API
+   * for the complete list. Returned only when result.resultCode is SUCCESS.
+   */
   private List<ReceiptItem> items;
 
-  /** The payments. */
-  private List<Payment> payments;
+  /**
+   * Payment attempt history for the associated invoice. Sorted by &#x60;attemptNo&#x60; asc
+   * (chronological). Invoices rarely exceed 50 payment attempts; if truncated, contact Antom
+   * support. See PaymentInfo Object below. Null if no payment attempts exist. Note: When there are
+   * more than 50 payment attempts, only the first 50 are returned. Contact Antom support for the
+   * complete list. Returned only when result.resultCode is SUCCESS.
+   */
+  private List<InvoicePayment> payments;
 
-  /** The creation time. Maximum length: 24 characters. */
+  /**
+   * ISO 8601 timestamp of receipt creation. Maximum length: 29 characters. Returned only when
+   * result.resultCode is SUCCESS.
+   */
   private String gmtCreate;
 
-  /** The gmt update. Maximum length: 24 characters. */
+  /**
+   * ISO 8601 timestamp of last receipt update. Maximum length: 29 characters. Returned only when
+   * result.resultCode is SUCCESS.
+   */
   private String gmtUpdate;
 
-  /** The payment method type. Maximum length: 32 characters. */
+  /**
+   * Payment method type (e.g., &#x60;CARD&#x60;, &#x60;WALLET&#x60;). Null if not set. Returned
+   * only when result.resultCode is SUCCESS.
+   */
   private String paymentMethodType;
-
-  /** The footer. */
-  private String footer;
 }

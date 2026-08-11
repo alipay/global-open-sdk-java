@@ -23,6 +23,15 @@ import lombok.*;
 @Data
 public class AlipayCreditGrantInquireListResponse extends AlipayResponse {
 
-  /** The credit grants. Note: See documentation for details. */
+  /** The current page number. */
+  private Integer pageNum;
+
+  /** The number of records on the current page. */
+  private Integer pageSize;
+
+  /** The total number of matching credit grants at query time. */
+  private Integer totalCount;
+
+  /** The matching credit grants. Returned only when result.resultCode is SUCCESS. */
   private List<CreditGrant> creditGrants;
 }

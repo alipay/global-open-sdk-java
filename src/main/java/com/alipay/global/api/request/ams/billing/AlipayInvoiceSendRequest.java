@@ -15,6 +15,7 @@ package com.alipay.global.api.request.ams.billing;
 import com.alipay.global.api.model.ams.*;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.billing.AlipayInvoiceSendResponse;
+import java.util.List;
 import lombok.*;
 
 /** AlipayInvoiceSendRequest */
@@ -22,11 +23,28 @@ import lombok.*;
 @Data
 public class AlipayInvoiceSendRequest extends AlipayRequest<AlipayInvoiceSendResponse> {
 
-  /** The invoice ID. Maximum length: 64 characters. */
+  /**
+   * Invoice ID to send. Must be in OPEN or PAID status and belong to the requesting merchant.
+   * Validated before any email dispatch. Cannot be null.
+   */
   private String invoiceId;
 
-  /** The send request id. Maximum length: 64 characters. */
-  private String sendRequestId;
+  /**
+   * CC email addresses to include in the invoice email. Optional; when omitted, only the primary
+   * customer email is used.
+   */
+  private List<String> ccEmails;
+
+  /**
+   * Internal note attached to the send request for merchant reference. Not visible to the customer.
+   */
+  private String internalNote;
+
+  /**
+   * Whether to include the payment link in the invoice email. Default: &#x60;true&#x60;. When
+   * &#x60;false&#x60;, the email is sent without a payment link.
+   */
+  private Boolean includePaymentLink;
 
   public AlipayInvoiceSendRequest() {
     this.setPath("/ams/api/v1/billing/invoice/send");

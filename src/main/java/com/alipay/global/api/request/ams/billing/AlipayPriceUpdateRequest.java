@@ -15,7 +15,6 @@ package com.alipay.global.api.request.ams.billing;
 import com.alipay.global.api.model.ams.*;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.billing.AlipayPriceUpdateResponse;
-import java.util.Map;
 import lombok.*;
 
 /** AlipayPriceUpdateRequest */
@@ -23,23 +22,43 @@ import lombok.*;
 @Data
 public class AlipayPriceUpdateRequest extends AlipayRequest<AlipayPriceUpdateResponse> {
 
-  /** The price ID. Maximum length: 32 characters. */
+  /**
+   * Price ID to update. Cannot be null. Format: price_ prefix + alphanumeric suffix. This field
+   * serves as the idempotent key for this operation
+   */
   private String priceId;
 
-  /** The name. Maximum length: 128 characters. */
+  /**
+   * Price name. O - Present with value: update; present with null: clear; absent: no change. Can be
+   * null
+   */
   private String name;
 
   /**
-   * Custom metadata for special use cases. Maximum length: 20 characters. Note: See documentation
-   * for details.
+   * Custom metadata encoded as a JSON object string. When provided, the value fully replaces the
+   * existing metadata; keys are not merged. When omitted, the existing value is unchanged. PII must
+   * not be stored.
    */
-  private Map<String, String> metadata;
+  private String metadata;
 
-  /** The metadata keys to remove. Maximum length: 20 characters. */
-  private String metadataKeysToRemove;
-
-  /** The active. */
+  /**
+   * Price active status. O - explicit true&#x3D;activate, explicit false&#x3D;deactivate, absent or
+   * null&#x3D;no change. There is no \&quot;clear\&quot; semantic for active - it is always either
+   * true or false. For Boolean fields on update APIs, null/absent means \&quot;no change\&quot;
+   * (not \&quot;set to null\&quot;). See Section 6.8 Update API Null/Absent Semantics for the
+   * authoritative definition. When deactivated (active&#x3D;false), the price cannot be used for
+   * new subscriptions; existing subscriptions continue using the price
+   */
   private Boolean active;
+
+  /**
+   * Whether this price is the default price for the product. O - Only &#x60;true&#x60; is accepted;
+   * &#x60;false&#x60; or absent means no change. When set to true, this price becomes the default
+   * price of the product and any previous default price of that product is automatically
+   * un-defaulted. Cannot be combined with active&#x3D;false in the same request - a default price
+   * must remain active
+   */
+  private Boolean defaultPrice;
 
   public AlipayPriceUpdateRequest() {
     this.setPath("/ams/api/v1/billing/price/update");

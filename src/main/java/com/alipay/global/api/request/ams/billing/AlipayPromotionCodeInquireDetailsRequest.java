@@ -23,7 +23,9 @@ import lombok.*;
 public class AlipayPromotionCodeInquireDetailsRequest
     extends AlipayRequest<AlipayPromotionCodeInquireDetailsResponse> {
 
-  /** The promotion code ID. Maximum length: 64 characters. */
+  /**
+   * System-generated promotion code ID to query. Cannot be empty. Maximum length: 64 characters.
+   */
   private String promotionCodeId;
 
   public AlipayPromotionCodeInquireDetailsRequest() {

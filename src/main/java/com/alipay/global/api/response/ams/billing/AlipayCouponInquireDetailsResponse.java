@@ -16,7 +16,6 @@ import com.alipay.global.api.model.ams.*;
 import com.alipay.global.api.model.ams.Amount;
 import com.alipay.global.api.model.ams.CouponInquireDetailsAppliesTo;
 import com.alipay.global.api.response.AlipayResponse;
-import java.util.Map;
 import lombok.*;
 
 /** AlipayCouponInquireDetailsResponse */
@@ -24,52 +23,80 @@ import lombok.*;
 @Data
 public class AlipayCouponInquireDetailsResponse extends AlipayResponse {
 
-  /** The coupon ID. Maximum length: 64 characters. Note: See documentation for details. */
+  /** System-generated coupon ID. Returned when resultCode is &#x60;SUCCESS&#x60;. */
   private String couponId;
 
-  /** The coupon request id. Maximum length: 64 characters. Note: See documentation for details. */
+  /**
+   * Merchant-supplied idempotency key used at creation. Returned when resultCode is
+   * &#x60;SUCCESS&#x60;.
+   */
   private String couponRequestId;
 
-  /** The coupon name. Maximum length: 128 characters. Note: See documentation for details. */
+  /** Coupon display name. Returned when resultCode is &#x60;SUCCESS&#x60; and the field was set. */
   private String couponName;
 
-  /** The discount type. Maximum length: 16 characters. Note: See documentation for details. */
+  /**
+   * Discount type: &#x60;PERCENT&#x60; or &#x60;AMOUNT&#x60;. Returned when resultCode is
+   * &#x60;SUCCESS&#x60;.
+   */
   private String discountType;
 
-  /** The percent off. Note: See documentation for details. */
+  /**
+   * Percentage discount value (up to 2 decimal places). Returned when &#x60;discountType&#x60;
+   * &#x3D; &#x60;PERCENT&#x60;. Returned only when result.resultCode is SUCCESS.
+   */
   private String percentOff;
 
   private Amount amountOff;
 
-  /** The duration type. Maximum length: 16 characters. Note: See documentation for details. */
+  /**
+   * Duration type: &#x60;ONCE&#x60; / &#x60;REPEATING&#x60; / &#x60;FOREVER&#x60;. Returned when
+   * resultCode is &#x60;SUCCESS&#x60;.
+   */
   private String durationType;
 
-  /** The duration value. Note: See documentation for details. */
+  /**
+   * Duration value. Returned when &#x60;durationType&#x60; &#x3D; &#x60;REPEATING&#x60;. Returned
+   * only when result.resultCode is SUCCESS.
+   */
   private Integer durationValue;
 
-  /** The duration unit. Maximum length: 16 characters. Note: See documentation for details. */
+  /**
+   * Duration unit. Returned when &#x60;durationType&#x60; &#x3D; &#x60;REPEATING&#x60;. Returned
+   * only when result.resultCode is SUCCESS.
+   */
   private String durationUnit;
 
-  /** The max redemptions. Note: See documentation for details. */
-  private Integer maxRedemptions;
-
-  /** The redeemed count. Note: See documentation for details. */
-  private Integer redeemedCount;
-
-  /** The redeem by. Note: See documentation for details. */
+  /**
+   * Redemption expiry time. Returned when resultCode is &#x60;SUCCESS&#x60; and the field was set.
+   */
   private String redeemBy;
 
   private CouponInquireDetailsAppliesTo appliesTo;
 
-  /** The current status. Maximum length: 16 characters. Note: See documentation for details. */
+  /**
+   * Coupon status: &#x60;ACTIVE&#x60; / &#x60;INACTIVE&#x60;. Returned when resultCode is
+   * &#x60;SUCCESS&#x60;. EXPIRED note (D-3): the system persists only
+   * &#x60;ACTIVE&#x60;/&#x60;INACTIVE&#x60;; EXPIRED has no read-time derivation today. When
+   * &#x60;status&#x60; is &#x60;ACTIVE&#x60;, compare &#x60;redeemBy&#x60; with the current time to
+   * detect an expired coupon.
+   */
   private String status;
 
   /**
-   * Custom metadata for special use cases. Maximum length: 65535 characters. Note: See
-   * documentation for details.
+   * Merchant-defined key-value pairs. Returned when resultCode is &#x60;SUCCESS&#x60; and the field
+   * was set. The value must be a valid JSON object string.
    */
-  private Map<String, String> metadata;
+  private String metadata;
 
-  /** The create time. Note: See documentation for details. */
-  private String createTime;
+  /** Creation time (UTC, ISO 8601). Returned when resultCode is &#x60;SUCCESS&#x60;. */
+  private String gmtCreate;
+
+  /** Maximum redemption count. Returned when resultCode is &#x60;SUCCESS&#x60;. */
+  private Integer maxRedemptions;
+
+  /**
+   * Number of times the coupon has been redeemed. Returned when resultCode is &#x60;SUCCESS&#x60;.
+   */
+  private Integer redeemedCount;
 }

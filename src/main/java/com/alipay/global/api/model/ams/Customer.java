@@ -21,52 +21,36 @@ import lombok.*;
 @AllArgsConstructor
 public class Customer {
 
-  /** The unique ID assigned by Antom to identify a customer. Maximum length: 64 characters. */
+  /** Filter by exact customer ID (single exact match). */
   private String customerId;
 
-  /** The unique ID assigned by a merchant to identify a request. Maximum length: 64 characters. */
+  /** Merchant-supplied idempotency key. */
   private String customerRequestId;
 
-  /** The email address. Maximum length: 256 characters. Note: See documentation for details. */
+  /** Filter by exact email address match. Maximum length: 256 characters. */
   private String email;
 
-  /** The first name. Maximum length: 256 characters. Note: See documentation for details. */
+  /** Customer first name. Returned when the field was set. */
   private String firstName;
 
-  /** The last name. Maximum length: 256 characters. Note: See documentation for details. */
+  /** Customer last name. Returned when the field was set. */
   private String lastName;
 
-  /** The current status. Maximum length: 16 characters. */
+  /**
+   * Filter by customer status. Allowed values: &#x60;ACTIVE&#x60;, &#x60;DELETED&#x60;. If not
+   * provided, returns customers of all statuses.
+   */
   private String status;
 
-  /**
-   * The customer&#39;s phone number (digits only). Replaces deprecated mobileNo. Maximum length: 32
-   * characters.
-   */
-  private String phoneNo;
-
-  /**
-   * ISO 3166-1 alpha-2 country code paired with phoneNo. Required when phoneNo is provided. Maximum
-   * length: 2 characters.
-   */
-  private String countryCode;
-
-  /**
-   * Invoice recipient email address (independent of account email). Maximum length: 256 characters.
-   */
+  /** Invoice recipient email (independent of account email). Returned when the field was set. */
   private String billingEmail;
 
   /**
-   * Shipping recipient first name. Replaces deprecated shippingName. Maximum length: 256
-   * characters.
+   * Filter by billing country codes (ISO 3166-1 alpha-2) using SQL &#x60;IN&#x60; clause. Maximum
+   * size: 50 elements.
    */
-  private String shippingFirstName;
+  private String country;
 
-  /**
-   * Shipping recipient last name. Replaces deprecated shippingName. Maximum length: 256 characters.
-   */
-  private String shippingLastName;
-
-  /** ISO 3166-1 alpha-2 country code paired with shippingPhone. Maximum length: 8 characters. */
-  private String shippingCountryCode;
+  /** Customer creation timestamp. */
+  private String gmtCreate;
 }
