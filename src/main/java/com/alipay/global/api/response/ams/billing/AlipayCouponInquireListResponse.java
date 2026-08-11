@@ -23,18 +23,36 @@ import lombok.*;
 @Data
 public class AlipayCouponInquireListResponse extends AlipayResponse {
 
-  /** The coupons. Note: See documentation for details. */
+  /**
+   * List of coupon summary items. Empty array if no results. Returned when resultCode is
+   * &#x60;SUCCESS&#x60;. Maximum size: 100 elements per page.
+   */
   private List<Coupon> coupons;
 
-  /** The has more. Note: See documentation for details. */
+  /**
+   * Whether more results exist beyond the current page. &#x60;false&#x60; &#x3D; last page.
+   * Returned when resultCode is &#x60;SUCCESS&#x60;.
+   */
   private Boolean hasMore;
 
-  /** The next cursor. Maximum length: 64 characters. Note: See documentation for details. */
+  /**
+   * The &#x60;couponId&#x60; of the last element of the current page. Pass as
+   * &#x60;startingAfter&#x60; in the next request to page toward older items (&#x60;gmt_create
+   * DESC&#x60; keyset). Returned when &#x60;hasMore&#x60; is &#x60;true&#x60;. Absent when
+   * &#x60;hasMore&#x60; is &#x60;false&#x60;. Returned only when result.resultCode is SUCCESS.
+   */
   private String nextCursor;
 
-  /** The prev cursor. Maximum length: 64 characters. Note: See documentation for details. */
-  private String prevCursor;
-
-  /** The total. Note: See documentation for details. */
+  /**
+   * Total count of matching coupons. Only returned when request has
+   * &#x60;includeTotal&#x3D;true&#x60;. Returned only when result.resultCode is SUCCESS.
+   */
   private Integer total;
+
+  /**
+   * The &#x60;couponId&#x60; of the first element of the current page. Pass as
+   * &#x60;endingBefore&#x60; to page toward newer items. Only returned when the request used
+   * &#x60;endingBefore&#x60;. Returned only when result.resultCode is SUCCESS.
+   */
+  private String previousCursor;
 }

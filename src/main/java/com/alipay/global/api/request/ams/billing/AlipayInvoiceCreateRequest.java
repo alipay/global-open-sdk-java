@@ -27,53 +27,103 @@ import lombok.*;
 @Data
 public class AlipayInvoiceCreateRequest extends AlipayRequest<AlipayInvoiceCreateResponse> {
 
-  /** The invoice request id. Maximum length: 64 characters. */
+  /**
+   * Merchant-supplied idempotency key. Repeating the same &#x60;invoiceRequestId&#x60; returns the
+   * originally created invoice (true idempotency - same key, same result). Must be unique per
+   * merchant. Backed by a unique constraint &#x60;UK(merchant_id, invoice_request_id)&#x60; on
+   * &#x60;ibilling_invoice&#x60;. Accepts alphanumeric characters, and underscores. Cannot be null.
+   */
   private String invoiceRequestId;
 
-  /** The unique ID assigned by Antom to identify a customer. Maximum length: 64 characters. */
+  /**
+   * Customer ID this invoice belongs to. The customer must exist and belong to the requesting
+   * merchant. Cannot be null.
+   */
   private String customerId;
 
-  /** The subscription ID. Maximum length: 64 characters. */
+  /**
+   * The subscription this invoice is linked to. Leave empty for standalone invoices. If provided,
+   * the subscription must exist and belong to the requesting merchant. Can be null.
+   */
   private String subscriptionId;
 
   /**
-   * The 3-letter currency code that follows the ISO 4217 standard. Maximum length: 3 characters.
+   * Three-letter ISO currency code in uppercase. The currency in which the invoice item will be
+   * charged (e.g., &#x60;\&quot;USD\&quot;&#x60;). Must be consistent across all monetary fields in
+   * the request. Cannot be null.
    */
   private String currency;
 
-  /** The items. */
+  /**
+   * Line items for the invoice. Minimum 1 item. Maximum 100 for standalone invoices, 20 for
+   * subscription-linked invoices (subscription invoices use batch price calculation which requires
+   * shared recurring settings). Each item supports three pricing models: Model 1 (Fixed Amount via
+   * &#x60;itemAmount&#x60;), Model 2 (Unit Amount x Quantity via &#x60;unitAmount&#x60;), Model 3
+   * (Price Object via &#x60;priceId&#x60;). Only one model per item; mixing is rejected.
+   * Additionally, all items within the same invoice must use the same pricing model - mixed pricing
+   * models across items are rejected. Cannot be null or empty.
+   */
   private List<InvoiceCreateItem> items;
 
-  /** The current status. Maximum length: 16 characters. */
+  /**
+   * Invoice status on creation. Allowed values: &#x60;DRAFT&#x60; and &#x60;OPEN&#x60;. Defaults to
+   * &#x60;DRAFT&#x60; when omitted. When set to &#x60;OPEN&#x60;, &#x60;dueDate&#x60; is required.
+   * Maximum length: 16 characters.
+   */
   private String status;
 
   /**
-   * Indicates whether to automatically send the notification. Note: See documentation for details.
+   * Whether to email the invoice to the customer when created as &#x60;OPEN&#x60;. When
+   * &#x60;true&#x60;, the email is sent idempotently - sending the same invoice twice won&#39;t
+   * produce duplicate emails. Can be null (defaults to false).
    */
   private Boolean autoSend;
 
-  /** The cc emails. */
+  /**
+   * CC email addresses for invoice notification. When &#x60;autoSend&#x60; is &#x60;true&#x60;, the
+   * invoice email is also sent to these addresses. Can be null.
+   */
   private List<String> ccEmails;
 
-  /** The description. Maximum length: 512 characters. */
+  /**
+   * Human-readable description of the invoice. Appears on the invoice PDF and hosted page. HTML
+   * tags are stripped for XSS prevention. Can be null.
+   */
   private String description;
 
-  /** The due date. Maximum length: 24 characters. Note: See documentation for details. */
+  /**
+   * Payment due date. Format: ISO 8601 date (&#x60;yyyy-MM-dd&#x60;, e.g.,
+   * &#x60;\&quot;2026-06-01\&quot;&#x60;) or full ISO 8601 datetime with timezone offset (e.g.,
+   * &#x60;\&quot;2026-06-01T23:59:59+00:00\&quot;&#x60;). Date-only values are interpreted as
+   * end-of-day in the merchant&#39;s acquiring-region timezone. Required when
+   * &#x60;status&#x3D;OPEN&#x60;; optional when &#x60;status&#x3D;DRAFT&#x60;. Past dates are
+   * rejected with &#x60;PARAM_ILLEGAL&#x60;. Maximum length: 64 characters.
+   */
   private String dueDate;
 
-  /** The collection method. Maximum length: 32 characters. */
+  /**
+   * Payment collection method. See enum table below. Default: &#x60;CHARGE_AUTOMATICALLY&#x60;. Can
+   * be null (defaults to &#x60;CHARGE_AUTOMATICALLY&#x60;).
+   */
   private String collectionMethod;
 
   private PaymentMethod paymentMethod;
 
   private InvoiceShipping shipping;
 
-  /** The discounts applied. */
+  /**
+   * Invoice-level discount items. Each item carries either a &#x60;couponId&#x60; or
+   * &#x60;promotionCodeId&#x60; (at least one must be provided per element). Multiple discounts are
+   * applied sequentially to the invoice subtotal in the order they appear. The system resolves each
+   * discount reference to its actual discount value (percentage or fixed amount) at creation time
+   * and computes the resulting &#x60;discountAmount&#x60; internally. Can be null. See DiscountItem
+   * Object below for field details.
+   */
   private List<BillingDiscount> discounts;
 
   /**
-   * The URL that Antom uses to send the invoice payment status change notification to. Only HTTPS
-   * is supported. Maximum length: 2048 characters.
+   * HTTPS URL that receives invoice payment-status notifications. When omitted, invoice
+   * notifications are not sent. Maximum length: 2048 characters.
    */
   private String invoiceNotifyUrl;
 

@@ -22,13 +22,18 @@ import lombok.*;
 @Data
 public class AlipayInvoiceVoidRequest extends AlipayRequest<AlipayInvoiceVoidResponse> {
 
-  /** The void request id. Maximum length: 64 characters. */
-  private String voidRequestId;
-
-  /** The invoice ID. Maximum length: 64 characters. */
+  /**
+   * Invoice ID to void. Must belong to the requesting merchant. Format: &#x60;inv_&#x60; + 10-char
+   * alphanumeric. Validated before any state transition. Cannot be null.
+   */
   private String invoiceId;
 
-  /** The invoice note. Maximum length: 512 characters. */
+  /**
+   * Optional note attached to the invoice for this void action. Stored as an entry in the
+   * &#x60;invoiceNotes&#x60; array in the invoice metadata with &#x60;action&#x3D;void&#x60;.
+   * Enables merchants to attach contextual notes (e.g., \&quot;Voided due to customer
+   * request\&quot;) to the invoice audit trail. Can be null (defaults to null - no note provided).
+   */
   private String invoiceNote;
 
   public AlipayInvoiceVoidRequest() {

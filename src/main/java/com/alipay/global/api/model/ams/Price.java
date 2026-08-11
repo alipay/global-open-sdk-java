@@ -13,7 +13,6 @@
 package com.alipay.global.api.model.ams;
 
 import java.util.List;
-import java.util.Map;
 import lombok.*;
 
 /** Price */
@@ -23,52 +22,96 @@ import lombok.*;
 @AllArgsConstructor
 public class Price {
 
-  /** The price ID. Maximum length: 32 characters. */
+  /** System-generated price ID */
   private String priceId;
 
-  /** The product ID. Maximum length: 32 characters. */
+  /** System-generated product ID */
   private String productId;
 
-  /** The name. Maximum length: 100 characters. */
+  /** Product name */
   private String name;
 
-  /** The pricing model. Maximum length: 24 characters. */
+  /**
+   * Pricing model type. Aligned with Price API. Enum: PER_UNIT(per-unit pricing - charge is
+   * unitAmount x quantity; when includedQuantity is present, charge &#x3D; ceil(quantity /
+   * includedQuantity) x unitAmount for package pricing), TIERED(tiered pricing - tier-based pricing
+   * with tiersMode GRADUATED or VOLUME; actual pricing comes from tier definitions). Forward
+   * compatibility: If a new value is added in the future, clients that do not recognize it should
+   * treat it as an unknown value and not break
+   */
   private String pricingModel;
 
-  /** The usage type. Maximum length: 16 characters. */
+  /**
+   * Usage type. O - May be null in the response when the value is not set. Enum: LICENSED(fixed
+   * quantity billing - subscription item quantity is set at subscription creation and changed
+   * manually via update API), METERED(metered usage billing - quantity is tracked by external
+   * metering system and reported via Usage Report API). Forward compatibility: If a new value is
+   * added in the future, clients that do not recognize it should treat it as an unknown value and
+   * not break. Full structure definitions for recurring, includedQuantity, tiersMode, tiers are
+   * documented in price-apis.md
+   */
   private String usageType;
 
-  /** The unit label. Maximum length: 64 characters. */
+  /**
+   * Whether this price is the default price for the product. Returned only when result.resultCode
+   * is SUCCESS.
+   */
+  private Boolean defaultPrice;
+
+  /** Product-level unit label. O - May be null in the response when the value is not set */
   private String unitLabel;
 
-  /** The meter ID. Maximum length: 32 characters. */
+  /** External meter reference. O - May be null in the response when the value is not set */
   private String meterId;
 
   private Amount unitAmount;
 
   private RecurringSettings recurring;
 
-  /** The active. */
+  /**
+   * Product active status. true&#x3D;product is active and can be used for new subscriptions,
+   * false&#x3D;product is deactivated and cannot be used for new subscriptions. Cannot be null.
+   * Deactivated products can be reactivated via Update active&#x3D;true
+   */
   private Boolean active;
 
-  /** The included quantity. */
+  /**
+   * Included quantity for package pricing. O - May be null in the response when the value is not
+   * set. See price-apis.md for includedQuantity semantics
+   */
   private Long includedQuantity;
 
-  /** The tiers mode. Maximum length: 16 characters. */
+  /**
+   * Tiered pricing mode. O - May be null in the response when the value is not set. Enum:
+   * GRADUATED(graduated volume pricing), VOLUME(flat-tier volume pricing). See price-apis.md for
+   * tier structure definition
+   */
   private String tiersMode;
 
-  /** The tiers. */
+  /**
+   * Tier definitions. O - May be null in the response when the value is not set. Structure defined
+   * in price-apis.md
+   */
   private List<Tier> tiers;
 
-  /** Custom metadata for special use cases. */
-  private Map<String, String> metadata;
+  /**
+   * Custom key-value metadata stored as JSON string. O - May be null in the response when the value
+   * is not set The value must be a valid JSON object string.
+   */
+  private String metadata;
 
-  /** The created at. Maximum length: 29 characters. */
+  /** ISO 8601 creation timestamp */
   private String createdAt;
 
-  /** The deactivated at. Maximum length: 29 characters. Note: See documentation for details. */
+  /**
+   * ISO 8601 deactivation timestamp. O - Returned when product has been deactivated
+   * (active&#x3D;false); absent when product is active
+   */
   private String deactivatedAt;
 
-  /** The updated at. Maximum length: 29 characters. */
+  /**
+   * ISO 8601 last update timestamp. O - Returned when non-null; absent from response if never
+   * updated after creation
+   */
   private String updatedAt;
 }

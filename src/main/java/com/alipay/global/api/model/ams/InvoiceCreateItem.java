@@ -21,28 +21,55 @@ import lombok.*;
 @AllArgsConstructor
 public class InvoiceCreateItem {
 
-  /** The description. Maximum length: 256 characters. */
+  /**
+   * Human-readable description of the invoice. Appears on the invoice PDF and hosted page. HTML
+   * tags are stripped for XSS prevention. Can be null.
+   */
   private String description;
 
   private Amount itemAmount;
 
   private Amount unitAmount;
 
-  /** The price ID. Maximum length: 64 characters. Note: See documentation for details. */
+  /**
+   * Price identifier from the Antom price catalog. The unit amount and currency are resolved from
+   * the price catalog entry. Use this for items linked to the product/price catalog. Can be null
+   * when using &#x60;itemAmount&#x60; or &#x60;unitAmount&#x60; pricing models.
+   */
   private String priceId;
 
-  /** The product ID. Maximum length: 64 characters. */
+  /**
+   * External product identifier associated with this line item. Stored in item metadata; used for
+   * reconciliation and reporting. Can be null.
+   */
   private String productId;
 
-  /** The quantity. */
+  /**
+   * Quantity of units. Integer only; decimal quantities are not supported in v1. Defaults to 1 if
+   * omitted. Required for unit-amount and price-object pricing models, and ignored for fixed-amount
+   * pricing. Value range: 1 to 999999.
+   */
   private Integer quantity;
 
-  /** The item id. Maximum length: 64 characters. */
+  /**
+   * Item identifier for upsert during update operations. When provided in an update request, the
+   * system queries by itemId + merchantId to determine whether to update an existing item or create
+   * a new one. Omit for create operations. Can be null.
+   */
   private String itemId;
 
-  /** The supply start. */
+  /**
+   * Service/goods supply period start date (ISO 8601 format, e.g.
+   * &#x60;\&quot;2026-01-15T00:00:00Z\&quot;&#x60;). NULL if not applicable. Complements billing
+   * period coverage fields. Can be null.
+   */
   private String supplyStart;
 
-  /** The supply end. Note: See documentation for details. */
+  /**
+   * Service/goods supply period end date (ISO 8601 format, e.g.
+   * &#x60;\&quot;2026-01-31T23:59:59Z\&quot;&#x60;). NULL if not applicable. If both
+   * &#x60;supplyStart&#x60; and &#x60;supplyEnd&#x60; are provided, &#x60;supplyStart&#x60; must be
+   * before &#x60;supplyEnd&#x60;. Can be null.
+   */
   private String supplyEnd;
 }

@@ -23,13 +23,23 @@ import lombok.*;
 public class AlipayInvoiceCreateViewLinkRequest
     extends AlipayRequest<AlipayInvoiceCreateViewLinkResponse> {
 
-  /** The invoice ID. Maximum length: 64 characters. Note: See documentation for details. */
+  /**
+   * System-generated invoice ID returned at invoice creation time. Can be null if
+   * &#x60;invoiceRequestId&#x60; is provided. Format: alphanumeric with hyphens and underscores,
+   * max 64 characters (e.g., &#x60;inv_20260413_000123&#x60;).
+   */
   private String invoiceId;
 
-  /** The invoice request id. Maximum length: 64 characters. Note: See documentation for details. */
+  /**
+   * Merchant-supplied idempotency key used when the invoice was originally created. Can be null if
+   * &#x60;invoiceId&#x60; is provided.
+   */
   private String invoiceRequestId;
 
-  /** The link expiry days. */
+  /**
+   * Number of days until the link expires. Defaults to 7 days if not provided. Cannot be zero or
+   * negative. Range: 1-365. Can be null (defaults to 7).
+   */
   private Integer linkExpiryDays;
 
   public AlipayInvoiceCreateViewLinkRequest() {

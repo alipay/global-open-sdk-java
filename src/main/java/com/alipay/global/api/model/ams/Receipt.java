@@ -21,37 +21,64 @@ import lombok.*;
 @AllArgsConstructor
 public class Receipt {
 
-  /** The receipt ID. Maximum length: 64 characters. */
+  /** Receipt ID. Unique identifier. */
   private String receiptId;
 
-  /** The invoice ID. Maximum length: 64 characters. */
+  /**
+   * Filter by associated invoice ID. Returns receipts linked to this invoice. Can be null (no
+   * filter).
+   */
   private String invoiceId;
 
-  /** The unique ID assigned by Antom to identify a customer. Maximum length: 64 characters. */
+  /**
+   * Filter by customer ID. Returns only receipts belonging to this customer. Can be null (no
+   * filter).
+   */
   private String customerId;
 
-  /** The subscription ID. Maximum length: 64 characters. */
+  /**
+   * Filter by associated subscription ID. Returns receipts linked to this subscription. Can be null
+   * (no filter).
+   */
   private String subscriptionId;
 
   /**
-   * The original receipt id. Maximum length: 64 characters. Note: See documentation for details.
+   * Original receipt ID for refund receipts. Only set when receiptType&#x3D;REFUND. Null for
+   * PAYMENT receipts.
    */
   private String originalReceiptId;
 
-  /** The receipt type. Maximum length: 16 characters. */
+  /**
+   * Filter by receipt type. Allowed values: &#x60;PAYMENT&#x60; (receipt for a payment),
+   * &#x60;REFUND&#x60; (receipt for a refund). Unknown type values are silently ignored (treated as
+   * no filter for that value). Can be null (no filter).
+   */
   private String receiptType;
 
-  /** The current status. Maximum length: 32 characters. */
+  /**
+   * Filter by receipt status. Allowed values: &#x60;ACTIVE&#x60; (payment receipt with no refunds),
+   * &#x60;PARTIALLY_REFUNDED&#x60; (some amount refunded), &#x60;REFUNDED&#x60; (fully refunded).
+   * Unknown status values are silently ignored (treated as no filter for that value). Can be null
+   * (no filter).
+   */
   private String status;
 
-  /** The reason for the status change. Maximum length: 32 characters. */
+  /**
+   * Reason for receipt creation. Allowed values: &#x60;SUBSCRIPTION_CREATION&#x60;,
+   * &#x60;RECURRENCE&#x60;, &#x60;UPDATE&#x60;, &#x60;TRIAL_END&#x60;, &#x60;REFUND&#x60;.
+   * Merchants should handle unknown enum values gracefully (e.g., log for review); new values may
+   * be added without version change.
+   */
   private String reason;
 
-  /** The collection method. Maximum length: 32 characters. Note: See documentation for details. */
+  /**
+   * Payment collection method: &#x60;CHARGE_AUTOMATICALLY&#x60; or &#x60;SEND_INVOICE&#x60;.
+   * Returned when the receipt has an associated collection method; null when not applicable (e.g.,
+   * manual payment confirmation).
+   */
   private String collectionMethod;
 
-  /** The payment method. Maximum length: 32 characters. Note: See documentation for details. */
-  private String paymentMethod;
+  private ReceiptPaymentMethod paymentMethod;
 
   private Amount subtotal;
 
@@ -67,31 +94,25 @@ public class Receipt {
 
   private Amount paymentDeductedAmount;
 
-  /** The period start. Maximum length: 24 characters. */
+  /** ISO 8601 timestamp of billing period start. Null if not subscription-based. */
   private String periodStart;
 
-  /** The period end. Maximum length: 24 characters. */
+  /** ISO 8601 timestamp of billing period end. Null if not subscription-based. */
   private String periodEnd;
 
-  /** The description. Maximum length: 512 characters. */
+  /**
+   * Receipt narrative. Returned when merchant set a receipt narrative; null if no description was
+   * provided.
+   */
   private String description;
 
-  /** The creation time. Maximum length: 24 characters. */
+  /** ISO 8601 timestamp of receipt creation. */
   private String gmtCreate;
 
-  /** The gmt update. Maximum length: 24 characters. */
+  /** ISO 8601 timestamp of last receipt update. */
   private String gmtUpdate;
 
-  /** The customer first name. Maximum length: 256 characters. */
-  private String customerFirstName;
-
-  /** The customer last name. Maximum length: 256 characters. */
-  private String customerLastName;
-
-  /** The email address of the customer. Maximum length: 256 characters. */
-  private String customerEmail;
-
-  /** The payment method type. Maximum length: 32 characters. */
+  /** Payment method type (e.g., &#x60;CARD&#x60;, &#x60;WALLET&#x60;). Can be null. */
   private String paymentMethodType;
 
   private Amount discountAmount;
@@ -102,33 +123,33 @@ public class Receipt {
 
   private Amount settlementAmount;
 
-  /** The fx rate. Maximum length: 32 characters. */
+  /**
+   * Foreign exchange rate applied when payment currency differs from settlement currency. Null for
+   * same-currency transactions.
+   */
   private String fxRate;
 
-  /** The fx rate id. Maximum length: 64 characters. */
+  /** FX rate reference ID for audit and reconciliation. Null when no FX rate was applied. */
   private String fxRateId;
 
-  /** The due date. Maximum length: 24 characters. */
+  /** ISO 8601 timestamp of payment due date. Null for receipts without a due date. */
   private String dueDate;
 
-  /** The paid time. Maximum length: 24 characters. */
+  /** ISO 8601 timestamp of when payment was completed. Null for unpaid receipts. */
   private String paidTime;
 
-  /**
-   * The unique ID assigned by a merchant to identify a payment request. Maximum length: 128
-   * characters.
-   */
+  /** Outbound payment request ID used as idempotency key. Null for offline confirmations. */
   private String paymentRequestId;
 
-  /** The pay to request id. Maximum length: 128 characters. */
+  /** Payment order request ID. Null if not applicable. */
   private String payToRequestId;
 
-  /** The pay to id. Maximum length: 64 characters. */
+  /** Payment order ID. Null if not applicable. */
   private String payToId;
 
-  /** The footer. Maximum length: 256 characters. */
+  /** Receipt footer text. Can be null. */
   private String footer;
 
-  /** The file url. Maximum length: 2048 characters. */
+  /** URL to the receipt PDF file. Can be null (PDF not yet generated). */
   private String fileUrl;
 }

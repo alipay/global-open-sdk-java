@@ -19,7 +19,6 @@ import com.alipay.global.api.model.ams.Tier;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.billing.AlipayPriceCreateResponse;
 import java.util.List;
-import java.util.Map;
 import lombok.*;
 
 /** AlipayPriceCreateRequest */
@@ -27,42 +26,111 @@ import lombok.*;
 @Data
 public class AlipayPriceCreateRequest extends AlipayRequest<AlipayPriceCreateResponse> {
 
-  /** The price request id. Maximum length: 64 characters. */
+  /**
+   * Idempotent request key. O - Optional idempotent request key. When provided, prevents duplicate
+   * price creation from network retries. If a request with the same priceRequestId from the same
+   * merchant has been successfully processed within 24 hours, the original response is returned
+   * without re-processing. Max 64 characters, alphanumeric, hyphens and underscores allowed. This
+   * field serves as the idempotent key for this operation. Since priceId is system-generated and no
+   * natural business key exists for deduplication, priceRequestId is the sole dedup mechanism -
+   * omitting it risks duplicate price creation on network retries
+   */
   private String priceRequestId;
 
-  /** The product ID. Maximum length: 32 characters. */
+  /**
+   * Product ID to attach price to. Cannot be null. Format: prod_ prefix + alphanumeric suffix
+   * (e.g., prod_2xK8mN3pQ7)
+   */
   private String productId;
 
-  /** The name. Maximum length: 128 characters. */
+  /**
+   * Price name. O - Optional display name for the price; default null. Can be null. Characters
+   * &amp; &#39; \&quot; are not allowed. Max 128 characters
+   */
   private String name;
 
-  /** The pricing model. Maximum length: 24 characters. */
+  /**
+   * Pricing model type. O - If absent, derived from other fields per Pricing Model Default
+   * Derivation rules. Enum: PER_UNIT(per-unit pricing aligned with Stripe
+   * billing_scheme&#x3D;per_unit - charge is unitAmount x quantity; when includedQuantity is
+   * present, charge &#x3D; ceil(quantity / includedQuantity) x unitAmount for package pricing),
+   * TIERED(tiered pricing aligned with Stripe billing_scheme&#x3D;tiered - tier-based pricing with
+   * tiersMode GRADUATED or VOLUME; actual pricing comes from tier definitions). Can be null;
+   * derived when absent
+   */
   private String pricingModel;
 
-  /** The usage type. Maximum length: 16 characters. Note: See documentation for details. */
+  /**
+   * Usage type. O - Optional. When provided, must be a valid enum value (LICENSED or METERED). Can
+   * be null; default null. Enum: LICENSED(fixed quantity billing - subscription item quantity is
+   * set at subscription creation and changed manually via update API; system bills unitAmount x
+   * quantity automatically each period), METERED(metered usage billing - quantity is tracked by
+   * external metering system iusage and reported via Usage Report API; system bills based on actual
+   * reported usage in arrears at end of billing period)
+   */
   private String usageType;
 
   private Amount unitAmount;
 
-  /** The unit label. Maximum length: 64 characters. Note: See documentation for details. */
+  /**
+   * Price-level unit label. O - Optional. Price-level unitLabel overrides Product-level unitLabel
+   * when both are set; if Price-level is absent, Product-level is inherited. Can be null; default
+   * null. Characters &amp; &#39; \&quot; are not allowed
+   */
   private String unitLabel;
 
-  /** The meter ID. Maximum length: 32 characters. Note: See documentation for details. */
+  /**
+   * External meter reference. C - Required when usageType&#x3D;METERED; otherwise forbidden.
+   * References external metering system contract. Format: alphanumeric + underscore, max 32 chars.
+   * Validated at price creation: format check (regex: ^[a-zA-Z0-9_]{1,32}$) AND existence check
+   * against iusage meter registry. Returns METER_NOT_FOUND if meter definition does not exist in
+   * iusage. This ensures fail-fast validation - merchants are alerted to invalid meter references
+   * immediately rather than discovering the error at subscription creation time
+   */
   private String meterId;
 
   private RecurringSettings recurring;
 
-  /** The included quantity. Note: See documentation for details. */
+  /**
+   * Included quantity for package pricing. O - Number of units included in the base price. When
+   * present, indicates package pricing (aligned with Stripe&#39;s transform_quantity): the total
+   * charge &#x3D; ceil(quantity / includedQuantity) x unitAmount. When absent (null), indicates
+   * flat-rate PER_UNIT pricing: charge &#x3D; unitAmount x quantity. Forbidden when
+   * pricingModel&#x3D;TIERED. Can be null; default null
+   */
   private Long includedQuantity;
 
-  /** The tiers mode. Maximum length: 16 characters. Note: See documentation for details. */
+  /**
+   * Tiered pricing mode. C - Required when pricingModel&#x3D;TIERED; forbidden otherwise. Enum:
+   * GRADUATED(graduated pricing - each tier is priced independently, customer may cross tiers with
+   * different unit rates), VOLUME(volume pricing - single tier rate applies to the entire quantity
+   * based on which tier the total volume falls into). Can be null; default null
+   */
   private String tiersMode;
 
-  /** The tiers. Maximum length: 20 characters. Note: See documentation for details. */
+  /**
+   * Tier definitions. Required when &#x60;pricingModel&#x60; is &#x60;TIERED&#x60; and forbidden
+   * otherwise. Maximum size: 20 elements; exceeding the limit returns &#x60;TOO_MANY_TIERS&#x60;.
+   */
   private List<Tier> tiers;
 
-  /** Custom metadata for special use cases. Note: See documentation for details. */
-  private Map<String, String> metadata;
+  /**
+   * Optional metadata encoded as a JSON object string. The SDK must forward the string unchanged.
+   * Maximum size: 20 entries. Keys must use lowerCamelCase alphanumeric text and be at most 40
+   * characters. Values are at most 500 characters and cannot contain &#x60;&lt;&#x60;,
+   * &#x60;&gt;&#x60;, &#x60;&amp;&#x60;, &#x60;&#39;&#x60;, or &#x60;\&quot;&#x60;. PII must not be
+   * stored. Invalid keys, values, or entry counts return &#x60;INVALID_METADATA_KEY&#x60;,
+   * &#x60;INVALID_METADATA_VALUE&#x60;, or &#x60;INVALID_METADATA_SIZE&#x60;.
+   */
+  private String metadata;
+
+  /**
+   * Whether this price is the default price for the product. O - Optional. Only &#x60;true&#x60; is
+   * accepted; &#x60;false&#x60; or absent means the price is not the default. Only one price per
+   * product can be the default price - creating a new default price automatically un-defaults any
+   * previous default price of that product. Can be null; default null
+   */
+  private Boolean defaultPrice;
 
   public AlipayPriceCreateRequest() {
     this.setPath("/ams/api/v1/billing/price/create");

@@ -14,8 +14,9 @@ package com.alipay.global.api.response.ams.billing;
 
 import com.alipay.global.api.model.ams.*;
 import com.alipay.global.api.model.ams.Amount;
-import com.alipay.global.api.model.ams.CreditNoteCreateItems;
+import com.alipay.global.api.model.ams.CreditNoteItem;
 import com.alipay.global.api.response.AlipayResponse;
+import java.util.List;
 import lombok.*;
 
 /** AlipayCreditNoteCreateResponse */
@@ -71,7 +72,8 @@ public class AlipayCreditNoteCreateResponse extends AlipayResponse {
   /** The refund destination. Maximum length: 32 characters. Note: See documentation for details. */
   private String refundDestination;
 
-  private CreditNoteCreateItems items;
+  /** The credit note items returned when the credit note is created successfully. */
+  private List<CreditNoteItem> items;
 
   /** The memo. Maximum length: 512 characters. Note: See documentation for details. */
   private String memo;
@@ -84,9 +86,6 @@ public class AlipayCreditNoteCreateResponse extends AlipayResponse {
 
   /** The refunded at. Maximum length: 29 characters. Note: See documentation for details. */
   private String refundedAt;
-
-  /** The voided at. Maximum length: 29 characters. Note: See documentation for details. */
-  private String voidedAt;
 
   /** The created at. Note: See documentation for details. */
   private String createdAt;

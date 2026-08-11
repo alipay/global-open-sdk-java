@@ -15,7 +15,6 @@ package com.alipay.global.api.response.ams.billing;
 import com.alipay.global.api.model.ams.*;
 import com.alipay.global.api.response.AlipayResponse;
 import java.util.List;
-import java.util.Map;
 import lombok.*;
 
 /** AlipayProductCreateResponse */
@@ -23,39 +22,77 @@ import lombok.*;
 @Data
 public class AlipayProductCreateResponse extends AlipayResponse {
 
-  /** The product ID. Maximum length: 32 characters. */
+  /**
+   * System-generated product ID. Format: prod_ prefix + alphanumeric suffix (e.g., prod_2xK8mN3pQ7)
+   * Returned only when result.resultCode is SUCCESS.
+   */
   private String productId;
 
-  /** The product request id. Maximum length: 64 characters. */
+  /**
+   * Echo of the idempotent request key from the request. O - May be null in the response when the
+   * value is not set Returned only when result.resultCode is SUCCESS.
+   */
   private String productRequestId;
 
-  /** The name. Maximum length: 100 characters. */
+  /** Product name. Echo of request value Returned only when result.resultCode is SUCCESS. */
   private String name;
 
-  /** The type. Maximum length: 16 characters. */
+  /**
+   * Product type. Enum: SERVICE(intangible digital service or SaaS offering - checkout skips
+   * shipping address collection), GOOD(tangible physical product requiring delivery - checkout
+   * collects shipping address). Echo of request value (or default SERVICE if not provided). Forward
+   * compatibility: If a new value is added in the future, clients that do not recognize it should
+   * treat it as an unknown value and not break Returned only when result.resultCode is SUCCESS.
+   */
   private String type;
 
-  /** The description. Maximum length: 1024 characters. */
+  /**
+   * Product description. O - May be null in the response when the value is not set Returned only
+   * when result.resultCode is SUCCESS.
+   */
   private String description;
 
-  /** The images. */
+  /**
+   * Product image URLs. O - Returned when non-null and non-empty; absent if null or empty Returned
+   * only when result.resultCode is SUCCESS.
+   */
   private List<String> images;
 
-  /** The unit label. Maximum length: 64 characters. */
+  /**
+   * Product-level unit label. O - May be null in the response when the value is not set Returned
+   * only when result.resultCode is SUCCESS.
+   */
   private String unitLabel;
 
-  /** Custom metadata for special use cases. */
-  private Map<String, String> metadata;
+  /**
+   * Metadata encoded as a JSON object string. Returned only when &#x60;result.resultCode&#x60; is
+   * &#x60;SUCCESS&#x60; and metadata was set. The SDK must expose the stored string unchanged.
+   */
+  private String metadata;
 
-  /** The active. */
+  /**
+   * Product active status. true&#x3D;product is active and can be used for new subscriptions,
+   * false&#x3D;product is deactivated and cannot be used for new subscriptions. Default: true.
+   * Cannot be null. Deactivated products can be reactivated via Update active&#x3D;true Returned
+   * only when result.resultCode is SUCCESS.
+   */
   private Boolean active;
 
-  /** The created at. Maximum length: 29 characters. */
+  /**
+   * ISO 8601 creation timestamp. Cannot be null Returned only when result.resultCode is SUCCESS.
+   */
   private String createdAt;
 
-  /** The deactivated at. Maximum length: 29 characters. Note: See documentation for details. */
+  /**
+   * ISO 8601 deactivation timestamp. O - Returned when product has been deactivated
+   * (active&#x3D;false); absent when product is active Returned only when result.resultCode is
+   * SUCCESS.
+   */
   private String deactivatedAt;
 
-  /** The updated at. Maximum length: 29 characters. Note: See documentation for details. */
+  /**
+   * ISO 8601 last update timestamp. O - Returned when non-null; absent from response if never
+   * updated after creation Returned only when result.resultCode is SUCCESS.
+   */
   private String updatedAt;
 }

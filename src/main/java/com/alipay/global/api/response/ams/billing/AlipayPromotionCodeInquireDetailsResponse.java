@@ -15,7 +15,6 @@ package com.alipay.global.api.response.ams.billing;
 import com.alipay.global.api.model.ams.*;
 import com.alipay.global.api.model.ams.PromotionCodeInquireDetailsMinAmount;
 import com.alipay.global.api.response.AlipayResponse;
-import java.util.Map;
 import lombok.*;
 
 /** AlipayPromotionCodeInquireDetailsResponse */
@@ -23,53 +22,65 @@ import lombok.*;
 @Data
 public class AlipayPromotionCodeInquireDetailsResponse extends AlipayResponse {
 
-  /** The promotion code ID. Maximum length: 64 characters. Note: See documentation for details. */
+  /** System-generated promotion code ID. Returned when resultCode is &#x60;SUCCESS&#x60;. */
   private String promotionCodeId;
 
   /**
-   * The promotion code request id. Maximum length: 64 characters. Note: See documentation for
-   * details.
+   * Merchant-supplied idempotency key used at creation. Returned when resultCode is
+   * &#x60;SUCCESS&#x60;.
    */
   private String promotionCodeRequestId;
 
-  /** The code. Maximum length: 128 characters. Note: See documentation for details. */
+  /** The promotion code string. Returned when resultCode is &#x60;SUCCESS&#x60;. */
   private String code;
 
-  /** The coupon ID. Maximum length: 64 characters. Note: See documentation for details. */
+  /** Parent coupon&#39;s ID. Returned when resultCode is &#x60;SUCCESS&#x60;. */
   private String couponId;
 
-  /** The current status. Maximum length: 16 characters. Note: See documentation for details. */
+  /**
+   * Promotion code status: &#x60;ACTIVE&#x60; / &#x60;INACTIVE&#x60; only - the DB persists these
+   * two values and no &#x60;EXPIRED&#x60; status is derived at read time. A promotion code past its
+   * &#x60;expiryTime&#x60; is no longer redeemable; compare &#x60;expiryTime&#x60; to the current
+   * time to detect expiry. Future status values may be added; merchants must handle unrecognized
+   * values gracefully (log and skip). Returned only when result.resultCode is SUCCESS.
+   */
   private String status;
 
-  /** The max redemptions. Note: See documentation for details. */
+  /**
+   * Maximum redemption count. Value range: 0-999999. Returned when resultCode is
+   * &#x60;SUCCESS&#x60;.
+   */
   private Integer maxRedemptions;
 
-  /** The redeemed count. Note: See documentation for details. */
+  /**
+   * Number of times the promotion code has been redeemed. Value range: 0-999999. Returned when
+   * resultCode is &#x60;SUCCESS&#x60;.
+   */
   private Integer redeemedCount;
 
-  /** The expiry time. Note: See documentation for details. */
+  /**
+   * Expiry time (UTC, ISO 8601). Returned when resultCode is &#x60;SUCCESS&#x60; and the field was
+   * set.
+   */
   private String expiryTime;
 
   private PromotionCodeInquireDetailsMinAmount minAmount;
 
-  /** The one time only. Note: See documentation for details. */
+  /** Whether code is one-time per customer. Returned when resultCode is &#x60;SUCCESS&#x60;. */
   private Boolean oneTimeOnly;
 
   /**
-   * The unique ID assigned by Antom to identify a customer. Maximum length: 64 characters. Note:
-   * See documentation for details.
+   * Restricted customer&#39;s ID. Returned when resultCode is &#x60;SUCCESS&#x60; and the field was
+   * set.
    */
   private String customerId;
 
   /**
-   * Custom metadata for special use cases. Maximum length: 65535 characters. Note: See
-   * documentation for details.
+   * Merchant-defined key-value pairs. Returned when resultCode is &#x60;SUCCESS&#x60; and the field
+   * was set. The value must be a valid JSON object string.
    */
-  private Map<String, String> metadata;
+  private String metadata;
 
-  /** The create time. Note: See documentation for details. */
+  /** Creation time (UTC, ISO 8601). Returned when resultCode is &#x60;SUCCESS&#x60;. */
   private String createTime;
-
-  /** The update time. Note: See documentation for details. */
-  private String updateTime;
 }

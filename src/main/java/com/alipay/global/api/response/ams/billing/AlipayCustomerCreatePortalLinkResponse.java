@@ -13,7 +13,6 @@
 package com.alipay.global.api.response.ams.billing;
 
 import com.alipay.global.api.model.ams.*;
-import com.alipay.global.api.model.ams.ErrorStack;
 import com.alipay.global.api.response.AlipayResponse;
 import lombok.*;
 
@@ -22,24 +21,30 @@ import lombok.*;
 @Data
 public class AlipayCustomerCreatePortalLinkResponse extends AlipayResponse {
 
-  /** The encrypted token. Maximum length: 512 characters. */
+  /**
+   * Opaque URL-safe bearer token. Treat it as a credential: do not log, parse, or store its
+   * internal structure - the format may change without notice. Returned only when result.resultCode
+   * is SUCCESS.
+   */
   private String token;
 
   /**
-   * The portal access URL. Maximum length: 1024 characters. Note: See documentation for details.
+   * Fully-qualified portal URL. Null when the portal base URL is not configured for the merchant -
+   * in that case build the URL from &#x60;token&#x60;. Returned only when result.resultCode is
+   * SUCCESS.
    */
   private String portalUrl;
 
-  /** The expiration time. */
+  /**
+   * Token expiration timestamp. Format: &#x60;yyyy-MM-dd HH:mm:ss&#x60; (NOT ISO 8601). Returned
+   * only when result.resultCode is SUCCESS.
+   */
   private String expiresAt;
 
   /**
-   * The email sending status. Maximum length: 6 characters. Note: See documentation for details.
+   * &#x60;SENT&#x60; / &#x60;FAILED&#x60;. Populated only when request
+   * &#x60;autoSend&#x3D;true&#x60;. Best-effort: failure never blocks link creation. Null when
+   * &#x60;autoSend&#x3D;false&#x60;. Returned only when result.resultCode is SUCCESS.
    */
   private String sendStatus;
-
-  /** Indicates whether the operation is successful. */
-  private Boolean success;
-
-  private ErrorStack errorContext;
 }

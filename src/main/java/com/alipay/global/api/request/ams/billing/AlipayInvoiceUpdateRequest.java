@@ -13,10 +13,12 @@
 package com.alipay.global.api.request.ams.billing;
 
 import com.alipay.global.api.model.ams.*;
+import com.alipay.global.api.model.ams.InvoiceCustomField;
 import com.alipay.global.api.model.ams.InvoiceShipping;
 import com.alipay.global.api.model.ams.PaymentMethod;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.billing.AlipayInvoiceUpdateResponse;
+import java.util.List;
 import lombok.*;
 
 /** AlipayInvoiceUpdateRequest */
@@ -24,16 +26,26 @@ import lombok.*;
 @Data
 public class AlipayInvoiceUpdateRequest extends AlipayRequest<AlipayInvoiceUpdateResponse> {
 
-  /** The invoice ID. Maximum length: 64 characters. */
+  /** Invoice ID to edit. Must be DRAFT status and belong to the merchant. Cannot be null. */
   private String invoiceId;
 
-  /** The description. Maximum length: 512 characters. */
+  /**
+   * Updated invoice description. When omitted, the existing value is unchanged. Maximum length: 512
+   * characters.
+   */
   private String description;
 
-  /** The due date. Maximum length: 24 characters. */
+  /**
+   * Updated payment due date in &#x60;yyyy-MM-dd&#x60; or ISO 8601 format. The date must be in the
+   * future. When omitted, the existing value is unchanged. Maximum length: 24 characters.
+   */
   private String dueDate;
 
-  /** The collection method. Maximum length: 32 characters. */
+  /**
+   * Updated collection method. Allowed values: &#x60;CHARGE_AUTOMATICALLY&#x60; and
+   * &#x60;SEND_INVOICE&#x60;. When omitted, the existing value is unchanged. Maximum length: 32
+   * characters.
+   */
   private String collectionMethod;
 
   private PaymentMethod paymentMethod;
@@ -41,8 +53,39 @@ public class AlipayInvoiceUpdateRequest extends AlipayRequest<AlipayInvoiceUpdat
   private InvoiceShipping shipping;
 
   /**
-   * The URL that Antom uses to send the invoice payment status change notification to. Only HTTPS
-   * is supported. Maximum length: 2048 characters.
+   * Customer ID to associate with this invoice. If the customer differs from the invoice&#39;s
+   * current customer, the invoice is soft-deleted and recreated with a new ID in the new
+   * customer&#39;s shard. The response includes &#x60;previousInvoiceId&#x60; with the old invoice
+   * ID. Can be null (unchanged).
+   */
+  private String customerId;
+
+  /**
+   * Footer text for PDF rendering (multi-line). PATCH semantics: null &#x3D; unchanged, empty
+   * string &#x3D; cleared.
+   */
+  private String footer;
+
+  /**
+   * Whether to include payment link in email and PDF. Default: true. Stored in invoice metadata.
+   */
+  private Boolean includePaymentLink;
+
+  /**
+   * Free-text memo for PDF rendering (multi-line, &#x60;\\n&#x60; separated). PATCH semantics: null
+   * &#x3D; unchanged, empty string &#x3D; cleared.
+   */
+  private String memo;
+
+  /**
+   * Custom fields for PDF rendering. Max 4 items. Each InvoiceCustomField has &#x60;label&#x60;
+   * (String, max 256, M) and &#x60;value&#x60; (String, max 512, M).
+   */
+  private List<InvoiceCustomField> customFields;
+
+  /**
+   * Updated HTTPS URL that receives invoice payment-status notifications. When omitted, the
+   * existing value is unchanged. Maximum length: 2048 characters.
    */
   private String invoiceNotifyUrl;
 

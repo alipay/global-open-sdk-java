@@ -126,15 +126,34 @@ public class AlipayPayResponse extends AlipayResponse {
    */
   private List<PromotionResult> promotionResult;
 
-  /** The subscription ID echo. */
+  /**
+   * The subscription ID echo. Returned only when subscriptionId was provided in the request and
+   * result.resultCode is SUCCESS.
+   */
   private String subscriptionId;
 
-  /** The subscription status after payment/token binding. */
+  /**
+   * The invoice ID being paid. Returned only when subscriptionId was provided in the request and
+   * result.resultCode is SUCCESS.
+   */
+  private String invoiceId;
+
+  /**
+   * The subscription status after payment or token binding. Expected values include INCOMPLETE,
+   * TRIALING, and ACTIVE. Handle unknown values without failing. Returned only when subscriptionId
+   * was provided in the request and result.resultCode is SUCCESS.
+   */
   private String status;
 
-  /** The start time of the billing cycle. */
+  /**
+   * The billing period start in ISO 8601 format. Returned only when subscriptionId was provided in
+   * the request and result.resultCode is SUCCESS.
+   */
   private String currentPeriodStart;
 
-  /** The end time of the billing cycle. */
+  /**
+   * The billing period end in ISO 8601 format. Returned only when subscriptionId was provided in
+   * the request and result.resultCode is SUCCESS.
+   */
   private String currentPeriodEnd;
 }

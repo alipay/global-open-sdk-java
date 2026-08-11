@@ -22,7 +22,7 @@ import lombok.*;
 @Data
 public class AlipayCustomerDeleteRequest extends AlipayRequest<AlipayCustomerDeleteResponse> {
 
-  /** The unique ID assigned by Antom to identify a customer. Maximum length: 64 characters. */
+  /** System-generated customer ID to delete. Cannot be empty. Maximum length: 64 characters. */
   private String customerId;
 
   public AlipayCustomerDeleteRequest() {

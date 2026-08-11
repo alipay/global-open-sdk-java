@@ -27,7 +27,7 @@ public class AlipayCreditNoteInquireListResponse extends AlipayResponse {
   private Boolean hasMore;
 
   /** The total number of records. Note: See documentation for details. */
-  private Integer totalCount;
+  private Long totalCount;
 
   /** The list. Note: See documentation for details. */
   private List<CreditNoteSummary> list;

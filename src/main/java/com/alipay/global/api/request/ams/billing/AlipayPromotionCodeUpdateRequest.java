@@ -15,7 +15,6 @@ package com.alipay.global.api.request.ams.billing;
 import com.alipay.global.api.model.ams.*;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.billing.AlipayPromotionCodeUpdateResponse;
-import java.util.Map;
 import lombok.*;
 
 /** AlipayPromotionCodeUpdateRequest */
@@ -24,20 +23,30 @@ import lombok.*;
 public class AlipayPromotionCodeUpdateRequest
     extends AlipayRequest<AlipayPromotionCodeUpdateResponse> {
 
-  /** The promotion code ID. Maximum length: 64 characters. */
+  /** System-generated promotion code ID to update. Cannot be empty. */
   private String promotionCodeId;
 
-  /** The current status. Maximum length: 16 characters. */
+  /**
+   * Status transition. Accepted values: &#x60;ACTIVE&#x60; / &#x60;INACTIVE&#x60;. Drives an ACTIVE
+   * &lt;-&gt; INACTIVE state change. When null/blank, status is left unchanged.
+   */
   private String status;
 
-  /** The max redemptions. */
+  /** Updated maximum redemption count. Value range: 0-999999 (same as create). */
   private Integer maxRedemptions;
 
-  /** The expiry time. */
+  /**
+   * Updated expiry time (UTC, ISO 8601). Must be a future time; a past value returns
+   * &#x60;PARAM_ILLEGAL&#x60;.
+   */
   private String expiryTime;
 
-  /** Custom metadata for special use cases. Maximum length: 65535 characters. */
-  private Map<String, String> metadata;
+  /**
+   * Updated merchant-defined key-value pairs. Full replacement semantics. Enforced constraints: up
+   * to 50 keys; each key up to 40 characters; each value up to 500 characters (in addition to the
+   * 65535 max length). The value must be a valid JSON object string.
+   */
+  private String metadata;
 
   public AlipayPromotionCodeUpdateRequest() {
     this.setPath("/ams/api/v1/billing/promotionCode/update");

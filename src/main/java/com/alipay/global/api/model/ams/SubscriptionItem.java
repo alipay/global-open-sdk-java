@@ -21,12 +21,21 @@ import lombok.*;
 @AllArgsConstructor
 public class SubscriptionItem {
 
-  /** The item id. Maximum length: 64 characters. */
+  /** Subscription item ID. Maximum length: 64 characters. */
   private String itemId;
 
-  /** The price ID. Maximum length: 64 characters. */
+  /** Price ID. Maximum length: 64 characters. */
   private String priceId;
 
-  /** The quantity. */
-  private String quantity;
+  /** The quantity of the subscription item. */
+  private Integer quantity;
+
+  /** The start of the current billing period in ISO 8601 format. */
+  private String currentPeriodStart;
+
+  /** The end of the current billing period in ISO 8601 format. */
+  private String currentPeriodEnd;
+
+  /** The number of recurring intervals in each billing period. */
+  private Integer recurringIntervalCount;
 }

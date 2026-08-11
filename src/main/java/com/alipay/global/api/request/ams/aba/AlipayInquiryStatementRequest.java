@@ -35,7 +35,7 @@ public class AlipayInquiryStatementRequest extends AlipayRequest<AlipayInquirySt
    * start time of statement query. The value follows the ISO 8601 standard format. The time
    * interval between startTime and endTime cannot be more than 3 months (equivalent to 100 days).
    */
-  private Object startTime;
+  private String startTime;
 
   /**
    * end time of statement query. The value follows the ISO 8601 standard format. The time interval

@@ -22,13 +22,24 @@ import lombok.*;
 @Data
 public class AlipayInvoiceFinalizeRequest extends AlipayRequest<AlipayInvoiceFinalizeResponse> {
 
-  /** The invoice ID. Maximum length: 64 characters. */
+  /** Invoice ID to finalize. Must be DRAFT status and belong to the merchant. Cannot be null. */
   private String invoiceId;
 
-  /** Indicates whether to automatically send the notification. */
+  /**
+   * Whether to send the invoice email to the customer after finalization. &#x60;true&#x60; &#x3D;
+   * send email; &#x60;false&#x60; &#x3D; do not send email (default, prevents unintended emails
+   * during bulk finalization). Merchants who need the email can explicitly set
+   * &#x60;autoSend&#x3D;true&#x60;. Use &#x60;false&#x60; for bulk finalization scenarios to avoid
+   * email storms. Can be null (defaults to false).
+   */
   private Boolean autoSend;
 
-  /** The invoice note. Maximum length: 512 characters. */
+  /**
+   * Optional note attached to the invoice for this finalize action. Stored as an entry in the
+   * &#x60;invoiceNotes&#x60; array in the invoice metadata with &#x60;action&#x3D;finalize&#x60;.
+   * Enables merchants to attach contextual notes (e.g., \&quot;Finalized after review\&quot;) to
+   * the invoice audit trail. Can be null (defaults to null - no note provided).
+   */
   private String invoiceNote;
 
   public AlipayInvoiceFinalizeRequest() {

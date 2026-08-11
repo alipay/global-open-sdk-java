@@ -21,9 +21,9 @@ import lombok.*;
 @AllArgsConstructor
 public class PriceItem {
 
-  /** The price ID. Maximum length: 64 characters. */
+  /** Price ID referencing pre-created Recurring Price. Not null */
   private String priceId;
 
-  /** The quantity. */
+  /** Quantity for licensed type. Default: 1, Min: 1. Can be null (defaults to 1) */
   private Integer quantity;
 }
