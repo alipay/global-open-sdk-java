@@ -21,12 +21,12 @@ import lombok.*;
 @Data
 public class AlipayCustomerDeleteResponse extends AlipayResponse {
 
-  /**
-   * The unique ID assigned by Antom to identify a customer. Maximum length: 64 characters. Note:
-   * See documentation for details.
-   */
+  /** The deleted customer&#39;s ID. Returned when resultCode is &#x60;SUCCESS&#x60;. */
   private String customerId;
 
-  /** The current status. Maximum length: 16 characters. Note: See documentation for details. */
+  /**
+   * Always &#x60;DELETED&#x60; when resultCode is &#x60;SUCCESS&#x60;. Returned only when
+   * result.resultCode is SUCCESS.
+   */
   private String status;
 }

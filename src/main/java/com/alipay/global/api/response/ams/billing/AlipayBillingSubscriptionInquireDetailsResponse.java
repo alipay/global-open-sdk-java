@@ -13,14 +13,13 @@
 package com.alipay.global.api.response.ams.billing;
 
 import com.alipay.global.api.model.ams.*;
+import com.alipay.global.api.model.ams.Amount;
 import com.alipay.global.api.model.ams.BillingSubscriptionDiscountInfo;
 import com.alipay.global.api.model.ams.BillingSubscriptionInquireDetailsCancellationDetails;
-import com.alipay.global.api.model.ams.BillingSubscriptionInquireDetailsPauseCollection;
-import com.alipay.global.api.model.ams.BillingSubscriptionInquireDetailsTrialSettings;
-import com.alipay.global.api.model.ams.SubscriptionItem;
+import com.alipay.global.api.model.ams.BillingSubscriptionPriceItem;
+import com.alipay.global.api.model.ams.BillingSubscriptionTrialSettings;
 import com.alipay.global.api.response.AlipayResponse;
 import java.util.List;
-import java.util.Map;
 import lombok.*;
 
 /** AlipayBillingSubscriptionInquireDetailsResponse */
@@ -37,11 +36,25 @@ public class AlipayBillingSubscriptionInquireDetailsResponse extends AlipayRespo
    */
   private String subscriptionRequestId;
 
-  /** The created at. */
-  private String createdAt;
+  /**
+   * The subscription creation time in ISO 8601 format. Returned only when result.resultCode is
+   * SUCCESS.
+   */
+  private String createTime;
 
   /** The current status. Maximum length: 20 characters. */
   private String status;
+
+  /**
+   * The billing mode. Valid values are LICENSED, METERED, and MIXED. Maximum length: 8 characters.
+   */
+  private String billingMode;
+
+  /**
+   * The payment behavior used for the initial subscription payment. Valid values are
+   * ALLOW_INCOMPLETE, ERROR_IF_INCOMPLETE, and PENDING_IF_INCOMPLETE.
+   */
+  private String paymentBehavior;
 
   /** The current period start. */
   private String currentPeriodStart;
@@ -64,9 +77,7 @@ public class AlipayBillingSubscriptionInquireDetailsResponse extends AlipayRespo
   /** The trial end. Note: See documentation for details. */
   private String trialEnd;
 
-  private BillingSubscriptionInquireDetailsTrialSettings trialSettings;
-
-  private BillingSubscriptionInquireDetailsPauseCollection pauseCollection;
+  private BillingSubscriptionTrialSettings trialSettings;
 
   /** The cancel at. Note: See documentation for details. */
   private String cancelAt;
@@ -91,12 +102,21 @@ public class AlipayBillingSubscriptionInquireDetailsResponse extends AlipayRespo
    */
   private String defaultPaymentMethod;
 
-  /** The subscription items. Maximum length: 20 characters. */
-  private List<SubscriptionItem> subscriptionItems;
+  private Amount subtotal;
+
+  private Amount discountAmount;
+
+  private Amount totalAmount;
+
+  /** The subscription price items. Maximum size: 100. */
+  private List<BillingSubscriptionPriceItem> priceItems;
 
   /** The discounts applied. Note: See documentation for details. */
   private List<BillingSubscriptionDiscountInfo> discounts;
 
-  /** Custom metadata for special use cases. Note: See documentation for details. */
-  private Map<String, String> metadata;
+  /**
+   * Custom metadata for special use cases. Note: See documentation for details. The value must be a
+   * valid JSON object string.
+   */
+  private String metadata;
 }

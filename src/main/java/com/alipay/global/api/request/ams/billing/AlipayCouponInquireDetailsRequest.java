@@ -23,7 +23,7 @@ import lombok.*;
 public class AlipayCouponInquireDetailsRequest
     extends AlipayRequest<AlipayCouponInquireDetailsResponse> {
 
-  /** The coupon ID. Maximum length: 64 characters. */
+  /** System-generated coupon ID to query. Cannot be empty. Maximum length: 64 characters. */
   private String couponId;
 
   public AlipayCouponInquireDetailsRequest() {

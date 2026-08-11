@@ -21,23 +21,46 @@ import lombok.*;
 @Data
 public class AlipayInvoiceFinalizeResponse extends AlipayResponse {
 
-  /** The invoice ID. Maximum length: 64 characters. */
+  /**
+   * Invoice ID that was finalized (echo-back). Cannot be null. Returned only when result.resultCode
+   * is SUCCESS.
+   */
   private String invoiceId;
 
-  /** The current status. Maximum length: 16 characters. */
+  /**
+   * New invoice status: &#x60;OPEN&#x60;. The invoice is now visible to the customer and ready for
+   * payment. Cannot be null. Returned only when result.resultCode is SUCCESS.
+   */
   private String status;
 
-  /** The hosted invoice url. Maximum length: 2048 characters. */
+  /**
+   * URL to the hosted invoice page where the customer can view and pay the invoice online. Same URL
+   * returned by the Create Invoice API and Invoice Send API. Cannot be null. Returned only when
+   * result.resultCode is SUCCESS.
+   */
   private String hostedInvoiceUrl;
 
-  /** The finalized at. Maximum length: 24 characters. */
+  /**
+   * ISO 8601 timestamp of when the invoice was finalized (e.g.,
+   * &#x60;2026-05-10T14:30:00+00:00&#x60;). This is the official time the invoice became OPEN and
+   * visible to the customer. Maps to internal DB column &#x60;finalized_time&#x60; (DATETIME) on
+   * &#x60;ibilling_invoice&#x60;. Cannot be null. Returned only when result.resultCode is SUCCESS.
+   */
   private String finalizedAt;
 
-  /** The invoice note. Maximum length: 512 characters. */
+  /**
+   * Echo-back of the &#x60;invoiceNote&#x60; provided in the request, if any. The note is stored in
+   * the &#x60;invoiceNotes&#x60; array in the invoice metadata with
+   * &#x60;action&#x3D;finalize&#x60;. Can be null (no note provided). Returned only when
+   * result.resultCode is SUCCESS.
+   */
   private String invoiceNote;
 
   /**
-   * The email sending status. Maximum length: 16 characters. Note: See documentation for details.
+   * Email send status. Returned only when &#x60;autoSend&#x3D;true&#x60; in the request. Enum
+   * values: &#x60;SENT&#x60; - email dispatched successfully; &#x60;FAILED&#x60; - email dispatch
+   * failed (retry allowed). Can be null (when &#x60;autoSend&#x3D;false&#x60; or absent). Returned
+   * only when result.resultCode is SUCCESS.
    */
   private String sendStatus;
 }

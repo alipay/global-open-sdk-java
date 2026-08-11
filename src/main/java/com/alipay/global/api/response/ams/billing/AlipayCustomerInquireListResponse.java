@@ -23,46 +23,37 @@ import lombok.*;
 @Data
 public class AlipayCustomerInquireListResponse extends AlipayResponse {
 
-  /** The customers. Note: See documentation for details. */
+  /**
+   * List of customer summary items. Maximum size: 100 elements (bounded by &#x60;limit&#x60;).
+   * Empty array if no results. Returned when resultCode is &#x60;SUCCESS&#x60;. Each item is a slim
+   * 9-field projection (see below).
+   */
   private List<Customer> customers;
 
-  /** The total. Note: See documentation for details. */
+  /**
+   * Total count of matching customers. Only returned when request has
+   * &#x60;includeTotal&#x3D;true&#x60;. Returned only when result.resultCode is SUCCESS.
+   */
   private Integer total;
 
-  /** The has more. Note: See documentation for details. */
+  /**
+   * Whether more results exist beyond the current page. &#x60;false&#x60; &#x3D; last page.
+   * Returned when resultCode is &#x60;SUCCESS&#x60;.
+   */
   private Boolean hasMore;
 
-  /** The next cursor. Maximum length: 64 characters. Note: See documentation for details. */
+  /**
+   * The &#x60;customerId&#x60; of the last element in the current page. Pass as
+   * &#x60;startingAfter&#x60; in the next request. Returned when &#x60;hasMore&#x60; is
+   * &#x60;true&#x60;. Absent when &#x60;hasMore&#x60; is &#x60;false&#x60;. Returned only when
+   * result.resultCode is SUCCESS.
+   */
   private String nextCursor;
 
   /**
-   * The customer&#39;s phone number (digits only). Replaces deprecated mobileNo. Maximum length: 32
-   * characters.
+   * Returned only in BACKWARD (&#x60;endingBefore&#x60;) navigation. The &#x60;customerId&#x60; of
+   * the first item in the current page. Pass as &#x60;endingBefore&#x60; in the previous-page
+   * request. Absent in forward navigation. Returned only when result.resultCode is SUCCESS.
    */
-  private String phoneNo;
-
-  /**
-   * ISO 3166-1 alpha-2 country code paired with phoneNo. Required when phoneNo is provided. Maximum
-   * length: 2 characters.
-   */
-  private String countryCode;
-
-  /**
-   * Invoice recipient email address (independent of account email). Maximum length: 256 characters.
-   */
-  private String billingEmail;
-
-  /**
-   * Shipping recipient first name. Replaces deprecated shippingName. Maximum length: 256
-   * characters.
-   */
-  private String shippingFirstName;
-
-  /**
-   * Shipping recipient last name. Replaces deprecated shippingName. Maximum length: 256 characters.
-   */
-  private String shippingLastName;
-
-  /** ISO 3166-1 alpha-2 country code paired with shippingPhone. Maximum length: 8 characters. */
-  private String shippingCountryCode;
+  private String previousCursor;
 }

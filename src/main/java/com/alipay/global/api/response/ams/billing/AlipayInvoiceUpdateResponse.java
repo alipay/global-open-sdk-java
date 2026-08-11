@@ -21,9 +21,22 @@ import lombok.*;
 @Data
 public class AlipayInvoiceUpdateResponse extends AlipayResponse {
 
-  /** The invoice ID. Maximum length: 64 characters. */
+  /** Invoice ID (echo-back). Cannot be null. Returned only when result.resultCode is SUCCESS. */
   private String invoiceId;
 
-  /** The current status. Maximum length: 16 characters. Note: See documentation for details. */
+  /**
+   * Invoice status after edit: always &#x60;DRAFT&#x60;. The edit API only operates on DRAFT
+   * invoices - successful edits always return &#x60;DRAFT&#x60; status. This confirms the invoice
+   * remains in editable state. See enum table below. Cannot be null. Returned only when
+   * result.resultCode is SUCCESS.
+   */
   private String status;
+
+  /**
+   * Previous invoice ID when customer reassignment occurred (soft-delete + recreate). Null for
+   * normal updates. Populated only when &#x60;customerId&#x60; was changed, causing the invoice to
+   * be recreated with a new ID in a different shard. Returned only when result.resultCode is
+   * SUCCESS.
+   */
+  private String previousInvoiceId;
 }

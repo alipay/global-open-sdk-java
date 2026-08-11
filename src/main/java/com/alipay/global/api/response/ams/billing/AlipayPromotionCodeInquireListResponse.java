@@ -23,18 +23,36 @@ import lombok.*;
 @Data
 public class AlipayPromotionCodeInquireListResponse extends AlipayResponse {
 
-  /** The promotion codes. Note: See documentation for details. */
+  /**
+   * List of promotion code summary items. Maximum size: 100 elements per page (governed by request
+   * &#x60;limit&#x60; max value 100). Empty array if no results. Returned when resultCode is
+   * &#x60;SUCCESS&#x60;.
+   */
   private List<PromotionCodeInfo> promotionCodes;
 
-  /** The has more. Note: See documentation for details. */
+  /**
+   * Whether more results exist beyond the current page. &#x60;false&#x60; &#x3D; last page.
+   * Returned when resultCode is &#x60;SUCCESS&#x60;.
+   */
   private Boolean hasMore;
 
-  /** The next cursor. Maximum length: 64 characters. Note: See documentation for details. */
+  /**
+   * Entity ID of the last element. Pass as &#x60;startingAfter&#x60; in the next request. Returned
+   * when &#x60;hasMore&#x60; is &#x60;true&#x60;. Absent when &#x60;hasMore&#x60; is
+   * &#x60;false&#x60;. Returned only when result.resultCode is SUCCESS.
+   */
   private String nextCursor;
 
-  /** The prev cursor. Maximum length: 64 characters. Note: See documentation for details. */
-  private String prevCursor;
-
-  /** The total. Note: See documentation for details. */
+  /**
+   * Total count of matching promotion codes. Only returned when request has
+   * &#x60;includeTotal&#x3D;true&#x60;. Returned only when result.resultCode is SUCCESS.
+   */
   private Integer total;
+
+  /**
+   * Entity ID of the first element. Pass as &#x60;endingBefore&#x60; to navigate backward. Only
+   * returned when request used &#x60;endingBefore&#x60;. Returned only when result.resultCode is
+   * SUCCESS.
+   */
+  private String previousCursor;
 }

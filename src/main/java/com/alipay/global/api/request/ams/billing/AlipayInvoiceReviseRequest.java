@@ -24,23 +24,34 @@ import lombok.*;
 @Data
 public class AlipayInvoiceReviseRequest extends AlipayRequest<AlipayInvoiceReviseResponse> {
 
-  /** The invoice ID. Maximum length: 64 characters. Note: See documentation for details. */
+  /**
+   * Invoice ID of the DRAFT or OPEN invoice to revise. Format: &#x60;inv_&#x60; + 10-char
+   * alphanumeric. Can be null if &#x60;invoiceRequestId&#x60; is provided.
+   */
   private String invoiceId;
 
-  /** The invoice request id. Maximum length: 64 characters. Note: See documentation for details. */
+  /** Alternative lookup by idempotency key. Can be null if &#x60;invoiceId&#x60; is provided. */
   private String invoiceRequestId;
 
-  /** The invoice revision request id. Maximum length: 64 characters. */
+  /**
+   * Idempotency key for the revision operation. Stored as &#x60;invoiceRequestId&#x60; on the new
+   * invoice. Backed by UK &#x60;(merchant_id, invoice_revision_request_id)&#x60;. Accepts
+   * alphanumeric, hyphens, underscores. Cannot be null.
+   */
   private String invoiceRevisionRequestId;
 
-  /** The void. */
+  /**
+   * Controls the revision mode: &#x60;true&#x60; &#x3D; void original invoice + create new
+   * (atomic); &#x60;false&#x60; &#x3D; clone original without voiding (original untouched). Cannot
+   * be null.
+   */
   @JSONField(name = "void")
   @JsonProperty("void")
   private Boolean voidValue;
 
   /**
-   * The URL that Antom uses to send the invoice payment status change notification to. Only HTTPS
-   * is supported. Maximum length: 2048 characters.
+   * Updated HTTPS URL that receives invoice payment-status notifications for the revised invoice.
+   * Maximum length: 2048 characters.
    */
   private String invoiceNotifyUrl;
 

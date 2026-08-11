@@ -13,7 +13,6 @@
 package com.alipay.global.api.model.ams;
 
 import java.util.List;
-import java.util.Map;
 import lombok.*;
 
 /** Product */
@@ -23,36 +22,57 @@ import lombok.*;
 @AllArgsConstructor
 public class Product {
 
-  /** The product ID. Maximum length: 32 characters. */
+  /** System-generated product ID */
   private String productId;
 
-  /** The name. Maximum length: 100 characters. */
+  /**
+   * The idempotency key supplied when the product was created. Returned only when result.resultCode
+   * is SUCCESS.
+   */
+  private String productRequestId;
+
+  /** Product name */
   private String name;
 
-  /** The type. Maximum length: 16 characters. */
+  /**
+   * Filter by product type. O - When provided, returns only products of the specified type; when
+   * absent, returns all types. Enum: SERVICE, GOOD. Can be null; default null. Invalid values
+   * return PARAM_ILLEGAL error
+   */
   private String type;
 
-  /** The description. Maximum length: 1024 characters. */
+  /** Product description. O - May be null in the response when the value is not set */
   private String description;
 
-  /** The images. */
+  /** Product image URLs */
   private List<String> images;
 
-  /** The unit label. Maximum length: 64 characters. */
+  /** Product-level unit label. O - May be null in the response when the value is not set */
   private String unitLabel;
 
-  /** Custom metadata for special use cases. */
-  private Map<String, String> metadata;
+  /**
+   * Custom key-value metadata stored as JSON string The value must be a valid JSON object string.
+   */
+  private String metadata;
 
-  /** The active. */
+  /**
+   * Filter by active status. O - true&#x3D;return only active products, false&#x3D;return only
+   * deactivated products, absent or null&#x3D;return all products. No default value
+   */
   private Boolean active;
 
-  /** The created at. Maximum length: 29 characters. */
+  /** ISO 8601 creation timestamp */
   private String createdAt;
 
-  /** The deactivated at. Maximum length: 29 characters. Note: See documentation for details. */
+  /**
+   * ISO 8601 deactivation timestamp. O - Returned when product has been deactivated
+   * (active&#x3D;false); absent when product is active
+   */
   private String deactivatedAt;
 
-  /** The updated at. Maximum length: 29 characters. */
+  /**
+   * ISO 8601 last update timestamp. O - Returned when non-null; absent from response if never
+   * updated after creation
+   */
   private String updatedAt;
 }

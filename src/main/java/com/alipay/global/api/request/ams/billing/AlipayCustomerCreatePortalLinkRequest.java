@@ -25,24 +25,33 @@ public class AlipayCustomerCreatePortalLinkRequest
     extends AlipayRequest<AlipayCustomerCreatePortalLinkResponse> {
 
   /**
-   * The unique ID assigned by Antom to identify a customer. Maximum length: 64 characters. Note:
-   * See documentation for details.
+   * Customer ID to target. When both &#x60;customerId&#x60; and &#x60;email&#x60; are supplied,
+   * &#x60;customerId&#x60; takes precedence.
    */
   private String customerId;
 
-  /** The email address. Maximum length: 254 characters. Note: See documentation for details. */
+  /**
+   * Customer email for lookup. When multiple customers share the email, the most recently created
+   * (by &#x60;gmtCreate DESC&#x60;) is selected. Maximum length: 254 characters (RFC 5322).
+   */
   private String email;
 
-  /** The token validity period in days. */
-  private Integer expiryDays;
-
-  /** The feature list. Note: See documentation for details. */
+  /**
+   * Feature set enabled for this portal session. Allowed values: &#x60;SUBSCRIPTION&#x60;,
+   * &#x60;INVOICE&#x60;, &#x60;PAYMENT_METHOD&#x60;. Empty/absent list -&gt; ALL features enabled
+   * by default (NOT an intersection with settingId features, as previously documented). The portal
+   * settings referenced by &#x60;settingId&#x60; may further restrict which features are shown at
+   * render time.
+   */
   private List<String> features;
 
-  /** Indicates whether to automatically send the notification. */
+  /**
+   * When &#x60;true&#x60;, best-effort email the portal URL to the customer. Default:
+   * &#x60;false&#x60;. Failure never blocks link creation.
+   */
   private Boolean autoSend;
 
-  /** The setting configuration ID. Maximum length: 64 characters. */
+  /** Portal setting configuration ID. Passed through token payload, parsed by iexpfront. */
   private String settingId;
 
   public AlipayCustomerCreatePortalLinkRequest() {

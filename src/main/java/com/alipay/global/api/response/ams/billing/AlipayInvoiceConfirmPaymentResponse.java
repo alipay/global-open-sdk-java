@@ -21,23 +21,46 @@ import lombok.*;
 @Data
 public class AlipayInvoiceConfirmPaymentResponse extends AlipayResponse {
 
-  /** The invoice ID. Maximum length: 64 characters. */
+  /**
+   * Invoice ID for which payment was confirmed (echo-back of request). Cannot be null. Returned
+   * only when result.resultCode is SUCCESS.
+   */
   private String invoiceId;
 
-  /** The current status. Maximum length: 16 characters. */
+  /**
+   * New invoice status after confirmation: &#x60;PAID&#x60;. The invoice is now in a terminal paid
+   * state. Cannot be null. Returned only when result.resultCode is SUCCESS.
+   */
   private String status;
 
-  /** The receipt ID. Maximum length: 64 characters. */
+  /**
+   * Auto-generated receipt ID for the payment. Format: &#x60;rcpt_&#x60; + 10-char alphanumeric.
+   * The receipt confirms the payment and can be used with the Receipt Details and Send Receipt
+   * APIs. Cannot be null. Returned only when result.resultCode is SUCCESS.
+   */
   private String receiptId;
 
-  /** The invoice note. Maximum length: 512 characters. */
+  /**
+   * Echo-back of the &#x60;invoiceNote&#x60; provided in the request, if any. The note is stored in
+   * the &#x60;invoiceNotes&#x60; array in the invoice metadata with &#x60;action&#x3D;paid&#x60;.
+   * Can be null (no note provided). Returned only when result.resultCode is SUCCESS.
+   */
   private String invoiceNote;
 
-  /** The paid at. Maximum length: 24 characters. */
+  /**
+   * Timestamp when the payment was confirmed (ISO 8601, e.g.,
+   * &#x60;2026-05-10T14:30:00+00:00&#x60;). Sourced from the delegate result&#39;s
+   * &#x60;paidTime&#x60;, which is set during the 3-way atomic write. This ensures consistency with
+   * the actual payment confirmation time in the database. Cannot be null. Returned only when
+   * result.resultCode is SUCCESS.
+   */
   private String paidAt;
 
   /**
-   * The email sending status. Maximum length: 16 characters. Note: See documentation for details.
+   * Email send status for receipt email. Returned only when &#x60;autoSend&#x3D;true&#x60; in the
+   * request. Enum values: &#x60;SENT&#x60; - email dispatched successfully; &#x60;FAILED&#x60; -
+   * email dispatch failed (retry allowed). Can be null (when &#x60;autoSend&#x3D;false&#x60; or
+   * absent). Returned only when result.resultCode is SUCCESS.
    */
   private String sendStatus;
 }

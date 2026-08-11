@@ -23,30 +23,68 @@ import lombok.*;
 public class AlipayProductInquireListRequest
     extends AlipayRequest<AlipayProductInquireListResponse> {
 
-  /** The starting after. Maximum length: 32 characters. Note: See documentation for details. */
+  /**
+   * Cursor: product ID after which to return results (forward pagination). O - When provided,
+   * returns products sorted by createdAt DESC, productId DESC whose createdAt is strictly before
+   * the product identified by startingAfter. Can be null; default null. Must not be combined with
+   * endingBefore (returns PARAM_ILLEGAL). The cursor product ID must exist and belong to the
+   * merchant (returns PARAM_ILLEGAL if not found). Aligned with Stripe cursor-based pagination
+   * pattern
+   */
   private String startingAfter;
 
-  /** The ending before. Maximum length: 32 characters. Note: See documentation for details. */
+  /**
+   * Cursor: product ID before which to return results (backward pagination). O - When provided,
+   * returns products sorted by createdAt DESC, productId DESC whose createdAt is strictly after the
+   * product identified by endingBefore. Can be null; default null. Must not be combined with
+   * startingAfter (returns PARAM_ILLEGAL). The cursor product ID must exist and belong to the
+   * merchant (returns PARAM_ILLEGAL if not found). Aligned with Stripe cursor-based pagination
+   * pattern
+   */
   private String endingBefore;
 
-  /** The limit. */
+  /**
+   * Maximum number of products to return per page. O - Default: 10. Can be null; default 10.
+   * Out-of-range values (e.g., 0, negative, or &gt;100) return PARAM_ILLEGAL error. Aligned with
+   * Stripe cursor-based pagination pattern
+   */
   private Integer limit;
 
-  /** The active. */
+  /**
+   * Filter by active status. O - true&#x3D;return only active products, false&#x3D;return only
+   * deactivated products, absent or null&#x3D;return all products. No default value
+   */
   private Boolean active;
 
-  /** The type. Maximum length: 16 characters. Note: See documentation for details. */
+  /**
+   * Filter by product type. O - When provided, returns only products of the specified type; when
+   * absent, returns all types. Enum: SERVICE, GOOD. Can be null; default null. Invalid values
+   * return PARAM_ILLEGAL error
+   */
   private String type;
 
-  /** The keyword. Maximum length: 128 characters. */
+  /**
+   * Search keyword. O - When provided, returns only products whose name or description contains the
+   * keyword (case-insensitive). Can be null; default null. Search behavior: (1) Tokenization:
+   * keyword is matched as a full string (not split on whitespace); partial matches are supported
+   * via prefix matching. (2) Special characters: characters &amp; &#39; \&quot; are stripped from
+   * the keyword before matching. (3) Language support: Unicode-aware matching supporting English,
+   * Chinese, Japanese, Korean, and other UTF-8 characters. (4) Consistency: eventual consistency
+   * with approximately 1-second delay after create/update before new/modified products appear in
+   * search results
+   */
   private String keyword;
 
-  /** The include total. */
+  /**
+   * Request total count in response. O - When set to true (or absent, as default is true), the
+   * response includes total field. Default: true. Setting to false omits the total field to avoid
+   * COUNT query latency. Can be null; default true
+   */
   private Boolean includeTotal;
 
   /**
-   * Filter by usage type. Valid values: LICENSED, METERED. O - When provided, returns only products
-   * that have prices with matching usage type.
+   * Filter by usage type (LICENSED or METERED). Returns only products that have prices with
+   * matching usage_type.
    */
   private String usageType;
 

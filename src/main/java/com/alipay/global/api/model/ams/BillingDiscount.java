@@ -21,9 +21,17 @@ import lombok.*;
 @AllArgsConstructor
 public class BillingDiscount {
 
-  /** Coupon ID. */
+  /**
+   * Coupon ID associated with the discount. Exactly one of &#x60;couponId&#x60; and
+   * &#x60;promotionCodeId&#x60; can be provided in a discount request; responses return the
+   * identifier that was applied. Maximum length: 64 characters.
+   */
   private String couponId;
 
-  /** Promotion code ID. */
+  /**
+   * Promotion code ID associated with the discount. Exactly one of &#x60;couponId&#x60; and
+   * &#x60;promotionCodeId&#x60; can be provided in a discount request; responses return the
+   * identifier that was applied. Maximum length: 64 characters.
+   */
   private String promotionCodeId;
 }

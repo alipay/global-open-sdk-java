@@ -21,8 +21,14 @@ import lombok.*;
 @AllArgsConstructor
 public class PriceItemChange {
 
-  /** The change type. Maximum length: 7 characters. */
-  private String changeType;
+  /** The change type. Valid values are CHANGE, ADD, and REMOVE. Maximum length: 7 characters. */
+  private String type;
+
+  /**
+   * The subscription item ID. Provide it when the item to change or remove is known. Maximum
+   * length: 64 characters.
+   */
+  private String itemId;
 
   /** The current price id. Maximum length: 64 characters. Note: See documentation for details. */
   private String currentPriceId;
@@ -30,6 +36,6 @@ public class PriceItemChange {
   /** The new price id. Maximum length: 64 characters. Note: See documentation for details. */
   private String newPriceId;
 
-  /** The quantity. Note: See documentation for details. */
-  private Integer quantity;
+  /** The new quantity. Applicable when type is CHANGE or ADD. Value range: 1-999999. */
+  private Integer newQuantity;
 }

@@ -12,7 +12,6 @@
 
 package com.alipay.global.api.model.ams;
 
-import java.util.Map;
 import lombok.*;
 
 /** PromotionCode */
@@ -22,26 +21,41 @@ import lombok.*;
 @AllArgsConstructor
 public class PromotionCode {
 
-  /** The promotion code request id. Maximum length: 128 characters. */
+  /**
+   * Idempotency key for the nested promotion code. Must be unique per merchant. Independent of the
+   * coupon&#39;s &#x60;couponRequestId&#x60;.
+   */
   private String promotionCodeRequestId;
 
-  /** The code. Maximum length: 128 characters. */
+  /**
+   * Public promotion code string. If not provided, the server auto-generates a 12-character
+   * readable code (uppercase letters + digits, ambiguous chars O/0/I/1/L removed). Must be unique
+   * per merchant.
+   */
   private String code;
 
-  /** The max redemptions. */
-  private Integer maxRedemptions;
-
-  /** The expiry time. Maximum length: 24 characters. */
+  /** UTC timestamp (ISO 8601) after which the code expires. */
   private String expiryTime;
 
   private Amount minAmount;
 
-  /** The one time only. */
+  /**
+   * If &#x60;true&#x60;, each customer can only redeem this code once. Default: &#x60;false&#x60;.
+   */
   private Boolean oneTimeOnly;
 
-  /** The unique ID assigned by Antom to identify a customer. Maximum length: 64 characters. */
+  /**
+   * If set, restricts this code to a specific customer. Must be a valid customerId in the system.
+   */
   private String customerId;
 
-  /** Custom metadata for special use cases. */
-  private Map<String, String> metadata;
+  /**
+   * Merchant-defined key-value pairs stored as JSON string. Enforced constraints: max 50 keys; each
+   * key max 40 characters; each value max 500 characters. Requests exceeding these limits return
+   * &#x60;PARAM_ILLEGAL&#x60;. The value must be a valid JSON object string.
+   */
+  private String metadata;
+
+  /** Maximum redemption count for this code. If not set or 0, unlimited. Value range: 0-999999. */
+  private Integer maxRedemptions;
 }

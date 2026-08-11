@@ -30,8 +30,8 @@ public class BillingSubscriptionDiscountInfo {
   /** The type. Maximum length: 16 characters. */
   private String type;
 
-  /** The percent off. Note: See documentation for details. */
-  private Integer percentOff;
+  /** Percentage discount as a decimal string. */
+  private String percentOff;
 
   private Amount amountOff;
 

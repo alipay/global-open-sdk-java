@@ -148,7 +148,10 @@ public class AlipayPayRequest extends AlipayRequest<AlipayPayResponse> {
 
   private Boolean dualOfflinePayment;
 
-  /** The existing subscription ID, pre-created via the create subscription API. */
+  /**
+   * The existing subscription ID created by the Billing subscription API. It is mutually exclusive
+   * with subscriptionInfo. When provided, omit paymentAmount and order.
+   */
   private String subscriptionId;
 
   /**

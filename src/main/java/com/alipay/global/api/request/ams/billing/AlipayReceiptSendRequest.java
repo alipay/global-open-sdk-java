@@ -15,6 +15,7 @@ package com.alipay.global.api.request.ams.billing;
 import com.alipay.global.api.model.ams.*;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.billing.AlipayReceiptSendResponse;
+import java.util.List;
 import lombok.*;
 
 /** AlipayReceiptSendRequest */
@@ -22,11 +23,14 @@ import lombok.*;
 @Data
 public class AlipayReceiptSendRequest extends AlipayRequest<AlipayReceiptSendResponse> {
 
-  /** The receipt ID. Maximum length: 64 characters. */
+  /** Receipt ID to send. Must belong to the merchant. Cannot be null. */
   private String receiptId;
 
-  /** The send request id. Maximum length: 64 characters. */
-  private String sendRequestId;
+  /**
+   * CC email addresses to receive a copy of the receipt email in addition to the customer&#39;s
+   * registered email. Can be null.
+   */
+  private List<String> ccEmails;
 
   public AlipayReceiptSendRequest() {
     this.setPath("/ams/api/v1/billing/receipt/send");

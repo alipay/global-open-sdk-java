@@ -23,18 +23,21 @@ public class InvoiceShipping {
 
   private UserName shippingName;
 
-  private Address shippingAddress;
+  private InvoiceAddress shippingAddress;
 
-  /** The shipping carrier. Maximum length: 128 characters. */
+  /**
+   * Delivery service provider (e.g., FedEx, UPS, USPS). Characters &#x60;&lt;&#x60;,
+   * &#x60;&gt;&#x60;, and &#x60;&amp;&#x60; are not allowed.
+   */
   private String shippingCarrier;
 
-  /** The shipping number. Maximum length: 128 characters. */
+  /** Tracking number. */
   private String shippingNumber;
 
-  /** The shipping phone no. Maximum length: 16 characters. */
+  /** Recipient phone number. */
   private String shippingPhoneNo;
 
-  /** The ship to email. Maximum length: 256 characters. */
+  /** Recipient email address. Must be a valid email format. */
   private String shipToEmail;
 
   /** The notes. Maximum length: 512 characters. */
@@ -53,6 +56,11 @@ public class InvoiceShipping {
   /** The tracking url. Maximum length: 2048 characters. */
   private String trackingUrl;
 
-  /** The shipping method indicator. Maximum length: 32 characters. */
+  /**
+   * Shipping method indicator for 3DS risk assessment. Allowed EMVCo values: &#x60;01&#x60;,
+   * &#x60;02&#x60;, &#x60;03&#x60;, &#x60;04&#x60;, &#x60;05&#x60;, &#x60;06&#x60;, and
+   * &#x60;07&#x60;. Use &#x60;07&#x60; when no other value applies and provide details in
+   * &#x60;notes&#x60;. Maximum length: 32 characters.
+   */
   private String shippingMethodIndicator;
 }

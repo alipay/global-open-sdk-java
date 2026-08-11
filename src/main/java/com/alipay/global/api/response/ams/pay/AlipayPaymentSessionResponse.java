@@ -50,11 +50,14 @@ public class AlipayPaymentSessionResponse extends AlipayResponse {
   private String url;
 
   /**
-   * The system-created subscription ID. Always returned when subscription is provided in the
-   * request.
+   * The created subscription ID. Returned only when the request contains subscription and
+   * result.resultCode is SUCCESS.
    */
   private String subscriptionId;
 
-  /** The draft invoice ID created for the first billing cycle. Empty for trial subscriptions. */
+  /**
+   * The invoice ID generated at subscription creation. Returned only for a non-trial subscription
+   * when result.resultCode is SUCCESS.
+   */
   private String invoiceId;
 }

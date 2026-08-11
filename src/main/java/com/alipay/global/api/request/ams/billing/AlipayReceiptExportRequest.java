@@ -23,32 +23,63 @@ import lombok.*;
 @Data
 public class AlipayReceiptExportRequest extends AlipayRequest<AlipayReceiptExportResponse> {
 
-  /** The limit. */
-  private Integer limit;
-
-  /** The current status. Maximum length: 16 characters. */
+  /**
+   * Filter by receipt status. Allowed values: &#x60;ACTIVE&#x60;, &#x60;PARTIALLY_REFUNDED&#x60;,
+   * &#x60;REFUNDED&#x60;. Can be null (no filter).
+   */
   private String status;
 
-  /** The receipt type. Maximum length: 16 characters. */
-  private String receiptType;
-
-  /** The invoice ID. Maximum length: 64 characters. */
-  private String invoiceId;
-
-  /** The subscription ID. Maximum length: 64 characters. */
+  /**
+   * Filter receipts by associated subscription ID. Returns only receipts linked to this
+   * subscription. Can be null (no filter).
+   */
   private String subscriptionId;
 
-  /** The unique ID assigned by Antom to identify a customer. Maximum length: 64 characters. */
+  /**
+   * Filter by customer ID. Returns only receipts belonging to this customer. Can be null (no
+   * filter).
+   */
   private String customerId;
 
-  /** The start date. Maximum length: 24 characters. */
+  /**
+   * Date range start for receipt creation time (ISO 8601 format, e.g.,
+   * &#x60;2026-04-01T00:00:00+00:00&#x60;). Can be null (no lower bound).
+   */
   private String startDate;
 
-  /** The end date. Maximum length: 24 characters. */
+  /**
+   * Date range end for receipt creation time (ISO 8601 format, e.g.,
+   * &#x60;2026-04-30T23:59:59+00:00&#x60;). Can be null (no upper bound).
+   */
   private String endDate;
 
-  /** The receipt ids. */
+  /**
+   * Filter by exact list of receipt IDs. Max 1000 elements. When provided, other filters
+   * (&#x60;status&#x60;, &#x60;customerId&#x60;, &#x60;subscriptionId&#x60;, &#x60;startDate&#x60;,
+   * &#x60;endDate&#x60;) are ignored. Can be null (no filter).
+   */
   private List<String> receiptIds;
+
+  /**
+   * Output file format. Allowed values: &#x60;csv&#x60; (default), &#x60;xlsx&#x60;. Can be null
+   * (defaults to &#x60;csv&#x60;).
+   */
+  private String fileFormat;
+
+  /**
+   * BCP-47 language code for localized column headers (e.g., &#x60;en&#x60;, &#x60;zh&#x60;). Can
+   * be null (defaults to &#x60;en&#x60;).
+   */
+  private String language;
+
+  /** Type of entity to export. Must be &#x60;RECEIPT&#x60;. Required - no default. */
+  private String downloadType;
+
+  /**
+   * Column selection preset. Allowed values: &#x60;DEFAULT&#x60; (standard columns),
+   * &#x60;ALL&#x60; (all available columns). Can be null (defaults to &#x60;DEFAULT&#x60;).
+   */
+  private String columnPreset;
 
   public AlipayReceiptExportRequest() {
     this.setPath("/ams/api/v1/billing/receipt/export");

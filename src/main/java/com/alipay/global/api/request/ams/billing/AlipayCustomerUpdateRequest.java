@@ -16,7 +16,6 @@ import com.alipay.global.api.model.ams.*;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.billing.AlipayCustomerUpdateResponse;
 import java.util.List;
-import java.util.Map;
 import lombok.*;
 
 /** AlipayCustomerUpdateRequest */
@@ -24,112 +23,121 @@ import lombok.*;
 @Data
 public class AlipayCustomerUpdateRequest extends AlipayRequest<AlipayCustomerUpdateResponse> {
 
-  /** The unique ID assigned by Antom to identify a customer. Maximum length: 64 characters. */
+  /** System-generated customer ID to update. Cannot be empty. */
   private String customerId;
 
-  /** The customer ID in the merchant system. Maximum length: 32 characters. */
+  /** Update merchant&#39;s own customer reference ID. Maximum length: 32 characters. */
   private String referenceCustomerId;
 
-  /** The Alipay user ID. Maximum length: 64 characters. */
+  /**
+   * Update bound Alipay user ID. Antom-specific field for channel routing and risk identification.
+   * Maximum length: 64 characters.
+   */
   private String alipayUserId;
 
-  /** The email address. Maximum length: 256 characters. */
+  /**
+   * Updated email address. Optional - &#x60;null&#x60;/omitted means no change (PATCH semantics).
+   * No email-format validation is applied. Maximum length: 256 characters.
+   */
   private String email;
 
-  /** The first name. Maximum length: 256 characters. */
+  /** Updated first name. Maximum length: 256 characters. */
   private String firstName;
 
-  /** The last name. Maximum length: 256 characters. */
+  /** Updated last name. Maximum length: 256 characters. */
   private String lastName;
 
-  /** The country or region code. Maximum length: 8 characters. */
+  /** Updated billing address country. Format: ISO 3166-1 alpha-2. Maximum length: 2 characters. */
   private String country;
 
-  /** The state or province. Maximum length: 128 characters. */
+  /** Updated billing address state. Maximum length: 128 characters. */
   private String state;
 
-  /** The city. Maximum length: 256 characters. */
+  /** Updated billing address city. Maximum length: 256 characters. */
   private String city;
 
-  /** The address. Maximum length: 1024 characters. */
+  /** Updated billing address street. Maximum length: 1024 characters. */
   private String address;
 
-  /** The detailed address information. Maximum length: 2048 characters. */
+  /** Updated billing address detail. Maximum length: 2048 characters. */
   private String addressDetail;
 
-  /** The ZIP or postal code. Maximum length: 32 characters. */
+  /** Updated billing postal code. Maximum length: 32 characters. */
   private String zipcode;
 
-  /** The shipping phone. Maximum length: 32 characters. */
+  /** Updated shipping phone. Maximum length: 32 characters. */
   private String shippingPhone;
 
-  /** The shipping country. Maximum length: 8 characters. */
+  /** Updated shipping country. Format: ISO 3166-1 alpha-2. Maximum length: 2 characters. */
   private String shippingCountry;
 
-  /** The shipping state. Maximum length: 128 characters. */
+  /** Updated shipping state. Maximum length: 128 characters. */
   private String shippingState;
 
-  /** The shipping city. Maximum length: 256 characters. */
+  /** Updated shipping city. Maximum length: 256 characters. */
   private String shippingCity;
 
-  /** The shipping address. Maximum length: 1024 characters. */
+  /** Updated shipping address. Maximum length: 1024 characters. */
   private String shippingAddress;
 
-  /** The shipping address detail. Maximum length: 2048 characters. */
+  /** Updated shipping address detail. Maximum length: 2048 characters. */
   private String shippingAddressDetail;
 
-  /** The shipping zipcode. Maximum length: 32 characters. */
+  /** Updated shipping postal code. Maximum length: 32 characters. */
   private String shippingZipcode;
 
-  /** The description. Maximum length: 1024 characters. */
+  /** Updated free-text description. Maximum length: 1024 characters. */
   private String description;
 
-  /**
-   * The 3-letter currency code that follows the ISO 4217 standard. Maximum length: 8 characters.
-   */
+  /** Updated default currency. Format: ISO 4217 alphabetic code. Maximum length: 3 characters. */
   private String currency;
 
-  /** The preferred language or locale settings. */
+  /**
+   * Updated preferred locale(s) (e.g. &#x60;[\&quot;en-US\&quot;, \&quot;fr-FR\&quot;]&#x60;).
+   * Maximum size: 5 elements.
+   */
   private List<String> preferredLocales;
 
-  /** The default payment method token. Maximum length: 64 characters. */
+  /**
+   * Updated default payment method token. The payment method must exist, belong to this customer,
+   * and be in an available state; otherwise &#x60;PARAM_ILLEGAL&#x60; is returned. Maximum length:
+   * 64 characters.
+   */
   private String defaultPaymentMethod;
 
   /**
-   * Custom metadata for special use cases. Maximum length: 65535 characters. Note: See
-   * documentation for details.
+   * Merchant-defined metadata encoded as a JSON object string. Maximum length: 500 characters. A
+   * non-empty value fully replaces the existing metadata and must contain a valid JSON object
+   * string. An empty string clears all metadata. Omitted or null means no change.
    */
-  private Map<String, String> metadata;
+  private String metadata;
 
   /**
-   * The customer&#39;s phone number (digits only). Replaces deprecated mobileNo. Maximum length: 32
-   * characters.
+   * Updated phone number (digits only). Cross-field constraint: when &#x60;phoneNo&#x60; is
+   * provided, &#x60;countryCode&#x60; is required; omitting it returns &#x60;PARAM_ILLEGAL&#x60;.
+   * Maximum length: 32 characters.
    */
   private String phoneNo;
 
   /**
-   * ISO 3166-1 alpha-2 country code paired with phoneNo. Required when phoneNo is provided. Maximum
-   * length: 2 characters.
+   * ISO 3166-1 alpha-2 country code paired with &#x60;phoneNo&#x60;. Required when
+   * &#x60;phoneNo&#x60; is provided. Maximum length: 2 characters.
    */
   private String countryCode;
 
-  /**
-   * Invoice recipient email address (independent of account email). Maximum length: 256 characters.
-   */
+  /** Updated invoice recipient email. Maximum length: 256 characters. */
   private String billingEmail;
 
-  /**
-   * Shipping recipient first name. Replaces deprecated shippingName. Maximum length: 256
-   * characters.
-   */
+  /** Updated shipping recipient first name. Maximum length: 256 characters. */
   private String shippingFirstName;
 
-  /**
-   * Shipping recipient last name. Replaces deprecated shippingName. Maximum length: 256 characters.
-   */
+  /** Updated shipping recipient last name. Maximum length: 256 characters. */
   private String shippingLastName;
 
-  /** ISO 3166-1 alpha-2 country code paired with shippingPhone. Maximum length: 8 characters. */
+  /**
+   * ISO 3166-1 alpha-2 country code paired with &#x60;phoneNo&#x60;. Required when
+   * &#x60;shippingPhone&#x60; is provided. Maximum length: 2 characters.
+   */
   private String shippingCountryCode;
 
   public AlipayCustomerUpdateRequest() {

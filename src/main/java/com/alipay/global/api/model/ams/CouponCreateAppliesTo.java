@@ -22,6 +22,9 @@ import lombok.*;
 @AllArgsConstructor
 public class CouponCreateAppliesTo {
 
-  /** The product ids. Maximum length: 64 characters. */
+  /**
+   * List of product IDs this coupon applies to. When set, the coupon only discounts subscriptions
+   * containing at least one of these products. Maximum size: 20 elements (each max 64 characters).
+   */
   private List<String> productIds;
 }

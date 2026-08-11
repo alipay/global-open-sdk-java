@@ -13,7 +13,7 @@
 package com.alipay.global.api.response.ams.billing;
 
 import com.alipay.global.api.model.ams.*;
-import com.alipay.global.api.model.ams.PromotionCode;
+import com.alipay.global.api.model.ams.CouponPromotionCode;
 import com.alipay.global.api.response.AlipayResponse;
 import java.util.List;
 import lombok.*;
@@ -23,18 +23,28 @@ import lombok.*;
 @Data
 public class AlipayCouponCreateResponse extends AlipayResponse {
 
-  /** The coupon ID. Maximum length: 64 characters. Note: See documentation for details. */
+  /** System-generated unique coupon ID. Returned when resultCode is &#x60;SUCCESS&#x60;. */
   private String couponId;
 
-  /** The coupon name. Maximum length: 128 characters. Note: See documentation for details. */
+  /** Coupon display name. Returned when resultCode is &#x60;SUCCESS&#x60; and the field was set. */
   private String couponName;
 
-  /** The discount type. Maximum length: 16 characters. Note: See documentation for details. */
+  /**
+   * Discount type: &#x60;PERCENT&#x60; or &#x60;AMOUNT&#x60;. Returned when resultCode is
+   * &#x60;SUCCESS&#x60;.
+   */
   private String discountType;
 
-  /** The current status. Maximum length: 16 characters. Note: See documentation for details. */
+  /**
+   * Coupon status. Always &#x60;ACTIVE&#x60; on initial creation. Returned when resultCode is
+   * &#x60;SUCCESS&#x60;.
+   */
   private String status;
 
-  /** The promotion codes. Note: See documentation for details. */
-  private List<PromotionCode> promotionCodes;
+  /**
+   * Nested promotion codes created atomically. Non-empty only when the request carried
+   * &#x60;promotionCodes&#x60; AND all were created successfully. Null/empty when the field was
+   * omitted. Maximum size: 10 elements. Returned only when result.resultCode is SUCCESS.
+   */
+  private List<CouponPromotionCode> promotionCodes;
 }

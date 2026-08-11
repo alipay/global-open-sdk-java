@@ -23,15 +23,33 @@ import lombok.*;
 @Data
 public class AlipayReceiptInquireListResponse extends AlipayResponse {
 
-  /** The receipts. */
+  /**
+   * List of receipt summaries, limited to &#x60;limit&#x60; (max 100) per page. Returned only when
+   * result.resultCode is SUCCESS.
+   */
   private List<Receipt> receipts;
 
-  /** The total. Note: See documentation for details. */
+  /**
+   * Total number of matching records across all pages. Requires an extra &#x60;COUNT&#x60; query -
+   * use &#x60;includeTotal&#x3D;true&#x60; to request it. Absent from response when
+   * &#x60;includeTotal&#x60; is omitted or &#x60;false&#x60;. Can be null (not returned by
+   * default). Returned only when result.resultCode is SUCCESS.
+   */
   private Integer total;
 
-  /** The has more. */
+  /**
+   * Whether more results exist beyond the current page. Detected by fetching &#x60;limit + 1&#x60;
+   * rows internally - if the extra row exists, &#x60;hasMore&#x3D;true&#x60; (the extra row is not
+   * returned). &#x60;false&#x60; &#x3D; last page - hide the \&quot;Next\&quot; button. Cannot be
+   * null. Returned only when result.resultCode is SUCCESS.
+   */
   private Boolean hasMore;
 
-  /** The next cursor. Maximum length: 64 characters. Note: See documentation for details. */
+  /**
+   * The &#x60;receiptId&#x60; of the last receipt in the current page. Use this value as
+   * &#x60;startingAfter&#x60; in the next request to fetch the next page. Absent when
+   * &#x60;hasMore&#x3D;false&#x60;. Can be null (no more pages). Returned only when
+   * result.resultCode is SUCCESS.
+   */
   private String nextCursor;
 }

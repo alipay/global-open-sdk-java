@@ -24,42 +24,90 @@ import lombok.*;
 public class AlipayInvoiceInquireListRequest
     extends AlipayRequest<AlipayInvoiceInquireListResponse> {
 
-  /** The starting after. Maximum length: 64 characters. Note: See documentation for details. */
+  /**
+   * Cursor for forward pagination - return invoices after this &#x60;invoiceId&#x60;. Think of it
+   * as a bookmark: pass the &#x60;nextCursor&#x60; from the previous response to get the next batch
+   * of invoices. Mutually exclusive with &#x60;endingBefore&#x60; (both -&gt;
+   * &#x60;INVALID_PARAMETER&#x60;). When omitted, returns the first page (newest invoices first).
+   * Always use the LAST invoice&#39;s ID from the current page - using the first ID will skip
+   * records. Can be null (first page).
+   */
   private String startingAfter;
 
-  /** The ending before. Maximum length: 64 characters. Note: See documentation for details. */
+  /**
+   * Cursor for backward pagination - return invoices before this &#x60;invoiceId&#x60;. Pass the
+   * first invoice&#39;s &#x60;invoiceId&#x60; from the current page to go back to the previous
+   * page. Mutually exclusive with &#x60;startingAfter&#x60;. Can be null (not used).
+   */
   private String endingBefore;
 
-  /** The limit. */
+  /**
+   * Maximum number of invoices per page. Integer value; range 1-100. Internally, &#x60;limit +
+   * 1&#x60; rows are fetched to determine &#x60;hasMore&#x60; - the extra row is not returned. Can
+   * be null (defaults to 20).
+   */
   private Integer limit;
 
-  /** The include total. */
+  /**
+   * Whether to include the &#x60;total&#x60; count of matching records in the response. When
+   * &#x60;true&#x60;, an additional &#x60;COUNT&#x60; query is executed. Default &#x60;false&#x60;
+   * to avoid the performance cost of counting when not needed. Can be null (defaults to false).
+   */
   private Boolean includeTotal;
 
-  /** The subscription ID. Maximum length: 64 characters. */
+  /**
+   * Filter invoices by associated subscription ID. Returns only invoices linked to this
+   * subscription. Can be null (no filter).
+   */
   private String subscriptionId;
 
-  /** The unique ID assigned by Antom to identify a customer. Maximum length: 64 characters. */
+  /**
+   * Filter invoices by customer ID. Returns only invoices belonging to this customer. Can be null
+   * (no filter).
+   */
   private String customerId;
 
-  /** The invoice ID. Maximum length: 64 characters. */
+  /**
+   * Filter by exact invoice ID. Returns the single matching invoice if found. Format:
+   * &#x60;inv_&#x60; + 10-char alphanumeric. Unlike the planned &#x60;invoiceNumber&#x60; fuzzy
+   * search, this is an exact match. Can be null (no filter).
+   */
   private String invoiceId;
 
-  /** The current status. Maximum length: 16 characters. */
+  /**
+   * Filter by invoice status. Allowed values: &#x60;DRAFT&#x60;, &#x60;OPEN&#x60;,
+   * &#x60;PAID&#x60;, &#x60;&#x60;UNCOLLECTIBLE&#x60;&#x60;, &#x60;VOID&#x60;. Can be null (no
+   * filter).
+   */
   private String status;
 
-  /** The reason for the status change. Maximum length: 32 characters. */
+  /**
+   * Filter by invoice reason. Allowed values: &#x60;SUBSCRIPTION_CREATION&#x60;,
+   * &#x60;SUBSCRIPTION_RECURRENCE&#x60;, &#x60;SUBSCRIPTION_UPDATE&#x60;. Can be null (no filter).
+   */
   private String reason;
 
-  /** The start date. Maximum length: 24 characters. */
+  /**
+   * Date range start for invoice creation time (ISO 8601 format, e.g., 2026-04-01T00:00:00+00:00).
+   * Can be null (no lower bound).
+   */
   private String startDate;
 
-  /** The end date. Maximum length: 24 characters. */
+  /**
+   * Date range end for invoice creation time (ISO 8601 format, e.g., 2026-04-30T23:59:59+00:00).
+   * Can be null (no upper bound).
+   */
   private String endDate;
 
   private Amount minAmount;
 
   private Amount maxAmount;
+
+  /**
+   * When &#x60;true&#x60;, excludes &#x60;DRAFT&#x60; invoices from results. Can be null (defaults
+   * to false).
+   */
+  private Boolean excludeDraft;
 
   public AlipayInvoiceInquireListRequest() {
     this.setPath("/ams/api/v1/billing/invoice/inquireList");

@@ -23,37 +23,80 @@ import lombok.*;
 public class AlipayReceiptInquireListRequest
     extends AlipayRequest<AlipayReceiptInquireListResponse> {
 
-  /** The starting after. Maximum length: 64 characters. Note: See documentation for details. */
+  /**
+   * Cursor for forward pagination - return receipts after this &#x60;receiptId&#x60;. Think of it
+   * as a bookmark: pass the &#x60;nextCursor&#x60; from the previous response to get the next batch
+   * of receipts. Mutually exclusive with &#x60;endingBefore&#x60; (both -&gt;
+   * &#x60;PARAM_ILLEGAL&#x60;). When omitted, returns the first page (newest receipts first).
+   * Always use the LAST receipt&#39;s ID from the current page - using the first ID will skip
+   * records. Can be null (first page).
+   */
   private String startingAfter;
 
-  /** The ending before. Maximum length: 64 characters. Note: See documentation for details. */
+  /**
+   * Cursor for backward pagination - return receipts before this &#x60;receiptId&#x60;. Pass the
+   * first receipt&#39;s &#x60;receiptId&#x60; from the current page to go back to the previous
+   * page. Mutually exclusive with &#x60;startingAfter&#x60;. Can be null (not used).
+   */
   private String endingBefore;
 
-  /** The limit. */
+  /**
+   * Maximum number of receipts per page. Internally, &#x60;limit + 1&#x60; rows are fetched to
+   * determine &#x60;hasMore&#x60; - the extra row is not returned. Can be null (defaults to 20).
+   */
   private Integer limit;
 
-  /** The include total. */
+  /**
+   * Whether to include the &#x60;total&#x60; count of matching records in the response.
+   * &#x60;true&#x60; &#x3D; include total count (an additional &#x60;COUNT&#x60; query is
+   * executed); &#x60;false&#x60; or omitted &#x3D; exclude total count (better performance). Can be
+   * null (defaults to false).
+   */
   private Boolean includeTotal;
 
-  /** The unique ID assigned by Antom to identify a customer. Maximum length: 64 characters. */
+  /**
+   * Filter by customer ID. Returns only receipts belonging to this customer. Can be null (no
+   * filter).
+   */
   private String customerId;
 
-  /** The invoice ID. Maximum length: 64 characters. */
+  /**
+   * Filter by associated invoice ID. Returns receipts linked to this invoice. Can be null (no
+   * filter).
+   */
   private String invoiceId;
 
-  /** The subscription ID. Maximum length: 64 characters. */
+  /**
+   * Filter by associated subscription ID. Returns receipts linked to this subscription. Can be null
+   * (no filter).
+   */
   private String subscriptionId;
 
-  /** The current status. Maximum length: 32 characters. */
+  /**
+   * Filter by receipt status. Allowed values: &#x60;ACTIVE&#x60; (payment receipt with no refunds),
+   * &#x60;PARTIALLY_REFUNDED&#x60; (some amount refunded), &#x60;REFUNDED&#x60; (fully refunded).
+   * Unknown status values are silently ignored (treated as no filter for that value). Can be null
+   * (no filter).
+   */
   private String status;
 
-  /** The receipt type. Maximum length: 16 characters. */
+  /**
+   * Filter by receipt type. Allowed values: &#x60;PAYMENT&#x60; (receipt for a payment),
+   * &#x60;REFUND&#x60; (receipt for a refund). Unknown type values are silently ignored (treated as
+   * no filter for that value). Can be null (no filter).
+   */
   private String receiptType;
 
-  /** The start date. Maximum length: 24 characters. */
+  /**
+   * Date range start for receipt creation time (ISO 8601 format, e.g.,
+   * &#x60;2026-04-01T00:00:00+00:00&#x60;). Can be null (no lower bound).
+   */
   private String startDate;
 
-  /** The end date. Maximum length: 24 characters. */
+  /**
+   * Date range end for receipt creation time (ISO 8601 format, e.g.,
+   * &#x60;2026-04-30T23:59:59+00:00&#x60;). Can be null (no upper bound).
+   */
   private String endDate;
 
   public AlipayReceiptInquireListRequest() {

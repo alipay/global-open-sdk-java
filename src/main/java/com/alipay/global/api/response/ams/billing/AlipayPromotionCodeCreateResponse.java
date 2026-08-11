@@ -21,12 +21,19 @@ import lombok.*;
 @Data
 public class AlipayPromotionCodeCreateResponse extends AlipayResponse {
 
-  /** The promotion code ID. Maximum length: 64 characters. Note: See documentation for details. */
+  /** System-generated unique promotion code ID. Returned when resultCode is &#x60;SUCCESS&#x60;. */
   private String promotionCodeId;
 
-  /** The code. Maximum length: 128 characters. Note: See documentation for details. */
+  /**
+   * The promotion code string (merchant-supplied or auto-generated). Returned when resultCode is
+   * &#x60;SUCCESS&#x60;.
+   */
   private String code;
 
-  /** The current status. Maximum length: 16 characters. Note: See documentation for details. */
+  /**
+   * Promotion code status. Always &#x60;ACTIVE&#x60; on creation. Returned when resultCode is
+   * &#x60;SUCCESS&#x60;. Future status values may be added; merchants must handle unrecognized
+   * values gracefully (log and skip).
+   */
   private String status;
 }

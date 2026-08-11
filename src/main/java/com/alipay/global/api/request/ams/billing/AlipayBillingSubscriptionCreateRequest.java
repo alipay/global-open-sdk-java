@@ -13,13 +13,12 @@
 package com.alipay.global.api.request.ams.billing;
 
 import com.alipay.global.api.model.ams.*;
-import com.alipay.global.api.model.ams.BillingSubscriptionCreateDiscount;
-import com.alipay.global.api.model.ams.BillingSubscriptionCreateTrialSettings;
+import com.alipay.global.api.model.ams.BillingDiscount;
+import com.alipay.global.api.model.ams.BillingTrialSettings;
 import com.alipay.global.api.model.ams.PriceItem;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.billing.AlipayBillingSubscriptionCreateResponse;
 import java.util.List;
-import java.util.Map;
 import lombok.*;
 
 /** AlipayBillingSubscriptionCreateRequest */
@@ -28,55 +27,87 @@ import lombok.*;
 public class AlipayBillingSubscriptionCreateRequest
     extends AlipayRequest<AlipayBillingSubscriptionCreateResponse> {
 
-  /** The subscription request id. Maximum length: 64 characters. */
+  /**
+   * Idempotency key. Unique per merchant. This field is an idempotent field. Not null. Idempotent
+   * replay (2026-08-06 code-verified): if a request is repeated with the same
+   * &#x60;subscriptionRequestId&#x60;, the API returns SUCCESS together with the previously created
+   * subscription and its latest invoice - no new subscription is created
+   */
   private String subscriptionRequestId;
 
   /**
-   * The unique ID assigned by Antom to identify a customer. Maximum length: 64 characters. Note:
-   * See documentation for details.
+   * Existing customer ID. References a customer already created in your account. Mutually optional
+   * with &#x60;customerEmail&#x60; - you must provide at least one. If both are provided,
+   * &#x60;customerId&#x60; takes precedence. Can be null
    */
   private String customerId;
 
   /**
-   * The email address of the customer. Maximum length: 256 characters. Note: See documentation for
-   * details.
+   * Customer email address. Use this when you don&#39;t yet have a &#x60;customerId&#x60; - Antom
+   * will create a new customer with this email. If a customer with this email already exists under
+   * your merchant account, a &#x60;CUSTOMER_EMAIL_DUPLICATED&#x60; error is returned - use the
+   * existing customer&#39;s &#x60;customerId&#x60; instead. Mutually optional with
+   * &#x60;customerId&#x60;. Must be a valid email format. Can be null
    */
   private String customerEmail;
 
-  /** The price items. */
+  /**
+   * List of PriceItem objects. At least 1 item is required; there is no maximum limit on the number
+   * of items (the previous maximum of 20 no longer applies)
+   */
   private List<PriceItem> priceItems;
 
-  private BillingSubscriptionCreateTrialSettings trialSettings;
+  private BillingTrialSettings trialSettings;
 
-  /** The discounts applied. Note: See documentation for details. */
-  private List<BillingSubscriptionCreateDiscount> discounts;
+  /**
+   * Pre-bound discounts. Currently limited to exactly 1 item (the previous maximum of 10 no longer
+   * applies) - sending more than one discount item returns PARAM_ILLEGAL. Can be null
+   */
+  private List<BillingDiscount> discounts;
 
-  /** The payment behavior. */
+  /**
+   * Payment attempt behavior. See Enum Behavior Reference for detailed behavior per value. Default:
+   * ALLOW_INCOMPLETE. Not null
+   */
   private String paymentBehavior;
 
-  /** The collection method. */
+  /**
+   * Collection method. CHARGE_AUTOMATICALLY - charges automatically at each billing cycle.
+   * SEND_INVOICE - emails invoice; customer pays manually. Default: CHARGE_AUTOMATICALLY. Not null
+   */
   private String collectionMethod;
 
-  /** The days until due. Note: See documentation for details. */
+  /** Days to pay invoices. Range: 1-365, default: 30. Can be null */
   private Integer daysUntilDue;
 
-  /** The billing cycle anchor. */
-  private String billingCycleAnchor;
-
-  /** The cancel at. */
+  /** Pre-schedule cancellation. ISO 8601 with timezone offset, must be future. Can be null */
   private String cancelAt;
 
-  /** The cancel at period end. */
+  /**
+   * Whether to automatically cancel the subscription when the current billing period ends. If not
+   * specified, defaults to false. Can be null
+   */
   private Boolean cancelAtPeriodEnd;
 
-  /** The description. Maximum length: 500 characters. Note: See documentation for details. */
+  /**
+   * Subscription description, displayable to customer. PII caution: should not contain personal
+   * data (names, emails) - use structured fields for customer information. No HTML tags. Can be
+   * null. Server-side fallback (2026-07-29 SA): when blank, the WALLET payment paths send
+   * &#x60;Subscription {subscriptionId} payment&#x60; as the A+ APS &#x60;orderDescription&#x60;
+   * (mandatory downstream) - no contract change, field stays optional
+   */
   private String description;
 
-  /** The subscription notify url. Maximum length: 512 characters. */
+  /** Subscription status notification URL. Valid URL. Can be null */
   private String subscriptionNotifyUrl;
 
-  /** Custom metadata for special use cases. Note: See documentation for details. */
-  private Map<String, String> metadata;
+  /**
+   * Key-value extension data as a JSON-encoded string. Keys max 64 chars, values max 512 chars.
+   * Maximum size: 20 pairs. PII prohibition applies - must not contain personal data (names,
+   * emails, IDs). Use structured fields for PII. Can be null The value must be a valid JSON object
+   * string.
+   */
+  private String metadata;
 
   public AlipayBillingSubscriptionCreateRequest() {
     this.setPath("/ams/api/v1/billing/subscription/create");

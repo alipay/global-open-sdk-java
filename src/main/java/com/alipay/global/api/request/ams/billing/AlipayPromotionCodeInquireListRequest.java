@@ -23,22 +23,38 @@ import lombok.*;
 public class AlipayPromotionCodeInquireListRequest
     extends AlipayRequest<AlipayPromotionCodeInquireListResponse> {
 
-  /** The coupon ID. Maximum length: 64 characters. */
+  /**
+   * Parent coupon ID. Only promotion codes belonging to this coupon are returned. Cannot be empty.
+   */
   private String couponId;
 
-  /** The current status. Maximum length: 16 characters. Note: See documentation for details. */
+  /**
+   * Filter by promotion code status. Allowed values: &#x60;ACTIVE&#x60;, &#x60;INACTIVE&#x60;. If
+   * not provided, returns all statuses.
+   */
   private String status;
 
-  /** The starting after. Maximum length: 64 characters. Note: See documentation for details. */
+  /**
+   * Forward pagination cursor. Returns promotion codes older than (created before) this
+   * promotionCodeId, in creation-time descending order (&#x60;gmt_create DESC&#x60;). Pass the
+   * &#x60;nextCursor&#x60; from the previous response. Mutually exclusive with
+   * &#x60;endingBefore&#x60;.
+   */
   private String startingAfter;
 
-  /** The ending before. Maximum length: 64 characters. Note: See documentation for details. */
+  /**
+   * Backward pagination cursor. Returns promotion codes newer than (created after) this
+   * promotionCodeId. Mutually exclusive with &#x60;startingAfter&#x60;.
+   */
   private String endingBefore;
 
-  /** The limit. */
+  /** Number of records per page. Value range: 1-100. Defaults to 20 if not provided. */
   private Integer limit;
 
-  /** The include total. */
+  /**
+   * When &#x60;true&#x60;, an additional COUNT query is executed to populate &#x60;total&#x60; in
+   * the response. Default: &#x60;false&#x60;.
+   */
   private Boolean includeTotal;
 
   public AlipayPromotionCodeInquireListRequest() {

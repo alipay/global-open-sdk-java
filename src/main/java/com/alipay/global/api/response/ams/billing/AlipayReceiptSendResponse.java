@@ -21,14 +21,20 @@ import lombok.*;
 @Data
 public class AlipayReceiptSendResponse extends AlipayResponse {
 
-  /** The receipt ID. Maximum length: 64 characters. */
+  /** Receipt ID (echo-back). Returned only when result.resultCode is SUCCESS. */
   private String receiptId;
 
   /**
-   * The email sending status. Maximum length: 32 characters. Note: See documentation for details.
+   * Email delivery status. Returned when &#x60;result.resultCode&#x3D;SUCCESS&#x60;.
+   * &#x60;SENT&#x60; - email successfully dispatched to the customer&#39;s registered email
+   * address; &#x60;FAILED&#x60; - email dispatch failed (e.g., email service unavailable). Merchant
+   * may retry. Returned only when result.resultCode is SUCCESS.
    */
   private String sendStatus;
 
-  /** The hosted receipt url. Maximum length: 2048 characters. */
+  /**
+   * URL to the hosted receipt page where the customer can view and download the receipt online.
+   * Cannot be null. Returned only when result.resultCode is SUCCESS.
+   */
   private String hostedReceiptUrl;
 }

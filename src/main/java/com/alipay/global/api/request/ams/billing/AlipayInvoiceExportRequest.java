@@ -13,7 +13,6 @@
 package com.alipay.global.api.request.ams.billing;
 
 import com.alipay.global.api.model.ams.*;
-import com.alipay.global.api.model.ams.Amount;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.billing.AlipayInvoiceExportResponse;
 import java.util.List;
@@ -24,33 +23,63 @@ import lombok.*;
 @Data
 public class AlipayInvoiceExportRequest extends AlipayRequest<AlipayInvoiceExportResponse> {
 
-  /** The limit. Note: See documentation for details. */
-  private Integer limit;
-
-  /** The unique ID assigned by Antom to identify a customer. Maximum length: 64 characters. */
+  /**
+   * Filter by customer ID. Returns only invoices belonging to this customer. Can be null (no
+   * filter).
+   */
   private String customerId;
 
-  /** The current status. Maximum length: 16 characters. */
+  /**
+   * Filter by invoice status. Allowed values: &#x60;DRAFT&#x60;, &#x60;OPEN&#x60;,
+   * &#x60;PAID&#x60;, &#x60;UNCOLLECTIBLE&#x60;, &#x60;VOID&#x60;. Can be null (no filter).
+   */
   private String status;
 
-  /** The subscription ID. Maximum length: 64 characters. */
+  /**
+   * Filter invoices by associated subscription ID. Returns only invoices linked to this
+   * subscription. Can be null (no filter).
+   */
   private String subscriptionId;
 
-  /** The invoice ids. */
+  /**
+   * Filter by exact list of invoice IDs. Max 1000 elements. When provided, other filters
+   * (&#x60;status&#x60;, &#x60;customerId&#x60;, &#x60;subscriptionId&#x60;, &#x60;startDate&#x60;,
+   * &#x60;endDate&#x60;) are ignored. Can be null (no filter).
+   */
   private List<String> invoiceIds;
 
-  /** The reason for the status change. Maximum length: 32 characters. */
-  private String reason;
-
-  /** The start date. Maximum length: 24 characters. */
+  /**
+   * Date range start for invoice creation time (ISO 8601 format, e.g.,
+   * &#x60;2026-04-01T00:00:00+00:00&#x60;). Can be null (no lower bound).
+   */
   private String startDate;
 
-  /** The end date. Maximum length: 24 characters. */
+  /**
+   * Date range end for invoice creation time (ISO 8601 format, e.g.,
+   * &#x60;2026-04-30T23:59:59+00:00&#x60;). Can be null (no upper bound).
+   */
   private String endDate;
 
-  private Amount minAmount;
+  /**
+   * Output file format. Allowed values: &#x60;csv&#x60; (default), &#x60;xlsx&#x60;. Can be null
+   * (defaults to &#x60;csv&#x60;).
+   */
+  private String fileFormat;
 
-  private Amount maxAmount;
+  /**
+   * BCP-47 language code for localized column headers (e.g., &#x60;en&#x60;, &#x60;zh&#x60;). Can
+   * be null (defaults to &#x60;en&#x60;).
+   */
+  private String language;
+
+  /** Type of entity to export. Must be &#x60;INVOICE&#x60;. Required - no default. */
+  private String downloadType;
+
+  /**
+   * Column selection preset. Allowed values: &#x60;DEFAULT&#x60; (standard columns),
+   * &#x60;ALL&#x60; (all available columns). Can be null (defaults to &#x60;DEFAULT&#x60;).
+   */
+  private String columnPreset;
 
   public AlipayInvoiceExportRequest() {
     this.setPath("/ams/api/v1/billing/invoice/export");
