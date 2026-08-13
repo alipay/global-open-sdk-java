@@ -23,11 +23,11 @@ import lombok.*;
 public class AlipayProductInquireDetailsRequest
     extends AlipayRequest<AlipayProductInquireDetailsResponse> {
 
-  /** The product ID. Maximum length: 32 characters. */
+  /**
+   * Product ID to query. Cannot be null. Format: prod_ prefix + alphanumeric suffix (e.g.,
+   * prod_2xK8mN3pQ7). This field serves as the idempotent key for this operation
+   */
   private String productId;
-
-  /** The include prices. */
-  private Boolean includePrices;
 
   public AlipayProductInquireDetailsRequest() {
     this.setPath("/ams/api/v1/billing/product/inquireDetails");

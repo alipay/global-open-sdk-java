@@ -21,20 +21,22 @@ import lombok.*;
 @Data
 public class AlipayBillingSubscriptionResumeResponse extends AlipayResponse {
 
-  /** The subscription ID. Maximum length: 64 characters. */
+  /**
+   * The resumed subscription ID. Returned only when result.resultCode is SUCCESS or
+   * PAYMENT_IN_PROCESSING. Maximum length: 64 characters.
+   */
   private String subscriptionId;
 
-  /** The current status. Maximum length: 20 characters. */
+  /**
+   * The subscription status after the resume attempt. ACTIVE indicates that payment succeeded;
+   * PAUSED indicates that payment is still processing or failed. Returned only when the operation
+   * produced a subscription result. Maximum length: 20 characters.
+   */
   private String status;
 
-  /** The billing cycle anchor. Note: See documentation for details. */
-  private String billingCycleAnchor;
-
   /**
-   * The proration invoice id. Maximum length: 64 characters. Note: See documentation for details.
+   * The effective billing cycle anchor after the subscription is resumed, represented as an ISO
+   * 8601 date-time string with a timezone offset. Returned when the billing cycle is reset.
    */
-  private String prorationInvoiceId;
-
-  /** The proration date. Note: See documentation for details. */
-  private String prorationDate;
+  private String billingCycleAnchor;
 }

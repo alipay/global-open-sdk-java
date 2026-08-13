@@ -27,7 +27,10 @@ public class BillingSubscription {
 
   private BillingTrialSettings trialSettings;
 
-  /** Payment behavior. */
+  /**
+   * The payment behavior for subscription creation. The currently supported value is
+   * ALLOW_INCOMPLETE.
+   */
   private String paymentBehavior;
 
   /** Collection method. */
@@ -35,9 +38,6 @@ public class BillingSubscription {
 
   /** Number of days until due. */
   private Integer daysUntilDue;
-
-  /** Billing cycle anchor time. */
-  private String billingCycleAnchor;
 
   /** Cancellation time. */
   private String cancelAt;
@@ -50,6 +50,12 @@ public class BillingSubscription {
 
   /** Discounts applied to the subscription. */
   private List<BillingDiscount> discounts;
+
+  /**
+   * The default payment method for this subscription. It takes precedence over the customer-level
+   * default. Maximum length: 64 characters.
+   */
+  private String defaultPaymentMethod;
 
   /** Whether to allow promotion codes. */
   private Boolean allowPromotionCode;

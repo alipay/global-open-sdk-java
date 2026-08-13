@@ -16,7 +16,6 @@ import com.alipay.global.api.model.ams.*;
 import com.alipay.global.api.model.ams.PromotionCodeCreateMinAmount;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.billing.AlipayPromotionCodeCreateResponse;
-import java.util.Map;
 import lombok.*;
 
 /** AlipayPromotionCodeCreateRequest */
@@ -25,31 +24,65 @@ import lombok.*;
 public class AlipayPromotionCodeCreateRequest
     extends AlipayRequest<AlipayPromotionCodeCreateResponse> {
 
-  /** The promotion code request id. Maximum length: 64 characters. */
+  /**
+   * Merchant-supplied idempotency key for this create request. Must be unique per merchant. Cannot
+   * be empty. Maximum length: 64 characters. Idempotent replay: if a request is repeated with the
+   * same &#x60;promotionCodeRequestId&#x60; and the same parameters, the API returns
+   * &#x60;SUCCESS&#x60; together with the previously created promotion code. Replaying the same
+   * &#x60;promotionCodeRequestId&#x60; with different parameters returns &#x60;PARAM_ILLEGAL&#x60;.
+   */
   private String promotionCodeRequestId;
 
-  /** The coupon ID. Maximum length: 64 characters. */
+  /**
+   * ID of the parent coupon this promotion code is associated with. The coupon must exist and be
+   * ACTIVE. Cannot be empty. Maximum length: 64 characters.
+   */
   private String couponId;
 
-  /** The code. Maximum length: 128 characters. */
+  /**
+   * The customer-facing promotion code string (e.g. &#x60;SUMMER20&#x60;). Must be unique per
+   * merchant. Allowed characters for merchant-supplied codes: uppercase letters (A-Z), digits
+   * (0-9), hyphens (-), and underscores (_). If not provided, the server auto-generates a
+   * 12-character readable code (uppercase letters + digits; ambiguous characters O/0/I/1/L removed;
+   * uniqueness guaranteed with up to 5 retry attempts). If the supplied code collides with an
+   * existing code of the merchant, &#x60;PROMOTION_CODE_DUPLICATED&#x60; is returned. Maximum
+   * length: 128 characters.
+   */
   private String code;
 
-  /** The max redeem size. */
-  private Integer maxRedeemSize;
-
-  /** The expiry time. */
+  /**
+   * UTC timestamp (ISO 8601) after which the promotion code can no longer be redeemed. Must be a
+   * future time; a past value returns &#x60;PARAM_ILLEGAL&#x60;. If not set, the code has no
+   * independent expiry (subject to parent coupon&#39;s &#x60;redeemBy&#x60;).
+   */
   private String expiryTime;
 
   private PromotionCodeCreateMinAmount minAmount;
 
-  /** The one time only. */
+  /**
+   * If &#x60;true&#x60;, each customer can only redeem this promotion code once. Default:
+   * &#x60;false&#x60;.
+   */
   private Boolean oneTimeOnly;
 
-  /** The unique ID assigned by Antom to identify a customer. Maximum length: 64 characters. */
+  /**
+   * If set, restricts this promotion code to a specific customer. Must be a valid
+   * &#x60;customerId&#x60; in the system. Maximum length: 64 characters.
+   */
   private String customerId;
 
-  /** Custom metadata for special use cases. Maximum length: 65535 characters. */
-  private Map<String, String> metadata;
+  /**
+   * Merchant-defined key-value pairs stored as JSON string. Enforced constraints: max 50 keys; each
+   * key max 40 characters; each value max 500 characters. Requests exceeding these limits return
+   * &#x60;PARAM_ILLEGAL&#x60;. The value must be a valid JSON object string.
+   */
+  private String metadata;
+
+  /**
+   * Maximum number of times this promotion code can be redeemed. If not set or 0, redemptions are
+   * unlimited. Value range: 0-999999.
+   */
+  private Integer maxRedemptions;
 
   public AlipayPromotionCodeCreateRequest() {
     this.setPath("/ams/api/v1/billing/promotionCode/create");

@@ -16,7 +16,6 @@ import com.alipay.global.api.model.ams.*;
 import com.alipay.global.api.model.ams.Price;
 import com.alipay.global.api.response.AlipayResponse;
 import java.util.List;
-import java.util.Map;
 import lombok.*;
 
 /** AlipayProductInquireDetailsResponse */
@@ -24,42 +23,82 @@ import lombok.*;
 @Data
 public class AlipayProductInquireDetailsResponse extends AlipayResponse {
 
-  /** The product ID. Maximum length: 32 characters. */
+  /** System-generated product ID Returned only when result.resultCode is SUCCESS. */
   private String productId;
 
-  /** The name. Maximum length: 100 characters. */
+  /** Product name Returned only when result.resultCode is SUCCESS. */
   private String name;
 
-  /** The type. Maximum length: 16 characters. */
+  /**
+   * Product type. Enum: SERVICE(intangible digital service or SaaS offering - checkout skips
+   * shipping address collection), GOOD(tangible physical product requiring delivery - checkout
+   * collects shipping address) Returned only when result.resultCode is SUCCESS.
+   */
   private String type;
 
-  /** The description. Maximum length: 1024 characters. */
+  /**
+   * Product description. O - May be null in the response when the value is not set Returned only
+   * when result.resultCode is SUCCESS.
+   */
   private String description;
 
-  /** The images. */
+  /**
+   * Product image URLs. O - Returned when non-null and non-empty; absent if null or empty Returned
+   * only when result.resultCode is SUCCESS.
+   */
   private List<String> images;
 
-  /** The unit label. Maximum length: 64 characters. */
+  /**
+   * Product-level unit label. O - May be null in the response when the value is not set Returned
+   * only when result.resultCode is SUCCESS.
+   */
   private String unitLabel;
 
-  /** Custom metadata for special use cases. */
-  private Map<String, String> metadata;
+  /**
+   * Custom key-value metadata stored as JSON string. O - May be null in the response when the value
+   * is not set The value must be a valid JSON object string. Returned only when result.resultCode
+   * is SUCCESS.
+   */
+  private String metadata;
 
-  /** The active. */
+  /**
+   * Product active status. true&#x3D;product is active and can be used for new subscriptions,
+   * false&#x3D;product is deactivated and cannot be used for new subscriptions. Cannot be null.
+   * Deactivated products can be reactivated via Update active&#x3D;true Returned only when
+   * result.resultCode is SUCCESS.
+   */
   private Boolean active;
 
-  /** The created at. Maximum length: 29 characters. */
+  /** ISO 8601 creation timestamp Returned only when result.resultCode is SUCCESS. */
   private String createdAt;
 
-  /** The deactivated at. Maximum length: 29 characters. Note: See documentation for details. */
+  /**
+   * ISO 8601 deactivation timestamp. O - Returned when product has been deactivated
+   * (active&#x3D;false); absent when product is active Returned only when result.resultCode is
+   * SUCCESS.
+   */
   private String deactivatedAt;
 
-  /** The updated at. Maximum length: 29 characters. Note: See documentation for details. */
+  /**
+   * ISO 8601 last update timestamp. O - Returned when non-null; absent from response if never
+   * updated after creation Returned only when result.resultCode is SUCCESS.
+   */
   private String updatedAt;
 
-  /** The prices. Note: See documentation for details. */
+  /**
+   * Active default prices only for this product. O - Returned when the product has at least one
+   * active default price; absent when no active default prices exist. Only prices where
+   * &#x60;defaultPrice&#x3D;true&#x60; AND &#x60;active&#x3D;true&#x60; are included - non-default
+   * prices and deactivated prices are excluded. Callers must use the Price List API
+   * (&#x60;/ams/api/v1/billing/price/inquireList&#x60;) to retrieve non-default or inactive prices.
+   * When prices array contains items, each Price object&#39;s M fields (priceId, productId,
+   * pricingModel, active, createdAt) are mandatory Returned only when result.resultCode is SUCCESS.
+   */
   private List<Price> prices;
 
-  /** The has more prices. Note: See documentation for details. */
-  private Boolean hasMorePrices;
+  /**
+   * Idempotency key. O - May be null in the response when the value is not set. Returned only when
+   * result.resultCode is SUCCESS.
+   */
+  private String productRequestId;
 }

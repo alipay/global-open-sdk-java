@@ -21,22 +21,39 @@ import lombok.*;
 @Data
 public class AlipayInvoiceCreateResponse extends AlipayResponse {
 
-  /** The invoice ID. Maximum length: 64 characters. */
+  /**
+   * System-generated unique invoice ID. Used as the primary identifier for subsequent API calls
+   * (query, update, void). Cannot be null. Returned only when result.resultCode is SUCCESS.
+   */
   private String invoiceId;
 
-  /** The invoice request id. Maximum length: 64 characters. */
+  /**
+   * Echo-back of the merchant-supplied idempotency key from the request. Enables merchant-side
+   * correlation between request and response. Cannot be null. Returned only when result.resultCode
+   * is SUCCESS.
+   */
   private String invoiceRequestId;
 
-  /** The current status. Maximum length: 16 characters. */
+  /**
+   * Current invoice status: &#x60;DRAFT&#x60; or &#x60;OPEN&#x60;. Determines which subsequent
+   * operations are available (edit for DRAFT, pay for OPEN). Cannot be null. Returned only when
+   * result.resultCode is SUCCESS.
+   */
   private String status;
 
   /**
-   * The hosted invoice url. Maximum length: 2048 characters. Note: See documentation for details.
+   * URL to the customer-facing hosted invoice page. Auto-generated for OPEN invoices. When
+   * &#x60;status&#x3D;DRAFT&#x60;, this field is not returned - use the [Create View Link
+   * API](createViewLink.md) to generate a view URL for DRAFT invoices. Cannot be null when present.
+   * Returned only when result.resultCode is SUCCESS.
    */
   private String hostedInvoiceUrl;
 
   /**
-   * The email sending status. Maximum length: 16 characters. Note: See documentation for details.
+   * Email send status. Returned only when &#x60;autoSend&#x3D;true&#x60; in the request. Enum
+   * values: &#x60;SENT&#x60; - email dispatched successfully; &#x60;FAILED&#x60; - email dispatch
+   * failed (retry allowed). Can be null (when &#x60;autoSend&#x3D;false&#x60; or absent). Returned
+   * only when result.resultCode is SUCCESS.
    */
   private String sendStatus;
 }

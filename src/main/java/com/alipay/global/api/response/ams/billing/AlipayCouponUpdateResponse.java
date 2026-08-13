@@ -14,7 +14,6 @@ package com.alipay.global.api.response.ams.billing;
 
 import com.alipay.global.api.model.ams.*;
 import com.alipay.global.api.response.AlipayResponse;
-import java.util.Map;
 import lombok.*;
 
 /** AlipayCouponUpdateResponse */
@@ -22,30 +21,9 @@ import lombok.*;
 @Data
 public class AlipayCouponUpdateResponse extends AlipayResponse {
 
-  /** The coupon ID. Maximum length: 64 characters. Note: See documentation for details. */
+  /** Updated coupon&#39;s ID. Returned when resultCode is &#x60;SUCCESS&#x60;. */
   private String couponId;
 
-  /** The coupon name. Maximum length: 128 characters. Note: See documentation for details. */
-  private String couponName;
-
-  /** The current status. Maximum length: 16 characters. Note: See documentation for details. */
+  /** Coupon status after update. Returned when resultCode is &#x60;SUCCESS&#x60;. */
   private String status;
-
-  /** The max redemptions. Note: See documentation for details. */
-  private Integer maxRedemptions;
-
-  /** The redeemed count. Note: See documentation for details. */
-  private Integer redeemedCount;
-
-  /** The redeem by. Note: See documentation for details. */
-  private String redeemBy;
-
-  /**
-   * Custom metadata for special use cases. Maximum length: 65535 characters. Note: See
-   * documentation for details.
-   */
-  private Map<String, String> metadata;
-
-  /** The update time. Note: See documentation for details. */
-  private String updateTime;
 }

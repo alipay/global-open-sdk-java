@@ -75,6 +75,11 @@ public class AlipayPayResultNotify extends AlipayNotify {
    */
   private String authExpiryTime;
 
-  /** The tax calculation ID for billing. */
+  /**
+   * The tax calculation ID associated with the payment. Merchants should retain this ID for
+   * reconciliation and subsequent refunds; tax details can be queried through the
+   * inquireTransactionList API. This field only indicates a tax association and does not indicate
+   * that tax has been posted or recorded. If absent, the payment is not subject to tax.
+   */
   private String taxCalculationId;
 }

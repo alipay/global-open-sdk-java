@@ -19,7 +19,6 @@ import com.alipay.global.api.model.ams.PromotionCode;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.billing.AlipayCouponCreateResponse;
 import java.util.List;
-import java.util.Map;
 import lombok.*;
 
 /** AlipayCouponCreateRequest */
@@ -27,42 +26,100 @@ import lombok.*;
 @Data
 public class AlipayCouponCreateRequest extends AlipayRequest<AlipayCouponCreateResponse> {
 
-  /** The coupon request id. Maximum length: 64 characters. */
+  /**
+   * Merchant-supplied idempotency key for this create request. Must be unique per merchant. Cannot
+   * be empty. Maximum length: 64 characters. Idempotent replay: if a request is repeated with the
+   * same &#x60;couponRequestId&#x60; and the same parameters, the API returns &#x60;SUCCESS&#x60;
+   * together with the previously created coupon (no new coupon is created); a replay with different
+   * parameters returns &#x60;PARAM_ILLEGAL&#x60;.
+   */
   private String couponRequestId;
 
-  /** The coupon name. Maximum length: 128 characters. */
+  /** Display name for the coupon. Maximum length: 128 characters. */
   private String couponName;
 
-  /** The discount type. Maximum length: 16 characters. */
+  /**
+   * Type of discount. Allowed values: &#x60;PERCENT&#x60; (percentage off) or &#x60;AMOUNT&#x60;
+   * (fixed amount off). Cannot be empty.
+   */
   private String discountType;
 
-  /** The percent off. Note: See documentation for details. */
+  /**
+   * Percentage discount value. Up to 2 decimal places. Value range: 0.01-100.00. Examples:
+   * &#x60;20&#x60; (20% off), &#x60;33.33&#x60; (33.33% off), &#x60;100&#x60; (100% off / free).
+   * Values with more than 2 decimal places (e.g. &#x60;33.333&#x60;) are rejected with
+   * &#x60;PARAM_ILLEGAL&#x60;. Required when &#x60;discountType&#x60; &#x3D; &#x60;PERCENT&#x60;;
+   * must be null when &#x60;discountType&#x60; &#x3D; &#x60;AMOUNT&#x60;.
+   */
   private String percentOff;
 
   private Amount amountOff;
 
-  /** The duration type. Maximum length: 16 characters. */
+  /**
+   * How long the discount applies to a subscription. Allowed values: &#x60;ONCE&#x60; (applied once
+   * on the next invoice only; discount is marked EXPIRED immediately after the first invoice),
+   * &#x60;REPEATING&#x60; (applied for a calendar duration defined by &#x60;durationValue&#x60; x
+   * &#x60;durationUnit&#x60; - see below for detailed semantics), &#x60;FOREVER&#x60; (applied
+   * indefinitely to all future invoices; discount remains ACTIVE until manually deactivated).
+   */
   private String durationType;
 
-  /** The duration value. Note: See documentation for details. */
+  /**
+   * The numeric component of the coupon&#39;s calendar duration. Required when
+   * &#x60;durationType&#x60; &#x3D; &#x60;REPEATING&#x60;; must be null otherwise. Combined with
+   * &#x60;durationUnit&#x60;, it defines a half-open time window &#x60;[startTime, startTime +
+   * durationValue x durationUnit)&#x60; starting from the coupon&#39;s first application to a
+   * subscription. At each billing cycle, the system uses the billing period start time (not the
+   * invoice generation task&#39;s execution time) as the reference point to check the window. If
+   * the reference time is before the expiry boundary, the full discount is applied to the invoice;
+   * if the reference time is at or after the boundary, the discount is not applied and is marked
+   * EXPIRED. No proration is performed for partial overlap. Value range: 1-120. Examples: (1)
+   * &#x60;durationValue&#x3D;3, durationUnit&#x3D;MONTH&#x60; -&gt; coupon effective for 3 calendar
+   * months from first use; a monthly subscription receives the discount on 3 invoices. (2)
+   * &#x60;durationValue&#x3D;2, durationUnit&#x3D;WEEK&#x60; -&gt; effective for 2 calendar weeks
+   * (14 days); a monthly subscription only receives the discount on the first invoice. (3)
+   * &#x60;durationValue&#x3D;21, durationUnit&#x3D;DAY&#x60; -&gt; effective for 21 calendar days;
+   * a monthly subscription only receives the discount on the first invoice (billing period start of
+   * the second invoice is ~30 days later, outside the window).
+   */
   private Integer durationValue;
 
-  /** The duration unit. Maximum length: 16 characters. Note: See documentation for details. */
+  /**
+   * The time unit for the coupon duration. Required when &#x60;durationType&#x60; is
+   * &#x60;REPEATING&#x60;. Allowed values are &#x60;DAY&#x60;, &#x60;WEEK&#x60;, &#x60;MONTH&#x60;,
+   * and &#x60;YEAR&#x60;. Combined with &#x60;durationValue&#x60; to define the calendar-based
+   * effective window.
+   */
   private String durationUnit;
 
-  /** The max redemptions. */
-  private Integer maxRedemptions;
-
-  /** The redeem by. Maximum length: 24 characters. */
+  /**
+   * UTC timestamp (ISO 8601) after which the coupon can no longer be redeemed. If not set, the
+   * coupon has no expiry.
+   */
   private String redeemBy;
 
   private CouponCreateAppliesTo appliesTo;
 
-  /** Custom metadata for special use cases. */
-  private Map<String, String> metadata;
+  /**
+   * Merchant-defined key-value pairs stored as JSON string. Enforced constraints: max 50 keys; each
+   * key max 40 characters; each value max 500 characters. Requests exceeding these limits return
+   * &#x60;PARAM_ILLEGAL&#x60;. The value must be a valid JSON object string.
+   */
+  private String metadata;
 
-  /** The promotion codes. */
+  /**
+   * Optional nested promotion code descriptors. When non-empty, the server atomically creates the
+   * coupon and all listed promotion codes in a single transaction. When provided, each element must
+   * include &#x60;promotionCodeRequestId&#x60;. Maximum size: 10. See Section 4.2.3.7 for
+   * PromotionCodeCreateInfo structure.
+   */
   private List<PromotionCode> promotionCodes;
+
+  /**
+   * Maximum number of times the coupon can be redeemed across all promotion codes. If not set or
+   * set to 0, redemptions are unlimited. Value range: 0-999999.
+   */
+  private Integer maxRedemptions;
 
   public AlipayCouponCreateRequest() {
     this.setPath("/ams/api/v1/billing/coupon/create");

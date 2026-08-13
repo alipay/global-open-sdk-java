@@ -23,6 +23,15 @@ import lombok.*;
 public class AlipayCreditGrantInquireListRequest
     extends AlipayRequest<AlipayCreditGrantInquireListResponse> {
 
+  /**
+   * The page number. The value must be at least 1. The default value is 1. A page beyond the last
+   * page returns SUCCESS with an empty &#x60;creditGrants&#x60; array.
+   */
+  private Integer pageNum;
+
+  /** The number of records per page. Value range: 1-100. The default value is 10. */
+  private Integer pageSize;
+
   /** The unique ID assigned by Antom to identify a customer. Maximum length: 64 characters. */
   private String customerId;
 

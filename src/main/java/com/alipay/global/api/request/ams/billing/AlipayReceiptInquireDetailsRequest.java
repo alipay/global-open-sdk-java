@@ -23,10 +23,16 @@ import lombok.*;
 public class AlipayReceiptInquireDetailsRequest
     extends AlipayRequest<AlipayReceiptInquireDetailsResponse> {
 
-  /** The receipt ID. Maximum length: 64 characters. Note: See documentation for details. */
+  /**
+   * Receipt ID. When provided, looks up the receipt directly. Can be null (when
+   * &#x60;invoiceId&#x60; is provided instead).
+   */
   private String receiptId;
 
-  /** The invoice ID. Maximum length: 64 characters. Note: See documentation for details. */
+  /**
+   * Alternative lookup by associated invoice ID. When provided, finds the receipt associated with
+   * this invoice. Can be null (when &#x60;receiptId&#x60; is provided instead).
+   */
   private String invoiceId;
 
   public AlipayReceiptInquireDetailsRequest() {

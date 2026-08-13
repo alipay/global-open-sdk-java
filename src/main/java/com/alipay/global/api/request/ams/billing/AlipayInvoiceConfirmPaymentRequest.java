@@ -15,6 +15,7 @@ package com.alipay.global.api.request.ams.billing;
 import com.alipay.global.api.model.ams.*;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.billing.AlipayInvoiceConfirmPaymentResponse;
+import java.util.List;
 import lombok.*;
 
 /** AlipayInvoiceConfirmPaymentRequest */
@@ -23,23 +24,60 @@ import lombok.*;
 public class AlipayInvoiceConfirmPaymentRequest
     extends AlipayRequest<AlipayInvoiceConfirmPaymentResponse> {
 
-  /** The invoice ID. Maximum length: 64 characters. */
+  /**
+   * Invoice ID to confirm payment for. Must be in OPEN or UNCOLLECTIBLE status and belong to the
+   * requesting merchant. Validated before any state transition. Cannot be null.
+   */
   private String invoiceId;
 
-  /** The confirmation type. Maximum length: 32 characters. */
+  /**
+   * Payment confirmation type. Currently only &#x60;OFFLINE&#x60; is supported - indicates a manual
+   * offline payment (bank transfer, cash, check) was received by the merchant. This field is an
+   * extensibility point for future confirmation types (e.g., &#x60;CREDIT_NOTE_OFFSET&#x60;).
+   * Cannot be null. Allowed values: &#x60;OFFLINE&#x60;. Note: Future values may be added;
+   * merchants should handle unknown values gracefully.
+   */
   private String confirmationType;
 
-  /** The payment method. Maximum length: 32 characters. */
+  /**
+   * Offline payment method used by the customer. Must be one of: &#x60;BANK_TRANSFER&#x60; -
+   * payment received via bank/wire transfer; &#x60;CASH&#x60; - cash payment received in person;
+   * &#x60;CHECK&#x60; - payment by physical check; &#x60;WIRE_TRANSFER&#x60; - domestic or
+   * international wire transfer; &#x60;OTHER&#x60; - any other offline payment method not listed
+   * above. Validated against &#x60;OfflinePaymentMethodEnum&#x60; when provided. When not provided
+   * or blank, defaults to &#x60;OTHER&#x60;. Helps merchants categorize payments for
+   * reconciliation. Note: Future enum values may be added; merchants should handle unknown values
+   * as &#x60;OTHER&#x60;. Can be null.
+   */
   private String paymentMethod;
 
-  /** The reference. Maximum length: 256 characters. */
+  /**
+   * Merchant-supplied payment reference for audit trail (e.g., bank transfer number, check number).
+   * Stored on the payment record for reconciliation. Can be null.
+   */
   private String reference;
 
-  /** Indicates whether to automatically send the notification. */
+  /**
+   * Whether to automatically send the receipt email to the customer after successful payment
+   * confirmation. &#x60;true&#x60; &#x3D; send receipt email; &#x60;false&#x60; &#x3D; do not send;
+   * not set &#x3D; treat as &#x60;false&#x60;. Can be null (defaults to false).
+   */
   private Boolean autoSend;
 
-  /** The invoice note. Maximum length: 512 characters. */
+  /**
+   * Optional note attached to the invoice for this payment confirmation action. Stored as an entry
+   * in the &#x60;invoiceNotes&#x60; array in the invoice metadata with
+   * &#x60;action&#x3D;paid&#x60;. Enables merchants to attach contextual notes (e.g.,
+   * \&quot;Payment received via bank transfer\&quot;) to the invoice audit trail. Can be null
+   * (defaults to null - no note provided).
+   */
   private String invoiceNote;
+
+  /**
+   * CC email addresses for receipt notification. Optional. When &#x60;autoSend&#x60; is true, the
+   * receipt email is also sent to these addresses. Can be null.
+   */
+  private List<String> ccEmails;
 
   public AlipayInvoiceConfirmPaymentRequest() {
     this.setPath("/ams/api/v1/billing/invoice/confirmPayment");

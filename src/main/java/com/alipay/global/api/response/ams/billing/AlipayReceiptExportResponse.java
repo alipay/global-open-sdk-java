@@ -21,12 +21,34 @@ import lombok.*;
 @Data
 public class AlipayReceiptExportResponse extends AlipayResponse {
 
-  /** The current status. Maximum length: 16 characters. */
-  private String status;
+  /**
+   * MIME type of the generated file. The response returns the MIME type corresponding to the
+   * requested format: &#x60;csv&#x60; -&gt; &#x60;text/csv&#x60;, &#x60;xlsx&#x60; -&gt;
+   * &#x60;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet&#x60;. Note: the
+   * response &#x60;fileFormat&#x60; returns the MIME type, not the request format code. The request
+   * accepts &#x60;csv&#x60;/&#x60;xlsx&#x60;. Returned only when result.resultCode is SUCCESS.
+   */
+  private String fileFormat;
 
-  /** The download url. Maximum length: 2048 characters. Note: See documentation for details. */
-  private String downloadUrl;
-
-  /** The expiration time. Maximum length: 24 characters. */
+  /**
+   * Expiry timestamp of the signed &#x60;fileUrl&#x60; in ISO 8601 format. Maximum length: 29
+   * characters. After this time, accessing the URL returns HTTP 403. Returned only when
+   * result.resultCode is SUCCESS.
+   */
   private String expiresAt;
+
+  /**
+   * Signed OSS URL for file download. URL is time-limited; see &#x60;expiresAt&#x60;. After expiry,
+   * accessing the URL returns HTTP 403. Returned only when result.resultCode is SUCCESS.
+   */
+  private String fileUrl;
+
+  /** File size in bytes. Returned only when result.resultCode is SUCCESS. */
+  private Long fileSize;
+
+  /**
+   * Generated file name (e.g., &#x60;receipts_20260401_20260430_1685000000.csv&#x60;). Returned
+   * only when result.resultCode is SUCCESS.
+   */
+  private String fileName;
 }

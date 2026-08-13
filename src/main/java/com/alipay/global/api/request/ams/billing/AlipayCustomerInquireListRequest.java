@@ -15,6 +15,7 @@ package com.alipay.global.api.request.ams.billing;
 import com.alipay.global.api.model.ams.*;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.billing.AlipayCustomerInquireListResponse;
+import java.util.List;
 import lombok.*;
 
 /** AlipayCustomerInquireListRequest */
@@ -23,54 +24,74 @@ import lombok.*;
 public class AlipayCustomerInquireListRequest
     extends AlipayRequest<AlipayCustomerInquireListResponse> {
 
-  /** The starting after. Maximum length: 64 characters. Note: See documentation for details. */
+  /**
+   * Cursor for forward pagination - return customers created before this &#x60;customerId&#x60;
+   * (older items). Pass the &#x60;nextCursor&#x60; from the previous response. Mutually exclusive
+   * with &#x60;endingBefore&#x60;.
+   */
   private String startingAfter;
 
-  /** The ending before. Maximum length: 64 characters. Note: See documentation for details. */
+  /**
+   * Cursor for backward pagination - return customers created after this &#x60;customerId&#x60;
+   * (newer items). Mutually exclusive with &#x60;startingAfter&#x60;.
+   */
   private String endingBefore;
 
-  /** The limit. */
+  /** Page size. Value range: 1-100. Default: 20. */
   private Integer limit;
 
-  /** The include total. */
+  /**
+   * When &#x60;true&#x60;, an additional COUNT query is executed to populate &#x60;total&#x60; in
+   * the response. Default: &#x60;false&#x60;.
+   */
   private Boolean includeTotal;
 
-  /** The current status. Maximum length: 16 characters. */
+  /**
+   * Filter by customer status. Allowed values: &#x60;ACTIVE&#x60;, &#x60;DELETED&#x60;. If not
+   * provided, returns customers of all statuses.
+   */
   private String status;
 
-  /** The email address. Maximum length: 256 characters. */
+  /** Filter by exact email address match. Maximum length: 256 characters. */
   private String email;
 
   /**
-   * The customer&#39;s phone number (digits only). Replaces deprecated mobileNo. Maximum length: 32
-   * characters.
+   * Filter by phone number (canonical). Cross-field constraint: when &#x60;phoneNo&#x60; is
+   * provided, &#x60;countryCode&#x60; is REQUIRED - omitting it returns &#x60;PARAM_ILLEGAL&#x60;.
    */
   private String phoneNo;
 
   /**
-   * ISO 3166-1 alpha-2 country code paired with phoneNo. Required when phoneNo is provided. Maximum
-   * length: 2 characters.
+   * ISO 3166-1 alpha-2 country code paired with &#x60;phoneNo&#x60;. Required when
+   * &#x60;phoneNo&#x60; is provided.
    */
   private String countryCode;
 
   /**
-   * Invoice recipient email address (independent of account email). Maximum length: 256 characters.
+   * Inclusive end of the creation-timestamp range. Closed interval with &#x60;gmtCreateStart&#x60;.
    */
-  private String billingEmail;
+  private String gmtCreateEnd;
+
+  /** Filter by exact customer ID (single exact match). */
+  private String customerId;
 
   /**
-   * Shipping recipient first name. Replaces deprecated shippingName. Maximum length: 256
+   * Filter by billing country codes (ISO 3166-1 alpha-2) using SQL &#x60;IN&#x60; clause. Maximum
+   * size: 50 elements.
+   */
+  private List<String> country;
+
+  /**
+   * Filter by email LIKE prefix% (e.g. &#x60;\&quot;alice\&quot;&#x60; matches
+   * &#x60;alice@example.com&#x60;, &#x60;alice.smith@example.com&#x60;). Maximum length: 256
    * characters.
    */
-  private String shippingFirstName;
+  private String emailPrefix;
 
   /**
-   * Shipping recipient last name. Replaces deprecated shippingName. Maximum length: 256 characters.
+   * Inclusive start of the creation-timestamp range. Closed interval with &#x60;gmtCreateEnd&#x60;.
    */
-  private String shippingLastName;
-
-  /** ISO 3166-1 alpha-2 country code paired with shippingPhone. Maximum length: 8 characters. */
-  private String shippingCountryCode;
+  private String gmtCreateStart;
 
   public AlipayCustomerInquireListRequest() {
     this.setPath("/ams/api/v1/billing/customer/inquireList");

@@ -14,8 +14,9 @@ package com.alipay.global.api.response.ams.billing;
 
 import com.alipay.global.api.model.ams.*;
 import com.alipay.global.api.model.ams.Amount;
-import com.alipay.global.api.model.ams.CreditNoteInquireDetailsItems;
+import com.alipay.global.api.model.ams.CreditNoteItem;
 import com.alipay.global.api.response.AlipayResponse;
+import java.util.List;
 import lombok.*;
 
 /** AlipayCreditNoteInquireDetailsResponse */
@@ -48,6 +49,8 @@ public class AlipayCreditNoteInquireDetailsResponse extends AlipayResponse {
 
   private Amount totalAmount;
 
+  private Amount refundAmount;
+
   /** The refund status. Maximum length: 32 characters. Note: See documentation for details. */
   private String refundStatus;
 
@@ -75,7 +78,8 @@ public class AlipayCreditNoteInquireDetailsResponse extends AlipayResponse {
   /** The memo. Maximum length: 512 characters. Note: See documentation for details. */
   private String memo;
 
-  private CreditNoteInquireDetailsItems items;
+  /** The credit note items. */
+  private List<CreditNoteItem> items;
 
   /** The issued at. Maximum length: 29 characters. Note: See documentation for details. */
   private String issuedAt;

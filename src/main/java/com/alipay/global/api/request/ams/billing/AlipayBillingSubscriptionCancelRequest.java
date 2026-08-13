@@ -24,20 +24,28 @@ import lombok.*;
 public class AlipayBillingSubscriptionCancelRequest
     extends AlipayRequest<AlipayBillingSubscriptionCancelResponse> {
 
-  /** The subscription ID. Maximum length: 64 characters. */
+  /**
+   * The target subscription ID. Repeated cancellation requests for the same subscription return the
+   * existing cancellation result. Maximum length: 64 characters.
+   */
   private String subscriptionId;
 
   /** The cancellation type. Maximum length: 32 characters. */
   private String cancellationType;
 
   /**
-   * The cancellation reason. Maximum length: 64 characters. Note: See documentation for details.
+   * A free-text cancellation reason. Do not include personally identifiable information. At least
+   * one of &#x60;cancellationReason&#x60; and &#x60;cancellationDetails.feedback&#x60; must be
+   * provided. Maximum length: 64 characters.
    */
   private String cancellationReason;
 
   private BillingSubscriptionCancelCancellationDetails cancellationDetails;
 
-  /** The proration behavior. Maximum length: 18 characters. */
+  /**
+   * The proration behavior for immediate termination. Valid values are CREATE_PRORATIONS, NONE, and
+   * ALWAYS_INVOICE. Maximum length: 18 characters.
+   */
   private String prorationBehavior;
 
   public AlipayBillingSubscriptionCancelRequest() {

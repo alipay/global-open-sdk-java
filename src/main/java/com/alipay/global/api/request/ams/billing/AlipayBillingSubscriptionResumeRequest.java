@@ -23,19 +23,18 @@ import lombok.*;
 public class AlipayBillingSubscriptionResumeRequest
     extends AlipayRequest<AlipayBillingSubscriptionResumeResponse> {
 
-  /** The subscription ID. Maximum length: 64 characters. */
+  /**
+   * The ID of the paused subscription to resume. If payment is already in progress, a repeated
+   * request returns PAYMENT_IN_PROCESSING without creating another charge. If the subscription is
+   * already active, the operation returns SUCCESS without changing it. Maximum length: 64
+   * characters.
+   */
   private String subscriptionId;
 
-  /** The billing cycle anchor. Maximum length: 9 characters. */
-  private String billingCycleAnchor;
-
-  /** The proration behavior. Maximum length: 18 characters. */
-  private String prorationBehavior;
-
-  /** The proration date. */
-  private String prorationDate;
-
-  /** The reason code. Maximum length: 64 characters. */
+  /**
+   * The reason for resuming the subscription, recorded for audit purposes. HTML tags are not
+   * allowed. Maximum length: 64 characters.
+   */
   private String reasonCode;
 
   public AlipayBillingSubscriptionResumeRequest() {

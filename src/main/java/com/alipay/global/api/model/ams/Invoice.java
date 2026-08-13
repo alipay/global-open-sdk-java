@@ -21,28 +21,45 @@ import lombok.*;
 @AllArgsConstructor
 public class Invoice {
 
-  /** The invoice ID. Maximum length: 64 characters. */
+  /**
+   * System-generated invoice ID. Format: &#x60;inv_&#x60; + 10-char alphanumeric. Cannot be null.
+   */
   private String invoiceId;
 
-  /** The subscription ID. Maximum length: 64 characters. */
+  /** Associated subscription ID. May be null for standalone manual invoices. Can be null. */
   private String subscriptionId;
 
-  /** The unique ID assigned by Antom to identify a customer. Maximum length: 64 characters. */
+  /** Customer ID this invoice belongs to. Cannot be null. */
   private String customerId;
 
-  /** The customer first name. Maximum length: 256 characters. */
+  /**
+   * Customer&#39;s first name. Populated from the customer record at invoice creation time.
+   * Displayed on merchant portal list view. Can be null.
+   */
   private String customerFirstName;
 
-  /** The customer last name. Maximum length: 256 characters. */
+  /**
+   * Customer&#39;s last name. Populated from the customer record at invoice creation time.
+   * Displayed on merchant portal list view. Can be null.
+   */
   private String customerLastName;
 
-  /** The email address of the customer. Maximum length: 256 characters. */
+  /**
+   * Customer&#39;s email address. Populated from the customer record at invoice creation time.
+   * Displayed on merchant portal list view. Can be null.
+   */
   private String customerEmail;
 
-  /** The reason for the status change. Maximum length: 32 characters. */
+  /**
+   * Invoice creation reason: &#x60;SUBSCRIPTION_CREATION&#x60;,
+   * &#x60;SUBSCRIPTION_RECURRENCE&#x60;, &#x60;SUBSCRIPTION_UPDATE&#x60;. Cannot be null.
+   */
   private String reason;
 
-  /** The current status. Maximum length: 16 characters. */
+  /**
+   * Current invoice status: &#x60;DRAFT&#x60;, &#x60;OPEN&#x60;, &#x60;PAID&#x60;,
+   * &#x60;UNCOLLECTIBLE&#x60;, &#x60;VOID&#x60;. Cannot be null.
+   */
   private String status;
 
   private Amount totalAmount;
@@ -52,34 +69,29 @@ public class Invoice {
   private Amount remainAmount;
 
   /**
-   * The 3-letter currency code that follows the ISO 4217 standard. Maximum length: 3 characters.
+   * Three-letter ISO currency code in uppercase (e.g., &#x60;\&quot;USD\&quot;&#x60;). The invoice
+   * currency. Cannot be null.
    */
   private String currency;
 
-  /** The paid time. Maximum length: 24 characters. */
-  private String paidTime;
-
-  /** The voided time. Maximum length: 24 characters. */
-  private String voidedTime;
-
-  /** The period start. Maximum length: 24 characters. */
+  /** Billing period start timestamp (ISO 8601). Cannot be null. */
   private String periodStart;
 
-  /** The period end. Maximum length: 24 characters. */
+  /** Billing period end timestamp (ISO 8601). Cannot be null. */
   private String periodEnd;
 
-  /** The due date. Maximum length: 24 characters. */
+  /** Payment due date (ISO 8601). Cannot be null. */
   private String dueDate;
 
-  /** The creation time. Maximum length: 24 characters. */
+  /** ISO 8601 timestamp of invoice creation. Cannot be null. */
   private String gmtCreate;
 
-  /** The gmt update. Maximum length: 24 characters. */
+  /** ISO 8601 timestamp of last invoice update. Cannot be null. */
   private String gmtUpdate;
 
-  /** The description. Maximum length: 512 characters. */
+  /** Invoice description text. Can be null. */
   private String description;
 
-  /** The pdf file url. Maximum length: 2048 characters. */
+  /** URL of the generated PDF file for download. Can be null (PDF not yet generated). */
   private String pdfFileUrl;
 }

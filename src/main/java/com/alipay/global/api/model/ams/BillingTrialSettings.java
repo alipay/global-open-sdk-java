@@ -21,9 +21,22 @@ import lombok.*;
 @AllArgsConstructor
 public class BillingTrialSettings {
 
-  /** Number of trial period days. */
+  /**
+   * Relative trial duration in days. Value range: 1-365. Exactly one of &#x60;trialPeriodDays&#x60;
+   * and &#x60;trialEnd&#x60; must be provided when trial settings are used.
+   */
   private Integer trialPeriodDays;
 
-  /** Trial end time. */
+  /**
+   * Absolute trial end time in ISO 8601 format with a timezone offset. Exactly one of
+   * &#x60;trialPeriodDays&#x60; and &#x60;trialEnd&#x60; must be provided when trial settings are
+   * used.
+   */
   private String trialEnd;
+
+  /**
+   * Behavior when the trial ends without an available payment method. Valid values are CANCEL and
+   * PAUSE.
+   */
+  private String trialEndBehavior;
 }

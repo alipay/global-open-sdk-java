@@ -16,7 +16,6 @@ import com.alipay.global.api.model.ams.*;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.billing.AlipayProductUpdateResponse;
 import java.util.List;
-import java.util.Map;
 import lombok.*;
 
 /** AlipayProductUpdateRequest */
@@ -24,31 +23,53 @@ import lombok.*;
 @Data
 public class AlipayProductUpdateRequest extends AlipayRequest<AlipayProductUpdateResponse> {
 
-  /** The product ID. Maximum length: 32 characters. */
+  /**
+   * Product ID to update. Cannot be null. Format: prod_ prefix + alphanumeric suffix. This field
+   * serves as the idempotent key for this operation
+   */
   private String productId;
 
-  /** The name. Maximum length: 100 characters. */
+  /**
+   * Product name. O - When provided, updates name. When null, rejected with PARAM_ILLEGAL error
+   * (name is mandatory and cannot be cleared). When absent, no change. Characters &amp; &#39;
+   * \&quot; are not allowed (XSS prevention - see Section 4.1.1 name field)
+   */
   private String name;
 
-  /** The type. Maximum length: 16 characters. Note: See documentation for details. */
-  private String type;
-
-  /** The description. Maximum length: 1024 characters. */
+  /**
+   * Product description. O - Present with value: update; present with null: clear; absent: no
+   * change. Can be null
+   */
   private String description;
 
-  /** The images. Note: See documentation for details. */
+  /**
+   * Product image URLs. O - Present with value: full-replacement of entire image list; present with
+   * null: clear all images; absent: no change. Each URL must start with http:// or https://, max
+   * 2048 characters. Full-replacement: providing images replaces the entire array, not appends.
+   * Merchants are responsible for availability of externally-hosted URLs; Antom does not validate
+   * external URL accessibility. See Section 6.13 for image management workflow
+   */
   private List<String> images;
 
-  /** The unit label. Maximum length: 64 characters. Note: See documentation for details. */
+  /**
+   * Product-level unit label. O - Present with value: update; present with null: clear; absent: no
+   * change. Can be null
+   */
   private String unitLabel;
 
-  /** Custom metadata for special use cases. */
-  private Map<String, String> metadata;
+  /**
+   * Custom metadata encoded as a JSON object string. When provided, the value fully replaces the
+   * existing metadata; keys are not merged. When omitted, the existing value is unchanged. PII must
+   * not be stored.
+   */
+  private String metadata;
 
-  /** The metadata keys to remove. Note: See documentation for details. */
-  private List<String> metadataKeysToRemove;
-
-  /** The active. Note: See documentation for details. */
+  /**
+   * Product active status. O - explicit true&#x3D;activate, explicit false&#x3D;deactivate, absent
+   * or null&#x3D;no change. There is no \&quot;clear\&quot; semantic for active - it is always
+   * either true or false. When deactivated (active&#x3D;false), the product cannot be used for new
+   * subscriptions; existing subscriptions continue using the product
+   */
   private Boolean active;
 
   public AlipayProductUpdateRequest() {

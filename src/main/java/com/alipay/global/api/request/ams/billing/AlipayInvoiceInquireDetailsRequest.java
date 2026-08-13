@@ -23,10 +23,20 @@ import lombok.*;
 public class AlipayInvoiceInquireDetailsRequest
     extends AlipayRequest<AlipayInvoiceInquireDetailsResponse> {
 
-  /** The invoice ID. Maximum length: 64 characters. Note: See documentation for details. */
+  /**
+   * System-generated invoice ID. The primary lookup key. Exactly one of &#x60;invoiceId&#x60; or
+   * &#x60;invoiceRequestId&#x60; must be provided. If both are provided and resolve to the same
+   * invoice, the request succeeds. Omit this field when looking up by &#x60;invoiceRequestId&#x60;.
+   */
   private String invoiceId;
 
-  /** The invoice request id. Maximum length: 64 characters. Note: See documentation for details. */
+  /**
+   * Merchant-supplied idempotency key from invoice creation. Allows merchants to look up invoices
+   * using their own reference without storing the system-generated &#x60;invoiceId&#x60;. Exactly
+   * one of &#x60;invoiceId&#x60; or &#x60;invoiceRequestId&#x60; must be provided. If both are
+   * provided and resolve to the same invoice, the request succeeds. Omit this field when looking up
+   * by &#x60;invoiceId&#x60;.
+   */
   private String invoiceRequestId;
 
   public AlipayInvoiceInquireDetailsRequest() {

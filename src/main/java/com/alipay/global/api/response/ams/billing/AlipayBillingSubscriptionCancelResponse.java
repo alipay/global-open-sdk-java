@@ -13,7 +13,6 @@
 package com.alipay.global.api.response.ams.billing;
 
 import com.alipay.global.api.model.ams.*;
-import com.alipay.global.api.model.ams.BillingSubscriptionCancelCancellationDetails;
 import com.alipay.global.api.response.AlipayResponse;
 import lombok.*;
 
@@ -28,19 +27,27 @@ public class AlipayBillingSubscriptionCancelResponse extends AlipayResponse {
   /** The current status. Maximum length: 20 characters. */
   private String status;
 
-  /**
-   * The cancellation reason. Maximum length: 64 characters. Note: See documentation for details.
-   */
-  private String cancellationReason;
-
-  private BillingSubscriptionCancelCancellationDetails cancellationDetails;
-
   /** The canceled at. */
   private String canceledAt;
 
   /** The cancel at period end. */
   private Boolean cancelAtPeriodEnd;
 
-  /** The credit note ID. Maximum length: 64 characters. Note: See documentation for details. */
+  /**
+   * The generated credit note ID. Returned for an immediate termination that generates prorated
+   * credit. Maximum length: 64 characters.
+   */
   private String creditNoteId;
+
+  /**
+   * The credit amount in the smallest currency unit. Returned together with
+   * &#x60;creditNoteId&#x60; and &#x60;creditNoteCurrency&#x60;.
+   */
+  private Long creditNoteAmount;
+
+  /**
+   * The three-letter ISO 4217 currency code for &#x60;creditNoteAmount&#x60;. Returned together
+   * with &#x60;creditNoteId&#x60;. Maximum length: 3 characters.
+   */
+  private String creditNoteCurrency;
 }

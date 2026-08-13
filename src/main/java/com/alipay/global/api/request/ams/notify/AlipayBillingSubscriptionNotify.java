@@ -8,8 +8,12 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class AlipayBillingSubscriptionNotify extends AlipayNotify {
 
-  /** The merchant request ID. */
-  private String merchantRequestId;
+  /**
+   * The unique ID assigned by the merchant when creating the subscription. It identifies the
+   * subscription request and serves as the merchant-side idempotency key for deduplicating
+   * notifications.
+   */
+  private String subscriptionRequestId;
 
   /** The event time. ISO 8601 format string. */
   private String eventTime;

@@ -378,6 +378,71 @@ public abstract class BaseAlipayClient implements AlipayClient {
     header.put(Constants.USER_AGENT_HEADER, SdkVersion.getUserAgent());
   }
 
+  /**
+   * Narrow internal bridge for the multipart upload path. Existing client internals remain private
+   * so adding file upload support does not change the subclass contract of this public base class.
+   */
+  static final class FileUploadClientContext {
+
+    private final BaseAlipayClient client;
+
+    FileUploadClientContext(BaseAlipayClient client) {
+      this.client = client;
+    }
+
+    String getConfiguredGatewayUrl() {
+      return client.gatewayUrl;
+    }
+
+    String getConfiguredClientId() {
+      return client.clientId;
+    }
+
+    String resolveSandboxPath(String path, boolean useSandboxUrl, String effectiveClientId) {
+      if (StringUtils.startsWith(effectiveClientId, "SANDBOX_")
+          && useSandboxUrl
+          && !client.shouldUseProductionPathInSandbox(path)) {
+        return path.replaceFirst("/ams/api", "/ams/sandbox/api");
+      }
+      return path;
+    }
+
+    String sign(
+        String httpMethod, String path, String clientId, String requestTime, String requestBody)
+        throws AlipayApiException {
+      return client.genSignValue(httpMethod, path, clientId, requestTime, requestBody);
+    }
+
+    Map<String, String> buildHeaders(
+        String requestTime, String clientId, Integer keyVersion, String signatureValue) {
+      Map<String, String> headers =
+          client.buildBaseHeader(requestTime, clientId, keyVersion, signatureValue);
+      Map<String, String> customHeaders = client.buildCustomHeader();
+      if (customHeaders != null && !customHeaders.isEmpty()) {
+        for (Map.Entry<String, String> entry : customHeaders.entrySet()) {
+          if (entry.getKey() != null
+              && !RESERVED_HEADERS.contains(entry.getKey().toLowerCase())) {
+            headers.put(entry.getKey(), entry.getValue());
+          }
+        }
+      }
+      client.applySdkUserAgent(headers);
+      return headers;
+    }
+
+    boolean verifyResponse(
+        String httpMethod,
+        String path,
+        String clientId,
+        String responseTime,
+        String responseBody,
+        String responseSignature)
+        throws AlipayApiException {
+      return client.checkRspSign(
+          httpMethod, path, clientId, responseTime, responseBody, responseSignature);
+    }
+  }
+
   public abstract Map<String, String> buildCustomHeader();
 
   public abstract HttpRpcResult sendRequest(

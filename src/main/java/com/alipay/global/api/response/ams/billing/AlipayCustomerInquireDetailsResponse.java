@@ -15,7 +15,6 @@ package com.alipay.global.api.response.ams.billing;
 import com.alipay.global.api.model.ams.*;
 import com.alipay.global.api.response.AlipayResponse;
 import java.util.List;
-import java.util.Map;
 import lombok.*;
 
 /** AlipayCustomerInquireDetailsResponse */
@@ -23,138 +22,178 @@ import lombok.*;
 @Data
 public class AlipayCustomerInquireDetailsResponse extends AlipayResponse {
 
-  /**
-   * The unique ID assigned by Antom to identify a customer. Maximum length: 64 characters. Note:
-   * See documentation for details.
-   */
+  /** System-generated customer ID. Returned when resultCode is &#x60;SUCCESS&#x60;. */
   private String customerId;
 
   /**
-   * The unique ID assigned by a merchant to identify a request. Maximum length: 64 characters.
-   * Note: See documentation for details.
+   * Merchant-supplied idempotency key used at creation. Returned when resultCode is
+   * &#x60;SUCCESS&#x60;.
    */
   private String customerRequestId;
 
-  /** The Alipay user ID. Maximum length: 64 characters. Note: See documentation for details. */
+  /**
+   * Bound Alipay user ID for channel routing and risk control. Returned when resultCode is
+   * &#x60;SUCCESS&#x60; and the field was set; omitted (not returned as null) if not set.
+   */
   private String alipayUserId;
 
-  /** The email address. Maximum length: 256 characters. Note: See documentation for details. */
+  /**
+   * Customer email address. Returned when resultCode is &#x60;SUCCESS&#x60; and the field was set.
+   */
   private String email;
 
-  /** The first name. Maximum length: 256 characters. Note: See documentation for details. */
+  /** Customer first name. Returned when resultCode is &#x60;SUCCESS&#x60; and the field was set. */
   private String firstName;
 
-  /** The last name. Maximum length: 256 characters. Note: See documentation for details. */
+  /** Customer last name. Returned when resultCode is &#x60;SUCCESS&#x60; and the field was set. */
   private String lastName;
 
   /**
-   * The country or region code. Maximum length: 8 characters. Note: See documentation for details.
+   * Billing address country (ISO 3166-1 alpha-2). Returned when resultCode is &#x60;SUCCESS&#x60;
+   * and the field was set.
    */
   private String country;
 
-  /** The state or province. Maximum length: 128 characters. Note: See documentation for details. */
+  /**
+   * Billing address state. Returned when resultCode is &#x60;SUCCESS&#x60; and the field was set.
+   */
   private String state;
 
-  /** The city. Maximum length: 256 characters. Note: See documentation for details. */
+  /**
+   * Billing address city. Returned when resultCode is &#x60;SUCCESS&#x60; and the field was set.
+   */
   private String city;
 
-  /** The address. Maximum length: 1024 characters. Note: See documentation for details. */
+  /**
+   * Billing address street line 1. Returned when resultCode is &#x60;SUCCESS&#x60; and the field
+   * was set.
+   */
   private String address;
 
   /**
-   * The detailed address information. Maximum length: 2048 characters. Note: See documentation for
-   * details.
+   * Billing address street line 2. Returned when resultCode is &#x60;SUCCESS&#x60; and the field
+   * was set.
    */
   private String addressDetail;
 
-  /** The ZIP or postal code. Maximum length: 32 characters. Note: See documentation for details. */
+  /**
+   * Billing address postal code. Returned when resultCode is &#x60;SUCCESS&#x60; and the field was
+   * set.
+   */
   private String zipcode;
 
-  /** The shipping phone. Maximum length: 32 characters. Note: See documentation for details. */
+  /** Shipping phone. Returned when resultCode is &#x60;SUCCESS&#x60; and the field was set. */
   private String shippingPhone;
 
-  /** The shipping country. Maximum length: 8 characters. Note: See documentation for details. */
+  /**
+   * Shipping country (ISO 3166-1 alpha-2). Returned when resultCode is &#x60;SUCCESS&#x60; and the
+   * field was set.
+   */
   private String shippingCountry;
 
-  /** The shipping state. Maximum length: 128 characters. Note: See documentation for details. */
+  /** Shipping state. Returned when resultCode is &#x60;SUCCESS&#x60; and the field was set. */
   private String shippingState;
 
-  /** The shipping city. Maximum length: 256 characters. Note: See documentation for details. */
+  /** Shipping city. Returned when resultCode is &#x60;SUCCESS&#x60; and the field was set. */
   private String shippingCity;
 
-  /** The shipping address. Maximum length: 1024 characters. Note: See documentation for details. */
+  /**
+   * Shipping street line 1. Returned when resultCode is &#x60;SUCCESS&#x60; and the field was set.
+   */
   private String shippingAddress;
 
   /**
-   * The shipping address detail. Maximum length: 2048 characters. Note: See documentation for
-   * details.
+   * Shipping street line 2. Returned when resultCode is &#x60;SUCCESS&#x60; and the field was set.
    */
   private String shippingAddressDetail;
 
-  /** The shipping zip code. Maximum length: 32 characters. Note: See documentation for details. */
-  private String shippingZipCode;
-
-  /** The description. Maximum length: 1024 characters. Note: See documentation for details. */
+  /**
+   * Free-text description. Returned when resultCode is &#x60;SUCCESS&#x60; and the field was set.
+   */
   private String description;
 
   /**
-   * The 3-letter currency code that follows the ISO 4217 standard. Maximum length: 8 characters.
-   * Note: See documentation for details.
+   * Default currency (ISO 4217). Returned when resultCode is &#x60;SUCCESS&#x60; and the field was
+   * set.
    */
   private String currency;
 
   /**
-   * The preferred language or locale settings. Maximum length: 256 characters. Note: See
-   * documentation for details.
+   * Preferred locale(s). Maximum size: 5 elements. Returned when resultCode is &#x60;SUCCESS&#x60;
+   * and the field was set.
    */
   private List<String> preferredLocales;
 
   /**
-   * The default payment method token. Maximum length: 64 characters. Note: See documentation for
-   * details.
+   * Default payment method token. Sourced from &#x60;defaultCustomerPaymentMethodId&#x60;. Returned
+   * when resultCode is &#x60;SUCCESS&#x60; and the field was set.
    */
   private String defaultPaymentMethod;
 
-  /** The current status. Maximum length: 16 characters. Note: See documentation for details. */
+  /**
+   * Customer status: &#x60;ACTIVE&#x60; / &#x60;DELETED&#x60;. Returned when resultCode is
+   * &#x60;SUCCESS&#x60;.
+   */
   private String status;
 
   /**
-   * The customer ID in the merchant system. Maximum length: 32 characters. Note: See documentation
-   * for details.
+   * Merchant&#39;s internal customer ID reference. Returned when resultCode is &#x60;SUCCESS&#x60;
+   * and the field was set.
    */
   private String referenceCustomerId;
 
-  /** Custom metadata for special use cases. Note: See documentation for details. */
-  private Map<String, String> metadata;
+  /**
+   * Merchant-defined metadata encoded as a JSON object string. Maximum length: 500 characters.
+   * Returned only when result.resultCode is SUCCESS and the field was set.
+   */
+  private String metadata;
 
   /**
-   * The customer&#39;s phone number (digits only). Replaces deprecated mobileNo. Maximum length: 32
-   * characters.
+   * Customer phone number (digits only). Returned when resultCode is &#x60;SUCCESS&#x60; and the
+   * field was set.
    */
   private String phoneNo;
 
   /**
-   * ISO 3166-1 alpha-2 country code paired with phoneNo. Required when phoneNo is provided. Maximum
-   * length: 2 characters.
+   * ISO 3166-1 alpha-2 country code paired with &#x60;phoneNo&#x60;. Returned when resultCode is
+   * &#x60;SUCCESS&#x60; and the field was set.
    */
   private String countryCode;
 
   /**
-   * Invoice recipient email address (independent of account email). Maximum length: 256 characters.
+   * Invoice recipient email (independent of account &#x60;email&#x60;). Returned when resultCode is
+   * &#x60;SUCCESS&#x60; and the field was set.
    */
   private String billingEmail;
 
   /**
-   * Shipping recipient first name. Replaces deprecated shippingName. Maximum length: 256
-   * characters.
+   * Shipping recipient first name. Returned when resultCode is &#x60;SUCCESS&#x60; and the field
+   * was set.
    */
   private String shippingFirstName;
 
   /**
-   * Shipping recipient last name. Replaces deprecated shippingName. Maximum length: 256 characters.
+   * Shipping recipient last name. Returned when resultCode is &#x60;SUCCESS&#x60; and the field was
+   * set.
    */
   private String shippingLastName;
 
-  /** ISO 3166-1 alpha-2 country code paired with shippingPhone. Maximum length: 8 characters. */
+  /**
+   * Shipping address numeric calling code. Returned when resultCode is &#x60;SUCCESS&#x60; and the
+   * field was set.
+   */
   private String shippingCountryCode;
+
+  /**
+   * Shipping postal code. Wire name: &#x60;shippingZipcode&#x60;. Returned when resultCode is
+   * &#x60;SUCCESS&#x60; and the field was set.
+   */
+  private String shippingZipcode;
+
+  /**
+   * Customer creation timestamp. Note: there is NO &#x60;updateTime&#x60; / &#x60;gmtModified&#x60;
+   * field on &#x60;CustomerQueryDetailsResult&#x60;. Returned only when result.resultCode is
+   * SUCCESS.
+   */
+  private String gmtCreate;
 }

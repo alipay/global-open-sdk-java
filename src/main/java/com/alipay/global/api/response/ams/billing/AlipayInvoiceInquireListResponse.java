@@ -23,15 +23,49 @@ import lombok.*;
 @Data
 public class AlipayInvoiceInquireListResponse extends AlipayResponse {
 
-  /** The invoices. */
+  /**
+   * Array of invoice summary objects. May be empty if no invoices match. Maximum 100 elements per
+   * page (controlled by &#x60;limit&#x60; parameter). Cannot be null. Returned only when
+   * result.resultCode is SUCCESS.
+   */
   private List<Invoice> invoices;
 
-  /** The total. Note: See documentation for details. */
+  /**
+   * Total number of matching records across all pages. Requires an extra &#x60;COUNT&#x60; query -
+   * use &#x60;includeTotal&#x3D;true&#x60; to request it. Absent from response when
+   * &#x60;includeTotal&#x60; is omitted or &#x60;false&#x60;. Can be null (not returned by
+   * default). Returned only when result.resultCode is SUCCESS.
+   */
   private String total;
 
-  /** The has more. */
+  /**
+   * Whether more results exist beyond the current page. Detected by fetching &#x60;limit + 1&#x60;
+   * rows internally - if the extra row exists, &#x60;hasMore&#x3D;true&#x60; (the extra row is not
+   * returned). &#x60;false&#x60; &#x3D; last page - hide the \&quot;Next\&quot; button. Cannot be
+   * null. Returned only when result.resultCode is SUCCESS.
+   */
   private Boolean hasMore;
 
-  /** The next cursor. Maximum length: 64 characters. Note: See documentation for details. */
+  /**
+   * The &#x60;invoiceId&#x60; of the last invoice in the current page. Use this value as
+   * &#x60;startingAfter&#x60; in the next request to fetch the next page. Absent when
+   * &#x60;hasMore&#x3D;false&#x60;. Can be null (no more pages). Returned only when
+   * result.resultCode is SUCCESS.
+   */
   private String nextCursor;
+
+  /**
+   * Whether the degrade DB served the query (ZSearch fallback path). &#x60;null&#x60; when ZSearch
+   * served the query normally (backward-compatible with existing callers). &#x60;true&#x60; when
+   * degrade DB served the query. Can be null. Returned only when result.resultCode is SUCCESS.
+   */
+  private Boolean degrade;
+
+  /**
+   * The &#x60;invoiceId&#x60; of the first invoice in the current page. Use this value as
+   * &#x60;endingBefore&#x60; to navigate further backward. Only populated when the current request
+   * used &#x60;endingBefore&#x60;. Not populated in forward navigation. Can be null. Returned only
+   * when result.resultCode is SUCCESS.
+   */
+  private String previousCursor;
 }

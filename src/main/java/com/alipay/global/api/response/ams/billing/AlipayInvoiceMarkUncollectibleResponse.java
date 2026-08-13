@@ -21,15 +21,32 @@ import lombok.*;
 @Data
 public class AlipayInvoiceMarkUncollectibleResponse extends AlipayResponse {
 
-  /** The invoice ID. Maximum length: 64 characters. */
+  /**
+   * Invoice ID that was marked uncollectible (echo-back of request). Cannot be null. Returned only
+   * when result.resultCode is SUCCESS.
+   */
   private String invoiceId;
 
-  /** The current status. Maximum length: 16 characters. */
+  /**
+   * New invoice status after marking: &#x60;UNCOLLECTIBLE&#x60;. The invoice is now in a terminal
+   * write-off state for bad debt accounting. Cannot be null. Returned only when result.resultCode
+   * is SUCCESS.
+   */
   private String status;
 
-  /** The marked uncollectible at. Maximum length: 24 characters. */
+  /**
+   * ISO 8601 timestamp of when the invoice was marked uncollectible (e.g.,
+   * &#x60;2026-05-26T10:30:00+00:00&#x60;). This is the official time the invoice entered the
+   * UNCOLLECTIBLE state for audit and financial reporting. Cannot be null. Returned only when
+   * result.resultCode is SUCCESS.
+   */
   private String markedUncollectibleAt;
 
-  /** The invoice note. Maximum length: 512 characters. */
+  /**
+   * Echo-back of the &#x60;invoiceNote&#x60; provided in the request, if any. The note is stored in
+   * the &#x60;invoiceNotes&#x60; array in the invoice metadata with
+   * &#x60;action&#x3D;mark_uncollectible&#x60;. Can be null (no note provided). Returned only when
+   * result.resultCode is SUCCESS.
+   */
   private String invoiceNote;
 }
