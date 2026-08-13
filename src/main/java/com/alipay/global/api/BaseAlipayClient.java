@@ -420,8 +420,7 @@ public abstract class BaseAlipayClient implements AlipayClient {
       Map<String, String> customHeaders = client.buildCustomHeader();
       if (customHeaders != null && !customHeaders.isEmpty()) {
         for (Map.Entry<String, String> entry : customHeaders.entrySet()) {
-          if (entry.getKey() != null
-              && !RESERVED_HEADERS.contains(entry.getKey().toLowerCase())) {
+          if (entry.getKey() != null && !RESERVED_HEADERS.contains(entry.getKey().toLowerCase())) {
             headers.put(entry.getKey(), entry.getValue());
           }
         }
