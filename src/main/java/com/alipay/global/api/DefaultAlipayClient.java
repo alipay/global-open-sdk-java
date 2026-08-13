@@ -53,8 +53,7 @@ public class DefaultAlipayClient extends BaseAlipayClient {
    */
   public <T extends AlipayResponse> T uploadFile(AlipayFileRequest<T> request)
       throws AlipayApiException {
-    return FileUploadExecutor.execute(
-        new FileUploadClientContext(this), uploadGatewayUrl, request);
+    return FileUploadExecutor.execute(new FileUploadClientContext(this), uploadGatewayUrl, request);
   }
 
   public HttpRpcResult sendRequest(
