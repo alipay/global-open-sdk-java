@@ -170,6 +170,10 @@ public abstract class BaseAlipayClient implements AlipayClient {
   public <T extends AlipayResponse> T executeWithHeaders(
       AlipayRequest<T> alipayRequest, Map<String, String> extraHeaders) throws AlipayApiException {
 
+    if (RequestTransportResolver.requiresSessionHttp2(alipayRequest)) {
+      return SessionHttp2Executor.execute(gatewayUrl, alipayRequest, extraHeaders);
+    }
+
     // compatible with old version which clientId does not exist in BaseAlipayClient
     alipayRequest.setClientId(
         alipayRequest.getClientId() == null ? this.clientId : alipayRequest.getClientId());

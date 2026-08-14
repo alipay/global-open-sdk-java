@@ -24,7 +24,7 @@ import lombok.*;
 public class AlipayMeterUploadEventResponse extends AlipayResponse {
 
   /** The retry after. Note: See documentation for details. */
-  private Integer retryAfter;
+  private Long retryAfter;
 
   /** The errors. Note: See documentation for details. */
   private List<Error> errors;
