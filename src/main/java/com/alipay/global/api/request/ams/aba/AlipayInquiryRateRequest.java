@@ -26,6 +26,9 @@ public class AlipayInquiryRateRequest extends AlipayRequest<AlipayInquiryRateRes
 
   private List<InquiryRateCondition> rateConditionList;
 
+  /** 5.14测试 */
+  private String testRequestId;
+
   public AlipayInquiryRateRequest() {
     this.setPath("/ams/api/v1/aba/funds/inquireRate");
   }
