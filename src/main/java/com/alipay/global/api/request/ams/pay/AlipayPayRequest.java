@@ -140,6 +140,9 @@ public class AlipayPayRequest extends AlipayRequest<AlipayPayResponse> {
 
   private String extendInfo;
 
+  /** 5.6号测试 */
+  private String ordertestrequest;
+
   /**
    * The unique ID to identify a merchant account. Note: Specify this parameter when you use a
    * single client ID across multiple locations. More information: Maximum length: 32 characters
