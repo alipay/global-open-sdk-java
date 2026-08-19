@@ -12,6 +12,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class AlipayAuthConsultRequest extends AlipayRequest<AlipayAuthConsultResponse> {
 
+    private String merchantAccountId;
     private CustomerBelongsTo customerBelongsTo;
     private String authClientId;
     private String authRedirectUrl;
