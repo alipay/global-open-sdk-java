@@ -1,4 +1,21 @@
 ```
+
+#### Exact amount conversion
+
+`AmountUtil` converts a major-unit decimal string to Antom's integer-string
+`Amount.value`, and converts it back using the currency's ISO 4217 minor unit.
+
+```java
+import com.alipay.global.api.tools.AmountUtil;
+
+String value = AmountUtil.toAmount("10.25", "USD"); // "1025"
+String major = AmountUtil.fromAmount(value, "USD"); // "10.25"
+AmountUtil.validate(value, "USD");
+```
+
+Conversion is exact and never rounds. Extra non-zero decimal places are
+rejected. Payment-method currency support and minimum amounts remain subject to
+the relevant Antom API documentation.
 Language：JAVA  
 JDK version：1.6+  
 Copyright：Ant financial services group  
