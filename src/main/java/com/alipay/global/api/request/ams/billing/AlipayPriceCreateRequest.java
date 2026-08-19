@@ -61,12 +61,11 @@ public class AlipayPriceCreateRequest extends AlipayRequest<AlipayPriceCreateRes
   private String pricingModel;
 
   /**
-   * Usage type. O - Optional. When provided, must be a valid enum value (LICENSED or METERED). Can
-   * be null; default null. Enum: LICENSED(fixed quantity billing - subscription item quantity is
-   * set at subscription creation and changed manually via update API; system bills unitAmount x
-   * quantity automatically each period), METERED(metered usage billing - quantity is tracked by
-   * external metering system iusage and reported via Usage Report API; system bills based on actual
-   * reported usage in arrears at end of billing period)
+   * Usage type that identifies how subscription items are billed. Valid values are:
+   * &#x60;LICENSED&#x60; - fixed-quantity billing; the quantity is set when the subscription is
+   * created and can be changed through the update API, and &#x60;unitAmount&#x60; multiplied by
+   * &#x60;quantity&#x60; is billed each period. &#x60;METERED&#x60; - metered billing based on the
+   * actual usage quantity at the end of each billing period. Maximum length: 16 characters.
    */
   private String usageType;
 
@@ -80,12 +79,10 @@ public class AlipayPriceCreateRequest extends AlipayRequest<AlipayPriceCreateRes
   private String unitLabel;
 
   /**
-   * External meter reference. C - Required when usageType&#x3D;METERED; otherwise forbidden.
-   * References external metering system contract. Format: alphanumeric + underscore, max 32 chars.
-   * Validated at price creation: format check (regex: ^[a-zA-Z0-9_]{1,32}$) AND existence check
-   * against iusage meter registry. Returns METER_NOT_FOUND if meter definition does not exist in
-   * iusage. This ensures fail-fast validation - merchants are alerted to invalid meter references
-   * immediately rather than discovering the error at subscription creation time
+   * Meter ID. Required when &#x60;usageType&#x60; is &#x60;METERED&#x60;; otherwise, it must not be
+   * provided. The value must match &#x60;^[a-zA-Z0-9_]{1,32}$&#x60; and must exist in the meter
+   * registry. The API returns &#x60;METER_NOT_FOUND&#x60; when the meter does not exist. Maximum
+   * length: 32 characters.
    */
   private String meterId;
 
@@ -125,10 +122,11 @@ public class AlipayPriceCreateRequest extends AlipayRequest<AlipayPriceCreateRes
   private String metadata;
 
   /**
-   * Whether this price is the default price for the product. O - Optional. Only &#x60;true&#x60; is
-   * accepted; &#x60;false&#x60; or absent means the price is not the default. Only one price per
-   * product can be the default price - creating a new default price automatically un-defaults any
-   * previous default price of that product. Can be null; default null
+   * Whether to set this price as the default price for the product. When provided, only
+   * &#x60;true&#x60; is accepted. The first price created for a product must be set as the default
+   * price; otherwise, the API returns &#x60;FIRST_PRICE_NOT_DEFAULT&#x60;. A product can have only
+   * one default price, and creating a new default price automatically removes the default status
+   * from the previous one.
    */
   private Boolean defaultPrice;
 
