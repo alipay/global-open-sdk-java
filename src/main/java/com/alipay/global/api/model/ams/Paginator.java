@@ -21,15 +21,21 @@ import lombok.*;
 @AllArgsConstructor
 public class Paginator {
 
-  /** The current page number, start from 1. */
+  /**
+   * The current page number, starting from 1. If currentPage exceeds totalPage, transactions is
+   * returned as an empty array.
+   */
   private Integer currentPage;
 
-  /** The maximum records returned per page. */
+  /**
+   * The number of records returned per page. The value must be a positive integer; otherwise,
+   * PARAM_ILLEGAL is returned.
+   */
   private Integer pageSize;
 
-  /** Total number of pages. */
+  /** The total number of pages in the query result. */
   private Integer totalPage;
 
-  /** Total items that match the criteria. */
+  /** The total number of tax transactions that match the query criteria. */
   private Integer totalCount;
 }
