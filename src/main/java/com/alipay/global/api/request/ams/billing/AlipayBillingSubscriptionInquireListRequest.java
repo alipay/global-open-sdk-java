@@ -23,7 +23,12 @@ import lombok.*;
 public class AlipayBillingSubscriptionInquireListRequest
     extends AlipayRequest<AlipayBillingSubscriptionInquireListResponse> {
 
-  /** The current status. Maximum length: 20 characters. */
+  /**
+   * Filters subscriptions by status. To provide multiple values, use a comma-separated string such
+   * as ACTIVE,PAUSED. Up to eight values are supported. Valid values are INCOMPLETE, TRIALING,
+   * ACTIVE, PAST_DUE, PAUSED, CANCELLED, TERMINATED, and UNPAID. Each status value has a maximum
+   * length of 20 characters.
+   */
   private String status;
 
   /** The unique ID assigned by Antom to identify a customer. Maximum length: 64 characters. */
