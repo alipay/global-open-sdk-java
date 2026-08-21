@@ -22,15 +22,15 @@ import lombok.*;
 @AllArgsConstructor
 public class TaxCustomerDetails {
 
-  /** The name. Maximum length: 128 characters. Note: See documentation for details. */
-  private String name;
-
   private TaxBusinessDetails businessDetails;
 
   private TaxAddress shippingAddress;
 
   private TaxAddress billingAddress;
 
-  /** The tax ID list. Note: See documentation for details. */
+  /** The customer tax ID list. Maximum size: 10. */
   private List<TaxId> taxIds;
+
+  /** The customer tax exemption list. Maximum size: 10. */
+  private List<TaxExemption> taxExemptions;
 }

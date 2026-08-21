@@ -30,6 +30,9 @@ public class AlipayTaxInitializeSettingsResponse extends AlipayResponse {
 
   private TaxHeadOffice headOffice;
 
-  /** The current status. Maximum length: 16 characters. Note: See documentation for details. */
+  /**
+   * The tax settings status. Valid values are ACTIVE and PENDING. Do not treat an unknown value as
+   * ACTIVE. Maximum length: 16 characters.
+   */
   private String status;
 }

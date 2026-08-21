@@ -25,9 +25,6 @@ public class TaxCalculatedLineItem {
   /** The goods reference ID. Maximum length: 128 characters. */
   private String goodsReferenceId;
 
-  /** The unit amount. Maximum length: 19 characters. */
-  private String unitAmount;
-
   /** The amount. Maximum length: 19 characters. */
   private String amount;
 
