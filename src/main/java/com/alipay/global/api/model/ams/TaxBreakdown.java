@@ -21,7 +21,10 @@ import lombok.*;
 @AllArgsConstructor
 public class TaxBreakdown {
 
-  /** The tax type. Maximum length: 32 characters. */
+  /**
+   * The tax type. Supported values include CUIT, GST, VAT, CBS, IBS, HST, PST, RST, QST, JCT,
+   * SERVICE_TAX, IGV, SALES_TAX, and PERSONAL_PROPERTY_LEASE_TRANSACTION_TAX.
+   */
   private String taxType;
 
   /** The tax authority name. Maximum length: 128 characters. */
