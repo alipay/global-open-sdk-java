@@ -142,8 +142,9 @@ public class AlipayCustomerCreateRequest extends AlipayRequest<AlipayCustomerCre
   private String countryCode;
 
   /**
-   * Invoice recipient email address (independent of account &#x60;email&#x60;). Maximum length: 256
-   * characters.
+   * Email address used to receive bills and invoices. It can differ from the account
+   * &#x60;email&#x60;. If omitted during customer creation, it defaults to &#x60;email&#x60;.
+   * Maximum length: 256 characters.
    */
   private String billingEmail;
 

@@ -14,7 +14,9 @@ package com.alipay.global.api.response.ams.billing;
 
 import com.alipay.global.api.model.ams.*;
 import com.alipay.global.api.model.ams.TaxBreakdown;
+import com.alipay.global.api.model.ams.TaxCalculatedCustomerDetails;
 import com.alipay.global.api.model.ams.TaxCalculatedLineItem;
+import com.alipay.global.api.model.ams.TaxCalculatedShipFromDetails;
 import com.alipay.global.api.model.ams.TaxCalculatedShippingCost;
 import com.alipay.global.api.response.AlipayResponse;
 import java.util.List;
@@ -34,6 +36,10 @@ public class AlipayTaxInquireCalculationResponse extends AlipayResponse {
    * The 3-letter currency code that follows the ISO 4217 standard. Maximum length: 3 characters.
    */
   private String currency;
+
+  private TaxCalculatedCustomerDetails customerDetails;
+
+  private TaxCalculatedShipFromDetails shipFromDetails;
 
   /** The total amount. Maximum length: 19 characters. */
   private String totalAmount;
