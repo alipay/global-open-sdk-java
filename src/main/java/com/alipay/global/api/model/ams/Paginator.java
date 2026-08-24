@@ -21,15 +21,15 @@ import lombok.*;
 @AllArgsConstructor
 public class Paginator {
 
-  /** The current page number, start from 1. */
+  /** The current page number, starting from 1. */
   private Integer currentPage;
 
-  /** The maximum records returned per page. */
+  /** The number of records returned per page. */
   private Integer pageSize;
 
-  /** Total number of pages. */
+  /** The total number of pages. */
   private Integer totalPage;
 
-  /** Total items that match the criteria. */
+  /** The total number of records that match the query criteria. */
   private Integer totalCount;
 }
