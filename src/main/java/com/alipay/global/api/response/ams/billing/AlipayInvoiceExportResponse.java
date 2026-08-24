@@ -53,4 +53,11 @@ public class AlipayInvoiceExportResponse extends AlipayResponse {
    * length: 256 characters. Returned only when result.resultCode is SUCCESS.
    */
   private String fileName;
+
+  /**
+   * Execution mode of the export request. The returned value is &#x60;SYNC&#x60;, indicating
+   * synchronous export. Maximum length: 8 characters. Returned only when result.resultCode is
+   * SUCCESS.
+   */
+  private String mode;
 }
