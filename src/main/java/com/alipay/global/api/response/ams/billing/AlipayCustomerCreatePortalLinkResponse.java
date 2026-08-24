@@ -23,28 +23,29 @@ public class AlipayCustomerCreatePortalLinkResponse extends AlipayResponse {
 
   /**
    * Opaque URL-safe bearer token. Treat it as a credential: do not log, parse, or store its
-   * internal structure - the format may change without notice. Returned only when result.resultCode
-   * is SUCCESS.
+   * internal structure because the format may change without notice. Maximum length: 4096
+   * characters. Returned only when result.resultCode is SUCCESS.
    */
   private String token;
 
   /**
-   * Fully-qualified portal URL. Null when the portal base URL is not configured for the merchant -
-   * in that case build the URL from &#x60;token&#x60;. Returned only when result.resultCode is
-   * SUCCESS.
+   * Fully-qualified portal URL. Null when the portal base URL is not configured for the merchant;
+   * in that case, build the URL from &#x60;token&#x60;. Maximum length: 2048 characters. Returned
+   * only when result.resultCode is SUCCESS.
    */
   private String portalUrl;
 
   /**
-   * Token expiration timestamp. Format: &#x60;yyyy-MM-dd HH:mm:ss&#x60; (NOT ISO 8601). Returned
-   * only when result.resultCode is SUCCESS.
+   * Expiration time of the portal link, returned as a string. Maximum length: 32 characters.
+   * Returned only when result.resultCode is SUCCESS.
    */
   private String expiresAt;
 
   /**
-   * &#x60;SENT&#x60; / &#x60;FAILED&#x60;. Populated only when request
-   * &#x60;autoSend&#x3D;true&#x60;. Best-effort: failure never blocks link creation. Null when
-   * &#x60;autoSend&#x3D;false&#x60;. Returned only when result.resultCode is SUCCESS.
+   * Email send status. Valid values are &#x60;SENT&#x60; and &#x60;FAILED&#x60;. Populated only
+   * when request &#x60;autoSend&#x3D;true&#x60;; a send failure never blocks link creation. Null
+   * when &#x60;autoSend&#x3D;false&#x60;. Maximum length: 16 characters. Returned only when
+   * result.resultCode is SUCCESS.
    */
   private String sendStatus;
 }

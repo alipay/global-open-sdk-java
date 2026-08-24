@@ -14,6 +14,7 @@ package com.alipay.global.api.request.ams.billing;
 
 import com.alipay.global.api.model.ams.*;
 import com.alipay.global.api.model.ams.BillingSubscriptionCancellationDetails;
+import com.alipay.global.api.model.ams.BillingSubscriptionStatusChange;
 import com.alipay.global.api.model.ams.BillingTrialSettings;
 import com.alipay.global.api.model.ams.PriceItemChange;
 import com.alipay.global.api.request.AlipayRequest;
@@ -45,6 +46,8 @@ public class AlipayBillingSubscriptionUpdateRequest
   private Boolean resetBillingCycleAnchor;
 
   private BillingTrialSettings trialSettings;
+
+  private BillingSubscriptionStatusChange statusChange;
 
   /** The cancel at period end. Note: See documentation for details. */
   private Boolean cancelAtPeriodEnd;
