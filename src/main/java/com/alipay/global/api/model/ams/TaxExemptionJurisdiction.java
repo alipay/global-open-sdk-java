@@ -14,25 +14,22 @@ package com.alipay.global.api.model.ams;
 
 import lombok.*;
 
-/** TaxId */
+/** TaxExemptionJurisdiction */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class TaxId {
-
-  /**
-   * The value of the amount as a positive integer in the smallest currency unit. Maximum length: 64
-   * characters.
-   */
-  private String value;
+public class TaxExemptionJurisdiction {
 
   /** The country or region code. Maximum length: 2 characters. */
   private String country;
 
-  /** The region. Maximum length: 10 characters. Note: See documentation for details. */
+  /** The region. Maximum length: 10 characters. */
   private String region;
 
-  /** The customer name recorded for tax purposes. Maximum length: 128 characters. */
-  private String name;
+  /** The city. Maximum length: 64 characters. */
+  private String city;
+
+  /** The time when the tax exemption becomes effective. Maximum length: 32 characters. */
+  private String effectiveFrom;
 }
