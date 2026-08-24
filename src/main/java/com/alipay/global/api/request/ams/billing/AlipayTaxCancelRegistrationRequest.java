@@ -24,8 +24,8 @@ public class AlipayTaxCancelRegistrationRequest
     extends AlipayRequest<AlipayTaxCancelRegistrationResponse> {
 
   /**
-   * The unique ID assigned by a merchant to identify a tax registration cancellation request.
-   * Maximum length: 64 characters. Note: See documentation for details.
+   * The unique ID assigned by a merchant to identify a tax registration cancellation request. Any
+   * repeated request using an accepted ID returns REPEATED_SUBMIT. Maximum length: 64 characters.
    */
   private String registrationCancelRequestId;
 
