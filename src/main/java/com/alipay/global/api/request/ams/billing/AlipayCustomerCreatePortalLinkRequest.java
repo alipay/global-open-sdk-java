@@ -25,23 +25,26 @@ public class AlipayCustomerCreatePortalLinkRequest
     extends AlipayRequest<AlipayCustomerCreatePortalLinkResponse> {
 
   /**
-   * Customer ID to target. When both &#x60;customerId&#x60; and &#x60;email&#x60; are supplied,
-   * &#x60;customerId&#x60; takes precedence.
+   * Customer ID to target. Either &#x60;customerId&#x60; or &#x60;email&#x60; must be provided.
+   * When both are provided, &#x60;email&#x60; must match the registered account email of this
+   * customer; otherwise, the API returns &#x60;PARAM_ILLEGAL&#x60;. Maximum length: 64 characters.
    */
   private String customerId;
 
   /**
-   * Customer email for lookup. When multiple customers share the email, the most recently created
-   * (by &#x60;gmtCreate DESC&#x60;) is selected. Maximum length: 254 characters (RFC 5322).
+   * Customer email for lookup. Either &#x60;customerId&#x60; or &#x60;email&#x60; must be provided.
+   * When multiple customers share the email, the most recently created customer by
+   * &#x60;gmtCreate&#x60; descending is selected. When both fields are provided, this value must
+   * match the registered account email of the specified customer; otherwise, the API returns
+   * &#x60;PARAM_ILLEGAL&#x60;. Maximum length: 254 characters (RFC 5322).
    */
   private String email;
 
   /**
    * Feature set enabled for this portal session. Allowed values: &#x60;SUBSCRIPTION&#x60;,
-   * &#x60;INVOICE&#x60;, &#x60;PAYMENT_METHOD&#x60;. Empty/absent list -&gt; ALL features enabled
-   * by default (NOT an intersection with settingId features, as previously documented). The portal
-   * settings referenced by &#x60;settingId&#x60; may further restrict which features are shown at
-   * render time.
+   * &#x60;INVOICE&#x60;, &#x60;PAYMENT_METHOD&#x60;. An empty or absent list enables all features
+   * by default. The portal settings referenced by &#x60;settingId&#x60; may further restrict which
+   * features are shown at render time. Maximum size: 3 elements.
    */
   private List<String> features;
 
@@ -51,7 +54,10 @@ public class AlipayCustomerCreatePortalLinkRequest
    */
   private Boolean autoSend;
 
-  /** Portal setting configuration ID. Passed through token payload, parsed by iexpfront. */
+  /**
+   * Portal setting configuration ID passed through the token payload. Maximum length: 64
+   * characters.
+   */
   private String settingId;
 
   public AlipayCustomerCreatePortalLinkRequest() {
