@@ -14,6 +14,7 @@ package com.alipay.global.api.response.ams.billing;
 
 import com.alipay.global.api.model.ams.*;
 import com.alipay.global.api.model.ams.TaxBreakdown;
+import com.alipay.global.api.model.ams.TaxCalculatedCustomerDetails;
 import com.alipay.global.api.model.ams.TaxCalculatedLineItem;
 import com.alipay.global.api.model.ams.TaxCalculatedShippingCost;
 import com.alipay.global.api.response.AlipayResponse;
@@ -62,4 +63,6 @@ public class AlipayTaxCalculateResponse extends AlipayResponse {
   private String taxDate;
 
   private TaxCalculatedShippingCost shippingCost;
+
+  private TaxCalculatedCustomerDetails customerDetails;
 }
