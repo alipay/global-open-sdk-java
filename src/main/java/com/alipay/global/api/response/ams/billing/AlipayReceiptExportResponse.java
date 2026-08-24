@@ -26,7 +26,8 @@ public class AlipayReceiptExportResponse extends AlipayResponse {
    * requested format: &#x60;csv&#x60; -&gt; &#x60;text/csv&#x60;, &#x60;xlsx&#x60; -&gt;
    * &#x60;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet&#x60;. Note: the
    * response &#x60;fileFormat&#x60; returns the MIME type, not the request format code. The request
-   * accepts &#x60;csv&#x60;/&#x60;xlsx&#x60;. Returned only when result.resultCode is SUCCESS.
+   * accepts &#x60;csv&#x60;/&#x60;xlsx&#x60;. Maximum length: 128 characters. Returned only when
+   * result.resultCode is SUCCESS.
    */
   private String fileFormat;
 
@@ -39,7 +40,8 @@ public class AlipayReceiptExportResponse extends AlipayResponse {
 
   /**
    * Signed OSS URL for file download. URL is time-limited; see &#x60;expiresAt&#x60;. After expiry,
-   * accessing the URL returns HTTP 403. Returned only when result.resultCode is SUCCESS.
+   * accessing the URL returns HTTP 403. Maximum length: 2048 characters. Returned only when
+   * result.resultCode is SUCCESS.
    */
   private String fileUrl;
 
@@ -47,8 +49,15 @@ public class AlipayReceiptExportResponse extends AlipayResponse {
   private Long fileSize;
 
   /**
-   * Generated file name (e.g., &#x60;receipts_20260401_20260430_1685000000.csv&#x60;). Returned
-   * only when result.resultCode is SUCCESS.
+   * Generated file name (e.g., &#x60;receipts_20260401_20260430_1685000000.csv&#x60;). Maximum
+   * length: 256 characters. Returned only when result.resultCode is SUCCESS.
    */
   private String fileName;
+
+  /**
+   * Execution mode of the export request. The returned value is &#x60;SYNC&#x60;, indicating
+   * synchronous export. Maximum length: 8 characters. Returned only when result.resultCode is
+   * SUCCESS.
+   */
+  private String mode;
 }
