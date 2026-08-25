@@ -82,9 +82,6 @@ public class AlipayCustomerInquireDetailsResponse extends AlipayResponse {
    */
   private String zipcode;
 
-  /** Shipping phone. Returned when resultCode is &#x60;SUCCESS&#x60; and the field was set. */
-  private String shippingPhone;
-
   /**
    * Shipping country (ISO 3166-1 alpha-2). Returned when resultCode is &#x60;SUCCESS&#x60; and the
    * field was set.
@@ -149,18 +146,6 @@ public class AlipayCustomerInquireDetailsResponse extends AlipayResponse {
   private String metadata;
 
   /**
-   * Customer phone number (digits only). Returned when resultCode is &#x60;SUCCESS&#x60; and the
-   * field was set.
-   */
-  private String phoneNo;
-
-  /**
-   * ISO 3166-1 alpha-2 country code paired with &#x60;phoneNo&#x60;. Returned when resultCode is
-   * &#x60;SUCCESS&#x60; and the field was set.
-   */
-  private String countryCode;
-
-  /**
    * Invoice recipient email (independent of account &#x60;email&#x60;). Returned when resultCode is
    * &#x60;SUCCESS&#x60; and the field was set.
    */
@@ -177,12 +162,6 @@ public class AlipayCustomerInquireDetailsResponse extends AlipayResponse {
    * set.
    */
   private String shippingLastName;
-
-  /**
-   * Shipping address numeric calling code. Returned when resultCode is &#x60;SUCCESS&#x60; and the
-   * field was set.
-   */
-  private String shippingCountryCode;
 
   /**
    * Shipping postal code. Wire name: &#x60;shippingZipcode&#x60;. Returned when resultCode is
