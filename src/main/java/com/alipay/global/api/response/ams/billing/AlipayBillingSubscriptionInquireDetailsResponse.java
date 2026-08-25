@@ -17,7 +17,6 @@ import com.alipay.global.api.model.ams.Amount;
 import com.alipay.global.api.model.ams.BillingSubscriptionDiscountInfo;
 import com.alipay.global.api.model.ams.BillingSubscriptionInquireDetailsCancellationDetails;
 import com.alipay.global.api.model.ams.BillingSubscriptionPriceItem;
-import com.alipay.global.api.model.ams.BillingSubscriptionTrialSettings;
 import com.alipay.global.api.response.AlipayResponse;
 import java.util.List;
 import lombok.*;
@@ -85,8 +84,6 @@ public class AlipayBillingSubscriptionInquireDetailsResponse extends AlipayRespo
 
   /** The trial end. Note: See documentation for details. */
   private String trialEnd;
-
-  private BillingSubscriptionTrialSettings trialSettings;
 
   /** The cancel at. Note: See documentation for details. */
   private String cancelAt;

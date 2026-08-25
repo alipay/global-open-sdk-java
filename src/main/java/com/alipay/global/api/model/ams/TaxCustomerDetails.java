@@ -24,6 +24,9 @@ public class TaxCustomerDetails {
 
   private TaxBusinessDetails businessDetails;
 
+  /** The customer name recorded for tax purposes. Maximum length: 256 characters. */
+  private String name;
+
   private TaxAddress shippingAddress;
 
   private TaxAddress billingAddress;
