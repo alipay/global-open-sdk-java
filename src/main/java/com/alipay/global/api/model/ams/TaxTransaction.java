@@ -34,19 +34,7 @@ public class TaxTransaction {
   /** The type. Maximum length: 16 characters. Note: See documentation for details. */
   private String type;
 
-  /**
-   * The non-negative tax amount in the smallest currency unit, without leading zeros. For
-   * TRANSACTION and REVERSAL records, this value is always a positive absolute amount. Reconcile a
-   * business scope by subtracting the sum of REVERSAL amounts from the sum of TRANSACTION amounts.
-   * Maximum length: 19 characters.
-   */
-  private String taxAmount;
-
-  /**
-   * The 3-letter currency code that follows the ISO 4217 standard. This field is returned together
-   * with taxAmount. Maximum length: 3 characters.
-   */
-  private String currency;
+  private Amount taxAmount;
 
   /** The current status. Maximum length: 16 characters. Note: See documentation for details. */
   private String status;

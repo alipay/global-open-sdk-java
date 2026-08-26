@@ -39,7 +39,7 @@ public class AlipayCreateExchangeRequest extends AlipayRequest<AlipayCreateExcha
   private String exchangeMode;
 
   public AlipayCreateExchangeRequest() {
-    this.setPath("/ams/v1/aba/funds/createExchange");
+    this.setPath("/ams/api/v1/aba/funds/createExchange");
   }
 
   @Override
