@@ -29,7 +29,4 @@ public class TaxCalculatedTaxId {
 
   /** The region. Maximum length: 10 characters. */
   private String region;
-
-  /** The customer name recorded for tax purposes. Maximum length: 256 characters. */
-  private String name;
 }

@@ -29,7 +29,4 @@ public class TaxCalculatedExemptionJurisdiction {
 
   /** The city. Maximum length: 64 characters. */
   private String city;
-
-  /** The time when the tax exemption becomes effective. Maximum length: 32 characters. */
-  private String effectiveFrom;
 }

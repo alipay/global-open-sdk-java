@@ -28,4 +28,10 @@ public class TaxCalculatedExemption {
   private String exemptionType;
 
   private TaxCalculatedExemptionJurisdiction jurisdiction;
+
+  /**
+   * The ISO 8601 time with a timezone when the tax exemption becomes effective. Maximum length: 32
+   * characters.
+   */
+  private String effectiveFrom;
 }
