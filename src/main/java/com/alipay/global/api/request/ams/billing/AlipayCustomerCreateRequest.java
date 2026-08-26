@@ -77,9 +77,6 @@ public class AlipayCustomerCreateRequest extends AlipayRequest<AlipayCustomerCre
   /** Billing address postal/zip code. Maximum length: 32 characters. */
   private String zipcode;
 
-  /** Recipient phone number for shipping. Maximum length: 32 characters. */
-  private String shippingPhone;
-
   /** Shipping address country code. Format: ISO 3166-1 alpha-2. Maximum length: 2 characters. */
   private String shippingCountry;
 
@@ -129,19 +126,6 @@ public class AlipayCustomerCreateRequest extends AlipayRequest<AlipayCustomerCre
   private String metadata;
 
   /**
-   * Customer&#39;s phone number (digits only). Maximum length: 32 characters. Cross-field
-   * constraint: when &#x60;phoneNo&#x60; is provided, &#x60;countryCode&#x60; is required; omitting
-   * it returns &#x60;PARAM_ILLEGAL&#x60;.
-   */
-  private String phoneNo;
-
-  /**
-   * ISO 3166-1 alpha-2 country code paired with &#x60;phoneNo&#x60; (NOT a numeric dial prefix).
-   * Required when &#x60;phoneNo&#x60; is provided. Maximum length: 2 characters.
-   */
-  private String countryCode;
-
-  /**
    * Email address used to receive bills and invoices. It can differ from the account
    * &#x60;email&#x60;. If omitted during customer creation, it defaults to &#x60;email&#x60;.
    * Maximum length: 256 characters.
@@ -153,12 +137,6 @@ public class AlipayCustomerCreateRequest extends AlipayRequest<AlipayCustomerCre
 
   /** Shipping recipient last name. Maximum length: 256 characters. */
   private String shippingLastName;
-
-  /**
-   * ISO 3166-1 alpha-2 country code paired with &#x60;phoneNo&#x60;. Required when
-   * &#x60;shippingPhone&#x60; is provided. Maximum length: 2 characters.
-   */
-  private String shippingCountryCode;
 
   public AlipayCustomerCreateRequest() {
     this.setPath("/ams/api/v1/billing/customer/create");

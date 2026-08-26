@@ -56,18 +56,6 @@ public class AlipayCustomerInquireListRequest
   private String email;
 
   /**
-   * Filter by phone number (canonical). Cross-field constraint: when &#x60;phoneNo&#x60; is
-   * provided, &#x60;countryCode&#x60; is REQUIRED - omitting it returns &#x60;PARAM_ILLEGAL&#x60;.
-   */
-  private String phoneNo;
-
-  /**
-   * ISO 3166-1 alpha-2 country code paired with &#x60;phoneNo&#x60;. Required when
-   * &#x60;phoneNo&#x60; is provided.
-   */
-  private String countryCode;
-
-  /**
    * Inclusive end of the creation-timestamp range. Closed interval with &#x60;gmtCreateStart&#x60;.
    */
   private String gmtCreateEnd;
