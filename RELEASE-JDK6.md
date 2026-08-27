@@ -33,7 +33,10 @@ mvn clean package -Dmaven.javadoc.skip=true -Dmaven.test.skip=true
 1. **全量字节码审计**：解包 fat jar，4907 个 class（SDK 659 + 嵌入依赖）逐一检查 class 文件 major version，**全部 ≤ 50（Java 6）**，零超标；无 META-INF/versions 多版本目录残留。
 2. **嵌入 fastjson 版本身份验证**：`ParserConfig.class` sha 与官方 `fastjson-1.2.83_noneautotype.jar` 完全一致（edc461dd5417）；autoType 入口类 `JSONObject$SecureObjectInputStream` 确认已移除。
 3. **运行时冒烟（JDK 8 跑 Java 6 字节码）**：DefaultAlipayClient 构造、pay/subscription 请求 fastjson 序列化+反序列化 round-trip、RSA-SHA256 签名 + Base64、lang3 3.5 StringUtils、jackson-annotations 枚举注解加载——全部通过。
-4. **源码级验证（此前完成）**：477 个源文件 `-source 1.6 -target 1.6` 全量编译零错误；常量池扫描 24 项 JDK 7/8 API 特征零引用。
+4. **端到端真实网关验证（沙箱，2026-08-27）**：使用本 fat jar 实际调用 Antom 沙箱网关（open-sea-global.alipay.com）：pay（ALIPAY_HK 收银台）返回 `PAYMENT_IN_PROCESS` + paymentId + normalUrl；inquiryPayment 返回 `SUCCESS` / paymentStatus=PROCESSING。覆盖真实签名→TLS→网关→响应验签→反序列化全链路。
+5. **源码级验证（此前完成）**：477 个源文件 `-source 1.6 -target 1.6` 全量编译零错误；常量池扫描 24 项 JDK 7/8 API 特征零引用。
+
+> 运行环境说明：以上运行时验证均在 JDK 8 JVM 上执行 Java 6 字节码（字节码版本已保证 JDK 6 可加载）。真机 JDK 6 JVM 行为、TLS 1.2 握手（需 6u111+ 及 `-Dhttps.protocols=TLSv1.2`）、SNI 缺失影响需在商户实际环境验证——验证方法见 CUSTOMER-DELIVERY-NOTES.md。
 
 ## 已知运行时约束（非 SDK 可控，详见客户交付说明）
 
