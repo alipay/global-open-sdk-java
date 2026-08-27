@@ -98,7 +98,7 @@ public class CardDemoCode {
 
     request.setAuthorizationControl(authorizationControl);
 
-    Map<String, String> metadata = new HashMap<>();
+    Map<String, String> metadata = new HashMap<String, String>();
     metadata.put("FIGHT_NO", "SQ1111");
     request.setMetadata(metadata);
 
@@ -139,7 +139,7 @@ public class CardDemoCode {
 
     request.setAuthorizationControl(authorizationControl);
 
-    Map<String, String> metadata = new HashMap<>();
+    Map<String, String> metadata = new HashMap<String, String>();
     metadata.put("FIGHT_NO", "SQ1111");
     request.setMetadata(metadata);
 
@@ -210,7 +210,7 @@ public class CardDemoCode {
     request.setRequestId("388d5b6a-b193-4989-9825-b8527eb0e9ed");
     request.setAssetId("2025120429027200120386700007321");
 
-    Map<String, String> metadata = new HashMap<>();
+    Map<String, String> metadata = new HashMap<String, String>();
     metadata.put("hotelId", "1526086");
     metadata.put("hotelName", "Pullman Paris Montparnasse");
     request.setMetadata(metadata);

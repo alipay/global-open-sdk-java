@@ -4,7 +4,7 @@
     <groupId>com.alipay.global.sdk</groupId>
     <artifactId>global-open-sdk-java</artifactId>
     <packaging>jar</packaging>
-    <version>2.1.15</version>
+    <version>2.1.15-jdk6</version>
     <name>global-open-sdk-java</name>
     <url>https://github.com/alipay/global-open-sdk-java</url>
     <description>
@@ -59,6 +59,18 @@
     </distributionManagement>
 
     <dependencies>
+        <!--
+            JDK 1.6 兼容版本（基于官方 2.1.15）：
+            - jackson-databind 2.12.7.2 → jackson-annotations 2.12.7：SDK 仅使用 @JsonValue/@JsonCreator
+              注解（48 处枚举），不使用 ObjectMapper 等运行时 API；annotations 包字节码为 Java 6 (major 50)，
+              注解语义与 databind 捆绑版本完全一致，JSON 序列化由 fastjson 承担，行为零漂移。
+            - commons-lang3 3.9 → 3.5：3.9 字节码为 Java 8（3.7 起 Java 7）；3.5 全量 260 个 class 均为
+              Java 6 字节码（MANIFEST 声明 JavaSE 1.6，已逐一核验）；SDK 仅使用 isBlank/isEmpty/DateFormatUtils，
+              3.5 全部支持。
+            - validation-api 2.0.1.Final 删除：全代码库零引用（编译期即不依赖），字节码为 Java 8。
+            - fastjson 1.2.83 / commons-codec 1.10 / bcprov-jdk15on 1.61：字节码分别为 major 49/50/49，原生兼容 Java 6，保留。
+            - lombok 仅编译期（provided），不进入运行时，保留 1.18.30。
+        -->
         <dependency>
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
@@ -66,13 +78,13 @@
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>2.12.7.2</version>
+            <artifactId>jackson-annotations</artifactId>
+            <version>2.12.7</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.9</version>
+            <version>3.5</version>
         </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -85,11 +97,6 @@
             <artifactId>lombok</artifactId>
             <version>1.18.30</version>
             <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
-            <version>2.0.1.Final</version>
         </dependency>
         <dependency>
             <groupId>org.bouncycastle</groupId>
@@ -105,8 +112,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.3.2</version>
                 <configuration>
-                    <source>8</source>
-                    <target>8</target>
+                    <source>1.6</source>
+                    <target>1.6</target>
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
@@ -146,26 +153,37 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.sonatype.central</groupId>
-                <artifactId>central-publishing-maven-plugin</artifactId>
-                <version>0.8.0</version>
-                <extensions>true</extensions>
-                <configuration>
-                    <publishingServerId>central</publishingServerId>
-                </configuration>
-            </plugin>
+            <!--
+                fat jar：嵌入全部运行时依赖（fastjson / commons-lang3 / commons-codec / bcprov-jdk15on /
+                jackson-annotations），客户 JDK 1.6 环境无需额外引入任何依赖。
+                本地交付构建专用，不发布 Maven Central。
+            -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-gpg-plugin</artifactId>
-                <version>1.5</version>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.2.1</version>
                 <executions>
                     <execution>
-                        <id>sign-artifacts</id>
-                        <phase>verify</phase>
+                        <phase>package</phase>
                         <goals>
-                            <goal>sign</goal>
+                            <goal>shade</goal>
                         </goals>
+                        <configuration>
+                            <createDependencyReducedPom>false</createDependencyReducedPom>
+                            <filters>
+                                <filter>
+                                    <artifact>*:*</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/*.SF</exclude>
+                                        <exclude>META-INF/*.DSA</exclude>
+                                        <exclude>META-INF/*.RSA</exclude>
+                                        <exclude>META-INF/maven/**</exclude>
+                                        <exclude>LICENSE</exclude>
+                                        <exclude>NOTICE</exclude>
+                                    </excludes>
+                                </filter>
+                            </filters>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
