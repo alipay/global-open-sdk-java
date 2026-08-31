@@ -63,11 +63,11 @@ public class AlipayUpdateCardStatusRequest extends AlipayRequest<AlipayUpdateCar
     @JsonCreator
     public static OperateTypeEnum fromValue(String value) {
       for (OperateTypeEnum b : OperateTypeEnum.values()) {
-        if (b.value.equals(value)) {
+        if (b.value.equals(value) || b.name().equals(value)) {
           return b;
         }
       }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+      return null;
     }
   }
 

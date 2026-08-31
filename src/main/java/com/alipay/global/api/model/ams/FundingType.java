@@ -47,10 +47,10 @@ public enum FundingType {
   @JsonCreator
   public static FundingType fromValue(String value) {
     for (FundingType b : FundingType.values()) {
-      if (b.value.equals(value)) {
+      if (b.value.equals(value) || b.name().equals(value)) {
         return b;
       }
     }
-    throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    return null;
   }
 }

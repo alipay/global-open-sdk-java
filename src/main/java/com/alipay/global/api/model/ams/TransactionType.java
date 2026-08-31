@@ -51,10 +51,10 @@ public enum TransactionType {
   @JsonCreator
   public static TransactionType fromValue(String value) {
     for (TransactionType b : TransactionType.values()) {
-      if (b.value.equals(value)) {
+      if (b.value.equals(value) || b.name().equals(value)) {
         return b;
       }
     }
-    throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    return null;
   }
 }

@@ -39,10 +39,10 @@ public enum TakeType {
   @JsonCreator
   public static TakeType fromValue(String value) {
     for (TakeType b : TakeType.values()) {
-      if (b.value.equals(value)) {
+      if (b.value.equals(value) || b.name().equals(value)) {
         return b;
       }
     }
-    throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    return null;
   }
 }

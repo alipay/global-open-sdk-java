@@ -67,11 +67,11 @@ public class AbaCard {
     @JsonCreator
     public static CardStatusEnum fromValue(String value) {
       for (CardStatusEnum b : CardStatusEnum.values()) {
-        if (b.value.equals(value)) {
+        if (b.value.equals(value) || b.name().equals(value)) {
           return b;
         }
       }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+      return null;
     }
   }
 
@@ -109,11 +109,11 @@ public class AbaCard {
     @JsonCreator
     public static CardBrandEnum fromValue(String value) {
       for (CardBrandEnum b : CardBrandEnum.values()) {
-        if (b.value.equals(value)) {
+        if (b.value.equals(value) || b.name().equals(value)) {
           return b;
         }
       }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+      return null;
     }
   }
 

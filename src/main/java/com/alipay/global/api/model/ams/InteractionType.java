@@ -51,10 +51,10 @@ public enum InteractionType {
   @JsonCreator
   public static InteractionType fromValue(String value) {
     for (InteractionType b : InteractionType.values()) {
-      if (b.value.equals(value)) {
+      if (b.value.equals(value) || b.name().equals(value)) {
         return b;
       }
     }
-    throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    return null;
   }
 }

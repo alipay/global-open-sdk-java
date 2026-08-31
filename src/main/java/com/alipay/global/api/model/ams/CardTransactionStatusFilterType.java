@@ -43,10 +43,10 @@ public enum CardTransactionStatusFilterType {
   @JsonCreator
   public static CardTransactionStatusFilterType fromValue(String value) {
     for (CardTransactionStatusFilterType b : CardTransactionStatusFilterType.values()) {
-      if (b.value.equals(value)) {
+      if (b.value.equals(value) || b.name().equals(value)) {
         return b;
       }
     }
-    throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    return null;
   }
 }

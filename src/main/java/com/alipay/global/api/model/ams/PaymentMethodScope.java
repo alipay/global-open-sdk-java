@@ -41,10 +41,10 @@ public enum PaymentMethodScope {
   @JsonCreator
   public static PaymentMethodScope fromValue(String value) {
     for (PaymentMethodScope b : PaymentMethodScope.values()) {
-      if (b.value.equals(value)) {
+      if (b.value.equals(value) || b.name().equals(value)) {
         return b;
       }
     }
-    throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    return null;
   }
 }
