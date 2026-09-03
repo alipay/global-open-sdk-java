@@ -52,11 +52,11 @@ public class ProrationSettings {
     @JsonCreator
     public static ProrationModeEnum fromValue(String value) {
       for (ProrationModeEnum b : ProrationModeEnum.values()) {
-        if (b.value.equals(value)) {
+        if (b.value.equals(value) || b.name().equals(value)) {
           return b;
         }
       }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+      return null;
     }
   }
 

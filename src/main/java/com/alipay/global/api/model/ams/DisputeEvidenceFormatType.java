@@ -41,10 +41,10 @@ public enum DisputeEvidenceFormatType {
   @JsonCreator
   public static DisputeEvidenceFormatType fromValue(String value) {
     for (DisputeEvidenceFormatType b : DisputeEvidenceFormatType.values()) {
-      if (b.value.equals(value)) {
+      if (b.value.equals(value) || b.name().equals(value)) {
         return b;
       }
     }
-    throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    return null;
   }
 }

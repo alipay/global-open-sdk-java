@@ -43,10 +43,10 @@ public enum RefundFromType {
   @JsonCreator
   public static RefundFromType fromValue(String value) {
     for (RefundFromType b : RefundFromType.values()) {
-      if (b.value.equals(value)) {
+      if (b.value.equals(value) || b.name().equals(value)) {
         return b;
       }
     }
-    throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    return null;
   }
 }

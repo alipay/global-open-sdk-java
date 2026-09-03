@@ -43,10 +43,10 @@ public enum ChallengeType {
   @JsonCreator
   public static ChallengeType fromValue(String value) {
     for (ChallengeType b : ChallengeType.values()) {
-      if (b.value.equals(value)) {
+      if (b.value.equals(value) || b.name().equals(value)) {
         return b;
       }
     }
-    throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    return null;
   }
 }

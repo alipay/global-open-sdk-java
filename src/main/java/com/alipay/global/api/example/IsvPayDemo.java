@@ -1,6 +1,5 @@
 package com.alipay.global.api.example;
 
-import com.alibaba.fastjson.JSONObject;
 import com.alipay.global.api.AlipayClient;
 import com.alipay.global.api.DefaultAlipayClient;
 import com.alipay.global.api.exception.AlipayApiException;
@@ -10,6 +9,7 @@ import com.alipay.global.api.request.ams.pay.AlipayPayConsultRequest;
 import com.alipay.global.api.request.ams.pay.AlipayPayRequest;
 import com.alipay.global.api.response.ams.pay.AlipayPayConsultResponse;
 import com.alipay.global.api.response.ams.pay.AlipayPayResponse;
+import com.alipay.global.api.tools.JsonUtil;
 import java.util.UUID;
 
 public class IsvPayDemo {
@@ -64,7 +64,7 @@ public class IsvPayDemo {
 
     try {
       alipayPayConsultResponse = CLIENT.execute(alipayPayConsultRequest);
-      System.out.println(JSONObject.toJSON(alipayPayConsultResponse));
+      System.out.println(JsonUtil.toJson(alipayPayConsultResponse));
     } catch (AlipayApiException e) {
       String errorMsg = e.getMessage();
       e.printStackTrace();
@@ -118,7 +118,7 @@ public class IsvPayDemo {
     AlipayPayResponse alipayPayResponse = null;
     try {
       alipayPayResponse = CLIENT.execute(alipayPayRequest);
-      System.out.println(JSONObject.toJSON(alipayPayResponse));
+      System.out.println(JsonUtil.toJson(alipayPayResponse));
     } catch (AlipayApiException e) {
       String errorMsg = e.getMessage();
       System.out.println(errorMsg);

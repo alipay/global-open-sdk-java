@@ -1,11 +1,10 @@
 package com.alipay.global.api;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alipay.global.api.exception.AlipayApiException;
 import com.alipay.global.api.model.Result;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.AlipayResponse;
+import com.alipay.global.api.tools.JsonUtil;
 import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 
@@ -19,15 +18,14 @@ final class SessionHttp2Executor {
       String gatewayUrl, AlipayRequest<T> request, Map<String, String> extraHeaders)
       throws AlipayApiException {
     String sessionId = validateAndGetSessionId(extraHeaders);
-    String requestBody =
-        JSON.toJSONString(request, SerializerFeature.DisableCircularReferenceDetect);
+    String requestBody = JsonUtil.toJson(request);
     String responseBody =
         Http2JsonTransport.post(gatewayUrl, request.getPath(), sessionId, requestBody);
 
     T response;
     try {
-      response = JSON.parseObject(responseBody, request.getResponseClass());
-    } catch (RuntimeException e) {
+      response = JsonUtil.fromJson(responseBody, request.getResponseClass());
+    } catch (AlipayApiException e) {
       throw new AlipayApiException("Failed to parse API response.", e);
     }
     Result result = response == null ? null : response.getResult();

@@ -45,10 +45,10 @@ public enum TransitType {
   @JsonCreator
   public static TransitType fromValue(String value) {
     for (TransitType b : TransitType.values()) {
-      if (b.value.equals(value)) {
+      if (b.value.equals(value) || b.name().equals(value)) {
         return b;
       }
     }
-    throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    return null;
   }
 }

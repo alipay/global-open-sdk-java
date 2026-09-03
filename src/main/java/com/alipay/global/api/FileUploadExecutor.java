@@ -1,6 +1,5 @@
 package com.alipay.global.api;
 
-import com.alibaba.fastjson.JSON;
 import com.alipay.global.api.exception.AlipayApiException;
 import com.alipay.global.api.model.ResultStatusType;
 import com.alipay.global.api.net.HttpRpcResult;
@@ -9,6 +8,7 @@ import com.alipay.global.api.request.AlipayFileRequest;
 import com.alipay.global.api.response.AlipayResponse;
 import com.alipay.global.api.tools.Constants;
 import com.alipay.global.api.tools.DateTool;
+import com.alipay.global.api.tools.JsonUtil;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -103,8 +103,8 @@ final class FileUploadExecutor {
 
     final T parsedResponse;
     try {
-      parsedResponse = JSON.parseObject(responseBody, operation.getResponseClass());
-    } catch (RuntimeException e) {
+      parsedResponse = JsonUtil.fromJson(responseBody, operation.getResponseClass());
+    } catch (AlipayApiException e) {
       throw new AlipayApiException("Response body is not valid JSON", e);
     }
     if (parsedResponse == null || parsedResponse.getResult() == null) {

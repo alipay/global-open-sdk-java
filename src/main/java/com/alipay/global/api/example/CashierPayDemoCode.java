@@ -1,6 +1,5 @@
 package com.alipay.global.api.example;
 
-import com.alibaba.fastjson.JSONObject;
 import com.alipay.global.api.AlipayClient;
 import com.alipay.global.api.DefaultAlipayClient;
 import com.alipay.global.api.exception.AlipayApiException;
@@ -14,6 +13,7 @@ import com.alipay.global.api.response.ams.pay.AlipayPayConsultResponse;
 import com.alipay.global.api.response.ams.pay.AlipayPayQueryResponse;
 import com.alipay.global.api.response.ams.pay.AlipayPayResponse;
 import com.alipay.global.api.response.ams.pay.AlipayPaymentSessionResponse;
+import com.alipay.global.api.tools.JsonUtil;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -70,7 +70,7 @@ public class CashierPayDemoCode {
 
     try {
       alipayPayConsultResponse = CLIENT.execute(alipayPayConsultRequest);
-      System.out.println(JSONObject.toJSON(alipayPayConsultResponse));
+      System.out.println(JsonUtil.toJson(alipayPayConsultResponse));
     } catch (AlipayApiException e) {
       String errorMsg = e.getMessage();
       // handle error condition
@@ -98,7 +98,7 @@ public class CashierPayDemoCode {
     paymentMethodMetaData.put("expiryYear", "28");
     paymentMethodMetaData.put("tokenize", false);
     paymentMethodMetaData.put("cpf", "671.998.112-31");
-    JSONObject cardholderName = new JSONObject();
+    Map<String, String> cardholderName = new HashMap<String, String>();
     cardholderName.put("firstName", "Alan");
     cardholderName.put("lastName", "Wallex");
     paymentMethodMetaData.put("cardholderName", cardholderName);
@@ -145,7 +145,7 @@ public class CashierPayDemoCode {
     AlipayPayResponse alipayPayResponse = null;
     try {
       alipayPayResponse = CLIENT.execute(alipayPayRequest);
-      System.out.println(JSONObject.toJSON(alipayPayResponse));
+      System.out.println(JsonUtil.toJson(alipayPayResponse));
     } catch (AlipayApiException e) {
       String errorMsg = e.getMessage();
       // handle error condition

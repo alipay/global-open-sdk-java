@@ -61,10 +61,10 @@ public enum CompanyType {
   @JsonCreator
   public static CompanyType fromValue(String value) {
     for (CompanyType b : CompanyType.values()) {
-      if (b.value.equals(value)) {
+      if (b.value.equals(value) || b.name().equals(value)) {
         return b;
       }
     }
-    throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    return null;
   }
 }

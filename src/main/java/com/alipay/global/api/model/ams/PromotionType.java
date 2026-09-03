@@ -41,10 +41,10 @@ public enum PromotionType {
   @JsonCreator
   public static PromotionType fromValue(String value) {
     for (PromotionType b : PromotionType.values()) {
-      if (b.value.equals(value)) {
+      if (b.value.equals(value) || b.name().equals(value)) {
         return b;
       }
     }
-    throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    return null;
   }
 }
