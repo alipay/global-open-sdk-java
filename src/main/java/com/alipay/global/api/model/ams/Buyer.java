@@ -60,4 +60,20 @@ public class Buyer {
 
   /** 用于指定买家电话号码的国家代码，当支付方式为STCPAY时为必填字段 */
   private String buyerPhoneNoContryCode;
+
+  private Amount successfulOrderAmount;
+
+  /**
+   * The date and time of the buyer&#39;s last paid purchase. When using KLARNA for an e-commerce
+   * merchant, this field is required. The value follows the ISO 8601 standard format. For example,
+   * \&quot;2019-11-27T12:01:01+08:00\&quot;.
+   */
+  private String dateOfLastPaidPurchase;
+
+  /**
+   * The date and time of the buyer&#39;s first paid purchase. When using KLARNA for an e-commerce
+   * merchant, this field is required. The value follows the ISO 8601 standard format. For example,
+   * \&quot;2019-11-27T12:01:01+08:00\&quot;.
+   */
+  private String dateOfFirstPaidPurchase;
 }

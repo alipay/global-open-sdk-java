@@ -70,4 +70,7 @@ public class Shipping {
 
   /** Added field for shipping notes */
   private String notes;
+
+  /** The URL where the customer can track the shipment. */
+  private String trackingUrl;
 }
