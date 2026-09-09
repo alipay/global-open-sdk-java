@@ -88,4 +88,20 @@ public class Goods {
   private String goodsEndsOnTime;
 
   private Goods crossSell;
+
+  /**
+   * For createPaymentSession, this is the product tax code used by Antom GlobalTax to classify the
+   * goods line. When automatic tax is active, omit it to use the merchant default tax code. Because
+   * Goods is a shared SDK model, omit this field in APIs that do not explicitly document support.
+   * Maximum length: 64 characters.
+   */
+  private String taxCode;
+
+  /**
+   * For createPaymentSession, this value indicates whether the goods-line price excludes or
+   * includes tax. Supported values are EXCLUSIVE and INCLUSIVE. When automatic tax is active, omit
+   * it to use the merchant tax behavior settings. Because Goods is a shared SDK model, omit this
+   * field in APIs that do not explicitly document support. Maximum length: 16 characters.
+   */
+  private String taxBehavior;
 }

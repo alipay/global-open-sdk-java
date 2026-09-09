@@ -15,6 +15,7 @@ package com.alipay.global.api.request.ams.pay;
 import com.alipay.global.api.model.ams.*;
 import com.alipay.global.api.model.ams.AgreementInfo;
 import com.alipay.global.api.model.ams.Amount;
+import com.alipay.global.api.model.ams.AutomaticTax;
 import com.alipay.global.api.model.ams.AvailablePaymentMethod;
 import com.alipay.global.api.model.ams.BillingSubscription;
 import com.alipay.global.api.model.ams.CreditPayPlan;
@@ -168,6 +169,8 @@ public class AlipayPaymentSessionRequest extends AlipayRequest<AlipayPaymentSess
   private String paymentExpiryTime;
 
   private BillingSubscription subscription;
+
+  private AutomaticTax automaticTax;
 
   public AlipayPaymentSessionRequest() {
     this.setPath("/ams/api/v1/payments/createPaymentSession");
