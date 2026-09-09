@@ -76,4 +76,12 @@ public class Order {
 
   /** test */
   private String orderType;
+
+  /**
+   * For the pay API, this is the tax calculation ID returned by the Tax calculate API. It
+   * associates the order with a valid, unexpired tax calculation; omit it for the existing non-tax
+   * flow. Because Order is a shared SDK model, omit this field in APIs that do not explicitly
+   * document support. Maximum length: 64 characters.
+   */
+  private String taxCalculationId;
 }
