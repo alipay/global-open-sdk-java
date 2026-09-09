@@ -155,12 +155,6 @@ public class AlipayPayRequest extends AlipayRequest<AlipayPayResponse> {
   private String subscriptionId;
 
   /**
-   * The tax calculation ID. This ID is obtained from the calculate API and used for subsequent
-   * payment posting verification and tax records.
-   */
-  private String taxCalculationId;
-
-  /**
    * The language code used by Antom Hosted Checkout Page. This field applies only to non-POP Hosted
    * Checkout Page requests. Supported values are en_US, pt_BR, pt_PT, es_ES, ko_KR, zh_CN, zh_HK,
    * ms_MY, in_ID, th_TH, vi_VN, tl_PH, it_IT, de_DE, fr_FR, nl_NL, ja_JP, ro, pl_PL, ar_SA, tr_TR,

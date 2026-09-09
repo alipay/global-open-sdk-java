@@ -17,6 +17,7 @@ import com.alipay.global.api.model.ams.Amount;
 import com.alipay.global.api.model.ams.TaxBreakdown;
 import com.alipay.global.api.model.ams.TaxCalculatedCustomerDetails;
 import com.alipay.global.api.model.ams.TaxCalculatedLineItem;
+import com.alipay.global.api.model.ams.TaxCalculatedShipFromDetails;
 import com.alipay.global.api.model.ams.TaxCalculatedShippingCost;
 import com.alipay.global.api.response.AlipayResponse;
 import java.util.List;
@@ -54,4 +55,6 @@ public class AlipayTaxCalculateResponse extends AlipayResponse {
   private TaxCalculatedShippingCost shippingCost;
 
   private TaxCalculatedCustomerDetails customerDetails;
+
+  private TaxCalculatedShipFromDetails shipFromDetails;
 }
