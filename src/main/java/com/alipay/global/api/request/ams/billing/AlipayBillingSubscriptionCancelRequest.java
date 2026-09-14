@@ -43,8 +43,8 @@ public class AlipayBillingSubscriptionCancelRequest
   private BillingSubscriptionCancelCancellationDetails cancellationDetails;
 
   /**
-   * The proration behavior for immediate termination. Valid values are CREATE_PRORATIONS, NONE, and
-   * ALWAYS_INVOICE. Maximum length: 18 characters.
+   * The proration behavior for immediate termination. Valid values are ALWAYS_INVOICE and NONE. The
+   * default value is NONE. Maximum length: 18 characters.
    */
   private String prorationBehavior;
 

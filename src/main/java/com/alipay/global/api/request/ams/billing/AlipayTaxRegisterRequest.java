@@ -24,17 +24,25 @@ import lombok.*;
 public class AlipayTaxRegisterRequest extends AlipayRequest<AlipayTaxRegisterResponse> {
 
   /**
-   * The unique ID assigned by a merchant to identify a tax registration request. Maximum length: 64
-   * characters. Note: See documentation for details.
+   * The unique ID assigned by a merchant to identify a tax registration request. Once accepted, the
+   * ID is permanently occupied and any subsequent request using it returns REPEATED_SUBMIT. Maximum
+   * length: 64 characters.
    */
   private String registrationRequestId;
 
-  /** The tax type. Maximum length: 16 characters. */
+  /**
+   * The tax type. Supported values include CUIT, GST, VAT, CBS, IBS, HST, PST, RST, QST, JCT,
+   * SERVICE_TAX, IGV, SALES_TAX, and PERSONAL_PROPERTY_LEASE_TRANSACTION_TAX.
+   */
   private String taxType;
 
   private TaxJurisdiction jurisdiction;
 
-  /** The tax registration type. Maximum length: 32 characters. */
+  /**
+   * The tax registration type. Supported values are OSS_NON_UNION, STANDARD_LOCAL_TAX,
+   * SINGLE_LOCAL_USE_TAX_RATE, SIMPLIFIED_SELLERS_USE_TAX, STANDARD_SALES_AND_USE_TAX,
+   * NORMAL_GST_HST, and SIMPLIFIED_GST_HST. Maximum length: 32 characters.
+   */
   private String registrationType;
 
   /** The tax ID. Maximum length: 64 characters. */

@@ -53,10 +53,10 @@ public enum PaymentMethodCategoryType {
   @JsonCreator
   public static PaymentMethodCategoryType fromValue(String value) {
     for (PaymentMethodCategoryType b : PaymentMethodCategoryType.values()) {
-      if (b.value.equals(value)) {
+      if (b.value.equals(value) || b.name().equals(value)) {
         return b;
       }
     }
-    throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    return null;
   }
 }

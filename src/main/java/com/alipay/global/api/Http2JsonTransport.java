@@ -10,9 +10,9 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.hc.client5.http.config.ConnectionConfig;
 import org.apache.hc.client5.http.async.methods.SimpleHttpRequest;
 import org.apache.hc.client5.http.async.methods.SimpleHttpResponse;
+import org.apache.hc.client5.http.config.ConnectionConfig;
 import org.apache.hc.client5.http.impl.async.CloseableHttpAsyncClient;
 import org.apache.hc.client5.http.impl.async.HttpAsyncClients;
 import org.apache.hc.client5.http.impl.nio.PoolingAsyncClientConnectionManagerBuilder;
@@ -36,8 +36,7 @@ final class Http2JsonTransport {
     request.setHeader("X-Session-Id", sessionId);
     request.setHeader("Accept", "application/json");
     request.setHeader("User-Agent", SdkVersion.getUserAgent());
-    request.setBody(
-        requestBody, ContentType.create("application/json", StandardCharsets.UTF_8));
+    request.setBody(requestBody, ContentType.create("application/json", StandardCharsets.UTF_8));
 
     Future<SimpleHttpResponse> responseFuture = HTTP_CLIENT.execute(request, null);
     SimpleHttpResponse response;
@@ -115,8 +114,7 @@ final class Http2JsonTransport {
         throw new AlipayApiException(
             "gatewayUrl must be an HTTPS origin without path, query, fragment, or user info.");
       }
-      return new URI(
-          "https", null, gateway.getHost(), gateway.getPort(), path, null, null);
+      return new URI("https", null, gateway.getHost(), gateway.getPort(), path, null, null);
     } catch (URISyntaxException e) {
       throw new AlipayApiException("gatewayUrl is invalid.", e);
     }

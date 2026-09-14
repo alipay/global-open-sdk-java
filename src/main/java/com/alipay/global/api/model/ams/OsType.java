@@ -41,10 +41,10 @@ public enum OsType {
   @JsonCreator
   public static OsType fromValue(String value) {
     for (OsType b : OsType.values()) {
-      if (b.value.equals(value)) {
+      if (b.value.equals(value) || b.name().equals(value)) {
         return b;
       }
     }
-    throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    return null;
   }
 }

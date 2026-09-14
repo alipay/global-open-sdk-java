@@ -34,13 +34,7 @@ public class TaxTransaction {
   /** The type. Maximum length: 16 characters. Note: See documentation for details. */
   private String type;
 
-  /** The tax amount. Maximum length: 19 characters. */
-  private String taxAmount;
-
-  /**
-   * The 3-letter currency code that follows the ISO 4217 standard. Maximum length: 3 characters.
-   */
-  private String currency;
+  private Amount taxAmount;
 
   /** The current status. Maximum length: 16 characters. Note: See documentation for details. */
   private String status;

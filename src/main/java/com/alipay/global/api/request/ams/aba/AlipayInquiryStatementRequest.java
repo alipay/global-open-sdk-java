@@ -120,11 +120,11 @@ public class AlipayInquiryStatementRequest extends AlipayRequest<AlipayInquirySt
     @JsonCreator
     public static TransactionTypeListEnum fromValue(String value) {
       for (TransactionTypeListEnum b : TransactionTypeListEnum.values()) {
-        if (b.value.equals(value)) {
+        if (b.value.equals(value) || b.name().equals(value)) {
           return b;
         }
       }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+      return null;
     }
   }
 

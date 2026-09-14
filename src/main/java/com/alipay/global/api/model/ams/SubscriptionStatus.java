@@ -47,10 +47,10 @@ public enum SubscriptionStatus {
   @JsonCreator
   public static SubscriptionStatus fromValue(String value) {
     for (SubscriptionStatus b : SubscriptionStatus.values()) {
-      if (b.value.equals(value)) {
+      if (b.value.equals(value) || b.name().equals(value)) {
         return b;
       }
     }
-    throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    return null;
   }
 }

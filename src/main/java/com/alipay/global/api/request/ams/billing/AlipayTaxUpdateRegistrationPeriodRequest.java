@@ -35,12 +35,16 @@ public class AlipayTaxUpdateRegistrationPeriodRequest
   private String taxRegistrationId;
 
   /**
-   * The time from which the tax registration is active. Maximum length: 32 characters. Note: See
-   * documentation for details.
+   * The new activation time for a SCHEDULED registration. The value must be later than the current
+   * time. Maximum length: 32 characters.
    */
   private String activeFrom;
 
-  /** The expiration time. Maximum length: 32 characters. Note: See documentation for details. */
+  /**
+   * The new expiration time for an ACTIVE or SCHEDULED registration. The value must be later than
+   * the current time and, for a scheduled registration, later than the effective activeFrom.
+   * Maximum length: 32 characters.
+   */
   private String expireAt;
 
   public AlipayTaxUpdateRegistrationPeriodRequest() {

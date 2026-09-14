@@ -36,7 +36,9 @@ public class AlipayCustomerUpdateRequest extends AlipayRequest<AlipayCustomerUpd
   private String alipayUserId;
 
   /**
-   * Updated email address. Optional - &#x60;null&#x60;/omitted means no change (PATCH semantics).
+   * Updated account email address. Optional - &#x60;null&#x60; or omitted means no change (PATCH
+   * semantics). Updating this field does not change &#x60;billingEmail&#x60;, including when
+   * &#x60;billingEmail&#x60; originally defaulted from &#x60;email&#x60; during customer creation.
    * No email-format validation is applied. Maximum length: 256 characters.
    */
   private String email;
@@ -64,9 +66,6 @@ public class AlipayCustomerUpdateRequest extends AlipayRequest<AlipayCustomerUpd
 
   /** Updated billing postal code. Maximum length: 32 characters. */
   private String zipcode;
-
-  /** Updated shipping phone. Maximum length: 32 characters. */
-  private String shippingPhone;
 
   /** Updated shipping country. Format: ISO 3166-1 alpha-2. Maximum length: 2 characters. */
   private String shippingCountry;
@@ -113,19 +112,10 @@ public class AlipayCustomerUpdateRequest extends AlipayRequest<AlipayCustomerUpd
   private String metadata;
 
   /**
-   * Updated phone number (digits only). Cross-field constraint: when &#x60;phoneNo&#x60; is
-   * provided, &#x60;countryCode&#x60; is required; omitting it returns &#x60;PARAM_ILLEGAL&#x60;.
-   * Maximum length: 32 characters.
+   * Updated email address used to receive bills and invoices. Send this field explicitly when the
+   * invoice-recipient email must change; updating &#x60;email&#x60; alone does not change it.
+   * Maximum length: 256 characters.
    */
-  private String phoneNo;
-
-  /**
-   * ISO 3166-1 alpha-2 country code paired with &#x60;phoneNo&#x60;. Required when
-   * &#x60;phoneNo&#x60; is provided. Maximum length: 2 characters.
-   */
-  private String countryCode;
-
-  /** Updated invoice recipient email. Maximum length: 256 characters. */
   private String billingEmail;
 
   /** Updated shipping recipient first name. Maximum length: 256 characters. */
@@ -133,12 +123,6 @@ public class AlipayCustomerUpdateRequest extends AlipayRequest<AlipayCustomerUpd
 
   /** Updated shipping recipient last name. Maximum length: 256 characters. */
   private String shippingLastName;
-
-  /**
-   * ISO 3166-1 alpha-2 country code paired with &#x60;phoneNo&#x60;. Required when
-   * &#x60;shippingPhone&#x60; is provided. Maximum length: 2 characters.
-   */
-  private String shippingCountryCode;
 
   public AlipayCustomerUpdateRequest() {
     this.setPath("/ams/api/v1/billing/customer/update");

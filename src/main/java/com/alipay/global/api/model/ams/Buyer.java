@@ -12,6 +12,7 @@
 
 package com.alipay.global.api.model.ams;
 
+import java.util.List;
 import lombok.*;
 
 /** Buyer */
@@ -60,4 +61,30 @@ public class Buyer {
 
   /** 用于指定买家电话号码的国家代码，当支付方式为STCPAY时为必填字段 */
   private String buyerPhoneNoContryCode;
+
+  private Amount successfulOrderAmount;
+
+  /**
+   * The date and time of the buyer&#39;s last paid purchase. When using KLARNA for an e-commerce
+   * merchant, this field is required. The value follows the ISO 8601 standard format. For example,
+   * \&quot;2019-11-27T12:01:01+08:00\&quot;.
+   */
+  private String dateOfLastPaidPurchase;
+
+  /**
+   * The date and time of the buyer&#39;s first paid purchase. When using KLARNA for an e-commerce
+   * merchant, this field is required. The value follows the ISO 8601 standard format. For example,
+   * \&quot;2019-11-27T12:01:01+08:00\&quot;.
+   */
+  private String dateOfFirstPaidPurchase;
+
+  /**
+   * For createPaymentSession, these buyer tax IDs are used for B2B or reverse-charge determination
+   * when automatic tax is active. If omitted, null, invalid, or unusable, Antom calculates tax as
+   * B2C instead of rejecting the payment session. Because Buyer is a shared SDK model, omit this
+   * field in APIs that do not explicitly document support. Maximum size: 10.
+   */
+  private List<BuyerTaxId> taxIds;
+
+  private Address businessAddress;
 }

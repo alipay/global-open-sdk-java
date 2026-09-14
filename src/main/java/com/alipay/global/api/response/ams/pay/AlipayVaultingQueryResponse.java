@@ -13,6 +13,7 @@
 package com.alipay.global.api.response.ams.pay;
 
 import com.alipay.global.api.model.ams.*;
+import com.alipay.global.api.model.ams.AcquirerInfo;
 import com.alipay.global.api.model.ams.PaymentMethodDetail;
 import com.alipay.global.api.response.AlipayResponse;
 import lombok.*;
@@ -93,4 +94,6 @@ public class AlipayVaultingQueryResponse extends AlipayResponse {
    * characters
    */
   private String vaultingResultMessage;
+
+  private AcquirerInfo acquirerInfo;
 }

@@ -43,10 +43,10 @@ public enum ResultStatusType {
   @JsonCreator
   public static ResultStatusType fromValue(String value) {
     for (ResultStatusType b : ResultStatusType.values()) {
-      if (b.value.equals(value)) {
+      if (b.value.equals(value) || b.name().equals(value)) {
         return b;
       }
     }
-    throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    return null;
   }
 }

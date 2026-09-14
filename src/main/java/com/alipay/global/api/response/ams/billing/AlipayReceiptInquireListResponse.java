@@ -52,4 +52,12 @@ public class AlipayReceiptInquireListResponse extends AlipayResponse {
    * result.resultCode is SUCCESS.
    */
   private String nextCursor;
+
+  /**
+   * The &#x60;receiptId&#x60; of the first receipt in the current page. Use this value as
+   * &#x60;endingBefore&#x60; in the next request to continue paging backward to earlier data.
+   * Returned only when &#x60;endingBefore&#x60; is used. Maximum length: 64 characters. Returned
+   * only when result.resultCode is SUCCESS.
+   */
+  private String previousCursor;
 }

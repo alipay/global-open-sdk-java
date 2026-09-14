@@ -70,4 +70,23 @@ public class Shipping {
 
   /** Added field for shipping notes */
   private String notes;
+
+  /** The URL where the customer can track the shipment. */
+  private String trackingUrl;
+
+  /**
+   * For createPaymentSession, this is the tax code used by Antom GlobalTax to classify shipping.
+   * When automatic tax is active, omit it to use the default shipping tax code. Because Shipping is
+   * a shared SDK model, omit this field in APIs that do not explicitly document support. Maximum
+   * length: 64 characters.
+   */
+  private String taxCode;
+
+  /**
+   * For createPaymentSession, this value indicates whether the shipping fee excludes or includes
+   * tax. Supported values are EXCLUSIVE and INCLUSIVE. When automatic tax is active, omit it to use
+   * the merchant tax behavior settings. Because Shipping is a shared SDK model, omit this field in
+   * APIs that do not explicitly document support. Maximum length: 16 characters.
+   */
+  private String taxBehavior;
 }

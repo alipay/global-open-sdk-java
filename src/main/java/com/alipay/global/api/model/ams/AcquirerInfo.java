@@ -72,4 +72,13 @@ public class AcquirerInfo {
    * if you integrate the APO product. More information: Maximum length: 64 characters
    */
   private String acquirerCardToken;
+
+  /**
+   * An acquirer-generated, irreversible card fingerprint passed through for card identification,
+   * reconciliation, and risk deduplication. It is returned only for APO merchants enrolled in
+   * fingerprint passthrough when Checkout.com is the acquirer and the original scenario is card
+   * vaulting or payment with vaulting. It is not returned in other scenarios and may be empty.
+   * Maximum length: 64 characters.
+   */
+  private String acquirerFingerprint;
 }

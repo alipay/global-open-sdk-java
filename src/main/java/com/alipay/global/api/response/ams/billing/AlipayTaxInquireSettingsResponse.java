@@ -22,14 +22,22 @@ import lombok.*;
 @Data
 public class AlipayTaxInquireSettingsResponse extends AlipayResponse {
 
-  /** The default tax code. Maximum length: 32 characters. */
+  /**
+   * The default tax code. Returned only when the API call succeeds. Maximum length: 32 characters.
+   */
   private String defaultTaxCode;
 
-  /** The default tax behavior. Maximum length: 16 characters. */
+  /**
+   * The default tax behavior. Returned only when the API call succeeds. Maximum length: 16
+   * characters.
+   */
   private String defaultTaxBehavior;
 
   private TaxHeadOffice headOffice;
 
-  /** The current status. Maximum length: 16 characters. Note: See documentation for details. */
+  /**
+   * The tax settings status. Valid values are ACTIVE and PENDING. Returned only when the API call
+   * succeeds. Maximum length: 16 characters.
+   */
   private String status;
 }

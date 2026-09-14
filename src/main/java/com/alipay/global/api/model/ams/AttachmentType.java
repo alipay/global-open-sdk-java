@@ -69,10 +69,10 @@ public enum AttachmentType {
   @JsonCreator
   public static AttachmentType fromValue(String value) {
     for (AttachmentType b : AttachmentType.values()) {
-      if (b.value.equals(value)) {
+      if (b.value.equals(value) || b.name().equals(value)) {
         return b;
       }
     }
-    throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    return null;
   }
 }

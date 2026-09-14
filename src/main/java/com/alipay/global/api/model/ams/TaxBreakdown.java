@@ -21,22 +21,25 @@ import lombok.*;
 @AllArgsConstructor
 public class TaxBreakdown {
 
-  /** The tax type. Maximum length: 32 characters. */
+  /**
+   * The tax type. Supported values are CUIT, GST, VAT, CBS, IBS, HST, PST, RST, QST, JCT,
+   * SERVICE_TAX, IGV, SALES_TAX, and PERSONAL_PROPERTY_LEASE_TRANSACTION_TAX. This response field
+   * is extensible; accept unknown values without failing deserialization.
+   */
   private String taxType;
-
-  /** The tax authority name. Maximum length: 128 characters. */
-  private String authorityName;
 
   /** The tax rate. Maximum length: 16 characters. */
   private String taxRate;
 
-  /** The tax amount. Maximum length: 19 characters. */
-  private String taxAmount;
+  private Amount taxAmount;
 
-  /** The taxable amount. Maximum length: 19 characters. */
-  private String taxableAmount;
+  private Amount taxableAmount;
 
-  /** The taxability reason. Maximum length: 32 characters. */
+  /**
+   * The taxability reason. Supported values are NOT_COLLECTING, PRODUCT_EXEMPT, REVERSE_CHARGE,
+   * CUSTOMER_EXEMPT, NOT_SUPPORTED, NOT_SUBJECT_TO_TAX, PRODUCT_EXEMPT_HOLIDAY,
+   * PORTION_PRODUCT_EXEMPT, ZERO_RATED, STANDARD_RATED, and UNKNOWN_ZERO_TAX.
+   */
   private String taxabilityReason;
 
   /** Indicates whether the tax is inclusive. */

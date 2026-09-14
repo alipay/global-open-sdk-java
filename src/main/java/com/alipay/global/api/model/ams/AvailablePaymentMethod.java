@@ -23,7 +23,12 @@ import lombok.*;
 @AllArgsConstructor
 public class AvailablePaymentMethod {
 
-  /** Additional information required for some specific payment methods. */
+  /**
+   * Additional information required for some specific payment methods. This object remains
+   * free-form. For merchants with the billing-address collection capability enabled,
+   * billingAddressCollectionMode controls whether the billing address is collected. Supported
+   * values are ALWAYS, DYNAMIC, and NEVER. If this field is omitted, the service uses NEVER.
+   */
   private Map<String, Object> paymentMethodMetaData;
 
   private List<PaymentMethodTypeItem> paymentMethodTypeList;

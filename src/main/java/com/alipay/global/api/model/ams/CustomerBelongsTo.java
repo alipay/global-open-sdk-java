@@ -97,10 +97,10 @@ public enum CustomerBelongsTo {
   @JsonCreator
   public static CustomerBelongsTo fromValue(String value) {
     for (CustomerBelongsTo b : CustomerBelongsTo.values()) {
-      if (b.value.equals(value)) {
+      if (b.value.equals(value) || b.name().equals(value)) {
         return b;
       }
     }
-    throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    return null;
   }
 }

@@ -41,10 +41,10 @@ public enum ChallengeTriggerSourceType {
   @JsonCreator
   public static ChallengeTriggerSourceType fromValue(String value) {
     for (ChallengeTriggerSourceType b : ChallengeTriggerSourceType.values()) {
-      if (b.value.equals(value)) {
+      if (b.value.equals(value) || b.name().equals(value)) {
         return b;
       }
     }
-    throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    return null;
   }
 }

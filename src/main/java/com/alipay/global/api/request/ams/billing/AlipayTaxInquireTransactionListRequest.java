@@ -24,24 +24,30 @@ public class AlipayTaxInquireTransactionListRequest
     extends AlipayRequest<AlipayTaxInquireTransactionListResponse> {
 
   /**
-   * The unique ID assigned by Antom to identify a tax calculation. Maximum length: 64 characters.
-   * Note: See documentation for details.
+   * The unique ID assigned by Antom to identify a tax calculation. Exactly one of taxCalculationId,
+   * paymentId, and refundId must be provided. Omit the unused query keys; do not send them with
+   * null values. Maximum length: 64 characters.
    */
   private String taxCalculationId;
 
   /**
-   * The unique ID assigned by Antom to identify a payment. Maximum length: 64 characters. Note: See
-   * documentation for details.
+   * The unique ID assigned by Antom to identify a payment. Exactly one of taxCalculationId,
+   * paymentId, and refundId must be provided. Omit the unused query keys; do not send them with
+   * null values. Maximum length: 64 characters.
    */
   private String paymentId;
 
-  /** The refund ID. Maximum length: 64 characters. Note: See documentation for details. */
+  /**
+   * The unique ID assigned by Antom to identify a refund. Exactly one of taxCalculationId,
+   * paymentId, and refundId must be provided. Omit the unused query keys; do not send them with
+   * null values. Maximum length: 64 characters.
+   */
   private String refundId;
 
-  /** The current page number. */
+  /** The current page number, starting from 1. The default value is 1. */
   private Integer currentPage;
 
-  /** The number of records per page. */
+  /** The number of records returned per page. The default value is 20. */
   private Integer pageSize;
 
   public AlipayTaxInquireTransactionListRequest() {

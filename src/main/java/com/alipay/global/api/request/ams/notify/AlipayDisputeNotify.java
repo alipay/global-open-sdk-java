@@ -28,4 +28,5 @@ public class AlipayDisputeNotify extends AlipayNotify {
   private String captureId;
   private String autoDefendReason;
   private AcquirerInfo acquirerInfo;
+  private IssuerComments issuerComments;
 }

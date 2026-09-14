@@ -36,4 +36,12 @@ public class Merchant {
   private Store store;
 
   private MerchantType merchantType;
+
+  /**
+   * The number of orders completed by the merchant in the past 12 months. When using KLARNA for an
+   * e-commerce merchant, this field is required. Value range: 0 to unlimited.
+   */
+  private Integer numberOfTrades;
+
+  private AccountLastModified accountLastModified;
 }

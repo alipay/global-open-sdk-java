@@ -44,10 +44,10 @@ public enum PaymentStatus {
   @JsonCreator
   public static PaymentStatus fromValue(String value) {
     for (PaymentStatus b : PaymentStatus.values()) {
-      if (b.value.equals(value)) {
+      if (b.value.equals(value) || b.name().equals(value)) {
         return b;
       }
     }
-    throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    return null;
   }
 }

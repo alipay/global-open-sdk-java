@@ -1,6 +1,5 @@
 package com.alipay.global.api.example;
 
-import com.alibaba.fastjson.JSON;
 import com.alipay.global.api.AlipayClient;
 import com.alipay.global.api.DefaultAlipayClient;
 import com.alipay.global.api.exception.AlipayApiException;
@@ -8,6 +7,7 @@ import com.alipay.global.api.model.ams.*;
 import com.alipay.global.api.model.constants.EndPointConstants;
 import com.alipay.global.api.request.ams.subscription.AlipaySubscriptionCreateRequest;
 import com.alipay.global.api.response.ams.subscription.AlipaySubscriptionCreateResponse;
+import com.alipay.global.api.tools.JsonUtil;
 import java.util.UUID;
 
 public class SubscriptionDemoCode {
@@ -77,16 +77,14 @@ public class SubscriptionDemoCode {
 
     AlipaySubscriptionCreateResponse alipaySubscriptionCreateResponse = null;
 
-    System.out.println(JSON.toJSON(alipaySubscriptionCreateRequest));
-
     try {
+      System.out.println(JsonUtil.toJson(alipaySubscriptionCreateRequest));
       alipaySubscriptionCreateResponse = CLIENT.execute(alipaySubscriptionCreateRequest);
+      System.out.println(JsonUtil.toJson(alipaySubscriptionCreateResponse));
     } catch (AlipayApiException e) {
       String errorMsg = e.getMessage();
       System.out.println(e);
       // handle error condition
     }
-
-    System.out.println(JSON.toJSON(alipaySubscriptionCreateResponse));
   }
 }

@@ -41,10 +41,10 @@ public enum DeclarationBizSceneType {
   @JsonCreator
   public static DeclarationBizSceneType fromValue(String value) {
     for (DeclarationBizSceneType b : DeclarationBizSceneType.values()) {
-      if (b.value.equals(value)) {
+      if (b.value.equals(value) || b.name().equals(value)) {
         return b;
       }
     }
-    throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    return null;
   }
 }

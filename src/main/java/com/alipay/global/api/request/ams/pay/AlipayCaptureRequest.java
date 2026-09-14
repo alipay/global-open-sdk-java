@@ -14,9 +14,12 @@ package com.alipay.global.api.request.ams.pay;
 
 import com.alipay.global.api.model.ams.*;
 import com.alipay.global.api.model.ams.Amount;
+import com.alipay.global.api.model.ams.Goods;
+import com.alipay.global.api.model.ams.Shipping;
 import com.alipay.global.api.model.ams.Transit;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.pay.AlipayCaptureResponse;
+import java.util.List;
 import lombok.*;
 
 /** AlipayCaptureRequest */
@@ -43,10 +46,25 @@ public class AlipayCaptureRequest extends AlipayRequest<AlipayCaptureResponse> {
 
   private Boolean isLastCapture;
 
-  /** The type of capture operation */
+  /**
+   * The type of capture operation. Valid values are FINAL (the final capture) and NON_FINAL (a
+   * non-final capture). The default value is FINAL.
+   */
   private String captureType;
 
   private Transit transit;
+
+  /**
+   * The goods included in this capture. When using KLARNA, provide the goods information required
+   * for the capture.
+   */
+  private List<Goods> goods;
+
+  /**
+   * The shipment information for this capture. When using KLARNA, this field can be provided to
+   * display shipment tracking information in the payment method app.
+   */
+  private List<Shipping> shippings;
 
   public AlipayCaptureRequest() {
     this.setPath("/ams/api/v1/payments/capture");

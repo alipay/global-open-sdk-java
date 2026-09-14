@@ -24,7 +24,10 @@ import lombok.*;
 @Data
 public class AlipayTaxInquireTransactionListResponse extends AlipayResponse {
 
-  /** The transactions. Note: See documentation for details. */
+  /**
+   * The tax transaction list returned for a successful query. The list is empty or omitted when no
+   * matching transaction exists. Maximum size: 100.
+   */
   private List<TaxTransaction> transactions;
 
   private Paginator paginator;

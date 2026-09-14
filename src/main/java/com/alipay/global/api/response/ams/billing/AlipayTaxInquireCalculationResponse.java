@@ -13,8 +13,11 @@
 package com.alipay.global.api.response.ams.billing;
 
 import com.alipay.global.api.model.ams.*;
+import com.alipay.global.api.model.ams.Amount;
 import com.alipay.global.api.model.ams.TaxBreakdown;
+import com.alipay.global.api.model.ams.TaxCalculatedCustomerDetails;
 import com.alipay.global.api.model.ams.TaxCalculatedLineItem;
+import com.alipay.global.api.model.ams.TaxCalculatedShipFromDetails;
 import com.alipay.global.api.model.ams.TaxCalculatedShippingCost;
 import com.alipay.global.api.response.AlipayResponse;
 import java.util.List;
@@ -30,23 +33,15 @@ public class AlipayTaxInquireCalculationResponse extends AlipayResponse {
    */
   private String taxCalculationId;
 
-  /**
-   * The 3-letter currency code that follows the ISO 4217 standard. Maximum length: 3 characters.
-   */
-  private String currency;
+  private TaxCalculatedCustomerDetails customerDetails;
 
-  /** The total amount. Maximum length: 19 characters. */
-  private String totalAmount;
+  private TaxCalculatedShipFromDetails shipFromDetails;
 
-  /**
-   * The exclusive tax amount. Maximum length: 19 characters. Note: See documentation for details.
-   */
-  private String exclusiveTaxAmount;
+  private Amount totalAmount;
 
-  /**
-   * The inclusive tax amount. Maximum length: 19 characters. Note: See documentation for details.
-   */
-  private String inclusiveTaxAmount;
+  private Amount exclusiveTaxAmount;
+
+  private Amount inclusiveTaxAmount;
 
   /** The line item list. */
   private List<TaxCalculatedLineItem> lineItems;

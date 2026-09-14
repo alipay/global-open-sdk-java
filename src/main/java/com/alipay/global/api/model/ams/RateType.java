@@ -43,10 +43,10 @@ public enum RateType {
   @JsonCreator
   public static RateType fromValue(String value) {
     for (RateType b : RateType.values()) {
-      if (b.value.equals(value)) {
+      if (b.value.equals(value) || b.name().equals(value)) {
         return b;
       }
     }
-    throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    return null;
   }
 }

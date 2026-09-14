@@ -33,11 +33,6 @@ public class AlipayTaxCalculateRequest extends AlipayRequest<AlipayTaxCalculateR
    */
   private String taxCalculationRequestId;
 
-  /**
-   * The 3-letter currency code that follows the ISO 4217 standard. Maximum length: 3 characters.
-   */
-  private String currency;
-
   /** The line item list. */
   private List<TaxCalculationLineItem> lineItems;
 

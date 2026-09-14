@@ -45,10 +45,10 @@ public enum PaymentMethodDetailType {
   @JsonCreator
   public static PaymentMethodDetailType fromValue(String value) {
     for (PaymentMethodDetailType b : PaymentMethodDetailType.values()) {
-      if (b.value.equals(value)) {
+      if (b.value.equals(value) || b.name().equals(value)) {
         return b;
       }
     }
-    throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    return null;
   }
 }

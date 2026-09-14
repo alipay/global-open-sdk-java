@@ -52,11 +52,13 @@ public class AlipayPriceUpdateRequest extends AlipayRequest<AlipayPriceUpdateRes
   private Boolean active;
 
   /**
-   * Whether this price is the default price for the product. O - Only &#x60;true&#x60; is accepted;
-   * &#x60;false&#x60; or absent means no change. When set to true, this price becomes the default
-   * price of the product and any previous default price of that product is automatically
-   * un-defaulted. Cannot be combined with active&#x3D;false in the same request - a default price
-   * must remain active
+   * Whether to set this price as the default price for the product. When provided, only
+   * &#x60;true&#x60; is accepted; &#x60;false&#x60; is rejected with
+   * &#x60;DEFAULT_PRICE_REMOVAL_FORBIDDEN&#x60;, while omission means no change. When set to
+   * &#x60;true&#x60;, this price becomes the product default and the previous default price is
+   * automatically unset. &#x60;defaultPrice&#x3D;true&#x60; cannot be combined with
+   * &#x60;active&#x3D;false&#x60; in the same request because the default price must remain active.
+   * A product must always retain a default price.
    */
   private Boolean defaultPrice;
 

@@ -12,6 +12,7 @@
 
 package com.alipay.global.api.model.ams;
 
+import java.util.List;
 import lombok.*;
 
 /** BillingSubscriptionPriceItem */
@@ -44,11 +45,20 @@ public class BillingSubscriptionPriceItem {
   /** The pricing model. Valid values are PER_UNIT and TIERED. */
   private String pricingModel;
 
+  /** The tiered pricing mode. Valid values are GRADUATED and VOLUME. */
+  private String tiersMode;
+
+  /** The tiered pricing details. */
+  private List<Tier> tiers;
+
   /** The associated product ID. Maximum length: 64 characters. */
   private String productId;
 
   /** The associated product name. */
   private String productName;
+
+  /** The product description resolved from the product ID of this price item. */
+  private String productDescription;
 
   /** The quantity of this subscription item. */
   private Integer quantity;
@@ -63,4 +73,7 @@ public class BillingSubscriptionPriceItem {
 
   /** The usage type. Valid values include LICENSED and METERED. */
   private String usageType;
+
+  /** The external meter reference ID. */
+  private String meterId;
 }

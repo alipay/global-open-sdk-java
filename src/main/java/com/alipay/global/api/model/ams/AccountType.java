@@ -41,10 +41,10 @@ public enum AccountType {
   @JsonCreator
   public static AccountType fromValue(String value) {
     for (AccountType b : AccountType.values()) {
-      if (b.value.equals(value)) {
+      if (b.value.equals(value) || b.name().equals(value)) {
         return b;
       }
     }
-    throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    return null;
   }
 }

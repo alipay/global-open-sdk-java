@@ -105,11 +105,11 @@ public class Statement {
     @JsonCreator
     public static TransactionTypeEnum fromValue(String value) {
       for (TransactionTypeEnum b : TransactionTypeEnum.values()) {
-        if (b.value.equals(value)) {
+        if (b.value.equals(value) || b.name().equals(value)) {
           return b;
         }
       }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+      return null;
     }
   }
 

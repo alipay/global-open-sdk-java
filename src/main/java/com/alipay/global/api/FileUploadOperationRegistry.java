@@ -1,11 +1,11 @@
 package com.alipay.global.api;
 
-import com.alibaba.fastjson.JSON;
 import com.alipay.global.api.exception.AlipayApiException;
 import com.alipay.global.api.request.AlipayFileRequest;
 import com.alipay.global.api.request.ams.billing.AlipayProductUploadImageRequest;
 import com.alipay.global.api.response.AlipayResponse;
 import com.alipay.global.api.response.ams.billing.AlipayProductUploadImageResponse;
+import com.alipay.global.api.tools.JsonUtil;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -69,7 +69,7 @@ final class FileUploadOperationRegistry {
       Map<String, String> body = new LinkedHashMap<String, String>();
       body.put("productId", productRequest.getProductId());
       body.put("fileSha256", fileSha256);
-      return JSON.toJSONString(body);
+      return JsonUtil.toJson(body);
     }
   }
 }

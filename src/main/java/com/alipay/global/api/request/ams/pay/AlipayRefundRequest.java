@@ -15,6 +15,7 @@ package com.alipay.global.api.request.ams.pay;
 import com.alipay.global.api.model.ams.*;
 import com.alipay.global.api.model.ams.Amount;
 import com.alipay.global.api.model.ams.CustomizedInfo;
+import com.alipay.global.api.model.ams.Goods;
 import com.alipay.global.api.model.ams.RefundDetail;
 import com.alipay.global.api.model.ams.RefundToBankInfo;
 import com.alipay.global.api.request.AlipayRequest;
@@ -86,6 +87,12 @@ public class AlipayRefundRequest extends AlipayRequest<AlipayRefundResponse> {
   private String refundSourceAccountNo;
 
   private Amount actualRefundAmount;
+
+  /**
+   * The goods included in this refund. When using KLARNA, this field is required for a partial
+   * refund.
+   */
+  private List<Goods> goods;
 
   public AlipayRefundRequest() {
     this.setPath("/ams/api/v1/payments/refund");

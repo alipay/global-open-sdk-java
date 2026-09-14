@@ -45,4 +45,10 @@ public class AlipayRefundNotify extends AlipayNotify {
 
   /** 用于商户自定义元数据信息，支持JSON格式 */
   private String metadata;
+
+  /**
+   * The authorization code returned by the payment channel for a successful refund. This field is
+   * returned only when the merchant is enabled for this capability.
+   */
+  private String authorizationCode;
 }

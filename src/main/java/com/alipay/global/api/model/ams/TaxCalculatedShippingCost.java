@@ -22,11 +22,9 @@ import lombok.*;
 @AllArgsConstructor
 public class TaxCalculatedShippingCost {
 
-  /** The amount. Maximum length: 19 characters. */
-  private String amount;
+  private Amount amount;
 
-  /** The tax amount. Maximum length: 19 characters. */
-  private String taxAmount;
+  private Amount taxAmount;
 
   /** The tax breakdown. */
   private List<TaxBreakdown> taxBreakdown;

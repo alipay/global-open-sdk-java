@@ -27,12 +27,6 @@ public class TaxJurisdiction {
   /** The region. Maximum length: 10 characters. */
   private String region;
 
-  /** The county. Maximum length: 64 characters. */
-  private String county;
-
   /** The city. Maximum length: 64 characters. */
   private String city;
-
-  /** The district. Maximum length: 64 characters. */
-  private String district;
 }

@@ -51,4 +51,21 @@ public class Lodging {
    * elements
    */
   private List<UserName> guestNames;
+
+  /** The hotel room type, for example, Presidential suite. */
+  private String roomClass;
+
+  /**
+   * The ticket delivery method. Valid values are: pick_up (the ticket is picked up in person),
+   * email (the ticket is sent by email), post (the ticket is sent by post), and phone (the ticket
+   * is sent to a phone number).
+   */
+  private String ticketDeliveryMethod;
+
+  /**
+   * The ticket recipient. For email, specify the recipient&#39;s email address. For phone, specify
+   * the recipient&#39;s phone number. For pick_up and post, specify the recipient&#39;s first and
+   * last name, for example, John Doe.
+   */
+  private String ticketDeliveryRecipient;
 }
