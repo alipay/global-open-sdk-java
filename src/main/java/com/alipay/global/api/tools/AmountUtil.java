@@ -61,11 +61,11 @@ public final class AmountUtil {
         }
         AmountRuleLoader.RuleSet rules = AmountRuleLoader.rules();
         if (!rules.currencies.containsKey(currency)) {
-            throw invalid("UNKNOWN_CURRENCY", "currency is not present in the ISO snapshot");
+            throw invalid("UNSUPPORTED_CURRENCY", "currency is not supported by AmountUtil");
         }
         Integer minorUnit = rules.currencies.get(currency);
         if (minorUnit == null) {
-            throw invalid("UNSUPPORTED_MINOR_UNIT", "currency has no numeric minor unit");
+            throw new IllegalStateException("RULE_DATA_ERROR: supported currency has no numeric minor unit");
         }
         return minorUnit;
     }
@@ -78,7 +78,7 @@ public final class AmountUtil {
             throw invalid("INVALID_VALUE_FORMAT", "value must contain ASCII digits only");
         }
         if (value.length() > MAX_VALUE_LENGTH) {
-            throw invalid("VALUE_TOO_LONG", "value exceeds 16 digits");
+            throw invalid("VALUE_TOO_LONG", "value must contain at most 16 digits");
         }
         if (!allowZero && allZeros(value)) {
             throw invalid("AMOUNT_NOT_POSITIVE", "value must be greater than zero");
@@ -90,7 +90,7 @@ public final class AmountUtil {
             throw invalid("AMOUNT_NOT_POSITIVE", "value must be greater than zero");
         }
         if (value.length() > MAX_VALUE_LENGTH) {
-            throw invalid("VALUE_TOO_LONG", "value exceeds 16 digits");
+            throw invalid("VALUE_TOO_LONG", "value must contain at most 16 digits");
         }
         String multiple = AmountRuleLoader.rules().multiples.get(currency);
         if (multiple != null && !value.endsWith(multiple.substring(1))) {
