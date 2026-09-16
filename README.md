@@ -327,6 +327,8 @@ static {
 
 ## API Key authentication
 
+See the [complete API Key example](src/main/java/com/alipay/global/api/example/ApiKeyExample.java).
+
 Initialize the client with your gateway URL and API Key; existing RSA usage remains supported.
 This feature is available in the current source branch and has not been published yet.
 

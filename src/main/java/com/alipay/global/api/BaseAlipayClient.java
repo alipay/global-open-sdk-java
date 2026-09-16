@@ -272,7 +272,7 @@ public abstract class BaseAlipayClient implements AlipayClient {
     headers.put("Content-Type", "application/json; charset=UTF-8");
     headers.put("Authorization", apiKeyAuth.authorization());
     applySdkUserAgent(headers);
-    HttpRpcResult rsp = sendRequest(gatewayUrl + path, request.getHttpMethod(), headers, JsonUtil.toJson(request));
+    HttpRpcResult rsp = sendRequest(genRequestUrl(path), request.getHttpMethod(), headers, JsonUtil.toJson(request));
     if (rsp == null) { throw new AlipayApiException("HttpRpcResult is null."); }
     if (rsp.getRspCode() != Constants.HTTP_SUCCESS_CODE) {
       throw new AlipayApiException("API Key HTTP status " + rsp.getRspCode() + ": " + apiKeyAuth.redact(rsp.getRspBody()));
