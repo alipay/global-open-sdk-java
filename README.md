@@ -12,7 +12,7 @@ https://mvnrepository.com/artifact/com.alipay.global.sdk/global-open-sdk-java
 <dependency>
     <groupId>com.alipay.global.sdk</groupId>
     <artifactId>global-open-sdk-java</artifactId>
-    <version>3.0.1</version>
+    <version>3.1.0</version>
 </dependency>
 ```
    
@@ -324,3 +324,69 @@ static {
     Base64Provider.setBase64Encryptor(new MyBase64Encryptor());
 }
 ```
+
+## API Key authentication
+
+Initialize the client with your gateway URL and API Key; existing RSA usage remains supported.
+This feature is available in the current source branch and has not been published yet.
+
+Set `ANTOM_GATEWAY_URL` to your regional HTTPS gateway (for example,
+`https://open-sea-global.alipay.com` for Asia), `ANTOM_API_KEY` to your key,
+`ANTOM_REDIRECT_URL` to your checkout return URL, and `ANTOM_NOTIFY_URL` to your
+notification endpoint. The application reads these variables; the SDK does not load them automatically.
+
+The example creates a CARD payment session for USD 1.00 (`100` minor units),
+with USD settlement. Use a merchant configured for this combination and a key
+with createPaymentSession permission. Replace the example client IP with the
+buyer's IP in your application. Exceptions propagate to the caller; a normal
+response must still be checked for business success.
+
+```java
+import java.util.UUID;
+import com.alipay.global.api.DefaultAlipayClient;
+import com.alipay.global.api.model.ams.*;
+import com.alipay.global.api.request.ams.pay.AlipayPaymentSessionRequest;
+import com.alipay.global.api.response.ams.pay.AlipayPaymentSessionResponse;
+
+public class ApiKeyExample {
+    public static void main(String[] args) throws Exception {
+        DefaultAlipayClient client = new DefaultAlipayClient(
+            System.getenv("ANTOM_GATEWAY_URL"), System.getenv("ANTOM_API_KEY"));
+        Amount amount = Amount.builder().currency("USD").value("100").build();
+        AlipayPaymentSessionRequest request = new AlipayPaymentSessionRequest();
+        request.setProductCode(ProductCodeType.CASHIER_PAYMENT);
+        request.setProductScene("CHECKOUT_PAYMENT");
+        request.setPaymentRequestId(UUID.randomUUID().toString());
+        request.setOrder(Order.builder()
+            .referenceOrderId(UUID.randomUUID().toString())
+            .orderDescription("API Key example").orderAmount(amount).build());
+        request.setPaymentAmount(amount);
+        request.setPaymentMethod(PaymentMethod.builder().paymentMethodType("CARD").build());
+        request.setPaymentFactor(PaymentFactor.builder().isAuthorization(false).build());
+        request.setSettlementStrategy(SettlementStrategy.builder().settlementCurrency("USD").build());
+        request.setEnv(Env.builder().terminalType(TerminalType.WEB).clientIp("127.0.0.1").build());
+        request.setPaymentRedirectUrl(System.getenv("ANTOM_REDIRECT_URL"));
+        request.setPaymentNotifyUrl(System.getenv("ANTOM_NOTIFY_URL"));
+
+        // Transport errors propagate as exceptions; also check the business result.
+        AlipayPaymentSessionResponse response = client.execute(request);
+        if (response.getResult() == null
+                || !"S".equals(response.getResult().getResultStatus())
+                || !"SUCCESS".equals(response.getResult().getResultCode())) {
+            throw new IllegalStateException("Session creation was not successful: "
+                + (response.getResult() == null ? "missing result" : response.getResult().getResultCode()));
+        }
+        if (response.getPaymentSessionId() == null || response.getPaymentSessionId().isEmpty()) {
+            throw new IllegalStateException("Missing paymentSessionId");
+        }
+        // Use response.getPaymentSessionData() or the returned URL with your checkout.
+        System.out.println("Payment session created");
+    }
+}
+```
+
+- Standard and Restricted keys use the same client. TEST/PROD in the key selects
+  the request environment; do not add a sandbox path to the gateway URL.
+- Creating a session does not mean payment is complete. Notifications still use
+  the existing signature verification mechanism.
+- File upload is not supported with API Key authentication.

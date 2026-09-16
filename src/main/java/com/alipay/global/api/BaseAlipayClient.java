@@ -49,6 +49,15 @@ public abstract class BaseAlipayClient implements AlipayClient {
 
   private String agentToken;
 
+  private ApiKeyAuth apiKeyAuth;
+
+  protected BaseAlipayClient(String gatewayUrl, String apiKey) {
+    this.apiKeyAuth = new ApiKeyAuth(gatewayUrl, apiKey);
+    this.gatewayUrl = gatewayUrl.endsWith("/") ? gatewayUrl.substring(0, gatewayUrl.length() - 1) : gatewayUrl;
+  }
+
+  protected final boolean isApiKeyAuthentication() { return apiKeyAuth != null; }
+
   public BaseAlipayClient() {}
 
   public BaseAlipayClient(String gatewayUrl, String merchantPrivateKey, String alipayPublicKey) {
@@ -90,6 +99,8 @@ public abstract class BaseAlipayClient implements AlipayClient {
 
   public <T extends AlipayResponse> T execute(AlipayRequest<T> alipayRequest)
       throws AlipayApiException {
+
+    if (apiKeyAuth != null) { return executeApiKey(alipayRequest, null); }
 
     // compatible with old version which clientId does not exist in BaseAlipayClient
     alipayRequest.setClientId(
@@ -172,6 +183,8 @@ public abstract class BaseAlipayClient implements AlipayClient {
       return SessionHttp2Executor.execute(gatewayUrl, alipayRequest, extraHeaders);
     }
 
+    if (apiKeyAuth != null) { return executeApiKey(alipayRequest, extraHeaders); }
+
     // compatible with old version which clientId does not exist in BaseAlipayClient
     alipayRequest.setClientId(
         alipayRequest.getClientId() == null ? this.clientId : alipayRequest.getClientId());
@@ -244,6 +257,45 @@ public abstract class BaseAlipayClient implements AlipayClient {
     }
 
     return alipayResponse;
+  }
+
+  private <T extends AlipayResponse> T executeApiKey(
+      AlipayRequest<T> request, Map<String, String> extraHeaders) throws AlipayApiException {
+    if (request == null) { throw new AlipayApiException("alipayRequest can't null"); }
+    if (request.getClientId() != null && !apiKeyAuth.clientId().equals(request.getClientId())) {
+      throw new AlipayApiException("Request clientId does not match API Key");
+    }
+    String path = apiKeyAuth.path(request.getPath());
+    Map<String, String> headers = new HashMap<>();
+    addApiKeyHeaders(headers, buildCustomHeader());
+    addApiKeyHeaders(headers, extraHeaders);
+    headers.put("Content-Type", "application/json; charset=UTF-8");
+    headers.put("Authorization", apiKeyAuth.authorization());
+    applySdkUserAgent(headers);
+    HttpRpcResult rsp = sendRequest(gatewayUrl + path, request.getHttpMethod(), headers, JsonUtil.toJson(request));
+    if (rsp == null) { throw new AlipayApiException("HttpRpcResult is null."); }
+    if (rsp.getRspCode() != Constants.HTTP_SUCCESS_CODE) {
+      throw new AlipayApiException("API Key HTTP status " + rsp.getRspCode() + ": " + apiKeyAuth.redact(rsp.getRspBody()));
+    }
+    T result;
+    try { result = JsonUtil.fromJson(rsp.getRspBody(), request.getResponseClass()); }
+    catch (Exception e) { throw new AlipayApiException("API Key response is not valid JSON"); }
+    if (result == null || result.getResult() == null) {
+      throw new AlipayApiException("API Key response result field is null");
+    }
+    return result;
+  }
+
+  private void addApiKeyHeaders(Map<String, String> target, Map<String, String> source) {
+    if (source == null) { return; }
+    for (Map.Entry<String, String> entry : source.entrySet()) {
+      if (StringUtils.isBlank(entry.getKey())) { continue; }
+      String key = entry.getKey().toLowerCase(java.util.Locale.ROOT);
+      if (!RESERVED_HEADERS.contains(key) && !"authorization".equals(key)
+          && !"key-version".equals(key) && !"keyversion".equals(key) && !"host".equals(key)) {
+        target.put(entry.getKey(), entry.getValue());
+      }
+    }
   }
 
   private String genSignValue(

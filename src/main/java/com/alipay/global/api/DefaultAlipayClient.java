@@ -2,6 +2,7 @@ package com.alipay.global.api;
 
 import com.alipay.global.api.exception.AlipayApiException;
 import com.alipay.global.api.net.DefaultHttpRPC;
+import com.alipay.global.api.net.ApiKeyHttpRPC;
 import com.alipay.global.api.net.HttpRpcResult;
 import com.alipay.global.api.request.AlipayFileRequest;
 import com.alipay.global.api.response.AlipayResponse;
@@ -10,6 +11,10 @@ import java.util.Map;
 public class DefaultAlipayClient extends BaseAlipayClient {
 
   private volatile String uploadGatewayUrl;
+
+  public DefaultAlipayClient(String gatewayUrl, String apiKey) {
+    super(gatewayUrl, apiKey);
+  }
 
   public DefaultAlipayClient(String gatewayUrl, String merchantPrivateKey, String alipayPublicKey) {
     super(gatewayUrl, merchantPrivateKey, alipayPublicKey);
@@ -53,6 +58,9 @@ public class DefaultAlipayClient extends BaseAlipayClient {
    */
   public <T extends AlipayResponse> T uploadFile(AlipayFileRequest<T> request)
       throws AlipayApiException {
+    if (isApiKeyAuthentication()) {
+      throw new AlipayApiException("File upload does not support API Key authentication");
+    }
     return FileUploadExecutor.execute(new FileUploadClientContext(this), uploadGatewayUrl, request);
   }
 
@@ -61,7 +69,9 @@ public class DefaultAlipayClient extends BaseAlipayClient {
       throws AlipayApiException {
     HttpRpcResult httpRpcResult;
     try {
-      httpRpcResult = DefaultHttpRPC.doPost(requestUrl, header, reqBody);
+      httpRpcResult = isApiKeyAuthentication()
+          ? ApiKeyHttpRPC.doPost(requestUrl, header, reqBody)
+          : DefaultHttpRPC.doPost(requestUrl, header, reqBody);
     } catch (Exception e) {
       throw new AlipayApiException(e);
     }
