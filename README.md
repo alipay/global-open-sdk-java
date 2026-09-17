@@ -4,7 +4,11 @@ JDK version：8+
 Copyright：Ant financial services group  
 ```
 
-## API Key client (current branch, not yet released)
+
+Planned release: **3.1.0**. This version is not published yet; package/tag references
+below describe the target release. Build this branch to try it before publication.
+
+## API Key client (planned for 3.1.0)
 
 Use `ApiKeyAlipayClient` with a regional HTTPS gateway and API Key. Existing request
 models are shared with the RSA client; ClientId and RSA keys are not required.
@@ -29,7 +33,7 @@ https://mvnrepository.com/artifact/com.alipay.global.sdk/global-open-sdk-java
 <dependency>
     <groupId>com.alipay.global.sdk</groupId>
     <artifactId>global-open-sdk-java</artifactId>
-    <version>3.0.1</version>
+    <version>3.1.0</version>
 </dependency>
 ```
    
