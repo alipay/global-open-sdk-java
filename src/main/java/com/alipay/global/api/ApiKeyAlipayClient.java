@@ -102,13 +102,13 @@ public class ApiKeyAlipayClient implements AlipayClient {
                 }
                 return parsed;
               } catch (AlipayApiException e) {
-                throw new java.io.IOException(auth.redact(e.getMessage()));
+                throw new java.io.IOException(auth.redact(e.getMessage()), auth.safeCause(e));
               }
             });
       }
     } catch (Exception e) {
-      // Do not retain a cause that could contain an echoed Authorization value.
-      throw new AlipayApiException(auth.redact(e.getMessage()));
+      // Preserve diagnostics unless the exception chain contains the API Key.
+      throw new AlipayApiException(auth.redact(e.getMessage()), auth.safeCause(e));
     }
   }
 

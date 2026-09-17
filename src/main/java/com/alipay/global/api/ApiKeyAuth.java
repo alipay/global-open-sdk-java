@@ -1,5 +1,7 @@
 package com.alipay.global.api;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.net.URI;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -82,6 +84,12 @@ final class ApiKeyAuth {
         || value.indexOf('\n') >= 0) {
       throw new IllegalArgumentException("Invalid custom header");
     }
+  }
+
+  Throwable safeCause(Throwable error) {
+    StringWriter trace = new StringWriter();
+    error.printStackTrace(new PrintWriter(trace));
+    return trace.toString().contains(apiKey) ? null : error;
   }
 
   String redact(String message) {
