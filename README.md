@@ -4,6 +4,23 @@ JDK version：8+
 Copyright：Ant financial services group  
 ```
 
+## API Key client (current branch, not yet released)
+
+Use `ApiKeyAlipayClient` with a regional HTTPS gateway and API Key. Existing request
+models are shared with the RSA client; ClientId and RSA keys are not required.
+
+```java
+import com.alipay.global.api.ApiKeyAlipayClient;
+
+ApiKeyAlipayClient client = new ApiKeyAlipayClient(
+    System.getenv("ANTOM_GATEWAY_URL"), System.getenv("ANTOM_API_KEY"));
+```
+
+Start with the [sandbox createPaymentSession example](src/main/java/com/alipay/global/api/example/ApiKeyPaymentSessionDemo.java) and its
+[configuration and run instructions](docs/api-key-client.md). Existing RSA usage below remains supported.
+
+
+
 #### 1 Please use the latest version
 
 https://mvnrepository.com/artifact/com.alipay.global.sdk/global-open-sdk-java
