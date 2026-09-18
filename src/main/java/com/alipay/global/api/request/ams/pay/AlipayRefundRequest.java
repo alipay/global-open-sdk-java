@@ -18,6 +18,7 @@ import com.alipay.global.api.model.ams.CustomizedInfo;
 import com.alipay.global.api.model.ams.Goods;
 import com.alipay.global.api.model.ams.RefundDetail;
 import com.alipay.global.api.model.ams.RefundToBankInfo;
+import com.alipay.global.api.model.ams.SplitDetail;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.pay.AlipayRefundResponse;
 import java.util.List;
@@ -93,6 +94,17 @@ public class AlipayRefundRequest extends AlipayRequest<AlipayRefundResponse> {
    * refund.
    */
   private List<Goods> goods;
+
+  /**
+   * The split details to reverse for a refund. Provide this field when you override the existing
+   * Shopify ISV funding rule and specify the original split recipients that bear this refund, with
+   * 1 to 20 non-null items. This field is available to the Shopify ISV product only. It is not an
+   * idempotency key, but its complete value participates in the consistency check of
+   * refundRequestId. If this field is omitted, no explicit split-reversal instruction is created
+   * and the existing funding rule applies. No default value. More information: Maximum size: 20
+   * elements
+   */
+  private List<SplitDetail> splitDetails;
 
   public AlipayRefundRequest() {
     this.setPath("/ams/api/v1/payments/refund");

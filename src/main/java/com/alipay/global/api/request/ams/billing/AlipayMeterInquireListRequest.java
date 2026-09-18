@@ -23,27 +23,40 @@ import lombok.*;
 public class AlipayMeterInquireListRequest extends AlipayRequest<AlipayMeterInquireListResponse> {
 
   /**
-   * The page number. The value must be at least 1. The default value is 1. A page beyond the last
-   * page returns SUCCESS with an empty &#x60;meters&#x60; array.
+   * The page number. Omit to use 1. When present, it must be an integer at least 1; a page beyond
+   * the current last page returns success with an empty meters array.
    */
   private Integer pageNum;
 
-  /** The number of records per page. Value range: 1-100. The default value is 10. */
+  /**
+   * The number of records per page. Omit to use 10. When present, it must be an integer from 1 to
+   * 100.
+   */
   private Integer pageSize;
 
-  /** The meter name. Maximum length: 255 characters. */
+  /** The meter name filter. Omit for no name filter. Maximum length: 255 characters. */
   private String meterName;
 
-  /** The event name. Maximum length: 100 characters. */
+  /** The event routing name filter. Omit for no event filter. Maximum length: 100 characters. */
   private String eventName;
 
-  /** The current status. Maximum length: 8 characters. */
+  /**
+   * The meter status filter. Valid values are ACTIVE and INACTIVE; omit to include both states.
+   * Maximum length: 8 characters.
+   */
   private String status;
 
-  /** The start date time. Maximum length: 32 characters. */
+  /**
+   * The inclusive lower bound of the creation time filter in ISO 8601 UTC format, encoded as a JSON
+   * string. Omit for no lower bound. Maximum length: 32 characters.
+   */
   private String startDateTime;
 
-  /** The end date time. Maximum length: 32 characters. Note: See documentation for details. */
+  /**
+   * The inclusive upper bound of the creation time filter in ISO 8601 UTC format, encoded as a JSON
+   * string. Omit for no upper bound; when both bounds exist, it must not be earlier than
+   * startDateTime. Maximum length: 32 characters.
+   */
   private String endDateTime;
 
   public AlipayMeterInquireListRequest() {

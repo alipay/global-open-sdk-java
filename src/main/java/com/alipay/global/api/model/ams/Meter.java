@@ -21,30 +21,50 @@ import lombok.*;
 @AllArgsConstructor
 public class Meter {
 
-  /** The meter ID. Maximum length: 64 characters. */
+  /** The unique identifier of the Meter. Maximum length: 64 characters. */
   private String meterId;
 
-  /** The meter name. Maximum length: 255 characters. */
+  /** The merchant-facing name of the Meter. Maximum length: 255 characters. */
   private String meterName;
 
-  /** The event name. Maximum length: 100 characters. */
+  /**
+   * The event routing name. It is unique within a merchant and cannot be changed after creation.
+   * Maximum length: 100 characters.
+   */
   private String eventName;
 
-  /** The current status. Maximum length: 8 characters. */
+  /** The Meter status. Valid values are ACTIVE and INACTIVE. Maximum length: 8 characters. */
   private String status;
 
-  /** The aggregation method. Maximum length: 8 characters. */
+  /**
+   * The aggregation method. Valid values are SUM, COUNT, and LAST. SUM adds the metered values from
+   * all eligible Events within the aggregation period; COUNT counts the number of eligible Events
+   * within the aggregation period; LAST uses the metered value from the most recent eligible Event.
+   * Maximum length: 8 characters.
+   */
   private String aggregationMethod;
 
-  /** The event time window. Maximum length: 4 characters. */
+  /**
+   * The upstream pre-aggregation window. Valid values are HOUR and DAY. The field is omitted for
+   * raw Events. Maximum length: 4 characters.
+   */
   private String eventTimeWindow;
 
-  /** The value key override. Maximum length: 256 characters. */
+  /**
+   * The field name in the Event payload that contains the metered value. Its length is 1 to 100
+   * characters and it must match ^[A-Za-z0-9_]{1,100}$. Maximum length: 100 characters.
+   */
   private String valueKeyOverride;
 
-  /** The created date time. Maximum length: 32 characters. */
+  /**
+   * The creation time in ISO 8601 UTC format, encoded as a JSON string. Maximum length: 32
+   * characters.
+   */
   private String createdDateTime;
 
-  /** The updated date time. Maximum length: 32 characters. */
+  /**
+   * The last update time in ISO 8601 UTC format, encoded as a JSON string. Maximum length: 32
+   * characters.
+   */
   private String updatedDateTime;
 }
