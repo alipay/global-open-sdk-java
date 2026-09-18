@@ -17,8 +17,10 @@ import com.alipay.global.api.model.ams.AcquirerInfo;
 import com.alipay.global.api.model.ams.Amount;
 import com.alipay.global.api.model.ams.CustomizedInfo;
 import com.alipay.global.api.model.ams.Quote;
+import com.alipay.global.api.model.ams.SplitDetail;
 import com.alipay.global.api.model.ams.TransactionStatusType;
 import com.alipay.global.api.response.AlipayResponse;
+import java.util.List;
 import lombok.*;
 
 /** AlipayInquiryRefundResponse */
@@ -68,6 +70,18 @@ public class AlipayInquiryRefundResponse extends AlipayResponse {
    */
   private String refundTime;
 
+  /**
+   * The actual split reversal details for a refund. This field is guaranteed when the value of
+   * result.resultStatus is S, the value of refundStatus is SUCCESS, and the original refund request
+   * contains splitDetails, in which case it contains 1 to 20 items. This field is absent when the
+   * original refund request does not contain an explicit split-reversal instruction. When the value
+   * of refundStatus is PROCESSING, this field can be absent, and each returned item contains only
+   * the original-request fields splitTo, splitAmount, and description; in this case
+   * actualSplitAmount is absent and the data is non-final and must not be used for reconciliation.
+   * More information: Maximum size: 20 elements
+   */
+  private List<SplitDetail> splitDetails;
+
   private Amount grossSettlementAmount;
 
   private Quote settlementQuote;
@@ -77,13 +91,6 @@ public class AlipayInquiryRefundResponse extends AlipayResponse {
   /** 检索参考号，可提供给用户用于跟踪支付/退款/争议的详细信息 */
   private String rrn;
 
-  /**
-   * The authorization code returned by the payment channel for a successful refund. This field is
-   * returned only when refundStatus is SUCCESS, the payment method or channel supplies a non-empty
-   * value, and the merchant is enabled for this capability. Otherwise, the property is omitted and
-   * is never returned as JSON null. The exact channel-provided string is returned without trimming,
-   * padding, case conversion, substitution, or truncation. Its absence does not change the refund
-   * result or produce a field-specific error.
-   */
+  /** The authorization code returned by the payment channel upon a successful refund. */
   private String authorizationCode;
 }
