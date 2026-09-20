@@ -21,41 +21,57 @@ import lombok.*;
 @AllArgsConstructor
 public class CreditGrant {
 
-  /** The credit grant ID. Maximum length: 64 characters. */
+  /** The unique identifier of the Credit Grant. Maximum length: 64 characters. */
   private String creditGrantId;
 
-  /** The credit grant name. Maximum length: 255 characters. */
+  /** The merchant-facing name of the Credit Grant. Maximum length: 255 characters. */
   private String creditGrantName;
 
-  /** The unique ID assigned by Antom to identify a customer. Maximum length: 64 characters. */
+  /** The Customer that receives the credit. Maximum length: 64 characters. */
   private String customerId;
 
-  /** The current status. Maximum length: 8 characters. */
+  /**
+   * The Credit Grant status. Valid values are PENDING, ACTIVE, EXPIRED, and VOIDED. VOIDED is the
+   * only irreversible terminal state. Maximum length: 8 characters.
+   */
   private String status;
 
   private Amount amount;
 
-  private AvailableAmount availableAmount;
+  private Amount availableAmount;
 
   private Applicability applicability;
 
-  /** The priority. */
+  /** The application priority from 0 to 100. A lower value has a higher priority. */
   private Integer priority;
 
-  /** The category. Maximum length: 16 characters. */
+  /**
+   * The Credit Grant category. Valid values are PREPAID and PROMOTIONAL. Maximum length: 16
+   * characters.
+   */
   private String category;
 
   /**
-   * The effective date time. Maximum length: 32 characters. Note: See documentation for details.
+   * The effective time in ISO 8601 UTC format, encoded as a JSON string. Omitted when the Grant is
+   * effective immediately. Maximum length: 32 characters.
    */
   private String effectiveDateTime;
 
-  /** The expiry date time. Maximum length: 32 characters. Note: See documentation for details. */
+  /**
+   * The expiration time in ISO 8601 UTC format, encoded as a JSON string. Omitted when the Grant
+   * does not expire automatically. Maximum length: 32 characters.
+   */
   private String expiryDateTime;
 
-  /** The created date time. Maximum length: 32 characters. */
+  /**
+   * The creation time in ISO 8601 UTC format, encoded as a JSON string. Maximum length: 32
+   * characters.
+   */
   private String createdDateTime;
 
-  /** The updated date time. Maximum length: 32 characters. */
+  /**
+   * The last update time in ISO 8601 UTC format, encoded as a JSON string. Maximum length: 32
+   * characters.
+   */
   private String updatedDateTime;
 }
