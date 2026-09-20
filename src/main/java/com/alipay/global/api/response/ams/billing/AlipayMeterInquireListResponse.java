@@ -23,18 +23,15 @@ import lombok.*;
 @Data
 public class AlipayMeterInquireListResponse extends AlipayResponse {
 
-  /** The current page number. Returned only when result.resultCode is SUCCESS. */
+  /** The current page number. */
   private Integer pageNum;
 
-  /** The number of records on the current page. Returned only when result.resultCode is SUCCESS. */
+  /** The current page size. */
   private Integer pageSize;
 
-  /**
-   * The total number of matching meters at query time. Returned only when result.resultCode is
-   * SUCCESS.
-   */
+  /** The real-time number of matching Meter resources at query time. */
   private Integer totalCount;
 
-  /** The matching meters. Returned only when result.resultCode is SUCCESS. */
+  /** The Meter list. Maximum size: 100 elements, bounded by pageSize. */
   private List<Meter> meters;
 }

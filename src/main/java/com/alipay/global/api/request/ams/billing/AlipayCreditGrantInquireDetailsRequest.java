@@ -23,7 +23,10 @@ import lombok.*;
 public class AlipayCreditGrantInquireDetailsRequest
     extends AlipayRequest<AlipayCreditGrantInquireDetailsResponse> {
 
-  /** The credit grant ID. Maximum length: 64 characters. */
+  /**
+   * The unique identifier of the Credit Grant. The resource must belong to the authenticated
+   * merchant. Maximum length: 64 characters.
+   */
   private String creditGrantId;
 
   public AlipayCreditGrantInquireDetailsRequest() {
