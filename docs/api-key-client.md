@@ -1,6 +1,6 @@
 # API Key client
 
-Planned for 3.1.0; available on this branch, not yet published as a package. The client accepts
+Available since 3.1.0. The client accepts
 a regional HTTPS gateway and a complete API Key. TEST/PROD paths are selected from
 the key without modifying the request or decoding a ClientId.
 
