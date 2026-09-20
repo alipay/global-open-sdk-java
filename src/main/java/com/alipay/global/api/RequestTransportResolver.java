@@ -22,6 +22,11 @@ final class RequestTransportResolver {
         && SESSION_HTTP2_ROUTES.contains(routeKey(request.getHttpMethod(), request.getPath()));
   }
 
+  static boolean allowsUnsignedResponse(AlipayRequest<?> request) {
+    // Routes designed to return unsigned responses are currently the same set as the HTTP/2 session routes.
+    return requiresSessionHttp2(request);
+  }
+
   private static String routeKey(String httpMethod, String path) {
     return (httpMethod == null ? "" : httpMethod.toUpperCase(Locale.ROOT)) + " " + path;
   }
