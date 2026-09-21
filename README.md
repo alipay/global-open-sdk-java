@@ -16,26 +16,12 @@ Requires JDK 8+.
 
 ## Quick start
 
-- **API Key:** follow the [setup guide](docs/api-key-client.md) and run the [sandbox example](src/main/java/com/alipay/global/api/example/ApiKeyPaymentSessionDemo.java).
 - **RSA:** follow the [configuration](#rsa-configuration) and [inline example](#payment) below.
+- **API Key (limited availability):** follow the [setup guide](docs/api-key-client.md) and run the [sandbox example](src/main/java/com/alipay/global/api/example/ApiKeyPaymentSessionDemo.java).
 - Browse [more examples](src/main/java/com/alipay/global/api/example) and the [API documentation](https://global.alipay.com/docs/).
 
-API Key and RSA clients share request/response models. File uploads and notification
+RSA and API Key clients share request/response models. File uploads and notification
 verification still require RSA credentials.
-
-### API Key client
-
-Set `ANTOM_GATEWAY_URL` and `ANTOM_API_KEY` in your server environment.
-This initializes the client; see the [setup guide](docs/api-key-client.md) for a
-complete sandbox request and its additional configuration. In Java, place the
-import at file scope and the initialization statements inside a method.
-
-```java
-import com.alipay.global.api.ApiKeyAlipayClient;
-
-ApiKeyAlipayClient client = new ApiKeyAlipayClient(
-    System.getenv("ANTOM_GATEWAY_URL"), System.getenv("ANTOM_API_KEY"));
-```
 
 ### RSA configuration
 
@@ -242,6 +228,23 @@ public class ReadmeRisk {
         RiskDecideResponse response = CLIENT.execute(riskDecideRequest);
     }
 }
+```
+
+### API Key client (limited availability)
+
+> API Key access is not yet available to all merchants. Use this client only if
+> API Key access has been enabled for your account; otherwise, use RSA.
+
+Set `ANTOM_GATEWAY_URL` and `ANTOM_API_KEY` in your server environment.
+This initializes the client; see the [setup guide](docs/api-key-client.md) for a
+complete sandbox request and its additional configuration. In Java, place the
+import at file scope and the initialization statements inside a method.
+
+```java
+import com.alipay.global.api.ApiKeyAlipayClient;
+
+ApiKeyAlipayClient client = new ApiKeyAlipayClient(
+    System.getenv("ANTOM_GATEWAY_URL"), System.getenv("ANTOM_API_KEY"));
 ```
 
 ## Upgrade notes
