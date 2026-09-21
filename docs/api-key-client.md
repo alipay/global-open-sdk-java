@@ -1,6 +1,9 @@
 # API Key client
 
-Available since 3.1.0. The client accepts
+> API Key access is not yet available to all merchants. Use this client only if
+> API Key access has been enabled for your account; otherwise, use RSA.
+
+SDK support was added in 3.1.0. The client accepts
 a regional HTTPS gateway and a complete API Key. TEST/PROD paths are selected from
 the key without modifying the request or decoding a ClientId.
 
