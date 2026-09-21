@@ -53,6 +53,11 @@ replace_once(
     r"(<artifactId>global-open-sdk-java</artifactId>\s*<version>)[^<]+(</version>)",
     r"\g<1>{}\g<2>".format(version),
 )
+replace_once(
+    "README.md",
+    r"(?m)^Latest release: \*\*[^\r\n*]+\*\*$",
+    "Latest release: **{}**".format(version),
+)
 PY
 
 echo "Updated global-open-sdk-java to $VERSION"
