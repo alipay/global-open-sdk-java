@@ -33,7 +33,7 @@ public final class AmountUtil {
 
     public static String fromAmount(String value, String currency) {
         int minorUnit = minorUnit(currency);
-        validateValueFormat(value, true);
+        validateValueFormat(value);
         String canonical = canonicalDigits(value);
         if (minorUnit == 0) {
             return canonical;
@@ -48,7 +48,7 @@ public final class AmountUtil {
 
     public static void validate(String value, String currency) {
         minorUnit(currency);
-        validateValueFormat(value, false);
+        validateValueFormat(value);
         validateCanonical(value, currency);
     }
 
@@ -70,7 +70,7 @@ public final class AmountUtil {
         return minorUnit;
     }
 
-    private static void validateValueFormat(String value, boolean allowZero) {
+    private static void validateValueFormat(String value) {
         if (value == null) {
             throw invalid("INVALID_ARGUMENT_TYPE", "value must be a string");
         }
@@ -80,18 +80,14 @@ public final class AmountUtil {
         if (value.length() > MAX_VALUE_LENGTH) {
             throw invalid("VALUE_TOO_LONG", "value must contain at most 16 digits");
         }
-        if (!allowZero && allZeros(value)) {
-            throw invalid("AMOUNT_NOT_POSITIVE", "value must be greater than zero");
-        }
     }
 
     private static void validateCanonical(String value, String currency) {
-        if (allZeros(value)) {
-            throw invalid("AMOUNT_NOT_POSITIVE", "value must be greater than zero");
-        }
         if (value.length() > MAX_VALUE_LENGTH) {
             throw invalid("VALUE_TOO_LONG", "value must contain at most 16 digits");
         }
+        // Zero is a multiple of every configured positive divisor.
+        if (allZeros(value)) return;
         String multiple = AmountRuleLoader.rules().multiples.get(currency);
         if (multiple != null && !value.endsWith(multiple.substring(1))) {
             throw invalid("RULE_VIOLATION", "value does not satisfy the Antom currency constraint");
