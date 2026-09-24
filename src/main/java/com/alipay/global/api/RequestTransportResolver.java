@@ -23,7 +23,8 @@ final class RequestTransportResolver {
   }
 
   static boolean allowsUnsignedResponse(AlipayRequest<?> request) {
-    // Routes designed to return unsigned responses are currently the same set as the HTTP/2 session routes.
+    // Routes designed to return unsigned responses are currently the same set as the HTTP/2 session
+    // routes.
     return requiresSessionHttp2(request);
   }
 
