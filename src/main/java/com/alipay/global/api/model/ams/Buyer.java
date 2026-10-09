@@ -23,6 +23,18 @@ import lombok.*;
 public class Buyer {
 
   /**
+   * Business name for createPaymentSession. Required when buyerType is B. Not persisted by
+   * asynchronous Billing customer resolution. Omit in APIs that do not document support.
+   */
+  private String businessName;
+
+  /**
+   * Optional buyer type for createPaymentSession: B (business) or C (consumer). No default. Omit in
+   * APIs that do not document support.
+   */
+  private String buyerType;
+
+  /**
    * The unique ID to identify the buyer. Note: Specify this parameter when you want to use the
    * promotion offered by Antom to this order. More information: Maximum length: 64 characters
    */
@@ -42,7 +54,8 @@ public class Buyer {
    * The email of the buyer. Specify this parameter: When you require risk control. When the value
    * of paymentMethodType is CARD. Providing this information helps to increase the accuracy of
    * anti-money laundering and fraud detection, and increase payment success rates. More
-   * information: Maximum length: 64 characters
+   * information: Maximum length: 64 characters For the DingTalk createPaymentSession integration, a
+   * valid buyer email is required and the maximum length is 128 characters.
    */
   private String buyerEmail;
 
@@ -79,10 +92,10 @@ public class Buyer {
   private String dateOfFirstPaidPurchase;
 
   /**
-   * For createPaymentSession, these buyer tax IDs are used for B2B or reverse-charge determination
-   * when automatic tax is active. If omitted, null, invalid, or unusable, Antom calculates tax as
-   * B2C instead of rejecting the payment session. Because Buyer is a shared SDK model, omit this
-   * field in APIs that do not explicitly document support. Maximum size: 10.
+   * Tax IDs for createPaymentSession tax handling; at most 10 entries with country/value and
+   * optional region. The asynchronous Billing customer resolution does not persist these IDs. Other
+   * session flows retain their documented B2C fallback for missing or unusable IDs. Omit in APIs
+   * that do not document support.
    */
   private List<BuyerTaxId> taxIds;
 

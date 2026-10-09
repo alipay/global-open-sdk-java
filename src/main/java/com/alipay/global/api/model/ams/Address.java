@@ -22,6 +22,12 @@ import lombok.*;
 public class Address {
 
   /**
+   * Country code for createPaymentSession buyer.businessAddress. Required in the DingTalk
+   * integration; use region for other address contexts. ISO 3166-1 alpha-2.
+   */
+  private String country;
+
+  /**
    * The 2-letter country or region code. For more information, see the ISO 3166 Country Codes
    * standard. More information: Maximum length: 2 characters
    */
