@@ -28,9 +28,7 @@ public class BuyerTaxId {
   private String country;
 
   /**
-   * The two-character country-specific subdivision code. Required only when the applicable tax
-   * authority or country or region rule requires subdivision-level identification. Maximum length:
-   * 2 characters.
+   * Optional ISO 3166-2 issuing state or province subdivision code. Maximum length: 10 characters.
    */
   private String region;
 

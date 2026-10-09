@@ -21,6 +21,17 @@ import lombok.*;
 @AllArgsConstructor
 public class InvoiceCreateItem {
 
+  private Amount discountAmount;
+
+  /**
+   * Tax inclusion behavior: EXCLUSIVE (tax added) or INCLUSIVE (tax included). Used for automatic
+   * tax calculation.
+   */
+  private String taxBehavior;
+
+  /** Line-item tax classification code for automatic tax calculation, such as txcd_37071002. */
+  private String taxCode;
+
   /**
    * Human-readable description of the invoice. Appears on the invoice PDF and hosted page. HTML
    * tags are stripped for XSS prevention. Can be null.
@@ -45,9 +56,8 @@ public class InvoiceCreateItem {
   private String productId;
 
   /**
-   * Quantity of units. Integer only; decimal quantities are not supported in v1. Defaults to 1 if
-   * omitted. Required for unit-amount and price-object pricing models, and ignored for fixed-amount
-   * pricing. Value range: 1 to 999999.
+   * Quantity of units, from 1 to 999. Defaults to 1 on the server. Multiplies unitAmount or catalog
+   * pricing; does not multiply fixed itemAmount.
    */
   private Integer quantity;
 
