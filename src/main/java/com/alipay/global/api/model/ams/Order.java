@@ -23,6 +23,13 @@ import lombok.*;
 public class Order {
 
   /**
+   * For createPaymentSession, request a receipt email after successful payment. Defaults to false
+   * on the server. Locale follows customer preferredLocales, or en-US. Omit in APIs that do not
+   * document support.
+   */
+  private Boolean sendReceipt;
+
+  /**
    * The unique ID to identify the order on the merchant side, which is assigned by the merchant
    * that provides services or goods directly to the customer. This field is used for user
    * consumption records display and other further actions such as disputes track or handling of
