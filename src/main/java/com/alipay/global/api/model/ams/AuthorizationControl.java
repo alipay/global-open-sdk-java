@@ -57,13 +57,72 @@ public class AuthorizationControl {
    * requestId idempotency, and invalid values, more than 9 entries, duplicates, or
    * capability-disabled use return PARAM_ILLEGAL. For inquireCardDetail, a configured list is
    * returned in stored order; an enabled merchant without a card-level preference receives null,
-   * and a disabled merchant does not receive the field. For inquireCardSensitiveInfo, a whitelisted
-   * merchant receives the configured list, the child field is omitted when no card-level preference
-   * exists, and a non-whitelisted merchant does not receive the parent cardDetail object. The
+   * and a disabled merchant does not receive the field. For inquireCardSensitiveInfo, the current
+   * contract exposes authorizationControl at the response top level for whitelisted merchants. The
+   * legacy cardDetail property remains in the SDK for compatibility, without automatic copying
+   * between the two locations. The order field is subject to its existing capability and visibility
+   * rules; an absent order field must not be interpreted as proof that no stored order exists. The
    * initially supported currencies are USD, EUR, GBP, HKD, AUD, CAD, CNH, JPY, and NZD; the
    * supported set is configuration-driven and can change without an API contract change.
    */
   private List<String> paymentPreferenceCurrencies;
+
+  /**
+   * Whether to prioritize the transaction currency balance. Accepted only by applyCard and
+   * immutable after creation; do not send to updateCard. True enables same-currency-first
+   * deduction; false skips it and follows paymentPreferenceCurrencies when configured, otherwise
+   * the account-level setting. Omission preserves the server default behavior
+   * (same-currency-first); SDKs must not supply a default and must preserve explicit false. An
+   * omitted, null, or empty currency order is accepted. Returned by inquireCardDetail and the
+   * top-level authorizationControl of inquireCardSensitiveInfo when a standing is stored; otherwise
+   * omitted. Sensitive-info enrichment requires the existing merchant whitelist. Availability is
+   * controlled by WorldFirst; an ignored preference is not stored. Applicable to eligible Z18
+   * merchants in CN/HK. Each payment is funded in full from one currency; balances are never split
+   * across currencies. A configured card-level currency order is exclusive: the account-level order
+   * is not consulted, and the payment fails if no eligible currency can fund it in full. On
+   * inquiry, an absent paymentPreferenceCurrencies field can mean the order is hidden or
+   * unavailable; it must not be interpreted as proof that no order is configured. Retain endpoint
+   * and capability context when interpreting returned fields.
+   */
+  private Boolean sameCurrencyPreference;
+
+  /**
+   * Card-level 3DS mode. Accepted only by applyCard and immutable after creation; do not send to
+   * updateCard. Current values are STANDARD and FRICTIONLESS. For card-level configuration,
+   * omission or null uses the server default STANDARD; FRICTIONLESS requires merchant enablement
+   * and remains subject to issuer risk decisions. MID-level configuration takes precedence where
+   * applicable. Returned by inquireCardDetail and the top-level authorizationControl of
+   * inquireCardSensitiveInfo for the card-level cohort; omitted for MID-level-only or Antom-hidden
+   * merchants. A null response means no stored card-level mode. SDKs must not insert defaults and
+   * must tolerate future response values.
+   */
+  private String threeDSMode;
+
+  /**
+   * Cardholder phone number for STANDARD-mode 3DS OTP authentication. Accepted by updateCard only;
+   * do not send to applyCard. Supply a complete E.164 number including the leading plus sign to
+   * update this card-specific value. Omission leaves the existing value unchanged and updating this
+   * field does not change email or merchant security settings. Initially populated from security
+   * settings. In inquireCardDetail and the top-level authorizationControl of
+   * inquireCardSensitiveInfo, returned masked when stored and visible to the card-level cohort, for
+   * both STANDARD and FRICTIONLESS; omitted for the hidden cohort. Never send a masked response
+   * value back to updateCard. Contains personal data; avoid logging complete values. This contract
+   * does not define null or empty-string clearing semantics.
+   */
+  private String phoneNo;
+
+  /**
+   * Cardholder email address for STANDARD-mode 3DS OTP authentication. Accepted by updateCard only;
+   * do not send to applyCard. Supply a complete email address to update this card-specific value.
+   * Omission leaves the existing value unchanged and updating this field does not change phoneNo or
+   * merchant security settings. Initially populated from security settings. In inquireCardDetail
+   * and the top-level authorizationControl of inquireCardSensitiveInfo, returned masked when stored
+   * and visible to the card-level cohort, for both STANDARD and FRICTIONLESS; omitted for the
+   * hidden cohort. Never send a masked response value back to updateCard. Contains personal data;
+   * avoid logging complete values. This contract does not define null or empty-string clearing
+   * semantics.
+   */
+  private String email;
 
   private CardLimitDetail cardLimitDetail;
 
