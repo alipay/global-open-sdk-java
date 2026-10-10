@@ -23,6 +23,13 @@ import lombok.*;
 public class Buyer {
 
   /**
+   * Comma-separated invoice and offline receipt PDF locales for createPaymentSession, such as
+   * ja-JP,en-US. First supported locale wins, with English fallback. Does not select email
+   * language. Omit in APIs that do not document support.
+   */
+  private String preferredLocales;
+
+  /**
    * Business name for createPaymentSession. Required when buyerType is B. Not persisted by
    * asynchronous Billing customer resolution. Omit in APIs that do not document support.
    */
