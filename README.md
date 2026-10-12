@@ -361,3 +361,25 @@ com.alipay.global.api.base64.Base64Provider.setBase64Encryptor(
 ## Support
 
 For integration questions, contact overseas_support@service.alibaba.com.
+
+## Exact amount conversion
+
+All three AmountUtil operations accept zero, including IDR. Zero converts to
+`"0"` in minor units; conversion back uses the currency's fixed decimal precision.
+The 16-digit value limit still applies. Callers must check whether their target
+API accepts a zero amount.
+
+`AmountUtil` converts a major-unit decimal string to Antom's integer-string
+`Amount.value`, and converts it back using Antom's supported-currency rules.
+
+```java
+import com.alipay.global.api.tools.AmountUtil;
+
+String value = AmountUtil.toAmount("10.25", "USD"); // "1025"
+String major = AmountUtil.fromAmount(value, "USD"); // "10.25"
+AmountUtil.validate(value, "USD");
+```
+
+Conversion is exact and never rounds. Extra non-zero decimal places are
+rejected. ISO 4217 is reference evidence only. Payment-method currency support
+and minimum amounts remain subject to the relevant Antom API documentation.

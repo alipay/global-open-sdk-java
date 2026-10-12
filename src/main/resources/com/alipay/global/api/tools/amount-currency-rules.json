@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "dataVersion": "2026-09-01",
+  "antom": {
+    "source": "Antom Amount object usage rules",
+    "sourceUrl": "https://docs.antom.com/ac/ref/cc",
+    "pageUpdatedAt": "2026-08-03"
+  },
+  "iso4217Reference": {
+    "effectiveDate": "2026-01-01",
+    "source": "ISO 4217 List One",
+    "sourceUrl": "https://www.six-group.com/dam/download/financial-information/data-center/iso-currrency/lists/list-one.xml",
+    "sourceSha256": "838dfb991648cf36df939edd5fe3811737962b75a32252847d239cedd1e291c9"
+  },
+  "currencies": {
+    "AUD": { "minorUnit": 2 },
+    "BDT": { "minorUnit": 2 },
+    "BRL": { "minorUnit": 2 },
+    "CAD": { "minorUnit": 2 },
+    "CLP": { "minorUnit": 0 },
+    "CNY": { "minorUnit": 2 },
+    "EUR": { "minorUnit": 2 },
+    "GBP": { "minorUnit": 2 },
+    "HKD": { "minorUnit": 2 },
+    "IDR": { "minorUnit": 2 },
+    "JPY": { "minorUnit": 0 },
+    "KRW": { "minorUnit": 0 },
+    "MXN": { "minorUnit": 2 },
+    "MYR": { "minorUnit": 2 },
+    "NZD": { "minorUnit": 2 },
+    "PEN": { "minorUnit": 2 },
+    "PHP": { "minorUnit": 2 },
+    "PKR": { "minorUnit": 2 },
+    "PLN": { "minorUnit": 2 },
+    "SGD": { "minorUnit": 2 },
+    "THB": { "minorUnit": 2 },
+    "TWD": { "minorUnit": 2 },
+    "USD": { "minorUnit": 2 },
+    "VND": { "minorUnit": 0 }
+  },
+  "antomConstraints": {
+    "IDR": { "minorValueMultiple": "100" }
+  }
+}
