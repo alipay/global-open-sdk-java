@@ -13,6 +13,9 @@ final class AmountRuleLoader {
     private static final String RESOURCE = "/com/alipay/global/api/tools/amount-currency-rules.json";
 
     static RuleSet rules() {
+        if (Holder.FAILURE != null) {
+            throw new IllegalStateException("RULE_DATA_ERROR: unable to load amount currency rules", Holder.FAILURE);
+        }
         return Holder.RULES;
     }
 
@@ -24,12 +27,13 @@ final class AmountRuleLoader {
             ObjectMapper mapper = new ObjectMapper();
             mapper.enable(JsonParser.Feature.STRICT_DUPLICATE_DETECTION);
             JsonNode root = mapper.readTree(stream);
-            if (root == null || !root.isObject() || root.path("schemaVersion").asInt(-1) != 1) {
+            if (root == null || !root.isObject() || !root.path("schemaVersion").isIntegralNumber()
+                    || !root.path("schemaVersion").canConvertToInt() || root.path("schemaVersion").asInt() != 1) {
                 throw new IllegalStateException("RULE_DATA_ERROR: unsupported amount currency rules schema");
             }
             JsonNode currenciesNode = root.get("currencies");
             JsonNode constraintsNode = root.get("antomConstraints");
-            if (currenciesNode == null || !currenciesNode.isObject()
+            if (currenciesNode == null || !currenciesNode.isObject() || currenciesNode.size() == 0
                     || constraintsNode == null || !constraintsNode.isObject()) {
                 throw new IllegalStateException("RULE_DATA_ERROR: invalid amount currency rules structure");
             }
@@ -38,10 +42,9 @@ final class AmountRuleLoader {
             java.util.Iterator<Map.Entry<String, JsonNode>> currencyFields = currenciesNode.fields();
             while (currencyFields.hasNext()) {
                 Map.Entry<String, JsonNode> field = currencyFields.next();
-                JsonNode minorUnit = field.getValue().get("minorUnit");
-                if (minorUnit == null || minorUnit.isNull()) {
-                    currencies.put(field.getKey(), null);
-                } else if (minorUnit.isIntegralNumber() && minorUnit.asInt() >= 0 && minorUnit.asInt() <= 4) {
+                JsonNode minorUnit = field.getValue().path("minorUnit");
+                if (field.getValue().isObject() && minorUnit.isIntegralNumber() && minorUnit.canConvertToInt()
+                        && minorUnit.asInt() >= 0 && minorUnit.asInt() <= 4) {
                     currencies.put(field.getKey(), minorUnit.asInt());
                 } else {
                     throw new IllegalStateException("RULE_DATA_ERROR: invalid minor unit");
@@ -77,7 +80,20 @@ final class AmountRuleLoader {
     }
 
     private static final class Holder {
-        private static final RuleSet RULES = load();
+        private static final RuleSet RULES;
+        private static final IllegalStateException FAILURE;
+
+        static {
+            RuleSet rules = null;
+            IllegalStateException failure = null;
+            try {
+                rules = load();
+            } catch (IllegalStateException exception) {
+                failure = exception;
+            }
+            RULES = rules;
+            FAILURE = failure;
+        }
     }
 
     private AmountRuleLoader() {
