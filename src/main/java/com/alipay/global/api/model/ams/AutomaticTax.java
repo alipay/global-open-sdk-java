@@ -22,9 +22,9 @@ import lombok.*;
 public class AutomaticTax {
 
   /**
-   * Indicates whether automatic tax is enabled for this payment session. This field is required
-   * when automaticTax is provided. true enables automatic tax and false disables it for this
-   * session when merchant tax settings exist.
+   * Whether automatic tax is enabled. createPaymentSession requires an explicit value when
+   * automaticTax is supplied. For invoice/create, omission defaults to false; tax is calculated at
+   * OPEN issuance or DRAFT finalization, not DRAFT creation.
    */
   private Boolean enabled;
 }

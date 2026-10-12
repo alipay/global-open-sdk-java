@@ -2,6 +2,7 @@ package com.alipay.global.api;
 
 import com.alipay.global.api.exception.AlipayApiException;
 import com.alipay.global.api.model.Result;
+import com.alipay.global.api.model.ResultStatusType;
 import com.alipay.global.api.net.HttpRpcResult;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.AlipayResponse;
@@ -95,6 +96,9 @@ public abstract class BaseAlipayClient implements AlipayClient {
     alipayRequest.setClientId(
         alipayRequest.getClientId() == null ? this.clientId : alipayRequest.getClientId());
 
+    // evaluate before adjustSandboxUrl rewrites the path, so the original route is matched
+    boolean allowUnsignedResponse = RequestTransportResolver.allowsUnsignedResponse(alipayRequest);
+
     // replace with sandbox url if needed
     adjustSandboxUrl(alipayRequest);
 
@@ -139,18 +143,15 @@ public abstract class BaseAlipayClient implements AlipayClient {
       throw new AlipayApiException("Response data error, result field is null, rspBody:" + rspBody);
     }
 
-    String rspSignValue = rsp.getRspSign();
-    String rspTime = rsp.getResponseTime();
-    if (null == rspSignValue || rspSignValue.isEmpty() || null == rspTime || rspTime.isEmpty()) {
-      return alipayResponse;
-    }
-
-    /** 对返回结果验签(Verify the result signature) */
-    boolean isVerifySuccess =
-        checkRspSign(httpMethod, path, clientId, rspTime, rspBody, rspSignValue);
-    if (!isVerifySuccess) {
-      throw new AlipayApiException("Response signature verify fail.");
-    }
+    assertResponseVerified(
+        allowUnsignedResponse,
+        httpMethod,
+        path,
+        clientId,
+        rsp.getResponseTime(),
+        rspBody,
+        rsp.getRspSign(),
+        result);
 
     return alipayResponse;
   }
@@ -175,6 +176,9 @@ public abstract class BaseAlipayClient implements AlipayClient {
     // compatible with old version which clientId does not exist in BaseAlipayClient
     alipayRequest.setClientId(
         alipayRequest.getClientId() == null ? this.clientId : alipayRequest.getClientId());
+
+    // evaluate before adjustSandboxUrl rewrites the path, so the original route is matched
+    boolean allowUnsignedResponse = RequestTransportResolver.allowsUnsignedResponse(alipayRequest);
 
     // replace with sandbox url if needed
     adjustSandboxUrl(alipayRequest);
@@ -230,18 +234,15 @@ public abstract class BaseAlipayClient implements AlipayClient {
       throw new AlipayApiException("Response data error, result field is null, rspBody:" + rspBody);
     }
 
-    String rspSignValue = rsp.getRspSign();
-    String rspTime = rsp.getResponseTime();
-    if (null == rspSignValue || rspSignValue.isEmpty() || null == rspTime || rspTime.isEmpty()) {
-      return alipayResponse;
-    }
-
-    /** 对返回结果验签(Verify the result signature) */
-    boolean isVerifySuccess =
-        checkRspSign(httpMethod, path, clientId, rspTime, rspBody, rspSignValue);
-    if (!isVerifySuccess) {
-      throw new AlipayApiException("Response signature verify fail.");
-    }
+    assertResponseVerified(
+        allowUnsignedResponse,
+        httpMethod,
+        path,
+        clientId,
+        rsp.getResponseTime(),
+        rspBody,
+        rsp.getRspSign(),
+        result);
 
     return alipayResponse;
   }
@@ -272,6 +273,45 @@ public abstract class BaseAlipayClient implements AlipayClient {
           httpMethod, path, clientId, responseTime, rspBody, rspSignValue, alipayPublicKey);
     } catch (Exception e) {
       throw new AlipayApiException("verify signature error", e);
+    }
+  }
+
+  private void assertResponseVerified(
+      boolean allowUnsignedResponse,
+      String httpMethod,
+      String path,
+      String clientId,
+      String rspTime,
+      String rspBody,
+      String rspSignValue,
+      Result result)
+      throws AlipayApiException {
+
+    if (allowUnsignedResponse) {
+      return;
+    }
+
+    boolean signatureMissing = StringUtils.isBlank(rspSignValue);
+    boolean responseTimeMissing = StringUtils.isBlank(rspTime);
+    if (signatureMissing && responseTimeMissing) {
+      ResultStatusType resultStatus = result.getResultStatus();
+      if (ResultStatusType.F.equals(resultStatus) || ResultStatusType.U.equals(resultStatus)) {
+        return;
+      }
+      throw new AlipayApiException(
+          "Response data error, unsigned response with resultStatus="
+              + resultStatus
+              + " is not accepted.");
+    }
+    if (signatureMissing || responseTimeMissing) {
+      throw new AlipayApiException("Response data error, incomplete signature headers.");
+    }
+
+    /** 对返回结果验签(Verify the result signature) */
+    boolean isVerifySuccess =
+        checkRspSign(httpMethod, path, clientId, rspTime, rspBody, rspSignValue);
+    if (!isVerifySuccess) {
+      throw new AlipayApiException("Response signature verify fail.");
     }
   }
 

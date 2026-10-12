@@ -13,7 +13,9 @@
 package com.alipay.global.api.request.ams.auth;
 
 import com.alipay.global.api.model.ams.*;
+import com.alipay.global.api.model.ams.Amount;
 import com.alipay.global.api.model.ams.AuthMetaData;
+import com.alipay.global.api.model.ams.AuthorizationConsultDirectDebitInfo;
 import com.alipay.global.api.model.ams.CustomerBelongsTo;
 import com.alipay.global.api.model.ams.Env;
 import com.alipay.global.api.model.ams.OsType;
@@ -27,6 +29,10 @@ import lombok.*;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class AlipayAuthConsultRequest extends AlipayRequest<AlipayAuthConsultResponse> {
+
+  private Amount amount;
+
+  private AuthorizationConsultDirectDebitInfo directDebitInfo;
 
   /** A unique identifier for a specific merchant account. */
   private String merchantAccountId;

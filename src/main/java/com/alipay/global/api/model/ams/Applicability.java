@@ -22,9 +22,17 @@ import lombok.*;
 @AllArgsConstructor
 public class Applicability {
 
-  /** The scope. Maximum length: 8 characters. */
+  /**
+   * The applicability scope. Valid values are ALL and SPECIFIC. ALL applies the Credit Grant to all
+   * eligible Prices that use the same currency as the Grant and omits priceIds; SPECIFIC applies it
+   * only to the Prices specified by priceIds. Maximum length: 8 characters.
+   */
   private String scope;
 
-  /** The price ids. Note: See documentation for details. */
+  /**
+   * The Price IDs that the Credit Grant applies to. Required when scope is SPECIFIC and values must
+   * be unique; omitted when scope is ALL. Maximum size: 64 elements. Maximum length per item: 64
+   * characters.
+   */
   private List<String> priceIds;
 }

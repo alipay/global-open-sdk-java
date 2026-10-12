@@ -13,6 +13,7 @@
 package com.alipay.global.api.response.ams.aba;
 
 import com.alipay.global.api.model.ams.*;
+import com.alipay.global.api.model.ams.AuthorizationControl;
 import com.alipay.global.api.model.ams.CardDetail;
 import com.alipay.global.api.response.AlipayResponse;
 import lombok.*;
@@ -53,6 +54,8 @@ public class AlipayInquireCardSensitiveInfoResponse extends AlipayResponse {
    * \&quot;29.\&quot; This field will only be returned on demand when result.resultStatus &#x3D; S.
    */
   private String expiredYear;
+
+  private AuthorizationControl authorizationControl;
 
   private CardDetail cardDetail;
 }

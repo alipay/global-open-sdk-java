@@ -21,6 +21,12 @@ import lombok.*;
 @AllArgsConstructor
 public class PaymentResultInfo {
 
+  /**
+   * Uniquely identifies a card number and can be used to determine whether different customers are
+   * using the same card number. Maximum length: 256 characters.
+   */
+  private String fingerprint;
+
   /** The name of the card issuer bank */
   private String issuerName;
 

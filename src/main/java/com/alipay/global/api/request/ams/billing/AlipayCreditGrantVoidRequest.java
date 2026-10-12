@@ -22,10 +22,17 @@ import lombok.*;
 @Data
 public class AlipayCreditGrantVoidRequest extends AlipayRequest<AlipayCreditGrantVoidResponse> {
 
-  /** The credit grant ID. Maximum length: 64 characters. */
+  /**
+   * The unique identifier of the Credit Grant. The resource must belong to the authenticated
+   * merchant. Maximum length: 64 characters.
+   */
   private String creditGrantId;
 
-  /** The void reason. Maximum length: 1024 characters. */
+  /**
+   * The business reason for voiding. Send a non-blank reason only when the business workflow
+   * requires the reason to be retained; omit when no audit reason exists. Maximum length: 1024
+   * characters.
+   */
   private String voidReason;
 
   public AlipayCreditGrantVoidRequest() {

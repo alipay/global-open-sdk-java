@@ -21,6 +21,17 @@ import lombok.*;
 @AllArgsConstructor
 public class PaymentFactor {
 
+  /**
+   * For the enabled pay (Checkout Payment) card-payment scenario, indicates whether Antom stores
+   * the buyer-card relationship for future payments. When true, order.buyer.referenceBuyerId must
+   * be non-empty; otherwise, the request is rejected as an invalid parameter. After a successful
+   * payment, Antom associates the card information with the buyer. This optional field is exposed
+   * only to merchants enabled for this scenario. PaymentFactor is a shared SDK model; omit this
+   * field in consult and createPaymentSession unless support is separately documented for the API.
+   * No default value is specified.
+   */
+  private Boolean storePaymentMethodForBuyer;
+
   private Boolean isPaymentEvaluation;
 
   private InStorePaymentScenario inStorePaymentScenario;

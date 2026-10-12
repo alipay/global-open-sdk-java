@@ -75,6 +75,12 @@ public class CardPaymentMethodDetail {
    */
   private String maskedCardNo;
 
+  /**
+   * System-generated card identifier for deduplication. In AMS vaulting, it is a stable
+   * 64-character lowercase hexadecimal string, independent of cardToken. Returned when
+   * result.resultStatus is S and card information is available; inquireVaulting also requires
+   * vaultingStatus SUCCESS. Otherwise omitted, never null. Do not include in merchant requests.
+   */
   private String fingerprint;
 
   private String authenticationFlow;

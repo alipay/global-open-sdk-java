@@ -23,7 +23,10 @@ import lombok.*;
 public class AlipayMeterInquireDetailsRequest
     extends AlipayRequest<AlipayMeterInquireDetailsResponse> {
 
-  /** The meter ID. Maximum length: 64 characters. */
+  /**
+   * The unique identifier of the Meter. The resource must belong to the authenticated merchant.
+   * Maximum length: 64 characters.
+   */
   private String meterId;
 
   public AlipayMeterInquireDetailsRequest() {

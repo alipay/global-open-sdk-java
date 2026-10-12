@@ -22,13 +22,24 @@ import lombok.*;
 @Data
 public class AlipayMeterUpdateRequest extends AlipayRequest<AlipayMeterUpdateResponse> {
 
-  /** The meter ID. Maximum length: 64 characters. */
+  /**
+   * The unique identifier of the Meter. The resource must belong to the authenticated merchant.
+   * Maximum length: 64 characters.
+   */
   private String meterId;
 
-  /** The meter name. Maximum length: 255 characters. Note: See documentation for details. */
+  /**
+   * The merchant-facing name of the Meter. Send this field to rename the Meter; omit to keep the
+   * current name. At least one of meterName and status must be provided. Maximum length: 255
+   * characters.
+   */
   private String meterName;
 
-  /** The current status. Maximum length: 8 characters. Note: See documentation for details. */
+  /**
+   * The Meter status. Valid values are ACTIVE and INACTIVE. Send this field to activate or
+   * deactivate the Meter; omit to keep the current state. At least one of meterName and status must
+   * be provided. Maximum length: 8 characters.
+   */
   private String status;
 
   public AlipayMeterUpdateRequest() {

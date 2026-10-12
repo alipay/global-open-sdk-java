@@ -13,8 +13,10 @@
 package com.alipay.global.api.request.ams.billing;
 
 import com.alipay.global.api.model.ams.*;
+import com.alipay.global.api.model.ams.AutomaticTax;
 import com.alipay.global.api.model.ams.BillingDiscount;
 import com.alipay.global.api.model.ams.InvoiceCreateItem;
+import com.alipay.global.api.model.ams.InvoiceCustomerDetails;
 import com.alipay.global.api.model.ams.InvoiceShipping;
 import com.alipay.global.api.model.ams.PaymentMethod;
 import com.alipay.global.api.request.AlipayRequest;
@@ -28,16 +30,26 @@ import lombok.*;
 public class AlipayInvoiceCreateRequest extends AlipayRequest<AlipayInvoiceCreateResponse> {
 
   /**
-   * Merchant-supplied idempotency key. Repeating the same &#x60;invoiceRequestId&#x60; returns the
-   * originally created invoice (true idempotency - same key, same result). Must be unique per
-   * merchant. Backed by a unique constraint &#x60;UK(merchant_id, invoice_request_id)&#x60; on
-   * &#x60;ibilling_invoice&#x60;. Accepts alphanumeric characters, and underscores. Cannot be null.
+   * Whether invoice emails and PDFs display payment links. Defaults to true on the server; false
+   * hides links without suppressing email or hostedInvoiceUrl. Saved for later delivery unless
+   * overridden.
+   */
+  private Boolean includePaymentLink;
+
+  private AutomaticTax automaticTax;
+
+  private InvoiceCustomerDetails customerDetails;
+
+  /**
+   * Merchant-scoped idempotency key. A duplicate returns BIZ_REPEATED_SUBMIT (F) with the persisted
+   * invoice ID and status before customer resolution, without comparing replay payloads. Reconcile
+   * and retry unknown outcomes with the same ID.
    */
   private String invoiceRequestId;
 
   /**
-   * Customer ID this invoice belongs to. The customer must exist and belong to the requesting
-   * merchant. Cannot be null.
+   * Existing customer ID belonging to the merchant. Supply exactly one of customerId and
+   * customerDetails.
    */
   private String customerId;
 
@@ -73,15 +85,13 @@ public class AlipayInvoiceCreateRequest extends AlipayRequest<AlipayInvoiceCreat
   private String status;
 
   /**
-   * Whether to email the invoice to the customer when created as &#x60;OPEN&#x60;. When
-   * &#x60;true&#x60;, the email is sent idempotently - sending the same invoice twice won&#39;t
-   * produce duplicate emails. Can be null (defaults to false).
+   * Request invoice email delivery when created as OPEN. Defaults to false on the server.
+   * Independent of includePaymentLink; delivery failure does not undo issuance.
    */
   private Boolean autoSend;
 
   /**
-   * CC email addresses for invoice notification. When &#x60;autoSend&#x60; is &#x60;true&#x60;, the
-   * invoice email is also sent to these addresses. Can be null.
+   * Valid CC email addresses. The current invoice auto-send flow does not guarantee CC forwarding.
    */
   private List<String> ccEmails;
 
@@ -117,7 +127,8 @@ public class AlipayInvoiceCreateRequest extends AlipayRequest<AlipayInvoiceCreat
    * applied sequentially to the invoice subtotal in the order they appear. The system resolves each
    * discount reference to its actual discount value (percentage or fixed amount) at creation time
    * and computes the resulting &#x60;discountAmount&#x60; internally. Can be null. See DiscountItem
-   * Object below for field details.
+   * Object below for field details. Invoice-level discounts are not supported when
+   * automaticTax.enabled is true.
    */
   private List<BillingDiscount> discounts;
 

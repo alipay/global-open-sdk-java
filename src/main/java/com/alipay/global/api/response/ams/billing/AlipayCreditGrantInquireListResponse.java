@@ -26,12 +26,12 @@ public class AlipayCreditGrantInquireListResponse extends AlipayResponse {
   /** The current page number. */
   private Integer pageNum;
 
-  /** The number of records on the current page. */
+  /** The current page size. */
   private Integer pageSize;
 
-  /** The total number of matching credit grants at query time. */
+  /** The real-time number of matching Credit Grant resources at query time. */
   private Integer totalCount;
 
-  /** The matching credit grants. Returned only when result.resultCode is SUCCESS. */
+  /** The Credit Grant list. Maximum size: 100 elements, bounded by pageSize. */
   private List<CreditGrant> creditGrants;
 }

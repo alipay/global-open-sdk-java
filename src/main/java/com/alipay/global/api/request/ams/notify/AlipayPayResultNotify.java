@@ -82,4 +82,26 @@ public class AlipayPayResultNotify extends AlipayNotify {
    * that tax has been posted or recorded. If absent, the payment is not subject to tax.
    */
   private String taxCalculationId;
+
+  /**
+   * The status of the post-authorization manual review. Valid values are: PROCESSING: The manual
+   * review is not completed. Do not capture the payment or fulfill the order before the review
+   * reaches a final state. ACCEPT: The manual review is passed. REJECT: The manual review is
+   * rejected. Note: This field is returned when the channel authorization requires manual review,
+   * or when the value of popRiskDecisionResultInfo.postRiskDecision is REVIEW. When this field is
+   * returned, authReviewSource is returned at the same time.
+   */
+  private String authReviewStatus;
+
+  /**
+   * The source of the post-authorization risk review. Valid values are: ANTOM_SHIELD: The review is
+   * initiated by the Antom internal risk engine (Antom Shield). PSP: The review is initiated by the
+   * acquirer-side risk control. Note: This field is returned only when authReviewStatus is
+   * returned. When both the channel manual review and the Antom Shield review are required, the
+   * channel manual review takes precedence and this field returns PSP.
+   */
+  private String authReviewSource;
+
+  /** The post-authorization risk review result of the payment. */
+  private PopRiskDecisionResultInfo popRiskDecisionResultInfo;
 }

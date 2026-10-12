@@ -24,28 +24,40 @@ import lombok.*;
 @Data
 public class AlipayCreditGrantCreateRequest extends AlipayRequest<AlipayCreditGrantCreateResponse> {
 
-  /** The unique ID assigned by Antom to identify a customer. Maximum length: 64 characters. */
+  /**
+   * The Customer receiving the credit. The service validates ownership and status. Maximum length:
+   * 64 characters.
+   */
   private String customerId;
 
-  /** The credit grant name. Maximum length: 255 characters. */
+  /**
+   * The merchant-facing name of the Credit Grant. It must not be null, empty, blank, or longer than
+   * 255 characters. Maximum length: 255 characters.
+   */
   private String creditGrantName;
 
   private Amount amount;
 
   private Applicability applicability;
 
-  /** The priority. */
+  /** The application priority from 0 to 100. Omit to use 0. A lower value has a higher priority. */
   private Integer priority;
 
-  /** The category. Maximum length: 16 characters. */
+  /** The category. Valid values are PREPAID and PROMOTIONAL. Maximum length: 16 characters. */
   private String category;
 
   /**
-   * The effective date time. Maximum length: 32 characters. Note: See documentation for details.
+   * The effective time in ISO 8601 UTC format, encoded as a JSON string. Omit for immediate
+   * activation; a provided value earlier than server time is accepted only within the clock-skew
+   * tolerance. Maximum length: 32 characters.
    */
   private String effectiveDateTime;
 
-  /** The expiry date time. Maximum length: 32 characters. Note: See documentation for details. */
+  /**
+   * The expiration time in ISO 8601 UTC format, encoded as a JSON string. Omit for no automatic
+   * expiration; otherwise the value must be later than the current and effective times. Maximum
+   * length: 32 characters.
+   */
   private String expiryDateTime;
 
   public AlipayCreditGrantCreateRequest() {

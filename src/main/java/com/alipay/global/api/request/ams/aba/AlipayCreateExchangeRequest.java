@@ -14,6 +14,7 @@ package com.alipay.global.api.request.ams.aba;
 
 import com.alipay.global.api.model.ams.*;
 import com.alipay.global.api.model.ams.Amount;
+import com.alipay.global.api.model.ams.Quote;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.aba.AlipayCreateExchangeResponse;
 import lombok.*;
@@ -22,6 +23,8 @@ import lombok.*;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class AlipayCreateExchangeRequest extends AlipayRequest<AlipayCreateExchangeResponse> {
+
+  private Quote quote;
 
   private Amount buyAmount;
 

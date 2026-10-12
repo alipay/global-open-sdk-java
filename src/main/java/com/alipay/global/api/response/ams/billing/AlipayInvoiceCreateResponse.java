@@ -22,8 +22,8 @@ import lombok.*;
 public class AlipayInvoiceCreateResponse extends AlipayResponse {
 
   /**
-   * System-generated unique invoice ID. Used as the primary identifier for subsequent API calls
-   * (query, update, void). Cannot be null. Returned only when result.resultCode is SUCCESS.
+   * System-generated invoice ID. Also returned for a persisted invoice on BIZ_REPEATED_SUBMIT; use
+   * it to reconcile the existing invoice.
    */
   private String invoiceId;
 
@@ -35,17 +35,14 @@ public class AlipayInvoiceCreateResponse extends AlipayResponse {
   private String invoiceRequestId;
 
   /**
-   * Current invoice status: &#x60;DRAFT&#x60; or &#x60;OPEN&#x60;. Determines which subsequent
-   * operations are available (edit for DRAFT, pay for OPEN). Cannot be null. Returned only when
-   * result.resultCode is SUCCESS.
+   * Invoice status: DRAFT, OPEN for a positive issued total, or PAID for zero-total issuance. Also
+   * returned with the persisted invoice on BIZ_REPEATED_SUBMIT.
    */
   private String status;
 
   /**
-   * URL to the customer-facing hosted invoice page. Auto-generated for OPEN invoices. When
-   * &#x60;status&#x3D;DRAFT&#x60;, this field is not returned - use the [Create View Link
-   * API](createViewLink.md) to generate a view URL for DRAFT invoices. Cannot be null when present.
-   * Returned only when result.resultCode is SUCCESS.
+   * Hosted invoice URL returned for OPEN and zero-total PAID issuance, even when includePaymentLink
+   * is false. Absent for DRAFT creation.
    */
   private String hostedInvoiceUrl;
 
