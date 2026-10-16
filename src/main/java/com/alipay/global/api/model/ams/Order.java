@@ -90,4 +90,9 @@ public class Order {
    * document support. Maximum length: 64 characters.
    */
   private String taxCalculationId;
+
+  private Amount paymentAmount;
+
+  /** Checkout JWT for Agentic Payment binding or authentication sessions. */
+  private String checkoutJwt;
 }
