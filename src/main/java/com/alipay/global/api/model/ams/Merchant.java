@@ -44,4 +44,10 @@ public class Merchant {
   private Integer numberOfTrades;
 
   private AccountLastModified accountLastModified;
+
+  /** Merchant website URL. */
+  private String merchantUrl;
+
+  /** ISO 3166-1 alpha-2 merchant country or region code. */
+  private String merchantCountryCode;
 }
