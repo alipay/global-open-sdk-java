@@ -11,6 +11,10 @@ public class AlipayDisputeNotify extends AlipayNotify {
   private String disputeId;
   private String paymentId;
   private String disputeTime;
+  /** Optional ISO 8601 cancellation time with timezone, returned for DISPUTE_CANCELLED. */
+  private String disputeCancelledTime;
+  /** Optional ISO 8601 defense acceptance time with timezone, returned for DEFENSE_SUPPLIED. */
+  private String defenseSuppliedTime;
   private Amount disputeAmount;
   private DisputeNotificationType disputeNotificationType;
   private String disputeReasonMsg;
