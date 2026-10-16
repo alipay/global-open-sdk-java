@@ -247,6 +247,51 @@ ApiKeyAlipayClient client = new ApiKeyAlipayClient(
     System.getenv("ANTOM_GATEWAY_URL"), System.getenv("ANTOM_API_KEY"));
 ```
 
+## Exact amount conversion
+
+Available in SDK version 3.2.0 and later.
+
+Convert a decimal amount string into Antom's integer-string `Amount.value`,
+convert it back to a fixed-precision decimal string, or validate an outbound
+value. Conversion returns a string, not an `Amount` object, and uses bundled
+currency rules without a network request.
+
+Place the import at file scope and the calls inside a method.
+
+```java
+import com.alipay.global.api.tools.AmountUtil;
+
+String value = AmountUtil.toAmount("10.25", "USD"); // "1025"
+String amount = AmountUtil.fromAmount(value, "USD"); // "10.25"
+AmountUtil.validate(value, "USD");
+```
+
+`validate` returns normally on success. Invalid input throws
+`IllegalArgumentException`; bundled-rule loading failures throw `IllegalStateException`.
+Error messages include categories such as `UNSUPPORTED_CURRENCY`,
+`EXCESS_PRECISION`, `VALUE_TOO_LONG`, and `RULE_VIOLATION`.
+
+- Pass amounts, values, and currency codes as strings. Use uppercase currency
+  codes and unsigned ASCII numbers, without spaces, separators, or exponents.
+- Supported currencies: AUD, BDT, BRL, CAD, CLP, CNY, EUR, GBP, HKD, IDR, JPY,
+  KRW, MXN, MYR, NZD, PEN, PHP, PKR, PLN, SGD, THB, TWD, USD, VND. Other codes
+  are rejected; there is no default conversion multiplier.
+- Conversion is exact and never rounds. Extra non-zero decimal places are
+  rejected; trailing zero decimal places are allowed. Zero is accepted, but
+  callers must check whether the target API permits a zero amount.
+- The 16-digit limit applies to `Amount.value`, not to the decimal input string
+  or the business transaction limit. Conversion to a value checks the normalized
+  result; conversion from a value and validation count all input digits,
+  including leading zeros.
+- For IDR, conversion to a value and outbound validation require the value to
+  be a multiple of 100. Conversion from a value does not apply this outbound
+  restriction and never rounds the response amount.
+
+See [Antom's amount rules](https://docs.antom.com/ac/ref/cc) for the conversion
+convention. Supported payment-method currencies, transaction limits, and
+method-specific constraints (such as JKOPay TWD or Octopus HKD multiples) must
+be checked separately; this utility does not validate payment-method context.
+
 ## Upgrade notes
 
 Gateway responses with `resultStatus S` must be signed; responses with only one
