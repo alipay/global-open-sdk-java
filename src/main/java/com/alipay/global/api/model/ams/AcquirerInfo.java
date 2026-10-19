@@ -40,10 +40,7 @@ public class AcquirerInfo {
    */
   private String acquirerTransactionId;
 
-  /**
-   * The unique ID that is assigned by the acquirer to identify a merchant. Note: This parameter is
-   * returned if you integrate the APO product. More information: Maximum length: 64 characters
-   */
+  /** The unique ID that is assigned by the acquirer to identify a merchant. Existing APO return conditions remain unchanged. For the applicable RP gateway-to-Antom-self-acquiring payment flow, this identifies the original Antom acquiring merchant account selected to execute the payment, not the request-side gateway account or a downstream processor account. In that RP flow, this field is mandatory within a returned root-level acquirerInfo object; if the original execution MID is unavailable, the entire object is omitted without changing the payment or capture outcome. This conditional requirement does not make the field mandatory for other consumers of this shared model. Maximum length: 64 characters. */
   private String acquirerMerchantId;
 
   /**
@@ -81,4 +78,8 @@ public class AcquirerInfo {
    * Maximum length: 64 characters.
    */
   private String acquirerFingerprint;
+
+  /** The saved name of the merchant account with the acquirer. For the applicable RP gateway-to-Antom-self-acquiring payment flow, this is the Antom portal account-name snapshot saved with the original payment. It is optional and is omitted when no usable original snapshot was saved. Subsequent payment inquiry, capture and notifications reuse the saved name without a new lookup or backfill; later account renames do not change it. It is not acquirerName or acquirerMerchantName. This field does not introduce a return requirement for other operations or flows. Maximum length: 255 characters. */
+  private String acquirerAccountName;
+
 }

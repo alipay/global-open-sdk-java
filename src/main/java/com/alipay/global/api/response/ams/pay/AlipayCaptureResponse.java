@@ -55,4 +55,7 @@ public class AlipayCaptureResponse extends AlipayResponse {
    * length: 64 characters
    */
   private String acquirerReferenceNo;
+
+  /** Original acquiring account information, when available. */
+  private AcquirerInfo acquirerInfo;
 }
