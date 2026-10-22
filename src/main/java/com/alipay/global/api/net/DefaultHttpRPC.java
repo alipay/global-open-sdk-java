@@ -1,15 +1,12 @@
 package com.alipay.global.api.net;
 
 import com.alipay.global.api.exception.AlipayApiException;
-import com.alipay.global.api.ssl.TrueHostnameVerifier;
-import com.alipay.global.api.ssl.X509TrustManagerImp;
 import com.alipay.global.api.tools.Constants;
 import com.alipay.global.api.tools.SdkVersion;
 import java.io.*;
 import java.lang.reflect.Field;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.security.SecureRandom;
 import java.util.Map;
 import java.util.Set;
 import javax.net.ssl.*;
@@ -20,27 +17,6 @@ public class DefaultHttpRPC {
   private static int readTimeout = 15000;
   private static int connectTimeout = 15000;
   private static int keepAliveTimeout = 30;
-
-  private static SSLContext ctx = null;
-  private static HostnameVerifier verifier = null;
-  private static SSLSocketFactory sslSocketFactory = null;
-
-  static {
-    try {
-      ctx = SSLContext.getInstance("TLS");
-      ctx.init(
-          new KeyManager[0], new TrustManager[] {new X509TrustManagerImp()}, new SecureRandom());
-
-      ctx.getClientSessionContext().setSessionTimeout(15);
-      ctx.getClientSessionContext().setSessionCacheSize(1000);
-
-      sslSocketFactory = ctx.getSocketFactory();
-    } catch (Exception e) {
-
-    }
-
-    verifier = new TrueHostnameVerifier();
-  }
 
   public static HttpRpcResult doPost(String url, Map<String, String> header, String reqBody)
       throws IOException, AlipayApiException {
@@ -116,8 +92,7 @@ public class DefaultHttpRPC {
     HttpsURLConnection connHttps;
     if (Constants.SCHEME.equalsIgnoreCase(url.getProtocol())) {
       connHttps = (HttpsURLConnection) url.openConnection();
-      connHttps.setSSLSocketFactory(sslSocketFactory);
-      connHttps.setHostnameVerifier(verifier);
+      // Keep the platform defaults for certificate-chain and hostname verification.
     } else {
       throw new AlipayApiException("Only supports HTTPS.");
     }
