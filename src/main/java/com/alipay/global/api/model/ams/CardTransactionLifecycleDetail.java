@@ -58,6 +58,12 @@ public class CardTransactionLifecycleDetail {
   /** The card asset ID. */
   private String assetId;
 
+  /**
+   * The product category of the card used for the transaction, such as Mastercard MTA or MTB.
+   * Returned when available; the value is passed through as provided and has no fixed code pattern.
+   */
+  private String cardProduct;
+
   /** The PCI-compliant masked card number. Returned when masking information is available. */
   private String maskedCardNo;
 

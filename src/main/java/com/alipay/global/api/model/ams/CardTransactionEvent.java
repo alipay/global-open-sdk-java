@@ -41,6 +41,12 @@ public class CardTransactionEvent {
   private String authExpireTime;
 
   /**
+   * The time of the channel-designated authorization associated with this event, in ISO 8601
+   * format. Returned for eligible non-AUTH events when available.
+   */
+  private String authTime;
+
+  /**
    * The authorization type. Current values are AUTH and PRE_AUTH. Returned only for an AUTH event
    * when available; consumers must preserve unknown future values.
    */
@@ -90,6 +96,12 @@ public class CardTransactionEvent {
 
   /** The card asset ID. */
   private String assetId;
+
+  /**
+   * The product category of the card used for the transaction, such as Mastercard MTA or MTB.
+   * Returned when available; the value is passed through as provided and has no fixed code pattern.
+   */
+  private String cardProduct;
 
   /** The PCI-compliant masked card number. Returned when masking information is available. */
   private String maskedCardNo;
