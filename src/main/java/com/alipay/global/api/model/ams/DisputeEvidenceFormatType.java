@@ -20,7 +20,11 @@ import lombok.*;
 public enum DisputeEvidenceFormatType {
   PDF("PDF"),
 
-  WORD("WORD");
+  WORD("WORD"),
+
+  ZIP("ZIP"),
+
+  JPG("JPG");
 
   private String value;
 

@@ -13,6 +13,7 @@
 package com.alipay.global.api.response.ams.pay;
 
 import com.alipay.global.api.model.ams.*;
+import com.alipay.global.api.model.ams.AcquirerInfo;
 import com.alipay.global.api.model.ams.Amount;
 import com.alipay.global.api.response.AlipayResponse;
 import lombok.*;
@@ -55,4 +56,6 @@ public class AlipayCaptureResponse extends AlipayResponse {
    * length: 64 characters
    */
   private String acquirerReferenceNo;
+
+  private AcquirerInfo acquirerInfo;
 }
