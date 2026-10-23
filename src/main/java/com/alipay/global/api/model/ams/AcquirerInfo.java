@@ -81,4 +81,10 @@ public class AcquirerInfo {
    * Maximum length: 64 characters.
    */
   private String acquirerFingerprint;
+
+  /**
+   * The name of the acquiring merchant account configured in the Antom portal. More information:
+   * Maximum length: 255 characters
+   */
+  private String acquirerAccountName;
 }
