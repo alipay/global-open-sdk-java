@@ -1,6 +1,6 @@
 # Antom SDK for Java
 
-Latest release: **3.2.0**
+Latest release: **3.2.1**
 
 ## Installation
 
