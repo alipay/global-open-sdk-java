@@ -20,7 +20,9 @@ import lombok.*;
 public enum DisputeEvidenceType {
   TEMPLATE("DISPUTE_EVIDENCE_TEMPLATE"),
 
-  FILE("DISPUTE_EVIDENCE_FILE");
+  FILE("DISPUTE_EVIDENCE_FILE"),
+
+  AI("DISPUTE_EVIDENCE_AI");
 
   private String value;
 

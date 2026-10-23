@@ -6,8 +6,10 @@ import lombok.Data;
 public class DisputeEvidenceRecommendation {
   /** Evidence tag. */
   private String evidenceTag;
+
   /** Whether Antom has already obtained this evidence. */
   private Boolean obtained;
+
   /** Optional contribution level: HIGH, MEDIUM or LOW. */
   private String winRateContribution;
 }
