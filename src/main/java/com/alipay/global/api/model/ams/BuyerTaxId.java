@@ -28,7 +28,8 @@ public class BuyerTaxId {
   private String country;
 
   /**
-   * Optional ISO 3166-2 issuing state or province subdivision code. Maximum length: 10 characters.
+   * Optional tax ID subdivision information. The accepted format and length depend on the API. The
+   * supplied value is transmitted unchanged.
    */
   private String region;
 
