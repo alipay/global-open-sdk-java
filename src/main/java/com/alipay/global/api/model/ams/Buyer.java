@@ -23,11 +23,11 @@ import lombok.*;
 public class Buyer {
 
   /**
-   * Comma-separated invoice and offline receipt PDF locales for createPaymentSession, such as
-   * ja-JP,en-US. First supported locale wins, with English fallback. Does not select email
-   * language. Omit in APIs that do not document support.
+   * Ordered PDF-language preferences for createPaymentSession. Omitted, null, empty or unsupported
+   * preferences use English. Does not read or update customer preferences or select Checkout UI or
+   * email language. Omit in APIs that do not document support.
    */
-  private String preferredLocales;
+  private List<String> preferredLocales;
 
   /**
    * Business name for createPaymentSession. Required when buyerType is B. Not persisted by
@@ -61,8 +61,7 @@ public class Buyer {
    * The email of the buyer. Specify this parameter: When you require risk control. When the value
    * of paymentMethodType is CARD. Providing this information helps to increase the accuracy of
    * anti-money laundering and fraud detection, and increase payment success rates. More
-   * information: Maximum length: 64 characters For the DingTalk createPaymentSession integration, a
-   * valid buyer email is required and the maximum length is 128 characters.
+   * information: Maximum length: 64 characters
    */
   private String buyerEmail;
 
