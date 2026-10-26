@@ -28,34 +28,37 @@ public class InvoiceCustomerDetails {
    */
   private String email;
 
-  /** B (business) or C (consumer). If omitted, uses the matched customer type, otherwise C. */
+  /**
+   * B (business) or C (consumer). Omitted or null values default to C on the server, regardless of
+   * an existing customer profile.
+   */
   private String customerType;
 
   /**
-   * Effective business name required for type B. Omitted values may come from the matched customer;
-   * its profile is not overwritten.
+   * Business name supplied for this invoice. For type B, provide a nonblank value in the request;
+   * an existing customer profile does not supply it.
    */
   private String businessName;
 
   /**
-   * Effective first name required for type C; may use the matched customer value when omitted.
-   * Optional contact name for type B.
+   * First name supplied for this invoice. For type C, provide a nonblank value in the request; an
+   * existing customer profile does not supply it. Optional contact name for type B.
    */
   private String firstName;
 
   /**
-   * Effective last name required for type C; may use the matched customer value when omitted.
-   * Optional contact name for type B.
+   * Last name supplied for this invoice. For type C, provide a nonblank value in the request; an
+   * existing customer profile does not supply it. Optional contact name for type B.
    */
   private String lastName;
 
   private CustomerBusinessAddress businessAddress;
 
   /**
-   * Comma-separated invoice and offline receipt PDF locales, such as ja-JP,en-US. First supported
-   * locale wins, with English fallback. Does not select email language.
+   * Ordered invoice and offline receipt PDF-language preferences. Omit or use null to retain stored
+   * customer preferences; an empty array uses English. Does not select email language.
    */
-  private String preferredLocales;
+  private List<String> preferredLocales;
 
   /**
    * Tax IDs saved for invoice and offline receipt PDF display. Omit to use stored customer IDs; an
