@@ -21,6 +21,7 @@ import com.alipay.global.api.model.ams.BillingSubscription;
 import com.alipay.global.api.model.ams.CreditPayPlan;
 import com.alipay.global.api.model.ams.CustomizedInfo;
 import com.alipay.global.api.model.ams.Env;
+import com.alipay.global.api.model.ams.FundTransferInfo;
 import com.alipay.global.api.model.ams.Order;
 import com.alipay.global.api.model.ams.PaymentFactor;
 import com.alipay.global.api.model.ams.PaymentMethod;
@@ -39,6 +40,8 @@ import lombok.*;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class AlipayPaymentSessionRequest extends AlipayRequest<AlipayPaymentSessionResponse> {
+
+  private FundTransferInfo fundTransferInfo;
 
   /**
    * A unique ID to identify a specific merchant account. Note: Specify this parameter when you use
