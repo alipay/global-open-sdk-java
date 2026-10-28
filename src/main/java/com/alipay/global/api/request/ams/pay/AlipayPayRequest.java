@@ -18,6 +18,7 @@ import com.alipay.global.api.model.ams.Amount;
 import com.alipay.global.api.model.ams.CreditPayPlan;
 import com.alipay.global.api.model.ams.CustomizedInfo;
 import com.alipay.global.api.model.ams.Env;
+import com.alipay.global.api.model.ams.FundTransferInfo;
 import com.alipay.global.api.model.ams.Merchant;
 import com.alipay.global.api.model.ams.Order;
 import com.alipay.global.api.model.ams.PaymentFactor;
@@ -153,6 +154,8 @@ public class AlipayPayRequest extends AlipayRequest<AlipayPayResponse> {
    * with subscriptionInfo. When provided, omit paymentAmount and order.
    */
   private String subscriptionId;
+
+  private FundTransferInfo fundTransferInfo;
 
   /**
    * The language code used by Antom Hosted Checkout Page. This field applies only to non-POP Hosted
