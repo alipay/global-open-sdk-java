@@ -21,6 +21,7 @@ import com.alipay.global.api.model.ams.BillingSubscription;
 import com.alipay.global.api.model.ams.CreditPayPlan;
 import com.alipay.global.api.model.ams.CustomizedInfo;
 import com.alipay.global.api.model.ams.Env;
+import com.alipay.global.api.model.ams.FundTransferInfo;
 import com.alipay.global.api.model.ams.Order;
 import com.alipay.global.api.model.ams.PaymentFactor;
 import com.alipay.global.api.model.ams.PaymentMethod;
@@ -169,6 +170,8 @@ public class AlipayPaymentSessionRequest extends AlipayRequest<AlipayPaymentSess
   private String paymentExpiryTime;
 
   private BillingSubscription subscription;
+
+  private FundTransferInfo fundTransferInfo;
 
   private AutomaticTax automaticTax;
 
