@@ -65,4 +65,9 @@ public class PaymentMethod {
 
   /** Additional information required for some specific payment methods. */
   private Map<String, Object> paymentMethodMetaData;
+
+  /**
+   * The card brand returned for card subscription payments, or UNKNOWN if it cannot be determined.
+   */
+  private String cardBrand;
 }
