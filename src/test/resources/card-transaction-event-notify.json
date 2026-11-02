@@ -1,0 +1,154 @@
+[
+  {
+    "name": "auth",
+    "body": {
+      "assetId": "example_asset_****",
+      "authCode": "00****",
+      "authExpireTime": "2026-07-18T03:35:10-07:00",
+      "authType": "AUTH",
+      "balanceType": "ANTOM_BIZ_ACCOUNT",
+      "billType": "CARD_PAYMENT",
+      "cardProduct": "MTA",
+      "eventId": "example_auth_event_****",
+      "eventType": "AUTH",
+      "exchangeCurrencyPair": "USD/CAD",
+      "exchangeRate": "1.36734",
+      "maskedCardNo": "****7952",
+      "merchantInfo": {
+        "mcc": "7695",
+        "name": "Example Merchant",
+        "region": "US"
+      },
+      "lifecycleId": "example_auth_lifecycle_****",
+      "outAmount": {
+        "currency": "USD",
+        "value": "10366"
+      },
+      "status": "SUCCESS",
+      "transactionAmount": {
+        "currency": "CAD",
+        "value": "14174"
+      },
+      "transactionTime": "2026-07-11T03:35:10-07:00"
+    }
+  },
+  {
+    "name": "capture",
+    "body": {
+      "assetId": "example_asset_****",
+      "authTime": "2026-07-09T10:35:10+00:00",
+      "balanceType": "ANTOM_BIZ_ACCOUNT",
+      "billType": "CARD_PAYMENT",
+      "cardProduct": "MTA",
+      "eventId": "example_capture_event_****",
+      "eventType": "CAPTURE",
+      "lifecycleId": "example_capture_lifecycle_****",
+      "outAmount": {
+        "currency": "USD",
+        "value": "0"
+      },
+      "status": "SUCCESS",
+      "transactionAmount": {
+        "currency": "USD",
+        "value": "30000"
+      },
+      "transactionTime": "2026-07-10T00:02:15-07:00"
+    }
+  },
+  {
+    "name": "refund",
+    "body": {
+      "eventId": "refund-event",
+      "lifecycleId": "spend-1",
+      "eventType": "REFUND",
+      "authTime": "2026-07-09T10:35:10-07:00",
+      "status": "SUCCESS",
+      "balanceType": "ANTOM_FUND_ACCOUNT",
+      "transactionTime": "2026-07-12T10:35:10+08:00",
+      "billType": "CARD_REFUND",
+      "inAmount": {
+        "value": "99999999999999999999",
+        "currency": "USD"
+      },
+      "transactionAmount": {
+        "value": "99999999999999999999",
+        "currency": "USD"
+      },
+      "assetId": "card-1",
+      "merchantInfo": {
+        "name": "商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商商",
+        "region": "US",
+        "mcc": "0001"
+      }
+    }
+  },
+  {
+    "name": "failure",
+    "body": {
+      "eventId": "failed-event",
+      "lifecycleId": "spend-1",
+      "eventType": "AUTH",
+      "status": "FAIL",
+      "failureReason": "CARD_BALANCE_NOT_ENOUGH",
+      "transactionTime": "2026-07-12T10:35:10+00:00",
+      "billType": "CARD_PAYMENT",
+      "transactionAmount": {
+        "value": "105",
+        "currency": "USD"
+      },
+      "assetId": "card-1"
+    }
+  },
+  {
+    "name": "future_values_transport_only",
+    "body": {
+      "eventId": "future-event",
+      "lifecycleId": "spend-1",
+      "eventType": "FUTURE_EVENT",
+      "status": "SUCCESS",
+      "authType": "FUTURE_AUTH",
+      "balanceType": "FUTURE_BALANCE",
+      "transactionTime": "2026-07-12T10:35:10+00:00",
+      "billType": "FUTURE_BILL",
+      "outAmount": {
+        "value": "0",
+        "currency": "USD"
+      },
+      "transactionAmount": {
+        "value": "105",
+        "currency": "USD"
+      },
+      "cardProduct": "Z9X",
+      "assetId": "card-1",
+      "exchangeCurrencyPair": "USD/CAD",
+      "exchangeRate": "1.00000000000000000001",
+      "metadata": {
+        "futureKey": "0",
+        "unicode": "中文",
+        "empty": ""
+      }
+    }
+  },
+  {
+    "name": "null_optionals_tolerated",
+    "body": {
+      "eventId": "null-event",
+      "lifecycleId": "spend-1",
+      "eventType": "AUTH",
+      "status": "FAIL",
+      "transactionTime": "2026-07-12T10:35:10+00:00",
+      "billType": "CARD_PAYMENT",
+      "transactionAmount": {
+        "value": "105",
+        "currency": "USD"
+      },
+      "assetId": "card-1",
+      "authTime": null,
+      "cardProduct": null,
+      "outAmount": null,
+      "inAmount": null,
+      "merchantInfo": null,
+      "metadata": null
+    }
+  }
+]
