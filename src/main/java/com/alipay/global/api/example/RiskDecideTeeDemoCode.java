@@ -12,6 +12,7 @@ import com.alipay.global.api.model.risk.*;
 import com.alipay.global.api.model.risk.Merchant;
 import com.alipay.global.api.model.risk.Order;
 import com.alipay.global.api.model.risk.PaymentMethod;
+import com.alipay.global.api.model.risk.PaymentMethodMetaData;
 import com.alipay.global.api.request.ams.risk.RiskDecideRequest;
 import com.alipay.global.api.request.ams.risk.RiskReportRequest;
 import com.alipay.global.api.request.ams.risk.SendPaymentResultRequest;
