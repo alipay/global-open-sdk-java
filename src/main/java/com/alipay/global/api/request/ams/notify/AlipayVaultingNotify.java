@@ -2,7 +2,7 @@ package com.alipay.global.api.request.ams.notify;
 
 import com.alipay.global.api.model.ams.AcquirerInfo;
 import com.alipay.global.api.model.ams.CustomizedInfo;
-import com.alipay.global.api.model.ams.VaultingPaymentMethodDetail;
+import com.alipay.global.api.model.ams.PaymentMethodDetail;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -14,7 +14,7 @@ public class AlipayVaultingNotify extends AlipayNotify {
   private String vaultingRequestId;
 
   /** The details about the card payment method. */
-  private VaultingPaymentMethodDetail paymentMethodDetail;
+  private PaymentMethodDetail paymentMethodDetail;
 
   private String vaultingCreateTime;
 
