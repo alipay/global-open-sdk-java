@@ -15,7 +15,7 @@ package com.alipay.global.api.request.ams.pay;
 import com.alipay.global.api.model.ams.*;
 import com.alipay.global.api.model.ams.CustomizedInfo;
 import com.alipay.global.api.model.ams.Env;
-import com.alipay.global.api.model.ams.VaultingPaymentMethodDetailPayload;
+import com.alipay.global.api.model.ams.PaymentMethodDetail;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.pay.AlipayVaultingPaymentMethodResponse;
 import lombok.*;
@@ -66,7 +66,7 @@ public class AlipayVaultingPaymentMethodRequest
    */
   private String merchantRegion;
 
-  private VaultingPaymentMethodDetailPayload paymentMethodDetail;
+  private PaymentMethodDetail paymentMethodDetail;
 
   private Env env;
 

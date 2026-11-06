@@ -42,4 +42,28 @@ public class PaymentMethodDetail {
   private Wallet wallet;
 
   private String interactionType;
+
+  private PaymentMethodMetaData paymentMethodMetaData;
+
+  /** Compatibility constructor that preserves the pre-existing request model signature. */
+  public PaymentMethodDetail(
+      PaymentMethodDetailType paymentMethodDetailType,
+      CardPaymentMethodDetail card,
+      ExternalPaymentMethodDetail externalAccount,
+      DiscountPaymentMethodDetail discount,
+      CouponPaymentMethodDetail coupon,
+      String paymentMethodType,
+      String extendInfo,
+      Wallet wallet,
+      String interactionType) {
+    this.paymentMethodDetailType = paymentMethodDetailType;
+    this.card = card;
+    this.externalAccount = externalAccount;
+    this.discount = discount;
+    this.coupon = coupon;
+    this.paymentMethodType = paymentMethodType;
+    this.extendInfo = extendInfo;
+    this.wallet = wallet;
+    this.interactionType = interactionType;
+  }
 }
