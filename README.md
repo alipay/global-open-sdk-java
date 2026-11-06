@@ -1,6 +1,6 @@
 # Antom SDK for Java
 
-Latest release: **3.2.2**
+Latest release: **3.2.3**
 
 ## Installation
 
@@ -8,7 +8,7 @@ Latest release: **3.2.2**
 <dependency>
     <groupId>com.alipay.global.sdk</groupId>
     <artifactId>global-open-sdk-java</artifactId>
-    <version>3.2.2</version>
+    <version>3.2.3</version>
 </dependency>
 ```
 
