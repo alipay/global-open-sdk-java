@@ -13,6 +13,7 @@
 package com.alipay.global.api.request.ams.pay;
 
 import com.alipay.global.api.model.ams.*;
+import com.alipay.global.api.model.ams.AlipayVaultingSessionRequestPaymentMethodMetaData;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.pay.AlipayVaultingSessionResponse;
 import lombok.*;
@@ -59,6 +60,8 @@ public class AlipayVaultingSessionRequest extends AlipayRequest<AlipayVaultingSe
    * the value of paymentMethodType is CARD.
    */
   private Boolean is3DSAuthentication;
+
+  private AlipayVaultingSessionRequestPaymentMethodMetaData paymentMethodMetaData;
 
   public AlipayVaultingSessionRequest() {
     this.setPath("/ams/api/v1/vaults/createVaultingSession");
