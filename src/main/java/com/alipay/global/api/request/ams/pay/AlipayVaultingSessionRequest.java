@@ -13,9 +13,9 @@
 package com.alipay.global.api.request.ams.pay;
 
 import com.alipay.global.api.model.ams.*;
-import com.alipay.global.api.model.ams.PaymentMethodMetaData;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.pay.AlipayVaultingSessionResponse;
+import java.util.Map;
 import lombok.*;
 
 /** AlipayVaultingSessionRequest */
@@ -61,7 +61,16 @@ public class AlipayVaultingSessionRequest extends AlipayRequest<AlipayVaultingSe
    */
   private Boolean is3DSAuthentication;
 
-  private PaymentMethodMetaData paymentMethodMetaData;
+  /**
+   * Card payment metadata declared when the vaulting session is created and passed through when the
+   * SDK submits the vaulting request. This object remains free-form. Applicable only when
+   * paymentMethodType is CARD. Only recurringType is merchant-facing: SCHEDULED for fixed-schedule
+   * deductions or UNSCHEDULED for on-demand deductions; if omitted, no recurring type is declared,
+   * and any other value returns PARAM_ILLEGAL. The transaction-initiated-type flag
+   * (merchantInitiated) is derived internally by Antom and must not be provided. More information:
+   * Maximum length: 2048 characters after serialization
+   */
+  private Map<String, Object> paymentMethodMetaData;
 
   public AlipayVaultingSessionRequest() {
     this.setPath("/ams/api/v1/vaults/createVaultingSession");
