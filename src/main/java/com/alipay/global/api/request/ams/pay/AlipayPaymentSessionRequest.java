@@ -21,6 +21,7 @@ import com.alipay.global.api.model.ams.BillingSubscription;
 import com.alipay.global.api.model.ams.CreditPayPlan;
 import com.alipay.global.api.model.ams.CustomizedInfo;
 import com.alipay.global.api.model.ams.Env;
+import com.alipay.global.api.model.ams.ExcludedPaymentMethod;
 import com.alipay.global.api.model.ams.FundTransferInfo;
 import com.alipay.global.api.model.ams.Order;
 import com.alipay.global.api.model.ams.PaymentFactor;
@@ -120,6 +121,8 @@ public class AlipayPaymentSessionRequest extends AlipayRequest<AlipayPaymentSess
   private String paymentNotifyUrl;
 
   private PaymentFactor paymentFactor;
+
+  private ExcludedPaymentMethod excludedPaymentMethod;
 
   private SettlementStrategy settlementStrategy;
 
