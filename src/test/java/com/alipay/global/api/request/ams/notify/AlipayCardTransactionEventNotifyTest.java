@@ -1,7 +1,5 @@
 package com.alipay.global.api.request.ams.notify;
 
-import static org.junit.Assert.*;
-
 import com.alipay.global.api.tools.JsonUtil;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -9,6 +7,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.io.InputStream;
 import java.util.Iterator;
 import org.junit.Test;
+import static org.junit.Assert.*;
 
 public class AlipayCardTransactionEventNotifyTest {
   private final ObjectMapper mapper = new ObjectMapper();
@@ -26,38 +25,30 @@ public class AlipayCardTransactionEventNotifyTest {
     return value;
   }
 
-  @Test
-  public void parsesEveryDocumentedFieldWithoutAnEnvelope() throws Exception {
+  @Test public void parsesEveryDocumentedFieldWithoutAnEnvelope() throws Exception {
     assertEquals(22, AlipayCardTransactionEventNotify.class.getDeclaredFields().length);
-    try (InputStream stream =
-        getClass().getResourceAsStream("/card-transaction-event-notify.json")) {
+    try (InputStream stream = getClass().getResourceAsStream("/card-transaction-event-notify.json")) {
       assertNotNull(stream);
       for (JsonNode fixture : mapper.readTree(stream)) {
         ObjectNode body = fixture.get("body").deepCopy();
         body.putObject("futureField").put("ignored", true);
         AlipayCardTransactionEventNotify notify =
             JsonUtil.fromJson(body.toString(), AlipayCardTransactionEventNotify.class);
-        assertEquals(
-            fixture.get("name").asText(),
-            withoutNulls(fixture.get("body")),
+        assertEquals(fixture.get("name").asText(), withoutNulls(fixture.get("body")),
             mapper.readTree(JsonUtil.toJson(notify)));
         assertEquals(fixture.get("body").get("eventId").asText(), notify.getEventId());
       }
     }
   }
 
-  @Test
-  public void preservesCaptureZeroAndAuthorizationCorrelationTime() throws Exception {
-    try (InputStream stream =
-        getClass().getResourceAsStream("/card-transaction-event-notify.json")) {
+  @Test public void preservesCaptureZeroAndAuthorizationCorrelationTime() throws Exception {
+    try (InputStream stream = getClass().getResourceAsStream("/card-transaction-event-notify.json")) {
       JsonNode fixtures = mapper.readTree(stream);
       AlipayCardTransactionEventNotify auth =
-          JsonUtil.fromJson(
-              fixtures.get(0).get("body").toString(), AlipayCardTransactionEventNotify.class);
+          JsonUtil.fromJson(fixtures.get(0).get("body").toString(), AlipayCardTransactionEventNotify.class);
       assertNull(auth.getAuthTime());
       AlipayCardTransactionEventNotify capture =
-          JsonUtil.fromJson(
-              fixtures.get(1).get("body").toString(), AlipayCardTransactionEventNotify.class);
+          JsonUtil.fromJson(fixtures.get(1).get("body").toString(), AlipayCardTransactionEventNotify.class);
       assertEquals("0", capture.getOutAmount().getValue());
       assertEquals("USD", capture.getOutAmount().getCurrency());
       assertEquals("30000", capture.getTransactionAmount().getValue());
