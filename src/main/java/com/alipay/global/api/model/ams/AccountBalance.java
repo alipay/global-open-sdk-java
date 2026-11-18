@@ -28,4 +28,7 @@ public class AccountBalance {
   private Amount frozenBalance;
 
   private Amount totalBalance;
+
+  /** The balance account number. More information: Maximum length: 32 characters */
+  private String accountNo;
 }
