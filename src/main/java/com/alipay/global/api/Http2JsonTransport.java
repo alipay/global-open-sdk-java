@@ -84,12 +84,11 @@ final class Http2JsonTransport {
             .disableContentCompression()
             .disableRedirectHandling()
             .disableCookieManagement()
-            .setThreadFactory(
-                runnable -> {
-                  Thread thread = new Thread(runnable, "antom-session-http2");
-                  thread.setDaemon(true);
-                  return thread;
-                })
+            .setThreadFactory(runnable -> {
+              Thread thread = new Thread(runnable, "antom-session-http2");
+              thread.setDaemon(true);
+              return thread;
+            })
             .build();
     client.start();
     return client;
