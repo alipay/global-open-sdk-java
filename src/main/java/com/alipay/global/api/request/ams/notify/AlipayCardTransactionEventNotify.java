@@ -10,8 +10,7 @@ import lombok.NoArgsConstructor;
 /**
  * One flat ABA VCC card transaction event callback (notification profile v2.1, document v2.13).
  * Verify the raw-body signature before parsing. Durable acceptance and eventId deduplication belong
- * to the merchant callback handler. Amount values remain quoted minor-unit strings (up to 20
- * digits).
+ * to the merchant callback handler. Amount values remain quoted minor-unit strings (up to 20 digits).
  */
 @Data
 @AllArgsConstructor
@@ -49,8 +48,8 @@ public class AlipayCardTransactionEventNotify {
   private String authCode;
 
   /**
-   * Optional Antom-normalized failure code, maximum 64 characters. Sent only for FAIL when a mapped
-   * code exists.
+   * Optional Antom-normalized failure code, maximum 64 characters. Sent only for FAIL when a
+   * mapped code exists.
    */
   private String failureReason;
 
@@ -88,14 +87,14 @@ public class AlipayCardTransactionEventNotify {
   private Amount inAmount;
 
   /**
-   * Optional BASE/QUOTE currency pair, maximum 8 characters. Sent with exchangeRate for a
-   * cross-currency transaction when both are available.
+   * Optional BASE/QUOTE currency pair, maximum 8 characters. Sent with exchangeRate for a cross-
+   * currency transaction when both are available.
    */
   private String exchangeCurrencyPair;
 
   /**
-   * Optional positive quoted decimal string, maximum 32 characters. One major BASE unit equals this
-   * many QUOTE units; paired with exchangeCurrencyPair.
+   * Optional positive quoted decimal string, maximum 32 characters. One major BASE unit equals
+   * this many QUOTE units; paired with exchangeCurrencyPair.
    */
   private String exchangeRate;
 
