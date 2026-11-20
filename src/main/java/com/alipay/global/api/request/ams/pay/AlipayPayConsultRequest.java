@@ -23,7 +23,6 @@ import com.alipay.global.api.model.ams.ProductCodeType;
 import com.alipay.global.api.model.ams.SettlementStrategy;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.pay.AlipayPayConsultResponse;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.util.List;
 import lombok.*;
 
@@ -84,7 +83,6 @@ public class AlipayPayConsultRequest extends AlipayRequest<AlipayPayConsultRespo
 
   private List<String> allowedPspRegions;
 
-  @JsonDeserialize(as = ConsultBuyer.class)
   private Buyer buyer;
 
   /**

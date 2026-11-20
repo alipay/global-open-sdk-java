@@ -136,8 +136,71 @@ public class Observe {
       }
       models.put(key, map("type", "object", "properties", props));
     }
+    // Compare the real current serializer against the pinned baseline Buyer source.
+    BaselineBuyer oldBuyer = new BaselineBuyer();
+    com.alipay.global.api.model.ams.Buyer shared = new com.alipay.global.api.model.ams.Buyer();
+    check(JsonUtil.toJson(oldBuyer).equals(JsonUtil.toJson(shared)), "baseline empty Buyer JSON");
+    for (java.beans.PropertyDescriptor p :
+        java.beans.Introspector.getBeanInfo(BaselineBuyer.class).getPropertyDescriptors()) {
+      if (p.getWriteMethod() == null) continue;
+      Object v = sample(mapper.constructType(p.getReadMethod().getGenericReturnType()));
+      p.getWriteMethod().invoke(oldBuyer, v);
+      shared
+          .getClass()
+          .getMethod(p.getWriteMethod().getName(), p.getPropertyType())
+          .invoke(shared, v);
+    }
+    check(
+        JsonUtil.toJson(oldBuyer).equals(JsonUtil.toJson(shared)),
+        "baseline populated Buyer JSON and old field order");
+    for (Constructor<?> c : BaselineBuyer.class.getConstructors()) {
+      Constructor<?> current = shared.getClass().getConstructor(c.getParameterTypes());
+      Object[] v = new Object[c.getParameterCount()];
+      for (int i = 0; i < v.length; i++)
+        v[i] = sample(mapper.constructType(c.getGenericParameterTypes()[i]));
+      check(
+          JsonUtil.toJson(c.newInstance(v)).equals(JsonUtil.toJson(current.newInstance(v))),
+          "legacy constructor descriptor and JSON");
+    }
+    com.alipay.global.api.model.ams.Buyer built =
+        com.alipay.global.api.model.ams.Buyer.builder().referenceBuyerId("legacy").build();
+    check(built.getReferenceBuyerId().equals("legacy"), "existing Lombok builder");
+    int sharedRequests = 0;
+    java.nio.file.Path requestBase =
+        java.nio.file.Paths.get(System.getProperty("sdk.classes", "target/classes"));
+    try (java.util.stream.Stream<java.nio.file.Path> files =
+        java.nio.file.Files.walk(requestBase.resolve("com/alipay/global/api/request/ams"))) {
+      for (java.nio.file.Path f : (Iterable<java.nio.file.Path>) files::iterator) {
+        if (!f.toString().endsWith(".class") || f.toString().contains("$")) continue;
+        Class<?> q =
+            Class.forName(
+                requestBase
+                    .relativize(f)
+                    .toString()
+                    .replace(File.separatorChar, '.')
+                    .replaceAll("\\.class$", ""));
+        try {
+          Method set = q.getMethod("setBuyer", shared.getClass());
+          Object requestObj = q.getConstructor().newInstance();
+          set.invoke(requestObj, shared);
+          JsonNode b = mapper.readTree(JsonUtil.toJson(requestObj)).get("buyer");
+          check(
+              b.equals(mapper.readTree(JsonUtil.toJson(oldBuyer)))
+                  && !b.has("buyerAccessGroupFlag"),
+              "other request unchanged when unset " + q.getName());
+          sharedRequests++;
+        } catch (NoSuchMethodException ignored) {
+        }
+      }
+    }
+    check(sharedRequests > 1, "multiple shared Buyer interfaces covered");
+    evidence.add(
+        "Pinned-baseline empty/populated Buyer JSON identical, old constructor descriptors and"
+            + " builder retained; unset field omitted across "
+            + sharedRequests
+            + " actual request classes");
     try {
-      Class<?> t = cls("ConsultBuyer");
+      Class<?> t = cls("Buyer");
       Object buyer = t.getConstructor().newInstance();
       Method setter = t.getMethod("setBuyerAccessGroupFlag", String.class);
       for (String value : Arrays.asList("true", "false")) {

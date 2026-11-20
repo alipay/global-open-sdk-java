@@ -130,7 +130,7 @@ def observe(req):
         run(['mvn', '-q', '-f', str(ROOT/'pom.xml'), 'dependency:build-classpath', '-Dmdep.outputFile=' + str(cpfile)], cwd=out)
         cp = str(ROOT / 'target/classes') + os.pathsep + cpfile.read_text().strip()
         binpath = Path(os.environ['JAVA_HOME']) / 'bin' if os.environ.get('JAVA_HOME') else None
-        run([str(binpath / 'javac') if binpath else 'javac', '-cp', cp, '-d', str(out), str(HERE / 'Observe.java')], cwd=out)
+        run([str(binpath / 'javac') if binpath else 'javac', '-cp', cp, '-d', str(out), str(HERE / 'Observe.java'), str(HERE / 'BaselineBuyer.java')], cwd=out)
         return json.loads(run([str(binpath / 'java') if binpath else 'java', '-Dsdk.classes='+str(ROOT/'target/classes'), '-cp', str(out) + os.pathsep + cp, 'Observe'], payload, cwd=out))
     if lang == 'dotnet':
         assemblies = list((ROOT / 'ams-dotnet/bin').glob('Debug/*/ams-dotnet.dll'))
@@ -153,7 +153,8 @@ def main():
     for key in req['expected']['operations']:
         method, tail = key.split(':', 1)[1].split(' ', 1)
         path = tail.split('/requestBody/', 1)[0].split('/responses/', 1)[0]
-        row = next(x for x in raw['bindings'] if x['path'] == path)
+        canonical = 'Alipay' + Path(key.split(':', 1)[0]).stem.split('-v', 1)[0]
+        row = next(x for x in raw['bindings'] if x['path'] == path and x['request'] == canonical)
         assert row['method'].upper() == method, ('HTTP binding', row, method)
         name = row['request'] if '/requestBody/' in key else row['response']
         operations[key] = {'$ref': '#/components/schemas/' + name}
