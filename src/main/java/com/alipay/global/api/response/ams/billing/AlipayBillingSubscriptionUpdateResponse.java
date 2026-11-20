@@ -57,17 +57,28 @@ public class AlipayBillingSubscriptionUpdateResponse extends AlipayResponse {
   private String creditNoteId;
 
   /**
-   * All Credit Note IDs issued by this update, in ascending source invoiceId order, without
-   * truncation. For a single note, this contains the retained creditNoteId. May be absent or null
-   * when no note was issued. Each opaque ID has at most 64 characters. An issued document does not
-   * by itself establish refund completion.
+   * All issued Credit Note IDs are non-null opaque strings of at most 64 characters, returned in
+   * ascending source invoiceId order after allocation without truncation or an independent
+   * item-count cap. Returned when a successful update issues notes, matching creditNoteId for a
+   * single note, and may be absent or null when none is issued.
    */
   private List<String> creditNoteIds;
 
-  /** Batch total in minor currency units, serialized as a non-negative integer string. */
-  private String creditNoteAmount;
+  /**
+   * The total amount of Credit Notes issued by this successful update in the smallest currency
+   * unit, retaining the per-note amount for a single note and the existing range, precision, and
+   * calculation. Represented as a signed 64-bit integer in the SDK and serialized as a JSON string,
+   * with zero meaning a measured zero credit amount and absence or null not meaning zero.
+   */
+  @com.fasterxml.jackson.annotation.JsonFormat(
+      shape = com.fasterxml.jackson.annotation.JsonFormat.Shape.STRING)
+  private Long creditNoteAmount;
 
-  /** The currency of creditNoteAmount as a three-letter ISO 4217 code. */
+  /**
+   * The currency of creditNoteAmount as a three-letter ISO 4217 code. Returned with
+   * creditNoteAmount when a successful update issues notes, using the non-null subscription
+   * currency shared by every note without conversion or an independent default.
+   */
   private String creditNoteCurrency;
 
   /**

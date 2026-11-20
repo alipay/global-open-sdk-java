@@ -180,6 +180,44 @@ public class Observe {
           "Actual subscription parser: one/many/empty/absent/null ordered IDs, retained scalar and"
               + " amount string");
     }
+
+    Class<?> amountType = cls("AlipayBillingSubscriptionUpdateResponse");
+    check(
+        amountType.getMethod("getCreditNoteAmount").getReturnType() == Long.class,
+        "public amount type must be Long");
+    for (String amount :
+        Arrays.asList("0", "3000", "8000", "9007199254740993", "9223372036854775807")) {
+      Object parsed = JsonUtil.fromJson("{\"creditNoteAmount\":\"" + amount + "\"}", amountType);
+      check(
+          amountType.getMethod("getCreditNoteAmount").invoke(parsed).equals(Long.valueOf(amount)),
+          "exact int64 parse");
+      check(
+          mapper.readTree(JsonUtil.toJson(parsed)).get("creditNoteAmount").isTextual(),
+          "wire amount must remain string");
+      check(
+          mapper.readTree(JsonUtil.toJson(parsed)).get("creditNoteAmount").asText().equals(amount),
+          "exact wire int64");
+      Object bySetter = amountType.getConstructor().newInstance();
+      amountType
+          .getMethod("setCreditNoteAmount", Long.class)
+          .invoke(bySetter, Long.valueOf(amount));
+      check(
+          mapper
+              .readTree(JsonUtil.toJson(bySetter))
+              .get("creditNoteAmount")
+              .asText()
+              .equals(amount),
+          "numeric public setter");
+    }
+    for (String missing : Arrays.asList("{}", "{\"creditNoteAmount\":null}")) {
+      Object parsed = JsonUtil.fromJson(missing, amountType);
+      check(
+          amountType.getMethod("getCreditNoteAmount").invoke(parsed) == null,
+          "missing/null amount is not zero");
+    }
+    evidence.add(
+        "Long public getter/setter; JSON string roundtrip at zero, batch samples, >2^53 and int64"
+            + " max; absent/null remain null");
     Set<String> paths = new HashSet<String>();
     for (JsonNode key : request.get("operation_keys")) {
       String path =
