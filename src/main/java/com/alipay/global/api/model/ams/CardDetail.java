@@ -139,7 +139,7 @@ public class CardDetail {
    */
   private Map<String, String> metadata;
 
-  private AuthorizationControl authorizationControl;
+  private CardInquiryAuthorizationControl authorizationControl;
 
   private CardholderInfo cardholderinfo;
 }
