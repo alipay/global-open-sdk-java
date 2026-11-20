@@ -1,7 +1,0 @@
-{
-  "schema_version": "sdk-contract-check-v1",
-  "command": [
-    "python3",
-    "tests/vcc_contract/check_contract.py"
-  ]
-}
