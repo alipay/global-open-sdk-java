@@ -106,4 +106,43 @@ public class Buyer {
   private List<BuyerTaxId> taxIds;
 
   private Address businessAddress;
+
+  /** Optional Kwai-Bettr consult-only flag: string "true" or "false"; omit for other uses. */
+  private String buyerAccessGroupFlag;
+
+  /** Preserves the existing Buyer all-arguments construction path. */
+  public Buyer(
+      List<String> preferredLocales,
+      String businessName,
+      String buyerType,
+      String referenceBuyerId,
+      UserName buyerName,
+      String buyerPhoneNo,
+      String buyerEmail,
+      String buyerRegistrationTime,
+      Boolean isAccountVerified,
+      Integer successfulOrderCount,
+      String buyerPhoneNoContryCode,
+      Amount successfulOrderAmount,
+      String dateOfLastPaidPurchase,
+      String dateOfFirstPaidPurchase,
+      List<BuyerTaxId> taxIds,
+      Address businessAddress) {
+    this.preferredLocales = preferredLocales;
+    this.businessName = businessName;
+    this.buyerType = buyerType;
+    this.referenceBuyerId = referenceBuyerId;
+    this.buyerName = buyerName;
+    this.buyerPhoneNo = buyerPhoneNo;
+    this.buyerEmail = buyerEmail;
+    this.buyerRegistrationTime = buyerRegistrationTime;
+    this.isAccountVerified = isAccountVerified;
+    this.successfulOrderCount = successfulOrderCount;
+    this.buyerPhoneNoContryCode = buyerPhoneNoContryCode;
+    this.successfulOrderAmount = successfulOrderAmount;
+    this.dateOfLastPaidPurchase = dateOfLastPaidPurchase;
+    this.dateOfFirstPaidPurchase = dateOfFirstPaidPurchase;
+    this.taxIds = taxIds;
+    this.businessAddress = businessAddress;
+  }
 }
