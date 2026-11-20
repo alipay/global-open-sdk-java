@@ -162,7 +162,7 @@ def main():
     assert raw.get('wire_checks', 0) >= len(raw['models']), 'Every model must execute a real JSON roundtrip'
     checks = [{'kind': kind, 'status': 'passed', 'covers': req['targets_by_check'][kind],
                'test': ('Native SDK metadata and actual serializer/parser roundtrips; string buyer flags, '
-                        'ordered credit-note lists, retained scalar and amount string, absent/null cases and operation bindings'
+                        'ordered credit-note lists, retained scalar and amount integer, absent/null cases and operation bindings'
                         if kind in {'serialization', 'parsing'} else
                         'Pinned baseline declaration comparison, exact material-backed type aliases, '
                         'existing no-argument/setter/property paths and current generated constructors')}

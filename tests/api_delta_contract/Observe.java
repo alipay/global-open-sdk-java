@@ -165,8 +165,8 @@ public class Observe {
               "{}",
               "{\"creditNoteIds\":null}",
               "{\"creditNoteIds\":[]}",
-              "{\"creditNoteId\":\"cn_a\",\"creditNoteIds\":[\"cn_a\"],\"creditNoteAmount\":\"3000\",\"creditNoteCurrency\":\"USD\"}",
-              "{\"creditNoteIds\":[\"cn_a\",\"cn_z\"],\"creditNoteAmount\":\"8000\",\"creditNoteCurrency\":\"USD\"}")) {
+              "{\"creditNoteId\":\"cn_a\",\"creditNoteIds\":[\"cn_a\"],\"creditNoteAmount\":3000,\"creditNoteCurrency\":\"USD\"}",
+              "{\"creditNoteIds\":[\"cn_a\",\"cn_z\"],\"creditNoteAmount\":8000,\"creditNoteCurrency\":\"USD\"}")) {
         JsonNode inputNode = mapper.readTree(fixture);
         JsonNode actual = mapper.readTree(JsonUtil.toJson(JsonUtil.fromJson(fixture, t)));
         Iterator<String> names = inputNode.fieldNames();
@@ -178,35 +178,36 @@ public class Observe {
       }
       evidence.add(
           "Actual subscription parser: one/many/empty/absent/null ordered IDs, retained scalar and"
-              + " amount string");
+              + " amount integer");
     }
 
     Class<?> amountType = cls("AlipayBillingSubscriptionUpdateResponse");
     check(
         amountType.getMethod("getCreditNoteAmount").getReturnType() == Long.class,
-        "public amount type must be Long");
+        "public amount type Long");
+    check(
+        amountType
+                .getDeclaredField("creditNoteAmount")
+                .getAnnotation(com.fasterxml.jackson.annotation.JsonFormat.class)
+            == null,
+        "no string wire annotation");
     for (String amount :
         Arrays.asList("0", "3000", "8000", "9007199254740993", "9223372036854775807")) {
-      Object parsed = JsonUtil.fromJson("{\"creditNoteAmount\":\"" + amount + "\"}", amountType);
+      Object parsed = JsonUtil.fromJson("{\"creditNoteAmount\":" + amount + "}", amountType);
       check(
           amountType.getMethod("getCreditNoteAmount").invoke(parsed).equals(Long.valueOf(amount)),
-          "exact int64 parse");
+          "exact numeric int64 parse");
+      JsonNode value = mapper.readTree(JsonUtil.toJson(parsed)).get("creditNoteAmount");
       check(
-          mapper.readTree(JsonUtil.toJson(parsed)).get("creditNoteAmount").isTextual(),
-          "wire amount must remain string");
-      check(
-          mapper.readTree(JsonUtil.toJson(parsed)).get("creditNoteAmount").asText().equals(amount),
-          "exact wire int64");
+          value.isIntegralNumber() && value.longValue() == Long.parseLong(amount),
+          "exact integer JSON wire");
       Object bySetter = amountType.getConstructor().newInstance();
       amountType
           .getMethod("setCreditNoteAmount", Long.class)
           .invoke(bySetter, Long.valueOf(amount));
+      JsonNode setValue = mapper.readTree(JsonUtil.toJson(bySetter)).get("creditNoteAmount");
       check(
-          mapper
-              .readTree(JsonUtil.toJson(bySetter))
-              .get("creditNoteAmount")
-              .asText()
-              .equals(amount),
+          setValue.isIntegralNumber() && setValue.longValue() == Long.parseLong(amount),
           "numeric public setter");
     }
     for (String missing : Arrays.asList("{}", "{\"creditNoteAmount\":null}")) {
@@ -216,8 +217,8 @@ public class Observe {
           "missing/null amount is not zero");
     }
     evidence.add(
-        "Long public getter/setter; JSON string roundtrip at zero, batch samples, >2^53 and int64"
-            + " max; absent/null remain null");
+        "Long public type; exact integer JSON at zero, samples, >2^53, int64 max; absent/null; no"
+            + " field string annotation");
     Set<String> paths = new HashSet<String>();
     for (JsonNode key : request.get("operation_keys")) {
       String path =
