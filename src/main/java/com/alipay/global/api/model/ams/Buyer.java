@@ -23,6 +23,14 @@ import lombok.*;
 public class Buyer {
 
   /**
+   * For Kwai-Bettr consult only, Kwai supplies this flag with referenceBuyerId when buyer is
+   * present: string \&quot;true\&quot; means within the access group and \&quot;false\&quot; means
+   * outside; omit it in all other uses. Antom passes it through without strict validation, and
+   * Bettr treats missing or invalid values as outside the group.
+   */
+  private String buyerAccessGroupFlag;
+
+  /**
    * Ordered PDF-language preferences for createPaymentSession. Omitted, null, empty or unsupported
    * preferences use English. Does not read or update customer preferences or select Checkout UI or
    * email language. Omit in APIs that do not document support.
