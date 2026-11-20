@@ -13,7 +13,7 @@
 package com.alipay.global.api.request.ams.aba;
 
 import com.alipay.global.api.model.ams.*;
-import com.alipay.global.api.model.ams.AuthorizationControl;
+import com.alipay.global.api.model.ams.ApplyCardAuthorizationControl;
 import com.alipay.global.api.request.AlipayRequest;
 import com.alipay.global.api.response.ams.aba.AlipayApplyCardResponse;
 import java.util.Map;
@@ -36,7 +36,7 @@ public class AlipayApplyCardRequest extends AlipayRequest<AlipayApplyCardRespons
 
   private Map<String, String> metadata;
 
-  private AuthorizationControl authorizationControl;
+  private ApplyCardAuthorizationControl authorizationControl;
 
   public AlipayApplyCardRequest() {
     this.setPath("/ams/api/v1/aba/cards/applyCard");
