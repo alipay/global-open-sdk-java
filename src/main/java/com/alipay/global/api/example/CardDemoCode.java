@@ -3,7 +3,7 @@ package com.alipay.global.api.example;
 import com.alipay.global.api.AlipayClient;
 import com.alipay.global.api.DefaultAlipayClient;
 import com.alipay.global.api.exception.AlipayApiException;
-import com.alipay.global.api.model.ams.AuthorizationControl;
+import com.alipay.global.api.model.ams.ApplyCardAuthorizationControl;
 import com.alipay.global.api.model.ams.CardLimitInfo;
 import com.alipay.global.api.model.constants.EndPointConstants;
 import com.alipay.global.api.request.ams.aba.AlipayApplyCardRequest;
@@ -81,7 +81,7 @@ public class CardDemoCode {
     request.setNote("Travel card");
 
     // Set authorization control
-    AuthorizationControl authorizationControl = new AuthorizationControl();
+    ApplyCardAuthorizationControl authorizationControl = new ApplyCardAuthorizationControl();
     authorizationControl.setCardActiveTime("2025-12-01T00:00:00-00:00");
     authorizationControl.setCardCancelTime("2025-12-31T00:00:00-00:00");
     authorizationControl.setAllowedAuthTimes(10);
@@ -122,7 +122,7 @@ public class CardDemoCode {
     request.setNote("Travel card");
 
     // Set authorization control
-    AuthorizationControl authorizationControl = new AuthorizationControl();
+    ApplyCardAuthorizationControl authorizationControl = new ApplyCardAuthorizationControl();
     authorizationControl.setCardActiveTime("2025-12-01T00:00:00-00:00");
     authorizationControl.setCardCancelTime("2025-12-31T00:00:00-00:00");
     authorizationControl.setAllowedAuthTimes(10);
