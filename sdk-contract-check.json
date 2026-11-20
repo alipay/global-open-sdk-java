@@ -1,0 +1,7 @@
+{
+  "schema_version": "sdk-contract-check-v1",
+  "command": [
+    "python3",
+    "tests/api_delta_contract/check_contract.py"
+  ]
+}

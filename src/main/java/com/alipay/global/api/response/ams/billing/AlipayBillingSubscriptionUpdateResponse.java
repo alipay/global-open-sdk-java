@@ -56,8 +56,16 @@ public class AlipayBillingSubscriptionUpdateResponse extends AlipayResponse {
   /** The credit note ID. Maximum length: 64 characters. Note: See documentation for details. */
   private String creditNoteId;
 
-  /** The credit note amount in the smallest currency unit. Returned together with creditNoteId. */
-  private Long creditNoteAmount;
+  /**
+   * All Credit Note IDs issued by this update, in ascending source invoiceId order, without
+   * truncation. For a single note, this contains the retained creditNoteId. May be absent or null
+   * when no note was issued. Each opaque ID has at most 64 characters. An issued document does not
+   * by itself establish refund completion.
+   */
+  private List<String> creditNoteIds;
+
+  /** Batch total in minor currency units, serialized as a non-negative integer string. */
+  private String creditNoteAmount;
 
   /** The currency of creditNoteAmount as a three-letter ISO 4217 code. */
   private String creditNoteCurrency;
