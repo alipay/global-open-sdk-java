@@ -53,10 +53,25 @@ public class AlipayBillingSubscriptionUpdateResponse extends AlipayResponse {
   /** The currency of prorationInvoiceAmount as a three-letter ISO 4217 code. */
   private String prorationInvoiceCurrency;
 
-  /** The credit note ID. Maximum length: 64 characters. Note: See documentation for details. */
+  /**
+   * The credit note ID when a successful update issues exactly one credit note. It matches the sole
+   * entry in creditNoteIds and is omitted when multiple credit notes are issued. Maximum length: 64
+   * characters.
+   */
   private String creditNoteId;
 
-  /** The credit note amount in the smallest currency unit. Returned together with creditNoteId. */
+  /**
+   * The complete list of credit note IDs issued by a successful update, in ascending order of
+   * source invoice ID. A single credit note is returned as a one-element list. When no credit notes
+   * are issued, this field can be omitted or null.
+   */
+  private List<String> creditNoteIds;
+
+  /**
+   * The total amount of all credit notes issued by a successful update, in the smallest currency
+   * unit. Returned with creditNoteCurrency when at least one credit note is issued. A value of zero
+   * is a zero credit amount.
+   */
   private Long creditNoteAmount;
 
   /** The currency of creditNoteAmount as a three-letter ISO 4217 code. */
