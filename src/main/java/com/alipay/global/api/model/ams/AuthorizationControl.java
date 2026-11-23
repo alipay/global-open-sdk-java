@@ -49,42 +49,7 @@ public class AuthorizationControl {
    */
   private List<String> allowedCurrencies;
 
-  /**
-   * An ordered list of ISO 4217 currency codes that defines the card-level balance-consumption
-   * priority. Only applyCard accepts this field in a request; do not send it to updateCard. For
-   * applyCard, the list must not contain duplicates and every currency must be supported by Antom.
-   * Omission, null, or an empty list configures no card-level preference. The field participates in
-   * requestId idempotency, and invalid values, more than 9 entries, duplicates, or
-   * capability-disabled use return PARAM_ILLEGAL. For inquireCardDetail, a configured list is
-   * returned in stored order; an enabled merchant without a card-level preference receives null,
-   * and a disabled merchant does not receive the field. For inquireCardSensitiveInfo, the current
-   * contract exposes authorizationControl at the response top level for whitelisted merchants. The
-   * legacy cardDetail property remains in the SDK for compatibility, without automatic copying
-   * between the two locations. The order field is subject to its existing capability and visibility
-   * rules; an absent order field must not be interpreted as proof that no stored order exists. The
-   * initially supported currencies are USD, EUR, GBP, HKD, AUD, CAD, CNH, JPY, and NZD; the
-   * supported set is configuration-driven and can change without an API contract change.
-   */
-  private List<String> paymentPreferenceCurrencies;
-
-  /**
-   * Whether to prioritize the transaction currency balance. Accepted only by applyCard and
-   * immutable after creation; do not send to updateCard. True enables same-currency-first
-   * deduction; false skips it and follows paymentPreferenceCurrencies when configured, otherwise
-   * the account-level setting. Omission preserves the server default behavior
-   * (same-currency-first); SDKs must not supply a default and must preserve explicit false. An
-   * omitted, null, or empty currency order is accepted. Returned by inquireCardDetail and the
-   * top-level authorizationControl of inquireCardSensitiveInfo when a standing is stored; otherwise
-   * omitted. Sensitive-info enrichment requires the existing merchant whitelist. Availability is
-   * controlled by WorldFirst; an ignored preference is not stored. Applicable to eligible Z18
-   * merchants in CN/HK. Each payment is funded in full from one currency; balances are never split
-   * across currencies. A configured card-level currency order is exclusive: the account-level order
-   * is not consulted, and the payment fails if no eligible currency can fund it in full. On
-   * inquiry, an absent paymentPreferenceCurrencies field can mean the order is hidden or
-   * unavailable; it must not be interpreted as proof that no order is configured. Retain endpoint
-   * and capability context when interpreting returned fields.
-   */
-  private Boolean sameCurrencyPreference;
+  private PaymentPreference paymentPreference;
 
   /**
    * Card-level 3DS mode. Accepted only by applyCard and immutable after creation; do not send to
