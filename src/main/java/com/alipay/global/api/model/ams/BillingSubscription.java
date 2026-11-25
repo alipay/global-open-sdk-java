@@ -62,4 +62,12 @@ public class BillingSubscription {
 
   /** The URL for subscription notifications. */
   private String subscriptionNotifyUrl;
+
+  /**
+   * The Billing identity email, overriding order.buyer.buyerEmail. Omitted, null, or blank uses the
+   * fallback. Without an ID, finds or creates an active customer. ID/email mismatch: PARAM_ILLEGAL.
+   */
+  private String customerEmail;
+
+  private CustomerDetails customerDetails;
 }
