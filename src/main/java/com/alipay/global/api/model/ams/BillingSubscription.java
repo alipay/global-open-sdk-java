@@ -15,14 +15,21 @@ package com.alipay.global.api.model.ams;
 import java.util.List;
 import lombok.*;
 
-/** BillingSubscription */
+/**
+ * The Billing subscription for this session. Its automatic tax election applies to eligible
+ * renewals. Customer profile updates apply independently of automatic tax.
+ */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class BillingSubscription {
 
-  /** The customer ID. */
+  /**
+   * The active Billing customer ID. Omitted, null, or blank uses email. With an ID, trimmed
+   * effective email must match stored email, ignoring case, or PARAM_ILLEGAL results. Stored email
+   * stays unchanged.
+   */
   private String customerId;
 
   private BillingTrialSettings trialSettings;
@@ -62,4 +69,12 @@ public class BillingSubscription {
 
   /** The URL for subscription notifications. */
   private String subscriptionNotifyUrl;
+
+  /**
+   * The Billing identity email, overriding order.buyer.buyerEmail. Omitted, null, or blank uses the
+   * fallback. Without an ID, finds or creates an active customer. ID/email mismatch: PARAM_ILLEGAL.
+   */
+  private String customerEmail;
+
+  private CustomerDetails customerDetails;
 }
