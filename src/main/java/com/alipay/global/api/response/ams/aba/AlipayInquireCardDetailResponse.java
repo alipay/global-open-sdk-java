@@ -13,7 +13,7 @@
 package com.alipay.global.api.response.ams.aba;
 
 import com.alipay.global.api.model.ams.*;
-import com.alipay.global.api.model.ams.AuthorizationControl;
+import com.alipay.global.api.model.ams.CardInquiryAuthorizationControl;
 import com.alipay.global.api.model.ams.CardholderInfo;
 import com.alipay.global.api.response.AlipayResponse;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -139,7 +139,7 @@ public class AlipayInquireCardDetailResponse extends AlipayResponse {
    */
   private Map<String, String> metadata;
 
-  private AuthorizationControl authorizationControl;
+  private CardInquiryAuthorizationControl authorizationControl;
 
   private CardholderInfo cardholderinfo;
 }
