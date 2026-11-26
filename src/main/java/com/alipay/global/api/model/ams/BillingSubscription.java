@@ -22,7 +22,10 @@ import lombok.*;
 @AllArgsConstructor
 public class BillingSubscription {
 
-  /** The customer ID. */
+  /**
+   * The active merchant customer ID. If omitted, null, or blank, Billing uses the effective email
+   * when available. A supplied effective email must match the customer or PARAM_ILLEGAL results.
+   */
   private String customerId;
 
   private BillingTrialSettings trialSettings;
@@ -62,4 +65,13 @@ public class BillingSubscription {
 
   /** The URL for subscription notifications. */
   private String subscriptionNotifyUrl;
+
+  /**
+   * The Billing customer email. Omitted, null, or blank uses buyerEmail. With an ID, effective
+   * email must match saved email or PARAM_ILLEGAL results. Without an ID, email selects or creates
+   * a customer.
+   */
+  private String customerEmail;
+
+  private BillingCustomerDetails customerDetails;
 }
