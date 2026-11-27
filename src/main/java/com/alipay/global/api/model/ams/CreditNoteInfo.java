@@ -3,10 +3,7 @@ package com.alipay.global.api.model.ams;
 import java.util.List;
 import lombok.*;
 
-/**
- * Full credit note object for notifyCreditNote. Contains status, amounts, refund details, and line
- * items.
- */
+/** Credit note notification projection. Detail-only merchant metadata is excluded. */
 @Data
 @Builder
 @NoArgsConstructor
@@ -30,24 +27,25 @@ public class CreditNoteInfo {
   /** The total credit note amount. */
   private Amount totalAmount;
 
-  /** The refund amount to the original payment method. Present when type is POST_PAYMENT. */
+  /**
+   * Optional planned original-method refund amount for refund-bearing POST_PAYMENT notes.
+   * Absent/null for note-only POST_PAYMENT and PRE_PAYMENT; does not prove completion.
+   */
   private Amount refundAmount;
 
   /**
-   * The refund tracking status. Present when type is POST_PAYMENT and refund occurred. Maximum
-   * length: 32 characters.
+   * Optional refund progress: REFUND_INITIATED, REFUND_SUCCEEDED or REFUND_FAILED. Absent/null
+   * before progress or for note-only notes. PRE_PAYMENT uses NOT_APPLICABLE where represented.
    */
   private String refundStatus;
 
   /**
-   * The refund transaction ID in the payment system. Present when type is POST_PAYMENT and refund
-   * occurred. Maximum length: 64 characters.
+   * Optional payment-system refund reference when obtained. Absent/null beforehand, for note-only
+   * POST_PAYMENT and PRE_PAYMENT. A reference alone does not prove success.
    */
   private String refundId;
 
-  /**
-   * The refund destination. Valid values: REFUND, CREDIT_BALANCE. Maximum length: 32 characters.
-   */
+  /** Optional REFUND routing when provided at creation; null when omitted. */
   private String refundDestination;
 
   /** The structured reason code. Maximum length: 32 characters. */
@@ -80,6 +78,27 @@ public class CreditNoteInfo {
   /** The creation timestamp. ISO 8601 format. Maximum length: 29 characters. */
   private String createdAt;
 
-  /** The line items. Maximum 100 elements. */
-  private List<LineItem> items;
+  /** Optional line items, at most 100; the service returns [] when absent. */
+  private List<NotificationLineItem> items;
+
+  /** Notification line item projection; excludes detail-only metadata. */
+  @Data
+  @Builder
+  @NoArgsConstructor
+  @AllArgsConstructor
+  public static class NotificationLineItem {
+    private String creditNoteItemId;
+    private String type;
+    private String invoiceItemId;
+    private String description;
+
+    /** Quantity in quantity mode only, from 1 to 999. */
+    private Integer quantity;
+
+    /** Required C (credit) or D (debit); D itemAmount is subtracted from the credit total. */
+    private String direction;
+
+    private Amount unitAmount;
+    private Amount itemAmount;
+  }
 }
