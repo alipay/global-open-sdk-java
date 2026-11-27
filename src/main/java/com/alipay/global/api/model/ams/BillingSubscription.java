@@ -22,7 +22,11 @@ import lombok.*;
 @AllArgsConstructor
 public class BillingSubscription {
 
-  /** The customer ID. */
+  /**
+   * Active customer ID under your merchant account. Omitted, null or blank selects by email. With
+   * an ID, a supplied email must match after trimming, case-insensitively, or PARAM_ILLEGAL is
+   * returned.
+   */
   private String customerId;
 
   private BillingTrialSettings trialSettings;
@@ -62,4 +66,12 @@ public class BillingSubscription {
 
   /** The URL for subscription notifications. */
   private String subscriptionNotifyUrl;
+
+  /**
+   * Email for customer lookup or creation; omitted, null or blank falls back to
+   * order.buyer.buyerEmail. With a customer ID, it must match the saved email.
+   */
+  private String customerEmail;
+
+  private BillingCustomerDetails customerDetails;
 }

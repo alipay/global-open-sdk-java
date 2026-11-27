@@ -60,4 +60,10 @@ public class AlipayPaymentSessionResponse extends AlipayResponse {
    * when result.resultCode is SUCCESS.
    */
   private String invoiceId;
+
+  /**
+   * ID of the Billing customer linked to the subscription. Returned on successful creation or
+   * reuse, including trial sessions. Use it in later Billing requests.
+   */
+  private String customerId;
 }
