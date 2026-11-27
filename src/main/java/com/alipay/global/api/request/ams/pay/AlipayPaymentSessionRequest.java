@@ -26,6 +26,7 @@ import com.alipay.global.api.model.ams.FundTransferInfo;
 import com.alipay.global.api.model.ams.Order;
 import com.alipay.global.api.model.ams.PaymentFactor;
 import com.alipay.global.api.model.ams.PaymentMethod;
+import com.alipay.global.api.model.ams.PaymentSessionInvoiceCreation;
 import com.alipay.global.api.model.ams.ProductCodeType;
 import com.alipay.global.api.model.ams.Quote;
 import com.alipay.global.api.model.ams.RiskData;
@@ -177,6 +178,8 @@ public class AlipayPaymentSessionRequest extends AlipayRequest<AlipayPaymentSess
   private BillingSubscription subscription;
 
   private AutomaticTax automaticTax;
+
+  private PaymentSessionInvoiceCreation invoiceCreation;
 
   public AlipayPaymentSessionRequest() {
     this.setPath("/ams/api/v1/payments/createPaymentSession");
