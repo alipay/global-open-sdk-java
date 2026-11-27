@@ -21,6 +21,7 @@ import com.alipay.global.api.model.ams.Env;
 import com.alipay.global.api.model.ams.FundTransferInfo;
 import com.alipay.global.api.model.ams.Merchant;
 import com.alipay.global.api.model.ams.Order;
+import com.alipay.global.api.model.ams.PayInvoiceCreation;
 import com.alipay.global.api.model.ams.PaymentFactor;
 import com.alipay.global.api.model.ams.PaymentMethod;
 import com.alipay.global.api.model.ams.PaymentVerificationData;
@@ -169,6 +170,8 @@ public class AlipayPayRequest extends AlipayRequest<AlipayPayResponse> {
    * PARAM_ILLEGAL. The value automatic is unsupported and exceeds the maximum length.
    */
   private String locale;
+
+  private PayInvoiceCreation invoiceCreation;
 
   public AlipayPayRequest() {
     this.setPath("/ams/api/v1/payments/pay");
