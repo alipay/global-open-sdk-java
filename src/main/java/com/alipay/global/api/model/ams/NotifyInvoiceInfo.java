@@ -27,12 +27,18 @@ public class NotifyInvoiceInfo {
    */
   private Amount originalAmount;
 
-  /** The cumulative amount of all PRE_PAYMENT credit notes applied to this invoice. */
+  /** Cumulative non-voided PRE_PAYMENT amount; reduces invoice total. Zero when none. */
   private Amount prePaymentCreditNotesAmount;
 
-  /** The cumulative refunded amount of all POST_PAYMENT credit notes (excluding voided ones). */
+  /**
+   * Cumulative non-voided POST_PAYMENT amount, including processing/failed refunds until void. Does
+   * not change invoice total and is not the successfully-refunded amount.
+   */
   private Amount postPaymentCreditNotesAmount;
 
-  /** The current invoice total after all PRE_PAYMENT credit note adjustments. */
+  /**
+   * Current invoice total after PRE_PAYMENT reductions, equal to current totalAmount. POST_PAYMENT
+   * refunds do not change it; zero may transition the invoice to PAID.
+   */
   private Amount adjustedAmount;
 }
