@@ -16,6 +16,12 @@ public class AlipayRefundNotify extends AlipayNotify {
   /** The unique ID assigned by a merchant to identify a refund request */
   private String refundRequestId;
 
+  /** The unique ID assigned by Alipay to identify the original payment. Optional. */
+  private String paymentId;
+
+  /** The unique ID assigned by the merchant to identify the original payment request. Optional. */
+  private String paymentRequestId;
+
   /**
    * The unique ID that is assigned by Alipay to identify a refund. A one-to-one correspondence
    * between paymentId and paymentRequestId exists
